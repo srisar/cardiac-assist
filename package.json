@@ -1,5 +1,5 @@
 {
-  "name": "app_template",
+  "name": "cardiac-assist",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -28,6 +28,5 @@
     "@types/jquery": "^3.3.38",
     "@types/toastr": "^2.1.38"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
