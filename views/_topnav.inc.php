@@ -21,7 +21,7 @@ use App\Core\Sessions\AuthSession;
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="<?= App::url('/patients/add') ?>">Add new patient</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="<?= App::url('/patients') ?>">View all patients</a>
                 </div>
             </li>
 

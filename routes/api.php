@@ -24,4 +24,4 @@ Router::post('/api/users/process-add', "System\UsersController@apiProcessAdduser
  * ---------------------------------------------------------------------------------------
  */
 
-Router::post('/api/patients/adding', "Patients\PatientsAPIController@adding", User::ROLE_NONE);
+Router::post('/api/patients/adding', "Patients\PatientsAPIController@adding", User::ROLE_ADMIN);

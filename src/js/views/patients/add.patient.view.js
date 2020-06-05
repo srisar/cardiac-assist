@@ -37,7 +37,7 @@ function addUser() {
         };
 
 
-        let validated: boolean = true;
+        let validated = true;
 
         if (trimString(fields.first_name) === "") {
             validated = false;

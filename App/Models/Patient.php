@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class Patient implements AbstractModel
 {
@@ -81,16 +82,32 @@ class Patient implements AbstractModel
         $statement->execute([$id]);
 
         /** @var Patient $result */
-        $result = $statement->fetchObject(Patient::class);
+        $result = $statement->fetchObject(self::class);
 
         if ( !empty($result) ) return $result;
         return null;
 
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return Patient[]|array
+     */
     public static function findAll(int $limit = 1000, int $offset = 0)
     {
-        // TODO: Implement findAll() method.
+        $db = Database::instance();
+        $statement = $db->prepare("select * from patients limit :limit_val offset :offset_val");
+
+        $statement->bindValue(":limit_val", $limit, PDO::PARAM_INT);
+        $statement->bindValue(":offset_val", $offset, PDO::PARAM_INT);
+        $statement->execute();
+
+        /** @var Patient[] $result */
+        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if ( !empty($result) ) return $result;
+        return [];
     }
 
     /**

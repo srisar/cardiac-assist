@@ -11,9 +11,11 @@ class PatientsController
 
     public function viewAdd()
     {
-
         View::render("patients/add.view");
+    }
 
+    public function viewAll(){
+        View::render("patients/all.view");
     }
 
 }

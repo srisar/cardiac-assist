@@ -25,6 +25,6 @@ export function redirect(path) {
 }
 
 
-export function trimString(field: JQuery<HTMLElement>) {
+export function trimString(field) {
     return field.val().toString().trim();
 }

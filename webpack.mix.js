@@ -6,7 +6,7 @@ let mix = require('webpack-mix');
 //     jquery: ['$', 'window.jQuery'],
 // });
 
-mix.ts('src/js/app.ts', 'public/js')
+mix.js('src/js/app.js', 'public/js')
     .sass('src/scss/app.scss', 'public/css').sourceMaps();
 
 // mix.js([

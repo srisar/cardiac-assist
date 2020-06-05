@@ -41,3 +41,4 @@ Router::post('/users/process-edit', "System\UsersController@processEditUser", Us
  */
 
 Router::get('/patients/add', "Patients\PatientsController@viewAdd", User::ROLE_ADMIN);
+Router::get('/patients', "Patients\PatientsController@viewAll", User::ROLE_ADMIN);

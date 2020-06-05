@@ -20,6 +20,7 @@ use App\Core\Sessions\AuthSession;
     <script src="<?= App::siteURL() ?>/js/libs/bootstrap.min.js" defer></script>
     <script src="<?= App::siteURL() ?>/js/libs/moment.min.js" defer></script>
     <script src="<?= App::siteURL() ?>/js/libs/daterangepicker.min.js" defer></script>
+    <script src="<?= App::siteURL() ?>/js/libs/datatables.min.js" defer></script>
     <script src="<?= App::siteURL() ?>/js/app.js" defer></script>
 </head>
 <body>

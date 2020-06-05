@@ -23,6 +23,11 @@ $(function () {
         }
     });
 
+    $(".datatable").DataTable({
+        "pageLength": 50,
+        "columnDefs": [],
+        "ordering": true
+    });
 
 });
 
