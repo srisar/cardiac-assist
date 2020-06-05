@@ -13,14 +13,22 @@
 }
 
 
-
 @import "variables";
 @import "~bootstrap/scss/bootstrap";
 @import "libs/toastr";
 
-
+@import "~daterangepicker/daterangepicker.css";
 
 .needs-validation {
 
 }
 
+.required {
+  color: #c23616;
+}
+
+
+.card-header {
+  font-weight: bold;
+  padding: 0.5rem;
+}

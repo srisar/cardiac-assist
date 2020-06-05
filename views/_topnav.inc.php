@@ -16,11 +16,10 @@ use App\Core\Sessions\AuthSession;
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
+                    Patients
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?= App::url('/patients/add') ?>">Add new patient</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
@@ -47,3 +46,5 @@ use App\Core\Sessions\AuthSession;
 
     </div>
 </nav>
+
+<div class="mb-3"></div>

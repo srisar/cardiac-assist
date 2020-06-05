@@ -23,3 +23,8 @@ export function getSiteUrl() {
 export function redirect(path) {
     location.replace(path);
 }
+
+
+export function trimString(field: JQuery<HTMLElement>) {
+    return field.val().toString().trim();
+}

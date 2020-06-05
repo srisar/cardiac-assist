@@ -59,9 +59,6 @@ function processAddUser() {
             .catch(function (error) {
                 console.log(error.response.data);
                 toast.showErrorToast(error.response.data.data);
-                toast.showInfoToast(error.response.data.data);
-                toast.showSuccessToast(error.response.data.data);
-
             });
 
     });

@@ -13,20 +13,24 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@popperjs/core": "^2.4.0",
+    "@types/daterangepicker": "^3.0.1",
+    "@types/jquery": "^3.3.38",
+    "@types/toastr": "^2.1.38",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "cross-env": "^7.0.2",
+    "daterangepicker": "^3.1.0",
     "jquery": "^3.5.1",
+    "moment": "^2.26.0",
+    "moments": "0.0.2",
     "resolve-url-loader": "^3.1.1",
     "sass": "^1.26.7",
     "sass-loader": "^8.0.2",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "vue-template-compiler": "^2.6.11",
-    "webpack-mix": "^3.0.0",
-    "@popperjs/core": "^2.4.0",
-    "@types/jquery": "^3.3.38",
-    "@types/toastr": "^2.1.38"
+    "webpack-mix": "^3.0.0"
   },
   "dependencies": {}
 }

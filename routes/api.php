@@ -9,6 +9,19 @@ use App\Models\User;
  * ---------------------------------------------------------------------------------------
  */
 
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for user and auth
+ * ---------------------------------------------------------------------------------------
+ */
 Router::post('/api/auth/process-login', "System\AuthController@apiProcessLogin", User::ROLE_NONE);
-
 Router::post('/api/users/process-add', "System\UsersController@apiProcessAdduser", User::ROLE_ADMIN);
+
+
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for patients
+ * ---------------------------------------------------------------------------------------
+ */
+
+Router::post('/api/patients/adding', "Patients\PatientsAPIController@adding", User::ROLE_NONE);

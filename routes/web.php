@@ -33,3 +33,11 @@ Router::get('/users/edit', "System\UsersController@viewEditUser", User::ROLE_ADM
 
 Router::post('/users/process-add', "System\UsersController@processAddUser", User::ROLE_ADMIN);
 Router::post('/users/process-edit', "System\UsersController@processEditUser", User::ROLE_ADMIN);
+
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for patients
+ * ---------------------------------------------------------------------------------------
+ */
+
+Router::get('/patients/add', "Patients\PatientsController@viewAdd", User::ROLE_ADMIN);
