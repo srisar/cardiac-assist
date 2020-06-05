@@ -15,12 +15,7 @@ use App\Core\Sessions\AuthSession;
     <link rel="stylesheet" href="<?= App::siteURL() ?>/css/app.css">
 
 
-    <script src="<?= App::siteURL() ?>/js/libs/jquery-3.5.1.min.js" defer></script>
-    <script src="<?= App::siteURL() ?>/js/libs/popper.min.js" defer></script>
-    <script src="<?= App::siteURL() ?>/js/libs/bootstrap.min.js" defer></script>
-    <script src="<?= App::siteURL() ?>/js/libs/moment.min.js" defer></script>
-    <script src="<?= App::siteURL() ?>/js/libs/daterangepicker.min.js" defer></script>
-    <script src="<?= App::siteURL() ?>/js/libs/datatables.min.js" defer></script>
+    <script src="<?= App::siteURL() ?>/js/libs/all.js" defer></script>
     <script src="<?= App::siteURL() ?>/js/app.js" defer></script>
 </head>
 <body>

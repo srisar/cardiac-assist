@@ -1,5 +1,3 @@
-import * as toastr from "./../libs/toastr";
-
 toastr.options = {
     "closeButton": false,
     "debug": false,

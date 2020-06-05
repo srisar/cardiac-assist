@@ -14,10 +14,6 @@
   "license": "ISC",
   "devDependencies": {
     "@popperjs/core": "^2.4.0",
-    "@types/datatables.net": "^1.10.19",
-    "@types/daterangepicker": "^3.0.1",
-    "@types/jquery": "^3.3.38",
-    "@types/toastr": "^2.1.38",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "cross-env": "^7.0.2",
