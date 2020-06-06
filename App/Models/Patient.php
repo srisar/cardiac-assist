@@ -17,7 +17,7 @@ class Patient implements AbstractModel
 
     public ?string $created_at, $updated_at;
 
-    public const SEX_LIST = [
+    public const GENDER_LIST = [
         'MALE' => 'Male',
         'FEMALE' => 'Female',
     ];
@@ -146,7 +146,41 @@ class Patient implements AbstractModel
 
     public function update()
     {
-        // TODO: Implement update() method.
+        $db = Database::instance();
+        $statement = $db->prepare(
+            "update patients set 
+                    first_name= :fn,
+                    last_name= :ln,
+                    dob= :dob,
+                    age= :age,
+                    address= :address,
+                    ds_division= :ds_div,
+                    nic= :nic,
+                    phone= :phone,
+                    gender= :gender,
+                    job= :job,
+                    job_type= :job_t,
+                    income= :income,
+                    status= :status
+                    where id= :id;"
+        );
+
+        return $statement->execute([
+            ':fn' => $this->first_name,
+            ':ln' => $this->last_name,
+            ':dob' => $this->dob,
+            ':age' => $this->age,
+            ':address' => $this->address,
+            ':ds_div' => $this->ds_division,
+            ':nic' => $this->nic,
+            ':phone' => $this->phone,
+            ':gender' => $this->gender,
+            ':job' => $this->job,
+            ':job_t' => $this->job_type,
+            ':income' => $this->income,
+            ':status' => $this->status,
+            ':id' => $this->id
+        ]);
     }
 
     public function delete()

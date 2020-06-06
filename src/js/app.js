@@ -1,6 +1,7 @@
 import {validateFormFields} from "./commom/forms/forms";
 import * as loginView from "./views/system/auth/login_view";
 import * as userView from "./views/system/users/users_all"
+import * as patientView from "./views/patients/patients_all";
 
 
 /**
@@ -31,6 +32,6 @@ $(function () {
 
     loginView.start();
     userView.all();
-
+    patientView.all();
 
 })

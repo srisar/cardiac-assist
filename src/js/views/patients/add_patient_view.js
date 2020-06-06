@@ -1,6 +1,7 @@
 import {makeInputFieldInvalid, resetInputFields} from "../../commom/forms/forms";
 import {getSiteUrl, trimString} from "../../commom/helper";
 import {showWarningToast} from "../../commom/toasts";
+import {calculateAge} from "./patients_helper";
 
 let axios = require('axios').default;
 
@@ -9,30 +10,33 @@ export function start() {
 
     if (document.getElementById("view_add_patient") == null) return false;
 
-    addUser();
+    addPatient();
 
 }
 
-function addUser() {
+function addPatient() {
+
+
+    let fields = {
+        'first_name': $("#field_first_name"),
+        'last_name': $("#field_last_name"),
+        'gender': $("#field_sex"),
+        'nic': $("#field_nic"),
+        'dob': $("#field_dob"),
+        'age': $("#field_age"),
+        'phone': $("#field_phone"),
+        'address': $("#field_address"),
+        'ds_division': $("#field_ds_division"),
+        'job': $("#field_job"),
+        'job_type': $("#field_job_type"),
+        'income': $("#field_income"),
+    };
+
+    calculateAge(fields.age);
 
     $("#btn_add_patient").on("click", function () {
 
         resetInputFields($("#container_add_patient"))
-
-        let fields = {
-            'first_name': $("#field_first_name"),
-            'last_name': $("#field_last_name"),
-            'gender': $("#field_sex"),
-            'nic': $("#field_nic"),
-            'dob': $("#field_dob"),
-            'age': $("#field_age"),
-            'phone': $("#field_phone"),
-            'address': $("#field_address"),
-            'ds_division': $("#field_ds_division"),
-            'job': $("#field_job"),
-            'job_type': $("#field_job_type"),
-            'income': $("#field_income"),
-        };
 
 
         let validated = true;
@@ -46,7 +50,7 @@ function addUser() {
             makeInputFieldInvalid(fields.last_name);
         }
 
-        if (fields.gender.val().toString() === "-1") {
+        if (fields.gender.val() === "-") {
             validated = false;
             makeInputFieldInvalid(fields.gender);
         }
@@ -81,3 +85,4 @@ function addUser() {
     });
 
 }
+

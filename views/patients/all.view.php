@@ -1,9 +1,7 @@
 <?php
-
 use App\Core\App;
 use App\Core\Helpers\FormHelper;
 use App\Models\Patient;
-
 
 ?>
 <?php include_once BASE_PATH . '/views/_header.inc.php'; ?>

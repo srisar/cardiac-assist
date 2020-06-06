@@ -6,7 +6,9 @@ namespace App\Controllers\Patients;
 
 use App\Core\Requests\Axios;
 use App\Core\Requests\JSONResponse;
+use App\Core\Requests\Request;
 use App\Models\Patient;
+use Exception;
 
 class PatientsAPIController
 {
@@ -24,11 +26,11 @@ class PatientsAPIController
 
             $patient = Patient::find($result);
 
-            (new JSONResponse(["data" => $patient]))->response();
+            (new JSONResponse(['data' => $patient]))->response();
             return;
         }
 
-        JSONResponse::invalidResponse(["data" => "Error adding a new patient"]);
+        JSONResponse::invalidResponse(['data' => 'Error adding a new patient']);
         return;
 
     }
@@ -40,13 +42,47 @@ class PatientsAPIController
     public function getAll()
     {
 
-        $fields = Axios::get();
+        try {
+            $fields = Axios::get();
 
-        $patients = Patient::findAll();
+            $patients = Patient::findAll();
+
+            (new JSONResponse(['data' => $patients]))->response();
+            return;
+
+        } catch ( Exception $exception ) {
+            JSONResponse::invalidResponse(['data' => $exception->getMessage()]);
+        }
+
+    }
 
 
-        (new JSONResponse(["data" => $patients]))->response();
-        return;
+    public function editing()
+    {
+
+        try {
+            $fields = Axios::get();
+
+            $patient = Patient::find($fields['id']);
+
+            if ( !is_null($patient) ) {
+
+                $patient_ = Patient::build($fields);
+
+                if ( $patient_->update() ) {
+                    (new JSONResponse(['data' => "Updated!"]))->response();
+                    return;
+                }
+                JSONResponse::invalidResponse();
+                return;
+
+            }
+            JSONResponse::invalidResponse();
+            return;
+
+        } catch ( Exception $exception ) {
+            JSONResponse::invalidResponse(['data' => $exception->getMessage()]);
+        }
 
     }
 

@@ -1,12 +1,12 @@
 <?php
 
-
-?>
-<?php use App\Core\App;
+use App\Core\App;
 use App\Core\Helpers\FormHelper;
 use App\Models\Patient;
 
-include_once BASE_PATH . '/views/_header.inc.php'; ?>
+
+?>
+<?php include_once BASE_PATH . '/views/_header.inc.php'; ?>
 
     <div id="view_add_patient"></div>
 
@@ -42,7 +42,7 @@ include_once BASE_PATH . '/views/_header.inc.php'; ?>
                                 <div class="form-group">
                                     <label for="field_sex" class="required">Gender</label>
                                     <select name="" id="field_sex" class="form-control">
-                                        <?php FormHelper::renderDropdownOptions(Patient::SEX_LIST); ?>
+                                        <?php FormHelper::renderDropdownOptions(Patient::GENDER_LIST); ?>
                                     </select>
                                 </div>
                             </div>
