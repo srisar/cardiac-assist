@@ -28,3 +28,8 @@ export function redirect(path) {
 export function trimString(field) {
     return field.val().toString().trim();
 }
+
+
+export function toCurrency(value) {
+    return `Rs. ${parseFloat(value).toFixed(2)}`;
+}

@@ -25,3 +25,4 @@ Router::post('/api/users/process-add', "System\UsersController@apiProcessAdduser
  */
 
 Router::post('/api/patients/adding', "Patients\PatientsAPIController@adding", User::ROLE_ADMIN);
+Router::get('/api/patients/all', "Patients\PatientsAPIController@getAll", User::ROLE_ADMIN);

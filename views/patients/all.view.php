@@ -8,7 +8,7 @@ use App\Models\Patient;
 ?>
 <?php include_once BASE_PATH . '/views/_header.inc.php'; ?>
 
-    <div id="view_add_patient"></div>
+    <div id="view_all_patient"></div>
 
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -16,22 +16,22 @@ use App\Models\Patient;
             <div class="col-md-12">
 
 
-                <table class="table table-bordered table-striped datatable">
+                <table class="table table-bordered table-striped" id="table_all_patients">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Full name</th>
+                        <th>Gender</th>
+                        <th>Date of birth</th>
+                        <th>Age</th>
                         <th>Address</th>
+                        <th>Phone</th>
+                        <th>Job</th>
+                        <th>Job type</th>
+                        <th>Income</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>One</td>
-                        <td>One</td>
-                    </tr>
-                    <tr>
-                        <td>Two</td>
-                        <td>Two</td>
-                    </tr>
+
                     </tbody>
                 </table>
 

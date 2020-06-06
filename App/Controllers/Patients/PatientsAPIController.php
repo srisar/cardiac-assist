@@ -33,4 +33,21 @@ class PatientsAPIController
 
     }
 
+
+    /**
+     * Required fields: offset, limit
+     */
+    public function getAll()
+    {
+
+        $fields = Axios::get();
+
+        $patients = Patient::findAll();
+
+
+        (new JSONResponse(["data" => $patients]))->response();
+        return;
+
+    }
+
 }

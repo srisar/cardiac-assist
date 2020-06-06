@@ -1,8 +1,6 @@
-import * as helper from "../../commom/helper";
-import * as toast from "../../commom/toasts";
 import {makeInputFieldInvalid, resetInputFields} from "../../commom/forms/forms";
 import {getSiteUrl, trimString} from "../../commom/helper";
-import {showInfoToast, showWarningToast} from "../../commom/toasts";
+import {showWarningToast} from "../../commom/toasts";
 
 let axios = require('axios').default;
 
