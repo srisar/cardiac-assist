@@ -6,7 +6,6 @@ namespace App\Controllers\Patients;
 
 use App\Core\Requests\Axios;
 use App\Core\Requests\JSONResponse;
-use App\Core\Requests\Request;
 use App\Models\Patient;
 use Exception;
 
