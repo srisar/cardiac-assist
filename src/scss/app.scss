@@ -18,9 +18,15 @@
 @import "libs/toastr";
 @import "libs/datatables.css";
 
-@import "~daterangepicker/daterangepicker.css";
 
 .needs-validation {
+}
+
+.datatable {
+
+}
+
+.datatable_simple {
 
 }
 
@@ -28,8 +34,12 @@
   color: #c23616;
 }
 
+.card {
+  box-shadow: 0 0 15px #a0a0a0;
+}
 
 .card-header {
   font-weight: bold;
   padding: 0.5rem;
+  text-align: center;
 }

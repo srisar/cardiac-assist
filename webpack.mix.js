@@ -1,9 +1,7 @@
 let mix = require('webpack-mix');
 
-// mix.config.fileLoaderDirs.fonts = 'public/css/fonts';
-
 // mix.autoload({
-//     jquery: ['$', 'window.jQuery'],
+//     jquery: ['$', 'window.jQuery']
 // });
 
 mix.js('src/js/app.js', 'public/js')

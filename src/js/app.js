@@ -1,19 +1,14 @@
 import {validateFormFields} from "./commom/forms/forms";
 import * as loginView from "./views/system/auth/login_view";
 import * as userView from "./views/system/users/users_all"
-import * as patientView from "./views/patients/patients_all";
+
 
 /**
  * Application bootstrap
  */
 $(function () {
 
-
     validateFormFields();
-
-    loginView.start();
-    userView.all();
-    patientView.all();
 
     $(".date_field").daterangepicker({
         "singleDatePicker": true,
@@ -29,5 +24,13 @@ $(function () {
         "ordering": true
     });
 
-});
+    $(".datatable_simple").DataTable({
+        "paging": false,
+    })
 
+
+    loginView.start();
+    userView.all();
+
+
+})
