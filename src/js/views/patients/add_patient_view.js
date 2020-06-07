@@ -1,5 +1,5 @@
 import {makeInputFieldInvalid, resetInputFields} from "../../commom/forms/forms";
-import {getSiteUrl, trimString} from "../../commom/helper";
+import {getSiteUrl, redirect, trimString} from "../../commom/helper";
 import {showWarningToast} from "../../commom/toasts";
 import {calculateAge} from "./patients_helper";
 
@@ -32,7 +32,7 @@ function addPatient() {
         'income': $("#field_income"),
     };
 
-    calculateAge(fields.age);
+    calculateAge(fields.dob, fields.age);
 
     $("#btn_add_patient").on("click", function () {
 
@@ -73,8 +73,8 @@ function addPatient() {
             'income': trimString(fields.income),
         })
             .then(function (response) {
-
-                console.log(response.data.data);
+                const id = response.data.data.id;
+                redirect(`${getSiteUrl()}/patients/edit?id=${id}`);
 
             })
             .catch(function (error) {

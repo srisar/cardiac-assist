@@ -11,9 +11,11 @@ use App\Core\Sessions\AuthSession;
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home</a>
             </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Patients
@@ -23,7 +25,18 @@ use App\Core\Sessions\AuthSession;
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?= App::url('/patients') ?>">View all patients</a>
                 </div>
-            </li>
+            </li><!-- end: patients dropdown-->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Management
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?= App::url('/symptoms') ?>">Manage symptoms</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="<?= App::url('/patients') ?>"></a>
+                </div>
+            </li><!-- end management dropdown-->
 
         </ul>
 

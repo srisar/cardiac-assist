@@ -1,7 +1,9 @@
 import {validateFormFields} from "./commom/forms/forms";
-import * as loginView from "./views/system/auth/login_view";
-import * as userView from "./views/system/users/users_all"
-import * as patientView from "./views/patients/patients_all";
+import * as loginViews from "./views/system/auth/login_view";
+import * as usersViews from "./views/system/users/users_all"
+import * as patientsViews from "./views/patients/patients_all";
+import * as visitsViews from "./views/visits/visits_all";
+import * as symptomsViews from "./views/symptoms/symptoms";
 
 
 /**
@@ -14,6 +16,7 @@ $(function () {
     $(".date_field").daterangepicker({
         "singleDatePicker": true,
         "showDropdowns": true,
+        "autoApply": true,
         "locale": {
             "format": "YYYY-MM-DD"
         }
@@ -30,8 +33,10 @@ $(function () {
     })
 
 
-    loginView.start();
-    userView.all();
-    patientView.all();
+    loginViews.start();
+    usersViews.all();
+    patientsViews.all();
+    visitsViews.all();
+    symptomsViews.all();
 
 })

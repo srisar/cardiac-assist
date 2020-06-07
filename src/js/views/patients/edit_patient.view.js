@@ -34,7 +34,7 @@ function updatePatient() {
 
     $("#btn_update_patient").on("click", function () {
 
-        axios.post(`${getSiteUrl()}/api/patients/editing`, {
+        axios.post(`${getSiteUrl()}/api/patients/updating`, {
             "id": parseInt(fields.id.val()),
             "first_name": trimString(fields.first_name),
             "last_name": trimString(fields.last_name),

@@ -9,6 +9,9 @@ use App\Core\Requests\Request;
 class App
 {
 
+    private static string $pageTitle;
+
+
     /**
      * Returns the site base URL (http://localhost)
      * @return string
@@ -42,7 +45,7 @@ class App
     public static function redirect($path = '/', $params = [])
     {
 
-        if (empty($params)) {
+        if ( empty($params) ) {
             header('Location:' . $path);
         } else {
             $query = http_build_query($params);
@@ -59,6 +62,23 @@ class App
     public static function appName(): string
     {
         return $_ENV['APP_NAME'];
+    }
+
+    /**
+     * @param string $title
+     */
+    public static function setTitle(string $title)
+    {
+        self::$pageTitle = $title;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public static function getTitle()
+    {
+        return sprintf('%s — %s', self::$pageTitle, self::appName());
     }
 
 }

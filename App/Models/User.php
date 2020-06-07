@@ -28,11 +28,11 @@ class User implements AbstractModel
 
     public static function build($fields)
     {
-        $user = new User();
+        $object = new self();
         foreach ( $fields as $key => $value ) {
-            $user->$key = $value;
+            $object->$key = $value;
         }
-        return $user;
+        return $object;
     }
 
 

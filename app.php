@@ -9,6 +9,7 @@ session_start();
  */
 require_once "vendor/autoload.php";
 
+use App\Core\App;
 use Dotenv\Dotenv;
 use App\Core\Database\Database;
 
@@ -56,3 +57,11 @@ require_once "routes/web.php";
 require_once "routes/api.php";
 
 
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Load additional configs
+ * ---------------------------------------------------------------------------------------
+ */
+
+// setting the default page title to app name
+App::setTitle(App::appName());

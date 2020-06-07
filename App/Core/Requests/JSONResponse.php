@@ -29,7 +29,7 @@ class JSONResponse
         echo json_encode($this->payload);
     }
 
-    public static function invalidResponse($payload = ["data" => "Invalid request."])
+    public static function invalidResponse($payload = ["message" => "Invalid request."])
     {
         $response = new JSONResponse($payload, 400);
         $response->response();

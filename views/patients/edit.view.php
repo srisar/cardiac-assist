@@ -4,9 +4,13 @@ use App\Core\App;
 use App\Core\Helpers\FormHelper;
 use App\Core\View;
 use App\Models\Patient;
+use App\Models\Visit;
 
 /** @var Patient $patient */
 $patient = View::getData("patient");
+
+/** @var Visit[] $visits */
+$visits = $patient->getVisits();
 
 ?>
 <?php include_once BASE_PATH . '/views/_header.inc.php'; ?>
@@ -18,9 +22,9 @@ $patient = View::getData("patient");
 
         <div class="col-md-12 col-lg-7">
 
-            <div class="card card-collapsible mb-4" id="container_add_patient">
+            <div class="card card-collapsible mb-4" id="container_edit_patient">
 
-                <div class="card-header">Edit patient</div>
+                <div class="card-header">Patient details</div>
 
                 <div class="card-body">
 
@@ -167,8 +171,39 @@ $patient = View::getData("patient");
                 </div> <!--.card-body-->
             </div><!--.card-->
 
-
         </div><!--end column-->
+
+        <!-- VISITS SECTION-->
+        <div class="col-md-12 col-lg-5">
+
+            <div class="card mb-4">
+                <div class="card-header">Visits</div>
+                <div class="card-body">
+                    <div>
+                        <a href="<?= App::url('/visits/add', ['patient_id' => $patient->id]) ?>" class="btn btn-sm btn-primary">Add a visit</a>
+                    </div>
+
+                    <table class="datatable_simple table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Remarks</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ( $visits as $visit ): ?>
+                            <tr>
+                                <td><a href="<?= App::url('/visits/edit', ['id' => $visit->id]) ?>"><?= $visit->visit_date ?></a></td>
+                                <td><?= $visit->remarks ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
 
     </div>
 </div>

@@ -64,7 +64,7 @@ class Patient implements AbstractModel
 
     public static function build(array $fields)
     {
-        $object = new Patient();
+        $object = new self();
         foreach ( $fields as $key => $value ) {
             $object->$key = $value;
         }
@@ -77,15 +77,7 @@ class Patient implements AbstractModel
      */
     public static function find(int $id)
     {
-        $db = Database::instance();
-        $statement = $db->prepare("select * from patients where id=?");
-        $statement->execute([$id]);
-
-        /** @var Patient $result */
-        $result = $statement->fetchObject(self::class);
-
-        if ( !empty($result) ) return $result;
-        return null;
+        return Database::find('patients', $id, self::class);
 
     }
 
@@ -96,18 +88,8 @@ class Patient implements AbstractModel
      */
     public static function findAll(int $limit = 1000, int $offset = 0)
     {
-        $db = Database::instance();
-        $statement = $db->prepare("select * from patients limit :limit_val offset :offset_val");
 
-        $statement->bindValue(":limit_val", $limit, PDO::PARAM_INT);
-        $statement->bindValue(":offset_val", $offset, PDO::PARAM_INT);
-        $statement->execute();
-
-        /** @var Patient[] $result */
-        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
-
-        if ( !empty($result) ) return $result;
-        return [];
+        return Database::findAll('patients', $limit, $offset, self::class);
     }
 
     /**
@@ -187,4 +169,21 @@ class Patient implements AbstractModel
     {
         // TODO: Implement delete() method.
     }
+
+
+    /*
+     * ---------------------------------------------------------------------------------------
+     * | Associated calls
+     * ---------------------------------------------------------------------------------------
+     */
+
+    /**
+     * @return Visit[]|array
+     */
+    public function getVisits()
+    {
+        return Visit::findByPatient($this);
+    }
+
+
 }

@@ -10,6 +10,7 @@ use App\Models\User;
  */
 
 Router::get("/", "PagesController@index");
+Router::get("/test", "System\TestController@genericTest");
 
 
 /*
@@ -40,6 +41,23 @@ Router::post('/users/process-edit', "System\UsersController@processEditUser", Us
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/patients/add', "Patients\PatientsController@viewAdd", User::ROLE_ADMIN);
-Router::get('/patients', "Patients\PatientsController@viewAll", User::ROLE_ADMIN);
-Router::get('/patients/edit', "Patients\PatientsController@viewEdit", User::ROLE_ADMIN);
+Router::get('/patients/add', "Patients\ViewsController@viewAdd", User::ROLE_ADMIN);
+Router::get('/patients', "Patients\ViewsController@viewAll", User::ROLE_ADMIN);
+Router::get('/patients/edit', "Patients\ViewsController@viewEdit", User::ROLE_ADMIN);
+
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for visits
+ * ---------------------------------------------------------------------------------------
+ */
+
+Router::get('/visits/add', "Visits\VisitsController@viewAdd", User::ROLE_ADMIN);
+Router::get('/visits/edit', "Visits\VisitsController@viewEdit", User::ROLE_ADMIN);
+
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for symptoms
+ * ---------------------------------------------------------------------------------------
+ */
+
+Router::get('/symptoms', "Symptoms\ViewsController@viewManage", User::ROLE_ADMIN);
