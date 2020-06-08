@@ -19,7 +19,7 @@ class Web
 
     public function viewAll()
     {
-        View::render('patients/all.view');
+        View::render('patients/list.view');
     }
 
     public function viewEdit()

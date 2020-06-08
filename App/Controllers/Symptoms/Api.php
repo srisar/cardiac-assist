@@ -6,6 +6,7 @@ namespace App\Controllers\Symptoms;
 
 use App\Core\Requests\Axios;
 use App\Core\Requests\JSONResponse;
+use App\Core\Requests\Request;
 use App\Models\Symptom;
 use Exception;
 
@@ -40,7 +41,7 @@ class Api
 
 
         } catch ( Exception $exception ) {
-            JSONResponse::invalidResponse();
+            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
         }
 
     }
@@ -61,6 +62,77 @@ class Api
         $symptoms = Symptom::findAll();
 
         (new JSONResponse(['symptoms' => $symptoms]))->response();
+
+    }
+
+
+    public function autoCompleteResponse()
+    {
+
+        try {
+
+            Axios::get();
+
+            $symptoms = Symptom::searchByName(Request::getAsString('query'));
+
+            error_log(print_r($symptoms, true));
+
+
+            $suggestions = [];
+
+            foreach ( $symptoms as $symptom ) {
+                $suggestions[] = [
+                    'data' => $symptom->id,
+                    'value' => $symptom->symptom_name
+                ];
+            }
+
+
+            (new JSONResponse(['suggestions' => $suggestions]))->response();
+            return;
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
+        }
+
+    }
+
+    public function find()
+    {
+        try {
+
+            /**
+             * fields: $id
+             */
+
+            $fields = Axios::get();
+
+            $id = Request::getAsInteger('id');
+
+            error_log(print_r($_REQUEST, true));
+            error_log(print_r($fields, true));
+
+            if ( is_null($id) ) {
+                JSONResponse::invalidResponse();
+                return;
+            }
+
+
+            $symptom = Symptom::find($id);
+
+            if ( $symptom != null ) {
+                (new JSONResponse(['symptom' => $symptom]))->response();
+                return;
+            }
+
+            JSONResponse::invalidResponse(['message' => 'Invalid id']);
+            return;
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::exceptionResponse($exception);
+        }
 
     }
 

@@ -12,8 +12,7 @@ use App\Core\Messages\SessionError;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= App::appName() ?> - Login</title>
     <link rel="stylesheet" href="<?= App::siteURL() ?>/css/app.css">
-    <script src="<?= App::siteURL() ?>/js/libs/all.js" defer></script>
-    <script src="<?= App::siteURL() ?>/js/app.js" defer></script>
+
 </head>
 <body>
 
@@ -60,5 +59,8 @@ use App\Core\Messages\SessionError;
     </div><!--.row-->
 </div>
 
+<script src="<?= App::siteURL() ?>/js/libs/all.js"></script>
+<script src="<?= App::siteURL() ?>/js/app.js"></script>
+<script><?php include_once "login.view.js" ?></script>
 </body>
 </html>

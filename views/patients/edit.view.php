@@ -209,3 +209,6 @@ $visits = $patient->getVisits();
 </div>
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
+
+<script><?php include_once "common.inc.js" ?></script>
+<script><?php include_once "edit.view.js" ?></script>

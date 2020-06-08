@@ -16,18 +16,18 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 
-export function showInfoToast(message) {
+function showInfoToast(message) {
     toastr.info(message);
 }
 
-export function showWarningToast(message) {
+function showWarningToast(message) {
     toastr.warning(message);
 }
 
-export function showErrorToast(message) {
+function showErrorToast(message) {
     toastr.error(message);
 }
 
-export function showSuccessToast(message) {
+function showSuccessToast(message) {
     toastr.success(message);
 }

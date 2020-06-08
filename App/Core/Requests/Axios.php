@@ -13,8 +13,14 @@ class Axios
      */
     public static function get()
     {
-        $_REQUEST = json_decode(file_get_contents("php://input"), true);
-        return $_REQUEST;
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if ( !empty($data) ) {
+            $_REQUEST = $data;
+            return $data;
+        }
+
+        return $data;
     }
 
 }

@@ -5,9 +5,12 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class Symptom implements AbstractModel
 {
+
+    private const TABLE = "symptoms";
 
     public ?int $id;
     public ?string $symptom_name, $description, $created_at, $updated_at;
@@ -74,6 +77,10 @@ class Symptom implements AbstractModel
      * ---------------------------------------------------------------------------------------
      */
 
+    /**
+     * @param string $symptomName
+     * @return Symptom|null
+     */
     public static function findByName(string $symptomName)
     {
         $db = Database::instance();
@@ -84,6 +91,29 @@ class Symptom implements AbstractModel
 
         if ( !empty($result) ) return $result;
         return null;
+    }
+
+
+    /**
+     * @param string $symptomName
+     * @return Symptom[]|bool
+     */
+    public static function searchByName(?string $symptomName)
+    {
+        $db = Database::instance();
+
+        $statement = $db->prepare(
+            "select * from " . self::TABLE . " where symptom_name like :query;"
+        );
+
+        $statement->bindValue(":query", "%" . $symptomName . "%");
+
+        $statement->execute();
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if ( !empty($results) ) return $results;
+        return [];
     }
 
 

@@ -10,5 +10,8 @@ use App\Core\App;
     </div>
 </div>
 
+<script src="<?= App::siteURL() ?>/js/libs/all.js"></script>
+<script src="<?= App::siteURL() ?>/js/app.js"></script>
+
 </body>
 </html>

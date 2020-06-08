@@ -1,7 +1,7 @@
 /**
  * Reloads the page
  */
-export function reloadPage() {
+function reloadPage() {
     window.location.reload();
 }
 
@@ -11,7 +11,7 @@ export function reloadPage() {
  * Eg. http://localhost/
  * @returns {string}
  */
-export function getSiteUrl() {
+function getSiteUrl() {
     return `${window.location.protocol}//${window.location.hostname}`;
 
 }
@@ -20,16 +20,16 @@ export function getSiteUrl() {
  * Redirects to the given url path
  * @param path
  */
-export function redirect(path) {
+function redirect(path) {
     location.replace(path);
 }
 
 
-export function trimString(field) {
+function trimString(field) {
     return field.val().toString().trim();
 }
 
 
-export function toCurrency(value) {
+function toCurrency(value) {
     return `Rs. ${parseFloat(value).toFixed(2)}`;
 }

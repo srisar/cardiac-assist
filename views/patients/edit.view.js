@@ -1,15 +1,11 @@
-import {calculateAge} from "./patients_helper";
-import {getSiteUrl, trimString} from "../../commom/helper";
-import {showErrorToast, showSuccessToast} from "../../commom/toasts";
 
-let axios = require("axios").default;
-
-export function start() {
-    if (document.getElementById("view_edit_patient") == null) return false;
+$(function () {
 
     updatePatient();
 
-}
+});
+
+
 
 function updatePatient() {
 

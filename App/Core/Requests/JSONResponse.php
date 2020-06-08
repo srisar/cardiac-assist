@@ -4,6 +4,8 @@
 namespace App\Core\Requests;
 
 
+use Exception;
+
 class JSONResponse
 {
 
@@ -29,10 +31,24 @@ class JSONResponse
         echo json_encode($this->payload);
     }
 
+    /**
+     * response with invalid message
+     * @param string[] $payload
+     */
     public static function invalidResponse($payload = ['message' => 'Invalid request'])
     {
         $response = new JSONResponse($payload, 400);
         $response->response();
+    }
+
+
+    /**
+     * Response for exception handling
+     * @param Exception $exception
+     */
+    public static function exceptionResponse(Exception $exception)
+    {
+        self::invalidResponse(['message' => $exception->getMessage()]);
     }
 
 }

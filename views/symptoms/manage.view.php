@@ -80,5 +80,50 @@ use App\Core\Helpers\FormHelper;
 
 </div><!--container-->
 
+
+<!--
+|
+| modal: edit/delete symptom
+|
+-->
+
+<div class="modal fade" id="modal_edit_symptom" tabindex="-1" role="dialog" aria-labelledby="modal_edit_symptom" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="label_edit_symptom_title"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" id="field_edit_id" value="">
+
+                <div class="form-group">
+                    <label for="field_edit_symptom_name">Symptom name</label>
+                    <input type="text" id="field_edit_symptom_name" class="form-control" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="field_edit_description">Description</label>
+                    <textarea id="field_edit_description" rows="15" class="form-control"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btn_update_symptom">Update changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="btn_delete_symptom">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
 
+<script>
+    <?php include_once "manage_symptoms.js"; ?>
+</script>

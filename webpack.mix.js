@@ -4,8 +4,8 @@ let mix = require('webpack-mix');
 //     jquery: ['$', 'window.jQuery']
 // });
 
-mix.js('src/js/app.js', 'public/js')
-    .sass('src/scss/app.scss', 'public/css').sourceMaps();
+mix.js('src/js/app.js', 'public/js');
+mix.sass('src/scss/app.scss', 'public/css').sourceMaps();
 
 
 mix.combine([
@@ -15,5 +15,12 @@ mix.combine([
     'src/js/libs/datatables.min.js',
     'src/js/libs/daterangepicker.min.js',
     'src/js/libs/popper.min.js',
-    'src/js/libs/toastr.min.js'
+    'src/js/libs/toastr.min.js',
+    'src/js/libs/jquery.autocomplete.js',
+    'src/js/libs/axios.min.js',
+    'src/js/common/helper.js',
+    'src/js/common/messages.js',
+    'src/js/common/toasts.js',
+    'src/js/common/forms.js'
+
 ], 'public/js/libs/all.js');

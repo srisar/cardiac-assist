@@ -299,3 +299,1136 @@ b.modal=function(b){return function(c,d,g){if(!a.fn.modal)e(c,d,g);else if(!d){i
  * */
 !function(e){e(["jquery"],function(e){return function(){function t(e,t,n){return g({type:O.error,iconClass:m().iconClasses.error,message:e,optionsOverride:n,title:t})}function n(t,n){return t||(t=m()),v=e("#"+t.containerId),v.length?v:(n&&(v=d(t)),v)}function o(e,t,n){return g({type:O.info,iconClass:m().iconClasses.info,message:e,optionsOverride:n,title:t})}function s(e){C=e}function i(e,t,n){return g({type:O.success,iconClass:m().iconClasses.success,message:e,optionsOverride:n,title:t})}function a(e,t,n){return g({type:O.warning,iconClass:m().iconClasses.warning,message:e,optionsOverride:n,title:t})}function r(e,t){var o=m();v||n(o),u(e,o,t)||l(o)}function c(t){var o=m();return v||n(o),t&&0===e(":focus",t).length?void h(t):void(v.children().length&&v.remove())}function l(t){for(var n=v.children(),o=n.length-1;o>=0;o--)u(e(n[o]),t)}function u(t,n,o){var s=!(!o||!o.force)&&o.force;return!(!t||!s&&0!==e(":focus",t).length)&&(t[n.hideMethod]({duration:n.hideDuration,easing:n.hideEasing,complete:function(){h(t)}}),!0)}function d(t){return v=e("<div/>").attr("id",t.containerId).addClass(t.positionClass),v.appendTo(e(t.target)),v}function p(){return{tapToDismiss:!0,toastClass:"toast",containerId:"toast-container",debug:!1,showMethod:"fadeIn",showDuration:300,showEasing:"swing",onShown:void 0,hideMethod:"fadeOut",hideDuration:1e3,hideEasing:"swing",onHidden:void 0,closeMethod:!1,closeDuration:!1,closeEasing:!1,closeOnHover:!0,extendedTimeOut:1e3,iconClasses:{error:"toast-error",info:"toast-info",success:"toast-success",warning:"toast-warning"},iconClass:"toast-info",positionClass:"toast-top-right",timeOut:5e3,titleClass:"toast-title",messageClass:"toast-message",escapeHtml:!1,target:"body",closeHtml:'<button type="button">&times;</button>',closeClass:"toast-close-button",newestOnTop:!0,preventDuplicates:!1,progressBar:!1,progressClass:"toast-progress",rtl:!1}}function f(e){C&&C(e)}function g(t){function o(e){return null==e&&(e=""),e.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}function s(){c(),u(),d(),p(),g(),C(),l(),i()}function i(){var e="";switch(t.iconClass){case"toast-success":case"toast-info":e="polite";break;default:e="assertive"}I.attr("aria-live",e)}function a(){E.closeOnHover&&I.hover(H,D),!E.onclick&&E.tapToDismiss&&I.click(b),E.closeButton&&j&&j.click(function(e){e.stopPropagation?e.stopPropagation():void 0!==e.cancelBubble&&e.cancelBubble!==!0&&(e.cancelBubble=!0),E.onCloseClick&&E.onCloseClick(e),b(!0)}),E.onclick&&I.click(function(e){E.onclick(e),b()})}function r(){I.hide(),I[E.showMethod]({duration:E.showDuration,easing:E.showEasing,complete:E.onShown}),E.timeOut>0&&(k=setTimeout(b,E.timeOut),F.maxHideTime=parseFloat(E.timeOut),F.hideEta=(new Date).getTime()+F.maxHideTime,E.progressBar&&(F.intervalId=setInterval(x,10)))}function c(){t.iconClass&&I.addClass(E.toastClass).addClass(y)}function l(){E.newestOnTop?v.prepend(I):v.append(I)}function u(){if(t.title){var e=t.title;E.escapeHtml&&(e=o(t.title)),M.append(e).addClass(E.titleClass),I.append(M)}}function d(){if(t.message){var e=t.message;E.escapeHtml&&(e=o(t.message)),B.append(e).addClass(E.messageClass),I.append(B)}}function p(){E.closeButton&&(j.addClass(E.closeClass).attr("role","button"),I.prepend(j))}function g(){E.progressBar&&(q.addClass(E.progressClass),I.prepend(q))}function C(){E.rtl&&I.addClass("rtl")}function O(e,t){if(e.preventDuplicates){if(t.message===w)return!0;w=t.message}return!1}function b(t){var n=t&&E.closeMethod!==!1?E.closeMethod:E.hideMethod,o=t&&E.closeDuration!==!1?E.closeDuration:E.hideDuration,s=t&&E.closeEasing!==!1?E.closeEasing:E.hideEasing;if(!e(":focus",I).length||t)return clearTimeout(F.intervalId),I[n]({duration:o,easing:s,complete:function(){h(I),clearTimeout(k),E.onHidden&&"hidden"!==P.state&&E.onHidden(),P.state="hidden",P.endTime=new Date,f(P)}})}function D(){(E.timeOut>0||E.extendedTimeOut>0)&&(k=setTimeout(b,E.extendedTimeOut),F.maxHideTime=parseFloat(E.extendedTimeOut),F.hideEta=(new Date).getTime()+F.maxHideTime)}function H(){clearTimeout(k),F.hideEta=0,I.stop(!0,!0)[E.showMethod]({duration:E.showDuration,easing:E.showEasing})}function x(){var e=(F.hideEta-(new Date).getTime())/F.maxHideTime*100;q.width(e+"%")}var E=m(),y=t.iconClass||E.iconClass;if("undefined"!=typeof t.optionsOverride&&(E=e.extend(E,t.optionsOverride),y=t.optionsOverride.iconClass||y),!O(E,t)){T++,v=n(E,!0);var k=null,I=e("<div/>"),M=e("<div/>"),B=e("<div/>"),q=e("<div/>"),j=e(E.closeHtml),F={intervalId:null,hideEta:null,maxHideTime:null},P={toastId:T,state:"visible",startTime:new Date,options:E,map:t};return s(),r(),a(),f(P),E.debug&&console&&console.log(P),I}}function m(){return e.extend({},p(),b.options)}function h(e){v||(v=n()),e.is(":visible")||(e.remove(),e=null,0===v.children().length&&(v.remove(),w=void 0))}var v,C,w,T=0,O={error:"error",info:"info",success:"success",warning:"warning"},b={clear:r,remove:c,error:t,getContainer:n,info:o,options:{},subscribe:s,success:i,version:"2.1.3",warning:a};return b}()})}("function"==typeof define&&define.amd?define:function(e,t){"undefined"!=typeof module&&module.exports?module.exports=t(require("jquery")):window.toastr=t(window.jQuery)});
 //# sourceMappingURL=toastr.js.map
+
+/**
+*  Ajax Autocomplete for jQuery, version 1.4.11
+*  (c) 2017 Tomas Kirda
+*
+*  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
+*  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
+*/
+
+/*jslint  browser: true, white: true, single: true, this: true, multivar: true */
+/*global define, window, document, jQuery, exports, require */
+
+// Expose plugin as an AMD module if AMD loader is present:
+(function (factory) {
+    "use strict";
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object' && typeof require === 'function') {
+        // Browserify
+        factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+    'use strict';
+
+    var
+        utils = (function () {
+            return {
+                escapeRegExChars: function (value) {
+                    return value.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+                },
+                createNode: function (containerClass) {
+                    var div = document.createElement('div');
+                    div.className = containerClass;
+                    div.style.position = 'absolute';
+                    div.style.display = 'none';
+                    return div;
+                }
+            };
+        }()),
+
+        keys = {
+            ESC: 27,
+            TAB: 9,
+            RETURN: 13,
+            LEFT: 37,
+            UP: 38,
+            RIGHT: 39,
+            DOWN: 40
+        },
+
+        noop = $.noop;
+
+    function Autocomplete(el, options) {
+        var that = this;
+
+        // Shared variables:
+        that.element = el;
+        that.el = $(el);
+        that.suggestions = [];
+        that.badQueries = [];
+        that.selectedIndex = -1;
+        that.currentValue = that.element.value;
+        that.timeoutId = null;
+        that.cachedResponse = {};
+        that.onChangeTimeout = null;
+        that.onChange = null;
+        that.isLocal = false;
+        that.suggestionsContainer = null;
+        that.noSuggestionsContainer = null;
+        that.options = $.extend(true, {}, Autocomplete.defaults, options);
+        that.classes = {
+            selected: 'autocomplete-selected',
+            suggestion: 'autocomplete-suggestion'
+        };
+        that.hint = null;
+        that.hintValue = '';
+        that.selection = null;
+
+        // Initialize and set options:
+        that.initialize();
+        that.setOptions(options);
+    }
+
+    Autocomplete.utils = utils;
+
+    $.Autocomplete = Autocomplete;
+
+    Autocomplete.defaults = {
+            ajaxSettings: {},
+            autoSelectFirst: false,
+            appendTo: 'body',
+            serviceUrl: null,
+            lookup: null,
+            onSelect: null,
+            width: 'auto',
+            minChars: 1,
+            maxHeight: 300,
+            deferRequestBy: 0,
+            params: {},
+            formatResult: _formatResult,
+            formatGroup: _formatGroup,
+            delimiter: null,
+            zIndex: 9999,
+            type: 'GET',
+            noCache: false,
+            onSearchStart: noop,
+            onSearchComplete: noop,
+            onSearchError: noop,
+            preserveInput: false,
+            containerClass: 'autocomplete-suggestions',
+            tabDisabled: false,
+            dataType: 'text',
+            currentRequest: null,
+            triggerSelectOnValidInput: true,
+            preventBadQueries: true,
+            lookupFilter: _lookupFilter,
+            paramName: 'query',
+            transformResult: _transformResult,
+            showNoSuggestionNotice: false,
+            noSuggestionNotice: 'No results',
+            orientation: 'bottom',
+            forceFixPosition: false
+    };
+
+    function _lookupFilter(suggestion, originalQuery, queryLowerCase) {
+        return suggestion.value.toLowerCase().indexOf(queryLowerCase) !== -1;
+    };
+
+    function _transformResult(response) {
+        return typeof response === 'string' ? $.parseJSON(response) : response;
+    };
+
+    function _formatResult(suggestion, currentValue) {
+        // Do not replace anything if the current value is empty
+        if (!currentValue) {
+            return suggestion.value;
+        }
+
+        var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
+
+        return suggestion.value
+            .replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/&lt;(\/?strong)&gt;/g, '<$1>');
+    };
+
+    function _formatGroup(suggestion, category) {
+        return '<div class="autocomplete-group">' + category + '</div>';
+    };
+
+    Autocomplete.prototype = {
+
+        initialize: function () {
+            var that = this,
+                suggestionSelector = '.' + that.classes.suggestion,
+                selected = that.classes.selected,
+                options = that.options,
+                container;
+
+            that.element.setAttribute('autocomplete', 'off');
+
+            // html() deals with many types: htmlString or Element or Array or jQuery
+            that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
+                                          .html(this.options.noSuggestionNotice).get(0);
+
+            that.suggestionsContainer = Autocomplete.utils.createNode(options.containerClass);
+
+            container = $(that.suggestionsContainer);
+
+            container.appendTo(options.appendTo || 'body');
+
+            // Only set width if it was provided:
+            if (options.width !== 'auto') {
+                container.css('width', options.width);
+            }
+
+            // Listen for mouse over event on suggestions list:
+            container.on('mouseover.autocomplete', suggestionSelector, function () {
+                that.activate($(this).data('index'));
+            });
+
+            // Deselect active element when mouse leaves suggestions container:
+            container.on('mouseout.autocomplete', function () {
+                that.selectedIndex = -1;
+                container.children('.' + selected).removeClass(selected);
+            });
+
+            // Listen for click event on suggestions list:
+            container.on('click.autocomplete', suggestionSelector, function () {
+                that.select($(this).data('index'));
+            });
+
+            container.on('click.autocomplete', function () {
+                clearTimeout(that.blurTimeoutId);
+            })
+
+            that.fixPositionCapture = function () {
+                if (that.visible) {
+                    that.fixPosition();
+                }
+            };
+
+            $(window).on('resize.autocomplete', that.fixPositionCapture);
+
+            that.el.on('keydown.autocomplete', function (e) { that.onKeyPress(e); });
+            that.el.on('keyup.autocomplete', function (e) { that.onKeyUp(e); });
+            that.el.on('blur.autocomplete', function () { that.onBlur(); });
+            that.el.on('focus.autocomplete', function () { that.onFocus(); });
+            that.el.on('change.autocomplete', function (e) { that.onKeyUp(e); });
+            that.el.on('input.autocomplete', function (e) { that.onKeyUp(e); });
+        },
+
+        onFocus: function () {
+            var that = this;
+
+            if (that.disabled) {
+                return;
+            }
+
+            that.fixPosition();
+
+            if (that.el.val().length >= that.options.minChars) {
+                that.onValueChange();
+            }
+        },
+
+        onBlur: function () {
+            var that = this,
+                options = that.options,
+                value = that.el.val(),
+                query = that.getQuery(value);
+
+            // If user clicked on a suggestion, hide() will
+            // be canceled, otherwise close suggestions
+            that.blurTimeoutId = setTimeout(function () {
+                that.hide();
+
+                if (that.selection && that.currentValue !== query) {
+                    (options.onInvalidateSelection || $.noop).call(that.element);
+                }
+            }, 200);
+        },
+
+        abortAjax: function () {
+            var that = this;
+            if (that.currentRequest) {
+                that.currentRequest.abort();
+                that.currentRequest = null;
+            }
+        },
+
+        setOptions: function (suppliedOptions) {
+            var that = this,
+                options = $.extend({}, that.options, suppliedOptions);
+
+            that.isLocal = Array.isArray(options.lookup);
+
+            if (that.isLocal) {
+                options.lookup = that.verifySuggestionsFormat(options.lookup);
+            }
+
+            options.orientation = that.validateOrientation(options.orientation, 'bottom');
+
+            // Adjust height, width and z-index:
+            $(that.suggestionsContainer).css({
+                'max-height': options.maxHeight + 'px',
+                'width': options.width + 'px',
+                'z-index': options.zIndex
+            });
+
+            this.options = options;
+        },
+
+
+        clearCache: function () {
+            this.cachedResponse = {};
+            this.badQueries = [];
+        },
+
+        clear: function () {
+            this.clearCache();
+            this.currentValue = '';
+            this.suggestions = [];
+        },
+
+        disable: function () {
+            var that = this;
+            that.disabled = true;
+            clearTimeout(that.onChangeTimeout);
+            that.abortAjax();
+        },
+
+        enable: function () {
+            this.disabled = false;
+        },
+
+        fixPosition: function () {
+            // Use only when container has already its content
+
+            var that = this,
+                $container = $(that.suggestionsContainer),
+                containerParent = $container.parent().get(0);
+            // Fix position automatically when appended to body.
+            // In other cases force parameter must be given.
+            if (containerParent !== document.body && !that.options.forceFixPosition) {
+                return;
+            }
+
+            // Choose orientation
+            var orientation = that.options.orientation,
+                containerHeight = $container.outerHeight(),
+                height = that.el.outerHeight(),
+                offset = that.el.offset(),
+                styles = { 'top': offset.top, 'left': offset.left };
+
+            if (orientation === 'auto') {
+                var viewPortHeight = $(window).height(),
+                    scrollTop = $(window).scrollTop(),
+                    topOverflow = -scrollTop + offset.top - containerHeight,
+                    bottomOverflow = scrollTop + viewPortHeight - (offset.top + height + containerHeight);
+
+                orientation = (Math.max(topOverflow, bottomOverflow) === topOverflow) ? 'top' : 'bottom';
+            }
+
+            if (orientation === 'top') {
+                styles.top += -containerHeight;
+            } else {
+                styles.top += height;
+            }
+
+            // If container is not positioned to body,
+            // correct its position using offset parent offset
+            if(containerParent !== document.body) {
+                var opacity = $container.css('opacity'),
+                    parentOffsetDiff;
+
+                    if (!that.visible){
+                        $container.css('opacity', 0).show();
+                    }
+
+                parentOffsetDiff = $container.offsetParent().offset();
+                styles.top -= parentOffsetDiff.top;
+                styles.top += containerParent.scrollTop;
+                styles.left -= parentOffsetDiff.left;
+
+                if (!that.visible){
+                    $container.css('opacity', opacity).hide();
+                }
+            }
+
+            if (that.options.width === 'auto') {
+                styles.width = that.el.outerWidth() + 'px';
+            }
+
+            $container.css(styles);
+        },
+
+        isCursorAtEnd: function () {
+            var that = this,
+                valLength = that.el.val().length,
+                selectionStart = that.element.selectionStart,
+                range;
+
+            if (typeof selectionStart === 'number') {
+                return selectionStart === valLength;
+            }
+            if (document.selection) {
+                range = document.selection.createRange();
+                range.moveStart('character', -valLength);
+                return valLength === range.text.length;
+            }
+            return true;
+        },
+
+        onKeyPress: function (e) {
+            var that = this;
+
+            // If suggestions are hidden and user presses arrow down, display suggestions:
+            if (!that.disabled && !that.visible && e.which === keys.DOWN && that.currentValue) {
+                that.suggest();
+                return;
+            }
+
+            if (that.disabled || !that.visible) {
+                return;
+            }
+
+            switch (e.which) {
+                case keys.ESC:
+                    that.el.val(that.currentValue);
+                    that.hide();
+                    break;
+                case keys.RIGHT:
+                    if (that.hint && that.options.onHint && that.isCursorAtEnd()) {
+                        that.selectHint();
+                        break;
+                    }
+                    return;
+                case keys.TAB:
+                    if (that.hint && that.options.onHint) {
+                        that.selectHint();
+                        return;
+                    }
+                    if (that.selectedIndex === -1) {
+                        that.hide();
+                        return;
+                    }
+                    that.select(that.selectedIndex);
+                    if (that.options.tabDisabled === false) {
+                        return;
+                    }
+                    break;
+                case keys.RETURN:
+                    if (that.selectedIndex === -1) {
+                        that.hide();
+                        return;
+                    }
+                    that.select(that.selectedIndex);
+                    break;
+                case keys.UP:
+                    that.moveUp();
+                    break;
+                case keys.DOWN:
+                    that.moveDown();
+                    break;
+                default:
+                    return;
+            }
+
+            // Cancel event if function did not return:
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        },
+
+        onKeyUp: function (e) {
+            var that = this;
+
+            if (that.disabled) {
+                return;
+            }
+
+            switch (e.which) {
+                case keys.UP:
+                case keys.DOWN:
+                    return;
+            }
+
+            clearTimeout(that.onChangeTimeout);
+
+            if (that.currentValue !== that.el.val()) {
+                that.findBestHint();
+                if (that.options.deferRequestBy > 0) {
+                    // Defer lookup in case when value changes very quickly:
+                    that.onChangeTimeout = setTimeout(function () {
+                        that.onValueChange();
+                    }, that.options.deferRequestBy);
+                } else {
+                    that.onValueChange();
+                }
+            }
+        },
+
+        onValueChange: function () {
+            if (this.ignoreValueChange) {
+                this.ignoreValueChange = false;
+                return;
+            }
+
+            var that = this,
+                options = that.options,
+                value = that.el.val(),
+                query = that.getQuery(value);
+
+            if (that.selection && that.currentValue !== query) {
+                that.selection = null;
+                (options.onInvalidateSelection || $.noop).call(that.element);
+            }
+
+            clearTimeout(that.onChangeTimeout);
+            that.currentValue = value;
+            that.selectedIndex = -1;
+
+            // Check existing suggestion for the match before proceeding:
+            if (options.triggerSelectOnValidInput && that.isExactMatch(query)) {
+                that.select(0);
+                return;
+            }
+
+            if (query.length < options.minChars) {
+                that.hide();
+            } else {
+                that.getSuggestions(query);
+            }
+        },
+
+        isExactMatch: function (query) {
+            var suggestions = this.suggestions;
+
+            return (suggestions.length === 1 && suggestions[0].value.toLowerCase() === query.toLowerCase());
+        },
+
+        getQuery: function (value) {
+            var delimiter = this.options.delimiter,
+                parts;
+
+            if (!delimiter) {
+                return value;
+            }
+            parts = value.split(delimiter);
+            return $.trim(parts[parts.length - 1]);
+        },
+
+        getSuggestionsLocal: function (query) {
+            var that = this,
+                options = that.options,
+                queryLowerCase = query.toLowerCase(),
+                filter = options.lookupFilter,
+                limit = parseInt(options.lookupLimit, 10),
+                data;
+
+            data = {
+                suggestions: $.grep(options.lookup, function (suggestion) {
+                    return filter(suggestion, query, queryLowerCase);
+                })
+            };
+
+            if (limit && data.suggestions.length > limit) {
+                data.suggestions = data.suggestions.slice(0, limit);
+            }
+
+            return data;
+        },
+
+        getSuggestions: function (q) {
+            var response,
+                that = this,
+                options = that.options,
+                serviceUrl = options.serviceUrl,
+                params,
+                cacheKey,
+                ajaxSettings;
+
+            options.params[options.paramName] = q;
+
+            if (options.onSearchStart.call(that.element, options.params) === false) {
+                return;
+            }
+
+            params = options.ignoreParams ? null : options.params;
+
+            if ($.isFunction(options.lookup)){
+                options.lookup(q, function (data) {
+                    that.suggestions = data.suggestions;
+                    that.suggest();
+                    options.onSearchComplete.call(that.element, q, data.suggestions);
+                });
+                return;
+            }
+
+            if (that.isLocal) {
+                response = that.getSuggestionsLocal(q);
+            } else {
+                if ($.isFunction(serviceUrl)) {
+                    serviceUrl = serviceUrl.call(that.element, q);
+                }
+                cacheKey = serviceUrl + '?' + $.param(params || {});
+                response = that.cachedResponse[cacheKey];
+            }
+
+            if (response && Array.isArray(response.suggestions)) {
+                that.suggestions = response.suggestions;
+                that.suggest();
+                options.onSearchComplete.call(that.element, q, response.suggestions);
+            } else if (!that.isBadQuery(q)) {
+                that.abortAjax();
+
+                ajaxSettings = {
+                    url: serviceUrl,
+                    data: params,
+                    type: options.type,
+                    dataType: options.dataType
+                };
+
+                $.extend(ajaxSettings, options.ajaxSettings);
+
+                that.currentRequest = $.ajax(ajaxSettings).done(function (data) {
+                    var result;
+                    that.currentRequest = null;
+                    result = options.transformResult(data, q);
+                    that.processResponse(result, q, cacheKey);
+                    options.onSearchComplete.call(that.element, q, result.suggestions);
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    options.onSearchError.call(that.element, q, jqXHR, textStatus, errorThrown);
+                });
+            } else {
+                options.onSearchComplete.call(that.element, q, []);
+            }
+        },
+
+        isBadQuery: function (q) {
+            if (!this.options.preventBadQueries){
+                return false;
+            }
+
+            var badQueries = this.badQueries,
+                i = badQueries.length;
+
+            while (i--) {
+                if (q.indexOf(badQueries[i]) === 0) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        hide: function () {
+            var that = this,
+                container = $(that.suggestionsContainer);
+
+            if ($.isFunction(that.options.onHide) && that.visible) {
+                that.options.onHide.call(that.element, container);
+            }
+
+            that.visible = false;
+            that.selectedIndex = -1;
+            clearTimeout(that.onChangeTimeout);
+            $(that.suggestionsContainer).hide();
+            that.signalHint(null);
+        },
+
+        suggest: function () {
+            if (!this.suggestions.length) {
+                if (this.options.showNoSuggestionNotice) {
+                    this.noSuggestions();
+                } else {
+                    this.hide();
+                }
+                return;
+            }
+
+            var that = this,
+                options = that.options,
+                groupBy = options.groupBy,
+                formatResult = options.formatResult,
+                value = that.getQuery(that.currentValue),
+                className = that.classes.suggestion,
+                classSelected = that.classes.selected,
+                container = $(that.suggestionsContainer),
+                noSuggestionsContainer = $(that.noSuggestionsContainer),
+                beforeRender = options.beforeRender,
+                html = '',
+                category,
+                formatGroup = function (suggestion, index) {
+                        var currentCategory = suggestion.data[groupBy];
+
+                        if (category === currentCategory){
+                            return '';
+                        }
+
+                        category = currentCategory;
+
+                        return options.formatGroup(suggestion, category);
+                    };
+
+            if (options.triggerSelectOnValidInput && that.isExactMatch(value)) {
+                that.select(0);
+                return;
+            }
+
+            // Build suggestions inner HTML:
+            $.each(that.suggestions, function (i, suggestion) {
+                if (groupBy){
+                    html += formatGroup(suggestion, value, i);
+                }
+
+                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, i) + '</div>';
+            });
+
+            this.adjustContainerWidth();
+
+            noSuggestionsContainer.detach();
+            container.html(html);
+
+            if ($.isFunction(beforeRender)) {
+                beforeRender.call(that.element, container, that.suggestions);
+            }
+
+            that.fixPosition();
+            container.show();
+
+            // Select first value by default:
+            if (options.autoSelectFirst) {
+                that.selectedIndex = 0;
+                container.scrollTop(0);
+                container.children('.' + className).first().addClass(classSelected);
+            }
+
+            that.visible = true;
+            that.findBestHint();
+        },
+
+        noSuggestions: function() {
+             var that = this,
+                 beforeRender = that.options.beforeRender,
+                 container = $(that.suggestionsContainer),
+                 noSuggestionsContainer = $(that.noSuggestionsContainer);
+
+            this.adjustContainerWidth();
+
+            // Some explicit steps. Be careful here as it easy to get
+            // noSuggestionsContainer removed from DOM if not detached properly.
+            noSuggestionsContainer.detach();
+
+            // clean suggestions if any
+            container.empty();
+            container.append(noSuggestionsContainer);
+
+            if ($.isFunction(beforeRender)) {
+                beforeRender.call(that.element, container, that.suggestions);
+            }
+
+            that.fixPosition();
+
+            container.show();
+            that.visible = true;
+        },
+
+        adjustContainerWidth: function() {
+            var that = this,
+                options = that.options,
+                width,
+                container = $(that.suggestionsContainer);
+
+            // If width is auto, adjust width before displaying suggestions,
+            // because if instance was created before input had width, it will be zero.
+            // Also it adjusts if input width has changed.
+            if (options.width === 'auto') {
+                width = that.el.outerWidth();
+                container.css('width', width > 0 ? width : 300);
+            } else if(options.width === 'flex') {
+                // Trust the source! Unset the width property so it will be the max length
+                // the containing elements.
+                container.css('width', '');
+            }
+        },
+
+        findBestHint: function () {
+            var that = this,
+                value = that.el.val().toLowerCase(),
+                bestMatch = null;
+
+            if (!value) {
+                return;
+            }
+
+            $.each(that.suggestions, function (i, suggestion) {
+                var foundMatch = suggestion.value.toLowerCase().indexOf(value) === 0;
+                if (foundMatch) {
+                    bestMatch = suggestion;
+                }
+                return !foundMatch;
+            });
+
+            that.signalHint(bestMatch);
+        },
+
+        signalHint: function (suggestion) {
+            var hintValue = '',
+                that = this;
+            if (suggestion) {
+                hintValue = that.currentValue + suggestion.value.substr(that.currentValue.length);
+            }
+            if (that.hintValue !== hintValue) {
+                that.hintValue = hintValue;
+                that.hint = suggestion;
+                (this.options.onHint || $.noop)(hintValue);
+            }
+        },
+
+        verifySuggestionsFormat: function (suggestions) {
+            // If suggestions is string array, convert them to supported format:
+            if (suggestions.length && typeof suggestions[0] === 'string') {
+                return $.map(suggestions, function (value) {
+                    return { value: value, data: null };
+                });
+            }
+
+            return suggestions;
+        },
+
+        validateOrientation: function(orientation, fallback) {
+            orientation = $.trim(orientation || '').toLowerCase();
+
+            if($.inArray(orientation, ['auto', 'bottom', 'top']) === -1){
+                orientation = fallback;
+            }
+
+            return orientation;
+        },
+
+        processResponse: function (result, originalQuery, cacheKey) {
+            var that = this,
+                options = that.options;
+
+            result.suggestions = that.verifySuggestionsFormat(result.suggestions);
+
+            // Cache results if cache is not disabled:
+            if (!options.noCache) {
+                that.cachedResponse[cacheKey] = result;
+                if (options.preventBadQueries && !result.suggestions.length) {
+                    that.badQueries.push(originalQuery);
+                }
+            }
+
+            // Return if originalQuery is not matching current query:
+            if (originalQuery !== that.getQuery(that.currentValue)) {
+                return;
+            }
+
+            that.suggestions = result.suggestions;
+            that.suggest();
+        },
+
+        activate: function (index) {
+            var that = this,
+                activeItem,
+                selected = that.classes.selected,
+                container = $(that.suggestionsContainer),
+                children = container.find('.' + that.classes.suggestion);
+
+            container.find('.' + selected).removeClass(selected);
+
+            that.selectedIndex = index;
+
+            if (that.selectedIndex !== -1 && children.length > that.selectedIndex) {
+                activeItem = children.get(that.selectedIndex);
+                $(activeItem).addClass(selected);
+                return activeItem;
+            }
+
+            return null;
+        },
+
+        selectHint: function () {
+            var that = this,
+                i = $.inArray(that.hint, that.suggestions);
+
+            that.select(i);
+        },
+
+        select: function (i) {
+            var that = this;
+            that.hide();
+            that.onSelect(i);
+        },
+
+        moveUp: function () {
+            var that = this;
+
+            if (that.selectedIndex === -1) {
+                return;
+            }
+
+            if (that.selectedIndex === 0) {
+                $(that.suggestionsContainer).children('.' + that.classes.suggestion).first().removeClass(that.classes.selected);
+                that.selectedIndex = -1;
+                that.ignoreValueChange = false;
+                that.el.val(that.currentValue);
+                that.findBestHint();
+                return;
+            }
+
+            that.adjustScroll(that.selectedIndex - 1);
+        },
+
+        moveDown: function () {
+            var that = this;
+
+            if (that.selectedIndex === (that.suggestions.length - 1)) {
+                return;
+            }
+
+            that.adjustScroll(that.selectedIndex + 1);
+        },
+
+        adjustScroll: function (index) {
+            var that = this,
+                activeItem = that.activate(index);
+
+            if (!activeItem) {
+                return;
+            }
+
+            var offsetTop,
+                upperBound,
+                lowerBound,
+                heightDelta = $(activeItem).outerHeight();
+
+            offsetTop = activeItem.offsetTop;
+            upperBound = $(that.suggestionsContainer).scrollTop();
+            lowerBound = upperBound + that.options.maxHeight - heightDelta;
+
+            if (offsetTop < upperBound) {
+                $(that.suggestionsContainer).scrollTop(offsetTop);
+            } else if (offsetTop > lowerBound) {
+                $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
+            }
+
+            if (!that.options.preserveInput) {
+                // During onBlur event, browser will trigger "change" event,
+                // because value has changed, to avoid side effect ignore,
+                // that event, so that correct suggestion can be selected
+                // when clicking on suggestion with a mouse
+                that.ignoreValueChange = true;
+                that.el.val(that.getValue(that.suggestions[index].value));
+            }
+
+            that.signalHint(null);
+        },
+
+        onSelect: function (index) {
+            var that = this,
+                onSelectCallback = that.options.onSelect,
+                suggestion = that.suggestions[index];
+
+            that.currentValue = that.getValue(suggestion.value);
+
+            if (that.currentValue !== that.el.val() && !that.options.preserveInput) {
+                that.el.val(that.currentValue);
+            }
+
+            that.signalHint(null);
+            that.suggestions = [];
+            that.selection = suggestion;
+
+            if ($.isFunction(onSelectCallback)) {
+                onSelectCallback.call(that.element, suggestion);
+            }
+        },
+
+        getValue: function (value) {
+            var that = this,
+                delimiter = that.options.delimiter,
+                currentValue,
+                parts;
+
+            if (!delimiter) {
+                return value;
+            }
+
+            currentValue = that.currentValue;
+            parts = currentValue.split(delimiter);
+
+            if (parts.length === 1) {
+                return value;
+            }
+
+            return currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value;
+        },
+
+        dispose: function () {
+            var that = this;
+            that.el.off('.autocomplete').removeData('autocomplete');
+            $(window).off('resize.autocomplete', that.fixPositionCapture);
+            $(that.suggestionsContainer).remove();
+        }
+    };
+
+    // Create chainable jQuery plugin:
+    $.fn.devbridgeAutocomplete = function (options, args) {
+        var dataKey = 'autocomplete';
+        // If function invoked without argument return
+        // instance of the first matched element:
+        if (!arguments.length) {
+            return this.first().data(dataKey);
+        }
+
+        return this.each(function () {
+            var inputElement = $(this),
+                instance = inputElement.data(dataKey);
+
+            if (typeof options === 'string') {
+                if (instance && typeof instance[options] === 'function') {
+                    instance[options](args);
+                }
+            } else {
+                // If instance already exists, destroy it:
+                if (instance && instance.dispose) {
+                    instance.dispose();
+                }
+                instance = new Autocomplete(this, options);
+                inputElement.data(dataKey, instance);
+            }
+        });
+    };
+
+    // Don't overwrite if it already exists
+    if (!$.fn.autocomplete) {
+        $.fn.autocomplete = $.fn.devbridgeAutocomplete;
+    }
+}));
+
+/* axios v0.19.2 | (c) 2020 by Matt Zabriskie */
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.axios=t():e.axios=t()}(this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={exports:{},id:r,loaded:!1};return e[r].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){e.exports=n(1)},function(e,t,n){"use strict";function r(e){var t=new s(e),n=i(s.prototype.request,t);return o.extend(n,s.prototype,t),o.extend(n,t),n}var o=n(2),i=n(3),s=n(4),a=n(22),u=n(10),c=r(u);c.Axios=s,c.create=function(e){return r(a(c.defaults,e))},c.Cancel=n(23),c.CancelToken=n(24),c.isCancel=n(9),c.all=function(e){return Promise.all(e)},c.spread=n(25),e.exports=c,e.exports.default=c},function(e,t,n){"use strict";function r(e){return"[object Array]"===j.call(e)}function o(e){return"undefined"==typeof e}function i(e){return null!==e&&!o(e)&&null!==e.constructor&&!o(e.constructor)&&"function"==typeof e.constructor.isBuffer&&e.constructor.isBuffer(e)}function s(e){return"[object ArrayBuffer]"===j.call(e)}function a(e){return"undefined"!=typeof FormData&&e instanceof FormData}function u(e){var t;return t="undefined"!=typeof ArrayBuffer&&ArrayBuffer.isView?ArrayBuffer.isView(e):e&&e.buffer&&e.buffer instanceof ArrayBuffer}function c(e){return"string"==typeof e}function f(e){return"number"==typeof e}function p(e){return null!==e&&"object"==typeof e}function d(e){return"[object Date]"===j.call(e)}function l(e){return"[object File]"===j.call(e)}function h(e){return"[object Blob]"===j.call(e)}function m(e){return"[object Function]"===j.call(e)}function y(e){return p(e)&&m(e.pipe)}function g(e){return"undefined"!=typeof URLSearchParams&&e instanceof URLSearchParams}function v(e){return e.replace(/^\s*/,"").replace(/\s*$/,"")}function x(){return("undefined"==typeof navigator||"ReactNative"!==navigator.product&&"NativeScript"!==navigator.product&&"NS"!==navigator.product)&&("undefined"!=typeof window&&"undefined"!=typeof document)}function w(e,t){if(null!==e&&"undefined"!=typeof e)if("object"!=typeof e&&(e=[e]),r(e))for(var n=0,o=e.length;n<o;n++)t.call(null,e[n],n,e);else for(var i in e)Object.prototype.hasOwnProperty.call(e,i)&&t.call(null,e[i],i,e)}function b(){function e(e,n){"object"==typeof t[n]&&"object"==typeof e?t[n]=b(t[n],e):t[n]=e}for(var t={},n=0,r=arguments.length;n<r;n++)w(arguments[n],e);return t}function E(){function e(e,n){"object"==typeof t[n]&&"object"==typeof e?t[n]=E(t[n],e):"object"==typeof e?t[n]=E({},e):t[n]=e}for(var t={},n=0,r=arguments.length;n<r;n++)w(arguments[n],e);return t}function S(e,t,n){return w(t,function(t,r){n&&"function"==typeof t?e[r]=C(t,n):e[r]=t}),e}var C=n(3),j=Object.prototype.toString;e.exports={isArray:r,isArrayBuffer:s,isBuffer:i,isFormData:a,isArrayBufferView:u,isString:c,isNumber:f,isObject:p,isUndefined:o,isDate:d,isFile:l,isBlob:h,isFunction:m,isStream:y,isURLSearchParams:g,isStandardBrowserEnv:x,forEach:w,merge:b,deepMerge:E,extend:S,trim:v}},function(e,t){"use strict";e.exports=function(e,t){return function(){for(var n=new Array(arguments.length),r=0;r<n.length;r++)n[r]=arguments[r];return e.apply(t,n)}}},function(e,t,n){"use strict";function r(e){this.defaults=e,this.interceptors={request:new s,response:new s}}var o=n(2),i=n(5),s=n(6),a=n(7),u=n(22);r.prototype.request=function(e){"string"==typeof e?(e=arguments[1]||{},e.url=arguments[0]):e=e||{},e=u(this.defaults,e),e.method?e.method=e.method.toLowerCase():this.defaults.method?e.method=this.defaults.method.toLowerCase():e.method="get";var t=[a,void 0],n=Promise.resolve(e);for(this.interceptors.request.forEach(function(e){t.unshift(e.fulfilled,e.rejected)}),this.interceptors.response.forEach(function(e){t.push(e.fulfilled,e.rejected)});t.length;)n=n.then(t.shift(),t.shift());return n},r.prototype.getUri=function(e){return e=u(this.defaults,e),i(e.url,e.params,e.paramsSerializer).replace(/^\?/,"")},o.forEach(["delete","get","head","options"],function(e){r.prototype[e]=function(t,n){return this.request(o.merge(n||{},{method:e,url:t}))}}),o.forEach(["post","put","patch"],function(e){r.prototype[e]=function(t,n,r){return this.request(o.merge(r||{},{method:e,url:t,data:n}))}}),e.exports=r},function(e,t,n){"use strict";function r(e){return encodeURIComponent(e).replace(/%40/gi,"@").replace(/%3A/gi,":").replace(/%24/g,"$").replace(/%2C/gi,",").replace(/%20/g,"+").replace(/%5B/gi,"[").replace(/%5D/gi,"]")}var o=n(2);e.exports=function(e,t,n){if(!t)return e;var i;if(n)i=n(t);else if(o.isURLSearchParams(t))i=t.toString();else{var s=[];o.forEach(t,function(e,t){null!==e&&"undefined"!=typeof e&&(o.isArray(e)?t+="[]":e=[e],o.forEach(e,function(e){o.isDate(e)?e=e.toISOString():o.isObject(e)&&(e=JSON.stringify(e)),s.push(r(t)+"="+r(e))}))}),i=s.join("&")}if(i){var a=e.indexOf("#");a!==-1&&(e=e.slice(0,a)),e+=(e.indexOf("?")===-1?"?":"&")+i}return e}},function(e,t,n){"use strict";function r(){this.handlers=[]}var o=n(2);r.prototype.use=function(e,t){return this.handlers.push({fulfilled:e,rejected:t}),this.handlers.length-1},r.prototype.eject=function(e){this.handlers[e]&&(this.handlers[e]=null)},r.prototype.forEach=function(e){o.forEach(this.handlers,function(t){null!==t&&e(t)})},e.exports=r},function(e,t,n){"use strict";function r(e){e.cancelToken&&e.cancelToken.throwIfRequested()}var o=n(2),i=n(8),s=n(9),a=n(10);e.exports=function(e){r(e),e.headers=e.headers||{},e.data=i(e.data,e.headers,e.transformRequest),e.headers=o.merge(e.headers.common||{},e.headers[e.method]||{},e.headers),o.forEach(["delete","get","head","post","put","patch","common"],function(t){delete e.headers[t]});var t=e.adapter||a.adapter;return t(e).then(function(t){return r(e),t.data=i(t.data,t.headers,e.transformResponse),t},function(t){return s(t)||(r(e),t&&t.response&&(t.response.data=i(t.response.data,t.response.headers,e.transformResponse))),Promise.reject(t)})}},function(e,t,n){"use strict";var r=n(2);e.exports=function(e,t,n){return r.forEach(n,function(n){e=n(e,t)}),e}},function(e,t){"use strict";e.exports=function(e){return!(!e||!e.__CANCEL__)}},function(e,t,n){"use strict";function r(e,t){!i.isUndefined(e)&&i.isUndefined(e["Content-Type"])&&(e["Content-Type"]=t)}function o(){var e;return"undefined"!=typeof XMLHttpRequest?e=n(12):"undefined"!=typeof process&&"[object process]"===Object.prototype.toString.call(process)&&(e=n(12)),e}var i=n(2),s=n(11),a={"Content-Type":"application/x-www-form-urlencoded"},u={adapter:o(),transformRequest:[function(e,t){return s(t,"Accept"),s(t,"Content-Type"),i.isFormData(e)||i.isArrayBuffer(e)||i.isBuffer(e)||i.isStream(e)||i.isFile(e)||i.isBlob(e)?e:i.isArrayBufferView(e)?e.buffer:i.isURLSearchParams(e)?(r(t,"application/x-www-form-urlencoded;charset=utf-8"),e.toString()):i.isObject(e)?(r(t,"application/json;charset=utf-8"),JSON.stringify(e)):e}],transformResponse:[function(e){if("string"==typeof e)try{e=JSON.parse(e)}catch(e){}return e}],timeout:0,xsrfCookieName:"XSRF-TOKEN",xsrfHeaderName:"X-XSRF-TOKEN",maxContentLength:-1,validateStatus:function(e){return e>=200&&e<300}};u.headers={common:{Accept:"application/json, text/plain, */*"}},i.forEach(["delete","get","head"],function(e){u.headers[e]={}}),i.forEach(["post","put","patch"],function(e){u.headers[e]=i.merge(a)}),e.exports=u},function(e,t,n){"use strict";var r=n(2);e.exports=function(e,t){r.forEach(e,function(n,r){r!==t&&r.toUpperCase()===t.toUpperCase()&&(e[t]=n,delete e[r])})}},function(e,t,n){"use strict";var r=n(2),o=n(13),i=n(5),s=n(16),a=n(19),u=n(20),c=n(14);e.exports=function(e){return new Promise(function(t,f){var p=e.data,d=e.headers;r.isFormData(p)&&delete d["Content-Type"];var l=new XMLHttpRequest;if(e.auth){var h=e.auth.username||"",m=e.auth.password||"";d.Authorization="Basic "+btoa(h+":"+m)}var y=s(e.baseURL,e.url);if(l.open(e.method.toUpperCase(),i(y,e.params,e.paramsSerializer),!0),l.timeout=e.timeout,l.onreadystatechange=function(){if(l&&4===l.readyState&&(0!==l.status||l.responseURL&&0===l.responseURL.indexOf("file:"))){var n="getAllResponseHeaders"in l?a(l.getAllResponseHeaders()):null,r=e.responseType&&"text"!==e.responseType?l.response:l.responseText,i={data:r,status:l.status,statusText:l.statusText,headers:n,config:e,request:l};o(t,f,i),l=null}},l.onabort=function(){l&&(f(c("Request aborted",e,"ECONNABORTED",l)),l=null)},l.onerror=function(){f(c("Network Error",e,null,l)),l=null},l.ontimeout=function(){var t="timeout of "+e.timeout+"ms exceeded";e.timeoutErrorMessage&&(t=e.timeoutErrorMessage),f(c(t,e,"ECONNABORTED",l)),l=null},r.isStandardBrowserEnv()){var g=n(21),v=(e.withCredentials||u(y))&&e.xsrfCookieName?g.read(e.xsrfCookieName):void 0;v&&(d[e.xsrfHeaderName]=v)}if("setRequestHeader"in l&&r.forEach(d,function(e,t){"undefined"==typeof p&&"content-type"===t.toLowerCase()?delete d[t]:l.setRequestHeader(t,e)}),r.isUndefined(e.withCredentials)||(l.withCredentials=!!e.withCredentials),e.responseType)try{l.responseType=e.responseType}catch(t){if("json"!==e.responseType)throw t}"function"==typeof e.onDownloadProgress&&l.addEventListener("progress",e.onDownloadProgress),"function"==typeof e.onUploadProgress&&l.upload&&l.upload.addEventListener("progress",e.onUploadProgress),e.cancelToken&&e.cancelToken.promise.then(function(e){l&&(l.abort(),f(e),l=null)}),void 0===p&&(p=null),l.send(p)})}},function(e,t,n){"use strict";var r=n(14);e.exports=function(e,t,n){var o=n.config.validateStatus;!o||o(n.status)?e(n):t(r("Request failed with status code "+n.status,n.config,null,n.request,n))}},function(e,t,n){"use strict";var r=n(15);e.exports=function(e,t,n,o,i){var s=new Error(e);return r(s,t,n,o,i)}},function(e,t){"use strict";e.exports=function(e,t,n,r,o){return e.config=t,n&&(e.code=n),e.request=r,e.response=o,e.isAxiosError=!0,e.toJSON=function(){return{message:this.message,name:this.name,description:this.description,number:this.number,fileName:this.fileName,lineNumber:this.lineNumber,columnNumber:this.columnNumber,stack:this.stack,config:this.config,code:this.code}},e}},function(e,t,n){"use strict";var r=n(17),o=n(18);e.exports=function(e,t){return e&&!r(t)?o(e,t):t}},function(e,t){"use strict";e.exports=function(e){return/^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(e)}},function(e,t){"use strict";e.exports=function(e,t){return t?e.replace(/\/+$/,"")+"/"+t.replace(/^\/+/,""):e}},function(e,t,n){"use strict";var r=n(2),o=["age","authorization","content-length","content-type","etag","expires","from","host","if-modified-since","if-unmodified-since","last-modified","location","max-forwards","proxy-authorization","referer","retry-after","user-agent"];e.exports=function(e){var t,n,i,s={};return e?(r.forEach(e.split("\n"),function(e){if(i=e.indexOf(":"),t=r.trim(e.substr(0,i)).toLowerCase(),n=r.trim(e.substr(i+1)),t){if(s[t]&&o.indexOf(t)>=0)return;"set-cookie"===t?s[t]=(s[t]?s[t]:[]).concat([n]):s[t]=s[t]?s[t]+", "+n:n}}),s):s}},function(e,t,n){"use strict";var r=n(2);e.exports=r.isStandardBrowserEnv()?function(){function e(e){var t=e;return n&&(o.setAttribute("href",t),t=o.href),o.setAttribute("href",t),{href:o.href,protocol:o.protocol?o.protocol.replace(/:$/,""):"",host:o.host,search:o.search?o.search.replace(/^\?/,""):"",hash:o.hash?o.hash.replace(/^#/,""):"",hostname:o.hostname,port:o.port,pathname:"/"===o.pathname.charAt(0)?o.pathname:"/"+o.pathname}}var t,n=/(msie|trident)/i.test(navigator.userAgent),o=document.createElement("a");return t=e(window.location.href),function(n){var o=r.isString(n)?e(n):n;return o.protocol===t.protocol&&o.host===t.host}}():function(){return function(){return!0}}()},function(e,t,n){"use strict";var r=n(2);e.exports=r.isStandardBrowserEnv()?function(){return{write:function(e,t,n,o,i,s){var a=[];a.push(e+"="+encodeURIComponent(t)),r.isNumber(n)&&a.push("expires="+new Date(n).toGMTString()),r.isString(o)&&a.push("path="+o),r.isString(i)&&a.push("domain="+i),s===!0&&a.push("secure"),document.cookie=a.join("; ")},read:function(e){var t=document.cookie.match(new RegExp("(^|;\\s*)("+e+")=([^;]*)"));return t?decodeURIComponent(t[3]):null},remove:function(e){this.write(e,"",Date.now()-864e5)}}}():function(){return{write:function(){},read:function(){return null},remove:function(){}}}()},function(e,t,n){"use strict";var r=n(2);e.exports=function(e,t){t=t||{};var n={},o=["url","method","params","data"],i=["headers","auth","proxy"],s=["baseURL","url","transformRequest","transformResponse","paramsSerializer","timeout","withCredentials","adapter","responseType","xsrfCookieName","xsrfHeaderName","onUploadProgress","onDownloadProgress","maxContentLength","validateStatus","maxRedirects","httpAgent","httpsAgent","cancelToken","socketPath"];r.forEach(o,function(e){"undefined"!=typeof t[e]&&(n[e]=t[e])}),r.forEach(i,function(o){r.isObject(t[o])?n[o]=r.deepMerge(e[o],t[o]):"undefined"!=typeof t[o]?n[o]=t[o]:r.isObject(e[o])?n[o]=r.deepMerge(e[o]):"undefined"!=typeof e[o]&&(n[o]=e[o])}),r.forEach(s,function(r){"undefined"!=typeof t[r]?n[r]=t[r]:"undefined"!=typeof e[r]&&(n[r]=e[r])});var a=o.concat(i).concat(s),u=Object.keys(t).filter(function(e){return a.indexOf(e)===-1});return r.forEach(u,function(r){"undefined"!=typeof t[r]?n[r]=t[r]:"undefined"!=typeof e[r]&&(n[r]=e[r])}),n}},function(e,t){"use strict";function n(e){this.message=e}n.prototype.toString=function(){return"Cancel"+(this.message?": "+this.message:"")},n.prototype.__CANCEL__=!0,e.exports=n},function(e,t,n){"use strict";function r(e){if("function"!=typeof e)throw new TypeError("executor must be a function.");var t;this.promise=new Promise(function(e){t=e});var n=this;e(function(e){n.reason||(n.reason=new o(e),t(n.reason))})}var o=n(23);r.prototype.throwIfRequested=function(){if(this.reason)throw this.reason},r.source=function(){var e,t=new r(function(t){e=t});return{token:t,cancel:e}},e.exports=r},function(e,t){"use strict";e.exports=function(e){return function(t){return e.apply(null,t)}}}])});
+//# sourceMappingURL=axios.min.map
+/**
+ * Reloads the page
+ */
+function reloadPage() {
+    window.location.reload();
+}
+
+
+/**
+ * Gets the base site url with protocol
+ * Eg. http://localhost/
+ * @returns {string}
+ */
+function getSiteUrl() {
+    return `${window.location.protocol}//${window.location.hostname}`;
+
+}
+
+/**
+ * Redirects to the given url path
+ * @param path
+ */
+function redirect(path) {
+    location.replace(path);
+}
+
+
+function trimString(field) {
+    return field.val().toString().trim();
+}
+
+
+function toCurrency(value) {
+    return `Rs. ${parseFloat(value).toFixed(2)}`;
+}
+function errorMessage(message) {
+    return `<span class="text-danger">${message}</span>`;
+}
+
+function successMessage(message) {
+    return `<span class="text-success">${message}</span>`;
+}
+
+function infoMessage(message) {
+    return `<span class="text-dark">${message}</span>`;
+}
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-bottom-left",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+
+function showInfoToast(message) {
+    toastr.info(message);
+}
+
+function showWarningToast(message) {
+    toastr.warning(message);
+}
+
+function showErrorToast(message) {
+    toastr.error(message);
+}
+
+function showSuccessToast(message) {
+    toastr.success(message);
+}
+function validateFormFields() {
+    'use strict';
+    window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        let forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        let validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+}
+
+
+function makeInputFieldValid(field) {
+    field.addClass('is-valid');
+    field.removeClass('is-invalid');
+}
+
+function makeInputFieldInvalid(field) {
+    field.addClass('is-invalid');
+    field.removeClass('is-valid');
+}
+
+/**
+ * This resets any is-invalid class applied to any of the input fields
+ * in the given container
+ * @param container
+ */
+function resetInputFields(container) {
+    let fields = $(container).find('.form-control');
+
+    $.each(fields, function (i, obj) {
+        $(obj).removeClass('is-invalid');
+    })
+}

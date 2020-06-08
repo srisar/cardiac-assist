@@ -1,11 +1,3 @@
-import {validateFormFields} from "./commom/forms/forms";
-import * as loginViews from "./views/system/auth/login_view";
-import * as usersViews from "./views/system/users/users_all"
-import * as patientsViews from "./views/patients/patients_all";
-import * as visitsViews from "./views/visits/visits_all";
-import * as symptomsViews from "./views/symptoms/symptoms";
-
-
 /**
  * Application bootstrap
  */
@@ -33,10 +25,10 @@ $(function () {
     })
 
 
-    loginViews.start();
-    usersViews.all();
-    patientsViews.all();
-    visitsViews.all();
-    symptomsViews.all();
+    // loginViews.start();
+    // usersViews.all();
+    // patientsViews.all();
+    // visitsViews.all();
+    // symptomsViews.all();
 
 })

@@ -41,3 +41,6 @@ use App\Models\Patient;
     </div>
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
+
+<script><?php include_once "common.inc.js" ?></script>
+<script><?php include_once "list.view.js" ?></script>

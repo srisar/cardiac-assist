@@ -44,5 +44,14 @@ Router::post('/api/visits/updating', "Visits\Api@updating", User::ROLE_ADMIN);
  * ---------------------------------------------------------------------------------------
  */
 Router::get('/api/symptoms/all', "Symptoms\Api@getAll", User::ROLE_ADMIN);
+Router::get('/api/symptoms/auto-complete', "Symptoms\Api@autoCompleteResponse", User::ROLE_ADMIN);
+Router::get('/api/symptoms/find', "Symptoms\Api@find", User::ROLE_ADMIN);
 
 Router::post('/api/symptoms/adding', "Symptoms\Api@adding", User::ROLE_ADMIN);
+
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for visit-symptoms
+ * ---------------------------------------------------------------------------------------
+ */
+Router::post('/api/visits/symptoms/adding', "VisitSymptoms\Api@adding", User::ROLE_ADMIN);

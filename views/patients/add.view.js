@@ -1,19 +1,11 @@
-import {makeInputFieldInvalid, resetInputFields} from "../../commom/forms/forms";
-import {getSiteUrl, redirect, trimString} from "../../commom/helper";
-import {showWarningToast} from "../../commom/toasts";
-import {calculateAge} from "./patients_helper";
-
-let axios = require('axios').default;
-
-
-export function start() {
-
-    if (document.getElementById("view_add_patient") == null) return false;
-
+$(function () {
     addPatient();
+});
 
-}
 
+/**
+ *
+ */
 function addPatient() {
 
 

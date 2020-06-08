@@ -190,4 +190,25 @@ class Database
 
     }
 
+
+    /**
+     * Deletes a row from given table where column = value
+     * @param string $table
+     * @param string $column
+     * @param $value
+     * @return bool
+     */
+    public static function delete(string $table, string $column, $value)
+    {
+        self::instance();
+
+        $query = "delete from {$table} where {$column} = :{$column}";
+
+        $statement = self::$pdo->prepare($query);
+        $statement->bindValue(":{$column}", $value);
+
+        return $statement->execute();
+
+    }
+
 }

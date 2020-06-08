@@ -32,6 +32,23 @@ $visit = View::getData('visit');
 
                 <div class="card" id="form_visit_symptoms">
                     <div class="card-header">Symptoms</div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label for="field_visit_symptom">Add a symptom</label>
+                            <input type="text" class="form-control" id="field_visit_symptom">
+                        </div>
+
+                        <table class="table table-striped table-bordered datatable_simple" id="table_visit_symptoms">
+                            <thead>
+                            <tr>
+                                <th>Symptom</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                    </div>
                 </div>
 
             </div>

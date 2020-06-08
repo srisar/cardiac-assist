@@ -1,18 +1,8 @@
-import * as helper from "../../../commom/helper";
-import {makeInputFieldInvalid, resetInputFields} from "../../../commom/forms/forms";
+$(function () {
+    addUser();
+});
 
-import * as toast from "../../../commom/toasts";
-
-let axios = require('axios').default;
-
-export function start() {
-    if (document.getElementById("view_add_user") == null) return false;
-
-    processAddUser();
-
-}
-
-function processAddUser() {
+function addUser() {
 
 
     $("#btn_add_user").on("click", function () {
@@ -45,7 +35,7 @@ function processAddUser() {
 
         if (!validated) return false;
 
-        axios.post(`${helper.getSiteUrl()}/api/users/process-add`, {
+        axios.post(`${getSiteUrl()}/api/users/process-add`, {
             'display_name': fields.display_name.val(),
             'username': fields.username.val(),
             'password': fields.password.val(),
@@ -53,12 +43,11 @@ function processAddUser() {
         })
             .then(function (response) {
 
-                helper.redirect(`${helper.getSiteUrl()}/users`);
+                redirect(`${getSiteUrl()}/users`);
 
             })
             .catch(function (error) {
-                console.log(error.response.data);
-                toast.showErrorToast(error.response.data.data);
+                showErrorToast(error.response.data.data);
             });
 
     });

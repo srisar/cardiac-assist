@@ -1,4 +1,4 @@
-export function validateFormFields() {
+function validateFormFields() {
     'use strict';
     window.addEventListener('load', function () {
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -17,12 +17,12 @@ export function validateFormFields() {
 }
 
 
-export function makeInputFieldValid(field) {
+function makeInputFieldValid(field) {
     field.addClass('is-valid');
     field.removeClass('is-invalid');
 }
 
-export function makeInputFieldInvalid(field) {
+function makeInputFieldInvalid(field) {
     field.addClass('is-invalid');
     field.removeClass('is-valid');
 }
@@ -32,7 +32,7 @@ export function makeInputFieldInvalid(field) {
  * in the given container
  * @param container
  */
-export function resetInputFields(container) {
+function resetInputFields(container) {
     let fields = $(container).find('.form-control');
 
     $.each(fields, function (i, obj) {
