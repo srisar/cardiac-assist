@@ -9,7 +9,7 @@ use App\Core\Requests\JSONResponse;
 use App\Models\Patient;
 use Exception;
 
-class ApiController
+class Api
 {
 
     public function adding()

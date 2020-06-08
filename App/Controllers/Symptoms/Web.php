@@ -7,7 +7,7 @@ namespace App\Controllers\Symptoms;
 use App\Core\App;
 use App\Core\View;
 
-class ViewsController
+class Web
 {
     public function viewManage()
     {

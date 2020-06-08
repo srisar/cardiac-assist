@@ -9,7 +9,7 @@ use App\Core\Requests\Request;
 use App\Core\View;
 use App\Models\Patient;
 
-class ViewsController
+class Web
 {
 
     public function viewAdd()

@@ -11994,7 +11994,7 @@ button.toast-close-button {
 }
 
 .card {
-  box-shadow: 0 0 15px #a0a0a0;
+  box-shadow: 0 0 10px #ddd;
 }
 
 .card-header {

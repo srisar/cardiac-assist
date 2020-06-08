@@ -10,7 +10,7 @@ use App\Core\View;
 use App\Models\Patient;
 use App\Models\Visit;
 
-class ViewsController
+class Web
 {
 
     public function viewAdd()

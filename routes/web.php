@@ -41,9 +41,9 @@ Router::post('/users/process-edit', "System\UsersController@processEditUser", Us
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/patients/add', "Patients\ViewsController@viewAdd", User::ROLE_ADMIN);
-Router::get('/patients', "Patients\ViewsController@viewAll", User::ROLE_ADMIN);
-Router::get('/patients/edit', "Patients\ViewsController@viewEdit", User::ROLE_ADMIN);
+Router::get('/patients/add', "Patients\Web@viewAdd", User::ROLE_ADMIN);
+Router::get('/patients', "Patients\Web@viewAll", User::ROLE_ADMIN);
+Router::get('/patients/edit', "Patients\Web@viewEdit", User::ROLE_ADMIN);
 
 /*
  * ---------------------------------------------------------------------------------------
@@ -51,8 +51,8 @@ Router::get('/patients/edit', "Patients\ViewsController@viewEdit", User::ROLE_AD
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/visits/add', "Visits\VisitsController@viewAdd", User::ROLE_ADMIN);
-Router::get('/visits/edit', "Visits\VisitsController@viewEdit", User::ROLE_ADMIN);
+Router::get('/visits/add', "Visits\Web@viewAdd", User::ROLE_ADMIN);
+Router::get('/visits/edit', "Visits\Web@viewEdit", User::ROLE_ADMIN);
 
 /*
  * ---------------------------------------------------------------------------------------
@@ -60,4 +60,4 @@ Router::get('/visits/edit', "Visits\VisitsController@viewEdit", User::ROLE_ADMIN
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/symptoms', "Symptoms\ViewsController@viewManage", User::ROLE_ADMIN);
+Router::get('/symptoms', "Symptoms\Web@viewManage", User::ROLE_ADMIN);

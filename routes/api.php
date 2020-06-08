@@ -24,10 +24,10 @@ Router::post('/api/users/process-add', "System\UsersController@apiProcessAdduser
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/api/patients/all', "Patients\ApiController@getAll", User::ROLE_ADMIN);
+Router::get('/api/patients/all', "Patients\Api@getAll", User::ROLE_ADMIN);
 
-Router::post('/api/patients/adding', "Patients\ApiController@adding", User::ROLE_ADMIN);
-Router::post('/api/patients/updating', "Patients\ApiController@updating", User::ROLE_ADMIN);
+Router::post('/api/patients/adding', "Patients\Api@adding", User::ROLE_ADMIN);
+Router::post('/api/patients/updating', "Patients\Api@updating", User::ROLE_ADMIN);
 
 /*
  * ---------------------------------------------------------------------------------------
@@ -35,13 +35,14 @@ Router::post('/api/patients/updating', "Patients\ApiController@updating", User::
  * ---------------------------------------------------------------------------------------
  */
 
-Router::post('/api/visits/adding', "Visits\ApiController@adding", User::ROLE_ADMIN);
+Router::post('/api/visits/adding', "Visits\Api@adding", User::ROLE_ADMIN);
+Router::post('/api/visits/updating', "Visits\Api@updating", User::ROLE_ADMIN);
 
 /*
  * ---------------------------------------------------------------------------------------
  * | Routes for symptoms
  * ---------------------------------------------------------------------------------------
  */
-Router::get('/api/symptoms/all', "Symptoms\ApiController@getAll", User::ROLE_ADMIN);
+Router::get('/api/symptoms/all', "Symptoms\Api@getAll", User::ROLE_ADMIN);
 
-Router::post('/api/symptoms/adding', "Symptoms\ApiController@adding", User::ROLE_ADMIN);
+Router::post('/api/symptoms/adding', "Symptoms\Api@adding", User::ROLE_ADMIN);
