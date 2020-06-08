@@ -10,6 +10,8 @@ use PDO;
 class Visit implements AbstractModel
 {
 
+    private const TABLE = 'visits';
+
     public ?int $id, $patient_id;
     public ?string $remarks, $visit_date, $added_at, $updated_at;
 
@@ -38,7 +40,7 @@ class Visit implements AbstractModel
 
     public static function findAll(int $limit = 1000, int $offset = 0)
     {
-        return Database::findAll('visits', $limit, $offset, self::class);
+        return Database::findAll(self::TABLE, $limit, $offset, self::class);
     }
 
     public function insert()
@@ -50,13 +52,19 @@ class Visit implements AbstractModel
             'visit_date' => $this->visit_date,
         ];
 
-        return Database::insert('visits', $data);
+        return Database::insert(self::TABLE, $data);
 
     }
 
     public function update()
     {
-        // TODO: Implement update() method.
+
+        $data = [
+            'visit_date' => $this->visit_date,
+            'remarks' => $this->remarks
+        ];
+
+        return Database::update(self::TABLE, $data, ['id' => $this->id]);
     }
 
     public function delete()

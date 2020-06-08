@@ -4,6 +4,7 @@
 namespace App\Controllers\System;
 
 
+use App\Core\Database\Database;
 use App\Models\Visit;
 
 class TestController
@@ -11,15 +12,8 @@ class TestController
 
     public function genericTest()
     {
-        var_dump("hello! this is a test.");
 
-        $visit = Visit::build([
-            'patient_id' => 1,
-            'remarks' => 'What a remark!',
-            'visit_date' => '2020-06-02'
-        ]);
-
-        var_dump($visit->insert());
+        Database::update('visits', ['visit_date' => '2020-05-05', 'remarks' => 'damn it!'], ['id' => 1]);
 
     }
 

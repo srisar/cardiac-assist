@@ -16,6 +16,8 @@ $visit = View::getData('visit');
 ?>
 <?php include_once BASE_PATH . '/views/_header.inc.php'; ?>
 
+    <div id="view_edit_visit"></div>
+
     <div class="container-fluid">
 
         <div class="row justify-content-center">
@@ -59,7 +61,7 @@ $visit = View::getData('visit');
 
                         <div class="form-group">
                             <label for="field_remarks">Remarks</label>
-                            <textarea id="field_remarks" class="form-control" rows="5"><?= $visit->remarks ?></textarea>
+                            <textarea id="field_remarks" class="form-control" rows="10"><?= $visit->remarks ?></textarea>
                         </div>
 
                         <div class="text-right">

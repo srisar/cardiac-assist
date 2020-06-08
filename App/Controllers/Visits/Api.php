@@ -41,4 +41,39 @@ class Api
     }
 
 
+    public function updating()
+    {
+
+        try {
+
+
+            $fields = Axios::get();
+
+            $visit = Visit::find($fields['id']);
+
+            if ( !is_null($visit) ) {
+
+                $visit->visit_date = $fields['visit_date'];
+                $visit->remarks = $fields['remarks'];
+
+                if ( $visit->update() ) {
+                    (new JSONResponse(['message' => 'Visit updated']))->response();
+                    return;
+                }
+
+                JSONResponse::invalidResponse(['message' => 'Error updating visit details']);
+                return;
+            }
+            JSONResponse::invalidResponse(['message' => 'Visit doesnt exits']);
+            return;
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
+            return;
+        }
+
+    }
+
+
 }

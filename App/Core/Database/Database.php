@@ -146,4 +146,48 @@ class Database
 
     }
 
+
+    /**
+     * Updates the row from given table by unique field
+     * @param string $table
+     * @param array $data
+     * @param array $unique - ['id' => 12]
+     * @return bool
+     */
+    public static function update(string $table, array $data, array $unique)
+    {
+
+        self::instance();
+
+        $query = "update {$table} set ";
+
+        $columns = array_keys($data);
+        $columnCount = count($data);
+
+        $index = 0;
+        foreach ( $columns as $column ) {
+
+            if ( ++$index != $columnCount ) {
+                $query .= "{$column} = :{$column}, ";
+            } else {
+                $query .= "{$column} = :{$column} ";
+            }
+        }
+
+        $uniqueKey = array_keys($unique)[0];
+
+        $query .= "where {$uniqueKey} = :{$uniqueKey};";
+
+        $statement = self::$pdo->prepare($query);
+
+        foreach ( $data as $key => $value ) {
+            $statement->bindValue(":{$key}", $value);
+        }
+
+        $statement->bindValue(":{$uniqueKey}", $unique[$uniqueKey]);
+
+        return $statement->execute();
+
+    }
+
 }
