@@ -22,7 +22,12 @@ $(function () {
 
     $(".datatable_simple").DataTable({
         "paging": false,
-    })
+    });
+
+    $(".datatable_basic").DataTable({
+        "paging": false,
+        "searching": false
+    });
 
 
     // loginViews.start();

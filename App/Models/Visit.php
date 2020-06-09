@@ -95,4 +95,9 @@ class Visit implements AbstractModel
         return [];
 
     }
+
+    public function getAllSymptoms()
+    {
+    }
+
 }

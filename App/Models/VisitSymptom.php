@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class VisitSymptom implements AbstractModel
 {
@@ -12,6 +13,8 @@ class VisitSymptom implements AbstractModel
     private const TABLE = 'visit_symptoms';
 
     public ?int $id, $visit_id, $symptom_id;
+    public ?Visit $visit;
+    public ?Symptom $symptom;
 
     /**
      * @param array $fields
@@ -33,7 +36,21 @@ class VisitSymptom implements AbstractModel
      */
     public static function find(int $id)
     {
-        return Database::find(self::TABLE, $id, self::class);
+
+
+        /** @var VisitSymptom $result */
+        $result = Database::find(self::TABLE, $id, self::class);
+
+        if ( !empty($result) ) {
+
+            $result->visit = $result->getVisit();
+            $result->symptom = $result->getSymptom();
+
+            return $result;
+        }
+
+        return $result;
+
     }
 
     /**
@@ -43,7 +60,11 @@ class VisitSymptom implements AbstractModel
      */
     public static function findAll(int $limit = 1000, int $offset = 0)
     {
-        return Database::findAll(self::TABLE, $limit, $offset, self::class);
+        /** @var VisitSymptom[] $result */
+        $result = Database::findAll(self::TABLE, $limit, $offset, self::class);
+
+        return $result;
+
     }
 
     public function insert()
@@ -70,4 +91,36 @@ class VisitSymptom implements AbstractModel
     {
         return Database::delete(self::TABLE, 'id', $this->id);
     }
+
+
+    /*
+     * ---------------------------------------------------------------------------------------
+     * | Other functions
+     * ---------------------------------------------------------------------------------------
+     */
+
+    public function getVisit()
+    {
+        return Visit::find($this->visit_id);
+    }
+
+    public function getSymptom()
+    {
+        return Symptom::find($this->symptom_id);
+    }
+
+    public static function getVisitSymptomsByVisit(Visit $visit)
+    {
+        $db = Database::instance();
+        $statement = $db->prepare("select * from visit_symptoms where visit_id=?");
+        $statement->execute([$visit->id]);
+
+        /** @var VisitSymptom[] $result */
+        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if ( !empty($result) ) return $result;
+        return [];
+    }
+
+
 }

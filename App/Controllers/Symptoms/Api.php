@@ -66,34 +66,26 @@ class Api
     }
 
 
-    public function autoCompleteResponse()
+    public function search()
     {
 
         try {
 
             Axios::get();
 
-            $symptoms = Symptom::searchByName(Request::getAsString('query'));
+            $query = Request::getAsString('query');
 
-            error_log(print_r($symptoms, true));
+            if ( !empty($query) )
+                $symptoms = Symptom::searchByName(Request::getAsString('query'));
+            else
+                $symptoms = [];
 
-
-            $suggestions = [];
-
-            foreach ( $symptoms as $symptom ) {
-                $suggestions[] = [
-                    'data' => $symptom->id,
-                    'value' => $symptom->symptom_name
-                ];
-            }
-
-
-            (new JSONResponse(['suggestions' => $suggestions]))->response();
+            (new JSONResponse(['symptoms' => $symptoms]))->response();
             return;
 
 
         } catch ( Exception $exception ) {
-            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
+            JSONResponse::exceptionResponse($exception);
         }
 
     }

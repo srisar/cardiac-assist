@@ -1,14 +1,7 @@
-import {getSiteUrl, trimString} from "../../commom/helper";
-import {showErrorToast, showSuccessToast} from "../../commom/toasts";
-
-let axios = require("axios").default;
-
-export function start() {
-    if (document.getElementById("view_edit_visit") == null) return false;
-
+$(function () {
     updateVisitDetails();
-    addAVisitSymptom();
-}
+});
+
 
 function updateVisitDetails() {
 
@@ -41,20 +34,4 @@ function updateVisitDetails() {
     });
 
 }
-
-function addAVisitSymptom() {
-
-    $('#field_visit_symptom').autocomplete({
-        serviceUrl: `${getSiteUrl()}/api/symptoms/auto-complete`,
-        onSelect: function (suggestion) {
-            insert(suggestion.value, suggestion.data);
-        }
-    });
-
-    function insert(value, data) {
-
-    }
-
-}
-
 

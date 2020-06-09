@@ -117,4 +117,9 @@ class Symptom implements AbstractModel
     }
 
 
+    public static function findByVisit(Visit $visit)
+    {
+
+    }
+
 }

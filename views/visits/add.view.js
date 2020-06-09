@@ -1,15 +1,6 @@
-import {getSiteUrl, redirect, trimString} from "../../commom/helper";
-import {showErrorToast} from "../../commom/toasts";
-
-let axios = require('axios').default;
-
-export function start() {
-
-    if (document.getElementById("view_add_visit") == null) return false;
-
+$(function () {
     addVisit();
-
-}
+});
 
 
 function addVisit() {
