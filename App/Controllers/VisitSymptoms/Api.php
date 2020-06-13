@@ -14,7 +14,10 @@ use Exception;
 class Api
 {
 
-    public function adding()
+    /**
+     * Add a new visit-symptom
+     */
+    public function add()
     {
 
         try {
@@ -46,6 +49,47 @@ class Api
     }
 
 
+    /**
+     * Delete existing visit-symptom
+     */
+    public function delete()
+    {
+
+        try {
+
+            /**
+             * field: id (visit-symptom id)
+             */
+
+            Axios::get();
+
+            $id = Request::getAsInteger('id');
+
+            $visitSymptom = VisitSymptom::find($id);
+
+            if ( !empty($visitSymptom) ) {
+
+                if ( $visitSymptom->delete() ) {
+                    (new JSONResponse(['message' => 'Deleted!']))->response();
+                    return;
+                }
+
+            }
+
+            JSONResponse::invalidResponse();
+            return;
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::exceptionResponse($exception);
+        }
+
+    }
+
+
+    /**
+     *
+     */
     public function findById()
     {
 
@@ -91,7 +135,7 @@ class Api
             $visit = Visit::find($visitId);
             $visitSymptoms = VisitSymptom::getVisitSymptomsByVisit($visit);
 
-            foreach ($visitSymptoms as $visitSymptom){
+            foreach ( $visitSymptoms as $visitSymptom ) {
                 $visitSymptom->symptom = $visitSymptom->getSymptom();
             }
 

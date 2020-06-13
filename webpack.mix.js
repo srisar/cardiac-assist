@@ -18,6 +18,7 @@ mix.combine([
     'src/js/libs/toastr.min.js',
     'src/js/libs/jquery.autocomplete.js',
     'src/js/libs/axios.min.js',
+    'src/js/libs/lodash.js',
     'src/js/common/helper.js',
     'src/js/common/messages.js',
     'src/js/common/toasts.js',

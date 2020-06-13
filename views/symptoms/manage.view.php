@@ -5,7 +5,6 @@
  * Controller: Symptoms\SymptomsController
  */
 
-use App\Core\App;
 use App\Core\Helpers\FormHelper;
 
 ?>
@@ -35,8 +34,8 @@ use App\Core\Helpers\FormHelper;
                     </div>
 
                     <div class="form-group">
-                        <label for="field_description">Description</label>
-                        <textarea id="field_description" class="form-control" rows="5"></textarea>
+                        <label for="field_symptom_description">Description</label>
+                        <textarea id="field_symptom_description" class="form-control" rows="5"></textarea>
                     </div>
 
                     <div class="text-right">

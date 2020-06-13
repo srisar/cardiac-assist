@@ -13,14 +13,29 @@ use Exception;
 class Api
 {
 
-    public function adding()
+    public function add()
     {
         try {
 
+            /**
+             * fields: symptom_name, description
+             */
+
             $fields = Axios::get();
+
+            /*
+             * server side validation
+             * fields: symptom_name
+             */
+
+            if ( empty($fields['symptom_name']) ) {
+                JSONResponse::invalidResponse('Symptom name cannot be empty');
+                return;
+            }
 
 
             if ( Symptom::findByName($fields['symptom_name']) == null ) {
+
 
                 $symptom = Symptom::build($fields);
 
@@ -31,17 +46,17 @@ class Api
                     return;
                 }
 
-                JSONResponse::invalidResponse(['message' => 'Error adding new symptom']);
+                JSONResponse::invalidResponse('Error adding new symptom');
                 return;
             } else {
 
-                JSONResponse::invalidResponse(['message' => 'Symptom already exists']);
+                JSONResponse::invalidResponse('Symptom already exists');
                 return;
             }
 
 
         } catch ( Exception $exception ) {
-            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
+            JSONResponse::exceptionResponse($exception);
         }
 
     }

@@ -17,14 +17,16 @@
 
                 <div class="form-group">
                     <label for="field_search_symptoms">Search for symptoms</label>
-                    <input type="text" id="field_search_symptoms" class="form-control">
+                    <input type="text" id="field_search_symptoms" class="form-control" autocomplete="off">
                 </div>
+
+                <div id="area_show_add_symptom_to_db"></div>
 
                 <table class="table table-bordered datatable_basic" id="table_symptoms_results">
                     <thead>
                     <tr>
                         <th>Symptom</th>
-                        <th style="width: 50px">Action</th>
+                        <th style="width: 30px"></th>
                     </tr>
                     </thead>
                 </table>

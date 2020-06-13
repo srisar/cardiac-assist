@@ -33,11 +33,17 @@ class JSONResponse
 
     /**
      * response with invalid message
-     * @param string[] $payload
+     * @param string|array $payload - by default, string, if array then
+     * it is passed as raw
      */
-    public static function invalidResponse($payload = ['message' => 'Invalid request'])
+    public static function invalidResponse($payload = 'Invalid request')
     {
-        $response = new JSONResponse($payload, 400);
+        if ( !is_array($payload) ) {
+            $response = new JSONResponse(['message' => $payload], 400);
+        } else {
+            $response = new JSONResponse($payload, 400);
+        }
+
         $response->response();
     }
 
