@@ -16,49 +16,49 @@ use App\Core\Messages\SessionError;
 </head>
 <body>
 
-<div id="view_login"></div>
+<div id="app">
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-4">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-4">
 
-            <div class="card">
-                <div class="card-header">Login to <?= App::appName() ?></div>
-                <div class="card-body">
+                <div class="card">
+                    <div class="card-header">Login to <?= App::appName() ?></div>
+                    <div class="card-body">
 
-                    <?php if ( SessionError::has('login') ): ?>
-                        <div class="alert alert-danger">
-                            <span><?= SessionError::get('login'); ?></span>
-                        </div>
-                    <?php endif; ?>
+                        <form @submit="tryLogin">
 
-                    <form action="<?= App::url('/auth/process-login') ?>" method="post" class="needs-validation" novalidate>
+                            <div></div>
 
-                        <div class="form-group">
-                            <label for="field_username">Username</label>
-                            <input type="text" class="form-control" id="field_username" name="username" required>
-                            <div class="invalid-feedback">Username cannot be empty.</div>
-                        </div>
+                            <div class="form-group">
+                                <label for="field_username">Username</label>
+                                <input v-model="username" type="text" class="form-control" id="field_username" :class="{'is-invalid' :forms.invalidUsername}">
+                                <div class="invalid-feedback">Username cannot be empty.</div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="field_password">Password</label>
-                            <input type="password" class="form-control" id="field_password" name="password" required>
-                            <div class="invalid-feedback">Password cannot be empty</div>
-                        </div>
+                            <div class="form-group">
+                                <label for="field_password">Password</label>
+                                <input v-model="password" type="password" class="form-control" id="field_password" :class="{'is-invalid' :forms.invalidPassword}">
+                                <div class="invalid-feedback">Password cannot be empty</div>
+                            </div>
 
-                        <div class="text-center">
-                            <button class="btn btn-primary" type="button" id="btn_login">Login</button>
-                        </div>
+                            <div class="text-center">
+                                <button v-on:click="tryLogin" class="btn btn-primary" type="button" id="btn_login">Login</button>
+                            </div>
 
-                    </form>
+                        </form>
 
-                </div>
-            </div><!--.card-->
+                    </div>
+                </div><!--.card-->
 
-        </div><!--.col-->
-    </div><!--.row-->
+            </div><!--.col-->
+        </div><!--.row-->
+    </div><!--.container-->
+
 </div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="<?= App::siteURL() ?>/js/libs/all.js"></script>
 <script src="<?= App::siteURL() ?>/js/app.js"></script>
 <script><?php include_once "login.view.js" ?></script>

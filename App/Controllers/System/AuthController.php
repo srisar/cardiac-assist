@@ -33,10 +33,11 @@ class AuthController
         $fields = Axios::get();
 
         if ( authenticate($fields['username'], $fields['password']) ) {
-            (new JSONResponse(["data" => "Login succeeded"]))->response();
+            (new JSONResponse(["message" => "Login succeeded"]))->response();
             return;
+
         } else {
-            JSONResponse::invalidResponse(['data' => 'Invalid username or password']);
+            JSONResponse::invalidResponse('Login failed');
             return;
         }
 
