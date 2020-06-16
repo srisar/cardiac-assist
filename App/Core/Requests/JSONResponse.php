@@ -57,4 +57,15 @@ class JSONResponse
         self::invalidResponse(['message' => $exception->getMessage()]);
     }
 
+    public static function validResponse($payload = 'Success')
+    {
+        if ( !is_array($payload) ) {
+            $response = new JSONResponse(['message' => $payload], 200);
+        } else {
+            $response = new JSONResponse($payload, 200);
+        }
+
+        $response->response();
+    }
+
 }

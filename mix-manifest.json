@@ -1,5 +1,6 @@
 {
     "/public/js/app.js": "/public/js/app.js",
     "/public/css/app.css": "/public/css/app.css",
+    "/public/vue/system/users/manage_users.js": "/public/vue/system/users/manage_users.js",
     "/public/js/libs/all.js": "/public/js/libs/all.js"
 }

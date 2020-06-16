@@ -14,8 +14,11 @@ use App\Models\User;
  * | Routes for user and auth
  * ---------------------------------------------------------------------------------------
  */
-Router::post('/api/auth/process-login', "System\AuthController@apiProcessLogin", User::ROLE_NONE);
-Router::post('/api/users/process-add', "System\UsersController@apiProcessAdduser", User::ROLE_ADMIN);
+Router::post('/api/auth/login', "System\AuthController@apiProcessLogin", User::ROLE_NONE);
+Router::post('/api/users/add', "System\Users\Api@add", User::ROLE_ADMIN);
+Router::post('/api/users/edit', "System\Users\Api@edit", User::ROLE_ADMIN);
+
+Router::get('/api/users/all', "System\Users\Api@getAll", User::ROLE_ADMIN);
 
 
 /*

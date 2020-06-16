@@ -34,7 +34,7 @@ const app = new Vue({
             }
 
 
-            axios.post(`${getSiteUrl()}/api/auth/process-login`, {
+            axios.post(`${getSiteUrl()}/api/auth/login`, {
                 username: this.username,
                 password: this.password
             }).then(response => {

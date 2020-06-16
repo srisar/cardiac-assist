@@ -5,6 +5,11 @@
         <div class="col-sm-6 col-12 text-center">
             <h1>Cardiac Assist</h1>
             <hr>
+            <div id="app">
+
+                <Welcome></Welcome>
+
+            </div>
         </div>
     </div>
 </div>

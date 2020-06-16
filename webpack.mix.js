@@ -5,6 +5,7 @@ let mix = require('webpack-mix');
 // });
 
 mix.js('src/js/app.js', 'public/js');
+mix.js('src/js/vue/system/users/manage_users.js', 'public/vue/system/users');
 mix.sass('src/scss/app.scss', 'public/css').sourceMaps();
 
 
