@@ -1,7 +1,10 @@
 {
     "/public/js/app.js": "/public/js/app.js",
     "/public/css/app.css": "/public/css/app.css",
+    "/public/js/app.js.map": "/public/js/app.js.map",
     "/public/vue/system/users/manage_users.js": "/public/vue/system/users/manage_users.js",
+    "/public/vue/system/users/manage_users.js.map": "/public/vue/system/users/manage_users.js.map",
     "/public/vue/visits/manage_visit.js": "/public/vue/visits/manage_visit.js",
+    "/public/vue/visits/manage_visit.js.map": "/public/vue/visits/manage_visit.js.map",
     "/public/js/libs/all.js": "/public/js/libs/all.js"
 }

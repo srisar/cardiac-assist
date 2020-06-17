@@ -28,7 +28,7 @@ Router::post('/auth/process-login', 'System\AuthController@processLogin');
  * | Routes for user management
  * ---------------------------------------------------------------------------------------
  */
-Router::get('/users', "System\users\Web@viewUsers", User::ROLE_ADMIN);
+Router::get('/users', "System\Users\Web@viewUsers", User::ROLE_ADMIN);
 Router::get('/users/add', "System\Users\Web@viewAddUser", User::ROLE_ADMIN);
 Router::get('/users/edit', "System\Users\Web@viewEditUser", User::ROLE_ADMIN);
 
