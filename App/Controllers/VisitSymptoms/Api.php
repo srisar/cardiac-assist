@@ -131,8 +131,18 @@ class Api
 
             $visitId = Request::getAsInteger('id');
 
+            if(is_null($visitId)){
+                JSONResponse::invalidResponse('Parameter (id) required');
+                return;
+            }
 
             $visit = Visit::find($visitId);
+
+            if(is_null($visit)){
+                JSONResponse::invalidResponse('Invalid visit, check visit id');
+                return;
+            }
+
             $visitSymptoms = VisitSymptom::getVisitSymptomsByVisit($visit);
 
             foreach ( $visitSymptoms as $visitSymptom ) {
@@ -146,7 +156,7 @@ class Api
             ];
 
 
-            (new JSONResponse($output))->response();
+            JSONResponse::validResponse($output);
             return;
 
 

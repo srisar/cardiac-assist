@@ -6,6 +6,8 @@ let mix = require('webpack-mix');
 
 mix.js('src/js/app.js', 'public/js');
 mix.js('src/js/vue/system/users/manage_users.js', 'public/vue/system/users');
+mix.js('src/js/vue/visits/manage_visit.js', 'public/vue/visits');
+
 mix.sass('src/scss/app.scss', 'public/css').sourceMaps();
 
 

@@ -6,6 +6,7 @@ namespace App\Controllers\Visits;
 
 use App\Core\Requests\Axios;
 use App\Core\Requests\JSONResponse;
+use App\Core\Requests\Request;
 use App\Models\Visit;
 use Exception;
 
@@ -13,7 +14,7 @@ class Api
 {
 
 
-    public function adding()
+    public function add()
     {
 
         try {
@@ -41,11 +42,14 @@ class Api
     }
 
 
-    public function updating()
+    public function update()
     {
 
         try {
 
+            /**
+             * fields: visit_date, remarks, id
+             */
 
             $fields = Axios::get();
 
@@ -57,21 +61,51 @@ class Api
                 $visit->remarks = $fields['remarks'];
 
                 if ( $visit->update() ) {
-                    (new JSONResponse(['message' => 'Visit updated']))->response();
+                    JSONResponse::validResponse('Visit updated');
                     return;
                 }
 
-                JSONResponse::invalidResponse(['message' => 'Error updating visit details']);
+                JSONResponse::invalidResponse('Error updating visit details');
                 return;
             }
-            JSONResponse::invalidResponse(['message' => 'Visit doesnt exits']);
+            JSONResponse::invalidResponse('Visit doesnt exist');
             return;
 
 
         } catch ( Exception $exception ) {
-            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
+            JSONResponse::exceptionResponse($exception);
             return;
         }
+
+    }
+
+    public function find()
+    {
+
+        try {
+
+            /**
+             * fields: id
+             */
+//            $fields = Axios::get();
+
+            $id = Request::getAsInteger('id');
+
+            $visit = Visit::find($id);
+
+            if ( !is_null($visit) ) {
+                JSONResponse::validResponse(['visit' => $visit]);
+                return;
+            }
+
+            JSONResponse::invalidResponse('Invalid visit id');
+            return;
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::exceptionResponse($exception);
+        }
+
 
     }
 
