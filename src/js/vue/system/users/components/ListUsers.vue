@@ -43,7 +43,7 @@
         },
 
         mounted() {
-            this.eventBus.$on('user-updated', this.fetchUsers);
+            this.eventBus.$on('update-users-table', this.fetchUsers);
         },
 
         methods: {

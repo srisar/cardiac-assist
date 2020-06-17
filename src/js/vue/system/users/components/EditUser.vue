@@ -146,13 +146,18 @@
 
                         showSuccessToast('User details updated');
                         $("#modal_edit_user").modal("hide");
-                        this.eventBus.$emit('user-updated');
+
+                        this.emitEventUpdateUsersTable();
 
                     })
                     .catch(err => {
                         showErrorToast(err.response.data.message);
                     });
 
+            },
+
+            emitEventUpdateUsersTable(){
+                this.eventBus.$emit('update-users-table');
             }
 
         }
