@@ -28,6 +28,13 @@ class Api
 
             $fields = Axios::get();
 
+            $isValid = true;
+
+            if ( !isset($fields['visit_id']) || !isset($fields['symptom_id']) ) {
+                JSONResponse::invalidResponse('Required fields missing: (visit_id, symptom_id)');
+                return;
+            }
+
             $visitSymptom = VisitSymptom::build($fields);
 
 
@@ -36,14 +43,17 @@ class Api
             if ( $id != false ) {
                 $visitSymptom = VisitSymptom::find($id);
 
-                (new JSONResponse(['visit_symptom' => $visitSymptom]))->response();
+                JSONResponse::validResponse(['visit_symptom' => $visitSymptom]);
                 return;
 
             }
 
+            JSONResponse::invalidResponse('Failed adding new symptom');
+            return;
 
         } catch ( Exception $exception ) {
             JSONResponse::exceptionResponse($exception);
+            return;
         }
 
     }
@@ -131,14 +141,14 @@ class Api
 
             $visitId = Request::getAsInteger('id');
 
-            if(is_null($visitId)){
+            if ( is_null($visitId) ) {
                 JSONResponse::invalidResponse('Parameter (id) required');
                 return;
             }
 
             $visit = Visit::find($visitId);
 
-            if(is_null($visit)){
+            if ( is_null($visit) ) {
                 JSONResponse::invalidResponse('Invalid visit, check visit id');
                 return;
             }

@@ -42,12 +42,10 @@
             /**
              * fetch the initial visit details
              */
-            fetchVisitDetails() {
+            fetchVisitDetails: function() {
                 axios
                     .get(`${getSiteUrl()}/api/visit/find?id=${this.visit.id}`)
                     .then(res => {
-
-                        console.log(res);
 
                         this.visit = res.data.visit;
 
@@ -57,7 +55,7 @@
                     })
             },
 
-            updateVisit() {
+            updateVisit: function() {
                 axios
                     .post(`${getSiteUrl()}/api/visit/update`, {
                         id: this.visit.id,
@@ -74,7 +72,7 @@
                     })
             },
 
-            updateDateField(){
+            updateDateField: function(){
 
             }
 

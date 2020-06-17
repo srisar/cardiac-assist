@@ -66,9 +66,6 @@ $visit = View::getData('visit');
 </div><!--container-->
 
 
-<?php include_once "_edit/add_visit_symptoms.inc.php"; ?>
-
-
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
 
