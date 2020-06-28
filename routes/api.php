@@ -62,11 +62,36 @@ Router::post('/api/symptom/add', "Symptoms\Api@add", ADMIN_ACCESS);
 
 /*
  * ---------------------------------------------------------------------------------------
+ * | Routes for diseases
+ * ---------------------------------------------------------------------------------------
+ */
+Router::get('/api/disease/all', "Diseases\Api@getAll", ADMIN_ACCESS);
+Router::get('/api/disease/search', "Diseases\Api@search", ADMIN_ACCESS);
+Router::get('/api/disease/find', "Diseases\Api@find", ADMIN_ACCESS);
+
+Router::post('/api/disease/add', "Diseases\Api@add", ADMIN_ACCESS);
+
+
+/*
+ * ---------------------------------------------------------------------------------------
+ * | Routes for differential diagnoses
+ * ---------------------------------------------------------------------------------------
+ */
+Router::get('/api/diff-diagnosis/by-visit', "Diseases\Api@getAllByVisit", ADMIN_ACCESS);
+Router::get('/api/diff-diagnosis/search', "Diseases\Api@search", ADMIN_ACCESS);
+Router::get('/api/diff-diagnosis/find', "Diseases\Api@find", ADMIN_ACCESS);
+
+Router::post('/api/diff-diagnosis/add', "Diseases\Api@add", ADMIN_ACCESS);
+Router::post('/api/diff-diagnosis/delete', "Diseases\Api@delete", ADMIN_ACCESS);
+
+
+/*
+ * ---------------------------------------------------------------------------------------
  * | Routes for visit-symptoms
  * ---------------------------------------------------------------------------------------
  */
 Router::get('/api/visit-symptom/by-visit', "VisitSymptoms\Api@getAllByVisit", ADMIN_ACCESS);
-Router::get('/api/visit-symptom/find', "VisitSymptoms\Api@findById", ADMIN_ACCESS);
+Router::get('/api/visit-symptom/find', "VisitSymptoms\Api@find", ADMIN_ACCESS);
 
 Router::post('/api/visit-symptom/add', "VisitSymptoms\Api@add", ADMIN_ACCESS);
 Router::post('/api/visit-symptom/delete', "VisitSymptoms\Api@delete", ADMIN_ACCESS);
