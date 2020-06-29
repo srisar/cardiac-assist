@@ -59,6 +59,7 @@ Router::get('/api/symptom/search', "Symptoms\Api@search", ADMIN_ACCESS);
 Router::get('/api/symptom/find', "Symptoms\Api@find", ADMIN_ACCESS);
 
 Router::post('/api/symptom/add', "Symptoms\Api@add", ADMIN_ACCESS);
+Router::post('/api/symptom/update', "Symptoms\Api@update", ADMIN_ACCESS);
 
 /*
  * ---------------------------------------------------------------------------------------

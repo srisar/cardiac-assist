@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controllers\Symptoms;
 
@@ -42,7 +43,7 @@ class Api
                 $result = $symptom->insert();
 
                 if ( $result ) {
-                    (new JSONResponse(['symptom' => Symptom::find($result)]))->response();
+                    (new JSONResponse(['symptom' => Symptom::find((int)$result)]))->response();
                     return;
                 }
 
@@ -61,13 +62,45 @@ class Api
 
     }
 
-    public function deleting()
+    public function update()
     {
 
-    }
+        try {
 
-    public function updating()
-    {
+
+            /**
+             * fields: id, symptom_name, description
+             * required: id, symptom_name
+             */
+            $fields = Axios::get();
+
+            if ( empty($fields['id']) ) {
+                throw new Exception('Invalid id');
+            }
+            if ( empty($fields['symptom_name']) ) {
+                throw new Exception('Invalid symptom name');
+            }
+
+            $symptom = Symptom::find($fields['id']);
+
+            if ( !empty($symptom) ) {
+
+                $symptom->symptom_name = $fields['symptom_name'];
+                $symptom->description = $fields['description'];
+
+                if ( $symptom->update() ) {
+                    JSONResponse::validResponse('Updated');
+                    return;
+                }
+
+            }
+
+            throw new Exception('Invalid symptom; Check your symptom id.');
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::exceptionResponse($exception);
+        }
 
     }
 

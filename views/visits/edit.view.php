@@ -30,7 +30,7 @@ $visit = View::getData('visit');
 
         <div class="col-12 col-lg-8">
 
-            <div class="card" id="form_visit_symptoms">
+            <div class="card mb-3" id="form_visit_symptoms">
                 <div class="card-header">Symptoms</div>
                 <div class="card-body">
 
@@ -39,7 +39,25 @@ $visit = View::getData('visit');
                 </div>
             </div>
 
+
+            <!--
+            |
+            | start section: differential diagnosis
+            |
+            -->
+            <div class="card mb-3" id="form_differential_diagnosis">
+                <div class="card-header">Differential Diagnosis</div>
+                <div class="card-body">
+
+                    <div id="vue_manage_differential_diagnosis"></div>
+
+                </div>
+            </div>
+
         </div>
+
+        <br>
+
 
         <!--
         |
@@ -64,7 +82,6 @@ $visit = View::getData('visit');
     </div><!--row-->
 
 </div><!--container-->
-
 
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>

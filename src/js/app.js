@@ -16,7 +16,7 @@ $(function () {
         }
     });
 
-    $(".datatable").DataTable({
+    $(".datatable").dataTable({
         "pageLength": 50,
         "columnDefs": [],
         "ordering": true

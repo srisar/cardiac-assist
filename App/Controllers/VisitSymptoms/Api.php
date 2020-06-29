@@ -100,7 +100,7 @@ class Api
     /**
      *
      */
-    public function findById()
+    public function find()
     {
 
         try {

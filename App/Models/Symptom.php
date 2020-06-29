@@ -63,7 +63,12 @@ class Symptom implements AbstractModel
 
     public function update()
     {
-        // TODO: Implement update() method.
+        $data = [
+            'symptom_name' => $this->symptom_name,
+            'description' => $this->description
+        ];
+
+        return Database::update('symptoms', $data, ['id' => $this->id]);
     }
 
     public function delete()

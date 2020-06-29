@@ -51,5 +51,3 @@ $patient = View::getData('patient');
     </div>
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
-
-<script><?php include_once "add.view.js" ?></script>
