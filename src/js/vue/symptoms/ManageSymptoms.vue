@@ -74,7 +74,6 @@
         data() {
             return {
                 symptoms: {},
-                table: undefined,
                 selectedSymptom: undefined,
                 eventBus: new Vue({}),
             };

@@ -6,19 +6,11 @@
  */
 
 use App\Core\App;
-use App\Core\Helpers\FormHelper;
 
 ?>
 <?php include_once BASE_PATH . '/views/_header.inc.php'; ?>
 
-<div id="app_manage_symptoms">
-
-
-
-
-</div>
-
-
+<div id="app_manage_symptoms"></div>
 
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>

@@ -8,6 +8,7 @@ mix.js('src/js/app.js', 'public/js');
 mix.js('src/js/vue/system/users/manage_users.js', 'public/vue/system/users');
 mix.js('src/js/vue/visits/manage_visit.js', 'public/vue/visits');
 mix.js('src/js/vue/symptoms/manage_symptoms.js', 'public/vue/symptoms');
+mix.js('src/js/vue/diseases/manage_diseases.js', 'public/vue/diseases');
 
 mix.sass('src/scss/app.scss', 'public/css').sourceMaps();
 

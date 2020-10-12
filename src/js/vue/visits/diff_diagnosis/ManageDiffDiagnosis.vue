@@ -7,7 +7,7 @@
         <div>
 
             <div class="alert alert-success" v-if="isEmpty">
-                Start adding symptoms for this visit by clicking <a href="#" @click="showAddVisitSymptomsModal">here</a>.
+                Start adding symptoms for this visit by clicking <a href="#">here</a>.
             </div>
 
             <table class="table table-bordered" v-if="!isEmpty">
@@ -20,10 +20,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="visitSymptom in visitSymptoms">
-                    <td>{{visitSymptom.symptom.symptom_name}}</td>
+                <tr v-for="diffDiag in diffDiagnoses">
+                    <td></td>
                     <td class="text-center">
-                        <button class="btn btn-sm btn-danger" @click="removeVisitSymptom(visitSymptom)"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-sm btn-danger" ><i class="fas fa-trash"></i></button>
                     </td>
                     <td class="text-center"></td>
                 </tr>

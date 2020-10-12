@@ -8,7 +8,6 @@ use App\Core\Requests\Axios;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
 use App\Models\Disease;
-use App\Models\Symptom;
 use Exception;
 
 class Api
@@ -28,10 +27,7 @@ class Api
              * fields: disease
              */
 
-            if ( empty($fields['disease']) ) {
-                JSONResponse::invalidResponse('Disease name cannot be empty');
-                return;
-            }
+            if ( empty($fields['disease']) ) throw new Exception('Invalid disease name');
 
 
             if ( Disease::findByName($fields['disease']) == null ) {
@@ -46,12 +42,10 @@ class Api
                     return;
                 }
 
-                JSONResponse::invalidResponse('Error adding new symptom');
-                return;
+                throw new Exception('Error adding new disease');
             } else {
 
-                JSONResponse::invalidResponse('Symptom already exists');
-                return;
+                throw new Exception('Disease already exists.');
             }
 
 

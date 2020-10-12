@@ -61,3 +61,5 @@ Router::get('/visits/edit', "Visits\Web@viewEdit", User::ROLE_ADMIN);
  */
 
 Router::get('/symptoms', "Symptoms\Web@viewManage", User::ROLE_ADMIN);
+
+Router::get('/diseases', "Diseases\Web@manage", User::ROLE_ADMIN);
