@@ -1,9 +1,7 @@
 {
     "/public/js/app.js": "/public/js/app.js",
     "/public/css/app.css": "/public/css/app.css",
-    "/public/vue/diseases/manage_diseases.js": "/public/vue/diseases/manage_diseases.js",
-    "/public/vue/symptoms/manage_symptoms.js": "/public/vue/symptoms/manage_symptoms.js",
     "/public/vue/system/users/manage_users.js": "/public/vue/system/users/manage_users.js",
-    "/public/vue/visits/manage_visit.js": "/public/vue/visits/manage_visit.js",
+    "/public/vue/visits/add/add_visit.js": "/public/vue/visits/add/add_visit.js",
     "/public/js/libs/all.js": "/public/js/libs/all.js"
 }

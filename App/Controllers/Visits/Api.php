@@ -14,6 +14,10 @@ class Api
 {
 
 
+    /**
+     * Add a new visit
+     * Require: patient_id, visit_date, remarks
+     */
     public function add()
     {
 
@@ -26,7 +30,7 @@ class Api
             $result = $visit->insert();
 
             if ( $result != false ) {
-                (new JSONResponse(['patient' => Visit::find($result)]))->response();
+                (new JSONResponse(['visit' => Visit::find($result)]))->response();
                 return;
             }
 
@@ -42,6 +46,9 @@ class Api
     }
 
 
+    /**
+     * Updates existing visit (only the visit details)
+     */
     public function update()
     {
 

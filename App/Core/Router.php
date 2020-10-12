@@ -40,7 +40,6 @@ class Router
     }
 
 
-
     /**
      * Execute the correct route for given path
      * @param $path - Current URL path
@@ -79,7 +78,6 @@ class Router
             $c = new $controllerClass();
 
             echo call_user_func([$c, $method]);
-            return;
         } else {
 
             /**
@@ -88,8 +86,6 @@ class Router
              */
 
             (new CommonController())->show404();
-            return;
-
         }
     }
 
