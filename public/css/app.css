@@ -1,4 +1,6 @@
-/*
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;
+
+0,700;1,400;1,700&display=swap);/*
  * This combined file was created by the DataTables downloader builder:
  *   https://datatables.net/download
  *
@@ -820,28 +822,6 @@ table.dataTable.dtr-inline.collapsed.table-sm > tbody > tr > th:first-child:befo
   }
 }
 @charset "UTF-8";
-
-@font-face {
-  font-family: "RecursiveWeb";
-  src: url(/fonts/recursive_52.woff2?561dcfa95b780e47a2ed8c750ef63d1d) format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "RecursiveWeb";
-  src: url(/fonts/recursive_52.woff2?561dcfa95b780e47a2ed8c750ef63d1d) format("woff2");
-  font-weight: bold;
-  font-style: normal;
-}
-
-/*!
- * Bootstrap v4.5.0 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;
@@ -869,7 +849,7 @@ table.dataTable.dtr-inline.collapsed.table-sm > tbody > tr > th:first-child:befo
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "RecursiveWeb", sans-serif;
+  --font-family-sans-serif: "Work Sans", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -901,7 +881,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "RecursiveWeb", sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.6;
@@ -7235,7 +7215,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "RecursiveWeb", sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7360,7 +7340,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "RecursiveWeb", sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
