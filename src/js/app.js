@@ -30,22 +30,6 @@ $(function () {
         "paging": false,
         "searching": false
     });
-
-
-    // loginViews.start();
-    // usersViews.all();
-    // patientsViews.all();
-    // visitsViews.all();
-    // symptomsViews.all();
-
 });
 
 
-// import Welcome from "./components/home/Welcome";
-//
-// const app = new Vue({
-//     el: "#app",
-//     components: {
-//         Welcome
-//     }
-// });

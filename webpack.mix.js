@@ -8,7 +8,9 @@ mix.js('src/js/app.js', 'public/js');
 mix.js('vue/system/users/manage_users.js', 'public/vue/system/users');
 
 
-mix.js('vue/visits/add/add_visit.js', 'public/vue/visits/add')
+mix.js('vue/visits/add/add_visit.js', 'public/vue/visits/add');
+mix.js('vue/symptoms/manage_symptoms.js', 'public/vue/symptoms');
+mix.js('vue/diseases/manage_diseases.js', 'public/vue/diseases');
 
 // mix.js('src/js/vue/symptoms/manage_symptoms.js', 'public/vue/symptoms');
 // mix.js('src/js/vue/diseases/manage_diseases.js', 'public/vue/diseases');
