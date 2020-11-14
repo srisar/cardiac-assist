@@ -1,7 +1,7 @@
 import ManageSymptoms from "./ManageSymptoms";
 
-window.Vue = require("vue");
+import Vue from "vue";
 
 new Vue({
-    render: h => h(ManageSymptoms)
-}).$mount("#app_manage_symptoms");
+    render: createElement => createElement(ManageSymptoms)
+}).$mount("#app");

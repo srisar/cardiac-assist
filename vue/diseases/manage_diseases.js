@@ -1,7 +1,11 @@
 import ManageDiseases from "./ManageDiseases";
 
-window.Vue = require("vue");
+import {createApp} from "vue";
 
-new Vue({
-    render: h => h(ManageDiseases)
-}).$mount("#app_manage_diseases");
+
+const app = createApp(ManageDiseases);
+app.mount("#app_manage_disease");
+
+// new Vue({
+//     render: h => h(ManageDiseases)
+// }).$mount("#app_manage_diseases");

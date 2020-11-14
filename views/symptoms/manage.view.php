@@ -10,7 +10,7 @@ use App\Core\App;
 ?>
 <?php include_once BASE_PATH . '/views/_header.inc.php'; ?>
 
-<div id="app_manage_symptoms"></div>
+<div id="app"></div>
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
 

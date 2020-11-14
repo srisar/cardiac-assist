@@ -1,134 +1,136 @@
 <template>
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-            <!--
-            |
-            | start section: add a symptom
-            |
-            -->
-            <div class="col-12 col-lg-4">
+      <!--
+      |
+      | start section: add a symptom
+      |
+      -->
+      <div class="col-12 col-lg-6">
 
-                <add-symptom :event-bus="eventBus"></add-symptom>
+        <add-symptom @symptom-added="fetchSymptoms"></add-symptom>
 
-            </div><!--col-->
+      </div><!--col-->
 
-            <!--
-            |
-            | start section: add a symptom
-            |
-            -->
-            <div class="col-12 col-lg-8">
+      <!--
+      |
+      | start section: add a symptom
+      |
+      -->
+      <div class="col-12 col-lg-6">
 
-                <div class="card">
-                    <div class="card-header">Existing symptoms</div>
-                    <div class="card-body">
+        <div class="card">
+          <div class="card-header">Existing symptoms</div>
+          <div class="card-body">
 
-                        <table class="table table-bordered table-striped" id="table_symptoms">
-                            <thead>
-                            <tr>
-                                <th>Symptom</th>
-                                <th>Description</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="symptom in symptoms">
-                                <td>{{symptom.symptom_name}}</td>
-                                <td>{{symptom.description}}</td>
-                                <td style="width: 50px">
-                                    <button @click="btnShowEditModalOnClick(symptom)" class="btn btn-sm btn-primary">
-                                        <i class="fad fa-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
+            <table class="table table-bordered table-striped table-sm" id="table_symptoms">
+              <thead>
+              <tr>
+                <th>Symptom</th>
+                <th>Description</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="symptom in symptoms">
+                <td>
+                  <a @click="btnShowEditModalOnClick(symptom)" href="#">
+                    {{ symptom.symptom_name }}
+                  </a>
+                </td>
+                <td v-html="symptom.description"></td>
+              </tr>
+              </tbody>
 
-                        </table>
+            </table>
 
-                    </div>
-                </div>
+          </div>
+        </div>
 
-            </div><!--col-->
+      </div><!--col-->
 
-        </div><!--row-->
+    </div><!--row-->
 
 
-        <edit-symptom :selected-symptom="selectedSymptom" :event-bus="eventBus"></edit-symptom>
+    <edit-symptom :selected-symptom="selectedSymptom" @symptom-updated="fetchSymptoms"></edit-symptom>
 
-    </div><!--container-->
+  </div><!--container-->
 </template>
 
 <script>
 
-    import EditSymptom from "./EditSymptom";
-    import AddSymptom from "./AddSymptom";
+import EditSymptom from "./components/EditSymptom";
+import AddSymptom from "./components/AddSymptom";
 
-    export default {
-        name: "ManageSymptoms",
-        components: {
-            EditSymptom,
-            AddSymptom
-        },
-        data() {
-            return {
-                symptoms: {},
-                selectedSymptom: undefined,
-                eventBus: new Vue({}),
-            };
-        },
-        computed: {},
-        mounted() {
-            /**
-             * getting all the symptoms
-             */
-            this.fetchSymptoms();
+export default {
+  name: "ManageSymptoms",
 
-            this.eventBus.$on('symptom-updated', this.fetchSymptoms);
-            this.eventBus.$on('symptom-added', this.fetchSymptoms);
+  components: {
+    EditSymptom,
+    AddSymptom
+  },
 
-        },
-        methods: {
+  data() {
+    return {
+      symptoms: {},
+      selectedSymptom: undefined,
+    };
+  },
 
-            /**
-             * fetch all symptoms
-             */
-            fetchSymptoms() {
+  computed: {
+    //
+  },
 
-                console.log("fetching....");
-
-                axios.get(`${getSiteUrl()}/api/symptom/all`)
-                    .then(response => {
-                        return response.data;
-                    })
-                    .then(data => {
-
-                        this.symptoms = data.symptoms;
-                    })
-                    .catch(error => {
-
-                        console.log(error);
-
-                    });
-
-            },
+  mounted() {
+    /**
+     * getting all the symptoms
+     */
+    this.fetchSymptoms();
 
 
-            showEditModal() {
-                $("#modal_edit_symptom").modal("show");
-            },
+  },
 
-            btnShowEditModalOnClick(symptom) {
-                this.selectedSymptom = symptom;
+  methods: {
 
-                $("#modal_edit_symptom").modal("show");
+    /**
+     * fetch all symptoms
+     */
+    fetchSymptoms: function () {
 
-            }
+      console.log("fetching....");
+
+      axios.get(`${getSiteUrl()}/api/symptom/all`)
+          .then(response => {
+            return response.data;
+          })
+          .then(data => {
+
+            this.symptoms = data.symptoms;
+          })
+          .catch(error => {
+
+            console.log(error);
+
+          });
+
+    },
 
 
-        }
+    showEditModal: function () {
+      $("#modal_edit_symptom").modal("show");
+    },
+
+    btnShowEditModalOnClick(symptom) {
+      this.selectedSymptom = symptom;
+
+      $("#modal_edit_symptom").modal("show");
+
     }
+
+
+  }
+}
 </script>
 
 <style scoped>
