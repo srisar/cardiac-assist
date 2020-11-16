@@ -65,12 +65,10 @@ $config['images'] = array(
 
 $config['backends'][] = array(
     'name'         => 'default',
-    'adapter'      => 'local',
-    'baseUrl'      => '/ckfinder/userfiles/',
-//  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
-    'chmodFiles'   => 0777,
-    'chmodFolders' => 0755,
-    'filesystemEncoding' => 'UTF-8',
+    'adapter'      => 'dropbox',
+    'username'     => 'saravanamuthaly@gmail.com',
+    'root'         => '/ckfinder/files',
+    'token' => 'sl.AloZSN3bAJH489cW0klcdeqjXxxWPcQY5X0DBsbm49SJfD0QYL_N62TK2KJwsYZ6oYD3tW3JyOCn3XmeEQOl_Q72l8kdQqzmpGM01c8IgvZLUHXWkAIkc1FOcQBUekV6XmkMDKk'
 );
 
 /*================================ Resource Types =====================================*/
@@ -157,7 +155,8 @@ $config['cache'] = array(
 /*============================ Temp Directory settings ================================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_tempDirectory
 
-$config['tempDirectory'] = sys_get_temp_dir();
+//$config['tempDirectory'] = sys_get_temp_dir();
+$config['tempDirectory'] = __DIR__ . '/temp';
 
 /*============================ Session Cause Performance Issues =======================*/
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_sessionWriteClose
