@@ -75,7 +75,7 @@ export default {
       },
       licenseKey: '',
       ckfinder: {
-        uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+        uploadUrl: '/ckf/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
       }
     })
         .then(editor => {
