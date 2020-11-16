@@ -13,7 +13,7 @@ class Disease implements AbstractModel
     private const _TABLE = "diseases";
 
     public ?int $id;
-    public ?string $disease, $disease_code, $created_at, $updated_at;
+    public ?string $disease, $disease_code, $description, $created_at, $updated_at;
 
 
     /**
@@ -54,6 +54,7 @@ class Disease implements AbstractModel
         $data = [
             "disease" => $this->disease,
             "disease_code" => $this->disease_code,
+            "description" => $this->description
         ];
 
         return Database::insert(self::_TABLE, $data);
@@ -65,6 +66,7 @@ class Disease implements AbstractModel
         $data = [
             "disease" => $this->disease,
             "disease_code" => $this->disease_code,
+            "description" => $this->description
         ];
 
         return Database::update(self::_TABLE, $data, ['id' => $this->id]);
@@ -101,12 +103,12 @@ class Disease implements AbstractModel
      * @param string $diseaseName
      * @return Disease[]|bool
      */
-    public static function searchByName(?string $diseaseName)
+    public static function searchByName(string $diseaseName)
     {
         $db = Database::instance();
 
         $statement = $db->prepare(
-            "select * from " . self::TABLE . " where disease like :query;"
+            "select * from " . self::_TABLE . " where disease like :query;"
         );
 
         $statement->bindValue(":query", "%" . $diseaseName . "%");

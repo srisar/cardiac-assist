@@ -1,11 +1,11 @@
 <template>
-  <div class="modal fade" id="modal_edit_symptom" tabindex="-1" role="dialog" aria-labelledby="modal_edit_symptom" aria-hidden="true">
+  <div class="modal" :class="{'modal-show' : isVisible, 'modal-hide': !isVisible}" id="modal_edit_symptom" tabindex="-1" role="dialog" aria-labelledby="modal_edit_symptom" aria-hidden="false">
 
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content shadow shadow-lg">
         <div class="modal-header">
           <h3 v-if="selectedSymptom" class="modal-title" id="label_edit_symptom_title">{{ selectedSymptom.symptom_name }}</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="hide">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -15,7 +15,7 @@
           <div v-if="selectedSymptom">
 
             <div class="form-group">
-              <label for="field_edit_symptom_name">Symptom name</label>
+              <label for="field_edit_symptom_name">Symptom name <span class="badge badge-danger">{{ symptomNameError }}</span></label>
               <input v-if="selectedSymptom" type="text" id="field_edit_symptom_name" class="form-control" v-model="selectedSymptom.symptom_name">
             </div>
 
@@ -29,13 +29,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" id="btn_update_symptom" @click="update">Update changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-secondary" @click="hide">Cancel</button>
           <button type="button" class="btn btn-danger" id="btn_delete_symptom">Delete</button>
         </div>
       </div>
     </div><!--modal-dialog-->
 
   </div>
+
 </template>
 
 <script>
@@ -57,11 +58,28 @@ export default {
     },
   },
 
+  data: function () {
+    return {
+      isVisible: false,
+      error: {
+        symptom_name: ""
+      }
+    }
+  },
+
+  computed: {
+    symptomNameError: function () {
+      if (this.selectedSymptom.symptom_name === "") return "Invalid symptom name";
+      return "";
+    },
+  },
+
+
   methods: {
     /**
      * update symptom
      */
-    update() {
+    update: function () {
 
       axios.post(`${getSiteUrl()}/api/symptom/update`, {
 
@@ -72,27 +90,37 @@ export default {
       }).then(response => {
 
         showSuccessToast("Symptom updated!");
-        this.emitUpdatedEvent();
+        this.$emit('symptom-updated');
 
+        this.hide();
 
-        $("#modal_edit_symptom").modal("hide");
 
       }).catch(error => {
 
-        console.log(error.response);
+        console.log(error.response.data);
+        showErrorToast('Error updating symptom.')
 
       })
 
     },
 
 
-    emitUpdatedEvent() {
-      this.$emit("symptom-updated");
-    },
+
 
     getDescription: function (data) {
       this.selectedSymptom.description = data;
-    }
+    },
+
+    hide: function () {
+      this.isVisible = false;
+      this.$emit('modal-hiding');
+    },
+
+    show: function () {
+      this.isVisible = true;
+      this.$emit('modal-showing');
+    },
+
 
   },
 }
@@ -100,4 +128,15 @@ export default {
 
 <style scoped>
 
+.modal {
+  background-color: rgba(108, 117, 125, 0.5);
+}
+
+.modal-show {
+  display: block;
+}
+
+.modal-hide {
+  display: none;
+}
 </style>

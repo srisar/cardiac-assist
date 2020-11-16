@@ -71,6 +71,7 @@ Router::get('/api/disease/search', "Diseases\Api@search", ADMIN_ACCESS);
 Router::get('/api/disease/find', "Diseases\Api@find", ADMIN_ACCESS);
 
 Router::post('/api/disease/add', "Diseases\Api@add", ADMIN_ACCESS);
+Router::post('/api/disease/update', "Diseases\Api@update", ADMIN_ACCESS);
 
 
 /*

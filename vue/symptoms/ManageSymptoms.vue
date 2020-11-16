@@ -53,7 +53,7 @@
     </div><!--row-->
 
 
-    <edit-symptom :selected-symptom="selectedSymptom" @symptom-updated="fetchSymptoms"></edit-symptom>
+    <edit-symptom ref="editModal" :selected-symptom="selectedSymptom" @symptom-updated="fetchSymptoms"></edit-symptom>
 
   </div><!--container-->
 </template>
@@ -75,6 +75,7 @@ export default {
     return {
       symptoms: {},
       selectedSymptom: undefined,
+      showEditModal: false,
     };
   },
 
@@ -98,8 +99,6 @@ export default {
      */
     fetchSymptoms: function () {
 
-      console.log("fetching....");
-
       axios.get(`${getSiteUrl()}/api/symptom/all`)
           .then(response => {
             return response.data;
@@ -117,15 +116,9 @@ export default {
     },
 
 
-    showEditModal: function () {
-      $("#modal_edit_symptom").modal("show");
-    },
-
     btnShowEditModalOnClick(symptom) {
       this.selectedSymptom = symptom;
-
-      $("#modal_edit_symptom").modal("show");
-
+      this.$refs.editModal.show();
     }
 
 

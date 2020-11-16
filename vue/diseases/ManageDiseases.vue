@@ -1,103 +1,167 @@
 <template>
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-            <!--
-            |
-            | start section: add a symptom
-            |
-            -->
-            <div class="col-12 col-lg-4">
+      <!--
+      |
+      | start section: add a symptom
+      |
+      -->
+      <div class="col-12 col-lg-4">
+        <add-disease @disease-added="fetchDiseases"></add-disease>
+      </div><!--col-->
 
-                <add-disease :event-bus="eventBus"></add-disease>
+      <!--
+      |
+      | start section: add a symptom
+      |
+      -->
+      <div class="col-12 col-lg-8">
 
-            </div><!--col-->
+        <div class="card">
+          <div class="card-header">Existing symptoms</div>
+          <div class="card-body">
 
-            <!--
-            |
-            | start section: add a symptom
-            |
-            -->
-            <div class="col-12 col-lg-8">
+            <table class="table table-bordered table-striped table-sm" id="table_symptoms">
+              <thead>
+              <tr>
+                <th>Disease</th>
+                <th>Disease code</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="disease in diseases">
+                <td>
+                  <a @click="btnShowEditModalOnClick(disease)" href="#">
+                    {{ disease.disease }}
+                  </a>
+                </td>
+                <td v-html="disease.disease_code"></td>
+              </tr>
+              </tbody>
 
-                <div class="card">
-                    <div class="card-header">Existing symptoms</div>
-                    <div class="card-body">
+            </table>
 
-                        <table class="table table-bordered table-striped" id="table_symptoms">
-                            <thead>
-                            <tr>
-                                <th>Disease</th>
-                                <th>Disease code</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="disease in diseases">
-                                <td>{{disease.disease}}</td>
-                                <td>{{disease.disease_code}}</td>
-                                <td style="width: 50px">
-                                    <button @click="" class="btn btn-sm btn-primary">
-                                        <i class="fad fa-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
+          </div>
+        </div>
 
-                        </table>
+      </div><!--col-->
 
-                    </div>
-                </div>
-
-            </div><!--col-->
-
-        </div><!--row-->
+    </div><!--row-->
 
 
-    </div><!--container-->
+    <ModalWindow ref="modal">
+
+      <template v-slot:title v-if="selectedDisease">{{ selectedDisease.disease }}</template>
+
+      <section>
+        <div v-if="selectedDisease">
+
+          <div class="form-group">
+            <label for="field_edit_disease">Disease</label>
+            <input type="text" id="field_edit_disease" class="form-control" v-model="selectedDisease.disease">
+          </div>
+
+          <div class="form-group">
+            <label for="field_edit_disease_code">Disease Code</label>
+            <input type="text" class="form-control" id="field_edit_disease_code" v-model="selectedDisease.disease_code">
+          </div>
+
+          <div class="form-group">
+            <label for="field_description">Description</label>
+            <RichEditor id="field_description" v-model="selectedDisease.description"></RichEditor>
+          </div>
+
+        </div>
+      </section>
+
+
+      <template v-slot:footer>
+        <button type="button" class="btn btn-success" id="btn_update_symptom" @click="updateDisease">Update changes</button>
+        <button type="button" class="btn btn-danger" id="btn_delete_symptom">Delete</button>
+      </template>
+
+    </ModalWindow>
+
+  </div><!--container-->
 </template>
 
 <script>
 
-    import AddDisease from "./AddDisease";
+import AddDisease from "./components/AddDisease";
+import ModalWindow from "../_common/ModalWindow";
+import RichEditor from "../_common/RichEditor";
 
-    export default {
-        name: "ManageDiseases",
-        components: {
-            AddDisease
-        },
-        data() {
-            return {
-                diseases: undefined,
-                disease: {
-                    disease: "",
-                    disease_code: ""
-                },
-                eventBus: new Vue({}),
-            };
-        },
-        mounted() {
-            this.fetchDiseases();
-        },
-        methods: {
 
-            fetchDiseases: function () {
+export default {
+  name: "ManageDiseases",
+  components: {
+    RichEditor,
+    ModalWindow,
+    AddDisease,
+  },
 
-                axios.get(`${getSiteUrl()}/api/disease/all`)
-                    .then(response => {
+  data() {
+    return {
+      diseases: undefined,
+      disease: {
+        id: undefined,
+        disease: "",
+        disease_code: "",
+        description: "",
+      },
+      selectedDisease: undefined,
+    };
+  },
 
-                        this.diseases = response.data.diseases;
+  mounted() {
+    this.fetchDiseases();
+  },
 
-                    }).catch(error => {
-                    showErrorToast("Failed to load diseases");
-                    console.log(error.response.data);
-                });
+  methods: {
 
-            },
+    fetchDiseases: function () {
 
-        },
-    }
+      axios.get(`${getSiteUrl()}/api/disease/all`)
+          .then(response => {
+
+            this.diseases = response.data.diseases;
+
+          })
+          .catch(error => {
+            showErrorToast("Failed to load diseases");
+            console.log(error.response.data);
+          });
+
+    },
+
+
+    updateDisease: function () {
+
+      axios.post(`${getSiteUrl()}/api/disease/update`, {
+        "id": this.selectedDisease.id,
+        "disease": this.selectedDisease.disease,
+        "disease_code": this.selectedDisease.disease_code
+      }).then(response => {
+
+        console.log(response.data);
+
+      }).catch(error => {
+        console.log(error.response.data);
+      })
+
+    },
+
+
+    btnShowEditModalOnClick: function (disease) {
+      this.selectedDisease = disease;
+      this.$refs.modal.show();
+    },
+
+
+  },
+}
 </script>
 
 <style scoped>

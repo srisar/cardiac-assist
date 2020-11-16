@@ -27,7 +27,7 @@
         name: "AddDisease",
 
         props: {
-            eventBus: undefined
+
         },
 
         data() {
@@ -64,7 +64,7 @@
             },
 
             emitDiseaseAddedEvent() {
-                this.eventBus.$emit("disease-added");
+                this.$emit("disease-added");
             }
 
         }

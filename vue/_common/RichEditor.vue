@@ -9,23 +9,17 @@ export default {
   name: "RichEditor",
 
   props: {
-    content: "",
+    value: ""
   },
 
   data: function () {
     return {
       editor: null,
-      editorData: this.content,
+      editorData: this.value,
     }
   },
 
   computed: {},
-
-  watch: {
-    content: function (data) {
-      this.editor.setData(data);
-    }
-  },
 
   mounted: function () {
 
@@ -71,15 +65,15 @@ export default {
         .then(newEditor => {
           this.editor = newEditor;
 
-          this.editor.setData(this.content);
+          if (this.value != null) this.editor.setData(this.value);
 
           // add event listener to capture the data
           newEditor.model.document.on('change', _.debounce(() => {
-            this.$emit('content-updated', this.editor.getData());
+            this.$emit('input', this.editor.getData());
 
             this.editorData = this.editor.getData();
 
-          }, 300));
+          }, 150));
 
 
         })

@@ -55,13 +55,39 @@ class Api
 
     }
 
+    public function update()
+    {
+        try {
+
+            /**
+             * fields: id, disease, disease_code, description
+             * validation: id, disease
+             */
+
+            $fields = Axios::get();
+
+            if ( empty($fields['id']) ) throw new Exception("Disease id missing");
+            if ( empty($fields['disease']) ) throw new Exception("Disease name missing");
+
+
+            $disease = Disease::build($fields);
+
+            JSONResponse::validResponse($disease);
+            return null;
+
+
+        } catch ( Exception $exception ) {
+            JSONResponse::exceptionResponse($exception);
+        }
+    }
+
 
     public function getAll()
     {
 
         $diseases = Disease::findAll();
         JSONResponse::validResponse(['diseases' => $diseases]);
-        return;
+        return null;
     }
 
 
