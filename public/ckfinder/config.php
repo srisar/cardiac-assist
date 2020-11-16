@@ -65,10 +65,12 @@ $config['images'] = array(
 
 $config['backends'][] = array(
     'name'         => 'default',
-    'adapter'      => 'dropbox',
-    'username'     => 'saravanamuthaly@gmail.com',
-    'root'         => '/ckfinder/files',
-    'token' => 'sl.AloZSN3bAJH489cW0klcdeqjXxxWPcQY5X0DBsbm49SJfD0QYL_N62TK2KJwsYZ6oYD3tW3JyOCn3XmeEQOl_Q72l8kdQqzmpGM01c8IgvZLUHXWkAIkc1FOcQBUekV6XmkMDKk'
+    'adapter'            => 'local',
+    'root'               => '/ckfinder/userfiles/',
+    'chmodFiles'         => 0755,
+    'chmodFolders'       => 0755,
+    'filesystemEncoding' => 'UTF-8',
+    'followSymlinks'     => true
 );
 
 /*================================ Resource Types =====================================*/
