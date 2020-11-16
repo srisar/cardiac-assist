@@ -5,6 +5,12 @@
 </template>
 
 <script>
+
+
+// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+
 export default {
   name: "RichEditor",
 
@@ -23,52 +29,64 @@ export default {
 
   mounted: function () {
 
-    ClassicEditor
-        .create(this.$refs.richEditor, {
-          toolbar: {
-            items: [
-              'heading',
-              '|',
-              'bold',
-              'italic',
-              'highlight',
-              'blockQuote',
-              'bulletedList',
-              'numberedList',
-              '|',
-              'indent',
-              'outdent',
-              '|',
-              'link',
-              'imageInsert',
-              'insertTable',
-              'mediaEmbed'
-            ]
-          },
-          language: 'en',
-          image: {
-            toolbar: [
-              'imageTextAlternative',
-              'imageStyle:full',
-              'imageStyle:side'
-            ]
-          },
-          table: {
-            contentToolbar: [
-              'tableColumn',
-              'tableRow',
-              'mergeTableCells'
-            ]
-          },
-          licenseKey: '',
-        })
-        .then(newEditor => {
-          this.editor = newEditor;
+    ClassicEditor.create(this.$refs.richEditor, {
+      toolbar: {
+        items: [
+          'heading',
+          '|',
+          'fontSize',
+          'fontColor',
+          'bold',
+          'italic',
+          'highlight',
+          'alignment',
+          'link',
+          'bulletedList',
+          'numberedList',
+          'imageUpload',
+          'imageInsert',
+          'insertTable',
+          '|',
+          'indent',
+          'outdent',
+          '|',
+          'blockQuote',
+          'mediaEmbed',
+          'undo',
+          'redo',
+          'ckfinder'
+        ]
+      },
+      language: 'en',
+      image: {
+        toolbar: [
+          'imageTextAlternative',
+          'imageStyle:full',
+          'imageStyle:side',
+          'linkImage'
+        ]
+      },
+      table: {
+        contentToolbar: [
+          'tableColumn',
+          'tableRow',
+          'mergeTableCells'
+        ]
+      },
+      licenseKey: '',
+      ckfinder: {
+        uploadUrl: 'http://localhost/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+      }
+    })
+        .then(editor => {
+          this.editor = editor;
 
           if (this.value != null) this.editor.setData(this.value);
 
+          Array.from(editor.ui.componentFactory.names());
+
           // add event listener to capture the data
-          newEditor.model.document.on('change', _.debounce(() => {
+          editor.model.document.on('change', _.debounce(() => {
             this.$emit('input', this.editor.getData());
 
             this.editorData = this.editor.getData();
@@ -78,7 +96,7 @@ export default {
 
         })
         .catch(error => {
-          console.log(error);
+          console.log(error.stack);
         });
 
 

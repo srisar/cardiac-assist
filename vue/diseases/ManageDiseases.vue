@@ -8,8 +8,8 @@
       | start section: add a symptom
       |
       -->
-      <div class="col-12 col-lg-4">
-        <add-disease @disease-added="fetchDiseases"></add-disease>
+      <div class="col-12 col-lg-6">
+        <AddDisease @disease-added="fetchDiseases"></AddDisease>
       </div><!--col-->
 
       <!--
@@ -17,7 +17,7 @@
       | start section: add a symptom
       |
       -->
-      <div class="col-12 col-lg-8">
+      <div class="col-12 col-lg-6">
 
         <div class="card">
           <div class="card-header">Existing symptoms</div>
@@ -26,18 +26,19 @@
             <table class="table table-bordered table-striped table-sm" id="table_symptoms">
               <thead>
               <tr>
-                <th>Disease</th>
                 <th>Disease code</th>
+                <th>Disease</th>
               </tr>
               </thead>
               <tbody>
               <tr v-for="disease in diseases">
+                <td v-html="disease.disease_code"></td>
                 <td>
                   <a @click="btnShowEditModalOnClick(disease)" href="#">
                     {{ disease.disease }}
                   </a>
                 </td>
-                <td v-html="disease.disease_code"></td>
+
               </tr>
               </tbody>
 

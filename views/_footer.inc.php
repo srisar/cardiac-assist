@@ -10,8 +10,8 @@ use App\Core\App;
     </div>
 </div>
 
-<!--<script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>-->
 <script src="<?= App::siteURL() ?>/js/libs/all.js"></script>
+<script src="<?= App::siteURL() ?>/ckfinder/ckfinder.js"></script>
 <script src="<?= App::siteURL() ?>/js/app.js"></script>
 
 </body>

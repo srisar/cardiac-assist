@@ -91,3 +91,5 @@ modules.xml
 # End of https://www.gitignore.io/api/phpstorm+all
 /vendor/
 /node_modules/
+/public/ckfinder/temp/
+/public/ckfinder/userfiles/
