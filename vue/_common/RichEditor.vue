@@ -43,8 +43,7 @@ export default {
           'link',
           'bulletedList',
           'numberedList',
-          'imageUpload',
-          'imageInsert',
+          'ckfinder',
           'insertTable',
           '|',
           'indent',
@@ -54,7 +53,7 @@ export default {
           'mediaEmbed',
           'undo',
           'redo',
-          'ckfinder'
+
         ]
       },
       language: 'en',
