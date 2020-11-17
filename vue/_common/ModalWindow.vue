@@ -107,6 +107,7 @@ export default {
 
 .modal {
   background-color: rgba(108, 117, 125, 0.5);
+  overflow-y: auto;
 }
 
 .show {

@@ -26,7 +26,7 @@
             <table class="table table-bordered table-striped table-sm" id="table_symptoms">
               <thead>
               <tr>
-                <th>Disease code</th>
+                <th style="width: 100px">Disease code</th>
                 <th>Disease</th>
               </tr>
               </thead>
@@ -79,8 +79,7 @@
 
 
       <template v-slot:footer>
-        <button type="button" class="btn btn-success" id="btn_update_symptom" @click="updateDisease">Update changes</button>
-        <button type="button" class="btn btn-danger" id="btn_delete_symptom">Delete</button>
+        <button type="button" class="btn btn-success" id="btn_update_symptom" :disabled="isEmptySelectedDiseaseName" @click="updateDisease">Update changes</button>
       </template>
 
     </ModalWindow>
@@ -112,8 +111,19 @@ export default {
         disease_code: "",
         description: "",
       },
-      selectedDisease: undefined,
+      selectedDisease: {
+        id: undefined,
+        disease_code: undefined,
+        disease: undefined,
+        description: undefined
+      },
     };
+  },
+
+  computed: {
+    isEmptySelectedDiseaseName: function () {
+      return _.isEmpty(this.selectedDisease.disease);
+    }
   },
 
   mounted() {
@@ -141,15 +151,19 @@ export default {
     updateDisease: function () {
 
       axios.post(`${getSiteUrl()}/api/disease/update`, {
-        "id": this.selectedDisease.id,
-        "disease": this.selectedDisease.disease,
-        "disease_code": this.selectedDisease.disease_code
+        id: this.selectedDisease.id,
+        disease: this.selectedDisease.disease,
+        disease_code: this.selectedDisease.disease_code,
+        description: this.selectedDisease.description,
+
       }).then(response => {
 
-        console.log(response.data);
+        this.fetchDiseases();
+        showSuccessToast('Disease updated');
 
       }).catch(error => {
         console.log(error.response.data);
+        showErrorToast('Failed to update disease');
       })
 
     },

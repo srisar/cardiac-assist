@@ -1,9 +1,6 @@
 {
     "/vue/diseases/manage_diseases.js": "/vue/diseases/manage_diseases.js",
-    "/vue/diseases/manage_diseases.js.map": "/vue/diseases/manage_diseases.js.map",
     "/vue/symptoms/manage_symptoms.js": "/vue/symptoms/manage_symptoms.js",
     "/css/app.css": "/css/app.css",
-    "/vue/symptoms/manage_symptoms.js.map": "/vue/symptoms/manage_symptoms.js.map",
-    "/css/app.css.map": "/css/app.css.map",
     "/js/libs/all.js": "/js/libs/all.js"
 }

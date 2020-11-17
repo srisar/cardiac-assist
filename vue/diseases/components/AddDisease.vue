@@ -20,7 +20,7 @@
       </div>
 
       <div class="text-right">
-        <button class="btn btn-success" @click="addDisease" v-bind:class="{'disabled' : isEmptyDiseaseName}">Add disease</button>
+        <button class="btn btn-success" @click="addDisease" :disabled="isEmptyDiseaseName">Add disease</button>
       </div>
 
     </div>

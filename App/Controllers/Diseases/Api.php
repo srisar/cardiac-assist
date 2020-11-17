@@ -72,8 +72,12 @@ class Api
 
             $disease = Disease::build($fields);
 
-            JSONResponse::validResponse($disease);
-            return null;
+            if ( $disease->update() ) {
+                JSONResponse::validResponse('Updated');
+                return null;
+            }
+
+            throw new Exception('Failed to update disease');
 
 
         } catch ( Exception $exception ) {
