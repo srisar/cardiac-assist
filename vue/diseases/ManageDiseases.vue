@@ -52,7 +52,7 @@
     </div><!--row-->
 
 
-    <ModalWindow ref="modal">
+    <ModalWindow ref="modal" id="edit_disease_modal">
 
       <template v-slot:title v-if="selectedDisease">{{ selectedDisease.disease }}</template>
 
@@ -71,7 +71,7 @@
 
           <div class="form-group">
             <label for="field_description">Description</label>
-            <RichEditor id="field_description" v-model="selectedDisease.description"></RichEditor>
+            <RichEditor ref="editorDescription" id="field_description" v-model="selectedDisease.description"></RichEditor>
           </div>
 
         </div>
@@ -171,6 +171,8 @@ export default {
 
     btnShowEditModalOnClick: function (disease) {
       this.selectedDisease = disease;
+      /** this init() method is needed if multiple instances need to bt swapped. for example, modal window */
+      this.$refs.editorDescription.init(this.selectedDisease.description);
       this.$refs.modal.show();
     },
 

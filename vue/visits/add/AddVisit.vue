@@ -14,8 +14,8 @@
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <label for="field_visit_date" v-model="visitDate">Visit date</label>
-                    <input type="text" class="form-control date_field" id="field_visit_date">
+                    <label v-model="visitDate">Visit date</label>
+                    <DateField v-model="visitDate"></DateField>
                   </div>
                 </div>
               </div>
@@ -43,16 +43,18 @@
 
 <script>
 
+import DateField from "../../_common/DateField";
 import voca from 'voca';
 
 export default {
   name: "AddVisit",
+  components: {DateField},
 
   data: function () {
     return {
       patientName: "",
       patientId: null,
-      visitDate: "",
+      visitDate: moment().format('YYYY-MM-DD'),
       rawRemarks: ""
     };
   },
@@ -86,14 +88,13 @@ export default {
      */
     addVisit: function () {
 
-      // get the date
-      this.visitDate = $("#field_visit_date").val();
-
       axios.post(`${getSiteUrl()}/api/visit/add`, {
         patient_id: this.patientId,
         visit_date: this.visitDate,
         remarks: this.visitRemarks
       }).then(response => {
+
+        console.log(response.data);
 
         const visitId = response.data.visit.id;
 

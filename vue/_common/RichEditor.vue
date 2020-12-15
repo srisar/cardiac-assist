@@ -6,29 +6,24 @@
 
 <script>
 
-
-// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
-// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-
 export default {
   name: "RichEditor",
 
-  props: {
-    value: ""
-  },
+  props: ['value'],
 
   data: function () {
     return {
-      editor: null,
-      editorData: this.value,
+      editorInstance: undefined,
     }
   },
 
-  computed: {},
+  // watch: {
+  //   value: function (oldValue, newValue) {
+  //     if (this.editorInstance !== undefined) this.editorInstance.setData(this.value);
+  //   }
+  // },
 
   mounted: function () {
-
     ClassicEditor.create(this.$refs.richEditor, {
       toolbar: {
         items: [
@@ -78,18 +73,13 @@ export default {
       }
     })
         .then(editor => {
-          this.editor = editor;
+          this.editorInstance = editor;
 
-          if (this.value != null) this.editor.setData(this.value);
-
-          Array.from(editor.ui.componentFactory.names());
+          if (this.value !== undefined) editor.setData(this.value);
 
           // add event listener to capture the data
           editor.model.document.on('change', _.debounce(() => {
-            this.$emit('input', this.editor.getData());
-
-            this.editorData = this.editor.getData();
-
+            this.$emit('input', this.editorInstance.getData());
           }, 150));
 
 
@@ -101,7 +91,19 @@ export default {
 
   },
 
-  methods: {}
+  methods: {
+
+    init: function (data) {
+      /**
+       * in order to capture the initial data and display it in the editor
+       */
+
+      if (data !== null) this.editorInstance.setData(data);
+      else this.editorInstance.setData('');
+
+    }
+
+  }
 }
 </script>
 

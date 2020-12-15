@@ -62,7 +62,7 @@ class Patient implements AbstractModel
     public const STATUS_INACTIVE = 'INACTIVE';
 
 
-    public static function build(array $fields)
+    public static function build(array $fields): Patient
     {
         $object = new self();
         foreach ( $fields as $key => $value ) {
@@ -75,7 +75,7 @@ class Patient implements AbstractModel
      * @param int $id
      * @return Patient|null
      */
-    public static function find(int $id)
+    public static function find(int $id): ?Patient
     {
         return Database::find('patients', $id, self::class);
 
@@ -86,7 +86,7 @@ class Patient implements AbstractModel
      * @param int $offset
      * @return Patient[]|array
      */
-    public static function findAll(int $limit = 1000, int $offset = 0)
+    public static function findAll(int $limit = 1000, int $offset = 0): array
     {
 
         return Database::findAll('patients', $limit, $offset, self::class);
@@ -94,9 +94,8 @@ class Patient implements AbstractModel
 
     /**
      * Insert a new row into patients table
-     * @return bool
      */
-    public function insert()
+    public function insert(): ?int
     {
         $db = Database::instance();
         $statement = $db->prepare(
@@ -121,12 +120,11 @@ class Patient implements AbstractModel
         ]);
 
         if ( $result ) return $db->lastInsertId();
-        return $result;
-
+        return false;
 
     }
 
-    public function update()
+    public function update(): bool
     {
         $db = Database::instance();
         $statement = $db->prepare(
@@ -180,7 +178,7 @@ class Patient implements AbstractModel
     /**
      * @return Visit[]|array
      */
-    public function getVisits()
+    public function getVisits(): array
     {
         return Visit::findByPatient($this);
     }

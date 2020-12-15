@@ -15,8 +15,8 @@
       </div>
 
       <div class="form-group">
-        <label for="field_description">Description</label>
-        <RichEditor id="field_description" v-model="disease.description"></RichEditor>
+        <label for="field_description_add">Description</label>
+        <RichEditor id="field_description_add" v-model="disease.description"></RichEditor>
       </div>
 
       <div class="text-right">

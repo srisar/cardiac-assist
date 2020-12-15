@@ -54,8 +54,6 @@ export default {
 
   props: {
     id: String,
-    modalTitle: String
-
   },
 
   data: function () {

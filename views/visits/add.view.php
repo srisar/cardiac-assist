@@ -19,7 +19,7 @@ $patient = View::getData('patient');
   <input type="hidden" id="patient_id" value="<?= $patient->id ?>">
 </section>
 
-<div id="app_add_visit"></div>
+<div id="app"></div>
 
 <?php include_once BASE_PATH . '/views/_footer.inc.php'; ?>
 

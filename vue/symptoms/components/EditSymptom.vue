@@ -1,40 +1,28 @@
 <template>
-  <div class="modal" :class="{'modal-show' : isVisible, 'modal-hide': !isVisible}" id="modal_edit_symptom" tabindex="-1" role="dialog" aria-labelledby="modal_edit_symptom" aria-hidden="false">
 
-    <div class="modal-dialog">
-      <div class="modal-content shadow shadow-lg">
-        <div class="modal-header">
-          <h3 v-if="selectedSymptom" class="modal-title" id="label_edit_symptom_title">{{ selectedSymptom.symptom_name }}</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="hide">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div>
+    <ModalWindow ref="editModal" id="editModal">
+      <template v-slot:title>Edit symptom: {{ selectedSymptom.symptom_name }}</template>
+
+      <section>
+        <div class="form-group">
+          <label for="field_edit_disease">Symptom name</label>
+          <input type="text" id="field_edit_disease" class="form-control" v-model="selectedSymptom.symptom_name">
         </div>
-        <div class="modal-body">
 
-
-          <div v-if="selectedSymptom">
-
-            <div class="form-group">
-              <label for="field_edit_symptom_name">Symptom name <span class="badge badge-danger">{{ symptomNameError }}</span></label>
-              <input v-if="selectedSymptom" type="text" id="field_edit_symptom_name" class="form-control" v-model="selectedSymptom.symptom_name">
-            </div>
-
-            <div class="form-group">
-              <label>Description</label>
-              <rich-editor :content="selectedSymptom.description" v-on:content-updated="getDescription"></rich-editor>
-            </div>
-
-          </div>
-
+        <div class="form-group">
+          <label for="field_description">Description</label>
+          <RichEditor id="field_description" v-model="selectedSymptom.description"></RichEditor>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" id="btn_update_symptom" @click="update">Update changes</button>
-          <button type="button" class="btn btn-secondary" @click="hide">Cancel</button>
-          <button type="button" class="btn btn-danger" id="btn_delete_symptom">Delete</button>
-        </div>
-      </div>
-    </div><!--modal-dialog-->
+      </section>
 
+
+      <template v-slot:footer>
+        <button type="button" class="btn btn-success" id="btn_update_symptom" :disabled="isEmptySymptomName" @click="update">Update changes</button>
+      </template>
+
+
+    </ModalWindow>
   </div>
 
 </template>
@@ -42,36 +30,34 @@
 <script>
 
 import RichEditor from "../../_common/RichEditor";
+import ModalWindow from "../../_common/ModalWindow";
 
 export default {
   name: "EditSymptom",
 
   components: {
-    RichEditor
+    RichEditor,
+    ModalWindow
   },
 
   props: {
     selectedSymptom: {
-      id: "",
-      symptom_name: "",
-      description: "",
+      id: undefined,
+      symptom_name: undefined,
+      description: undefined,
     },
   },
 
   data: function () {
-    return {
-      isVisible: false,
-      error: {
-        symptom_name: ""
-      }
-    }
+    return {}
   },
 
   computed: {
-    symptomNameError: function () {
-      if (this.selectedSymptom.symptom_name === "") return "Invalid symptom name";
-      return "";
+
+    isEmptySymptomName: function () {
+      return _.isEmpty(this.selectedSymptom.symptom_name);
     },
+
   },
 
 
@@ -92,8 +78,6 @@ export default {
         showSuccessToast("Symptom updated!");
         this.$emit('symptom-updated');
 
-        this.hide();
-
 
       }).catch(error => {
 
@@ -104,22 +88,9 @@ export default {
 
     },
 
-
-
-
-    getDescription: function (data) {
-      this.selectedSymptom.description = data;
-    },
-
-    hide: function () {
-      this.isVisible = false;
-      this.$emit('modal-hiding');
-    },
-
     show: function () {
-      this.isVisible = true;
-      this.$emit('modal-showing');
-    },
+      this.$refs.editModal.show();
+    }
 
 
   },

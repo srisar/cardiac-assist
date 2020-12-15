@@ -52,8 +52,8 @@
 
     </div><!--row-->
 
+    <EditSymptom ref="editSymptomModal" :selected-symptom="selectedSymptom"></EditSymptom>
 
-    <edit-symptom ref="editModal" :selected-symptom="selectedSymptom" @symptom-updated="fetchSymptoms"></edit-symptom>
 
   </div><!--container-->
 </template>
@@ -62,20 +62,25 @@
 
 import EditSymptom from "./components/EditSymptom";
 import AddSymptom from "./components/AddSymptom";
+import ModalWindow from "../_common/ModalWindow";
 
 export default {
   name: "ManageSymptoms",
 
   components: {
+    AddSymptom,
+    ModalWindow,
     EditSymptom,
-    AddSymptom
   },
 
   data() {
     return {
       symptoms: {},
-      selectedSymptom: undefined,
-      showEditModal: false,
+      selectedSymptom: {
+        id: undefined,
+        symptom_name: undefined,
+        description: undefined,
+      },
     };
   },
 
@@ -118,7 +123,7 @@ export default {
 
     btnShowEditModalOnClick(symptom) {
       this.selectedSymptom = symptom;
-      this.$refs.editModal.show();
+      this.$refs.editSymptomModal.show();
     }
 
 

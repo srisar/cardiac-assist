@@ -19,7 +19,7 @@ class Visit implements AbstractModel
      * @param array $fields
      * @return Visit
      */
-    public static function build(array $fields)
+    public static function build(array $fields): Visit
     {
         $object = new self();
         foreach ( $fields as $key => $value ) {
@@ -32,13 +32,13 @@ class Visit implements AbstractModel
      * @param int $id
      * @return Visit|null
      */
-    public static function find(int $id)
+    public static function find(int $id): ?Visit
     {
         return Database::find('visits', $id, self::class);
 
     }
 
-    public static function findAll(int $limit = 1000, int $offset = 0)
+    public static function findAll(int $limit = 1000, int $offset = 0): array
     {
         return Database::findAll(self::TABLE, $limit, $offset, self::class);
     }
@@ -56,7 +56,7 @@ class Visit implements AbstractModel
 
     }
 
-    public function update()
+    public function update(): bool
     {
 
         $data = [
@@ -82,7 +82,7 @@ class Visit implements AbstractModel
      * @param Patient $patient
      * @return Visit[]|array
      */
-    public static function findByPatient(Patient $patient)
+    public static function findByPatient(Patient $patient): array
     {
         $db = Database::instance();
         $statement = $db->prepare("select * from visits where patient_id=?");

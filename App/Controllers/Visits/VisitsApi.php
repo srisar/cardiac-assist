@@ -10,7 +10,7 @@ use App\Core\Requests\Request;
 use App\Models\Visit;
 use Exception;
 
-class Api
+class VisitsApi
 {
 
 
@@ -24,22 +24,19 @@ class Api
         try {
 
             $fields = Axios::get();
-
             $visit = Visit::build($fields);
 
             $result = $visit->insert();
 
             if ( $result != false ) {
-                (new JSONResponse(['visit' => Visit::find($result)]))->response();
+                $visit = Visit::find($result);
+                JSONResponse::validResponse(['visit' => $visit]);
                 return;
             }
-
-            JSONResponse::invalidResponse();
-            return;
-
+            throw new Exception('Failed to add a new visit');
 
         } catch ( Exception $exception ) {
-            JSONResponse::invalidResponse(['message' => $exception->getMessage()]);
+            JSONResponse::exceptionResponse($exception);
         }
 
 

@@ -9,31 +9,8 @@ use App\Core\Requests\JSONResponse;
 use App\Models\Patient;
 use Exception;
 
-class Api
+class PatientsApi
 {
-
-    public function adding()
-    {
-
-        $fields = Axios::get();
-
-        $patient = Patient::build($fields);
-
-        $result = $patient->insert();
-
-        if ( $result != false ) {
-
-            $patient = Patient::find($result);
-
-            (new JSONResponse(['data' => $patient]))->response();
-            return;
-        }
-
-        JSONResponse::invalidResponse(['data' => 'Error adding a new patient']);
-        return;
-
-    }
-
 
     /**
      * Required fields: offset, limit
@@ -56,7 +33,34 @@ class Api
     }
 
 
-    public function updating()
+    /**
+     * Add a new patient
+     */
+    public function add()
+    {
+
+        $fields = Axios::get();
+
+        $patient = Patient::build($fields);
+
+        $result = $patient->insert();
+
+        if ( $result != false ) {
+
+            $patient = Patient::find($result);
+
+            JSONResponse::validResponse(['patient' => $patient]);
+            return;
+        }
+
+        JSONResponse::invalidResponse('Error adding a new patient');
+    }
+
+
+    /**
+     * Update existing patient
+     */
+    public function update()
     {
 
         try {
