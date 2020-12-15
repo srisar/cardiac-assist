@@ -34,10 +34,10 @@ Router::get('/api/users/all', "System\Users\Api@getAll", User::ROLE_ADMIN);
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/api/patients/all', "Patients\Api@getAll", User::ROLE_ADMIN);
+Router::get('/api/patients/all', "Patients\PatientsApi@getAll", User::ROLE_ADMIN);
 
-Router::post('/api/patients/adding', "Patients\Api@adding", User::ROLE_ADMIN);
-Router::post('/api/patients/updating', "Patients\Api@updating", User::ROLE_ADMIN);
+Router::post('/api/patients/add', "Patients\PatientsApi@add", User::ROLE_ADMIN);
+Router::post('/api/patients/update', "Patients\PatientsApi@update", User::ROLE_ADMIN);
 
 /*
  * ---------------------------------------------------------------------------------------
@@ -45,9 +45,9 @@ Router::post('/api/patients/updating', "Patients\Api@updating", User::ROLE_ADMIN
  * ---------------------------------------------------------------------------------------
  */
 
-Router::get('/api/visit/find', "Visits\Api@find", User::ROLE_ADMIN);
-Router::post('/api/visit/add', "Visits\Api@add", User::ROLE_ADMIN);
-Router::post('/api/visit/update', "Visits\Api@update", User::ROLE_ADMIN);
+Router::get('/api/visit/find', "Visits\VisitsApi@find", User::ROLE_ADMIN);
+Router::post('/api/visit/add', "Visits\VisitsApi@add", User::ROLE_ADMIN);
+Router::post('/api/visit/update', "Visits\VisitsApi@update", User::ROLE_ADMIN);
 
 /*
  * ---------------------------------------------------------------------------------------
