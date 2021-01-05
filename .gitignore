@@ -93,3 +93,4 @@ modules.xml
 /node_modules/
 /public/ckfinder/temp/
 /public/ckfinder/userfiles/
+/public/ckf/userfiles/.ckfinder/cache/data/Files/Diseases/
