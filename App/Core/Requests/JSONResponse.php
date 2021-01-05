@@ -47,16 +47,6 @@ class JSONResponse
         $response->response();
     }
 
-
-    /**
-     * Response for exception handling
-     * @param Exception $exception
-     */
-    public static function exceptionResponse(Exception $exception)
-    {
-        self::invalidResponse(['message' => $exception->getMessage()]);
-    }
-
     public static function validResponse($payload = 'Success')
     {
         if ( !is_array($payload) ) {
@@ -66,6 +56,15 @@ class JSONResponse
         }
 
         $response->response();
+    }
+
+    /**
+     * Response for exception handling
+     * @param Exception $exception
+     */
+    public static function exceptionResponse(Exception $exception)
+    {
+        self::invalidResponse(['message' => $exception->getMessage()]);
     }
 
 }

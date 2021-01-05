@@ -46,7 +46,7 @@ class App
     {
 
         if ( empty($params) ) {
-            header('Location:' . $path);
+            header('Location:' . self::siteURL() . $path);
         } else {
             $query = http_build_query($params);
             header('Location:' . $path . '?' . $query);
@@ -61,7 +61,7 @@ class App
      */
     public static function appName(): string
     {
-        return $_ENV['APP_NAME'];
+        return APP_NAME;
     }
 
     /**

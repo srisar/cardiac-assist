@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #F5F6F7;
+}
+
+
+.card {
+    /*box-shadow: 0 0 20px #858585;*/
+}
+
+.card-header {
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    padding: .5rem !important;
+    text-transform: uppercase;
+}
+
+.card-body {
+    padding: .5rem !important;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-tiny {
+    padding: .05rem .25rem;
+    font-size: .675rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    text-transform: uppercase;
+}
+
+table {
+    background-color: white;
+}
+
+
+.table-row-options {
+    width: 80px;
+    text-align: center;
+}

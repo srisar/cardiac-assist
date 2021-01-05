@@ -5,31 +5,34 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
-use mysql_xdevapi\Statement;
-use PDO;
 
-class User implements AbstractModel
+class User implements IModel
 {
 
-    public ?int $id;
-    public ?string $username, $password, $display_name, $role, $created_at, $updated_at;
+    private const TABLE = 'users';
 
+    public int $id;
+    public string $username, $display_name, $password, $role, $password_string;
 
-    public const ROLE_LIST = [
+    const ROLES = [
         'ADMIN' => 'Administrator',
+        'USER' => 'User',
         'MANAGER' => 'Manager',
-        'USER' => 'User'
     ];
 
-    public const ROLE_ADMIN = 'ADMIN';
-    public const ROLE_MANAGER = 'MANAGER';
-    public const ROLE_USER = 'USER';
-    public const ROLE_NONE = 'NONE';
+    const ROLE_ADMIN = 'ADMIN';
+    const ROLE_USER = 'USER';
+    const ROLE_MANAGER = 'MANAGER';
 
-    public static function build($fields)
+
+    /**
+     * @param $array
+     * @return User
+     */
+    public static function build($array): User
     {
         $object = new self();
-        foreach ( $fields as $key => $value ) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -37,71 +40,84 @@ class User implements AbstractModel
 
 
     /**
+     * Find a user by id
      * @param int $id
      * @return User|null
      */
-    public static function find(int $id)
+    public static function find(int $id): ?User
     {
         $db = Database::instance();
-        $stmt = $db->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
-        $stmt->execute([$id]);
+        $statement = $db->prepare("select * from users where id=? limit 1");
+        $statement->execute([$id]);
 
-        /** @var User $result */
-        $result = $stmt->fetchObject(User::class);
+        $result = $statement->fetchObject(self::class);
 
         if ( !empty($result) ) return $result;
         return null;
+
     }
 
 
     /**
      * @param int $limit
      * @param int $offset
-     * @return User[]|array
+     * @return User[]
      */
-    public static function findAll(int $limit = 1000, int $offset = 0)
+    public static function findAll($limit = 1000, $offset = 0): array
     {
-        $db = Database::instance();
-        $statement = $db->prepare("SELECT * FROM users LIMIT :limit_value OFFSET :offset_value");
-        $statement->bindValue(':limit_value', $limit, PDO::PARAM_INT);
-        $statement->bindValue(':offset_value', $offset, PDO::PARAM_INT);
-
-        $statement->execute();
-
-        /** @var User[] $result */
-        $result = $statement->fetchAll(PDO::FETCH_CLASS, User::class);
-
-        if ( !empty($result) ) {
-            return $result;
-        }
-        return [];
+        return Database::findAll(self::TABLE, $limit, $offset, self::class, 'role');
     }
 
+    /**
+     * @return bool|int
+     */
     public function insert()
     {
-        $db = Database::instance();
-        $statement = $db->prepare("INSERT INTO users(username, password, display_name, role) values (?, ?, ?, ?)");
 
-        if ( $statement->execute([$this->username, $this->password, $this->display_name, $this->role]) ) {
-            return true;
-        }
+        $hashedPassword = password_hash($this->password_string, PASSWORD_DEFAULT);
 
-        return false;
+        $data = [
+            'username' => $this->username,
+            'display_name' => $this->display_name,
+            'role' => $this->role,
+            'password' => $hashedPassword
+        ];
+
+        return Database::insert(self::TABLE, $data);
+
     }
 
-
-    public function update()
+    /**
+     * @return bool
+     */
+    public function update(): bool
     {
-        $db = Database::instance();
-        $statement = $db->prepare("UPDATE users SET username=?, password=?, display_name=?, role=? WHERE id=?;");
 
-        return $statement->execute([
-            $this->username,
-            $this->password,
-            $this->display_name,
-            $this->role,
-            $this->id
-        ]);
+        $data = [
+            'display_name' => $this->display_name,
+            'role' => $this->role,
+        ];
+
+        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function updateWithPassword(): bool
+    {
+
+        $hashedPassword = password_hash($this->password_string, PASSWORD_DEFAULT);
+
+        $data = [
+            'display_name' => $this->display_name,
+            'role' => $this->role,
+            'password' => $hashedPassword
+        ];
+
+        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+
     }
 
     public function delete()
@@ -109,19 +125,17 @@ class User implements AbstractModel
         // TODO: Implement delete() method.
     }
 
-    /**
-     * Returns a user by username, if exists
-     * @param string $username
-     * @return User|null
-     */
     public static function findByUsername(string $username)
     {
         $db = Database::instance();
-        $statement = $db->prepare("SELECT * FROM users WHERE username=?");
+        $statement = $db->prepare("select * from users where username=? limit 1");
         $statement->execute([$username]);
 
-        $result = $statement->fetchObject(User::class);
+        $result = $statement->fetchObject(self::class);
+
         if ( !empty($result) ) return $result;
         return null;
     }
+
+
 }

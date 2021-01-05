@@ -1,6 +1,11 @@
 {
-    "/public/vue/diseases/manage_diseases.js": "/public/vue/diseases/manage_diseases.js",
-    "/public/vue/symptoms/manage_symptoms.js": "/public/vue/symptoms/manage_symptoms.js",
-    "/public/css/app.css": "/public/css/app.css",
-    "/public/js/libs/all.js": "/public/js/libs/all.js"
+    "/public/bookstore/homepage/home.app.js": "/public/bookstore/homepage/home.app.js",
+    "/public/bookstore/supplier/add-supplier.js": "/public/bookstore/supplier/add-supplier.js",
+    "/public/bookstore/supplier/edit-supplier.js": "/public/bookstore/supplier/edit-supplier.js",
+    "/public/bookstore/supplier/manage-suppliers.js": "/public/bookstore/supplier/manage-suppliers.js",
+    "/public/bookstore/users/manage-users.js": "/public/bookstore/users/manage-users.js",
+    "/public/bookstore/subjects/manage-subjects.js": "/public/bookstore/subjects/manage-subjects.js",
+    "/public/bookstore/books/manage-books.js": "/public/bookstore/books/manage-books.js",
+    "/public/bookstore/books-purchase/add-book-purchase.js": "/public/bookstore/books-purchase/add-book-purchase.js",
+    "/public/bookstore/books-purchase/view-all-book-purchases.js": "/public/bookstore/books-purchase/view-all-book-purchases.js"
 }

@@ -1,9 +1,0 @@
-{
-    "/vue/diseases/manage_diseases.js": "/vue/diseases/manage_diseases.js",
-    "/vue/patients/add/add-patient.js": "/vue/patients/add/add-patient.js",
-    "/vue/patients/list/list-patients.js": "/vue/patients/list/list-patients.js",
-    "/vue/symptoms/manage_symptoms.js": "/vue/symptoms/manage_symptoms.js",
-    "/vue/visits/add/add_visit.js": "/vue/visits/add/add_visit.js",
-    "/css/app.css": "/css/app.css",
-    "/js/libs/all.js": "/js/libs/all.js"
-}

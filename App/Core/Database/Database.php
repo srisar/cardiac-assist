@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Core\Database;
-
 
 use PDO;
 use PDOException;
@@ -56,13 +54,15 @@ class Database
      * @param int $limit
      * @param int $offset
      * @param $returnType
+     * @param $orderColumn
+     * @param string $order
      * @return array
      */
-    public static function findAll(string $table, int $limit, int $offset, $returnType)
+    public static function findAll(string $table, int $limit, int $offset, $returnType, $orderColumn, $order='ASC')
     {
 
         self::instance();
-        $statement = self::$pdo->prepare("select * from {$table} limit :limit_val offset :offset_val");
+        $statement = self::$pdo->prepare("select * from {$table} order by {$orderColumn} {$order} limit :limit_val offset :offset_val");
 
         $statement->bindValue(":limit_val", $limit, PDO::PARAM_INT);
         $statement->bindValue(":offset_val", $offset, PDO::PARAM_INT);
@@ -79,9 +79,11 @@ class Database
      * @param string $table
      * @param int $id
      * @param $returnType
+     * @param $orderColumn
+     * @param string $order
      * @return mixed|null
      */
-    public static function find(string $table, int $id, $returnType)
+    public static function find(string $table, int $id, $returnType )
     {
         self::instance();
         $statement = self::$pdo->prepare("select * from {$table} where id=?");
