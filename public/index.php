@@ -19,5 +19,5 @@ App::setTitle("Home");
 <div id="app"></div>
 
 <?php include_once BASE_PATH . "/inc.footer.php"; ?>
-<script src="bookstore/homepage/home.app.js"></script>
+<script src="app/homepage/home.app.js"></script>
 

@@ -51,11 +51,9 @@
                 <button class="btn btn-primary" :disabled="! passwordValidated">Save</button>
               </div>
 
-            </div>
+            </div><!-- card-body -->
           </div>
         </div>
-
-
 
 
       </div><!-- row -->
@@ -96,7 +94,7 @@
 
     </div>
 
-    <EditUser :user="selectedUser" @close="closedEditUserModal"></EditUser>
+    <EditUser :user="selectedUser" @close="closedEditUserModal" @user-updated="onUserUpdated"></EditUser>
 
   </div><!-- template -->
 
@@ -180,6 +178,10 @@ export default {
 
     closedEditUserModal: function () {
       this.selectedUser = undefined;
+    },
+
+    onUserUpdated: function () {
+      this._fetchUsers();
     },
 
     /**

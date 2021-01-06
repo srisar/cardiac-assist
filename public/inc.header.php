@@ -15,6 +15,8 @@ use App\Models\User;
 
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/bs-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/daterangepicker-3.1/daterangepicker.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/app.css">
 
 </head>
@@ -22,16 +24,18 @@ use App\Models\User;
 
 
 <?php if ( Authentication::isAuthenticated() || Authentication::isAuthenticated(User::ROLE_ADMIN) || Authentication::isAuthenticated(User::ROLE_MANAGER) ): ?>
-
+    <!-- TOP NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
 
         <a class="navbar-brand" href="<?= App::siteURL() ?>">
             <img class="img-fluid" style="width: 30px" src="<?= App::siteURL() ?>/assets/images/app-icon.svg" alt="Bookstore management system">
         </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -43,35 +47,11 @@ use App\Models\User;
 
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Suppliers
+                        Patients
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::url('/bookstore/supplier/manage.php') ?>">Manage suppliers</a>
-                        <a class="dropdown-item" href="<?= App::url('/bookstore/supplier/add.php') ?>">Add a supplier</a>
-
-                    </div>
-                </li><!-- end nav-item -->
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Books
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/bookstore/books/manage.php">Manage books</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/bookstore/subjects/manage.php">Manage subjects</a>
-
-                    </div>
-                </li><!-- end nav-item -->
-
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Purchases
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::url('/bookstore/books-purchase/add.php') ?>">Add a new book purchase</a>
-                        <a class="dropdown-item" href="<?= App::url('/bookstore/books-purchase/view-all.php') ?>">View purchases</a>
-
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/patients/add.php">Add a patient</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/patients/list.php">View all patients</a>
                     </div>
                 </li><!-- end nav-item -->
 
@@ -79,7 +59,7 @@ use App\Models\User;
             </ul>
 
             <div>
-                <a href="<?= App::url('/bookstore/users/manage.php') ?>" class="btn btn-sm btn-success"><i class="bi bi-people-fill"></i> Manage Users</a>
+                <a href="<?= App::url('/app/users/manage.php') ?>" class="btn btn-sm btn-success"><i class="bi bi-people-fill"></i> Manage Users</a>
                 <a href="<?= App::url('/logout.php') ?>" class="btn btn-sm btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </div>
 

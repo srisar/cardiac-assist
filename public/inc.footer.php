@@ -7,6 +7,8 @@ use App\Core\App;
 <script src="<?= App::siteURL() ?>/assets/js/popper.min.js"></script>
 <script src="<?= App::siteURL() ?>/assets/js/bootstrap.bundle.js"></script>
 <script src="<?= App::siteURL() ?>/assets/js/moment.min.js"></script>
+<script src="<?= App::siteURL() ?>/assets/DataTables/datatables.min.js"></script>
+<script src="<?= App::siteURL() ?>/assets/daterangepicker-3.1/daterangepicker.js"></script>
 <script src="<?= App::siteURL() ?>/assets/js/app.js"></script>
 </body>
 </html>

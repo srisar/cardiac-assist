@@ -3,84 +3,74 @@
   <div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="modal-edit-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" v-if="user">Edit User: {{ user.display_name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+    <ModalWindow ref="modal_edit_user" @modal-hiding="close">
+      <template v-slot:title v-if="user">Edit - {{ user.display_name }}</template>
+      <slot>
+        <div class="form-row">
 
+          <div class="col">
+            <div class="form-group">
+              <label>Display name</label>
+              <input type="text" v-model="selectedUser.display_name" class="form-control">
+            </div>
+          </div><!-- col -->
 
-            <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label>Role</label>
+              <select class="form-control" v-model="selectedUser.role">
+                <option v-for="item in roles" :value="item.key">{{ item.value }}</option>
+              </select>
+            </div>
+          </div><!-- col -->
 
-              <div class="col">
-                <div class="form-group">
-                  <label>Display name</label>
-                  <input type="text" v-model="selectedUser.display_name" class="form-control">
-                </div>
-              </div><!-- col -->
+        </div><!-- row -->
 
-              <div class="col">
-                <div class="form-group">
-                  <label>Role</label>
-                  <select class="form-control" v-model="selectedUser.role">
-                    <option v-for="item in roles" :value="item.key">{{ item.value }}</option>
-                  </select>
-                </div>
-              </div><!-- col -->
+        <hr>
+        <div class="form-row">
+          <div class="col mb-2">
 
-            </div><!-- row -->
-
-            <hr>
-            <div class="form-row">
-              <div class="col mb-2">
-
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="chk-change-password" v-model="updatePassword">
-                  <label for="chk-change-password" class="custom-control-label">Update password</label>
-                </div>
-
-              </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="chk-change-password" v-model="updatePassword">
+              <label for="chk-change-password" class="custom-control-label">Update password</label>
             </div>
 
-            <div v-if="updatePassword" class="form-row">
-              <div class="col">
-                <div class="form-group">
-                  <label>New Password</label>
-                  <input type="password" v-model="selectedUser.new_password" class="form-control">
-                </div>
-              </div><!-- col -->
-
-              <div class="col">
-                <div class="form-group">
-                  <label>Confirm new password</label>
-                  <input type="password" v-model="selectedUser.confirm_new_password" class="form-control">
-                </div>
-              </div><!-- col -->
-            </div><!-- row -->
-
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" :disabled="!isFormValid" @click="onClickUpdateUser">Save changes</button>
           </div>
         </div>
-      </div>
-    </div>
 
+        <div v-if="updatePassword" class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" v-model="selectedUser.new_password" class="form-control">
+            </div>
+          </div><!-- col -->
+
+          <div class="col">
+            <div class="form-group">
+              <label>Confirm new password</label>
+              <input type="password" v-model="selectedUser.confirm_new_password" class="form-control">
+            </div>
+          </div><!-- col -->
+        </div><!-- row -->
+      </slot>
+
+      <template v-slot:footer>
+        <button type="button" class="btn btn-primary" :disabled="!isFormValid" @click="onClickUpdateUser">Save changes</button>
+      </template>
+
+    </ModalWindow>
 
   </div>
 
 </template>
 
 <script>
+import ModalWindow from "../../_common/components/ModalWindow";
+
 export default {
   name: "EditUser",
+  components: {ModalWindow},
   props: ['user',],
 
   data() {
@@ -108,7 +98,7 @@ export default {
   watch: {
 
     /*
-    * Watch for user prop: if set, then display the moral window
+    * Watch for user prop: if set, then display the modal window
     * */
     user: function (value) {
       if (value !== undefined) {
@@ -147,22 +137,6 @@ export default {
   },
 
   mounted() {
-
-    /*
-    * Empty selected user when modal is closed.
-    * */
-    $("#modal-edit-user").on('hidden.bs.modal', (e) => {
-      this.selectedUser = {
-        id: "",
-        username: "",
-        display_name: "",
-        role: "",
-        password: ""
-      };
-
-      this.$emit('close');
-    });
-
   },
 
   methods: {
@@ -171,7 +145,7 @@ export default {
     * Show modal window
     * */
     showModal() {
-      $("#modal-edit-user").modal('show');
+      this.$refs.modal_edit_user.show();
     },
 
     onClickUpdateUser: function () {
@@ -184,7 +158,8 @@ export default {
         change_password: this.updatePassword
       }).done(r => {
 
-        console.log(r);
+        this.$refs.modal_edit_user.hide();
+        this.$emit('user-updated');
 
       }).fail(e => {
 
@@ -192,6 +167,9 @@ export default {
 
     },
 
+    close: function () {
+      this.$emit('close');
+    }
 
   },
 }

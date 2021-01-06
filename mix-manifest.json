@@ -1,11 +1,6 @@
 {
-    "/public/bookstore/homepage/home.app.js": "/public/bookstore/homepage/home.app.js",
-    "/public/bookstore/supplier/add-supplier.js": "/public/bookstore/supplier/add-supplier.js",
-    "/public/bookstore/supplier/edit-supplier.js": "/public/bookstore/supplier/edit-supplier.js",
-    "/public/bookstore/supplier/manage-suppliers.js": "/public/bookstore/supplier/manage-suppliers.js",
-    "/public/bookstore/users/manage-users.js": "/public/bookstore/users/manage-users.js",
-    "/public/bookstore/subjects/manage-subjects.js": "/public/bookstore/subjects/manage-subjects.js",
-    "/public/bookstore/books/manage-books.js": "/public/bookstore/books/manage-books.js",
-    "/public/bookstore/books-purchase/add-book-purchase.js": "/public/bookstore/books-purchase/add-book-purchase.js",
-    "/public/bookstore/books-purchase/view-all-book-purchases.js": "/public/bookstore/books-purchase/view-all-book-purchases.js"
+    "/public/app/users/manage-users.js": "/public/app/users/manage-users.js",
+    "/public/app/homepage/home.app.js": "/public/app/homepage/home.app.js",
+    "/public/app/patients/edit.app.js": "/public/app/patients/edit.app.js",
+    "/public/app/patients/list.app.js": "/public/app/patients/list.app.js"
 }

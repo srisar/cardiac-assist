@@ -1,7 +1,7 @@
-import HomepageComponent from "./HomepageComponent";
+import HomepageView from "./HomepageView";
 
-import Vue from "vue"
+import Vue from 'vue';
 
 new Vue({
-    render: h => h(HomepageComponent)
+    render: h => h(HomepageView),
 }).$mount("#app");
