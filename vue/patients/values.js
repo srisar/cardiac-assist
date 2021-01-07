@@ -4,37 +4,37 @@ export const GENDERS = {
     OTHER: 'Other',
 };
 
-export const JOBS = [
-    {key: 'PERMANENT', value: 'Permanent'},
-    {key: 'TEMPORARY', value: 'Temporary'},
-    {key: 'DAILY_BASIS', value: 'Daily Basis'},
-    {key: 'SELF_EMPLOYED', value: 'Self Employed'},
-    {key: 'JOBLESS', value: 'Jobless'},
-];
+export const JOBS = {
+    'PERMANENT': 'Permanent',
+    'TEMPORARY': 'Temporary',
+    'DAILY_BASIS': 'Daily Basis',
+    'SELF_EMPLOYED': 'Self Employed',
+    'JOBLESS': 'Jobless',
+};
 
-export const JOB_TYPES = [
-    {key: 'MANUAL', value: 'Manual'},
-    {key: 'SEDENTARY', value: 'Sedentary'},
-];
+export const JOB_TYPES = {
+    'MANUAL': 'Manual',
+    'SEDENTARY': 'Sedentary',
+};
 
-export const DS_DIVISIONS = [
-    {key: 'KORALAI_PATTU_WEST', value: 'Koralai Pattu West'},
-    {key: 'KORALAI_PATTU_NORTH', value: 'Koralai Pattu North'},
-    {key: 'KORALAI_PATTU_SOUTH', value: 'Koralai Pattu South'},
-    {key: 'KORALAI_PATTU_CENTRAL', value: 'Koralai Pattu Central'},
-    {key: 'KORALAI_PATTU', value: 'Koralai Pattu'},
-    {key: 'MANMUNAI_PATTU', value: 'Manmunai Pattu'},
-    {key: 'MANMUNAI_SOUTH_ERUVIL_PATTU', value: 'Manmunai South Eruvil Pattu'},
-    {key: 'MANMUNAI_WEST', value: 'Manmunai West'},
-    {key: 'MANMUNAI_SOUTH_WEST', value: 'Manmunai South West'},
-    {key: 'MANMUNAI_NORTH', value: 'Manmunai North'},
-    {key: 'KATTANKUDY', value: 'Kattankudy'},
-    {key: 'ERAVUR_PATTU', value: 'Manual'},
-    {key: 'ERAVUR_TOWN', value: 'Eravur Town'},
-    {key: 'PORAITHIVU_PATTU', value: 'Poraithivu Pattu'},
-];
+export const DS_DIVISIONS = {
+    'KORALAI_PATTU_WEST': 'Koralai Pattu West',
+    'KORALAI_PATTU_NORTH': 'Koralai Pattu North',
+    'KORALAI_PATTU_SOUTH': 'Koralai Pattu South',
+    'KORALAI_PATTU_CENTRAL': 'Koralai Pattu Central',
+    'KORALAI_PATTU': 'Koralai Pattu',
+    'MANMUNAI_PATTU': 'Manmunai Pattu',
+    'MANMUNAI_SOUTH_ERUVIL_PATTU': 'Manmunai South Eruvil Pattu',
+    'MANMUNAI_WEST': 'Manmunai West',
+    'MANMUNAI_SOUTH_WEST': 'Manmunai South West',
+    'MANMUNAI_NORTH': 'Manmunai North',
+    'KATTANKUDY': 'Kattankudy',
+    'ERAVUR_PATTU': 'Manual',
+    'ERAVUR_TOWN': 'Eravur Town',
+    'PORAITHIVU_PATTU': 'Poraithivu Pattu',
+};
 
-export const STATUS = [
-    {key: 'ACTIVE', value: 'Active'},
-    {key: 'Inactive', value: 'Inactive'},
-];
+export const STATUS = {
+    'ACTIVE': 'Active',
+    'Inactive': 'Inactive',
+};

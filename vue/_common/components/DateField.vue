@@ -6,25 +6,33 @@
 export default {
   name: "DateField",
   props: ['value', 'min-date', 'id'],
+
   data: function () {
-    return {
-    };
+    return {};
   },
+
+  watch: {
+    value(newValue) {
+      $(this.$refs.field_date).data('daterangepicker').setStartDate(newValue);
+      $(this.$refs.field_date).data('daterangepicker').setEndDate(newValue);
+    }
+  },
+
   mounted: function () {
     //
     $(this.$refs.field_date).daterangepicker({
-      "singleDatePicker": true,
+      singleDatePicker: true,
       autoApply: true,
-      "showDropdowns": true,
-      "locale": {
-        "format": "YYYY-MM-DD"
+      showDropdowns: true,
+      locale: {
+        format: "YYYY-MM-DD",
       },
-      "startDate": this.value,
+      startDate: this.value,
     });
 
     $(this.$refs.field_date).on("apply.daterangepicker", (event, picker) => {
-      let eDate = picker.endDate.format("YYYY-MM-DD");
-      this.$emit('input', eDate);
+      let date = picker.startDate.format("YYYY-MM-DD");
+      this.$emit('input', date);
       this.$emit('changed:date');
     });
   },

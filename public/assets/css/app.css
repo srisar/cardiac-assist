@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'clearsans', sans-serif;
     background: #F5F6F7;
 }
 
@@ -43,4 +42,9 @@ table {
 .table-row-options {
     width: 80px;
     text-align: center;
+}
+
+
+.field-age{
+    width: 80px !important;
 }

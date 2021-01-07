@@ -14,6 +14,7 @@ use App\Models\User;
     <title><?= App::getTitle() ?></title>
 
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/fonts/clear-sans/stylesheet.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/bs-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/DataTables/datatables.min.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/daterangepicker-3.1/daterangepicker.css">
@@ -52,6 +53,15 @@ use App\Models\User;
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/patients/add.php">Add a patient</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/patients/list.php">View all patients</a>
+                    </div>
+                </li><!-- end nav-item -->
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/symptoms/manage.php">Symptoms</a>
                     </div>
                 </li><!-- end nav-item -->
 

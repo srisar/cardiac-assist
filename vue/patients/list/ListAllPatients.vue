@@ -3,11 +3,9 @@
 
     <div class="container-fluid">
 
-      <div class="row">
+      <div class="row mb-3">
         <div class="col">
-          <div class="alert alert-primary">
-
-          </div>
+          <PatientsFilter @update="onFilterUpdate"></PatientsFilter>
         </div>
       </div>
 
@@ -15,7 +13,7 @@
 
         <div class="col">
 
-          <table class="table table-bordered">
+          <table class="table table-bordered data-table-full">
             <thead>
             <tr>
               <th>Full name</th>
@@ -47,18 +45,27 @@
 import DateRangeField from "../../_common/components/DateRangeField";
 import DateField from "../../_common/components/DateField";
 import ModalWindow from "../../_common/components/ModalWindow";
+import PatientsFilter from "./PatientsFilter";
 
 import * as values from '../values';
 
+const _ = require('lodash');
+
 export default {
   name: "ListAllPatients",
-  components: {DateRangeField, DateField, ModalWindow},
+  components: {DateRangeField, DateField, ModalWindow, PatientsFilter,},
 
   data() {
     return {
       patientsList: [],
-      dateRange: {startDate: moment().format('YYYY-MM-DD'), endDate: moment().format('YYYY-MM-DD')},
-      date: moment().format('YYYY-MM-DD'),
+      dataTable: null,
+
+      filters: {
+        gender: 'SELECT'
+      },
+
+      GENDERS: values.GENDERS,
+
     }
   },
 
@@ -66,6 +73,7 @@ export default {
 
   mounted() {
 
+    this.generateDataTable();
     this.fetchAllPatients();
 
   },
@@ -79,7 +87,9 @@ export default {
       $.get(`${getSiteURL()}/api/get/patients.php`)
           .done(r => {
             this.patientsList = r.data;
-            this.generateDataTable();
+
+            this.dataTable.rows.add(this.patientsList);
+            this.dataTable.draw();
 
           })
           .fail(e => {
@@ -87,11 +97,42 @@ export default {
           });
     },
 
+    onFilterUpdate: function (payload) {
 
+      $.get(`${getSiteURL()}/api/filter/patients.php`, {
+        gender: payload.gender,
+        age_start: payload.age_start,
+        age_end: payload.age_end,
+      }).done(r => {
+
+        if (r.data != null) {
+
+          this.patientsList = r.data;
+
+          this.dataTable.clear();
+          this.dataTable.rows.add(this.patientsList);
+          this.dataTable.draw();
+
+        } else {
+          this.dataTable.clear();
+          this.dataTable.draw();
+        }
+
+
+      }).fail(e => {
+
+      });
+    },
+
+
+    /**
+     * Generate the data-table from the fetched / filtered data
+     */
     generateDataTable: function () {
 
-      $("table").DataTable({
-        data: this.patientsList,
+      this.dataTable = $(".data-table-full").DataTable({
+        responsive: true,
+        autoWidth: false,
         columns: [
           {
             'data': 'first_name',
@@ -107,20 +148,25 @@ export default {
           },
           {'data': 'dob'},
           {'data': 'age'},
-          {'data': 'address'},
+          {
+            'data': 'address',
+            render: function (data, type, row) {
+              return toBrString(data);
+            }
+          },
           {'data': 'phone'},
           {'data': 'job'},
           {'data': 'job_type'},
           {
             'data': 'income',
             render: function (data, type, row) {
-              return toCurrency(data, 'LKR');
+              return toCurrency(data);
             }
           },
-        ]
+        ],
       });
-    },
 
+    },
 
 
   },

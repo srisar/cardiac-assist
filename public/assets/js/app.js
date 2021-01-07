@@ -13,3 +13,7 @@ function reload() {
 function toCurrency(value, currency = 'LKR', lang = 'en-LK') {
     return new Intl.NumberFormat(lang, {style: 'currency', currency: currency}).format(value);
 }
+
+function toBrString(text) {
+    return text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+}

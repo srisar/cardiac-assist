@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class Patient implements IModel
 {
@@ -106,4 +107,47 @@ class Patient implements IModel
     {
         // TODO: Implement delete() method.
     }
+
+
+    /**
+     * @param $gender
+     * @param $age
+     * @return Patient[]|null
+     */
+    public static function filter($gender = "ALL", $age = [0, 100]): ?array
+    {
+
+        $db = Database::instance();
+
+        if ( strtoupper($gender) == 'ALL' ) {
+            $statement = $db->prepare('select * from ' . self::TABLE .
+                ' where age between :age_start and :age_end 
+                order by first_name');
+
+            $statement->execute([
+                ':age_start' => $age[0],
+                ':age_end' => $age[1],
+            ]);
+
+
+        } else {
+
+            $statement = $db->prepare('select * from ' . self::TABLE .
+                ' where gender = :gender and age between :age_start and :age_end 
+                order by first_name');
+
+            $statement->execute([
+                ':gender' => $gender,
+                ':age_start' => $age[0],
+                ':age_end' => $age[1],
+            ]);
+        }
+
+        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if ( !empty($result) ) return $result;
+        return null;
+
+    }
+
 }

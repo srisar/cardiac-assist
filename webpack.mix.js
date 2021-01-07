@@ -16,3 +16,5 @@ mix.js('vue/homepage/home.app.js', 'public/app/homepage/').vue();
 mix.js('vue/patients/edit/edit.app.js', 'public/app/patients/').vue();
 mix.js('vue/patients/list/list.app.js', 'public/app/patients/').vue();
 
+mix.js('vue/symptoms/manage.app.js', 'public/app/symptoms/').vue();
+
