@@ -170,9 +170,57 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ListSymptoms.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichViewer.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichViewer.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "RichViewer",
+  props: ['value'],
+  data: function data() {
+    return {
+      editor: undefined,
+      content: this.value
+    };
+  },
+  watch: {
+    value: function value(newValue) {
+      this.content = newValue;
+      this.editor.setData(this.content);
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    ClassicEditor.create(this.$refs.richViewer).then(function (editor) {
+      _this.editor = editor;
+      _this.editor.isReadOnly = true;
+      if (_this.content !== undefined) _this.editor.setData(_this.content);
+    })["catch"](function (error) {
+      console.log(error.stack);
+    });
+  },
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ListDiseases.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ListSymptoms.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ListDiseases.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -181,12 +229,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _SelectedSymptomModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectedSymptomModal */ "./vue/symptoms/SelectedSymptomModal.vue");
-//
-//
-//
-//
-//
+/* harmony import */ var _SelectedDiseaseModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectedDiseaseModal */ "./vue/diseases/SelectedDiseaseModal.vue");
 //
 //
 //
@@ -216,15 +259,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ListSymptoms",
+  name: "ListDiseases",
   components: {
-    SelectedSymptomModal: _SelectedSymptomModal__WEBPACK_IMPORTED_MODULE_0__.default
+    SelectedDiseaseModal: _SelectedDiseaseModal__WEBPACK_IMPORTED_MODULE_0__.default
   },
   props: ['eventBus'],
   data: function data() {
     return {
-      symptomsList: [],
-      selectedSymptom: null
+      diseasesList: []
     };
   },
   computed: {//
@@ -234,11 +276,8 @@ __webpack_require__.r(__webpack_exports__);
 
     //
     this.fetchAll();
-    this.eventBus.$on('symptom-saved', function () {
+    this.eventBus.$on('disease-save', function () {
       _this.fetchAll();
-    });
-    this.eventBus.$on('edit-modal-close', function () {
-      _this.selectedSymptom = null;
     });
   },
   methods: {
@@ -250,27 +289,23 @@ __webpack_require__.r(__webpack_exports__);
     fetchAll: function fetchAll() {
       var _this2 = this;
 
-      $.get("".concat(getSiteURL(), "/api/get/symptoms.php")).done(function (r) {
-        _this2.symptomsList = r.data;
+      $.get("".concat(getSiteURL(), "/api/get/diseases.php")).done(function (r) {
+        _this2.diseasesList = r.data;
       }).fail(function (e) {
-        console.log("Error fetching symptoms");
+        console.log("Error fetching diseases");
       });
     },
-    viewSelectedSymptom: function viewSelectedSymptom(symptom) {
-      this.selectedSymptom = symptom;
-      this.eventBus.$emit('edit-modal-open');
-    },
-    onCloseViewSelectedSymptom: function onCloseViewSelectedSymptom() {
-      this.selectedSymptom = null;
+    viewSelectedDisease: function viewSelectedDisease(disease) {
+      this.eventBus.$emit('open-view-disease-modal', disease);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ManageDiseases.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ManageDiseases.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -279,11 +314,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _SaveSymptom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveSymptom */ "./vue/symptoms/SaveSymptom.vue");
-/* harmony import */ var _ListSymptoms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListSymptoms */ "./vue/symptoms/ListSymptoms.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-//
-//
+/* harmony import */ var _SaveDisease__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveDisease */ "./vue/diseases/SaveDisease.vue");
+/* harmony import */ var _ListDiseases__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListDiseases */ "./vue/diseases/ListDiseases.vue");
 //
 //
 //
@@ -308,13 +341,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ManageSymptoms",
+  name: "ManageDiseases",
   components: {
-    SaveSymptom: _SaveSymptom__WEBPACK_IMPORTED_MODULE_0__.default,
-    ListSymptoms: _ListSymptoms__WEBPACK_IMPORTED_MODULE_1__.default
+    SaveDisease: _SaveDisease__WEBPACK_IMPORTED_MODULE_0__.default,
+    ListDiseases: _ListDiseases__WEBPACK_IMPORTED_MODULE_1__.default
   },
+  props: [],
   data: function data() {
     return {
+      //
       eventBus: new vue__WEBPACK_IMPORTED_MODULE_2__.default({})
     };
   },
@@ -328,9 +363,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SaveSymptom.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SaveDisease.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SaveSymptom.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SaveDisease.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -378,17 +413,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "SaveSymptom",
+  name: "SaveDisease",
   components: {
     RichEditor: _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_0__.default
   },
   props: ['eventBus'],
   data: function data() {
     return {
-      symptom: {
-        symptom_name: "",
+      disease: {
+        disease: "",
+        disease_code: "",
         description: ""
       }
     };
@@ -402,17 +445,21 @@ __webpack_require__.r(__webpack_exports__);
     onClickSave: function onClickSave() {
       var _this = this;
 
-      $.post("".concat(getSiteURL(), "/api/save/symptom.php"), {
-        symptom_name: this.symptom.symptom_name,
-        description: this.symptom.description
+      $.post("".concat(getSiteURL(), "/api/save/disease.php"), {
+        disease: this.disease.disease,
+        disease_code: this.disease.disease_code,
+        description: this.disease.description
       }).done(function (r) {
         console.log(r);
-        _this.symptom.symptom_name = "";
-        _this.symptom.description = "";
+        _this.disease = {
+          disease: "",
+          disease_code: "",
+          description: ""
+        };
 
         _this.$refs.richEditor.cleanText();
 
-        _this.eventBus.$emit('symptom-saved');
+        _this.eventBus.$emit('disease-save');
       }).fail(function (e) {});
     }
   }
@@ -420,9 +467,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SelectedSymptomModal.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SelectedDiseaseModal.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SelectedSymptomModal.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SelectedDiseaseModal.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -432,7 +479,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_common/components/RichEditor */ "./vue/_common/components/RichEditor.vue");
-/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_components_RichViewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_common/components/RichViewer */ "./vue/_common/components/RichViewer.vue");
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
 //
 //
 //
@@ -480,50 +528,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "SelectedSymptomModal",
+  name: "SelectedDiseaseModal",
   components: {
-    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__.default,
-    RichEditor: _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_0__.default
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_2__.default,
+    RichEditor: _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_0__.default,
+    RichViewer: _common_components_RichViewer__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  props: ['symptom', 'eventBus'],
+  props: ['eventBus'],
   data: function data() {
     return {
-      selectedSymptom: {
+      selectedDisease: {
         id: "",
-        symptom_name: "",
+        disease: "",
+        disease_code: "",
         description: ""
       },
       editable: false,
       buttonText: 'Edit'
     };
   },
-  watch: {
-    symptom: function symptom(newValue) {
-      if (newValue != null) {
-        this.selectedSymptom = newValue;
-      }
-    }
-  },
+  watch: {},
   computed: {//
   },
   mounted: function mounted() {
     var _this = this;
 
     //
-    this.eventBus.$on('edit-modal-open', function () {
+    this.eventBus.$on('open-view-disease-modal', function (disease) {
+      _this.selectedDisease = disease;
+
       _this.$refs.modalWindow.show();
     });
   },
   methods: {
     //
     onModalHide: function onModalHide() {
-      this.cleanSelectedSymptom();
+      this.cleanSelectedDisease();
       this.editable = false;
       this.buttonText = 'Edit';
-      this.eventBus.$emit('edit-modal-close');
     },
     onClickEdit: function onClickEdit() {
       this.editable = !this.editable;
@@ -532,22 +588,24 @@ __webpack_require__.r(__webpack_exports__);
     onClickUpdate: function onClickUpdate() {
       var _this2 = this;
 
-      $.post("".concat(getSiteURL(), "/api/update/symptom.php"), {
-        id: this.selectedSymptom.id,
-        symptom_name: this.selectedSymptom.symptom_name,
-        description: this.selectedSymptom.description
+      $.post("".concat(getSiteURL(), "/api/update/disease.php"), {
+        id: this.selectedDisease.id,
+        disease: this.selectedDisease.disease,
+        disease_code: this.selectedDisease.disease_code,
+        description: this.selectedDisease.description
       }).done(function (r) {
-        alert(_this2.symptom.symptom_name + ' updated');
+        alert(_this2.selectedDisease.disease + ' updated');
       }).fail(function (e) {});
     },
 
     /*
     * PRIVATE METHODS
     * */
-    cleanSelectedSymptom: function cleanSelectedSymptom() {
-      this.selectedSymptom = {
+    cleanSelectedDisease: function cleanSelectedDisease() {
+      this.selectedDisease = {
         id: "",
-        symptom_name: "",
+        disease: "",
+        disease_code: "",
         description: ""
       };
     }
@@ -556,23 +614,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/symptoms/manage.app.js":
+/***/ "./vue/diseases/manage.app.js":
 /*!************************************!*\
-  !*** ./vue/symptoms/manage.app.js ***!
+  !*** ./vue/diseases/manage.app.js ***!
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _ManageSymptoms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSymptoms */ "./vue/symptoms/ManageSymptoms.vue");
+/* harmony import */ var _ManageDiseases__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageDiseases */ "./vue/diseases/ManageDiseases.vue");
 
 
 new vue__WEBPACK_IMPORTED_MODULE_1__.default({
   render: function render(h) {
-    return h(_ManageSymptoms__WEBPACK_IMPORTED_MODULE_0__.default);
+    return h(_ManageDiseases__WEBPACK_IMPORTED_MODULE_0__.default);
   }
-}).$mount('#app');
+}).$mount("#app");
 
 /***/ }),
 
@@ -18229,126 +18287,9 @@ component.options.__file = "vue/_common/components/RichEditor.vue"
 
 /***/ }),
 
-/***/ "./vue/symptoms/ListSymptoms.vue":
-/*!***************************************!*\
-  !*** ./vue/symptoms/ListSymptoms.vue ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _ListSymptoms_vue_vue_type_template_id_f6856534_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true& */ "./vue/symptoms/ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true&");
-/* harmony import */ var _ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListSymptoms.vue?vue&type=script&lang=js& */ "./vue/symptoms/ListSymptoms.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ListSymptoms_vue_vue_type_template_id_f6856534_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ListSymptoms_vue_vue_type_template_id_f6856534_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "f6856534",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/symptoms/ListSymptoms.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./vue/symptoms/ManageSymptoms.vue":
-/*!*****************************************!*\
-  !*** ./vue/symptoms/ManageSymptoms.vue ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& */ "./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&");
-/* harmony import */ var _ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageSymptoms.vue?vue&type=script&lang=js& */ "./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "42dfb62d",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/symptoms/ManageSymptoms.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./vue/symptoms/SaveSymptom.vue":
-/*!**************************************!*\
-  !*** ./vue/symptoms/SaveSymptom.vue ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _SaveSymptom_vue_vue_type_template_id_182f85c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true& */ "./vue/symptoms/SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true&");
-/* harmony import */ var _SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SaveSymptom.vue?vue&type=script&lang=js& */ "./vue/symptoms/SaveSymptom.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SaveSymptom_vue_vue_type_template_id_182f85c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SaveSymptom_vue_vue_type_template_id_182f85c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "182f85c4",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/symptoms/SaveSymptom.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./vue/symptoms/SelectedSymptomModal.vue":
+/***/ "./vue/_common/components/RichViewer.vue":
 /*!***********************************************!*\
-  !*** ./vue/symptoms/SelectedSymptomModal.vue ***!
+  !*** ./vue/_common/components/RichViewer.vue ***!
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18357,8 +18298,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _SelectedSymptomModal_vue_vue_type_template_id_7d46b9fd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true& */ "./vue/symptoms/SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true&");
-/* harmony import */ var _SelectedSymptomModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectedSymptomModal.vue?vue&type=script&lang=js& */ "./vue/symptoms/SelectedSymptomModal.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RichViewer_vue_vue_type_template_id_5ae7fa9b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true& */ "./vue/_common/components/RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true&");
+/* harmony import */ var _RichViewer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RichViewer.vue?vue&type=script&lang=js& */ "./vue/_common/components/RichViewer.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _RichViewer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RichViewer_vue_vue_type_template_id_5ae7fa9b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RichViewer_vue_vue_type_template_id_5ae7fa9b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "5ae7fa9b",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/_common/components/RichViewer.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/diseases/ListDiseases.vue":
+/*!***************************************!*\
+  !*** ./vue/diseases/ListDiseases.vue ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _ListDiseases_vue_vue_type_template_id_33374af4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListDiseases.vue?vue&type=template&id=33374af4&scoped=true& */ "./vue/diseases/ListDiseases.vue?vue&type=template&id=33374af4&scoped=true&");
+/* harmony import */ var _ListDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListDiseases.vue?vue&type=script&lang=js& */ "./vue/diseases/ListDiseases.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -18368,19 +18348,136 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _SelectedSymptomModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SelectedSymptomModal_vue_vue_type_template_id_7d46b9fd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SelectedSymptomModal_vue_vue_type_template_id_7d46b9fd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ListDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ListDiseases_vue_vue_type_template_id_33374af4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ListDiseases_vue_vue_type_template_id_33374af4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "7d46b9fd",
+  "33374af4",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/symptoms/SelectedSymptomModal.vue"
+component.options.__file = "vue/diseases/ListDiseases.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/diseases/ManageDiseases.vue":
+/*!*****************************************!*\
+  !*** ./vue/diseases/ManageDiseases.vue ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _ManageDiseases_vue_vue_type_template_id_28e82ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true& */ "./vue/diseases/ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true&");
+/* harmony import */ var _ManageDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageDiseases.vue?vue&type=script&lang=js& */ "./vue/diseases/ManageDiseases.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _ManageDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ManageDiseases_vue_vue_type_template_id_28e82ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ManageDiseases_vue_vue_type_template_id_28e82ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "28e82ae6",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/diseases/ManageDiseases.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/diseases/SaveDisease.vue":
+/*!**************************************!*\
+  !*** ./vue/diseases/SaveDisease.vue ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _SaveDisease_vue_vue_type_template_id_289b0bfe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true& */ "./vue/diseases/SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true&");
+/* harmony import */ var _SaveDisease_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SaveDisease.vue?vue&type=script&lang=js& */ "./vue/diseases/SaveDisease.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _SaveDisease_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SaveDisease_vue_vue_type_template_id_289b0bfe_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SaveDisease_vue_vue_type_template_id_289b0bfe_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "289b0bfe",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/diseases/SaveDisease.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/diseases/SelectedDiseaseModal.vue":
+/*!***********************************************!*\
+  !*** ./vue/diseases/SelectedDiseaseModal.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _SelectedDiseaseModal_vue_vue_type_template_id_4ddc759d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true& */ "./vue/diseases/SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true&");
+/* harmony import */ var _SelectedDiseaseModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectedDiseaseModal.vue?vue&type=script&lang=js& */ "./vue/diseases/SelectedDiseaseModal.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _SelectedDiseaseModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SelectedDiseaseModal_vue_vue_type_template_id_4ddc759d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SelectedDiseaseModal_vue_vue_type_template_id_4ddc759d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "4ddc759d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/diseases/SelectedDiseaseModal.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -18417,57 +18514,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/symptoms/ListSymptoms.vue?vue&type=script&lang=js&":
-/*!****************************************************************!*\
-  !*** ./vue/symptoms/ListSymptoms.vue?vue&type=script&lang=js& ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListSymptoms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ListSymptoms.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&":
-/*!******************************************************************!*\
-  !*** ./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js& ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageSymptoms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/symptoms/SaveSymptom.vue?vue&type=script&lang=js&":
-/*!***************************************************************!*\
-  !*** ./vue/symptoms/SaveSymptom.vue?vue&type=script&lang=js& ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveSymptom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SaveSymptom.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/symptoms/SelectedSymptomModal.vue?vue&type=script&lang=js&":
+/***/ "./vue/_common/components/RichViewer.vue?vue&type=script&lang=js&":
 /*!************************************************************************!*\
-  !*** ./vue/symptoms/SelectedSymptomModal.vue?vue&type=script&lang=js& ***!
+  !*** ./vue/_common/components/RichViewer.vue?vue&type=script&lang=js& ***!
   \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18476,8 +18525,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedSymptomModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedSymptomModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SelectedSymptomModal.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedSymptomModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RichViewer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RichViewer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichViewer.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RichViewer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/diseases/ListDiseases.vue?vue&type=script&lang=js&":
+/*!****************************************************************!*\
+  !*** ./vue/diseases/ListDiseases.vue?vue&type=script&lang=js& ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListDiseases.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ListDiseases.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/diseases/ManageDiseases.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./vue/diseases/ManageDiseases.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageDiseases.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ManageDiseases.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDiseases_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/diseases/SaveDisease.vue?vue&type=script&lang=js&":
+/*!***************************************************************!*\
+  !*** ./vue/diseases/SaveDisease.vue?vue&type=script&lang=js& ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDisease_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveDisease.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SaveDisease.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDisease_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/diseases/SelectedDiseaseModal.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./vue/diseases/SelectedDiseaseModal.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedDiseaseModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedDiseaseModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SelectedDiseaseModal.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedDiseaseModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -18528,70 +18641,87 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/symptoms/ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true&":
-/*!**********************************************************************************!*\
-  !*** ./vue/symptoms/ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true& ***!
-  \**********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_f6856534_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_f6856534_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_f6856534_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&":
-/*!************************************************************************************!*\
-  !*** ./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& ***!
-  \************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./vue/symptoms/SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true&":
-/*!*********************************************************************************!*\
-  !*** ./vue/symptoms/SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true& ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_182f85c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_182f85c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_182f85c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./vue/symptoms/SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true&":
+/***/ "./vue/_common/components/RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true&":
 /*!******************************************************************************************!*\
-  !*** ./vue/symptoms/SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true& ***!
+  !*** ./vue/_common/components/RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true& ***!
   \******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedSymptomModal_vue_vue_type_template_id_7d46b9fd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedSymptomModal_vue_vue_type_template_id_7d46b9fd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RichViewer_vue_vue_type_template_id_5ae7fa9b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RichViewer_vue_vue_type_template_id_5ae7fa9b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedSymptomModal_vue_vue_type_template_id_7d46b9fd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RichViewer_vue_vue_type_template_id_5ae7fa9b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/diseases/ListDiseases.vue?vue&type=template&id=33374af4&scoped=true&":
+/*!**********************************************************************************!*\
+  !*** ./vue/diseases/ListDiseases.vue?vue&type=template&id=33374af4&scoped=true& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDiseases_vue_vue_type_template_id_33374af4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDiseases_vue_vue_type_template_id_33374af4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDiseases_vue_vue_type_template_id_33374af4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListDiseases.vue?vue&type=template&id=33374af4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ListDiseases.vue?vue&type=template&id=33374af4&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/diseases/ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true&":
+/*!************************************************************************************!*\
+  !*** ./vue/diseases/ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDiseases_vue_vue_type_template_id_28e82ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDiseases_vue_vue_type_template_id_28e82ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDiseases_vue_vue_type_template_id_28e82ae6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/diseases/SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true&":
+/*!*********************************************************************************!*\
+  !*** ./vue/diseases/SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDisease_vue_vue_type_template_id_289b0bfe_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDisease_vue_vue_type_template_id_289b0bfe_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDisease_vue_vue_type_template_id_289b0bfe_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/diseases/SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./vue/diseases/SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedDiseaseModal_vue_vue_type_template_id_4ddc759d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedDiseaseModal_vue_vue_type_template_id_4ddc759d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedDiseaseModal_vue_vue_type_template_id_4ddc759d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true&");
 
 
 /***/ }),
@@ -18703,9 +18833,36 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichViewer.vue?vue&type=template&id=5ae7fa9b&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "ck_editor" }, [
+    _c("textarea", { ref: "richViewer" })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ListDiseases.vue?vue&type=template&id=33374af4&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ListSymptoms.vue?vue&type=template&id=f6856534&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ListDiseases.vue?vue&type=template&id=33374af4&scoped=true& ***!
   \*************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18723,18 +18880,16 @@ var render = function() {
     "div",
     [
       _c("div", { staticClass: "card shadow shadow-sm" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("Symptoms")]),
+        _c("div", { staticClass: "card-header" }, [_vm._v("Diseases")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body p-2" }, [
           _c(
             "table",
             { staticClass: "table table-sm table-bordered table-striped" },
             [
-              _vm._m(0),
-              _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.symptomsList, function(item, index) {
+                _vm._l(_vm.diseasesList, function(item, index) {
                   return _c("tr", [
                     _c("td", [
                       _c(
@@ -18743,11 +18898,11 @@ var render = function() {
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
-                              return _vm.viewSelectedSymptom(item)
+                              return _vm.viewSelectedDisease(item)
                             }
                           }
                         },
-                        [_vm._v(_vm._s(item.symptom_name))]
+                        [_vm._v(_vm._s(item.disease))]
                       )
                     ])
                   ])
@@ -18759,31 +18914,21 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("SelectedSymptomModal", {
-        attrs: { symptom: _vm.selectedSymptom, "event-bus": _vm.eventBus },
-        on: { close: _vm.onCloseViewSelectedSymptom }
-      })
+      _c("SelectedDiseaseModal", { attrs: { "event-bus": _vm.eventBus } })
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [_c("tr", [_c("th", [_vm._v("Symptom")])])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/ManageDiseases.vue?vue&type=template&id=28e82ae6&scoped=true& ***!
   \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18803,7 +18948,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "col-12 col-md-8 mb-2" },
-          [_c("SaveSymptom", { attrs: { "event-bus": _vm.eventBus } })],
+          [_c("SaveDisease", { attrs: { "event-bus": _vm.eventBus } })],
           1
         ),
         _vm._v(" "),
@@ -18811,8 +18956,8 @@ var render = function() {
           "div",
           { staticClass: "col-12 col-md-4" },
           [
-            _c("ListSymptoms", {
-              ref: "listSymptom",
+            _c("ListDiseases", {
+              ref: "listDiseases",
               attrs: { "event-bus": _vm.eventBus }
             })
           ],
@@ -18829,9 +18974,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SaveSymptom.vue?vue&type=template&id=182f85c4&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SaveDisease.vue?vue&type=template&id=289b0bfe&scoped=true& ***!
   \************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18847,35 +18992,67 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "card shadow shadow-sm" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("Add a symptom")]),
+      _c("div", { staticClass: "card-header" }, [_vm._v("Add a disease")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "form-row" }, [
           _c("div", { staticClass: "col" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Symptom name")]),
+              _c("label", [_vm._v("Disease name")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model.trim",
-                    value: _vm.symptom.symptom_name,
-                    expression: "symptom.symptom_name",
+                    value: _vm.disease.disease,
+                    expression: "disease.disease",
                     modifiers: { trim: true }
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text" },
-                domProps: { value: _vm.symptom.symptom_name },
+                domProps: { value: _vm.disease.disease },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.disease, "disease", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Disease code")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.disease.disease_code,
+                    expression: "disease.disease_code",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.disease.disease_code },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
                     _vm.$set(
-                      _vm.symptom,
-                      "symptom_name",
+                      _vm.disease,
+                      "disease_code",
                       $event.target.value.trim()
                     )
                   },
@@ -18896,11 +19073,11 @@ var render = function() {
               _c("RichEditor", {
                 ref: "richEditor",
                 model: {
-                  value: _vm.symptom.description,
+                  value: _vm.disease.description,
                   callback: function($$v) {
-                    _vm.$set(_vm.symptom, "description", $$v)
+                    _vm.$set(_vm.disease, "description", $$v)
                   },
-                  expression: "symptom.description"
+                  expression: "disease.description"
                 }
               })
             ],
@@ -18931,9 +19108,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/SelectedSymptomModal.vue?vue&type=template&id=7d46b9fd&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/diseases/SelectedDiseaseModal.vue?vue&type=template&id=4ddc759d&scoped=true& ***!
   \*********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -18972,8 +19149,10 @@ var render = function() {
                     ),
                     _vm._v(
                       "\n      " +
-                        _vm._s(_vm.selectedSymptom.symptom_name) +
-                        "\n    "
+                        _vm._s(_vm.selectedDisease.disease) +
+                        " (" +
+                        _vm._s(_vm.selectedDisease.disease_code) +
+                        ")\n    "
                     )
                   ]
                 },
@@ -19011,39 +19190,75 @@ var render = function() {
           _vm._t("default", [
             !_vm.editable
               ? _c("div", [
-                  _c("div", {
-                    staticClass: "content-description",
-                    domProps: {
-                      innerHTML: _vm._s(_vm.selectedSymptom.description)
-                    }
-                  })
+                  _c(
+                    "div",
+                    { staticClass: "content-description" },
+                    [
+                      _c("RichViewer", {
+                        attrs: { value: _vm.selectedDisease.description }
+                      })
+                    ],
+                    1
+                  )
                 ])
               : _c("div", [
                   _c("div", { staticClass: "form-row" }, [
                     _c("div", { staticClass: "col" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("Symptom name")]),
+                        _c("label", [_vm._v("Disease name")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.selectedSymptom.symptom_name,
-                              expression: "selectedSymptom.symptom_name"
+                              value: _vm.selectedDisease.disease,
+                              expression: "selectedDisease.disease"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.selectedSymptom.symptom_name },
+                          domProps: { value: _vm.selectedDisease.disease },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                _vm.selectedSymptom,
-                                "symptom_name",
+                                _vm.selectedDisease,
+                                "disease",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Disease code")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedDisease.disease_code,
+                              expression: "selectedDisease.disease_code"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.selectedDisease.disease_code },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.selectedDisease,
+                                "disease_code",
                                 $event.target.value
                               )
                             }
@@ -19063,15 +19278,15 @@ var render = function() {
                           _vm._v(" "),
                           _c("RichEditor", {
                             model: {
-                              value: _vm.selectedSymptom.description,
+                              value: _vm.selectedDisease.description,
                               callback: function($$v) {
                                 _vm.$set(
-                                  _vm.selectedSymptom,
+                                  _vm.selectedDisease,
                                   "description",
                                   $$v
                                 )
                               },
-                              expression: "selectedSymptom.description"
+                              expression: "selectedDisease.description"
                             }
                           })
                         ],
@@ -31296,7 +31511,7 @@ Vue.compile = compileToFunctions;
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	__webpack_require__("./vue/symptoms/manage.app.js");
+/******/ 	__webpack_require__("./vue/diseases/manage.app.js");
 /******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;

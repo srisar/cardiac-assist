@@ -1,7 +1,9 @@
+
 body {
-  font-family: "clearsans", sans-serif;
+  font-family: 'clearsans', sans-serif;
   background: #F5F6F7;
 }
+
 
 .card {
   /*box-shadow: 0 0 20px #858585;*/
@@ -11,12 +13,12 @@ body {
   font-size: 0.9rem;
   font-weight: bold;
   text-align: center;
-  padding: 0.5rem !important;
+  padding: .5rem !important;
   text-transform: uppercase;
 }
 
 .card-body {
-  padding: 0.5rem !important;
+  padding: .5rem !important;
 }
 
 .modal-title {
@@ -29,28 +31,39 @@ body {
 }
 
 .btn-tiny {
-  padding: 0.05rem 0.25rem;
-  font-size: 0.675rem;
+  padding: .05rem .25rem;
+  font-size: .675rem;
   line-height: 1.5;
-  border-radius: 0.2rem;
+  border-radius: .2rem;
+
 }
 
 table {
   background-color: white;
 }
 
+
 .table-row-options {
   width: 80px;
   text-align: center;
 }
 
+
 .field-age {
   width: 80px !important;
 }
 
+
 /*
 BOOTSTRAP MODAL FULLSCREEN OPTION
 */
-.content-description .image img {
-  max-width: 100%;
+
+
+.content-description {
+  .image img{
+    max-width: 100%;
+  }
+
 }
+
+

@@ -7,7 +7,7 @@
        :aria-labelledby="id"
        aria-hidden="true">
 
-    <div class="modal-dialog" :class="{'expanded': isExpanded}">
+    <div class="modal-dialog modal-lg" :class="{'expanded': isExpanded}">
       <div class="modal-content">
 
         <div class="modal-header p-2">
@@ -47,14 +47,12 @@
 export default {
   name: "ModalWindow",
 
-  props: {
-    id: String,
-  },
+  props: ['id', 'expanded'],
 
   data: function () {
     return {
       isVisible: false,
-      isExpanded: false,
+      isExpanded: this.expanded,
 
       icons: {
         expandIcon: 'bi-arrows-angle-expand',
@@ -68,6 +66,13 @@ export default {
   },
 
   computed: {},
+
+  mounted() {
+    //
+    if(this.expanded){
+      this.resizeButtonIcon = 'bi-arrows-angle-contract';
+    }
+  },
 
   methods: {
 

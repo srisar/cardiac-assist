@@ -11,7 +11,7 @@ const _ = require('lodash');
 export default {
   name: "RichEditor",
 
-  props: ['value'],
+  props: ['value', 'readonly'],
 
   data: function () {
     return {
@@ -19,11 +19,9 @@ export default {
     }
   },
 
-  // watch: {
-  //   value: function (oldValue, newValue) {
-  //     if (this.editorInstance !== undefined) this.editorInstance.setData(this.value);
-  //   }
-  // },
+  computed: {
+
+  },
 
   mounted: function () {
     ClassicEditor.create(this.$refs.richEditor, {
@@ -46,7 +44,6 @@ export default {
           'mediaEmbed',
           'undo',
           'redo',
-
         ]
       },
       language: 'en',
@@ -68,10 +65,11 @@ export default {
       ckfinder: {
         uploadUrl: `${getSiteURL()}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json`,
         openerMethod: 'modal'
-      }
+      },
     })
         .then(editor => {
           this.editorInstance = editor;
+          this.editorInstance.isReadOnly = this.readOnly;
 
           if (this.value !== undefined) editor.setData(this.value);
 
@@ -99,7 +97,11 @@ export default {
       if (data !== null) this.editorInstance.setData(data);
       else this.editorInstance.setData('');
 
-    }
+    },
+
+    cleanText: function () {
+      this.editorInstance.setData('');
+    },
 
   }
 }

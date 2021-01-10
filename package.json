@@ -28,6 +28,8 @@
     "luxon": "^1.25.0",
     "node-sass": "^5.0.0",
     "postcss": "^8.2.2",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.32.2",
     "sass-loader": "^10.1.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.6",

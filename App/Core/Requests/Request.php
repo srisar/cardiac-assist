@@ -93,4 +93,13 @@ class Request
         return null;
     }
 
+    /**
+     * @param string $key
+     * @return string|null
+     */
+    public static function getAsRawString(string $key): ?string
+    {
+        return self::getParam($key);
+    }
+
 }
