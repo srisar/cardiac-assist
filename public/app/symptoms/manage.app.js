@@ -133,10 +133,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/ManageSymptoms.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/ManageSymptoms.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -144,10 +144,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _components_SaveSymptom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/SaveSymptom */ "./vue/symptoms/components/SaveSymptom.vue");
-/* harmony import */ var _components_EditSymptom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/EditSymptom */ "./vue/symptoms/components/EditSymptom.vue");
-/* harmony import */ var _components_ListSymptoms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ListSymptoms */ "./vue/symptoms/components/ListSymptoms.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./vue/symptoms/store.js");
+/* harmony import */ var _components_SaveSymptom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/SaveSymptom */ "./vue/symptoms/manage/components/SaveSymptom.vue");
+/* harmony import */ var _components_EditSymptom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/EditSymptom */ "./vue/symptoms/manage/components/EditSymptom.vue");
+/* harmony import */ var _components_ListSymptoms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ListSymptoms */ "./vue/symptoms/manage/components/ListSymptoms.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./vue/symptoms/manage/store.js");
 //
 //
 //
@@ -204,10 +204,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/EditSymptom.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/EditSymptom.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/EditSymptom.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/EditSymptom.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -215,8 +215,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _common_components_RichViewer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/RichViewer */ "./vue/_common/components/RichViewer.vue");
-/* harmony import */ var _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../_common/components/RichEditor */ "./vue/_common/components/RichEditor.vue");
+/* harmony import */ var _common_components_RichViewer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/components/RichViewer */ "./vue/_common/components/RichViewer.vue");
+/* harmony import */ var _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/RichEditor */ "./vue/_common/components/RichEditor.vue");
 //
 //
 //
@@ -324,10 +324,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/ListSymptoms.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/ListSymptoms.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -409,10 +409,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/SaveSymptom.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/SaveSymptom.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -420,7 +420,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/RichEditor */ "./vue/_common/components/RichEditor.vue");
+/* harmony import */ var _common_components_RichEditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/components/RichEditor */ "./vue/_common/components/RichEditor.vue");
 //
 //
 //
@@ -498,10 +498,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/symptoms/manage.app.js":
-/*!************************************!*\
-  !*** ./vue/symptoms/manage.app.js ***!
-  \************************************/
+/***/ "./vue/symptoms/manage/manage.app.js":
+/*!*******************************************!*\
+  !*** ./vue/symptoms/manage/manage.app.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -509,7 +509,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.common.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _ManageSymptoms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSymptoms */ "./vue/symptoms/ManageSymptoms.vue");
+/* harmony import */ var _ManageSymptoms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSymptoms */ "./vue/symptoms/manage/ManageSymptoms.vue");
 
 
 
@@ -522,10 +522,10 @@ new vue__WEBPACK_IMPORTED_MODULE_1__.default({
 
 /***/ }),
 
-/***/ "./vue/symptoms/store.js":
-/*!*******************************!*\
-  !*** ./vue/symptoms/store.js ***!
-  \*******************************/
+/***/ "./vue/symptoms/manage/store.js":
+/*!**************************************!*\
+  !*** ./vue/symptoms/manage/store.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17872,10 +17872,10 @@ component.options.__file = "vue/_common/components/RichViewer.vue"
 
 /***/ }),
 
-/***/ "./vue/symptoms/ManageSymptoms.vue":
-/*!*****************************************!*\
-  !*** ./vue/symptoms/ManageSymptoms.vue ***!
-  \*****************************************/
+/***/ "./vue/symptoms/manage/ManageSymptoms.vue":
+/*!************************************************!*\
+  !*** ./vue/symptoms/manage/ManageSymptoms.vue ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17883,9 +17883,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& */ "./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&");
-/* harmony import */ var _ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageSymptoms.vue?vue&type=script&lang=js& */ "./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ManageSymptoms_vue_vue_type_template_id_10b5736a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true& */ "./vue/symptoms/manage/ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true&");
+/* harmony import */ var _ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageSymptoms.vue?vue&type=script&lang=js& */ "./vue/symptoms/manage/ManageSymptoms.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -17895,26 +17895,26 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ManageSymptoms_vue_vue_type_template_id_10b5736a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ManageSymptoms_vue_vue_type_template_id_10b5736a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "42dfb62d",
+  "10b5736a",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/symptoms/ManageSymptoms.vue"
+component.options.__file = "vue/symptoms/manage/ManageSymptoms.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/EditSymptom.vue":
-/*!*************************************************!*\
-  !*** ./vue/symptoms/components/EditSymptom.vue ***!
-  \*************************************************/
+/***/ "./vue/symptoms/manage/components/EditSymptom.vue":
+/*!********************************************************!*\
+  !*** ./vue/symptoms/manage/components/EditSymptom.vue ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17922,9 +17922,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _EditSymptom_vue_vue_type_template_id_6a55abc4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true& */ "./vue/symptoms/components/EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true&");
-/* harmony import */ var _EditSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSymptom.vue?vue&type=script&lang=js& */ "./vue/symptoms/components/EditSymptom.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _EditSymptom_vue_vue_type_template_id_68903de2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditSymptom.vue?vue&type=template&id=68903de2&scoped=true& */ "./vue/symptoms/manage/components/EditSymptom.vue?vue&type=template&id=68903de2&scoped=true&");
+/* harmony import */ var _EditSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditSymptom.vue?vue&type=script&lang=js& */ "./vue/symptoms/manage/components/EditSymptom.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -17934,26 +17934,26 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _EditSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _EditSymptom_vue_vue_type_template_id_6a55abc4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _EditSymptom_vue_vue_type_template_id_6a55abc4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _EditSymptom_vue_vue_type_template_id_68903de2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EditSymptom_vue_vue_type_template_id_68903de2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "6a55abc4",
+  "68903de2",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/symptoms/components/EditSymptom.vue"
+component.options.__file = "vue/symptoms/manage/components/EditSymptom.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/ListSymptoms.vue":
-/*!**************************************************!*\
-  !*** ./vue/symptoms/components/ListSymptoms.vue ***!
-  \**************************************************/
+/***/ "./vue/symptoms/manage/components/ListSymptoms.vue":
+/*!*********************************************************!*\
+  !*** ./vue/symptoms/manage/components/ListSymptoms.vue ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17961,9 +17961,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _ListSymptoms_vue_vue_type_template_id_ba091b1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true& */ "./vue/symptoms/components/ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true&");
-/* harmony import */ var _ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListSymptoms.vue?vue&type=script&lang=js& */ "./vue/symptoms/components/ListSymptoms.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ListSymptoms_vue_vue_type_template_id_6c132415_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true& */ "./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true&");
+/* harmony import */ var _ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListSymptoms.vue?vue&type=script&lang=js& */ "./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -17973,26 +17973,26 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ListSymptoms_vue_vue_type_template_id_ba091b1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ListSymptoms_vue_vue_type_template_id_ba091b1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ListSymptoms_vue_vue_type_template_id_6c132415_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ListSymptoms_vue_vue_type_template_id_6c132415_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "ba091b1a",
+  "6c132415",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/symptoms/components/ListSymptoms.vue"
+component.options.__file = "vue/symptoms/manage/components/ListSymptoms.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/SaveSymptom.vue":
-/*!*************************************************!*\
-  !*** ./vue/symptoms/components/SaveSymptom.vue ***!
-  \*************************************************/
+/***/ "./vue/symptoms/manage/components/SaveSymptom.vue":
+/*!********************************************************!*\
+  !*** ./vue/symptoms/manage/components/SaveSymptom.vue ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18000,9 +18000,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _SaveSymptom_vue_vue_type_template_id_57fac271_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true& */ "./vue/symptoms/components/SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true&");
-/* harmony import */ var _SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SaveSymptom.vue?vue&type=script&lang=js& */ "./vue/symptoms/components/SaveSymptom.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _SaveSymptom_vue_vue_type_template_id_5635548f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true& */ "./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true&");
+/* harmony import */ var _SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SaveSymptom.vue?vue&type=script&lang=js& */ "./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -18012,18 +18012,18 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SaveSymptom_vue_vue_type_template_id_57fac271_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SaveSymptom_vue_vue_type_template_id_57fac271_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _SaveSymptom_vue_vue_type_template_id_5635548f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SaveSymptom_vue_vue_type_template_id_5635548f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "57fac271",
+  "5635548f",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/symptoms/components/SaveSymptom.vue"
+component.options.__file = "vue/symptoms/manage/components/SaveSymptom.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -18060,10 +18060,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&":
-/*!******************************************************************!*\
-  !*** ./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js& ***!
-  \******************************************************************/
+/***/ "./vue/symptoms/manage/ManageSymptoms.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./vue/symptoms/manage/ManageSymptoms.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18071,15 +18071,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageSymptoms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageSymptoms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/ManageSymptoms.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/EditSymptom.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./vue/symptoms/components/EditSymptom.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
+/***/ "./vue/symptoms/manage/components/EditSymptom.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./vue/symptoms/manage/components/EditSymptom.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18087,15 +18087,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditSymptom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/EditSymptom.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditSymptom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/EditSymptom.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/ListSymptoms.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./vue/symptoms/components/ListSymptoms.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
+/***/ "./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18103,15 +18103,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListSymptoms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/ListSymptoms.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListSymptoms.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/SaveSymptom.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./vue/symptoms/components/SaveSymptom.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
+/***/ "./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18119,7 +18119,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveSymptom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/SaveSymptom.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveSymptom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
@@ -18158,70 +18158,70 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&":
-/*!************************************************************************************!*\
-  !*** ./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& ***!
-  \************************************************************************************/
+/***/ "./vue/symptoms/manage/ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true&":
+/*!*******************************************************************************************!*\
+  !*** ./vue/symptoms/manage/ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true& ***!
+  \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_10b5736a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_10b5736a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_42dfb62d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageSymptoms_vue_vue_type_template_id_10b5736a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true&":
-/*!********************************************************************************************!*\
-  !*** ./vue/symptoms/components/EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true& ***!
-  \********************************************************************************************/
+/***/ "./vue/symptoms/manage/components/EditSymptom.vue?vue&type=template&id=68903de2&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./vue/symptoms/manage/components/EditSymptom.vue?vue&type=template&id=68903de2&scoped=true& ***!
+  \***************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_template_id_6a55abc4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_template_id_6a55abc4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_template_id_68903de2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_template_id_68903de2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_template_id_6a55abc4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditSymptom_vue_vue_type_template_id_68903de2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditSymptom.vue?vue&type=template&id=68903de2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/EditSymptom.vue?vue&type=template&id=68903de2&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true&":
-/*!*********************************************************************************************!*\
-  !*** ./vue/symptoms/components/ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true& ***!
-  \*********************************************************************************************/
+/***/ "./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true& ***!
+  \****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_ba091b1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_ba091b1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_6c132415_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_6c132415_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_ba091b1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListSymptoms_vue_vue_type_template_id_6c132415_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./vue/symptoms/components/SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true&":
-/*!********************************************************************************************!*\
-  !*** ./vue/symptoms/components/SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true& ***!
-  \********************************************************************************************/
+/***/ "./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true& ***!
+  \***************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_57fac271_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_57fac271_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_5635548f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_5635548f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_57fac271_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveSymptom_vue_vue_type_template_id_5635548f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true&");
 
 
 /***/ }),
@@ -18280,10 +18280,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/ManageSymptoms.vue?vue&type=template&id=42dfb62d&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/ManageSymptoms.vue?vue&type=template&id=10b5736a&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18322,10 +18322,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/EditSymptom.vue?vue&type=template&id=6a55abc4&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/EditSymptom.vue?vue&type=template&id=68903de2&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/EditSymptom.vue?vue&type=template&id=68903de2&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18440,10 +18440,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/ListSymptoms.vue?vue&type=template&id=ba091b1a&scoped=true& ***!
-  \************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/ListSymptoms.vue?vue&type=template&id=6c132415&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18521,10 +18521,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/components/SaveSymptom.vue?vue&type=template&id=57fac271&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/symptoms/manage/components/SaveSymptom.vue?vue&type=template&id=5635548f&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -32074,7 +32074,7 @@ module.exports = index_cjs;
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	__webpack_require__("./vue/symptoms/manage.app.js");
+/******/ 	__webpack_require__("./vue/symptoms/manage/manage.app.js");
 /******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;

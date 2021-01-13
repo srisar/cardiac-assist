@@ -4,6 +4,7 @@
     "/public/app/patients/edit.app.js": "/public/app/patients/edit.app.js",
     "/public/app/patients/list.app.js": "/public/app/patients/list.app.js",
     "/public/app/symptoms/manage.app.js": "/public/app/symptoms/manage.app.js",
+    "/public/app/symptoms/view.app.js": "/public/app/symptoms/view.app.js",
     "/public/app/diseases/manage.app.js": "/public/app/diseases/manage.app.js",
     "/public/app/visits/manage.app.js": "/public/app/visits/manage.app.js",
     "/public/assets/css/app.css": "/public/assets/css/app.css"

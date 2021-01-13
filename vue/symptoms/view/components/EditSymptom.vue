@@ -49,8 +49,8 @@
 
 <script>
 
-import RichViewer from "../../_common/components/RichViewer";
-import RichEditor from "../../_common/components/RichEditor";
+import RichViewer from "../../../_common/components/RichViewer";
+import RichEditor from "../../../_common/components/RichEditor";
 import Vue from "vue";
 
 export default {
@@ -88,18 +88,16 @@ export default {
 
     onClickUpdate: function () {
 
-      $.post(`${getSiteURL()}/api/update/symptom.php`, {
-        id: this.symptom.id,
-        symptom_name: this.symptom.symptom_name,
-        description: this.symptomDescription,
-      }).done(r => {
+      this.symptom.description = this.symptomDescription;
+      this.$store.dispatch('updateSymptom', this.symptom)
+          .then(r => {
+            alert('Symptom updated');
+          })
+          .catch(e => {
+            alert('Update failed');
+            console.log(e);
+          });
 
-        alert(this.symptom.symptom_name + ' updated');
-        this.$store.dispatch('fetchSymptoms');
-
-      }).fail(e => {
-
-      });
     },
 
     onClickEdit: function () {

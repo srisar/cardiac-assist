@@ -38,7 +38,7 @@
 
 <script>
 
-import RichEditor from "../../_common/components/RichEditor";
+import RichEditor from "../../../_common/components/RichEditor";
 
 export default {
   name: "SaveSymptom",

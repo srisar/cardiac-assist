@@ -7,7 +7,7 @@
         <div class="float-left">
           <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
         </div>
-        <div>{{ disease.disease }}</div>
+        <div>{{ symptom.symptom_name }}</div>
       </div>
       <div class="card-body">
 
@@ -16,23 +16,15 @@
           <div class="form-row">
             <div class="col">
               <div class="form-group">
-                <label>Disease name</label>
-                <input type="text" class="form-control" v-model.trim="disease.disease">
+                <label>Symptom name</label>
+                <input type="text" class="form-control" v-model.trim="symptom.symptom_name">
               </div>
             </div><!-- col -->
-
-            <div class="col">
-              <div class="form-group">
-                <label>Disease code</label>
-                <input type="text" class="form-control" v-model.trim="disease.disease_code">
-              </div>
-            </div><!-- col -->
-
           </div><!-- row -->
 
           <div class="form-row">
             <div class="col">
-              <RichEditor :data="disease.description" @input="getDescription"/>
+              <RichEditor :data="symptom.description" @input="getSymptomDescription"/>
             </div>
           </div>
 
@@ -45,7 +37,7 @@
 
 
         <div v-else class="view-form">
-          <RichViewer :data="disease.description"/>
+          <RichViewer :data="symptom.description"/>
         </div><!-- view-form -->
 
       </div>
@@ -57,12 +49,12 @@
 
 <script>
 
-import RichViewer from "../../_common/components/RichViewer";
-import RichEditor from "../../_common/components/RichEditor";
+import RichViewer from "../../../_common/components/RichViewer";
+import RichEditor from "../../../_common/components/RichEditor";
 import Vue from "vue";
 
 export default {
-  name: "EditDisease",
+  name: "EditSymptom",
   components: {RichEditor, RichViewer},
   props: [],
 
@@ -70,21 +62,21 @@ export default {
   data() {
     return {
       editable: false,
-      description: this.$store.getters.getSelectedDisease.description,
+      symptomDescription: this.$store.getters.getSelectedSymptom.description,
 
     }
   },
 
   computed: {
 
-    disease: function () {
+    symptom: function () {
       this.editable = false;
-      return this.$store.getters.getSelectedDisease;
+      return this.$store.getters.getSelectedSymptom;
     },
 
     editButtonText: function () {
       return this.$store.getters.getEditButtonText;
-    },
+    }
 
   },
 
@@ -92,18 +84,22 @@ export default {
 
 
   methods: {
+    //
 
     onClickUpdate: function () {
-      this.disease.description = this.description;
 
-      this.$store.dispatch('updateDisease', this.disease)
-          .then(r => {
-            alert('Symptom updated');
-          })
-          .catch(e => {
-            alert('Update failed');
-          });
+      $.post(`${getSiteURL()}/api/update/symptom.php`, {
+        id: this.symptom.id,
+        symptom_name: this.symptom.symptom_name,
+        description: this.symptomDescription,
+      }).done(r => {
 
+        alert(this.symptom.symptom_name + ' updated');
+        this.$store.dispatch('fetchSymptoms');
+
+      }).fail(e => {
+
+      });
     },
 
     onClickEdit: function () {
@@ -116,8 +112,8 @@ export default {
       }
     },
 
-    getDescription: function (data) {
-      this.description = data;
+    getSymptomDescription: function (data) {
+      this.symptomDescription = data;
     }
 
   },
