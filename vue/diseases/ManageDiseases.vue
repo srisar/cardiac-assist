@@ -4,13 +4,17 @@
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-12 col-md-8 mb-2">
-          <SaveDisease :event-bus="eventBus"/>
-        </div><!-- col -->
 
         <div class="col-12 col-md-4">
-          <ListDiseases ref="listDiseases" :event-bus="eventBus"/>
+          <ListDiseases/>
         </div>
+
+        <div class="col-12 col-md-8 mb-2">
+          <SaveDisease v-if="panelMode === 'ADD'"/>
+          <EditDisease v-if="panelMode === 'EDIT'"/>
+        </div><!-- col -->
+
+
       </div><!-- row -->
 
     </div><!-- container -->
@@ -21,29 +25,31 @@
 <script>
 
 import Vue from "vue";
-import SaveDisease from "./SaveDisease";
-import ListDiseases from "./ListDiseases";
+import store from "./store";
+import SaveDisease from "./components/SaveDisease";
+import EditDisease from "./components/EditDisease";
+import ListDiseases from "./components/ListDiseases";
 
 export default {
   name: "ManageDiseases",
-  components: {SaveDisease, ListDiseases},
-  props:[],
+  components: {SaveDisease, ListDiseases, EditDisease,},
+  store: store,
+  props: [],
 
   data() {
     return {
       //
-
-
-      eventBus: new Vue({}),
     }
   },
 
   computed: {
-    //
+    panelMode: function () {
+      return this.$store.getters.getPanelMode;
+    }
   },
 
   mounted() {
-   //
+    //
   },
 
   methods: {

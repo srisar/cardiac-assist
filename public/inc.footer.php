@@ -9,7 +9,7 @@ use App\Core\App;
 <script src="<?= App::siteURL() ?>/assets/js/moment.min.js"></script>
 <script src="<?= App::siteURL() ?>/assets/DataTables/datatables.min.js"></script>
 <script src="<?= App::siteURL() ?>/assets/daterangepicker-3.1/daterangepicker.js"></script>
-<script src="<?= App::siteURL() ?>/assets/ckeditor5/build/ckeditor.js"></script>
+<script src="<?= App::siteURL() ?>/assets/ckeditor5/ckeditor.js"></script>
 <script src="<?= App::siteURL() ?>/ckfinder/ckfinder.js"></script>
 <script src="<?= App::siteURL() ?>/assets/js/app.js"></script>
 </body>

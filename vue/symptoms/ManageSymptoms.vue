@@ -5,13 +5,18 @@
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-12 col-md-8 mb-2">
-          <SaveSymptom :event-bus="eventBus"/>
-        </div><!-- col -->
 
         <div class="col-12 col-md-4">
-          <ListSymptoms ref="listSymptom" :event-bus="eventBus"/>
+          <ListSymptoms/>
+
         </div>
+
+        <div class="col-12 col-md-8 mb-2">
+          <SaveSymptom v-if="panelMode === 'ADD'"/>
+          <EditSymptom v-if="panelMode === 'EDIT'"/>
+        </div><!-- col -->
+
+
       </div><!-- row -->
 
     </div><!-- container -->
@@ -22,22 +27,26 @@
 
 <script>
 
-import SaveSymptom from "./SaveSymptom";
-import ListSymptoms from "./ListSymptoms";
+import SaveSymptom from "./components/SaveSymptom";
+import EditSymptom from "./components/EditSymptom";
+import ListSymptoms from "./components/ListSymptoms";
+
+import store from './store'
 import Vue from "vue";
 
 export default {
   name: "ManageSymptoms",
-  components: {SaveSymptom, ListSymptoms,},
+  components: {SaveSymptom, ListSymptoms, EditSymptom,},
+  store: store,
 
   data() {
-    return {
-      eventBus: new Vue({}),
-    }
+    return {}
   },
 
   computed: {
-    //
+    panelMode: function () {
+      return this.$store.getters.getPanelMode;
+    }
   },
 
   mounted() {
@@ -46,8 +55,6 @@ export default {
 
   methods: {
     //
-
-
   },
 }
 </script>

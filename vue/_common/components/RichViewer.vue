@@ -9,17 +9,17 @@
 export default {
   name: "RichViewer",
 
-  props: ['value'],
+  props: ['data'],
 
   data: function () {
     return {
       editor: undefined,
-      content: this.value,
+      content: this.data,
     }
   },
 
   watch: {
-    value(newValue) {
+    data(newValue) {
       this.content = newValue;
       this.editor.setData(this.content)
     }
