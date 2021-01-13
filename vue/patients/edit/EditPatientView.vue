@@ -148,7 +148,7 @@
         </div><!-- col-->
 
         <div class="col-12 col-lg-5 mb-3">
-
+          <ListVisits/>
         </div>
 
       </div><!-- row -->
@@ -161,36 +161,23 @@
 
 <script>
 
+import store from "./store";
 import DateField from "../../_common/components/DateField";
 import * as values from '../values';
+import ListVisits from "./components/ListVisits";
 
 const _ = require('lodash');
 
 export default {
   name: "EditPatientView",
-  components: {DateField},
+  components: {DateField, ListVisits},
+  store: store,
 
   data() {
     return {
 
       patientId: document.getElementById("php_patient_id").value,
 
-      patient: {
-        id: "",
-        first_name: "",
-        last_name: "",
-        dob: moment().format('YYYY-MM-DD'),
-        age: 0,
-        address: "",
-        ds_division: "",
-        nic: "",
-        phone: "",
-        gender: "",
-        job: "",
-        job_type: "",
-        income: 0,
-        status: "",
-      },
 
       genders: values.GENDERS,
       jobs: values.JOBS,
@@ -205,6 +192,10 @@ export default {
   * -----------------------------------------------------------------------------
   * */
   computed: {
+
+    patient: function () {
+      return this.$store.getters.getPatient;
+    },
 
     formValidated: function () {
       if (_.isEmpty(this.patient.first_name)) return false;
@@ -228,7 +219,6 @@ export default {
   * -----------------------------------------------------------------------------
   * */
   mounted() {
-    //
 
     this.fetchPatient();
 
@@ -245,43 +235,35 @@ export default {
 
     fetchPatient: function () {
 
-      $.get(`${getSiteURL()}/api/get/patients.php`, {
-        id: this.patientId
-      }).done(r => {
+      this.$store.dispatch('fetchPatient', this.patientId)
+          .then(r => {
 
-        this.patient = r.data;
+            /*
+            * after fetching patient data, fetch visits data
+            * */
 
-      }).fail(e => {
-
-      });
+            this.$store.dispatch('fetchVisits')
+                .catch(e => {
+                  alert('Failed to get visits');
+                  console.log(e);
+                });
+          });
 
     },
 
 
     onClickUpdatePatient: function () {
 
-      $.post(`${getSiteURL()}/api/update/patient.php`, {
-        id: this.patient.id,
-        first_name: this.patient.first_name,
-        last_name: this.patient.last_name,
-        dob: this.patient.dob,
-        age: this.calculatedAge,
-        address: this.patient.address,
-        ds_division: this.patient.ds_division,
-        nic: this.patient.nic,
-        phone: this.patient.phone,
-        gender: this.patient.gender,
-        job: this.patient.job,
-        job_type: this.patient.job_type,
-        income: this.patient.income,
-        status: this.patient.status,
-      }).done(r => {
+      this.patient.age = this.calculatedAge;
 
-        alert(r.message);
-
-      }).fail(e => {
-        console.log(e);
-      })
+      this.$store.dispatch('updatePatient', this.patient)
+          .then(r => {
+            alert(r.message);
+          })
+          .catch(e => {
+            alert('Failed to update patient details');
+            console.log(e);
+          })
 
     },
 

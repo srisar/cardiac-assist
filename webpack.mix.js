@@ -22,3 +22,5 @@ mix.js('vue/patients/list/list.app.js', 'public/app/patients/').vue();
 mix.js('vue/symptoms/manage.app.js', 'public/app/symptoms/').vue();
 mix.js('vue/diseases/manage.app.js', 'public/app/diseases/').vue();
 
+mix.js('vue/visits/manage.app.js', 'public/app/visits/').vue();
+
