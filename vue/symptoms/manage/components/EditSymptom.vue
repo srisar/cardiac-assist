@@ -7,7 +7,25 @@
         <div class="float-left">
           <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
         </div>
-        <div>{{ symptom.symptom_name }}</div>
+        <div>
+
+          {{ symptom.symptom_name }}
+
+          <div class="float-right">
+
+
+            <div v-if="confirmDelete">
+              <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
+              <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+            </div>
+
+            <div v-else>
+              <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+            </div>
+
+          </div>
+        </div>
+
       </div>
       <div class="card-body">
 
@@ -64,6 +82,9 @@ export default {
       editable: false,
       symptomDescription: this.$store.getters.getSelectedSymptom.description,
 
+      // delete
+      confirmDelete: false,
+
     }
   },
 
@@ -84,7 +105,14 @@ export default {
 
 
   methods: {
-    //
+
+    /*
+    * Get data from rich editor
+    * */
+    getSymptomDescription: function (data) {
+      this.symptomDescription = data;
+    },
+
 
     onClickUpdate: function () {
 
@@ -112,9 +140,30 @@ export default {
       }
     },
 
-    getSymptomDescription: function (data) {
-      this.symptomDescription = data;
-    }
+
+    /*
+    * Delete symptom event handlers
+    * */
+
+    onClickConfirmDelete: function () {
+      this.confirmDelete = true;
+    },
+
+    onClickCancelDelete: function () {
+      this.confirmDelete = false;
+    },
+
+    onClickDelete: function () {
+
+      this.$store.dispatch('deleteSymptom', this.symptom)
+          .then(r => {
+            this.$store.commit('setPanelModeAdd');
+          })
+          .catch(e => {
+            console.log(e);
+          });
+
+    },
 
   },
 

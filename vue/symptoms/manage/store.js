@@ -59,7 +59,19 @@ export default new Vuex.Store({
     },
 
     actions: {
-        fetchSymptoms({commit}, payload) {
+
+
+        setSelectedSymptom({commit, dispatch}, symptom) {
+            commit('updateSelectedSymptom', symptom);
+            commit('setPanelModeEdit');
+            commit('setEditButtonText', 'Edit');
+
+        },
+
+        /*
+        * Fetch all symptoms
+        * */
+        fetchSymptoms({commit}) {
 
             $.get(`${getSiteURL()}/api/get/symptoms.php`)
                 .done(r => {
@@ -71,6 +83,9 @@ export default new Vuex.Store({
 
         },
 
+        /*
+        * Save a new symptom
+        * */
         saveSymptom({commit, dispatch}, symptom) {
 
             return new Promise((resolve, reject) => {
@@ -89,6 +104,9 @@ export default new Vuex.Store({
 
         },
 
+        /*
+        * Update existing symptom
+        * */
         updateSymptom({commit, dispatch}, symptom) {
 
             return new Promise((resolve, reject) => {
@@ -109,12 +127,32 @@ export default new Vuex.Store({
 
         },
 
-        setSelectedSymptom({commit, dispatch}, symptom) {
-            commit('updateSelectedSymptom', symptom);
-            commit('setPanelModeEdit');
-            commit('setEditButtonText', 'Edit');
+        /*
+        * Delete existing symptom
+        * */
+        deleteSymptom({commit, dispatch}, symptom) {
+
+            return new Promise((resolve, reject) => {
+
+                $.post(`${getSiteURL()}/api/delete/symptom.php`, {
+                    id: symptom.id,
+                    symptom_name: symptom.symptom_name,
+                    description: symptom.description,
+                }).done(r => {
+
+                    dispatch('fetchSymptoms');
+                    resolve();
+
+                }).fail(e => {
+                    reject(e);
+                });
+
+
+            });
 
         }
+
+
     }
 
 });

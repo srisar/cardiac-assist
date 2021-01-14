@@ -81,9 +81,12 @@ class Disease implements IModel
 
     }
 
-    public function delete()
+    /**
+     * @return bool
+     */
+    public function delete(): bool
     {
-        // TODO: Implement delete() method.
+        return Database::delete(self::TABLE, 'id', $this->id);
     }
 
 

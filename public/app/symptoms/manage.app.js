@@ -266,6 +266,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -279,7 +297,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editable: false,
-      symptomDescription: this.$store.getters.getSelectedSymptom.description
+      symptomDescription: this.$store.getters.getSelectedSymptom.description,
+      // delete
+      confirmDelete: false
     };
   },
   computed: {
@@ -293,7 +313,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {},
   methods: {
-    //
+    /*
+    * Get data from rich editor
+    * */
+    getSymptomDescription: function getSymptomDescription(data) {
+      this.symptomDescription = data;
+    },
     onClickUpdate: function onClickUpdate() {
       var _this = this;
 
@@ -316,8 +341,24 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.commit('setEditButtonText', 'View');
       }
     },
-    getSymptomDescription: function getSymptomDescription(data) {
-      this.symptomDescription = data;
+
+    /*
+    * Delete symptom event handlers
+    * */
+    onClickConfirmDelete: function onClickConfirmDelete() {
+      this.confirmDelete = true;
+    },
+    onClickCancelDelete: function onClickCancelDelete() {
+      this.confirmDelete = false;
+    },
+    onClickDelete: function onClickDelete() {
+      var _this2 = this;
+
+      this.$store.dispatch('deleteSymptom', this.symptom).then(function (r) {
+        _this2.$store.commit('setPanelModeAdd');
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   }
 });
@@ -580,17 +621,32 @@ var PANEL_ADD = "ADD";
     }
   },
   actions: {
-    fetchSymptoms: function fetchSymptoms(_ref, payload) {
-      var commit = _ref.commit;
+    setSelectedSymptom: function setSelectedSymptom(_ref, symptom) {
+      var commit = _ref.commit,
+          dispatch = _ref.dispatch;
+      commit('updateSelectedSymptom', symptom);
+      commit('setPanelModeEdit');
+      commit('setEditButtonText', 'Edit');
+    },
+
+    /*
+    * Fetch all symptoms
+    * */
+    fetchSymptoms: function fetchSymptoms(_ref2) {
+      var commit = _ref2.commit;
       $.get("".concat(getSiteURL(), "/api/get/symptoms.php")).done(function (r) {
         commit('updateSymptomsList', r.data);
       }).fail(function (e) {
         console.log(e.responseJSON.message);
       });
     },
-    saveSymptom: function saveSymptom(_ref2, symptom) {
-      var commit = _ref2.commit,
-          dispatch = _ref2.dispatch;
+
+    /*
+    * Save a new symptom
+    * */
+    saveSymptom: function saveSymptom(_ref3, symptom) {
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
       return new Promise(function (resolve, reject) {
         $.post("".concat(getSiteURL(), "/api/save/symptom.php"), {
           symptom_name: symptom.symptom_name,
@@ -603,9 +659,13 @@ var PANEL_ADD = "ADD";
         });
       });
     },
-    updateSymptom: function updateSymptom(_ref3, symptom) {
-      var commit = _ref3.commit,
-          dispatch = _ref3.dispatch;
+
+    /*
+    * Update existing symptom
+    * */
+    updateSymptom: function updateSymptom(_ref4, symptom) {
+      var commit = _ref4.commit,
+          dispatch = _ref4.dispatch;
       return new Promise(function (resolve, reject) {
         $.post("".concat(getSiteURL(), "/api/update/symptom.php"), {
           id: symptom.id,
@@ -618,12 +678,25 @@ var PANEL_ADD = "ADD";
         });
       });
     },
-    setSelectedSymptom: function setSelectedSymptom(_ref4, symptom) {
-      var commit = _ref4.commit,
-          dispatch = _ref4.dispatch;
-      commit('updateSelectedSymptom', symptom);
-      commit('setPanelModeEdit');
-      commit('setEditButtonText', 'Edit');
+
+    /*
+    * Delete existing symptom
+    * */
+    deleteSymptom: function deleteSymptom(_ref5, symptom) {
+      var commit = _ref5.commit,
+          dispatch = _ref5.dispatch;
+      return new Promise(function (resolve, reject) {
+        $.post("".concat(getSiteURL(), "/api/delete/symptom.php"), {
+          id: symptom.id,
+          symptom_name: symptom.symptom_name,
+          description: symptom.description
+        }).done(function (r) {
+          dispatch('fetchSymptoms');
+          resolve();
+        }).fail(function (e) {
+          reject(e);
+        });
+      });
     }
   }
 }));
@@ -18352,7 +18425,43 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", [_vm._v(_vm._s(_vm.symptom.symptom_name))])
+        _c("div", [
+          _vm._v(
+            "\n\n        " + _vm._s(_vm.symptom.symptom_name) + "\n\n        "
+          ),
+          _c("div", { staticClass: "float-right" }, [
+            _vm.confirmDelete
+              ? _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-tiny btn-danger",
+                      on: { click: _vm.onClickDelete }
+                    },
+                    [_vm._v("Confirm")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-tiny btn-secondary",
+                      on: { click: _vm.onClickCancelDelete }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              : _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-tiny btn-danger",
+                      on: { click: _vm.onClickConfirmDelete }
+                    },
+                    [_vm._v("Delete")]
+                  )
+                ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
