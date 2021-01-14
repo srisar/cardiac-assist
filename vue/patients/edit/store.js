@@ -4,6 +4,9 @@ import Vue from 'vue';
 Vue.use(Vuex);
 
 
+/*
+* Module: visits
+* */
 const moduleVisits = {
 
     state: {
@@ -23,25 +26,58 @@ const moduleVisits = {
     },
 
     actions: {
-        fetchVisits({commit, rootGetters}, payload) {
+
+        /*
+        * Fetch visits
+        * */
+        fetchVisits({commit, rootGetters}) {
 
             return new Promise((resolve, reject) => {
 
                 $.get(`${getSiteURL()}/api/get/patient-visits.php`, {
                     id: rootGetters.getPatient.id
                 }).done(r => {
-                    commit('setVisitsList', r.data)
+
+                    commit('setVisitsList', r.data);
                     resolve();
+
                 }).fail(e => {
                     reject(e);
-                })
+                });
+            });
+        },
+
+        addVisit({commit, dispatch}, visit) {
+
+            return new Promise((resolve, reject) => {
+
+
+                $.get(`${getSiteURL()}/api/save/visit.php`, {
+                    patient_id: visit.patient_id,
+                    visit_date: visit.visit_date,
+                    remarks: visit.remarks
+                }).done(r => {
+
+                    dispatch('fetchVisits');
+                    resolve();
+
+                }).fail(e => {
+                    reject(e);
+                });
             });
 
-        }
+        },
+
     }
 
 };
 
+
+/*
+* ------------------------------------------------------------------------
+* Main store
+*
+* */
 export default new Vuex.Store({
 
     modules: {

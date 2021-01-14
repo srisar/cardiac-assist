@@ -12,7 +12,7 @@
               <div class="input-group-text">Gender</div>
             </div>
             <select class="form-control" v-model="filters.gender">
-              <option value="ALL" disabled>ALL</option>
+              <option value="ALL">ALL</option>
               <option v-for="(item, index) in GENDERS" :value="index">{{ item }}</option>
             </select>
           </div><!-- input-group -->

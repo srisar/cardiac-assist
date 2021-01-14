@@ -12,7 +12,7 @@ class Visit implements IModel
 
     private const TABLE = 'visits';
 
-    public ?int $id, $patient_id;
+    public ?int $id = -1, $patient_id = -1;
     public ?string $visit_date, $remarks;
 
     public ?string $added_at, $updated_at;

@@ -3,6 +3,7 @@
     "/public/app/homepage/home.app.js": "/public/app/homepage/home.app.js",
     "/public/app/patients/edit.app.js": "/public/app/patients/edit.app.js",
     "/public/app/patients/list.app.js": "/public/app/patients/list.app.js",
+    "/public/app/patients/add.app.js": "/public/app/patients/add.app.js",
     "/public/app/symptoms/manage.app.js": "/public/app/symptoms/manage.app.js",
     "/public/app/symptoms/view.app.js": "/public/app/symptoms/view.app.js",
     "/public/app/diseases/manage.app.js": "/public/app/diseases/manage.app.js",

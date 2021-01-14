@@ -18751,9 +18751,7 @@ var render = function() {
                 }
               },
               [
-                _c("option", { attrs: { value: "ALL", disabled: "" } }, [
-                  _vm._v("ALL")
-                ]),
+                _c("option", { attrs: { value: "ALL" } }, [_vm._v("ALL")]),
                 _vm._v(" "),
                 _vm._l(_vm.GENDERS, function(item, index) {
                   return _c("option", { domProps: { value: index } }, [
