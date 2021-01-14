@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ModalWindow",
-  props: ['id', 'expanded'],
+  props: ['id', 'expanded', 'visible'],
   data: function data() {
     return {
       isVisible: false,
@@ -76,6 +76,11 @@ __webpack_require__.r(__webpack_exports__);
     //
     if (this.expanded) {
       this.resizeButtonIcon = 'bi-arrows-angle-contract';
+    }
+  },
+  watch: {
+    visible: function visible(value) {
+      this.isVisible = value;
     }
   },
   methods: {

@@ -47,7 +47,7 @@
 export default {
   name: "ModalWindow",
 
-  props: ['id', 'expanded'],
+  props: ['id', 'expanded', 'visible'],
 
   data: function () {
     return {
@@ -69,8 +69,14 @@ export default {
 
   mounted() {
     //
-    if(this.expanded){
+    if (this.expanded) {
       this.resizeButtonIcon = 'bi-arrows-angle-contract';
+    }
+  },
+
+  watch: {
+    visible(value) {
+      this.isVisible = value;
     }
   },
 

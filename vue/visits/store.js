@@ -3,49 +3,18 @@ import Vue from 'vue';
 
 Vue.use(Vuex);
 
-const visitSymptomsStore = {
-    state: {
-        visitSymptomsList: [],
-    },
+import visitSymptoms from './store_modules/visit_symptoms';
 
-    mutations: {
-        updateVisitSymptomsList(state, payload) {
-            state.visitSymptomsList = payload;
-        }
-    },
-
-    getters: {
-        getVisitSymptomsList: state => {
-            return state.visitSymptomsList;
-        }
-    },
-
-    actions: {
-
-        fetchVisitSymptoms: function ({commit}, visitId) {
-            return new Promise((resolve, reject) => {
-
-                $.get(`${getSiteURL()}/api/get/visit-symptoms.php`, {
-                    visit_id: visitId
-                }).done(r => {
-
-                    commit('updateVisitSymptomsList', r.data);
-                    resolve();
-
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
-        }
-
-    }
-};
+/*
+* -------------------------------------------------------------------------
+* MAIN STORE
+* -------------------------------------------------------------------------
+* */
 
 export default new Vuex.Store({
 
     modules: {
-        visitSymptoms: visitSymptomsStore
+        visitSymptoms: visitSymptoms
     },
 
     state: {
