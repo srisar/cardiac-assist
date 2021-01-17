@@ -9,7 +9,7 @@ require_once "../../../_bootstrap.inc.php";
 try {
 
     $fields = [
-        'id' => Request::getAsString('id'),
+        'id' => Request::getAsInteger('id'),
     ];
 
     $object = Symptom::build($fields);

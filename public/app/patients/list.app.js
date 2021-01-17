@@ -171,11 +171,11 @@ __webpack_require__.r(__webpack_exports__);
       isVisible: false,
       isExpanded: this.expanded,
       icons: {
-        expandIcon: 'bi-arrows-angle-expand',
-        contractIcon: 'bi-arrows-angle-contract',
+        expandIcon: 'Expand',
+        contractIcon: 'Contract',
         closeIcon: 'bi-x'
       },
-      resizeButtonIcon: 'bi-arrows-angle-expand'
+      resizeButtonIcon: 'Expand'
     };
   },
   computed: {},
@@ -194,10 +194,12 @@ __webpack_require__.r(__webpack_exports__);
     hide: function hide() {
       this.isVisible = false;
       this.$emit('modal-hiding');
+      this.$emit('close');
     },
     show: function show() {
       this.isVisible = true;
       this.$emit('modal-showing');
+      this.$emit('open');
     },
     _resize: function _resize() {
       this.isExpanded = !this.isExpanded;
@@ -553,7 +555,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1.2em;\n  line-height: 1.6em;\n  font-weight: bold;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1.1em;\n  line-height: 1.5em;\n  font-weight: bold;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18580,28 +18582,39 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header p-2" }, [
-              _c("h3", { staticClass: "p-0 m-0" }, [_vm._t("title")], 2),
+            _c("div", { staticClass: "modal-header p-1" }, [
+              _c(
+                "h3",
+                { staticClass: "pl-2 pb-0 pt-0 pr-0 m-0" },
+                [_vm._t("title")],
+                2
+              ),
               _vm._v(" "),
               _c("div", [
                 _c(
                   "button",
                   {
-                    staticClass: "header-button",
+                    staticClass: "btn btn-tiny btn-secondary",
                     attrs: { type: "button" },
                     on: { click: _vm._resize }
                   },
-                  [_c("i", { staticClass: "bi", class: _vm.resizeButtonIcon })]
+                  [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.resizeButtonIcon) +
+                        "\n          "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
                   "button",
                   {
-                    staticClass: "header-button",
+                    staticClass: "btn btn-tiny btn-danger",
                     attrs: { type: "button" },
                     on: { click: _vm.hide }
                   },
-                  [_c("i", { staticClass: "bi", class: _vm.icons.closeIcon })]
+                  [_vm._v("\n            Close\n          ")]
                 )
               ])
             ]),

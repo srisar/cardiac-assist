@@ -23,7 +23,8 @@ mix.js('vue/patients/add/add.app.js', 'public/app/patients/').vue();
 mix.js('vue/symptoms/manage/manage.app.js', 'public/app/symptoms/').vue();
 mix.js('vue/symptoms/view/view.app.js', 'public/app/symptoms/').vue();
 
-mix.js('vue/diseases/manage.app.js', 'public/app/diseases/').vue();
+mix.js('vue/diseases/manage/manage.app.js', 'public/app/diseases/').vue();
+mix.js('vue/diseases/view/view.app.js', 'public/app/diseases/').vue();
 
 mix.js('vue/visits/manage.app.js', 'public/app/visits/').vue();
 

@@ -2,20 +2,19 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\Symptom;
-use App\Models\User;
-use App\Models\VisitSymptom;
+use App\Models\DifferentialDiagnosis;
 
 require_once "../../../_bootstrap.inc.php";
 
 try {
 
     $fields = [
-        'visit_id' => Request::getAsString('visit_id'),
-        'symptom_id' => Request::getAsInteger('symptom_id'),
+        'visit_id' => Request::getAsInteger('visit_id'),
+        'disease_id' => Request::getAsInteger('disease_id'),
+        'remarks' => Request::getAsString('remarks'),
     ];
 
-    $object = VisitSymptom::build($fields);
+    $object = DifferentialDiagnosis::build($fields);
 
     // check if name already exist in the database
 //    if ( !empty(Symptom::findByName($object->symptom_name)) ) throw new Exception('Symptom already exist');
@@ -24,7 +23,7 @@ try {
 
     if ( empty($result) ) throw new Exception('Failed');
 
-    $object = Symptom::find($result);
+    $object = DifferentialDiagnosis::find($result);
 
     JSONResponse::validResponse(['data' => $object]);
     return;

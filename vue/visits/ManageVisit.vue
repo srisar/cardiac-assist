@@ -19,7 +19,7 @@
 
         <!-- Differential diagnosis -->
         <div class="col-6">
-
+          <DifferentialDiagnosis/>
         </div><!-- col -->
 
       </div><!-- row -->
@@ -32,14 +32,13 @@
 
 <script>
 
-import store from './store';
 import VisitDetails from "./components/VisitDetails";
 import VisitSymptoms from "./components/VisitSymptoms";
+import DifferentialDiagnosis from "./components/DifferentialDiagnosis";
 
 export default {
   name: "ManageVisit",
-  components: {VisitDetails, VisitSymptoms},
-  store: store,
+  components: {VisitDetails, VisitSymptoms, DifferentialDiagnosis},
 
   data() {
     return {
@@ -60,12 +59,14 @@ export default {
           // fetch visit-symptoms
 
           this.$store.dispatch('fetchVisitSymptoms', this.visitId)
-              .then(r => {
-
-              })
               .catch(e => {
                 console.log(e);
-              })
+              });
+
+          this.$store.dispatch('fetchDifferentialDiagnosis', this.visitId)
+              .catch(e => {
+                console.log(e);
+              });
 
         })
         .catch(e => {

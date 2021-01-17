@@ -57,9 +57,8 @@
 
 <script>
 
-import RichViewer from "../../_common/components/RichViewer";
-import RichEditor from "../../_common/components/RichEditor";
-import Vue from "vue";
+import RichViewer from "../../../_common/components/RichViewer";
+import RichEditor from "../../../_common/components/RichEditor";
 
 export default {
   name: "EditDisease",
@@ -70,7 +69,7 @@ export default {
   data() {
     return {
       editable: false,
-      description: this.$store.getters.getSelectedDisease.description,
+      description: this.$store.getters.selectedDisease.description,
 
     }
   },
@@ -79,11 +78,11 @@ export default {
 
     disease: function () {
       this.editable = false;
-      return this.$store.getters.getSelectedDisease;
+      return this.$store.getters.selectedDisease;
     },
 
     editButtonText: function () {
-      return this.$store.getters.getEditButtonText;
+      return this.$store.getters.editButtonText;
     },
 
   },

@@ -4,6 +4,7 @@ import Vue from 'vue';
 Vue.use(Vuex);
 
 import visitSymptoms from './store_modules/visit_symptoms';
+import differentialDiagnosis from './store_modules/differential_diagnosis';
 
 /*
 * -------------------------------------------------------------------------
@@ -14,7 +15,8 @@ import visitSymptoms from './store_modules/visit_symptoms';
 export default new Vuex.Store({
 
     modules: {
-        visitSymptoms: visitSymptoms
+        visitSymptoms: visitSymptoms,
+        differentialDiagnosis: differentialDiagnosis
     },
 
     state: {
