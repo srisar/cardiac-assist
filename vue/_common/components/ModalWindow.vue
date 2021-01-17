@@ -10,18 +10,18 @@
     <div class="modal-dialog modal-lg" :class="{'expanded': isExpanded}">
       <div class="modal-content">
 
-        <div class="modal-header p-2">
-          <h3 class="p-0 m-0">
+        <div class="modal-header p-1">
+          <h3 class="pl-2 pb-0 pt-0 pr-0 m-0">
             <slot name="title"></slot>
           </h3>
 
 
           <div>
-            <button class="header-button" type="button" @click="_resize">
-              <i class="bi" :class="resizeButtonIcon"></i>
+            <button class="btn btn-tiny btn-secondary" type="button" @click="_resize">
+              {{ resizeButtonIcon }}
             </button>
-            <button type="button" class="header-button" @click="hide">
-              <i class="bi" :class="icons.closeIcon"></i>
+            <button type="button" class="btn btn-tiny btn-danger" @click="hide">
+              Close
             </button>
           </div>
 
@@ -55,12 +55,12 @@ export default {
       isExpanded: this.expanded,
 
       icons: {
-        expandIcon: 'bi-arrows-angle-expand',
-        contractIcon: 'bi-arrows-angle-contract',
+        expandIcon: 'Expand',
+        contractIcon: 'Contract',
         closeIcon: 'bi-x',
       },
 
-      resizeButtonIcon: 'bi-arrows-angle-expand',
+      resizeButtonIcon: 'Expand',
 
     };
   },
@@ -86,11 +86,13 @@ export default {
     hide: function () {
       this.isVisible = false;
       this.$emit('modal-hiding');
+      this.$emit('close');
     },
 
     show: function () {
       this.isVisible = true;
       this.$emit('modal-showing');
+      this.$emit('open');
     },
 
 
@@ -138,8 +140,8 @@ export default {
 }
 
 .modal-header h3 {
-  font-size: 1.2em;
-  line-height: 1.6em;
+  font-size: 1.1em;
+  line-height: 1.5em;
   font-weight: bold;
 }
 
