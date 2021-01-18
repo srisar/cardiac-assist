@@ -17,6 +17,8 @@ class Visit implements IModel
 
     public ?string $added_at, $updated_at;
 
+    public ?Patient $patient;
+
     public static function build($array): Visit
     {
         $object = new self();
@@ -33,7 +35,15 @@ class Visit implements IModel
      */
     public static function find(int $id): ?Visit
     {
-        return Database::find(self::TABLE, $id, self::class);
+        /** @var Visit $visit */
+        $visit = Database::find(self::TABLE, $id, self::class);
+
+        if ( !empty($visit) ) {
+            $visit->patient = Patient::find($visit->patient_id);
+        }
+
+        return $visit;
+
     }
 
     /**

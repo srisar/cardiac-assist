@@ -2,8 +2,13 @@
 
   <div>
 
-    <div class="card shadow shadow-sm">
+    <div class="card shadow shadow-sm" v-if="patient">
       <div class="card-header">
+
+        <div class="float-left">
+          <a :href="createPatientPageLink()" class="btn btn-tiny btn-secondary">Back to patient</a>
+        </div>
+
         Visit Details
         <div class="float-right">
           <button class="btn btn-tiny btn-primary" @click="onShowEditVisit">Edit</button>
@@ -11,7 +16,47 @@
       </div>
       <div class="card-body">
 
-        <div class="row">
+
+        <div class="form-row mb-2" v-if="patient">
+          <div class="col">
+
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Patient</div>
+              </div>
+              <input type="text" class="form-control bg-white" :value="patient.first_name + ' ' + patient.last_name" readonly>
+            </div>
+
+          </div><!-- col -->
+
+          <div class="col">
+
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Age</div>
+              </div>
+              <input type="text" class="form-control bg-white" :value="patient.age" readonly>
+            </div>
+
+          </div><!-- col -->
+
+          <div class="col">
+
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <div class="input-group-text">gender</div>
+              </div>
+              <input type="text" class="form-control bg-white" :value="patient.gender" readonly>
+            </div>
+
+          </div><!-- col -->
+
+
+        </div><!-- row -->
+
+        <!-- --- -->
+
+        <div class="form-row mb-2" v-if="visit">
           <div class="col-md-2">
 
             <div class="input-group input-group-sm">
@@ -35,6 +80,7 @@
           </div><!-- col -->
 
         </div><!-- row -->
+
 
       </div>
     </div>
@@ -97,6 +143,10 @@ export default {
   computed: {
     visit: function () {
       return this.$store.getters.getVisit;
+    },
+
+    patient: function () {
+      return this.visit.patient;
     }
   },
 
@@ -131,7 +181,11 @@ export default {
             console.log(e);
           })
 
-    }
+    },
+
+    createPatientPageLink: function () {
+      return `${getSiteURL()}/app/patients/edit.php?id=${this.patient.id}`;
+    },
 
   },
 }

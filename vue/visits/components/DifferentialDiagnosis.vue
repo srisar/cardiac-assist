@@ -4,7 +4,7 @@
 
     <div class="card shadow shadow-sm">
       <div class="card-header">
-        Differential Diagnosis
+        <span class="badge badge-danger">2</span> Differential Diagnosis
 
         <div class="float-right">
           <button class="btn btn-tiny btn-success" @click="onOpenAddDiffDiagModal">Add</button>
@@ -18,18 +18,21 @@
         <table class="table table-sm table-bordered">
           <thead>
           <tr>
-            <th>Disease</th>
-            <th>Code</th>
+            <th style="width: 50px">Code</th>
+            <th style="width: 200px">Disease</th>
+            <th>Remarks</th>
             <th style="width: 50px" class="text-center">Description</th>
             <th style="width: 100px" class="text-center">Actions</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="(item, index) in diffDiagnosisList">
-            <td>{{ item.disease.disease }}</td>
             <td>{{ item.disease.disease_code }}</td>
+            <td>{{ item.disease.disease }}</td>
+            <td>{{ item.remarks }}</td>
             <td class="text-center"><a :href="createDiseaseLink(item)" target="_blank" class="btn btn-tiny btn-secondary">View</a></td>
             <td class="text-center">
+              <button class="btn btn-tiny btn-primary" @click="onOpenEditDiffDiagModal(item)">Edit</button>
               <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Delete</button>
             </td>
           </tr>
@@ -41,7 +44,7 @@
     </div><!-- card -->
 
 
-    <!-- MODAL WINDOW -->
+    <!-- Modal Add Diff Diagnosis -->
     <ModalWindow id="modal-add-diff-diagnosis" :visible="addModalVisible" @close="onCloseAddDiffDiagModal">
       <template v-slot:title>Add a differential diagnosis</template>
       <slot>
@@ -83,7 +86,40 @@
         </div>
 
       </slot>
-    </ModalWindow>
+    </ModalWindow><!-- Modal Add Diff Diagnosis -->
+
+
+    <!-- Modal Edit Diff Diagnosis -->
+    <ModalWindow id="modal-edit-diff-diagnosis" @close="onCloseEditDiffDiagModal" :visible="editModalVisible">
+      <template v-slot:title v-if="diffDiagnosisToEdit">Edit {{ diffDiagnosisToEdit.disease.disease }}</template>
+      <slot v-if="diffDiagnosisToEdit">
+
+        <div class="form-row">
+          <div class="col">
+
+            <div class="form-group">
+              <label>Disease</label>
+              <input class="form-control" type="text" readonly :value="diffDiagnosisToEdit.disease.disease">
+            </div>
+
+            <div class="w-100"></div>
+
+            <div class="form-group">
+              <label>Remarks</label>
+              <textarea class="form-control" rows="5" v-model="diffDiagnosisToEdit.remarks"></textarea>
+            </div>
+
+          </div><!-- col -->
+        </div><!-- row -->
+
+        <div class="row">
+          <div class="col text-center">
+            <button class="btn btn-success" @click="onUpdate">Update</button>
+          </div>
+        </div>
+
+      </slot>
+    </ModalWindow><!-- Modal Edit Diff Diagnosis -->
 
   </div><!-- Template -->
 
@@ -106,11 +142,14 @@ export default {
   data() {
     return {
       addModalVisible: false,
+      editModalVisible: false,
 
       diffDiagnosisToAdd: {
         disease: "-1",
         remarks: "",
-      }
+      },
+
+      diffDiagnosisToEdit: null,
 
     }
   },
@@ -172,6 +211,20 @@ export default {
 
     },
 
+
+    onUpdate: function () {
+
+      this.$store.dispatch('updateDiffDiagnosis', this.diffDiagnosisToEdit)
+          .then(r => {
+            this.editModalVisible = false;
+          })
+          .catch(e => {
+            alert("Failed to update differential diagnosis");
+            console.log(e);
+          })
+
+    },
+
     onDelete: function (diffDiagnosis) {
 
       this.$store.dispatch('deleteDiffDiagnosis', diffDiagnosis);
@@ -184,7 +237,17 @@ export default {
 
     onCloseAddDiffDiagModal: function () {
       this.addModalVisible = false;
-    }
+    },
+
+
+    onOpenEditDiffDiagModal: function (diffDiagnosis) {
+      this.diffDiagnosisToEdit = diffDiagnosis;
+      this.editModalVisible = true;
+    },
+
+    onCloseEditDiffDiagModal: function () {
+      this.editModalVisible = false;
+    },
 
   },
 

@@ -128,6 +128,31 @@ export default {
                 });
 
             });
+        },
+
+        updateDiffDiagnosis: function ({commit, dispatch, rootGetters}, diffDiagnosis) {
+            return new Promise((resolve, reject) => {
+
+                const params = {
+                    id: diffDiagnosis.id,
+                    remarks: diffDiagnosis.remarks,
+                };
+
+                $.get(`${getSiteURL()}/api/update/diff-diagnosis.php`, {
+                    id: params.id,
+                    remarks: params.remarks
+                }).done(r => {
+
+                    const visit_id = rootGetters.getVisit.id;
+                    dispatch('fetchDifferentialDiagnosis', visit_id);
+
+                    resolve();
+
+                }).fail(e => {
+                    reject(e);
+                });
+
+            });
         }
 
     }

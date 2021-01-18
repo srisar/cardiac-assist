@@ -2,7 +2,8 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\Disease;
+use App\Models\DifferentialDiagnosis;
+use App\Models\Symptom;
 
 require_once "../../../_bootstrap.inc.php";
 
@@ -10,13 +11,10 @@ try {
 
     $fields = [
         'id' => Request::getAsInteger('id'),
-        'disease' => Request::getAsString('disease'),
-        'disease_code' => Request::getAsString('disease_code'),
-        'description' => Request::getAsRawString('description'),
-
+        'remarks' => Request::getAsString('remarks'),
     ];
 
-    $object = Disease::build($fields);
+    $object = DifferentialDiagnosis::build($fields);
 
     $result = $object->update();
 

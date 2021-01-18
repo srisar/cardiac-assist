@@ -24,7 +24,7 @@ try {
     else
         $result = $object->update();
 
-    if ( empty($result) ) throw new Exception('Failed to update user');
+    if ( empty($result) ) throw new Exception('Update failed');
 
     JSONResponse::validResponse('success');
     return;

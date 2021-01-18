@@ -77,8 +77,6 @@ class DifferentialDiagnosis implements IModel
     public function update(): bool
     {
         $data = [
-            'visit_id' => $this->visit_id,
-            'disease_id' => $this->disease_id,
             'remarks' => $this->remarks
         ];
 

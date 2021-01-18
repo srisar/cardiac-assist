@@ -29,7 +29,7 @@ try {
 
     $result = $object->update();
 
-    if ( empty($result) ) throw new Exception('Patient: Update failed');
+    if ( empty($result) ) throw new Exception('Update failed');
 
     JSONResponse::validResponse('Success');
     return;
