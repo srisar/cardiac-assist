@@ -59,6 +59,27 @@ export default new Vuex.Store({
 
             });
 
+        },
+
+        /*
+        * Update visit details
+        * */
+        updateVisit({commit}, visit) {
+            return new Promise((resolve, reject) => {
+
+                $.post(`${getSiteURL()}/api/update/visit.php`, {
+                    id: visit.id,
+                    visit_date: visit.visit_date,
+                    remarks: visit.remarks
+                }).done(r => {
+
+                    resolve();
+
+                }).fail(e => {
+                    reject(e);
+                });
+
+            });
         }
 
     }

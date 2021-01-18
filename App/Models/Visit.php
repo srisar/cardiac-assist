@@ -64,7 +64,6 @@ class Visit implements IModel
     public function update(): bool
     {
         $data = [
-            'patient_id' => $this->patient_id,
             'visit_date' => $this->visit_date,
             'remarks' => $this->remarks,
         ];

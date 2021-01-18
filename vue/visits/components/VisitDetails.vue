@@ -6,7 +6,7 @@
       <div class="card-header">
         Visit Details
         <div class="float-right">
-          <button class="btn btn-tiny btn-primary">Edit</button>
+          <button class="btn btn-tiny btn-primary" @click="onShowEditVisit">Edit</button>
         </div>
       </div>
       <div class="card-body">
@@ -39,17 +39,58 @@
       </div>
     </div>
 
+    <ModalWindow :visible="modalEditVisitVisible" @close="onHideEditVisit">
+      <template v-slot:title>Edit visit details</template>
+      <slot>
+
+        <div class="form-row">
+          <div class="col-auto">
+
+            <div class="form-group">
+              <label>Date</label>
+              <DateField v-model="visit.visit_date"/>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+
+            <div class="form-group">
+              <label>Remarks</label>
+              <textarea rows="5" class="form-control" v-model="visit.remarks"></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <button class="btn btn-success" @click="onUpdateVisitDetails">Update</button>
+          </div>
+        </div>
+
+      </slot>
+    </ModalWindow>
+
   </div><!-- template -->
 
 </template>
 
 <script>
+import ModalWindow from "../../_common/components/ModalWindow";
+import DateField from "../../_common/components/DateField";
+
 export default {
   name: "VisitDetails",
+  components: {ModalWindow, DateField},
 
   data() {
     return {
-      //
+
+      modalEditVisitVisible: false,
+
     }
   },
 
@@ -64,7 +105,34 @@ export default {
   },
 
   methods: {
-    //
+
+    /*
+    * Modal event handlers
+    * */
+    onShowEditVisit: function () {
+      this.modalEditVisitVisible = true;
+    },
+
+    onHideEditVisit: function () {
+      this.modalEditVisitVisible = false;
+    },
+
+
+    onUpdateVisitDetails: function () {
+
+      this.$store.dispatch('updateVisit', this.visit)
+          .then(r => {
+
+            this.modalEditVisitVisible = false;
+
+          })
+          .catch(e => {
+            alert('Failed to update visit details');
+            console.log(e);
+          })
+
+    }
+
   },
 }
 </script>
