@@ -39,11 +39,12 @@ class DifferentialDiagnosis implements IModel
     public static function find(int $id): ?DifferentialDiagnosis
     {
 
+        /** @var DifferentialDiagnosis $result */
         $result = Database::find(self::TABLE, $id, self::class);
 
         if ( !empty($result) ) {
             $result->visit = Visit::find($result->visit_id);
-            $result->disease = Disease::find($result->symptom_id);
+            $result->disease = Disease::find($result->disease_id);
 
             return $result;
         }
