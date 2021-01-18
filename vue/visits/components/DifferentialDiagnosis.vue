@@ -30,7 +30,7 @@
             <td>{{ item.disease.disease_code }}</td>
             <td>{{ item.disease.disease }}</td>
             <td>{{ item.remarks }}</td>
-            <td class="text-center"><a :href="createDiseaseLink(item)" target="_blank" class="btn btn-tiny btn-secondary">View</a></td>
+            <td class="text-center"><a :href="createDiseaseLink(item.disease)" target="_blank" class="btn btn-tiny btn-secondary">View</a></td>
             <td class="text-center">
               <button class="btn btn-tiny btn-primary" @click="onOpenEditDiffDiagModal(item)">Edit</button>
               <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Delete</button>

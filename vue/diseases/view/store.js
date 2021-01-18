@@ -48,13 +48,11 @@ export default new Vuex.Store({
 
             $.get(`${getSiteURL()}/api/get/diseases.php`, {
                 id: id
-            })
-                .done(r => {
-                    commit('updateSelectedDisease', r.data);
-                })
-                .fail(e => {
-                    console.log(e);
-                });
+            }).done(r => {
+                commit('updateSelectedDisease', r.data);
+            }).fail(e => {
+                console.log(e);
+            });
 
         },
 

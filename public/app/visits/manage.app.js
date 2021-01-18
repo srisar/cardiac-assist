@@ -19457,7 +19457,7 @@ var render = function() {
                       {
                         staticClass: "btn btn-tiny btn-secondary",
                         attrs: {
-                          href: _vm.createDiseaseLink(item),
+                          href: _vm.createDiseaseLink(item.disease),
                           target: "_blank"
                         }
                       },
