@@ -53,16 +53,20 @@ export default {
         fetchVisitSymptoms: function ({commit}, visitId) {
             return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/visit-symptoms.php`, {
+                const params = {
                     visit_id: visitId
-                }).done(r => {
+                }
 
-                    commit('updateVisitSymptomsList', r.data);
-                    resolve();
+                $.get(`${getSiteURL()}/api/get/visit-symptoms.php`, params)
+                    .done(r => {
 
-                }).fail(e => {
-                    reject(e);
-                });
+                        commit('updateVisitSymptomsList', r.data);
+                        resolve();
+
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
         },
@@ -90,21 +94,22 @@ export default {
         addVisitSymptom: function ({commit, dispatch, rootGetters}, symptom) {
             return new Promise((resolve, reject) => {
 
-                const visit_id = rootGetters.getVisit.id;
-                const symptom_id = symptom.id;
+                const params = {
+                    visit_id: rootGetters.getVisit.id,
+                    symptom_id: symptom.id,
+                }
 
-                $.get(`${getSiteURL()}/api/save/visit-symptom.php`, {
-                    visit_id: visit_id,
-                    symptom_id: symptom_id
-                }).done(r => {
+                $.get(`${getSiteURL()}/api/save/visit-symptom.php`, params)
+                    .done(r => {
 
-                    dispatch('fetchVisitSymptoms', visit_id);
+                        dispatch('fetchVisitSymptoms', params.visit_id);
 
-                    resolve();
+                        resolve();
 
-                }).fail(e => {
-                    reject(e);
-                });
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
         },
@@ -112,20 +117,22 @@ export default {
         deleteVisitSymptom: function ({commit, dispatch, rootGetters}, visitSymptom) {
             return new Promise((resolve, reject) => {
 
-                const visit_id = rootGetters.getVisit.id;
-                const id = visitSymptom.id;
+                const params = {
+                    visit_id: rootGetters.getVisit.id,
+                    id: visitSymptom.id,
+                }
 
-                $.get(`${getSiteURL()}/api/delete/visit-symptom.php`, {
-                    id: id,
-                }).done(r => {
+                $.get(`${getSiteURL()}/api/delete/visit-symptom.php`, params)
+                    .done(r => {
 
-                    dispatch('fetchVisitSymptoms', visit_id);
+                        dispatch('fetchVisitSymptoms', params.visit_id);
 
-                    resolve();
+                        resolve();
 
-                }).fail(e => {
-                    reject(e);
-                });
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
         }

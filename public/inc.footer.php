@@ -3,6 +3,21 @@
 use App\Core\App;
 
 ?>
+
+<div class="container-fluid mt-5 mb-3">
+    <div class="row">
+        <div class="col">
+
+            <hr>
+            <div class="text-center">
+                &copy; <?= date('Y') ?> Cardiac Assist. All rights reserved. Developed by <a href="#">srisar.dev</a>.
+                <span class="badge badge-secondary"><?= APP_VERSION ?></span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script src="<?= App::siteURL() ?>/assets/js/jquery-3.5.1.min.js"></script>
 <script src="<?= App::siteURL() ?>/assets/js/popper.min.js"></script>
 <script src="<?= App::siteURL() ?>/assets/js/bootstrap.bundle.js"></script>

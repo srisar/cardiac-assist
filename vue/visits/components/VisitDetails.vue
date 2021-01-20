@@ -44,7 +44,7 @@
 
             <div class="input-group input-group-sm">
               <div class="input-group-prepend">
-                <div class="input-group-text">gender</div>
+                <div class="input-group-text">Gender</div>
               </div>
               <input type="text" class="form-control bg-white" :value="patient.gender" readonly>
             </div>

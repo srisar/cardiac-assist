@@ -24,6 +24,13 @@
           <DifferentialDiagnosis/>
         </div><!-- col -->
 
+        <div class="w-100"></div>
+
+        <!-- Investigations -->
+        <div class="col-12 mb-3">
+          <Investigations/>
+        </div><!-- col -->
+
       </div><!-- row -->
 
     </div><!-- container -->
@@ -37,10 +44,11 @@
 import VisitDetails from "./components/VisitDetails";
 import VisitSymptoms from "./components/VisitSymptoms";
 import DifferentialDiagnosis from "./components/DifferentialDiagnosis";
+import Investigations from "./components/Investigations";
 
 export default {
   name: "ManageVisit",
-  components: {VisitDetails, VisitSymptoms, DifferentialDiagnosis},
+  components: {Investigations, VisitDetails, VisitSymptoms, DifferentialDiagnosis},
 
   data() {
     return {
@@ -66,6 +74,11 @@ export default {
               });
 
           this.$store.dispatch('fetchDifferentialDiagnosis', this.visitId)
+              .catch(e => {
+                console.log(e);
+              });
+
+          this.$store.dispatch('fetchInvestigations', this.visitId)
               .catch(e => {
                 console.log(e);
               });

@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 import visitSymptoms from './store_modules/visit_symptoms';
 import differentialDiagnosis from './store_modules/differential_diagnosis';
+import investigations from "./store_modules/investigations";
 
 /*
 * -------------------------------------------------------------------------
@@ -16,7 +17,8 @@ export default new Vuex.Store({
 
     modules: {
         visitSymptoms: visitSymptoms,
-        differentialDiagnosis: differentialDiagnosis
+        differentialDiagnosis: differentialDiagnosis,
+        investigations: investigations,
     },
 
     state: {
