@@ -10,7 +10,7 @@ use App\Core\App;
 
             <hr>
             <div class="text-center">
-                &copy; <?= date('Y') ?> Cardiac Assist. All rights reserved. Developed by <a href="#">srisar.dev</a>.
+                &copy; <?= date('Y') ?> Cardiac Assist. All rights reserved. Developed by <a href="https://gravitide.dev">gravitide.dev</a>.
                 <span class="badge badge-secondary"><?= APP_VERSION ?></span>
             </div>
 

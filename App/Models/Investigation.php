@@ -13,9 +13,8 @@ class Investigation implements IModel
 
     private const TABLE = 'investigations';
 
-    public ?int $id = -1, $visit_id = -1;
+    public ?int $id = -1;
     public ?string $investigation_name, $description;
-    public ?Visit $visit;
 
     /**
      * @param $array
@@ -35,28 +34,28 @@ class Investigation implements IModel
      * @param int $id
      * @return Investigation
      */
-    public static function find(int $id)
+    public static function find(int $id): Investigation
     {
         /** @var Investigation $investigation */
         $investigation = Database::find(self::TABLE, $id, self::class);
-
-        if ( !empty($investigation) ) {
-            $investigation->visit = Visit::find($investigation->visit_id);
-        }
 
         return $investigation;
 
     }
 
-    public static function findAll($limit = 1000, $offset = 0)
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return Investigation[]
+     */
+    public static function findAll($limit = 1000, $offset = 0): array
     {
-        // TODO: Implement findAll() method.
+        return Database::findAll(self::TABLE, $limit, $offset, self::class, 'investigation_name');
     }
 
     public function insert()
     {
         $data = [
-            'visit_id' => $this->visit_id,
             'investigation_name' => $this->investigation_name,
             'description' => $this->description
         ];
@@ -79,33 +78,21 @@ class Investigation implements IModel
         return Database::delete(self::TABLE, 'id', $this->id);
     }
 
-
     /**
-     * @param Visit $visit
-     * @return Investigation[]
+     * @param $investigation_name
+     * @return Investigation|null
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByName($investigation_name): ?Investigation
     {
         $db = Database::instance();
-        $statement = $db->prepare('select * from investigations where visit_id=?');
-        $statement->execute([$visit->id]);
+        $statement = $db->prepare("select * from investigations where investigation_name=? limit 1");
+        $statement->execute([$investigation_name]);
 
+        $result = $statement->fetchObject(self::class);
 
-        /** @var Investigation[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
-
-        $output = [];
-
-        if ( !empty($results) ) {
-
-            foreach ( $results as $result ) {
-                $result->visit = Visit::find($result->visit_id);
-                $output[] = $result;
-            }
-
-        }
-
-        return $output;
+        if ( !empty($result) ) return $result;
+        return null;
     }
+
 
 }

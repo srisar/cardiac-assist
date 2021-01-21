@@ -4,7 +4,6 @@ use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
 use App\Models\Investigation;
-use App\Models\Visit;
 
 require_once "../../../_bootstrap.inc.php";
 
@@ -12,22 +11,15 @@ Authentication::isAdminOrRedirect();
 
 
 try {
+
     $id = Request::getAsInteger('id');
-    $visit_id = Request::getAsInteger('visit_id');
 
-    if ( !empty($id) || !empty($visit_id) ) {
-
-        if ( !empty($id) ) {
-            JSONResponse::validResponse(['data' => Investigation::find($id)]);
-
-        } elseif ( !empty($visit_id) ) {
-            $visit = Visit::find($visit_id);
-            JSONResponse::validResponse(['data' => Investigation::findByVisit($visit)]);
-        }
-
+    if ( !empty($id) ) {
+        JSONResponse::validResponse(['data' => Investigation::find($id)]);
     } else {
-        throw new Exception('Invalid id');
+        JSONResponse::validResponse(['data' => Investigation::findAll()]);
     }
+
 
 } catch ( Exception $exception ) {
     JSONResponse::exceptionResponse($exception);

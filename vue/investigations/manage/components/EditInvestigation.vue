@@ -8,8 +8,7 @@
           <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
         </div>
         <div>
-
-          {{ symptom.symptom_name }}
+          {{ investigation.investigation_name }}
 
           <div class="float-right">
 
@@ -25,9 +24,7 @@
 
           </div><!-- float -->
 
-
         </div>
-
       </div>
       <div class="card-body">
 
@@ -36,15 +33,17 @@
           <div class="form-row">
             <div class="col">
               <div class="form-group">
-                <label>Symptom name</label>
-                <input type="text" class="form-control" v-model.trim="symptom.symptom_name">
+                <label>Investigation name</label>
+                <input type="text" class="form-control" v-model.trim="investigation.investigation_name">
               </div>
             </div><!-- col -->
+
+
           </div><!-- row -->
 
           <div class="form-row">
             <div class="col">
-              <RichEditor :data="symptom.description" @input="getSymptomDescription"/>
+              <RichEditor :data="investigation.description" @input="getDescription"/>
             </div>
           </div>
 
@@ -57,7 +56,7 @@
 
 
         <div v-else class="view-form">
-          <RichViewer :data="symptom.description"/>
+          <RichViewer :data="investigation.description"/>
         </div><!-- view-form -->
 
       </div>
@@ -71,10 +70,9 @@
 
 import RichViewer from "../../../_common/components/RichViewer";
 import RichEditor from "../../../_common/components/RichEditor";
-import Vue from "vue";
 
 export default {
-  name: "EditSymptom",
+  name: "EditInvestigation",
   components: {RichEditor, RichViewer},
   props: [],
 
@@ -82,24 +80,25 @@ export default {
   data() {
     return {
       editable: false,
-      symptomDescription: this.$store.getters.getSelectedSymptom.description,
+      description: this.$store.state.selectedInvestigation.description,
 
       // delete
       confirmDelete: false,
+
 
     }
   },
 
   computed: {
 
-    symptom: function () {
+    investigation: function () {
       this.editable = false;
-      return this.$store.getters.getSelectedSymptom;
+      return this.$store.state.selectedInvestigation;
     },
 
     editButtonText: function () {
-      return this.$store.getters.getEditButtonText;
-    }
+      return this.$store.state.editButtonText;
+    },
 
   },
 
@@ -108,28 +107,17 @@ export default {
 
   methods: {
 
-    /*
-    * Get data from rich editor
-    * */
-    getSymptomDescription: function (data) {
-      this.symptomDescription = data;
-    },
-
-
     onClickUpdate: function () {
+      this.investigation.description = this.description;
 
-      $.post(`${getSiteURL()}/api/update/symptom.php`, {
-        id: this.symptom.id,
-        symptom_name: this.symptom.symptom_name,
-        description: this.symptomDescription,
-      }).done(r => {
+      this.$store.dispatch('updateInvestigation', this.investigation)
+          .then(r => {
+            alert('Investigation updated');
+          })
+          .catch(e => {
+            alert(e.responseJSON.message);
+          });
 
-        alert(this.symptom.symptom_name + ' updated');
-        this.$store.dispatch('fetchSymptoms');
-
-      }).fail(e => {
-
-      });
     },
 
     onClickEdit: function () {
@@ -140,6 +128,10 @@ export default {
         this.editable = true;
         this.$store.commit('setEditButtonText', 'View');
       }
+    },
+
+    getDescription: function (data) {
+      this.description = data;
     },
 
 
@@ -157,7 +149,7 @@ export default {
 
     onClickDelete: function () {
 
-      this.$store.dispatch('deleteSymptom', this.symptom)
+      this.$store.dispatch('deleteInvestigation', this.investigation)
           .then(r => {
             this.$store.commit('setPanelModeAdd');
           })
@@ -166,6 +158,7 @@ export default {
           });
 
     },
+
 
   },
 
