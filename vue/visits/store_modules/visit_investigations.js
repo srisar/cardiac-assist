@@ -83,7 +83,7 @@ export default {
                 const params = {
                     visit_id: rootState.visit.id,
                     investigation_id: investigation.investigation_id,
-                    description: investigation.description
+                    remarks: investigation.remarks
                 };
 
                 console.log(params);
@@ -134,8 +134,7 @@ export default {
 
                 const params = {
                     id: investigation.id,
-                    investigation_name: investigation.investigation_name,
-                    description: investigation.description
+                    remarks: investigation.remarks
                 };
 
                 $.get(`${getSiteURL()}/api/update/visit-investigation.php`, params)
