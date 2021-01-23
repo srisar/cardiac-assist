@@ -13,7 +13,7 @@ class VisitInvestigation implements IModel
     private const TABLE = 'visit_investigations';
 
     public ?int $id = -1, $visit_id = -1, $investigation_id = -1;
-    public ?string $description = "";
+    public ?string $remarks = "";
 
     public ?Visit $visit;
     public ?Investigation $investigation;
@@ -62,7 +62,7 @@ class VisitInvestigation implements IModel
         $data = [
             'visit_id' => $this->visit_id,
             'investigation_id' => $this->investigation_id,
-            'description' => $this->description,
+            'remarks' => $this->remarks,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -71,7 +71,7 @@ class VisitInvestigation implements IModel
     public function update(): bool
     {
         $data = [
-            'description' => $this->description,
+            'remarks' => $this->remarks,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);

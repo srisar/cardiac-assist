@@ -11,7 +11,7 @@ try {
     $fields = [
         'visit_id' => Request::getAsInteger('visit_id'),
         'investigation_id' => Request::getAsInteger('investigation_id'),
-        'description' => Request::getAsRawString('description'),
+        'remarks' => Request::getAsRawString('remarks'),
     ];
 
     $object = VisitInvestigation::build($fields);

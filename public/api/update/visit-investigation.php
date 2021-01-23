@@ -10,7 +10,7 @@ try {
 
     $fields = [
         'id' => Request::getAsInteger('id'),
-        'description' => Request::getAsRawString('description'),
+        'remarks' => Request::getAsRawString('remarks'),
     ];
 
     $object = VisitInvestigation::build($fields);

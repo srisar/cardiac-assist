@@ -4,7 +4,7 @@
 
     <div class="card shadow shadow-sm">
       <div class="card-header">
-        <span class="badge badge-danger">1</span> Symptoms
+        Symptoms
         <div class="float-right">
           <button class="btn btn-tiny btn-success" @click="onShowAddModal">Add</button>
         </div>

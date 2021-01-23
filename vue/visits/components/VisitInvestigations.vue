@@ -23,7 +23,10 @@
 
                 <div class="form-group">
                   <label>Investigation</label>
-                  <input type="text" class="form-control" v-model="investigationToAdd.investigation_name">
+                  <select class="form-control" v-model="investigationToAdd.investigation_id">
+                    <option value="-1" disabled>SELECT</option>
+                    <option v-for="item in investigationsList" :value="item.id">{{ item.investigation_name }}</option>
+                  </select>
                 </div>
 
                 <div class="form-group">
@@ -32,7 +35,7 @@
                 </div>
 
                 <div class="form-group text-center">
-                  <button class="btn btn-success" @click="onAddInvestigation">Add</button>
+                  <button class="btn btn-success" @click="onAddInvestigation" :disabled="!isSaveFormValid">Add</button>
                   <button class="btn btn-secondary" @click="onHideAddInvestigationPanel">Close</button>
                 </div>
 
@@ -55,8 +58,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(item, index) in investigationsList">
-              <td>{{ item.investigation_name }}</td>
+            <tr v-for="(item) in visitInvestigationsList">
+              <td>{{ item.investigation.investigation_name }}</td>
               <td class="text-center">
                 <button class="btn btn-tiny btn-secondary">View</button>
               </td>
@@ -81,33 +84,63 @@ import RichEditor from "../../_common/components/RichEditor";
 const _ = require('lodash');
 
 export default {
-  name: "Investigations",
+  name: "VisitInvestigations",
   components: {RichEditor},
 
+  /*
+  * DATA
+  * */
   data() {
     return {
       addInvestigationPanelVisible: false,
 
       investigationToAdd: {
-        investigation_name: "",
+        visit_id: -1, // needs to be set when saving or updating the visit symptoms
+        investigation_id: -1,
         description: "",
       },
 
     }
   },
 
+  /*
+  * COMPUTED
+  * */
   computed: {
 
-    investigationsList: function () {
-      return this.$store.getters.investigationsList;
+    visitInvestigationsList: function () {
+      return this.$store.getters.getVisitInvestigationsList;
     },
 
+    investigationsList: function () {
+      return this.$store.getters.getInvestigationsList;
+    },
+
+    isSaveFormValid: function () {
+      return this.investigationToAdd.investigation_id !== -1;
+    },
+
+
   },
 
+  /*
+  * MOUNTED
+  * */
   mounted() {
-    //
+
+    /*
+    * Fetch investigations for the dropdown
+    * */
+    this.$store.dispatch('fetchInvestigations')
+        .catch(e => {
+          console.log(e);
+        });
+
   },
 
+  /*
+  * METHODS
+  * */
   methods: {
 
 
@@ -125,21 +158,27 @@ export default {
 
 
     onAddInvestigation: function () {
-      this.$store.dispatch('addInvestigation', this.investigationToAdd)
-          .then(r => {
+
+      this.investigationToAdd.visit_id = this.$store.state.visit.id;
+
+      // TODO: check if investigation is already added
+
+      this.$store.dispatch('addVisitInvestigation', this.investigationToAdd)
+          .then(() => {
 
             alert('Investigation added');
 
             // clearing out the form
             this.investigationToAdd = {
-              investigation_name: "",
+              investigation_id: -1,
               description: "",
             };
 
           })
-          .catch(e => {
+          .catch(() => {
             alert('Failed to add investigation');
-          })
+          });
+
     },
 
     /*

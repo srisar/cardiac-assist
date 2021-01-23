@@ -2,7 +2,7 @@
 
   <div>
 
-    <div class="container">
+    <div class="container" v-if="!isLoading">
 
       <div class="row mb-3">
         <div class="col">
@@ -28,12 +28,16 @@
 
         <!-- Investigations -->
         <div class="col-12 mb-3">
-          <Investigations/>
+          <VisitInvestigations/>
         </div><!-- col -->
 
       </div><!-- row -->
 
     </div><!-- container -->
+
+    <div v-else class="text-center">
+      <p class="lead">Loading</p>
+    </div>
 
   </div><!-- template -->
 
@@ -44,15 +48,18 @@
 import VisitDetails from "./components/VisitDetails";
 import VisitSymptoms from "./components/VisitSymptoms";
 import DifferentialDiagnosis from "./components/DifferentialDiagnosis";
-import Investigations from "./components/Investigations";
+import VisitInvestigations from "./components/VisitInvestigations";
 
 export default {
   name: "ManageVisit",
-  components: {Investigations, VisitDetails, VisitSymptoms, DifferentialDiagnosis},
+  components: {VisitInvestigations, VisitDetails, VisitSymptoms, DifferentialDiagnosis},
 
   data() {
     return {
       visitId: document.getElementById("php_visit_id").value,
+
+      isLoading: true,
+
     }
   },
 
@@ -64,25 +71,20 @@ export default {
     * Fetch the visit details
     * */
     this.$store.dispatch('fetchVisit', this.visitId)
-        .then(r => {
-
-          // fetch visit-symptoms
+        .then(() => {
 
           this.$store.dispatch('fetchVisitSymptoms', this.visitId)
-              .catch(e => {
-                console.log(e);
-              });
+              .then(() => {
 
-          this.$store.dispatch('fetchDifferentialDiagnosis', this.visitId)
-              .catch(e => {
-                console.log(e);
-              });
+                this.$store.dispatch('fetchDifferentialDiagnosis', this.visitId)
+                    .then(() => {
 
-          this.$store.dispatch('fetchInvestigations', this.visitId)
-              .catch(e => {
-                console.log(e);
+                      this.$store.dispatch('fetchVisitInvestigations', this.visitId)
+                          .then(() => {
+                            this.isLoading = false;
+                          });
+                    });
               });
-
         })
         .catch(e => {
           console.log(e);

@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 import visitSymptoms from './store_modules/visit_symptoms';
 import differentialDiagnosis from './store_modules/differential_diagnosis';
-import investigations from "./store_modules/investigations";
+import visitInvestigations from "./store_modules/visit_investigations";
 
 /*
 * -------------------------------------------------------------------------
@@ -18,7 +18,7 @@ export default new Vuex.Store({
     modules: {
         visitSymptoms: visitSymptoms,
         differentialDiagnosis: differentialDiagnosis,
-        investigations: investigations,
+        visitInvestigations: visitInvestigations,
     },
 
     state: {
@@ -82,7 +82,8 @@ export default new Vuex.Store({
                 });
 
             });
-        }
+        },
+
 
     }
 

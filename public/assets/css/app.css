@@ -39,6 +39,10 @@ table {
   background-color: white;
 }
 
+.table thead tr {
+  background-color: #ddd;
+}
+
 .table-row-options {
   width: 80px;
   text-align: center;
@@ -69,7 +73,7 @@ CK EDITOR STYLES
   --ck-sample-color-blue: #1a9aef;
   --ck-sample-container-width: 1285px;
   --ck-sample-sidebar-width: 350px;
-  --ck-sample-editor-min-height: 400px;
+  --ck-sample-editor-min-height: 250px;
   --ck-sample-editor-z-index: 10;
 }
 

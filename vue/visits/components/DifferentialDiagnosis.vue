@@ -4,7 +4,7 @@
 
     <div class="card shadow shadow-sm">
       <div class="card-header">
-        <span class="badge badge-danger">2</span> Differential Diagnosis
+        Differential Diagnosis
 
         <div class="float-right">
           <button class="btn btn-tiny btn-success" @click="onOpenAddDiffDiagModal">Add</button>
