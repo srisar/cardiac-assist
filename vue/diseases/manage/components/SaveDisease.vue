@@ -26,7 +26,7 @@
 
         <div class="form-row">
           <div class="col">
-            <RichEditor ref="richEditor" @input="getDescription"/>
+            <RichEditorV2 v-model="disease.description"/>
           </div>
         </div>
 
@@ -45,11 +45,11 @@
 
 <script>
 
-import RichEditor from "../../../_common/components/RichEditor";
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
   name: "SaveDisease",
-  components: {RichEditor,},
+  components: {RichEditorV2,},
 
   props: [],
 
@@ -78,21 +78,21 @@ export default {
   methods: {
     //
 
+    /*
+    * On save disease
+    * */
     onClickSave: function () {
 
       this.$store.dispatch('saveDisease', this.disease)
           .then(r => {
-            alert('Saved.');
+            alert('Disease saved');
           })
           .catch(e => {
             alert(e.responseJSON.message);
+            console.log(e);
           });
 
     },
-
-    getDescription: function (data) {
-      this.disease.description = data;
-    }
 
   },
 

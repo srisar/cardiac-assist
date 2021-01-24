@@ -59,6 +59,10 @@ export default new Vuex.Store({
     },
 
     actions: {
+
+        /*
+        * Fetch all available diseases
+        * */
         fetchDiseases({commit}, payload) {
 
             $.get(`${getSiteURL()}/api/get/diseases.php`)
@@ -71,46 +75,88 @@ export default new Vuex.Store({
 
         },
 
+        /*
+        * Save a new disease
+        * */
         saveDisease({commit, dispatch}, disease) {
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/save/disease.php`, {
+                const params = {
                     disease: disease.disease,
                     disease_code: disease.disease_code,
                     description: disease.description,
-                }).done(r => {
-                    dispatch('fetchDiseases');
-                    resolve(r);
-                }).fail(e => {
-                    reject(e);
-                });
+                };
+
+                $.post(`${getSiteURL()}/api/save/disease.php`, params)
+                    .done(r => {
+                        dispatch('fetchDiseases');
+                        resolve(r);
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
 
         },
 
+        /*
+        * Update disease
+        * */
         updateDisease({commit, dispatch}, disease) {
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/update/disease.php`, {
+                const params = {
                     id: disease.id,
                     disease: disease.disease,
                     disease_code: disease.disease_code,
                     description: disease.description,
-                }).done(r => {
+                };
 
-                    dispatch('fetchDiseases');
-                    resolve(`${disease.disease} updated`);
+                $.post(`${getSiteURL()}/api/update/disease.php`, params)
+                    .done(r => {
 
-                }).fail(e => {
-                    reject(e);
-                });
+                        dispatch('fetchDiseases');
+                        resolve(r);
+
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
 
         },
+
+
+        /*
+        * Delete existing disease
+        * */
+        deleteDisease({commit, dispatch}, disease) {
+
+            return new Promise((resolve, reject) => {
+
+                const params = {
+                    id: disease.id,
+                }
+
+                $.post(`${getSiteURL()}/api/delete/disease.php`, params)
+                    .done(r => {
+
+                        dispatch('fetchDiseases');
+                        resolve();
+
+                    }).fail(e => {
+                    reject(e);
+                });
+
+
+            });
+
+        },
+
 
         setSelectedDisease({commit, dispatch}, disease) {
             commit('updateSelectedDisease', disease);

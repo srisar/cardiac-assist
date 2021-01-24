@@ -43,7 +43,7 @@
 
           <div class="form-row">
             <div class="col">
-              <RichEditor :data="investigation.description" @input="getDescription"/>
+              <RichEditorV2 v-model="investigation.description"/>
             </div>
           </div>
 
@@ -56,7 +56,7 @@
 
 
         <div v-else class="view-form">
-          <RichViewer :data="investigation.description"/>
+          <RichEditorV2 v-model="investigation.description" disabled/>
         </div><!-- view-form -->
 
       </div>
@@ -68,19 +68,18 @@
 
 <script>
 
-import RichViewer from "../../../_common/components/RichViewer";
-import RichEditor from "../../../_common/components/RichEditor";
+
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
   name: "EditInvestigation",
-  components: {RichEditor, RichViewer},
+  components: {RichEditorV2},
   props: [],
 
 
   data() {
     return {
       editable: false,
-      description: this.$store.state.selectedInvestigation.description,
 
       // delete
       confirmDelete: false,
@@ -108,7 +107,6 @@ export default {
   methods: {
 
     onClickUpdate: function () {
-      this.investigation.description = this.description;
 
       this.$store.dispatch('updateInvestigation', this.investigation)
           .then(r => {
@@ -130,13 +128,9 @@ export default {
       }
     },
 
-    getDescription: function (data) {
-      this.description = data;
-    },
-
 
     /*
-    * Delete symptom event handlers
+    * Delete investigations event handlers
     * */
 
     onClickConfirmDelete: function () {

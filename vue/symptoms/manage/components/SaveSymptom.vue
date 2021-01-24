@@ -19,7 +19,7 @@
 
         <div class="form-row">
           <div class="col">
-            <RichEditor ref="richEditor" @input="getSymptomDescription"/>
+            <RichEditorV2 v-model="symptom.description"/>
           </div>
         </div>
 
@@ -39,10 +39,11 @@
 <script>
 
 import RichEditor from "../../../_common/components/RichEditor";
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
   name: "SaveSymptom",
-  components: {RichEditor,},
+  components: {RichEditor, RichEditorV2},
 
   props: [],
 
@@ -81,10 +82,6 @@ export default {
           });
 
     },
-
-    getSymptomDescription: function (data) {
-      this.symptom.description = data;
-    }
 
   },
 

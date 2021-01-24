@@ -90,15 +90,19 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/save/symptom.php`, {
+                const params = {
                     symptom_name: symptom.symptom_name,
                     description: symptom.description,
-                }).done(r => {
-                    dispatch('fetchSymptoms');
-                    resolve(r);
-                }).fail(e => {
-                    reject(e);
-                });
+                };
+
+                $.post(`${getSiteURL()}/api/save/symptom.php`, params)
+                    .done(r => {
+                        dispatch('fetchSymptoms');
+                        resolve(r);
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
 
@@ -111,17 +115,20 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/update/symptom.php`, {
+                const params = {
                     id: symptom.id,
                     symptom_name: symptom.symptom_name,
                     description: symptom.description,
-                }).done(r => {
+                };
 
-                    resolve(`${symptom.symptom_name} updated`);
-
-                }).fail(e => {
-                    reject(e);
-                });
+                $.post(`${getSiteURL()}/api/update/symptom.php`, params)
+                    .done(r => {
+                        resolve(r);
+                        dispatch('fetchSymptoms');
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
 
@@ -136,8 +143,6 @@ export default new Vuex.Store({
 
                 $.post(`${getSiteURL()}/api/delete/symptom.php`, {
                     id: symptom.id,
-                    symptom_name: symptom.symptom_name,
-                    description: symptom.description,
                 }).done(r => {
 
                     dispatch('fetchSymptoms');

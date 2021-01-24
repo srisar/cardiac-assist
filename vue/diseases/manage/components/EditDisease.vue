@@ -7,7 +7,24 @@
         <div class="float-left">
           <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
         </div>
-        <div>{{ disease.disease }}</div>
+        <div>
+          {{ disease.disease }}
+
+          <div class="float-right">
+
+
+            <div v-if="confirmDelete">
+              <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
+              <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+            </div>
+
+            <div v-else>
+              <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+            </div>
+
+          </div><!-- float -->
+
+        </div>
       </div>
       <div class="card-body">
 
@@ -32,7 +49,7 @@
 
           <div class="form-row">
             <div class="col">
-              <RichEditor :data="disease.description" @input="getDescription"/>
+              <RichEditorV2 v-model="disease.description"/>
             </div>
           </div>
 
@@ -45,7 +62,7 @@
 
 
         <div v-else class="view-form">
-          <RichViewer :data="disease.description"/>
+          <RichEditorV2 v-model="disease.description" disabled/>
         </div><!-- view-form -->
 
       </div>
@@ -57,20 +74,20 @@
 
 <script>
 
-import RichViewer from "../../../_common/components/RichViewer";
-import RichEditor from "../../../_common/components/RichEditor";
-import Vue from "vue";
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
   name: "EditDisease",
-  components: {RichEditor, RichViewer},
+  components: {RichEditorV2},
   props: [],
 
 
   data() {
     return {
       editable: false,
-      description: this.$store.getters.getSelectedDisease.description,
+
+      // delete
+      confirmDelete: false,
 
     }
   },
@@ -94,14 +111,21 @@ export default {
   methods: {
 
     onClickUpdate: function () {
-      this.disease.description = this.description;
 
-      this.$store.dispatch('updateDisease', this.disease)
+      const disease = {
+        id: this.disease.id,
+        disease: this.disease.disease,
+        disease_code: this.disease.disease_code,
+        description: this.disease.description
+      };
+
+      this.$store.dispatch('updateDisease', disease)
           .then(r => {
-            alert('Symptom updated');
+            alert('Disease updated');
           })
           .catch(e => {
             alert('Update failed');
+            console.log(e);
           });
 
     },
@@ -116,9 +140,31 @@ export default {
       }
     },
 
-    getDescription: function (data) {
-      this.description = data;
-    }
+
+    /*
+   * Delete disease event handlers
+   * */
+
+    onClickConfirmDelete: function () {
+      this.confirmDelete = true;
+    },
+
+    onClickCancelDelete: function () {
+      this.confirmDelete = false;
+    },
+
+    onClickDelete: function () {
+
+      this.$store.dispatch('deleteDisease', this.disease)
+          .then(r => {
+            this.$store.commit('setPanelModeAdd');
+          })
+          .catch(e => {
+            console.log(e);
+          });
+
+    },
+
 
   },
 

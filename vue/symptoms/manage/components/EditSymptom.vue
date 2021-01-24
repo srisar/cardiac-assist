@@ -44,7 +44,7 @@
 
           <div class="form-row">
             <div class="col">
-              <RichEditor :data="symptom.description" @input="getSymptomDescription"/>
+              <RichEditorV2 v-model="symptom.description"/>
             </div>
           </div>
 
@@ -57,7 +57,7 @@
 
 
         <div v-else class="view-form">
-          <RichViewer :data="symptom.description"/>
+          <RichEditorV2 v-model="symptom.description" disabled/>
         </div><!-- view-form -->
 
       </div>
@@ -71,11 +71,12 @@
 
 import RichViewer from "../../../_common/components/RichViewer";
 import RichEditor from "../../../_common/components/RichEditor";
-import Vue from "vue";
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
+
   name: "EditSymptom",
-  components: {RichEditor, RichViewer},
+  components: {RichEditor, RichViewer, RichEditorV2},
   props: [],
 
 
@@ -108,28 +109,19 @@ export default {
 
   methods: {
 
-    /*
-    * Get data from rich editor
-    * */
-    getSymptomDescription: function (data) {
-      this.symptomDescription = data;
-    },
-
 
     onClickUpdate: function () {
 
-      $.post(`${getSiteURL()}/api/update/symptom.php`, {
-        id: this.symptom.id,
-        symptom_name: this.symptom.symptom_name,
-        description: this.symptomDescription,
-      }).done(r => {
+      const symptom = {};
 
-        alert(this.symptom.symptom_name + ' updated');
-        this.$store.dispatch('fetchSymptoms');
+      this.$store.dispatch('updateSymptom', this.symptom)
+          .then(() => {
+            alert(this.symptom.symptom_name + ' updated');
+          })
+          .catch(() => {
+            alert('Failed to update symptom');
+          });
 
-      }).fail(e => {
-
-      });
     },
 
     onClickEdit: function () {

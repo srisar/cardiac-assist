@@ -19,7 +19,7 @@
 
         <div class="form-row">
           <div class="col">
-            <RichEditor ref="richEditor" @input="getDescription"/>
+            <RichEditorV2 v-model="investigation.description"/>
           </div>
         </div>
 
@@ -38,11 +38,12 @@
 
 <script>
 
-import RichEditor from "../../../_common/components/RichEditor";
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
+
 
 export default {
   name: "SaveInvestigation",
-  components: {RichEditor,},
+  components: {RichEditorV2,},
 
   props: [],
 
