@@ -11,7 +11,9 @@
           <div class="col">
             <div class="form-group">
               <label>Disease</label>
-              <input type="text" class="form-control" v-model.trim="disease.disease">
+              <input type="text" class="form-control" :class="{'is-invalid': !isValidForm, 'is-valid': isValidForm}" v-model.trim="disease.disease">
+              <div class="invalid-feedback">Required.</div>
+              <div class="valid-feedback">All looks good!</div>
             </div>
           </div><!-- col -->
 

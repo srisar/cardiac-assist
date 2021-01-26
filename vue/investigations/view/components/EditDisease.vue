@@ -7,24 +7,7 @@
         <div class="float-left">
           <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
         </div>
-        <div>
-          {{ disease.disease }}
-
-          <div class="float-right">
-
-
-            <div v-if="confirmDelete">
-              <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
-              <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
-            </div>
-
-            <div v-else>
-              <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
-            </div>
-
-          </div><!-- float -->
-
-        </div>
+        <div>{{ disease.disease }}</div>
       </div>
       <div class="card-body">
 
@@ -35,7 +18,6 @@
               <div class="form-group">
                 <label>Disease name</label>
                 <input type="text" class="form-control" v-model.trim="disease.disease">
-
               </div>
             </div><!-- col -->
 
@@ -50,7 +32,7 @@
 
           <div class="form-row">
             <div class="col">
-              <RichEditorV2 v-model="disease.description"/>
+              <RichEditor :data="disease.description" @input="getDescription"/>
             </div>
           </div>
 
@@ -63,7 +45,7 @@
 
 
         <div v-else class="view-form">
-          <RichEditorV2 v-model="disease.description" disabled/>
+          <RichViewer :data="disease.description"/>
         </div><!-- view-form -->
 
       </div>
@@ -75,20 +57,19 @@
 
 <script>
 
-import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import RichViewer from "../../../_common/components/RichViewer";
+import RichEditor from "../../../_common/components/RichEditor";
 
 export default {
   name: "EditDisease",
-  components: {RichEditorV2},
+  components: {RichEditor, RichViewer},
   props: [],
 
 
   data() {
     return {
       editable: false,
-
-      // delete
-      confirmDelete: false,
+      description: this.$store.getters.selectedDisease.description,
 
     }
   },
@@ -97,11 +78,11 @@ export default {
 
     disease: function () {
       this.editable = false;
-      return this.$store.getters.getSelectedDisease;
+      return this.$store.getters.selectedDisease;
     },
 
     editButtonText: function () {
-      return this.$store.getters.getEditButtonText;
+      return this.$store.getters.editButtonText;
     },
 
   },
@@ -112,21 +93,14 @@ export default {
   methods: {
 
     onClickUpdate: function () {
+      this.disease.description = this.description;
 
-      const disease = {
-        id: this.disease.id,
-        disease: this.disease.disease,
-        disease_code: this.disease.disease_code,
-        description: this.disease.description
-      };
-
-      this.$store.dispatch('updateDisease', disease)
+      this.$store.dispatch('updateDisease', this.disease)
           .then(r => {
-            alert('Disease updated');
+            alert('Symptom updated');
           })
           .catch(e => {
             alert('Update failed');
-            console.log(e);
           });
 
     },
@@ -141,31 +115,9 @@ export default {
       }
     },
 
-
-    /*
-   * Delete disease event handlers
-   * */
-
-    onClickConfirmDelete: function () {
-      this.confirmDelete = true;
-    },
-
-    onClickCancelDelete: function () {
-      this.confirmDelete = false;
-    },
-
-    onClickDelete: function () {
-
-      this.$store.dispatch('deleteDisease', this.disease)
-          .then(r => {
-            this.$store.commit('setPanelModeAdd');
-          })
-          .catch(e => {
-            console.log(e);
-          });
-
-    },
-
+    getDescription: function (data) {
+      this.description = data;
+    }
 
   },
 

@@ -27,6 +27,7 @@ mix.js('vue/diseases/manage/manage.app.js', 'public/app/diseases/').vue();
 mix.js('vue/diseases/view/view.app.js', 'public/app/diseases/').vue();
 
 mix.js('vue/investigations/manage/manage.app.js', 'public/app/investigations/').vue();
+mix.js('vue/investigations/view/view.app.js', 'public/app/investigations/').vue();
 
 mix.js('vue/visits/manage.app.js', 'public/app/visits/').vue();
 
