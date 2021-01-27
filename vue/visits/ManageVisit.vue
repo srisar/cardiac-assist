@@ -11,20 +11,19 @@
       </div><!-- row -->
 
       <div class="row mb-3">
-
         <!-- Symptoms -->
-        <div class="col-12 mb-3">
+        <div class="col-12 col-lg-4 mb-3">
           <VisitSymptoms/>
         </div><!-- col -->
 
-        <div class="w-100"></div>
-
         <!-- Differential diagnosis -->
-        <div class="col-12 mb-3">
+        <div class="col-12 col-lg-8 mb-3">
           <DifferentialDiagnosis/>
         </div><!-- col -->
 
-        <div class="w-100"></div>
+      </div>
+
+      <div class="row mb-3">
 
         <!-- Investigations -->
         <div class="col-12 mb-3">

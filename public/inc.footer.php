@@ -8,11 +8,13 @@ use App\Core\App;
     <div class="row">
         <div class="col">
 
-            <hr>
-            <div class="text-center">
-                &copy; <?= date('Y') ?> Cardiac Assist. All rights reserved. Developed by <a href="https://gravitide.dev">gravitide.dev</a>.
-                <span class="badge badge-secondary"><?= APP_VERSION ?></span>
-            </div>
+            <footer>
+                <hr>
+                <div class="text-center">
+                    &copy; <?= date('Y') ?> Cardiac Assist. All rights reserved. Developed by <a href="https://gravitide.dev">gravitide.dev</a>.
+                    <span class="badge badge-warning"><?= APP_VERSION ?></span>
+                </div>
+            </footer>
 
         </div>
     </div>

@@ -17,8 +17,8 @@
           <thead>
           <tr>
             <th>Symptom</th>
-            <th style="width: 50px" class="text-center">Description</th>
-            <th style="width: 100px" class="text-center">Actions</th>
+            <th style="width: 50px" class="text-center"></th>
+            <th style="width: 50px" class="text-center"></th>
           </tr>
           </thead>
           <tbody>

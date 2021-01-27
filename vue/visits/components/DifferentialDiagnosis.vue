@@ -21,8 +21,8 @@
             <th style="width: 50px">Code</th>
             <th style="width: 200px">Disease</th>
             <th>Remarks</th>
-            <th style="width: 50px" class="text-center">Description</th>
-            <th style="width: 100px" class="text-center">Actions</th>
+            <th style="width: 50px" class="text-center"></th>
+            <th style="width: 100px" class="text-center"></th>
           </tr>
           </thead>
           <tbody>

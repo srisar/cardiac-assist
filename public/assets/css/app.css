@@ -1,6 +1,17 @@
 body {
   font-family: "clearsans", sans-serif;
-  background: #F5F6F7;
+  background: #777777;
+}
+
+footer {
+  color: #ffffff;
+}
+footer a {
+  color: #ffc107;
+}
+footer a:hover {
+  color: #ffc107;
+  text-decoration: underline;
 }
 
 .card {
