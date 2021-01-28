@@ -139,10 +139,19 @@ export default {
   height: 28px;
 }
 
-.modal-header h3 {
-  font-size: 1.1em;
-  line-height: 1.5em;
-  font-weight: bold;
+.modal-header {
+  background-color: #212529;
+  color: whitesmoke;
+  line-height: 2em;
+
+  h3 {
+    font-size: 1em;
+    line-height: 2em;
+    font-weight: bold;
+
+  }
+
 }
+
 
 </style>
