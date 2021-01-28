@@ -12,12 +12,18 @@ class Visit implements IModel
 
     private const TABLE = 'visits';
 
-    public ?int $id = -1, $patient_id = -1;
+    public ?int $id, $patient_id;
     public ?string $visit_date, $remarks;
 
-    public ?string $added_at, $updated_at;
+    public ?float $weight, $height, $bmi, $bsa, $dbp, $sbp;
+
+    public ?string $added_at, $updated_at, $status;
 
     public ?Patient $patient;
+
+
+    private const STATUS_COMPLETE = 'COMPLETE';
+    private const STATUS_INCOMPLETE = 'INCOMPLETE';
 
     public static function build($array): Visit
     {
@@ -63,6 +69,12 @@ class Visit implements IModel
             'patient_id' => $this->patient_id,
             'visit_date' => $this->visit_date,
             'remarks' => $this->remarks,
+            'height' => $this->height,
+            'weight' => $this->weight,
+            'bmi' => $this->bmi,
+            'bsa' => $this->bsa,
+            'sbp' => $this->sbp,
+            'dbp' => $this->dbp,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -76,14 +88,48 @@ class Visit implements IModel
         $data = [
             'visit_date' => $this->visit_date,
             'remarks' => $this->remarks,
+            'height' => $this->height,
+            'weight' => $this->weight,
+            'bmi' => $this->bmi,
+            'bsa' => $this->bsa,
+            'sbp' => $this->sbp,
+            'dbp' => $this->dbp,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);
     }
 
-    public function delete()
+    /**
+     *
+     * @return bool
+     */
+    public function setAsComplete(): bool
     {
-        // TODO: Implement delete() method.
+        $data = [
+            'status' => self::STATUS_COMPLETE,
+        ];
+        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function setAsIncomplete(): bool
+    {
+        $data = [
+            'status' => self::STATUS_INCOMPLETE,
+        ];
+        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+    }
+
+    /**
+     * Delete a visit: will remove all the associated diagnosis, symptoms and all other
+     * data with it
+     * @return bool
+     */
+    public function delete(): bool
+    {
+        return Database::delete(self::TABLE, 'id', $this->id);
     }
 
 

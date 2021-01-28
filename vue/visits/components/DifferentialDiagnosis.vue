@@ -15,7 +15,7 @@
       <div class="card-body">
 
 
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered" v-if="!isEmpty">
           <thead>
           <tr>
             <th style="width: 50px">Code</th>
@@ -29,7 +29,7 @@
           <tr v-for="(item, index) in diffDiagnosisList">
             <td>{{ item.disease.disease_code }}</td>
             <td>{{ item.disease.disease }}</td>
-            <td>{{ item.remarks }}</td>
+            <td><pre>{{ item.remarks }}</pre></td>
             <td class="text-center"><a :href="createDiseaseLink(item.disease)" target="_blank" class="btn btn-tiny btn-secondary">View</a></td>
             <td class="text-center">
               <button class="btn btn-tiny btn-primary" @click="onOpenEditDiffDiagModal(item)">Edit</button>
@@ -38,6 +38,10 @@
           </tr>
           </tbody>
         </table>
+
+        <div v-else>
+          <p>No items. Start adding some differential diagnoses</p>
+        </div>
 
       </div><!-- card-body -->
 
@@ -165,6 +169,10 @@ export default {
 
     diseasesList: function () {
       return this.$store.getters.diseasesList;
+    },
+
+    isEmpty: function () {
+      return this.diffDiagnosisList.length === 0;
     }
 
   },

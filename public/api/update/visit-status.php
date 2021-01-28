@@ -10,19 +10,18 @@ try {
 
     $fields = [
         'id' => Request::getAsInteger('id'),
-        'visit_date' => Request::getAsString('visit_date'),
-        'remarks' => Request::getAsRawString('remarks'),
-        'height' => Request::getAsFloat('height'),
-        'weight' => Request::getAsFloat('weight'),
-        'bmi' => Request::getAsFloat('bmi'),
-        'bsa' => Request::getAsFloat('bsa'),
-        'dbp' => Request::getAsFloat('dbp'),
-        'sbp' => Request::getAsFloat('sbp'),
+        'status' => Request::getAsString('status'),
     ];
+
+    if ( empty($fields['id']) ) throw new Exception('Invalid id');
 
     $object = Visit::build($fields);
 
-    $result = $object->update();
+    if ( $fields['status'] == 'COMPLETE' ) {
+        $result = $object->setAsComplete();
+    } else {
+        $result = $object->setAsIncomplete();
+    }
 
     if ( empty($result) ) throw new Exception('Update failed');
 

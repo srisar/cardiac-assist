@@ -12,6 +12,12 @@ try {
         'patient_id' => Request::getAsInteger('patient_id'),
         'visit_date' => Request::getAsString('visit_date'),
         'remarks' => Request::getAsString('remarks'),
+        'height' => Request::getAsFloat('height'),
+        'weight' => Request::getAsFloat('weight'),
+        'bmi' => Request::getAsFloat('bmi'),
+        'bsa' => Request::getAsFloat('bsa'),
+        'dbp' => Request::getAsFloat('dbp'),
+        'sbp' => Request::getAsFloat('sbp'),
     ];
 
     $object = Visit::build($fields);

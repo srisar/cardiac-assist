@@ -32,8 +32,20 @@
 
       </div><!-- row -->
 
+      <div class="row mb-3">
+
+        <!-- Special Investigations -->
+        <div class="col-12 mb-3">
+          <SpecialInvestigations/>
+        </div><!-- col -->
+
+      </div><!-- row -->
+
     </div><!-- container -->
 
+    <!--  -->
+    <!--  -->
+    <!-- Display page loading message -->
     <div v-else class="text-center">
       <p class="lead">Loading</p>
     </div>
@@ -48,10 +60,11 @@ import VisitDetails from "./components/VisitDetails";
 import VisitSymptoms from "./components/VisitSymptoms";
 import DifferentialDiagnosis from "./components/DifferentialDiagnosis";
 import VisitInvestigations from "./components/VisitInvestigations";
+import SpecialInvestigations from "./components/SpecialInvestigations";
 
 export default {
   name: "ManageVisit",
-  components: {VisitInvestigations, VisitDetails, VisitSymptoms, DifferentialDiagnosis},
+  components: {VisitInvestigations, VisitDetails, VisitSymptoms, DifferentialDiagnosis, SpecialInvestigations},
 
   data() {
     return {

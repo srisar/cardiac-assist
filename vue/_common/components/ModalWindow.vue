@@ -153,5 +153,9 @@ export default {
 
 }
 
+.modal-footer {
+  /* modal footer display option */
+  justify-content: center;
+}
 
 </style>

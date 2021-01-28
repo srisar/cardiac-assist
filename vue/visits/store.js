@@ -69,19 +69,47 @@ export default new Vuex.Store({
         updateVisit({commit}, visit) {
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/update/visit.php`, {
+                const params = {
                     id: visit.id,
                     visit_date: visit.visit_date,
-                    remarks: visit.remarks
-                }).done(r => {
+                    remarks: visit.remarks,
+                    height: visit.height,
+                    weight: visit.weight,
+                    bmi: visit.bmi,
+                    bsa: visit.bsa,
+                    dbp: visit.dbp,
+                    sbp: visit.sbp,
+                };
 
-                    resolve();
-
-                }).fail(e => {
-                    reject(e);
-                });
+                $.post(`${getSiteURL()}/api/update/visit.php`, params)
+                    .done(r => {
+                        resolve(r);
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
 
             });
+        },
+
+        visitSetAsComplete({commit,}, {visit, status}) {
+
+            return new Promise(((resolve, reject) => {
+
+                const params = {
+                    id: visit.id,
+                    status: status,
+                }
+
+                $.post(`${getSiteURL()}/api/update/visit-status.php`, params)
+                    .done(r => {
+                        resolve();
+                    })
+                    .fail(e => {
+                        reject(e);
+                    });
+
+            }));
         },
 
 

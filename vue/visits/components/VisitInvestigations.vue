@@ -5,145 +5,165 @@
     <div class="card shadow shadow-sm">
       <div class="card-header">
         Investigations
-        <div class="float-right" v-if="!addInvestigationPanelVisible">
-          <button class="btn btn-tiny btn-success" @click="onShowAddInvestigationPanel">Add</button>
+        <div class="float-right">
+          <button class="btn btn-tiny btn-success" @click="onShowAddModal">Add</button>
         </div>
       </div><!-- card-header -->
 
       <div class="card-body">
 
-        <!-- add investigation form -->
-        <div id="form-add-investigation" v-if="addInvestigationPanelVisible">
-
-          <div class="alert alert-secondary">
-
-            <div class="form-row">
-              <div class="col">
-
-                <div class="form-group">
-                  <label>Investigation</label>
-                  <select class="form-control" v-model="investigationToAdd.investigation_id">
-                    <option value="-1" disabled>SELECT</option>
-                    <option v-for="item in investigationsList" :value="item.id" :disabled="disableIfExistingInvestigation(item)">
-                      {{ item.investigation_name }}
-                    </option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Remarks</label>
-                  <RichEditorV2 v-model="investigationToAdd.remarks"/>
-                </div>
-
-                <div class="form-group text-center">
-                  <button class="btn btn-success" @click="onAddInvestigation" :disabled="!isSaveFormValid">Add</button>
-                  <button class="btn btn-secondary" @click="onHideAddInvestigationPanel">Close</button>
-                </div>
-
-              </div>
-            </div><!-- row -->
-
-          </div><!-- alert -->
-
-        </div><!-- add investigation form -->
-
-        <!-- view visit investigation -->
-        <div id="view-single-visit-investigation" v-if="viewInvestigationPanelVisible">
-
-          <div class="alert alert-success">
-            <div class="form-row">
-              <div class="col">
-
-                <div class="form-group">
-                  <label>Investigation</label>
-                  <input type="text" class="form-control bg-white" readonly
-                         v-model="selectedInvestigation.investigation.investigation_name">
-                </div>
-
-                <div class="form-group">
-                  <label>Remarks</label>
-                  <RichEditorV2 v-model="selectedInvestigation.remarks"/>
-                </div>
-
-                <div class="form-group text-center clearfix">
-                  <div class="float-left">
-                    <button class="btn btn-success" @click="onUpdateInvestigation">Update</button>
-                    <button class="btn btn-secondary" @click="onHideViewInvestigationPanel">Close</button>
-                  </div>
-                  <div class="float-right">
-                    <span class="text-danger">Caution!</span>
-                    <button class="btn btn-danger" @click="onDeleteInvestigation">Delete</button>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- row -->
-          </div><!-- row -->
-
-        </div><!-- view visit investigation -->
-
-
         <!-- investigations list -->
-        <div id="visit-investigations-list" class="my-3">
-          <table class="table table-bordered table-sm">
+        <div id="visit-investigations-list" class="">
+
+          <table class="table table-bordered table-sm" v-if="!isEmpty">
             <thead>
             <tr>
               <th>Investigation</th>
-              <th style="width: 50px" class="text-center">Description</th>
+              <th>Remarks</th>
               <th style="width: 100px" class="text-center">Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(item) in visitInvestigationsList">
-              <td><a href="#view-single-visit-investigation" @click="onSelectViewInvestigationPanel(item)">{{ item.investigation.investigation_name }}</a></td>
-              <td class="text-center">
-                <a class="btn btn-tiny btn-secondary" :href="createViewInvestigationLink(item)">View</a>
+              <td><a href="#">{{ item.investigation.investigation_name }}</a></td>
+              <td>
+                <pre>{{ item.remarks }}</pre>
               </td>
               <td class="text-center">
-                <button class="btn btn-tiny btn-primary" @click="onSelectViewInvestigationPanel(item)">Edit</button>
-                <button class="btn btn-danger btn-tiny" @click="onDeleteInvestigation(item)">Delete</button>
+                <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)">Edit</button>
+                <button class="btn btn-danger btn-tiny" @click="onDelete(item)">Delete</button>
               </td>
             </tr>
             </tbody>
           </table>
+
+          <div v-else>
+            <p>No items. Start adding investigations.</p>
+          </div>
+
         </div><!-- investigations list -->
 
-
       </div><!-- card-body -->
-
     </div><!-- card -->
+
+
+    <!-- MODAL Add Investigation -->
+    <ModalWindow id="modal-add-visit-investigation" :visible="modalAddVisible" @close="onCloseAddModal">
+      <template v-slot:title>Add common investigations</template>
+      <slot>
+
+        <!-- section : add symptom -->
+        <div class="row">
+          <div class="col">
+
+            <div class="form-group">
+              <select class="form-control" v-model="investigationToAdd.investigation_id">
+                <option value="-1" disabled>SELECT</option>
+                <option v-for="item in investigationsList" :disabled="existingInvestigation(item)" :value="item.id">{{ item.investigation_name }}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Remarks</label>
+              <textarea rows="5" class="form-control" v-model="investigationToAdd.remarks"></textarea>
+            </div>
+
+
+          </div><!-- col -->
+        </div><!-- row -->
+        <!-- section: add symptom -->
+
+      </slot>
+
+      <template v-slot:footer>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-success" @click="onAdd" :disabled="!isSaveFormValid">Add</button>
+          </div>
+        </div>
+      </template><!-- footer -->
+
+    </ModalWindow>
+
+
+    <ModalWindow id="modal-edit-investigation" :visible="modalEditVisible" @close="onCloseEditModal">
+      <template v-slot:title v-if="modalEditVisible">Add common investigations</template>
+      <slot v-if="modalEditVisible">
+
+        <!-- section : add symptom -->
+        <div class="row">
+          <div class="col">
+
+            <div class="form-group">
+              <label>Investigation</label>
+              <input type="text" readonly class="form-control" :value="selectedVisitInvestigation.investigation_name">
+            </div>
+
+            <div class="form-group">
+              <label>Remarks</label>
+              <textarea rows="5" class="form-control" v-model="selectedVisitInvestigation.remarks"></textarea>
+            </div>
+
+
+          </div><!-- col -->
+        </div><!-- row -->
+        <!-- section: add symptom -->
+
+      </slot>
+
+      <template v-slot:footer>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-success" @click="onUpdate">Update</button>
+
+            <span v-if="confirmDelete">
+              <button class="btn btn-danger" @click="onDelete({id: selectedVisitInvestigation.id}) & (confirmDelete = false)">Confirm</button>
+              <button class="btn btn-secondary" @click="confirmDelete = !confirmDelete">Cancel</button>
+            </span>
+            <span v-else>
+              <button class="btn btn-danger" @click="confirmDelete = true">Delete</button>
+            </span>
+
+          </div>
+        </div>
+      </template><!-- footer -->
+
+    </ModalWindow>
+
 
   </div><!-- template -->
 
 </template>
 
 <script>
-import RichEditor from "../../_common/components/RichEditor";
 import RichEditorV2 from "../../_common/components/RichEditorV2";
+import ModalWindow from "../../_common/components/ModalWindow";
 
 const _ = require('lodash');
 
 export default {
   name: "VisitInvestigations",
-  components: {RichEditor, RichEditorV2},
+  components: {ModalWindow, RichEditorV2},
 
   /*
   * DATA
   * */
   data() {
     return {
-      addInvestigationPanelVisible: false,
-      viewInvestigationPanelVisible: false,
+      modalAddVisible: false,
+      modalEditVisible: false,
+
+      confirmDelete: false,
 
       investigationToAdd: {
-        visit_id: -1, // needs to be set when saving or updating the visit symptoms
+        visit_id: undefined, // needs to be set when saving or updating the visit investigation
         investigation_id: -1,
         remarks: "",
       },
 
-      selectedInvestigation: {
-        visit_id: -1,
-        investigation_id: -1,
+      selectedVisitInvestigation: {
+        id: undefined,
+        investigation_name: "",
         remarks: "",
       },
 
@@ -168,6 +188,10 @@ export default {
     },
 
 
+    isEmpty: function () {
+      return this.visitInvestigationsList.length === 0;
+    },
+
   },
 
   /*
@@ -191,7 +215,7 @@ export default {
   methods: {
 
 
-    onAddInvestigation: function () {
+    onAdd: function () {
 
       const investigation = {
         visit_id: this.$store.state.visit.id,
@@ -203,8 +227,6 @@ export default {
 
       this.$store.dispatch('addVisitInvestigation', investigation)
           .then(() => {
-
-            alert('Investigation added');
 
             // clearing out the form
             this.investigationToAdd = {
@@ -222,16 +244,15 @@ export default {
     /*
     * Update selected visit investigation
     * */
-    onUpdateInvestigation: function () {
+    onUpdate: function () {
 
-      const investigation = {
-        id: this.selectedInvestigation.id,
-        remarks: this.selectedInvestigation.remarks,
+      const visitInvestigation = {
+        id: this.selectedVisitInvestigation.id,
+        remarks: this.selectedVisitInvestigation.remarks,
       }
 
-      this.$store.dispatch('updateVisitInvestigation', investigation)
+      this.$store.dispatch('updateVisitInvestigation', visitInvestigation)
           .then(() => {
-            alert('Investigation remarks updated');
           })
           .catch(() => {
             alert('Failed to update investigation remarks');
@@ -239,17 +260,15 @@ export default {
 
     },
 
-    onDeleteInvestigation: function () {
+    onDelete: function (item) {
 
       const investigation = {
-        id: this.selectedInvestigation.id,
+        id: item.id,
       }
 
       this.$store.dispatch('deleteVisitInvestigation', investigation)
           .then(() => {
-
-            this.viewInvestigationPanelVisible = false;
-
+            this.onCloseEditModal();
           })
           .catch(() => {
             alert('Failed to delete visit investigation');
@@ -261,45 +280,57 @@ export default {
     *
     * HELPERS
     * */
-
     createViewInvestigationLink: function (investigation) {
       return `${getSiteURL()}/app/investigations/view.php?id=${investigation.id}`;
     },
 
-    onShowAddInvestigationPanel: function () {
-      this.addInvestigationPanelVisible = true;
-    },
-
-    onHideAddInvestigationPanel: function () {
-      this.addInvestigationPanelVisible = false;
-    },
 
     /*
-    * Handle visit investigation selection,
-    * 1. set selected investigation
-    * 2. set investigation remarks
+    * Check if investigation from the dropdown already added
     * */
-    onSelectViewInvestigationPanel: function (investigation) {
-
-      this.selectedInvestigation = investigation;
-      this.selectedInvestigation.updatedRemarks = investigation.remarks;
-
-      this.viewInvestigationPanelVisible = true;
-    },
-
-    onHideViewInvestigationPanel: function () {
-      this.viewInvestigationPanelVisible = false;
-    },
-
-    disableIfExistingInvestigation(investigation) {
+    existingInvestigation(investigation) {
 
       const i = _.find(this.visitInvestigationsList, (o) => {
         return o.investigation_id === investigation.id;
       });
 
-      if (i === undefined) return false;
-      else return true;
-    }
+      return i !== undefined;
+    },
+
+    /*
+    *
+    * Modal event handlers
+    * */
+    onShowAddModal: function () {
+      this.modalAddVisible = true;
+    },
+
+    onCloseAddModal: function () {
+      this.modalAddVisible = false;
+    },
+
+    /*
+    * Show edit selected investigation modal
+    * */
+    onShowEditModal: function (item) {
+
+      console.table(item);
+
+      this.selectedVisitInvestigation.id = item.id;
+      this.selectedVisitInvestigation.investigation_name = item.investigation.investigation_name;
+      this.selectedVisitInvestigation.remarks = item.remarks;
+
+      this.modalEditVisible = true;
+    },
+
+    onCloseEditModal: function () {
+      this.selectedVisitInvestigation.id = undefined;
+      this.selectedVisitInvestigation.investigation_name = "";
+      this.selectedVisitInvestigation.remarks = "";
+
+      this.modalEditVisible = false;
+    },
+
 
   },
 

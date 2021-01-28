@@ -511,7 +511,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+
+
+var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ListVisits",
@@ -525,9 +578,12 @@ __webpack_require__.r(__webpack_exports__);
         visible: false
       },
       visitToAdd: {
-        patient_id: undefined,
         visit_date: moment().format('YYYY-MM-DD'),
-        remarks: ""
+        remarks: "",
+        height: 1,
+        weight: 1,
+        sbp: 0,
+        dsp: 0
       }
     };
   },
@@ -540,6 +596,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     fullName: function fullName() {
       return this.patient.first_name + " " + this.patient.last_name;
+    },
+
+    /* BMI calculation */
+    bmi: function bmi() {
+      return _.round(this.visitToAdd.weight / (this.visitToAdd.height * this.visitToAdd.height), 2);
+    },
+    bsa: function bsa() {
+      // https://www.nursingcenter.com/ncblog/august-2017/body-mass-index-and-body-surface-area-what-s-the-d
+      return _.round(Math.sqrt(this.visitToAdd.height / 100.0 * this.visitToAdd.weight / 3600.0), 2);
     }
   },
   mounted: function mounted() {},
@@ -554,11 +619,26 @@ __webpack_require__.r(__webpack_exports__);
     onClickSave: function onClickSave() {
       var _this = this;
 
-      this.$store.dispatch('addVisit', this.visitToAdd).then(function (r) {
+      var visit = {
+        patient_id: this.patient.id,
+        visit_date: this.visitToAdd.visit_date,
+        remarks: this.visitToAdd.remarks,
+        height: this.visitToAdd.height,
+        weight: this.visitToAdd.weight,
+        bmi: this.bmi,
+        bsa: this.bsa,
+        dbp: this.visitToAdd.dsp,
+        sbp: this.visitToAdd.sbp
+      };
+      this.$store.dispatch('addVisit', visit).then(function (r) {
         // hide modal
-        _this.modalAddVisit.visible = false; // clear remark
+        _this.modalAddVisit.visible = false; // clear fields
 
         _this.visitToAdd.remarks = "";
+        _this.visitToAdd.height = 0;
+        _this.visitToAdd.weight = 0;
+        _this.visitToAdd.dsp = 0;
+        _this.visitToAdd.sbp = 0;
       })["catch"](function (e) {
         alert('Failed to add a visit');
       });
@@ -652,11 +732,18 @@ var moduleVisits = {
       var commit = _ref2.commit,
           dispatch = _ref2.dispatch;
       return new Promise(function (resolve, reject) {
-        $.get("".concat(getSiteURL(), "/api/save/visit.php"), {
+        var params = {
           patient_id: visit.patient_id,
           visit_date: visit.visit_date,
-          remarks: visit.remarks
-        }).done(function (r) {
+          remarks: visit.remarks,
+          height: visit.height,
+          weight: visit.weight,
+          bmi: visit.bmi,
+          bsa: visit.bsa,
+          sbp: visit.sbp,
+          dbp: visit.dbp
+        };
+        $.get("".concat(getSiteURL(), "/api/save/visit.php"), params).done(function (r) {
           dispatch('fetchVisits');
           resolve();
         }).fail(function (e) {
@@ -829,7 +916,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1.1em;\n  line-height: 1.5em;\n  font-weight: bold;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header[data-v-572c4ac0] {\n  background-color: #212529;\n  color: whitesmoke;\n  line-height: 2em;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1em;\n  line-height: 2em;\n  font-weight: bold;\n}\n.modal-footer[data-v-572c4ac0] {\n  /* modal footer display option */\n  justify-content: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19461,6 +19548,146 @@ var render = function() {
                   ],
                   1
                 )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Height (m)")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitToAdd.height,
+                        expression: "visitToAdd.height"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitToAdd.height },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitToAdd, "height", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Weight (kg)")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitToAdd.weight,
+                        expression: "visitToAdd.weight"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitToAdd.weight },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitToAdd, "weight", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("BMI (kg/m²)")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "number", readonly: "" },
+                    domProps: { value: _vm.bmi }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("BSA (m²)")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "number", readonly: "" },
+                    domProps: { value: _vm.bsa }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Systolic BP")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitToAdd.sbp,
+                        expression: "visitToAdd.sbp"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitToAdd.sbp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitToAdd, "sbp", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Diastolic BP")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitToAdd.dsp,
+                        expression: "visitToAdd.dsp"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitToAdd.dsp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitToAdd, "dsp", $event.target.value)
+                      }
+                    }
+                  })
+                ])
               ])
             ]),
             _vm._v(" "),

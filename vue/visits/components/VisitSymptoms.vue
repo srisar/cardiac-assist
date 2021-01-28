@@ -13,7 +13,7 @@
       <div class="card-body">
 
 
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered" v-if="!isEmpty">
           <thead>
           <tr>
             <th>Symptom</th>
@@ -31,6 +31,10 @@
           </tr>
           </tbody>
         </table>
+
+        <div v-else>
+          <p>No items. Start adding some symptoms.</p>
+        </div>
 
       </div><!-- card-body -->
 
@@ -102,7 +106,11 @@ export default {
 
     symptomsList: function () {
       return this.$store.getters.getSymptomsList;
-    }
+    },
+
+    isEmpty: function () {
+      return this.visitSymptomsList.length === 0;
+    },
 
   },
 
@@ -153,9 +161,9 @@ export default {
 
 
     /*
-    *
-    * Modal event handler
-    * */
+     *
+     * Modal event handler
+     * */
     onShowAddModal: function () {
       this.modalAddVisitSymptomVisible = true;
     },

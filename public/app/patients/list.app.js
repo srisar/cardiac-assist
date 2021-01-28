@@ -555,7 +555,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1.1em;\n  line-height: 1.5em;\n  font-weight: bold;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header[data-v-572c4ac0] {\n  background-color: #212529;\n  color: whitesmoke;\n  line-height: 2em;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1em;\n  line-height: 2em;\n  font-weight: bold;\n}\n.modal-footer[data-v-572c4ac0] {\n  /* modal footer display option */\n  justify-content: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

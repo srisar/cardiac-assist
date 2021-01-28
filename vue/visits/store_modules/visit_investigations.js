@@ -92,8 +92,7 @@ export default {
                     .done(r => {
 
                         dispatch('fetchVisitInvestigations', params.visit_id);
-
-                        resolve();
+                        resolve(r);
 
                     })
                     .fail(e => {
@@ -129,12 +128,12 @@ export default {
             });
         },
 
-        updateVisitInvestigation: function ({commit, dispatch, rootState}, investigation) {
+        updateVisitInvestigation: function ({commit, dispatch, rootState}, visitInvestigation) {
             return new Promise((resolve, reject) => {
 
                 const params = {
-                    id: investigation.id,
-                    remarks: investigation.remarks
+                    id: visitInvestigation.id,
+                    remarks: visitInvestigation.remarks
                 };
 
                 $.get(`${getSiteURL()}/api/update/visit-investigation.php`, params)

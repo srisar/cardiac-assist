@@ -48,6 +48,56 @@
         </div>
 
         <div class="form-row">
+
+          <div class="col-auto">
+            <div class="form-group">
+              <label>Height (m)</label>
+              <input type="number" class="form-control" v-model="visitToAdd.height">
+            </div>
+          </div><!-- col -->
+
+          <div class="col-auto">
+            <div class="form-group">
+              <label>Weight (kg)</label>
+              <input type="number" class="form-control" v-model="visitToAdd.weight">
+            </div>
+          </div><!-- col -->
+
+          <div class="col-auto">
+            <div class="form-group">
+              <label>BMI (kg/m&sup2;)</label>
+              <input type="number" class="form-control" :value="bmi" readonly>
+            </div>
+          </div><!-- col -->
+
+          <div class="col-auto">
+            <div class="form-group">
+              <label>BSA (m&sup2;)</label>
+              <input type="number" class="form-control" :value="bsa" readonly>
+            </div>
+          </div><!-- col -->
+
+        </div><!-- row -->
+
+        <div class="form-row">
+
+          <div class="col-auto">
+            <div class="form-group">
+              <label>Systolic BP</label>
+              <input type="number" class="form-control" v-model="visitToAdd.sbp">
+            </div>
+          </div><!-- col -->
+
+          <div class="col-auto">
+            <div class="form-group">
+              <label>Diastolic BP</label>
+              <input type="number" class="form-control" v-model="visitToAdd.dsp">
+            </div>
+          </div><!-- col -->
+
+        </div><!-- row -->
+
+        <div class="form-row">
           <div class="col">
             <div class="form-group">
               <label>Remarks</label>
@@ -74,6 +124,8 @@
 import ModalWindow from "../../../_common/components/ModalWindow";
 import DateField from "../../../_common/components/DateField";
 
+const _ = require('lodash');
+
 export default {
   name: "ListVisits",
   components: {ModalWindow, DateField},
@@ -85,9 +137,12 @@ export default {
       },
 
       visitToAdd: {
-        patient_id: undefined,
         visit_date: moment().format('YYYY-MM-DD'),
         remarks: "",
+        height: 1,
+        weight: 1,
+        sbp: 0,
+        dsp: 0
       }
 
     }
@@ -105,6 +160,19 @@ export default {
 
     fullName: function () {
       return this.patient.first_name + " " + this.patient.last_name;
+    },
+
+    /* BMI calculation */
+    bmi: function () {
+      return _.round(this.visitToAdd.weight / (this.visitToAdd.height * this.visitToAdd.height), 2);
+    },
+
+    bsa: function () {
+
+      // https://www.nursingcenter.com/ncblog/august-2017/body-mass-index-and-body-surface-area-what-s-the-d
+
+      return _.round(Math.sqrt(((this.visitToAdd.height / 100.0) * this.visitToAdd.weight) / 3600.0), 2);
+
     },
 
   },
@@ -127,14 +195,30 @@ export default {
     onClickSave: function () {
 
 
-      this.$store.dispatch('addVisit', this.visitToAdd)
+      const visit = {
+        patient_id: this.patient.id,
+        visit_date: this.visitToAdd.visit_date,
+        remarks: this.visitToAdd.remarks,
+        height: this.visitToAdd.height,
+        weight: this.visitToAdd.weight,
+        bmi: this.bmi,
+        bsa: this.bsa,
+        dbp: this.visitToAdd.dsp,
+        sbp: this.visitToAdd.sbp,
+      }
+
+      this.$store.dispatch('addVisit', visit)
           .then(r => {
 
             // hide modal
             this.modalAddVisit.visible = false;
 
-            // clear remark
+            // clear fields
             this.visitToAdd.remarks = "";
+            this.visitToAdd.height = 0;
+            this.visitToAdd.weight = 0;
+            this.visitToAdd.dsp = 0;
+            this.visitToAdd.sbp = 0;
 
           })
           .catch(e => {
