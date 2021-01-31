@@ -71,10 +71,9 @@ class Request
     public static function getAsFloat(string $key): ?float
     {
         $data = self::getParam($key);
+
         if ( !is_null($data) ) {
-            if ( filter_var($data, FILTER_VALIDATE_FLOAT) ) {
-                return (float)$data;
-            }
+            return filter_var($data, FILTER_VALIDATE_FLOAT);
         }
         return null;
     }
