@@ -5,23 +5,29 @@
     <div class="card shadow shadow-sm" v-if="patient">
       <div class="card-header">
 
-        <div class="float-left">
-          <!-- collapse/un-collapse button -->
-          <button class="btn btn-tiny btn-warning" @click="cardCollapsed = !cardCollapsed"><i class="bi" :class="collapseButtonIcon"></i></button>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <!-- collapse/un-collapse button -->
+            <button class="btn btn-tiny btn-warning" @click="cardCollapsed = !cardCollapsed"><i class="bi" :class="collapseButtonIcon"></i></button>
 
-          <a :href="createPatientPageLink()" class="btn btn-tiny btn-secondary">Back to patient</a>
-          <button class="btn btn-tiny btn-primary" @click="onShowEditVisit">Edit</button>
-        </div>
+            <a :href="createPatientPageLink()" class="btn btn-tiny btn-secondary">Back to patient</a>
+            <button class="btn btn-tiny btn-primary" @click="onShowEditVisit">Edit</button>
+          </div><!-- left -->
 
-        Visit Details
-        <div class="float-right">
+          <div>
+            Visit Details
+          </div><!-- center -->
 
-          <div class="custom-control custom-switch mt-1">
-            <input type="checkbox" class="custom-control-input" id="switch-status" v-model="completed">
-            <label class="custom-control-label" for="switch-status">{{ statusSwitchLabel }}</label>
-          </div>
+          <div>
+            <div class="custom-control custom-switch mt-1">
+              <input type="checkbox" class="custom-control-input" id="switch-status" v-model="completed">
+              <label class="custom-control-label" for="switch-status">{{ statusSwitchLabel }}</label>
+            </div>
+          </div><!-- right -->
 
-        </div>
+        </div><!-- d-flex -->
+
+
       </div>
       <div class="card-body">
 

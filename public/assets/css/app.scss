@@ -31,7 +31,7 @@ pre {
 .card-header {
   font-size: 0.9rem;
   font-weight: bold;
-  text-align: center;
+  //text-align: center;
   padding: .5rem !important;
   text-transform: uppercase;
 }
@@ -76,6 +76,10 @@ table {
   width: 80px !important;
 }
 
+
+.dropdown-item{
+  font-size: 0.8em !important;
+}
 
 /*
 BOOTSTRAP MODAL FULLSCREEN OPTION
