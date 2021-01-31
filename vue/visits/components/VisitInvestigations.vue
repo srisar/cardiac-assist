@@ -19,7 +19,7 @@
             <thead>
             <tr>
               <th>Investigation</th>
-              <th>Remarks</th>
+              <th style="width: 70%">Remarks</th>
               <th style="width: 100px" class="text-center">Actions</th>
             </tr>
             </thead>
