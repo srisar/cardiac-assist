@@ -159,4 +159,12 @@ class Patient implements IModel
         return Visit::findByPatient($this);
     }
 
+    /**
+     * @return Appointment[]
+     */
+    public function getAppointments(): array
+    {
+        return Appointment::findByPatient($this);
+    }
+
 }

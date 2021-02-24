@@ -104,21 +104,16 @@ class VisitECG implements IModel
         $statement = $db->prepare('select * from visit_ecg where visit_id=?');
         $statement->execute([$visit->id]);
 
-
         /** @var VisitECG[] $results */
         $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         $output = [];
-
         if ( !empty($results) ) {
-
             foreach ( $results as $result ) {
                 $result->visit = Visit::find($result->visit_id);
                 $output[] = $result;
             }
-
         }
-
         return $output;
     }
 

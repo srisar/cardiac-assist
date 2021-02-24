@@ -148,7 +148,10 @@
         </div><!-- col-->
 
         <div class="col-12 col-lg-5 mb-3">
-          <ListVisits/>
+          <ListVisits class="mb-2"/>
+
+          <ListAppointments class="mb-2"/>
+
         </div>
 
       </div><!-- row -->
@@ -165,12 +168,13 @@ import store from "./store";
 import DateField from "../../_common/components/DateField";
 import * as values from '../values';
 import ListVisits from "./components/ListVisits";
+import ListAppointments from "./components/ListAppointments";
 
 const _ = require('lodash');
 
 export default {
   name: "EditPatientView",
-  components: {DateField, ListVisits},
+  components: {ListAppointments, DateField, ListVisits},
   store: store,
 
   data() {
@@ -244,10 +248,18 @@ export default {
 
             this.$store.dispatch('fetchVisits')
                 .catch(e => {
-                  alert('Failed to get visits');
-                  console.log(e);
+                  alert('Failed to get visits')
+                  console.log(e)
                 });
-          });
+
+
+            this.$store.dispatch('fetchAppointments')
+                .catch(e => {
+                  alert('failed to get appointments')
+                  console.log(e)
+                })
+
+          })
 
     },
 

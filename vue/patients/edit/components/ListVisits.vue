@@ -5,12 +5,9 @@
     <div class="card">
       <div class="card-header">
 
-        <div class="float-left">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>Visits</div>
           <button class="btn btn-tiny btn-primary" @click="onClickShowAddVisitModal">Add a visit</button>
-        </div>
-
-        <div class="">
-          Visits
         </div>
 
       </div>

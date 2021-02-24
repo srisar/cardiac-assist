@@ -13,18 +13,31 @@ const moduleVisits = {
         visitsList: [],
     },
 
+    /*
+    * === MUTATIONS ===
+    * */
     mutations: {
-        setVisitsList(state, payload) {
-            state.visitsList = payload;
-        }
+
+        setVisitsList(state, list) {
+            state.visitsList = list
+        },
+
     },
 
+    /*
+    * === GETTERS ===
+    * */
     getters: {
+
         getVisitsList(state) {
-            return state.visitsList;
-        }
+            return state.visitsList
+        },
+
     },
 
+    /*
+    * === ACTIONS ===
+    * */
     actions: {
 
         /*
@@ -38,14 +51,15 @@ const moduleVisits = {
                     id: rootGetters.getPatient.id
                 }).done(r => {
 
-                    commit('setVisitsList', r.data);
-                    resolve();
+                    commit('setVisitsList', r.data)
+                    resolve()
 
                 }).fail(e => {
-                    reject(e);
-                });
-            });
-        },
+                    reject(e)
+                })
+            })
+
+        }, /* fetch visits */
 
         addVisit({commit, dispatch}, visit) {
 
@@ -66,30 +80,118 @@ const moduleVisits = {
                 $.get(`${getSiteURL()}/api/save/visit.php`, params)
                     .done(r => {
 
-                        dispatch('fetchVisits');
-                        resolve();
+                        dispatch('fetchVisits')
+                        resolve()
                     })
                     .fail(e => {
-                        reject(e);
+                        reject(e)
                     });
             });
 
-        },
+        }, /* add visit*/
+
 
     }
 
 };
 
+/* Module: appointments */
+const moduleAppointments = {
+    state: {
+        appointmentsList: [],
+    },
+
+    getters: {
+        getAppointmentsList(state) {
+            return state.appointmentsList
+        }
+    },
+
+    mutations: {
+        setAppointmentsList(state, list) {
+            state.appointmentsList = list
+        }
+    },
+
+    actions: {
+        fetchAppointments({rootGetters, commit}) {
+
+            return new Promise((resolve, reject) => {
+
+                $.get(`${getSiteURL()}/api/get/patient-appointments.php`, {
+                    id: rootGetters.getPatient.id
+                }).done(r => {
+
+                    commit('setAppointmentsList', r.data)
+                    resolve()
+
+                }).fail(e => {
+                    reject(e)
+                });
+
+            })
+        }, /* fetch appointments */
+
+        addAppointment({dispatch}, appointment) {
+            return new Promise((resolve, reject) => {
+                $.post(`${getSiteURL()}/api/save/appointment.php`, appointment)
+                    .done(r => {
+                        resolve()
+                    })
+                    .fail(e => {
+                        reject(e)
+                    })
+            })
+
+        }, /* add appointment */
+
+        editAppointment({dispatch}, appointment) {
+            return new Promise((resolve, reject) => {
+                $.post(`${getSiteURL()}/api/update/appointment.php`, appointment)
+                    .done(r => {
+                        dispatch('fetchAppointments')
+                        resolve()
+                    })
+                    .fail(e => {
+                        reject(e)
+                    })
+            })
+        }, /* update appointment */
+
+        deleteAppointment: function ({dispatch}, id) {
+            return new Promise((resolve, reject) => {
+
+                const params = {
+                    id: id
+                }
+
+                $.post(`${getSiteURL()}/api/delete/appointment.php`, params)
+                    .done(r => {
+
+                        dispatch('fetchAppointments')
+                            .then(() => {
+                                resolve()
+                            })
+                    })
+                    .fail(e => {
+                        reject(e)
+                    })
+            })
+
+        }, /* delete appointment */
+
+    },
+}
+
 
 /*
-* ------------------------------------------------------------------------
-* Main store
-*
+* ====== MAIN STORE ======
 * */
 export default new Vuex.Store({
 
     modules: {
-        visits: moduleVisits
+        visits: moduleVisits,
+        appointments: moduleAppointments
     },
 
     state: {

@@ -6,7 +6,6 @@ namespace App\Models;
 
 use App\Core\Database\Database;
 use PDO;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class VisitInvestigation implements IModel
 {
