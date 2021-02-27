@@ -95,7 +95,7 @@ class VisitCoronaryCT implements IModel
      * @param Visit $visit
      * @return VisitCoronaryCT
      */
-    public static function findByVisit(Visit $visit): VisitCoronaryCT
+    public static function findByVisit(Visit $visit): ?VisitCoronaryCT
     {
         $db        = Database::instance();
         $statement = $db->prepare('select * from visit_coronary_ct where visit_id=? limit 1');
@@ -106,8 +106,10 @@ class VisitCoronaryCT implements IModel
 
         if ( !empty($result) ) {
             $result->visit = Visit::find($result->visit_id);
+            return $result;
         }
-        return $result;
+        return null;
+
     }
 
 
