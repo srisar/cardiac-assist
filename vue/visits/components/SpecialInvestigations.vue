@@ -52,7 +52,7 @@
           </div><!-- card -->
         </div><!-- visit ecg -->
 
-        <!-- section: visit ecg -->
+        <!-- section: visit lipids -->
         <div id="section-visit-lipids" class="my-2">
           <div class="card shadow shadow-sm">
 
@@ -69,7 +69,26 @@
               <VisitLipids/>
             </div>
           </div><!-- card -->
-        </div><!-- visit ecg -->
+        </div><!-- visit lipids -->
+
+        <!-- section: visit coronary ct -->
+        <div id="section-visit-coronary-ct" class="my-2">
+          <div class="card shadow shadow-sm">
+
+            <div class="card-header">
+              <div class="d-flex">
+                <button class="btn btn-tiny btn-warning mr-2" @click="visitCoronaryCTExpanded = !visitCoronaryCTExpanded">
+                  <i class="bi" :class="iconToggle(visitCoronaryCTExpanded)"></i>
+                </button>
+                <div>Coronary CT</div>
+              </div>
+            </div>
+
+            <div class="card-body" v-if="visitCoronaryCTExpanded">
+              <VisitCoronaryCT/>
+            </div>
+          </div><!-- card -->
+        </div><!-- visit lipids -->
 
 
       </div><!-- card-body -->
@@ -80,18 +99,20 @@
 </template>
 
 <script>
-import VisitECG from "./special_investigations/VisitECG";
-import VisitLipids from "./special_investigations/VisitLipids";
+import VisitECG        from "./special_investigations/VisitECG";
+import VisitLipids     from "./special_investigations/VisitLipids";
+import VisitCoronaryCT from "./special_investigations/VisitCoronaryCT";
 
 export default {
   name: "SpecialInvestigations",
-  components: {VisitLipids, VisitECG},
+
+  components: { VisitCoronaryCT, VisitLipids, VisitECG },
+
   data() {
     return {
-
-      visitECGExpanded: false,
-      visitLipidsExpanded: true,
-
+      visitLipidsExpanded    : true,
+      visitECGExpanded       : false,
+      visitCoronaryCTExpanded: true,
     }
   },
 
@@ -100,7 +121,7 @@ export default {
   methods: {
     //
     iconToggle: function (value) {
-      if (value) return 'bi-arrow-up';
+      if ( value ) return 'bi-arrow-up';
       else return 'bi-arrow-down';
     },
 

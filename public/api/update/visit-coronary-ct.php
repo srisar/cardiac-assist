@@ -2,6 +2,7 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
+use App\Models\VisitCoronaryCT;
 use App\Models\VisitECG;
 
 require_once "../../../_bootstrap.inc.php";
@@ -24,7 +25,7 @@ try {
 
     if ( empty($fields['id']) ) throw new Exception('Invalid id');
 
-    $object = VisitECG::build($fields);
+    $object = VisitCoronaryCT::build($fields);
 
     $result = $object->update();
 
@@ -35,4 +36,3 @@ try {
 } catch ( Exception $exception ) {
     JSONResponse::exceptionResponse($exception);
 }
-

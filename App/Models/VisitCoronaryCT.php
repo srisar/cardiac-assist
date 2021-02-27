@@ -93,25 +93,21 @@ class VisitCoronaryCT implements IModel
 
     /**
      * @param Visit $visit
-     * @return VisitCoronaryCT[]
+     * @return VisitCoronaryCT
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit(Visit $visit): VisitCoronaryCT
     {
         $db        = Database::instance();
-        $statement = $db->prepare('select * from visit_coronary_ct where visit_id=?');
+        $statement = $db->prepare('select * from visit_coronary_ct where visit_id=? limit 1');
         $statement->execute([$visit->id]);
 
-        /** @var VisitCoronaryCT[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        /** @var VisitCoronaryCT $result */
+        $result = $statement->fetchObject(self::class);
 
-        $output = [];
-        if ( !empty($results) ) {
-            foreach ( $results as $result ) {
-                $result->visit = Visit::find($result->visit_id);
-                $output[]      = $result;
-            }
+        if ( !empty($result) ) {
+            $result->visit = Visit::find($result->visit_id);
         }
-        return $output;
+        return $result;
     }
 
 

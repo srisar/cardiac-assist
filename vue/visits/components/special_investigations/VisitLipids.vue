@@ -61,13 +61,13 @@ export default {
       exist: false,
 
       visitLipids: {
-        id: undefined,
+        id      : undefined,
         visit_id: undefined,
-        tc: 0,
-        ldl: 0,
-        hdl: 0,
-        tg: 0,
-        nhc: 0
+        tc      : 0,
+        ldl     : 0,
+        hdl     : 0,
+        tg      : 0,
+        nhc     : 0
       },
 
     }
@@ -75,9 +75,8 @@ export default {
 
   computed: {
     //
-    visit: function () {
-      return this.$store.getters.getVisit;
-    }
+    visit: function () { return this.$store.getters.getVisit; },
+
   },
 
   mounted() {
@@ -87,8 +86,7 @@ export default {
    * */
     this._checkIfExist()
         .then(r => {
-
-          if (!this.exist) {
+          if ( !this.exist ) {
             this._addNew()
                 .then(r => {
                   this.visitLipids = r.data;
@@ -106,11 +104,11 @@ export default {
 
     onUpdate: function () {
       const params = {
-        id: this.visitLipids.id,
-        tc: this.visitLipids.tc,
+        id : this.visitLipids.id,
+        tc : this.visitLipids.tc,
         ldl: this.visitLipids.ldl,
         hdl: this.visitLipids.hdl,
-        tg: this.visitLipids.tg,
+        tg : this.visitLipids.tg,
         nhc: this.visitLipids.nhc,
       };
 
@@ -127,9 +125,7 @@ export default {
 
     _checkIfExist: function () {
 
-      const params = {
-        visit_id: this.visit.id,
-      };
+      const params = { visit_id: this.visit.id, };
 
       return new Promise((resolve, reject) => {
         $.get(`${getSiteURL()}/api/get/visit-lipids.php`, params)
@@ -142,19 +138,14 @@ export default {
             });
       });
 
-    },
+    }, /* check if visit lipids already exist in db */
 
     _addNew: function () {
 
       return new Promise((resolve, reject) => {
 
         const params = {
-          visit_id: this.visit.id,
-          tc: 0,
-          ldl: 0,
-          hdl: 0,
-          tg: 0,
-          nhc: 0,
+          visit_id: this.visit.id, tc: 0, ldl: 0, hdl: 0, tg: 0, nhc: 0,
         };
 
         $.post(`${getSiteURL()}/api/save/visit-lipids.php`, params)
@@ -166,8 +157,7 @@ export default {
               reject(e);
             });
       });
-
-    }
+    }, /* add new */
 
   },
 }
