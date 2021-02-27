@@ -18,12 +18,14 @@
           <tr>
             <th style="width: 100px">Date</th>
             <th>Remarks</th>
+            <th>Status</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="(item, index) in visitsList">
             <td><a :href="createVisitLink(item)">{{ item.visit_date }}</a></td>
             <td>{{ item.remarks }}</td>
+            <td>{{ item.status }}</td>
           </tr>
           </tbody>
         </table>
@@ -31,6 +33,7 @@
       </div><!-- card-body -->
     </div><!-- card -->
 
+    <!-- MODAL: add new visit -->
     <ModalWindow id="modal-add-visit" :visible="modalAddVisit.visible" @modal-hiding="onHidingAddVisitModal">
       <template v-slot:title>Add a visit for {{ fullName }}</template>
       <slot>
@@ -124,8 +127,8 @@ import DateField from "../../../_common/components/DateField";
 const _ = require('lodash');
 
 export default {
-  name: "ListVisits",
-  components: {ModalWindow, DateField},
+  name      : "ListVisits",
+  components: { ModalWindow, DateField },
   data() {
     return {
 
@@ -135,11 +138,11 @@ export default {
 
       visitToAdd: {
         visit_date: moment().format('YYYY-MM-DD'),
-        remarks: "",
-        height: 1,
-        weight: 1,
-        sbp: 0,
-        dsp: 0
+        remarks   : "",
+        height    : 1,
+        weight    : 1,
+        sbp       : 0,
+        dsp       : 0
       }
 
     }
@@ -195,13 +198,13 @@ export default {
       const visit = {
         patient_id: this.patient.id,
         visit_date: this.visitToAdd.visit_date,
-        remarks: this.visitToAdd.remarks,
-        height: this.visitToAdd.height,
-        weight: this.visitToAdd.weight,
-        bmi: this.bmi,
-        bsa: this.bsa,
-        dbp: this.visitToAdd.dsp,
-        sbp: this.visitToAdd.sbp,
+        remarks   : this.visitToAdd.remarks,
+        height    : this.visitToAdd.height,
+        weight    : this.visitToAdd.weight,
+        bmi       : this.bmi,
+        bsa       : this.bsa,
+        dbp       : this.visitToAdd.dsp,
+        sbp       : this.visitToAdd.sbp,
       }
 
       this.$store.dispatch('addVisit', visit)

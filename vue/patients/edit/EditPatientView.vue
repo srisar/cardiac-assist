@@ -164,7 +164,6 @@
 
 <script>
 
-import store from "./store";
 import DateField from "../../_common/components/DateField";
 import * as values from '../values';
 import ListVisits from "./components/ListVisits";
@@ -173,27 +172,23 @@ import ListAppointments from "./components/ListAppointments";
 const _ = require('lodash');
 
 export default {
-  name: "EditPatientView",
-  components: {ListAppointments, DateField, ListVisits},
-  store: store,
+  name      : "EditPatientView",
+  components: { ListAppointments, DateField, ListVisits },
 
   data() {
     return {
 
       patientId: document.getElementById("php_patient_id").value,
 
-
-      genders: values.GENDERS,
-      jobs: values.JOBS,
-      jobTypes: values.JOB_TYPES,
+      genders    : values.GENDERS,
+      jobs       : values.JOBS,
+      jobTypes   : values.JOB_TYPES,
       dsDivisions: values.DS_DIVISIONS
     }
   },
 
   /*
-  * -----------------------------------------------------------------------------
-  * COMPUTED
-  * -----------------------------------------------------------------------------
+  * === COMPUTED ===
   * */
   computed: {
 
@@ -202,8 +197,8 @@ export default {
     },
 
     formValidated: function () {
-      if (_.isEmpty(this.patient.first_name)) return false;
-      if (_.isEmpty(this.patient.last_name)) return false;
+      if ( _.isEmpty(this.patient.first_name) ) return false;
+      if ( _.isEmpty(this.patient.last_name) ) return false;
       return !_.isEmpty(this.patient.gender);
     },
 
@@ -218,9 +213,7 @@ export default {
   },
 
   /*
-  * -----------------------------------------------------------------------------
-  * MOUNTED
-  * -----------------------------------------------------------------------------
+  * === MOUNTED ===
   * */
   mounted() {
 
@@ -230,10 +223,8 @@ export default {
 
 
   /*
-   * -----------------------------------------------------------------------------
-   * METHODS
-   * -----------------------------------------------------------------------------
-   * */
+  * === METHODS ===
+  * */
   methods: {
     //
 
@@ -245,7 +236,6 @@ export default {
             /*
             * after fetching patient data, fetch visits data
             * */
-
             this.$store.dispatch('fetchVisits')
                 .catch(e => {
                   alert('Failed to get visits')
@@ -270,20 +260,20 @@ export default {
 
       this.$store.dispatch('updatePatient', this.patient)
           .then(r => {
-            alert(r.message);
+            alert(r.message)
           })
           .catch(e => {
-            alert('Failed to update patient details');
-            console.log(e);
+            alert('Failed to update patient details')
+            console.log(e)
           })
 
     },
 
 
     _calculateAge: function () {
-      const today = moment();
-      const diff = moment.duration(today.diff(moment(this.patient.dob)));
-      return Math.round(diff.asYears());
+      const today = moment()
+      const diff = moment.duration(today.diff(moment(this.patient.dob)))
+      return Math.round(diff.asYears())
     }
   },
 

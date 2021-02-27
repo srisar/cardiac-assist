@@ -276,7 +276,7 @@ export default {
       modalEditVisitVisible: false,
       completed: false,
 
-      cardCollapsed: true,
+      cardCollapsed: false,
 
     }
   },
