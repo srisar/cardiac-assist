@@ -13,7 +13,7 @@ Authentication::isAdminOrRedirect();
 
 
 try {
-    $id = Request::getAsInteger('id');
+    $id       = Request::getAsInteger('id');
     $visit_id = Request::getAsInteger('visit_id');
 
     if ( !empty($id) || !empty($visit_id) ) {
@@ -23,7 +23,8 @@ try {
 
         } elseif ( !empty($visit_id) ) {
             $visit = Visit::find($visit_id);
-            JSONResponse::validResponse(['data' => VisitInvestigation::findByVisit($visit)]);
+            if ( !empty($visit) ) JSONResponse::validResponse(['data' => VisitInvestigation::findByVisit($visit)]);
+            else throw new Exception('Invalid visit');
         }
 
     } else {

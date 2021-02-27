@@ -24,7 +24,9 @@ try {
 
         } elseif ( !empty($visit_id) ) {
             $visit = Visit::find($visit_id);
-            JSONResponse::validResponse(['data' => VisitCoronaryCT::findByVisit($visit)]);
+
+            if ( !empty($visit) ) JSONResponse::validResponse(['data' => VisitCoronaryCT::findByVisit($visit)]);
+            else throw new Exception('Invalid visit');
         }
 
     } else {

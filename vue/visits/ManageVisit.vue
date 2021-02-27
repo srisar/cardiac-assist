@@ -12,12 +12,12 @@
 
       <div class="row mb-3">
         <!-- Symptoms -->
-        <div class="col-12 col-lg-4 mb-3">
+        <div class="col-12 col-lg-4">
           <VisitSymptoms/>
         </div><!-- col -->
 
         <!-- Differential diagnosis -->
-        <div class="col-12 col-lg-8 mb-3">
+        <div class="col-12 col-lg-8">
           <DifferentialDiagnosis/>
         </div><!-- col -->
 
@@ -26,7 +26,7 @@
       <div class="row mb-3">
 
         <!-- Investigations -->
-        <div class="col-12 mb-3">
+        <div class="col-12">
           <VisitInvestigations/>
         </div><!-- col -->
 
@@ -35,7 +35,7 @@
       <div class="row mb-3">
 
         <!-- Special Investigations -->
-        <div class="col-12 mb-3">
+        <div class="col-12">
           <SpecialInvestigations/>
         </div><!-- col -->
 
@@ -56,16 +56,25 @@
 
 <script>
 
-import VisitDetails from "./components/VisitDetails";
-import VisitSymptoms from "./components/VisitSymptoms";
+import VisitDetails          from "./components/VisitDetails";
+import VisitSymptoms         from "./components/VisitSymptoms";
 import DifferentialDiagnosis from "./components/DifferentialDiagnosis";
-import VisitInvestigations from "./components/VisitInvestigations";
+import VisitInvestigations   from "./components/VisitInvestigations";
 import SpecialInvestigations from "./components/SpecialInvestigations";
 
 export default {
-  name: "ManageVisit",
-  components: {VisitInvestigations, VisitDetails, VisitSymptoms, DifferentialDiagnosis, SpecialInvestigations},
+  name      : "ManageVisit",
+  components: {
+    VisitInvestigations,
+    VisitDetails,
+    VisitSymptoms,
+    DifferentialDiagnosis,
+    SpecialInvestigations,
+  },
 
+  /*
+  * === DATA ===
+  * */
   data() {
     return {
       visitId: document.getElementById("php_visit_id").value,
@@ -75,8 +84,14 @@ export default {
     }
   },
 
+  /*
+  * === COMPUTED ===
+  * */
   computed: {},
 
+  /*
+  * === MOUNTED ===
+  * */
   mounted() {
 
     /*
@@ -104,6 +119,9 @@ export default {
 
   },
 
+  /*
+  * === METHODS ===
+  * */
   methods: {
     //
   },

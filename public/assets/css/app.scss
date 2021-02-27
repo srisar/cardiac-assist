@@ -1,7 +1,7 @@
 
 body {
   font-family: 'clearsans', sans-serif;
-  background: #777777;
+  background: #4e4e4e;
 }
 
 footer {
@@ -78,14 +78,29 @@ table {
 }
 
 
-.dropdown-item{
+.dropdown-item {
   font-size: 1em !important;
 }
+
+
+.section {
+  .section__title {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    color: #FFFFFF;
+    border-bottom: solid 1px #FFFFFF;
+  }
+
+}
+
 
 /*
 BOOTSTRAP MODAL FULLSCREEN OPTION
 */
-
 
 .content-description {
   .image img {

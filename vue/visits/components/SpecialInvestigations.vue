@@ -2,97 +2,66 @@
 
   <div>
 
-    <div class="card">
-      <div class="card-header">
+    <div class="section">
+      <h2 class="section__title">Special Investigations</h2>
+    </div>
 
-        <div class="d-flex justify-content-between align-items-center">
+    <!-- section: visit ecg -->
+    <div id="section-visit-ecg" class="my-2">
+      <div class="card shadow shadow-sm">
 
-          <div>
-            <div class="flex-fill">Special Investigations</div>
-          </div><!-- left -->
-
-          <!-- checkboxes for investigation items -->
-          <div class="">
-
-            <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="check-ecg" v-model="visitECGExpanded">
-              <label for="check-ecg" class="form-check-label">ECG</label>
-            </div>
-
-            <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="check-lipids" v-model="visitLipidsExpanded">
-              <label for="check-lipids" class="form-check-label">Lipids</label>
-            </div>
-
-          </div><!-- right -->
-
-
+        <div class="card-header">
+          <div class="d-flex">
+            <button class="btn btn-tiny btn-warning mr-2" @click="visitECGExpanded = !visitECGExpanded">
+              <i class="bi" :class="iconToggle(visitECGExpanded)"></i>
+            </button>
+            <div>Electrocardiogram (ECG)</div>
+          </div>
         </div>
 
-      </div>
+        <div class="card-body" v-if="visitECGExpanded">
+          <VisitECG/>
+        </div>
+      </div><!-- card -->
+    </div><!-- visit ecg -->
 
-      <div class="card-body bg-dark">
+    <!-- section: visit lipids -->
+    <div id="section-visit-lipids" class="my-2">
+      <div class="card shadow shadow-sm">
 
-        <!-- section: visit ecg -->
-        <div id="section-visit-ecg" class="my-2">
-          <div class="card shadow shadow-sm">
+        <div class="card-header">
+          <div class="d-flex">
+            <button class="btn btn-tiny btn-warning mr-2" @click="visitLipidsExpanded = !visitLipidsExpanded">
+              <i class="bi" :class="iconToggle(visitLipidsExpanded)"></i>
+            </button>
+            <div>Lipid Profiles</div>
+          </div>
+        </div>
 
-            <div class="card-header">
-              <div class="d-flex">
-                <button class="btn btn-tiny btn-warning mr-2" @click="visitECGExpanded = !visitECGExpanded">
-                  <i class="bi" :class="iconToggle(visitECGExpanded)"></i>
-                </button>
-                <div>Electrocardiogram (ECG)</div>
-              </div>
-            </div>
+        <div class="card-body" v-if="visitLipidsExpanded">
+          <VisitLipids/>
+        </div>
+      </div><!-- card -->
+    </div><!-- visit lipids -->
 
-            <div class="card-body" v-if="visitECGExpanded">
-              <VisitECG/>
-            </div>
-          </div><!-- card -->
-        </div><!-- visit ecg -->
+    <!-- section: visit coronary ct -->
+    <div id="section-visit-coronary-ct" class="my-2">
+      <div class="card shadow shadow-sm">
 
-        <!-- section: visit lipids -->
-        <div id="section-visit-lipids" class="my-2">
-          <div class="card shadow shadow-sm">
+        <div class="card-header">
+          <div class="d-flex">
+            <button class="btn btn-tiny btn-warning mr-2" @click="visitCoronaryCTExpanded = !visitCoronaryCTExpanded">
+              <i class="bi" :class="iconToggle(visitCoronaryCTExpanded)"></i>
+            </button>
+            <div>Coronary CT</div>
+          </div>
+        </div>
 
-            <div class="card-header">
-              <div class="d-flex">
-                <button class="btn btn-tiny btn-warning mr-2" @click="visitLipidsExpanded = !visitLipidsExpanded">
-                  <i class="bi" :class="iconToggle(visitLipidsExpanded)"></i>
-                </button>
-                <div>Lipid Profiles</div>
-              </div>
-            </div>
-
-            <div class="card-body" v-if="visitLipidsExpanded">
-              <VisitLipids/>
-            </div>
-          </div><!-- card -->
-        </div><!-- visit lipids -->
-
-        <!-- section: visit coronary ct -->
-        <div id="section-visit-coronary-ct" class="my-2">
-          <div class="card shadow shadow-sm">
-
-            <div class="card-header">
-              <div class="d-flex">
-                <button class="btn btn-tiny btn-warning mr-2" @click="visitCoronaryCTExpanded = !visitCoronaryCTExpanded">
-                  <i class="bi" :class="iconToggle(visitCoronaryCTExpanded)"></i>
-                </button>
-                <div>Coronary CT</div>
-              </div>
-            </div>
-
-            <div class="card-body" v-if="visitCoronaryCTExpanded">
-              <VisitCoronaryCT/>
-            </div>
-          </div><!-- card -->
-        </div><!-- visit lipids -->
-
-
-      </div><!-- card-body -->
-    </div><!-- card -->
+        <div class="card-body" v-if="visitCoronaryCTExpanded">
+          <VisitCoronaryCT/>
+        </div>
+      </div><!-- card -->
+    </div><!-- visit coronary ct -->
 
   </div><!-- template -->
 
@@ -130,5 +99,7 @@ export default {
 </script>
 
 <style scoped>
-
+.section__title {
+  color: white;
+}
 </style>

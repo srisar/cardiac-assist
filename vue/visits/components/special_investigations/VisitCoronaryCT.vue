@@ -9,49 +9,73 @@
           <input type="number" class="form-control" v-model.number="visitCoronaryCT.total_calcium_score">
         </div>
 
-        <div class="form-group">
-          <label>Origin</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.origin"></textarea>
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label>Origin</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.origin"></textarea>
+            </div>
+
+          </div>
+          <div class="col">
+
+            <div class="form-group">
+              <label>Dominance</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.dominance"></textarea>
+            </div>
+          </div>
+        </div><!-- form-row -->
+
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label>Left Main</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.left_main"></textarea>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>LAD</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.lad"></textarea>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Dominance</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.dominance"></textarea>
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label>LCX</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.lcx"></textarea>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Cardiac Valves</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.cardiac_valves"></textarea>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Left Main</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.left_main"></textarea>
+
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label>Pericardium</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.pericardium"></textarea>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Extra Cardiac Findings</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.extra_cardiac_findings"></textarea>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>LAD</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.lad"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>LCX</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.lcx"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Cardiac Valves</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.cardiac_valves"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Pericardium</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.pericardium"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Extra Cardiac Findings</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.extra_cardiac_findings"></textarea>
-        </div>
 
         <div class="form-group">
           <label>Impression</label>
-          <textarea rows="5" class="form-control" v-model="visitCoronaryCT.impression"></textarea>
+          <textarea rows="2" class="form-control" v-model="visitCoronaryCT.impression"></textarea>
         </div>
 
         <div class="d-flex justify-content-center">
