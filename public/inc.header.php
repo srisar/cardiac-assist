@@ -67,6 +67,17 @@ use App\Models\User;
                     </div>
                 </li><!-- end nav-item -->
 
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Echocardiography
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/mitral-valve-values.php">Mitral Valve Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/diseases/manage.php">Diseases</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
+                    </div>
+                </li><!-- end nav-item -->
+
 
             </ul>
 

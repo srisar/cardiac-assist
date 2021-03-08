@@ -31,3 +31,5 @@ mix.js('vue/investigations/view/view.app.js', 'public/app/investigations/').vue(
 
 mix.js('vue/visits/manage.app.js', 'public/app/visits/').vue();
 
+mix.js('vue/echo/mitral-valve-values/mitral-valve-values.app.js', 'public/app/echo/').vue();
+

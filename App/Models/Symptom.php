@@ -5,7 +5,6 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class Symptom implements IModel
 {
