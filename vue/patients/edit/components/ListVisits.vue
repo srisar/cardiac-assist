@@ -18,14 +18,14 @@
           <tr>
             <th style="width: 100px">Date</th>
             <th>Remarks</th>
-            <th>Status</th>
+            <th style="width: 150px" class="text-center">Status</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(item, index) in visitsList">
+          <tr v-for="(item) in visitsList">
             <td><a :href="createVisitLink(item)">{{ item.visit_date }}</a></td>
             <td>{{ item.remarks }}</td>
-            <td>{{ item.status }}</td>
+            <td class="text-center">{{ item.status }}</td>
           </tr>
           </tbody>
         </table>
@@ -150,17 +150,11 @@ export default {
 
   computed: {
 
-    visitsList: function () {
-      return this.$store.getters.getVisitsList;
-    },
+    visitsList: function () { return this.$store.getters.getVisitsList },
 
-    patient: function () {
-      return this.$store.getters.getPatient;
-    },
+    patient: function () { return this.$store.getters.getPatient },
 
-    fullName: function () {
-      return this.patient.first_name + " " + this.patient.last_name;
-    },
+    fullName: function () { return this.patient.first_name + " " + this.patient.last_name },
 
     /* BMI calculation */
     bmi: function () {
@@ -168,11 +162,8 @@ export default {
     },
 
     bsa: function () {
-
       // https://www.nursingcenter.com/ncblog/august-2017/body-mass-index-and-body-surface-area-what-s-the-d
-
       return _.round(Math.sqrt(((this.visitToAdd.height / 100.0) * this.visitToAdd.weight) / 3600.0), 2);
-
     },
 
   },
@@ -208,20 +199,20 @@ export default {
       }
 
       this.$store.dispatch('addVisit', visit)
-          .then(r => {
+          .then(() => {
 
             // hide modal
             this.modalAddVisit.visible = false;
 
             // clear fields
             this.visitToAdd.remarks = "";
-            this.visitToAdd.height = 0;
-            this.visitToAdd.weight = 0;
+            this.visitToAdd.height = 1;
+            this.visitToAdd.weight = 1;
             this.visitToAdd.dsp = 0;
             this.visitToAdd.sbp = 0;
 
           })
-          .catch(e => {
+          .catch(() => {
             alert('Failed to add a visit');
           });
 

@@ -63,25 +63,46 @@
       </div><!-- card -->
     </div><!-- visit coronary ct -->
 
+    <!-- section: visit coronary ct -->
+    <div id="section-visit-echocardiography" class="my-2">
+      <div class="card shadow shadow-sm">
+
+        <div class="card-header">
+          <div class="d-flex">
+            <button class="btn btn-tiny btn-warning mr-2" @click="visitEchoExpanded = !visitEchoExpanded">
+              <i class="bi" :class="iconToggle(visitEchoExpanded)"></i>
+            </button>
+            <div>Echocardiography</div>
+          </div>
+        </div>
+
+        <div class="card-body" v-if="visitEchoExpanded">
+          <VisitEchocardiography/>
+        </div>
+      </div><!-- card -->
+    </div><!-- visit coronary ct -->
+
   </div><!-- template -->
 
 </template>
 
 <script>
-import VisitECG        from "./special_investigations/VisitECG";
-import VisitLipids     from "./special_investigations/VisitLipids";
+import VisitECG from "./special_investigations/VisitECG";
+import VisitLipids from "./special_investigations/VisitLipids";
 import VisitCoronaryCT from "./special_investigations/VisitCoronaryCT";
+import VisitEchocardiography from "./special_investigations/VisitEcho";
 
 export default {
   name: "SpecialInvestigations",
 
-  components: { VisitCoronaryCT, VisitLipids, VisitECG },
+  components: { VisitEchocardiography, VisitCoronaryCT, VisitLipids, VisitECG },
 
   data() {
     return {
-      visitLipidsExpanded    : true,
+      visitLipidsExpanded    : false,
       visitECGExpanded       : false,
-      visitCoronaryCTExpanded: true,
+      visitCoronaryCTExpanded: false,
+      visitEchoExpanded      : true,
     }
   },
 
@@ -99,7 +120,5 @@ export default {
 </script>
 
 <style scoped>
-.section__title {
-  color: white;
-}
+
 </style>

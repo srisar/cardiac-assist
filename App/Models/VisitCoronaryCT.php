@@ -57,14 +57,12 @@ class VisitCoronaryCT implements IModel
         return Database::findAll(self::TABLE, $limit, $offset, self::class, 'visit_id');
     }
 
-    public function insert()
+    public function insert(): int
     {
         $data = [
             'visit_id' => $this->visit_id,
         ];
-
         return Database::insert(self::TABLE, $data);
-
     }
 
     public function update(): bool

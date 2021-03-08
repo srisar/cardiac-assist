@@ -8,20 +8,21 @@ use PDOException;
 class Database
 {
 
-    private static array $config = [
-        'HOST' => '',
-        'DATABASE' => '',
-        'USERNAME' => '',
-        'PASSWORD' => '',
-    ];
-    private static ?PDO $pdo = null;
+    private static array $config
+                              = [
+            'HOST'     => '',
+            'DATABASE' => '',
+            'USERNAME' => '',
+            'PASSWORD' => '',
+        ];
+    private static ?PDO  $pdo = null;
 
     public static function init(array $config)
     {
         self::$config = $config;
     }
 
-    public static function instance()
+    public static function instance(): ?PDO
     {
         if ( is_null(self::$pdo) ) {
             return self::createInstance();
@@ -29,12 +30,12 @@ class Database
         return self::$pdo;
     }
 
-    private static function createInstance()
+    private static function createInstance(): ?PDO
     {
         try {
-            $dsn = sprintf("mysql:host=%s;dbname=%s", self::$config['HOST'], self::$config['DATABASE']);
-            $options = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            $dsn       = sprintf("mysql:host=%s;dbname=%s", self::$config['HOST'], self::$config['DATABASE']);
+            $options   = [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_CLASS
             ];
             self::$pdo = new PDO($dsn, self::$config['USERNAME'], self::$config['PASSWORD'], $options);
@@ -58,7 +59,7 @@ class Database
      * @param string $order
      * @return array
      */
-    public static function findAll(string $table, int $limit, int $offset, $returnType, $orderColumn, $order='ASC')
+    public static function findAll(string $table, int $limit, int $offset, $returnType, $orderColumn, $order = 'ASC'): array
     {
 
         self::instance();
@@ -79,11 +80,9 @@ class Database
      * @param string $table
      * @param int $id
      * @param $returnType
-     * @param $orderColumn
-     * @param string $order
      * @return mixed|null
      */
-    public static function find(string $table, int $id, $returnType )
+    public static function find(string $table, int $id, $returnType)
     {
         self::instance();
         $statement = self::$pdo->prepare("select * from {$table} where id=?");
@@ -100,15 +99,15 @@ class Database
      * Insert a new record and returns id on success
      * @param string $table
      * @param $data
-     * @return bool|int
+     * @return int
      */
-    public static function insert(string $table, $data)
+    public static function insert(string $table, $data): int
     {
         self::instance();
 
         $query = "insert into {$table} (";
 
-        $columns = array_keys($data);
+        $columns      = array_keys($data);
         $columnsCount = count($columns);
 
         $index = 0;
@@ -144,7 +143,7 @@ class Database
         $result = $statement->execute();
 
         if ( $result ) return (int)self::$pdo->lastInsertId();
-        return $result;
+        return -1;
 
     }
 
@@ -156,14 +155,14 @@ class Database
      * @param array $unique - ['id' => 12]
      * @return bool
      */
-    public static function update(string $table, array $data, array $unique)
+    public static function update(string $table, array $data, array $unique): bool
     {
 
         self::instance();
 
         $query = "update {$table} set ";
 
-        $columns = array_keys($data);
+        $columns     = array_keys($data);
         $columnCount = count($data);
 
         $index = 0;
@@ -200,7 +199,7 @@ class Database
      * @param $value
      * @return bool
      */
-    public static function delete(string $table, string $column, $value)
+    public static function delete(string $table, string $column, $value): bool
     {
         self::instance();
 

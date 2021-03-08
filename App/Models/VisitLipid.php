@@ -14,7 +14,7 @@ class VisitLipid implements IModel
     private const TABLE = 'visit_lipids';
 
     public ?int $id, $visit_id;
-    public ?float $tc, $ldl, $hdl, $tg, $nhc;
+    public ?float    $tc, $ldl, $hdl, $tg, $nhc;
 
     public ?Visit $visit;
 
@@ -52,27 +52,30 @@ class VisitLipid implements IModel
          * */
     }
 
-    public function insert()
+    /**
+     * Insert into database
+     * @return int
+     */
+    public function insert(): int
     {
         $data = [
             'visit_id' => $this->visit_id,
-            'tc' => $this->tc,
-            'ldl' => $this->ldl,
-            'hdl' => $this->hdl,
-            'tg' => $this->tg,
-            'nhc' => $this->nhc,
         ];
 
         return Database::insert(self::TABLE, $data);
     }
 
+    /**
+     * update existing values in database
+     * @return bool
+     */
     public function update(): bool
     {
         $data = [
-            'tc' => $this->tc,
+            'tc'  => $this->tc,
             'ldl' => $this->ldl,
             'hdl' => $this->hdl,
-            'tg' => $this->tg,
+            'tg'  => $this->tg,
             'nhc' => $this->nhc,
         ];
 
@@ -80,6 +83,10 @@ class VisitLipid implements IModel
 
     }
 
+    /**
+     * delete from database
+     * @return bool
+     */
     public function delete(): bool
     {
         /*
@@ -88,30 +95,26 @@ class VisitLipid implements IModel
         return Database::delete(self::TABLE, 'id', $this->id);
     }
 
+
     /**
      * @param Visit $visit
-     * @return VisitLipid[]
+     * @return VisitLipid|null
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit(Visit $visit): ?VisitLipid
     {
-        $db = Database::instance();
-        $statement = $db->prepare('select * from visit_lipids where visit_id=?');
+        $db        = Database::instance();
+        $statement = $db->prepare('select * from visit_lipids where visit_id=? limit 1');
         $statement->execute([$visit->id]);
 
-        /** @var VisitLipid[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        /** @var VisitLipid $result */
+        $result = $statement->fetchObject(self::class);
 
-        $output = [];
 
-        if ( !empty($results) ) {
-
-            foreach ( $results as $result ) {
-                $result->visit = Visit::find($result->visit_id);
-                $output[] = $result;
-            }
-
+        if ( !empty($result) ) {
+            $result->visit = Visit::find($result->visit_id);
+            return $result;
         }
 
-        return $output;
+        return null;
     }
 }

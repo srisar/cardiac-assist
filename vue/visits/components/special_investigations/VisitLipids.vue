@@ -5,40 +5,25 @@
     <div class="form-row">
 
       <div class="col">
-        <div class="form-group">
-          <label>TC</label>
-          <input type="text" class="form-control" v-model="visitLipids.tc">
-        </div>
-      </div><!-- col -->
 
-      <div class="col">
-        <div class="form-group">
-          <label>LDL</label>
-          <input type="text" class="form-control" v-model="visitLipids.ldl">
-        </div>
-      </div><!-- col -->
+        <table class="table table-bordered table-sm">
+          <tr>
+            <td class="font-weight-bold">TC</td>
+            <td class="font-weight-bold">LDL</td>
+            <td class="font-weight-bold">HDL</td>
+            <td class="font-weight-bold">TG</td>
+            <td class="font-weight-bold">NHC</td>
+          </tr>
+          <tr>
+            <td><input type="text" class="form-control" v-model="visitLipids.tc"></td>
+            <td><input type="text" class="form-control" v-model="visitLipids.ldl"></td>
+            <td><input type="text" class="form-control" v-model="visitLipids.hdl"></td>
+            <td><input type="text" class="form-control" v-model="visitLipids.tg"></td>
+            <td><input type="text" class="form-control" v-model="visitLipids.nhc"></td>
+          </tr>
+        </table>
 
-      <div class="col">
-        <div class="form-group">
-          <label>HDL</label>
-          <input type="text" class="form-control" v-model="visitLipids.hdl">
-        </div>
-      </div><!-- col -->
-
-      <div class="col">
-        <div class="form-group">
-          <label>TG</label>
-          <input type="text" class="form-control" v-model="visitLipids.tg">
-        </div>
-      </div><!-- col -->
-
-      <div class="col">
-        <div class="form-group">
-          <label>NHC</label>
-          <input type="text" class="form-control" v-model="visitLipids.nhc">
-        </div>
-      </div><!-- col -->
-
+      </div>
     </div><!-- row -->
 
     <div class="form-row">
@@ -74,33 +59,19 @@ export default {
   },
 
   computed: {
-    //
+
     visit: function () { return this.$store.getters.getVisit; },
 
   },
 
   mounted() {
 
-    /*
-   * Check if visit lipids exist, otherwise add a new one
-   * */
-    this._checkIfExist()
-        .then(r => {
-          if ( !this.exist ) {
-            this._addNew()
-                .then(r => {
-                  this.visitLipids = r.data;
-                });
-          } else {
-            this.visitLipids = r.data[0];
-          }
-        });
+    this._fetch()
 
   },
 
 
   methods: {
-    //
 
     onUpdate: function () {
       const params = {
@@ -120,44 +91,23 @@ export default {
             console.log(e);
             alert("Failed to update lipid details");
           });
-    },
+    }, /* update */
 
 
-    _checkIfExist: function () {
+    _fetch: function () {
 
       const params = { visit_id: this.visit.id, };
 
-      return new Promise((resolve, reject) => {
-        $.get(`${getSiteURL()}/api/get/visit-lipids.php`, params)
-            .done(r => {
-              this.exist = !_.isEmpty(r.data);
-              resolve(r);
-            })
-            .fail(e => {
-              reject(e);
-            });
-      });
+      $.get(`${getSiteURL()}/api/get/visit-lipids.php`, params)
+          .done(response => {
+            this.visitLipids = response.data
+          })
+          .fail(error => {
+            console.log(error)
+          });
 
-    }, /* check if visit lipids already exist in db */
+    }, /* fetch from database */
 
-    _addNew: function () {
-
-      return new Promise((resolve, reject) => {
-
-        const params = {
-          visit_id: this.visit.id, tc: 0, ldl: 0, hdl: 0, tg: 0, nhc: 0,
-        };
-
-        $.post(`${getSiteURL()}/api/save/visit-lipids.php`, params)
-            .done(r => {
-              this.exist = true;
-              resolve(r);
-            })
-            .fail(e => {
-              reject(e);
-            });
-      });
-    }, /* add new */
 
   },
 }

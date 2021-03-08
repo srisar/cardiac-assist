@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Core\Database\Database;
 use PDO;
+use PDOException;
 
 class Visit implements IModel
 {
@@ -13,7 +14,7 @@ class Visit implements IModel
     private const TABLE = 'visits';
 
     public ?int $id, $patient_id;
-    public ?string $visit_date, $remarks;
+    public ?string   $visit_date, $remarks;
 
     public ?float $weight, $height, $bmi, $bsa, $dbp, $sbp;
 
@@ -22,7 +23,7 @@ class Visit implements IModel
     public ?Patient $patient;
 
 
-    private const STATUS_COMPLETE = 'COMPLETE';
+    private const STATUS_COMPLETE   = 'COMPLETE';
     private const STATUS_INCOMPLETE = 'INCOMPLETE';
 
     public static function build($array): Visit
@@ -63,21 +64,54 @@ class Visit implements IModel
     }
 
 
-    public function insert()
+    public function insert(): bool
     {
-        $data = [
-            'patient_id' => $this->patient_id,
-            'visit_date' => $this->visit_date,
-            'remarks' => $this->remarks,
-            'height' => $this->height,
-            'weight' => $this->weight,
-            'bmi' => $this->bmi,
-            'bsa' => $this->bsa,
-            'sbp' => $this->sbp,
-            'dbp' => $this->dbp,
-        ];
+        $db = Database::instance();
 
-        return Database::insert(self::TABLE, $data);
+        try {
+            $data = [
+                'patient_id' => $this->patient_id,
+                'visit_date' => $this->visit_date,
+                'remarks'    => $this->remarks,
+                'height'     => $this->height,
+                'weight'     => $this->weight,
+                'bmi'        => $this->bmi,
+                'bsa'        => $this->bsa,
+                'sbp'        => $this->sbp,
+                'dbp'        => $this->dbp,
+            ];
+
+
+            $db->beginTransaction();
+
+            $visitId = Database::insert(self::TABLE, $data);
+
+            if ( $visitId != -1 ) {
+                $visitECG           = new VisitECG();
+                $visitECG->visit_id = $visitId;
+                $visitECG->insert();
+
+                $visitCCT           = new VisitCoronaryCT();
+                $visitCCT->visit_id = $visitId;
+                $visitCCT->insert();
+
+                $visitLipids           = new VisitLipid();
+                $visitLipids->visit_id = $visitId;
+                $visitLipids->insert();
+
+                $visitEcho           = new VisitEchocardiography();
+                $visitEcho->visit_id = $visitId;
+                $visitEcho->insert();
+            }
+
+            $db->commit();
+
+            return true;
+
+        } catch ( PDOException $exception ) {
+            $db->rollBack();
+            return false;
+        }
     }
 
     /**
@@ -87,13 +121,13 @@ class Visit implements IModel
     {
         $data = [
             'visit_date' => $this->visit_date,
-            'remarks' => $this->remarks,
-            'height' => $this->height,
-            'weight' => $this->weight,
-            'bmi' => $this->bmi,
-            'bsa' => $this->bsa,
-            'sbp' => $this->sbp,
-            'dbp' => $this->dbp,
+            'remarks'    => $this->remarks,
+            'height'     => $this->height,
+            'weight'     => $this->weight,
+            'bmi'        => $this->bmi,
+            'bsa'        => $this->bsa,
+            'sbp'        => $this->sbp,
+            'dbp'        => $this->dbp,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);
@@ -139,7 +173,7 @@ class Visit implements IModel
      */
     public static function findByPatient(Patient $patient): array
     {
-        $db = Database::instance();
+        $db        = Database::instance();
         $statement = $db->prepare('select * from visits where patient_id=?');
         $statement->execute([$patient->id]);
 

@@ -4,79 +4,69 @@
 
     <div class="form-row">
       <div class="col">
-        <div class="form-group">
-          <label>Total Calcium Score</label>
-          <input type="number" class="form-control" v-model.number="visitCoronaryCT.total_calcium_score">
-        </div>
 
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label>Origin</label>
+        <table class="table table-bordered table-sm">
+          <tr>
+            <td>
+              <div class="font-weight-bold">Total Calcium Score</div>
+              <input type="number" class="form-control" v-model.number="visitCoronaryCT.total_calcium_score">
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="font-weight-bold">Origin</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.origin"></textarea>
-            </div>
-
-          </div>
-          <div class="col">
-
-            <div class="form-group">
-              <label>Dominance</label>
+            </td>
+            <td>
+              <div class="font-weight-bold">Dominance</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.dominance"></textarea>
-            </div>
-          </div>
-        </div><!-- form-row -->
+            </td>
+          </tr>
 
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label>Left Main</label>
+          <tr>
+            <td>
+              <div class="font-weight-bold">Left Main</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.left_main"></textarea>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label>LAD</label>
+            </td>
+            <td>
+              <div class="font-weight-bold">LAD</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.lad"></textarea>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
 
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label>LCX</label>
+          <tr>
+            <td>
+              <div class="font-weight-bold">LCX</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.lcx"></textarea>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label>Cardiac Valves</label>
+            </td>
+            <td>
+              <div class="font-weight-bold">Cardiac Valves</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.cardiac_valves"></textarea>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
 
-
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label>Pericardium</label>
+          <tr>
+            <td>
+              <div class="font-weight-bold">Pericardium</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.pericardium"></textarea>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label>Extra Cardiac Findings</label>
+            </td>
+            <td>
+              <div class="font-weight-bold">Extra Cardiac Findings</div>
               <textarea rows="2" class="form-control" v-model="visitCoronaryCT.extra_cardiac_findings"></textarea>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
 
+          <tr>
+            <td colspan="2">
+              <label class="font-weight-bold">Impression</label>
+              <textarea rows="2" class="form-control" v-model="visitCoronaryCT.impression"></textarea>
+            </td>
+          </tr>
 
-        <div class="form-group">
-          <label>Impression</label>
-          <textarea rows="2" class="form-control" v-model="visitCoronaryCT.impression"></textarea>
-        </div>
+        </table>
+
 
         <div class="d-flex justify-content-center">
           <button class="btn btn-success" @click="onUpdate">Update</button>
@@ -95,8 +85,6 @@ export default {
 
   data() {
     return {
-      exist: false,
-
       visitCoronaryCT: {
         id                    : undefined,
         visit_id              : undefined,
@@ -112,29 +100,20 @@ export default {
         impression            : undefined,
       },
     }
-  },
+  }, /* data */
 
+  /*
+  * === COMPUTED ===
+  * */
   computed: {
     visit: function () { return this.$store.getters.getVisit }
   },
 
+  /*
+  * === MOUNTED ===
+  * */
   mounted() {
-
-    this._checkIfExist()
-        .then(response => {
-
-          console.log(response)
-
-          if ( !this.exist ) {
-            this._addNew()
-                .then(response => {
-                  this.visitCoronaryCT = response.data
-                })
-          } else {
-            this.visitCoronaryCT = response
-          }
-        })
-
+    this._fetch()
   },
 
   methods: {
@@ -142,36 +121,18 @@ export default {
     /*
     * check if visit-coronary-ct exist
     * */
-    _checkIfExist: function () {
+    _fetch: function () {
       const params = { visit_id: this.visit.id }
 
-      return new Promise((resolve, reject) => {
-        $.get(`${getSiteURL()}/api/get/visit-coronary-ct.php`, params)
-            .done(response => {
-              this.exist = !_.isEmpty(response.data)
-              resolve(response.data)
-            })
-            .fail(error => {
-              reject(error)
-            })
-      })
+      $.get(`${getSiteURL()}/api/get/visit-coronary-ct.php`, params)
+          .done(response => {
+            this.visitCoronaryCT = response.data
+          })
+          .fail(error => {
+            console.log(error)
+          })
     }, /* check if coronary ct exist in db*/
 
-    _addNew: function () {
-
-      const params = { visit_id: this.visit.id }
-
-      return new Promise((resolve, reject) => {
-        $.post(`${getSiteURL()}/api/save/visit-coronary-ct.php`, params)
-            .done(response => {
-              this.exist = true;
-              resolve(response.data)
-            })
-            .fail(error => {
-              reject(error)
-            })
-      })
-    }, /* add new visit-coronary-ct into db */
 
     onUpdate: function () {
       const params = {
@@ -189,7 +150,7 @@ export default {
       }
 
       $.post(`${getSiteURL()}/api/update/visit-coronary-ct.php`, params)
-          .done(r => {
+          .done(() => {
             alert("Coronary CT details updated");
           })
           .fail(e => {

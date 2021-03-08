@@ -12,7 +12,7 @@ class VisitECG implements IModel
     private const TABLE = 'visit_ecg';
 
     public ?int $id, $visit_id;
-    public ?string $description;
+    public ?string   $description;
 
     public ?Visit $visit;
 
@@ -59,7 +59,7 @@ class VisitECG implements IModel
             $output = [];
             foreach ( $result as $visitECG ) {
                 $visitECG->visit = Visit::find($visitECG->visit_id);
-                $output[] = $visitECG;
+                $output[]        = $visitECG;
             }
 
             return $output;
@@ -69,14 +69,12 @@ class VisitECG implements IModel
 
     }
 
-    public function insert()
+    public function insert(): int
     {
         $data = [
-            'visit_id' => $this->visit_id,
-            'description' => $this->description
+            'visit_id'    => $this->visit_id,
         ];
         return Database::insert(self::TABLE, $data);
-
     }
 
     public function update(): bool
@@ -96,25 +94,22 @@ class VisitECG implements IModel
 
     /**
      * @param Visit $visit
-     * @return VisitECG[]
+     * @return VisitECG
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit(Visit $visit): ?VisitECG
     {
-        $db = Database::instance();
-        $statement = $db->prepare('select * from visit_ecg where visit_id=?');
+        $db        = Database::instance();
+        $statement = $db->prepare('select * from visit_ecg where visit_id=? limit 1');
         $statement->execute([$visit->id]);
 
-        /** @var VisitECG[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        /** @var VisitECG $results */
+        $result = $statement->fetchObject(self::class);
 
-        $output = [];
-        if ( !empty($results) ) {
-            foreach ( $results as $result ) {
-                $result->visit = Visit::find($result->visit_id);
-                $output[] = $result;
-            }
+        if ( !empty($result) ) {
+            $result->visit = Visit::find($result->visit_id);
+            return $result;
         }
-        return $output;
+        return null;
     }
 
 
