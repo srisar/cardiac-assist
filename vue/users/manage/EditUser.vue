@@ -53,11 +53,12 @@
             </div>
           </div><!-- col -->
         </div><!-- row -->
-      </slot>
 
-      <template v-slot:footer>
-        <button type="button" class="btn btn-primary" :disabled="!isFormValid" @click="onClickUpdateUser">Save changes</button>
-      </template>
+        <div class="text-center mt-3">
+          <button type="button" class="btn btn-primary" :disabled="!isFormValid" @click="onClickUpdateUser">Save changes</button>
+        </div>
+
+      </slot>
 
     </ModalWindow>
 
@@ -69,25 +70,25 @@
 import ModalWindow from "../../_common/components/ModalWindow";
 
 export default {
-  name: "EditUser",
-  components: {ModalWindow},
-  props: ['user',],
+  name      : "EditUser",
+  components: { ModalWindow },
+  props     : ['user',],
 
   data() {
     return {
       selectedUser: {
-        id: "",
-        username: "",
-        display_name: "",
-        role: "",
-        new_password: "",
+        id                  : "",
+        username            : "",
+        display_name        : "",
+        role                : "",
+        new_password        : "",
         confirm_new_password: "",
       },
 
       roles: [
-        {key: 'USER', value: 'User'},
-        {key: 'MANAGER', value: 'Manager'},
-        {key: 'ADMIN', value: 'Administrator'},
+        { key: 'USER', value: 'User' },
+        { key: 'MANAGER', value: 'Manager' },
+        { key: 'ADMIN', value: 'Administrator' },
       ],
 
       updatePassword: false,
@@ -101,7 +102,7 @@ export default {
     * Watch for user prop: if set, then display the modal window
     * */
     user: function (value) {
-      if (value !== undefined) {
+      if ( value !== undefined ) {
 
         this.selectedUser.id = value.id;
         this.selectedUser.username = value.username;
@@ -120,13 +121,13 @@ export default {
     //
 
     passwordValidated: function () {
-      if (this.selectedUser.new_password === "") return false;
+      if ( this.selectedUser.new_password === "" ) return false;
       return this.selectedUser.new_password === this.selectedUser.confirm_new_password;
     },
 
     isFormValid: function () {
 
-      if (this.updatePassword) {
+      if ( this.updatePassword ) {
         return this.passwordValidated && this.selectedUser.display_name !== "";
       }
 
@@ -151,10 +152,10 @@ export default {
     onClickUpdateUser: function () {
 
       $.post(`${getSiteURL()}/api/update/user.php`, {
-        id: this.selectedUser.id,
-        display_name: this.selectedUser.display_name,
-        password: this.selectedUser.new_password,
-        role: this.selectedUser.role,
+        id             : this.selectedUser.id,
+        display_name   : this.selectedUser.display_name,
+        password       : this.selectedUser.new_password,
+        role           : this.selectedUser.role,
         change_password: this.updatePassword
       }).done(r => {
 

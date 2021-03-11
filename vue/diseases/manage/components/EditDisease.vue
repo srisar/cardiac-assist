@@ -3,29 +3,28 @@
   <div>
 
     <div class="card shadow shadow-sm">
-      <div class="card-header">
-        <div class="float-left">
-          <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
-        </div>
+      <div class="card-header d-flex justify-content-between">
+
+        <!-- left side -->
         <div>
+          <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
           {{ disease.disease }}
-
-          <div class="float-right">
-
-
-            <div v-if="confirmDelete">
-              <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
-              <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
-            </div>
-
-            <div v-else>
-              <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
-            </div>
-
-          </div><!-- float -->
-
         </div>
+
+        <!-- right side -->
+        <div>
+          <div v-if="confirmDelete">
+            <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
+            <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+          </div>
+
+          <div v-else>
+            <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+          </div>
+        </div>
+
       </div>
+
       <div class="card-body">
 
 
@@ -78,9 +77,9 @@
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
-  name: "EditDisease",
-  components: {RichEditorV2},
-  props: [],
+  name      : "EditDisease",
+  components: { RichEditorV2 },
+  props     : [],
 
 
   data() {
@@ -114,10 +113,10 @@ export default {
     onClickUpdate: function () {
 
       const disease = {
-        id: this.disease.id,
-        disease: this.disease.disease,
+        id          : this.disease.id,
+        disease     : this.disease.disease,
         disease_code: this.disease.disease_code,
-        description: this.disease.description
+        description : this.disease.description
       };
 
       this.$store.dispatch('updateDisease', disease)
@@ -132,7 +131,7 @@ export default {
     },
 
     onClickEdit: function () {
-      if (this.editable) {
+      if ( this.editable ) {
         this.editable = false;
         this.$store.commit('setEditButtonText', 'Edit');
       } else {

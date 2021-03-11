@@ -4,11 +4,17 @@
 
     <div class="card shadow shadow-sm">
 
-      <div class="card-header">
-        Diseases
-        <div class="float-right">
+      <div class="card-header d-flex justify-content-between">
+        <!-- left -->
+        <div>
+          Diseases
+        </div>
+
+        <!-- right -->
+        <div>
           <button class="btn btn-success btn-tiny" @click="onClickAdd">Add a new disease</button>
         </div>
+
       </div>
       <div class="card-body p-2">
 
@@ -39,7 +45,7 @@
 
 
 export default {
-  name: "ListDiseases",
+  name      : "ListDiseases",
   components: {},
 
   props: [],

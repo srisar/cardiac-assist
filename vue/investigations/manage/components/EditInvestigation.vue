@@ -3,28 +3,25 @@
   <div>
 
     <div class="card shadow shadow-sm">
-      <div class="card-header">
-        <div class="float-left">
-          <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
-        </div>
+      <div class="card-header d-flex justify-content-between">
+        <!-- left -->
         <div>
+          <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
           {{ investigation.investigation_name }}
-
-          <div class="float-right">
-
-
-            <div v-if="confirmDelete">
-              <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
-              <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
-            </div>
-
-            <div v-else>
-              <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
-            </div>
-
-          </div><!-- float -->
-
         </div>
+
+        <!-- right -->
+        <div>
+          <div v-if="confirmDelete">
+            <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
+            <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+          </div>
+
+          <div v-else>
+            <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+          </div>
+        </div>
+
       </div>
       <div class="card-body">
 
@@ -72,9 +69,9 @@
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
-  name: "EditInvestigation",
-  components: {RichEditorV2},
-  props: [],
+  name      : "EditInvestigation",
+  components: { RichEditorV2 },
+  props     : [],
 
 
   data() {
@@ -119,7 +116,7 @@ export default {
     },
 
     onClickEdit: function () {
-      if (this.editable) {
+      if ( this.editable ) {
         this.editable = false;
         this.$store.commit('setEditButtonText', 'Edit');
       } else {

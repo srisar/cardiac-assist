@@ -53,9 +53,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ModalWindow",
   props: ['id', 'expanded', 'visible'],
@@ -114,6 +111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+//
 //
 //
 //
@@ -1193,9 +1191,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [_vm._t("default")], 2),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [_vm._t("footer")], 2)
+            _c("div", { staticClass: "modal-body" }, [_vm._t("default")], 2)
           ])
         ]
       )
@@ -1242,24 +1238,7 @@ var render = function() {
                     },
                     proxy: true
                   }
-                : null,
-              {
-                key: "footer",
-                fn: function() {
-                  return [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button", disabled: !_vm.isFormValid },
-                        on: { click: _vm.onClickUpdateUser }
-                      },
-                      [_vm._v("Save changes")]
-                    )
-                  ]
-                },
-                proxy: true
-              }
+                : null
             ],
             null,
             true
@@ -1472,7 +1451,19 @@ var render = function() {
                     ])
                   ])
                 ])
-              : _vm._e()
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center mt-3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", disabled: !_vm.isFormValid },
+                  on: { click: _vm.onClickUpdateUser }
+                },
+                [_vm._v("Save changes")]
+              )
+            ])
           ])
         ],
         2

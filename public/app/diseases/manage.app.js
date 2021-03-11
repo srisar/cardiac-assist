@@ -336,7 +336,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EditDisease",
@@ -420,6 +419,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18368,8 +18373,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "card shadow shadow-sm" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("div", { staticClass: "float-left" }, [
+      _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
+        _c("div", [
           _c(
             "button",
             {
@@ -18377,43 +18382,41 @@ var render = function() {
               on: { click: _vm.onClickEdit }
             },
             [_vm._v(_vm._s(_vm.editButtonText))]
-          )
+          ),
+          _vm._v("\n        " + _vm._s(_vm.disease.disease) + "\n      ")
         ]),
         _vm._v(" "),
         _c("div", [
-          _vm._v("\n        " + _vm._s(_vm.disease.disease) + "\n\n        "),
-          _c("div", { staticClass: "float-right" }, [
-            _vm.confirmDelete
-              ? _c("div", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-tiny btn-danger",
-                      on: { click: _vm.onClickDelete }
-                    },
-                    [_vm._v("Confirm")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-tiny btn-secondary",
-                      on: { click: _vm.onClickCancelDelete }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ])
-              : _c("div", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-tiny btn-danger",
-                      on: { click: _vm.onClickConfirmDelete }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ])
-          ])
+          _vm.confirmDelete
+            ? _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-tiny btn-danger",
+                    on: { click: _vm.onClickDelete }
+                  },
+                  [_vm._v("Confirm")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-tiny btn-secondary",
+                    on: { click: _vm.onClickCancelDelete }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ])
+            : _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-tiny btn-danger",
+                    on: { click: _vm.onClickConfirmDelete }
+                  },
+                  [_vm._v("Delete")]
+                )
+              ])
         ])
       ]),
       _vm._v(" "),
@@ -18572,9 +18575,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "card shadow shadow-sm" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _vm._v("\n      Diseases\n      "),
-        _c("div", { staticClass: "float-right" }, [
+      _c("div", { staticClass: "card-header d-flex justify-content-between" }, [
+        _c("div", [_vm._v("\n        Diseases\n      ")]),
+        _vm._v(" "),
+        _c("div", [
           _c(
             "button",
             {

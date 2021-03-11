@@ -3,29 +3,21 @@
   <div>
 
     <div class="card shadow shadow-sm">
-      <div class="card-header">
-        <div class="float-left">
+      <div class="card-header d-flex justify-content-between">
+
+        <div>
           <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
+          {{ symptom.symptom_name }}
         </div>
         <div>
+          <div v-if="confirmDelete">
+            <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
+            <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+          </div>
 
-          {{ symptom.symptom_name }}
-
-          <div class="float-right">
-
-
-            <div v-if="confirmDelete">
-              <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
-              <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
-            </div>
-
-            <div v-else>
-              <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
-            </div>
-
-          </div><!-- float -->
-
-
+          <div v-else>
+            <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+          </div>
         </div>
 
       </div>
@@ -75,14 +67,14 @@ import RichEditorV2 from "../../../_common/components/RichEditorV2";
 
 export default {
 
-  name: "EditSymptom",
-  components: {RichEditor, RichViewer, RichEditorV2},
-  props: [],
+  name      : "EditSymptom",
+  components: { RichEditor, RichViewer, RichEditorV2 },
+  props     : [],
 
 
   data() {
     return {
-      editable: false,
+      editable          : false,
       symptomDescription: this.$store.getters.getSelectedSymptom.description,
 
       // delete
@@ -125,7 +117,7 @@ export default {
     },
 
     onClickEdit: function () {
-      if (this.editable) {
+      if ( this.editable ) {
         this.editable = false;
         this.$store.commit('setEditButtonText', 'Edit');
       } else {

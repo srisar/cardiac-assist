@@ -53,9 +53,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ModalWindow",
   props: ['id', 'expanded', 'visible'],
@@ -115,6 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _api_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api_mixins */ "./vue/echo/mitral-valve-values/api_mixins.js");
 //
 //
 //
@@ -185,26 +183,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MitralValveValues",
+  mixins: [_api_mixins__WEBPACK_IMPORTED_MODULE_1__.default],
   components: {
     ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: function data() {
     return {
-      modalEditWindowVisible: false,
-      mitralValveValueToAdd: {
-        value: ""
-      },
-      mitralValveValueToEdit: {
-        id: undefined,
-        value: ""
-      },
-      mitralValveValues: []
+      modalEditWindowVisible: false
     };
   },
 
@@ -225,6 +222,61 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
     isEmptyValue: function isEmptyValue(value) {
       return _.isEmpty(value);
     },
+    openEditModal: function openEditModal(item) {
+      this.mitralValveValueToEdit = _.cloneDeep(item);
+      this.modalEditWindowVisible = true;
+    },
+    closeEditModal: function closeEditModal() {
+      this.modalEditWindowVisible = false;
+      this.messages.updateMessage = '';
+    }
+  }
+  /* METHODS */
+
+});
+
+/***/ }),
+
+/***/ "./vue/echo/mitral-valve-values/api_mixins.js":
+/*!****************************************************!*\
+  !*** ./vue/echo/mitral-valve-values/api_mixins.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      mitralValveValueToAdd: {
+        value: ""
+      },
+      mitralValveValueToEdit: {
+        id: undefined,
+        value: ""
+      },
+      mitralValveValues: [],
+      messages: {
+        updateMessage: ""
+      }
+    };
+  },
+
+  /* ### MOUNTED ### */
+  mounted: function mounted() {
+    this.fetchAll();
+  },
+
+  /* MOUNTED */
+
+  /* ### METHODS ### */
+  methods: {
+    /*
+    * Fetch all values
+    * */
     fetchAll: function fetchAll() {
       var _this = this;
 
@@ -234,6 +286,10 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
         console.log(e);
       });
     },
+
+    /*
+    * Save new value
+    * */
     save: function save() {
       var _this2 = this;
 
@@ -247,13 +303,10 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
         console.log(e);
       });
     },
-    openEditModal: function openEditModal(item) {
-      this.mitralValveValueToEdit = _.cloneDeep(item);
-      this.modalEditWindowVisible = true;
-    },
-    closeEditModal: function closeEditModal() {
-      this.modalEditWindowVisible = false;
-    },
+
+    /*
+    * Updates the values
+    * */
     update: function update() {
       var _this3 = this;
 
@@ -264,7 +317,10 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
       $.post("".concat(getSiteURL(), "/api/update/echo-mitral-valve-value.php"), param).done(function () {
         // fetch everything again
         _this3.fetchAll();
+
+        _this3.messages.updateMessage = 'Updated successfully';
       }).fail(function (e) {
+        _this3.messages.updateMessage = 'Update failed';
         console.log(e);
       });
     }
@@ -18106,9 +18162,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [_vm._t("default")], 2),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [_vm._t("footer")], 2)
+            _c("div", { staticClass: "modal-body" }, [_vm._t("default")], 2)
           ])
         ]
       )
@@ -18316,7 +18370,15 @@ var render = function() {
                     on: { click: _vm.update }
                   },
                   [_vm._v("update")]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "my-2" }, [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.messages.updateMessage) +
+                      "\n          "
+                  )
+                ])
               ])
             ])
           ])

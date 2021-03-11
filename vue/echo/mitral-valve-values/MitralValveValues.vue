@@ -58,6 +58,11 @@
 
           <div class="text-center">
             <button class="btn btn-success" @click="update" :disabled="isEmptyValue(mitralValveValueToEdit.value)">update</button>
+
+            <div class="my-2">
+              {{ messages.updateMessage }}
+            </div>
+
           </div>
         </div>
       </div>
@@ -71,29 +76,20 @@
 <script>
 
 import ModalWindow from "../../_common/components/ModalWindow";
+import apiMixin from "./api_mixins"
 
 const _ = require('lodash')
 
 export default {
-  name: "MitralValveValues",
+  name  : "MitralValveValues",
+  mixins: [apiMixin],
 
   components: { ModalWindow },
 
   data() {
     return {
-
       modalEditWindowVisible: false,
 
-      mitralValveValueToAdd: {
-        value: "",
-      },
-
-      mitralValveValueToEdit: {
-        id   : undefined,
-        value: "",
-      },
-
-      mitralValveValues: [],
 
     }
   }, /* DATA */
@@ -119,28 +115,6 @@ export default {
       return _.isEmpty(value)
     },
 
-    fetchAll: function () {
-      $.get(`${getSiteURL()}/api/get/echo-mitral-valve-values.php`)
-          .done(response => {
-            this.mitralValveValues = response.data
-          })
-          .fail(e => { console.log(e) })
-    },
-
-    save: function () {
-
-      const param = {
-        value: this.mitralValveValueToAdd.value
-      }
-
-      $.post(`${getSiteURL()}/api/save/echo-mitral-valve-value.php`, param)
-          .done(() => {
-            // fetch everything again
-            this.fetchAll()
-          })
-          .fail(e => { console.log(e) })
-
-    },
 
     openEditModal: function (item) {
       this.mitralValveValueToEdit = _.cloneDeep(item)
@@ -149,21 +123,9 @@ export default {
 
     closeEditModal: function () {
       this.modalEditWindowVisible = false
+      this.messages.updateMessage = ''
     },
 
-    update: function () {
-      const param = {
-        id   : this.mitralValveValueToEdit.id,
-        value: this.mitralValveValueToEdit.value,
-      }
-
-      $.post(`${getSiteURL()}/api/update/echo-mitral-valve-value.php`, param)
-          .done(() => {
-            // fetch everything again
-            this.fetchAll()
-          })
-          .fail(e => { console.log(e) })
-    },
 
   }, /* METHODS */
 

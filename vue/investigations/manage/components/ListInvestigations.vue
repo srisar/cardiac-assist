@@ -4,12 +4,13 @@
 
     <div class="card shadow shadow-sm">
 
-      <div class="card-header">
-        Investigations
-        <div class="float-right">
+      <div class="card-header d-flex justify-content-between">
+        <div>Investigations</div>
+        <div>
           <button class="btn btn-success btn-tiny" @click="onClickAdd">Add a new investigation</button>
         </div>
       </div>
+
       <div class="card-body p-2">
 
         <table class="table table-sm table-bordered table-striped">
@@ -37,7 +38,7 @@
 
 
 export default {
-  name: "ListInvestigations",
+  name      : "ListInvestigations",
   components: {},
 
   props: [],

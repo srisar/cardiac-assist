@@ -4,9 +4,11 @@
 
     <div class="card shadow shadow-sm">
 
-      <div class="card-header">
-        Symptoms
-        <div class="float-right">
+      <div class="card-header d-flex justify-content-between">
+        <div>
+          Symptoms
+        </div>
+        <div>
           <button class="btn btn-success btn-tiny" @click="onClickAddSymptom">Add a new symptom</button>
         </div>
       </div>
@@ -37,7 +39,7 @@
 
 
 export default {
-  name: "ListSymptoms",
+  name      : "ListSymptoms",
   components: {},
 
   props: [],

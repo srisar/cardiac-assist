@@ -5,5 +5,5 @@ import MitralValveValues from "./MitralValveValues";
 Vue.use(Vuex);
 
 new Vue({
-    render: h => h(MitralValveValues)
+    render: h => h(MitralValveValues),
 }).$mount('#app');
