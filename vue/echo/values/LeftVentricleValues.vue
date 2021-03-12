@@ -3,7 +3,7 @@
   <div>
 
     <div class="card shadow shadow-sm">
-      <div class="card-header">Tricuspid Values</div>
+      <div class="card-header">Left Ventricle Values</div>
       <div class="card-body">
 
 
@@ -73,7 +73,7 @@ import mixins from "./common.mixin"
 const _ = require('lodash')
 
 export default {
-  name      : "TricuspidValveValues",
+  name      : "LeftVentricleValues",
   mixins    : [mixins],
   components: { ModalWindow },
 
@@ -90,7 +90,7 @@ export default {
     * Fetch all values
     * */
     fetchAll: function () {
-      $.get(`${getSiteURL()}/api/get/echo-tricuspid-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo-left-ventricle-values.php`)
           .done(response => {
             this.values = response.data
           })
@@ -106,7 +106,7 @@ export default {
         value: this.toAdd.value
       }
 
-      $.post(`${getSiteURL()}/api/save/echo-tricuspid-value.php`, param)
+      $.post(`${getSiteURL()}/api/save/echo-left-ventricle-value.php`, param)
           .done(() => {
             // fetch everything again
             this.fetchAll()
@@ -124,7 +124,7 @@ export default {
         value: this.toEdit.value,
       }
 
-      $.post(`${getSiteURL()}/api/update/echo-tricuspid-value.php`, param)
+      $.post(`${getSiteURL()}/api/update/echo-left-ventricle-value.php`, param)
           .done(() => {
 
             // fetch everything again
@@ -152,7 +152,7 @@ export default {
             id: item.id,
           }
 
-          $.post(`${getSiteURL()}/api/delete/echo-tricuspid-value.php`, param)
+          $.post(`${getSiteURL()}/api/delete/echo-left-ventricle-value.php`, param)
               .done(() => {
                 // fetch everything again
                 this.fetchAll()

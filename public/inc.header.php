@@ -82,7 +82,7 @@ use App\Models\User;
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-ventricle">Left Ventricle Values</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-ventricle">Right Ventricle Values</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Pericardium Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Doppler Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#doppler">Doppler Values</a>
                     </div>
                 </li><!-- end nav-item -->
 
