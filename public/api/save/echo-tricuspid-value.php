@@ -2,7 +2,6 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoMitralValveValue;
 
 require_once "../../../_bootstrap.inc.php";
 
@@ -12,13 +11,13 @@ try {
         'value' => Request::getAsString('value'),
     ];
 
-    $object = EchoMitralValveValue::build($fields);
+    $object = \App\Models\EchoTricuspidValue::build($fields);
 
     $result = $object->insert();
 
     if ( empty($result) ) throw new Exception('Failed');
 
-    $object = EchoMitralValveValue::find($result);
+    $object = \App\Models\EchoTricuspidValue::find($result);
 
     JSONResponse::validResponse(['data' => $object]);
     return;

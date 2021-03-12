@@ -100,10 +100,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AllValues.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AllValues.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _MitralValveValues__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitralValveValues */ "./vue/echo/values/MitralValveValues.vue");
+/* harmony import */ var _AorticValveValues__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AorticValveValues */ "./vue/echo/values/AorticValveValues.vue");
+/* harmony import */ var _PulmonicValveValues__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PulmonicValveValues */ "./vue/echo/values/PulmonicValveValues.vue");
+/* harmony import */ var _TricuspidValues__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TricuspidValues */ "./vue/echo/values/TricuspidValues.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AllValues",
+  components: {
+    PulmonicValveValues: _PulmonicValveValues__WEBPACK_IMPORTED_MODULE_2__.default,
+    MitralValveValues: _MitralValveValues__WEBPACK_IMPORTED_MODULE_0__.default,
+    AorticValveValues: _AorticValveValues__WEBPACK_IMPORTED_MODULE_1__.default,
+    TricuspidValues: _TricuspidValues__WEBPACK_IMPORTED_MODULE_3__.default
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AorticValveValues.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AorticValveValues.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -112,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
-/* harmony import */ var _api_mixins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api_mixins */ "./vue/echo/mitral-valve-values/api_mixins.js");
+/* harmony import */ var _common_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common.mixin */ "./vue/echo/values/common.mixin.js");
 //
 //
 //
@@ -121,6 +173,185 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AorticValveValues",
+  mixins: [_common_mixin__WEBPACK_IMPORTED_MODULE_1__.default],
+  components: {
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      toAdd: {
+        value: ""
+      },
+      toEdit: {
+        id: undefined,
+        value: ""
+      },
+      values: []
+    };
+  },
+
+  /* DATA */
+  mounted: function mounted() {
+    this.fetchAll();
+  },
+
+  /* MOUNTED */
+  methods: {
+    /*
+    * Fetch all values
+    * */
+    fetchAll: function fetchAll() {
+      var _this = this;
+
+      $.get("".concat(getSiteURL(), "/api/get/echo-aortic-valve-values.php")).done(function (response) {
+        _this.values = response.data;
+      }).fail(function (e) {
+        console.log(e);
+      });
+    },
+
+    /*
+    * Save new value
+    * */
+    onSave: function onSave() {
+      var _this2 = this;
+
+      var param = {
+        value: this.toAdd.value
+      };
+      $.post("".concat(getSiteURL(), "/api/save/echo-aortic-valve-value.php"), param).done(function () {
+        // fetch everything again
+        _this2.fetchAll();
+      }).fail(function (e) {
+        console.log(e);
+      });
+    },
+
+    /*
+    * Updates the values
+    * */
+    onUpdate: function onUpdate() {
+      var _this3 = this;
+
+      var param = {
+        id: this.toEdit.id,
+        value: this.toEdit.value
+      };
+      $.post("".concat(getSiteURL(), "/api/update/echo-aortic-valve-value.php"), param).done(function () {
+        // fetch everything again
+        _this3.fetchAll();
+
+        _this3.closeEditModal();
+      }).fail(function (e) {
+        bootbox.alert("<p class=\"lead text-danger\">Updated failed</p>");
+        console.log(e);
+      });
+    },
+    onDelete: function onDelete(item) {
+      var _this4 = this;
+
+      var message = "<p class=\"lead\">Do you want to delete?</p>" + "<p>This will delete this from all associated visit data.</p>";
+      bootbox.confirm(message, function (result) {
+        if (result) {
+          var param = {
+            id: item.id
+          };
+          console.log(param);
+          $.post("".concat(getSiteURL(), "/api/delete/echo-aortic-valve-value.php"), param).done(function () {
+            // fetch everything again
+            _this4.fetchAll();
+          }).fail(function (e) {
+            console.log(e);
+          });
+        }
+      });
+    }
+  }
+  /* METHODS */
+
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/MitralValveValues.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/MitralValveValues.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common.mixin */ "./vue/echo/values/common.mixin.js");
 //
 //
 //
@@ -195,84 +426,15 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MitralValveValues",
-  mixins: [_api_mixins__WEBPACK_IMPORTED_MODULE_1__.default],
+  mixins: [_common_mixin__WEBPACK_IMPORTED_MODULE_1__.default],
   components: {
     ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  data: function data() {
-    return {
-      modalEditWindowVisible: false
-    };
-  },
-
-  /* DATA */
-  computed: {
-    isEmptyList: function isEmptyList() {
-      return _.isEmpty(this.mitralValveValues);
-    }
-  },
-
-  /* COMPUTED */
   mounted: function mounted() {
     this.fetchAll();
   },
 
   /* MOUNTED */
-  methods: {
-    isEmptyValue: function isEmptyValue(value) {
-      return _.isEmpty(value);
-    },
-    openEditModal: function openEditModal(item) {
-      this.mitralValveValueToEdit = _.cloneDeep(item);
-      this.modalEditWindowVisible = true;
-    },
-    closeEditModal: function closeEditModal() {
-      this.modalEditWindowVisible = false;
-      this.messages.updateMessage = '';
-    }
-  }
-  /* METHODS */
-
-});
-
-/***/ }),
-
-/***/ "./vue/echo/mitral-valve-values/api_mixins.js":
-/*!****************************************************!*\
-  !*** ./vue/echo/mitral-valve-values/api_mixins.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      mitralValveValueToAdd: {
-        value: ""
-      },
-      mitralValveValueToEdit: {
-        id: undefined,
-        value: ""
-      },
-      mitralValveValues: [],
-      messages: {
-        updateMessage: ""
-      }
-    };
-  },
-
-  /* ### MOUNTED ### */
-  mounted: function mounted() {
-    this.fetchAll();
-  },
-
-  /* MOUNTED */
-
-  /* ### METHODS ### */
   methods: {
     /*
     * Fetch all values
@@ -281,7 +443,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       $.get("".concat(getSiteURL(), "/api/get/echo-mitral-valve-values.php")).done(function (response) {
-        _this.mitralValveValues = response.data;
+        _this.values = response.data;
       }).fail(function (e) {
         console.log(e);
       });
@@ -290,11 +452,11 @@ __webpack_require__.r(__webpack_exports__);
     /*
     * Save new value
     * */
-    save: function save() {
+    onSave: function onSave() {
       var _this2 = this;
 
       var param = {
-        value: this.mitralValveValueToAdd.value
+        value: this.toAdd.value
       };
       $.post("".concat(getSiteURL(), "/api/save/echo-mitral-valve-value.php"), param).done(function () {
         // fetch everything again
@@ -307,21 +469,43 @@ __webpack_require__.r(__webpack_exports__);
     /*
     * Updates the values
     * */
-    update: function update() {
+    onUpdate: function onUpdate() {
       var _this3 = this;
 
       var param = {
-        id: this.mitralValveValueToEdit.id,
-        value: this.mitralValveValueToEdit.value
+        id: this.toEdit.id,
+        value: this.toEdit.value
       };
       $.post("".concat(getSiteURL(), "/api/update/echo-mitral-valve-value.php"), param).done(function () {
         // fetch everything again
         _this3.fetchAll();
 
-        _this3.messages.updateMessage = 'Updated successfully';
+        _this3.closeEditModal();
       }).fail(function (e) {
-        _this3.messages.updateMessage = 'Update failed';
+        bootbox.alert("<p class=\"lead text-danger\">Updated failed</p>");
         console.log(e);
+      });
+    },
+
+    /*
+    * Delete selected value
+    * */
+    onDelete: function onDelete(item) {
+      var _this4 = this;
+
+      var message = "<p class=\"lead\">Do you want to delete?</p>" + "<p>This will delete this from all associated visit data.</p>";
+      bootbox.confirm(message, function (result) {
+        if (result) {
+          var param = {
+            id: item.id
+          };
+          $.post("".concat(getSiteURL(), "/api/delete/echo-mitral-valve-value.php"), param).done(function () {
+            // fetch everything again
+            _this4.fetchAll();
+          }).fail(function (e) {
+            console.log(e);
+          });
+        }
       });
     }
   }
@@ -331,10 +515,409 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/echo/mitral-valve-values/mitral-valve-values.app.js":
-/*!*****************************************************************!*\
-  !*** ./vue/echo/mitral-valve-values/mitral-valve-values.app.js ***!
-  \*****************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/PulmonicValveValues.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/PulmonicValveValues.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common.mixin */ "./vue/echo/values/common.mixin.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "PulmonicValveValues",
+  mixins: [_common_mixin__WEBPACK_IMPORTED_MODULE_1__.default],
+  components: {
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  mounted: function mounted() {
+    this.fetchAll();
+  },
+
+  /* MOUNTED */
+  methods: {
+    /*
+    * Fetch all values
+    * */
+    fetchAll: function fetchAll() {
+      var _this = this;
+
+      $.get("".concat(getSiteURL(), "/api/get/echo-pulmonic-valve-values.php")).done(function (response) {
+        _this.values = response.data;
+      }).fail(function (e) {
+        console.log(e);
+      });
+    },
+
+    /*
+    * Save new value
+    * */
+    onSave: function onSave() {
+      var _this2 = this;
+
+      var param = {
+        value: this.toAdd.value
+      };
+      $.post("".concat(getSiteURL(), "/api/save/echo-pulmonic-valve-value.php"), param).done(function () {
+        // fetch everything again
+        _this2.fetchAll();
+      }).fail(function (e) {
+        console.log(e);
+      });
+    },
+
+    /*
+    * Updates the values
+    * */
+    onUpdate: function onUpdate() {
+      var _this3 = this;
+
+      var param = {
+        id: this.toEdit.id,
+        value: this.toEdit.value
+      };
+      $.post("".concat(getSiteURL(), "/api/update/echo-pulmonic-valve-value.php"), param).done(function () {
+        // fetch everything again
+        _this3.fetchAll();
+
+        _this3.closeEditModal();
+      }).fail(function (e) {
+        bootbox.alert("<p class=\"lead text-danger\">Updated failed</p>");
+        console.log(e);
+      });
+    },
+
+    /*
+    * Delete selected value
+    * */
+    onDelete: function onDelete(item) {
+      var _this4 = this;
+
+      var message = "<p class=\"lead\">Do you want to delete?</p>" + "<p>This will delete this from all associated visit data.</p>";
+      bootbox.confirm(message, function (result) {
+        if (result) {
+          var param = {
+            id: item.id
+          };
+          $.post("".concat(getSiteURL(), "/api/delete/echo-pulmonic-valve-value.php"), param).done(function () {
+            // fetch everything again
+            _this4.fetchAll();
+          }).fail(function (e) {
+            console.log(e);
+          });
+        }
+      });
+    }
+  }
+  /* METHODS */
+
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/TricuspidValues.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/TricuspidValues.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_mixin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common.mixin */ "./vue/echo/values/common.mixin.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "PulmonicValveValues",
+  mixins: [_common_mixin__WEBPACK_IMPORTED_MODULE_1__.default],
+  components: {
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  mounted: function mounted() {
+    this.fetchAll();
+  },
+
+  /* MOUNTED */
+  methods: {
+    /*
+    * Fetch all values
+    * */
+    fetchAll: function fetchAll() {
+      var _this = this;
+
+      $.get("".concat(getSiteURL(), "/api/get/echo-tricuspid-values.php")).done(function (response) {
+        _this.values = response.data;
+      }).fail(function (e) {
+        console.log(e);
+      });
+    },
+
+    /*
+    * Save new value
+    * */
+    onSave: function onSave() {
+      var _this2 = this;
+
+      var param = {
+        value: this.toAdd.value
+      };
+      $.post("".concat(getSiteURL(), "/api/save/echo-tricuspid-value.php"), param).done(function () {
+        // fetch everything again
+        _this2.fetchAll();
+      }).fail(function (e) {
+        console.log(e);
+      });
+    },
+
+    /*
+    * Updates the values
+    * */
+    onUpdate: function onUpdate() {
+      var _this3 = this;
+
+      var param = {
+        id: this.toEdit.id,
+        value: this.toEdit.value
+      };
+      $.post("".concat(getSiteURL(), "/api/update/echo-tricuspid-value.php"), param).done(function () {
+        // fetch everything again
+        _this3.fetchAll();
+
+        _this3.closeEditModal();
+      }).fail(function (e) {
+        bootbox.alert("<p class=\"lead text-danger\">Updated failed</p>");
+        console.log(e);
+      });
+    },
+
+    /*
+    * Delete selected value
+    * */
+    onDelete: function onDelete(item) {
+      var _this4 = this;
+
+      var message = "<p class=\"lead\">Do you want to delete?</p>" + "<p>This will delete this from all associated visit data.</p>";
+      bootbox.confirm(message, function (result) {
+        if (result) {
+          var param = {
+            id: item.id
+          };
+          $.post("".concat(getSiteURL(), "/api/delete/echo-tricuspid-value.php"), param).done(function () {
+            // fetch everything again
+            _this4.fetchAll();
+          }).fail(function (e) {
+            console.log(e);
+          });
+        }
+      });
+    }
+  }
+  /* METHODS */
+
+});
+
+/***/ }),
+
+/***/ "./vue/echo/values/common.mixin.js":
+/*!*****************************************!*\
+  !*** ./vue/echo/values/common.mixin.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      modalEditWindowVisible: false,
+      confirmDelete: false,
+      toAdd: {
+        value: ""
+      },
+      toEdit: {
+        id: undefined,
+        value: ""
+      },
+      values: []
+    };
+  },
+  computed: {
+    isEmptyList: function isEmptyList() {
+      return _.isEmpty(this.values);
+    }
+  },
+  methods: {
+    isEmptyValue: function isEmptyValue(value) {
+      return _.isEmpty(value);
+    },
+    openEditModal: function openEditModal(item) {
+      this.toEdit = _.cloneDeep(item);
+      this.modalEditWindowVisible = true;
+    },
+    closeEditModal: function closeEditModal() {
+      this.modalEditWindowVisible = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./vue/echo/values/values.app.js":
+/*!***************************************!*\
+  !*** ./vue/echo/values/values.app.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -342,14 +925,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.common.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _MitralValveValues__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitralValveValues */ "./vue/echo/mitral-valve-values/MitralValveValues.vue");
+/* harmony import */ var _AllValues__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AllValues */ "./vue/echo/values/AllValues.vue");
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__.default.use((vuex__WEBPACK_IMPORTED_MODULE_2___default()));
 new vue__WEBPACK_IMPORTED_MODULE_1__.default({
   render: function render(h) {
-    return h(_MitralValveValues__WEBPACK_IMPORTED_MODULE_0__.default);
+    return h(_AllValues__WEBPACK_IMPORTED_MODULE_0__.default);
   }
 }).$mount('#app');
 
@@ -17969,10 +18552,10 @@ component.options.__file = "vue/_common/components/ModalWindow.vue"
 
 /***/ }),
 
-/***/ "./vue/echo/mitral-valve-values/MitralValveValues.vue":
-/*!************************************************************!*\
-  !*** ./vue/echo/mitral-valve-values/MitralValveValues.vue ***!
-  \************************************************************/
+/***/ "./vue/echo/values/AllValues.vue":
+/*!***************************************!*\
+  !*** ./vue/echo/values/AllValues.vue ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -17980,8 +18563,86 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _MitralValveValues_vue_vue_type_template_id_7d7e8372_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true& */ "./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true&");
-/* harmony import */ var _MitralValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MitralValveValues.vue?vue&type=script&lang=js& */ "./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AllValues_vue_vue_type_template_id_28c74f19_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AllValues.vue?vue&type=template&id=28c74f19&scoped=true& */ "./vue/echo/values/AllValues.vue?vue&type=template&id=28c74f19&scoped=true&");
+/* harmony import */ var _AllValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AllValues.vue?vue&type=script&lang=js& */ "./vue/echo/values/AllValues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AllValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AllValues_vue_vue_type_template_id_28c74f19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AllValues_vue_vue_type_template_id_28c74f19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "28c74f19",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/echo/values/AllValues.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/echo/values/AorticValveValues.vue":
+/*!***********************************************!*\
+  !*** ./vue/echo/values/AorticValveValues.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _AorticValveValues_vue_vue_type_template_id_591054de_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AorticValveValues.vue?vue&type=template&id=591054de&scoped=true& */ "./vue/echo/values/AorticValveValues.vue?vue&type=template&id=591054de&scoped=true&");
+/* harmony import */ var _AorticValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AorticValveValues.vue?vue&type=script&lang=js& */ "./vue/echo/values/AorticValveValues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AorticValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AorticValveValues_vue_vue_type_template_id_591054de_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AorticValveValues_vue_vue_type_template_id_591054de_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "591054de",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/echo/values/AorticValveValues.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/echo/values/MitralValveValues.vue":
+/*!***********************************************!*\
+  !*** ./vue/echo/values/MitralValveValues.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _MitralValveValues_vue_vue_type_template_id_0518a67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true& */ "./vue/echo/values/MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true&");
+/* harmony import */ var _MitralValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MitralValveValues.vue?vue&type=script&lang=js& */ "./vue/echo/values/MitralValveValues.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -17992,18 +18653,96 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _MitralValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _MitralValveValues_vue_vue_type_template_id_7d7e8372_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _MitralValveValues_vue_vue_type_template_id_7d7e8372_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _MitralValveValues_vue_vue_type_template_id_0518a67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MitralValveValues_vue_vue_type_template_id_0518a67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "7d7e8372",
+  "0518a67a",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/echo/mitral-valve-values/MitralValveValues.vue"
+component.options.__file = "vue/echo/values/MitralValveValues.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/echo/values/PulmonicValveValues.vue":
+/*!*************************************************!*\
+  !*** ./vue/echo/values/PulmonicValveValues.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _PulmonicValveValues_vue_vue_type_template_id_58f5cb6e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true& */ "./vue/echo/values/PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true&");
+/* harmony import */ var _PulmonicValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PulmonicValveValues.vue?vue&type=script&lang=js& */ "./vue/echo/values/PulmonicValveValues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _PulmonicValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _PulmonicValveValues_vue_vue_type_template_id_58f5cb6e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PulmonicValveValues_vue_vue_type_template_id_58f5cb6e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "58f5cb6e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/echo/values/PulmonicValveValues.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./vue/echo/values/TricuspidValues.vue":
+/*!*********************************************!*\
+  !*** ./vue/echo/values/TricuspidValues.vue ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _TricuspidValues_vue_vue_type_template_id_1ae7470d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true& */ "./vue/echo/values/TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true&");
+/* harmony import */ var _TricuspidValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TricuspidValues.vue?vue&type=script&lang=js& */ "./vue/echo/values/TricuspidValues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _TricuspidValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _TricuspidValues_vue_vue_type_template_id_1ae7470d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _TricuspidValues_vue_vue_type_template_id_1ae7470d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "1ae7470d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/echo/values/TricuspidValues.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -18024,10 +18763,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./vue/echo/values/AllValues.vue?vue&type=script&lang=js&":
+/*!****************************************************************!*\
+  !*** ./vue/echo/values/AllValues.vue?vue&type=script&lang=js& ***!
+  \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18035,8 +18774,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MitralValveValues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AllValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AllValues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AllValues.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AllValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/echo/values/AorticValveValues.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./vue/echo/values/AorticValveValues.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AorticValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AorticValveValues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AorticValveValues.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AorticValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/echo/values/MitralValveValues.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./vue/echo/values/MitralValveValues.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MitralValveValues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/MitralValveValues.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/echo/values/PulmonicValveValues.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./vue/echo/values/PulmonicValveValues.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PulmonicValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PulmonicValveValues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/PulmonicValveValues.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PulmonicValveValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/echo/values/TricuspidValues.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./vue/echo/values/TricuspidValues.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TricuspidValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TricuspidValues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/TricuspidValues.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TricuspidValues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -18070,19 +18873,87 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true&":
-/*!*******************************************************************************************************!*\
-  !*** ./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true& ***!
-  \*******************************************************************************************************/
+/***/ "./vue/echo/values/AllValues.vue?vue&type=template&id=28c74f19&scoped=true&":
+/*!**********************************************************************************!*\
+  !*** ./vue/echo/values/AllValues.vue?vue&type=template&id=28c74f19&scoped=true& ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_template_id_7d7e8372_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_template_id_7d7e8372_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllValues_vue_vue_type_template_id_28c74f19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllValues_vue_vue_type_template_id_28c74f19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_template_id_7d7e8372_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllValues_vue_vue_type_template_id_28c74f19_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AllValues.vue?vue&type=template&id=28c74f19&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AllValues.vue?vue&type=template&id=28c74f19&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/echo/values/AorticValveValues.vue?vue&type=template&id=591054de&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./vue/echo/values/AorticValveValues.vue?vue&type=template&id=591054de&scoped=true& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AorticValveValues_vue_vue_type_template_id_591054de_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AorticValveValues_vue_vue_type_template_id_591054de_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AorticValveValues_vue_vue_type_template_id_591054de_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AorticValveValues.vue?vue&type=template&id=591054de&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AorticValveValues.vue?vue&type=template&id=591054de&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/echo/values/MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./vue/echo/values/MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_template_id_0518a67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_template_id_0518a67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MitralValveValues_vue_vue_type_template_id_0518a67a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/echo/values/PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./vue/echo/values/PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PulmonicValveValues_vue_vue_type_template_id_58f5cb6e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PulmonicValveValues_vue_vue_type_template_id_58f5cb6e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PulmonicValveValues_vue_vue_type_template_id_58f5cb6e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/echo/values/TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true&":
+/*!****************************************************************************************!*\
+  !*** ./vue/echo/values/TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TricuspidValues_vue_vue_type_template_id_1ae7470d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TricuspidValues_vue_vue_type_template_id_1ae7470d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TricuspidValues_vue_vue_type_template_id_1ae7470d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true&");
 
 
 /***/ }),
@@ -18176,10 +19047,66 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/mitral-valve-values/MitralValveValues.vue?vue&type=template&id=7d7e8372&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AllValues.vue?vue&type=template&id=28c74f19&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AllValues.vue?vue&type=template&id=28c74f19&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c("MitralValveValues", {
+              staticClass: "mb-3",
+              attrs: { id: "mitral" }
+            }),
+            _vm._v(" "),
+            _c("AorticValveValues", {
+              staticClass: "mb-3",
+              attrs: { id: "aortic" }
+            }),
+            _vm._v(" "),
+            _c("PulmonicValveValues", {
+              staticClass: "mb-3",
+              attrs: { id: "pulmonic" }
+            }),
+            _vm._v(" "),
+            _c("TricuspidValues", {
+              staticClass: "mb-3",
+              attrs: { id: "tricuspid" }
+            })
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AorticValveValues.vue?vue&type=template&id=591054de&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/AorticValveValues.vue?vue&type=template&id=591054de&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18195,111 +19122,311 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col" }, [
-            _c("div", { staticClass: "card shadow shadow-sm" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _vm._v("Echo Mitral Valve Values")
+      _c("div", { staticClass: "card shadow shadow-sm" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("Aortic Valve Values")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", {}, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Value")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.toAdd.value,
+                    expression: "toAdd.value",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3" },
+                domProps: { value: _vm.toAdd.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.toAdd, "value", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { disabled: _vm.isEmptyValue(_vm.toAdd.value) },
+                  on: { click: _vm.onSave }
+                },
+                [_vm._v("Save")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-3" }, [
+            _c("hr"),
+            _vm._v(" "),
+            !_vm.isEmptyList
+              ? _c(
+                  "table",
+                  { staticClass: "table table-bordered table-sm" },
+                  _vm._l(_vm.values, function(item) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(item.value))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          staticStyle: { width: "100px" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-warning",
+                              on: {
+                                click: function($event) {
+                                  return _vm.openEditModal(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.onDelete(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _c("div", { staticClass: "text-center" }, [
+                  _vm._v("No values in the database, please add something.")
+                ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: {
+            id: "modal-edit-aortic-valve",
+            visible: _vm.modalEditWindowVisible
+          },
+          on: { close: _vm.closeEditModal },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Edit Item")]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c("div", [
+            _c("div", {}, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Value")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.toEdit.value,
+                      expression: "toEdit.value",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { rows: "3" },
+                  domProps: { value: _vm.toEdit.value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.toEdit, "value", $event.target.value.trim())
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", {}, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Value")]),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.mitralValveValueToAdd.value,
-                          expression: "mitralValveValueToAdd.value",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { rows: "3" },
-                      domProps: { value: _vm.mitralValveValueToAdd.value },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.mitralValveValueToAdd,
-                            "value",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          return _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-center" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          disabled: _vm.isEmptyValue(
-                            _vm.mitralValveValueToAdd.value
-                          )
-                        },
-                        on: { click: _vm.save }
-                      },
-                      [_vm._v("Save")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "my-3" }, [
-                  _c("hr"),
-                  _vm._v(" "),
-                  !_vm.isEmptyList
-                    ? _c(
-                        "table",
-                        { staticClass: "table table-bordered table-sm" },
-                        _vm._l(_vm.mitralValveValues, function(item) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(item.value))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              {
-                                staticClass: "text-center",
-                                staticStyle: { width: "100px" }
-                              },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-tiny btn-warning",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.openEditModal(item)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Edit")]
-                                )
-                              ]
-                            )
-                          ])
-                        }),
-                        0
-                      )
-                    : _c("div", { staticClass: "text-center" }, [
-                        _vm._v(
-                          "No values in the database, please add something."
-                        )
-                      ])
-                ])
+              _c("div", { staticClass: "text-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { disabled: _vm.isEmptyValue(_vm.toEdit.value) },
+                    on: { click: _vm.onUpdate }
+                  },
+                  [_vm._v("update")]
+                )
               ])
             ])
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/MitralValveValues.vue?vue&type=template&id=0518a67a&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card shadow shadow-sm" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("Mitral Valve Values")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", {}, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Value")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.toAdd.value,
+                    expression: "toAdd.value",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3" },
+                domProps: { value: _vm.toAdd.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.toAdd, "value", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { disabled: _vm.isEmptyValue(_vm.toAdd.value) },
+                  on: { click: _vm.onSave }
+                },
+                [_vm._v("Save")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-3" }, [
+            _c("hr"),
+            _vm._v(" "),
+            !_vm.isEmptyList
+              ? _c(
+                  "table",
+                  { staticClass: "table table-bordered table-sm" },
+                  _vm._l(_vm.values, function(item) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(item.value))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          staticStyle: { width: "100px" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-warning",
+                              on: {
+                                click: function($event) {
+                                  return _vm.openEditModal(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.onDelete(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _c("div", { staticClass: "text-center" }, [
+                  _vm._v("No values in the database, please add something.")
+                ])
           ])
         ])
       ]),
@@ -18331,24 +19458,20 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model.trim",
-                      value: _vm.mitralValveValueToEdit.value,
-                      expression: "mitralValveValueToEdit.value",
+                      value: _vm.toEdit.value,
+                      expression: "toEdit.value",
                       modifiers: { trim: true }
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { rows: "3" },
-                  domProps: { value: _vm.mitralValveValueToEdit.value },
+                  domProps: { value: _vm.toEdit.value },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.mitralValveValueToEdit,
-                        "value",
-                        $event.target.value.trim()
-                      )
+                      _vm.$set(_vm.toEdit, "value", $event.target.value.trim())
                     },
                     blur: function($event) {
                       return _vm.$forceUpdate()
@@ -18362,23 +19485,409 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-success",
-                    attrs: {
-                      disabled: _vm.isEmptyValue(
-                        _vm.mitralValveValueToEdit.value
-                      )
-                    },
-                    on: { click: _vm.update }
+                    attrs: { disabled: _vm.isEmptyValue(_vm.toEdit.value) },
+                    on: { click: _vm.onUpdate }
                   },
                   [_vm._v("update")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "my-2" }, [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(_vm.messages.updateMessage) +
-                      "\n          "
-                  )
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/PulmonicValveValues.vue?vue&type=template&id=58f5cb6e&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card shadow shadow-sm" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("Pulmonic Valve Values")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", {}, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Value")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.toAdd.value,
+                    expression: "toAdd.value",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3" },
+                domProps: { value: _vm.toAdd.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.toAdd, "value", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { disabled: _vm.isEmptyValue(_vm.toAdd.value) },
+                  on: { click: _vm.onSave }
+                },
+                [_vm._v("Save")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-3" }, [
+            _c("hr"),
+            _vm._v(" "),
+            !_vm.isEmptyList
+              ? _c(
+                  "table",
+                  { staticClass: "table table-bordered table-sm" },
+                  _vm._l(_vm.values, function(item) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(item.value))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          staticStyle: { width: "100px" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-warning",
+                              on: {
+                                click: function($event) {
+                                  return _vm.openEditModal(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.onDelete(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _c("div", { staticClass: "text-center" }, [
+                  _vm._v("No values in the database, please add something.")
                 ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { id: "edit-window", visible: _vm.modalEditWindowVisible },
+          on: { close: _vm.closeEditModal },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Edit Item")]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c("div", [
+            _c("div", {}, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Value")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.toEdit.value,
+                      expression: "toEdit.value",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { rows: "3" },
+                  domProps: { value: _vm.toEdit.value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.toEdit, "value", $event.target.value.trim())
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { disabled: _vm.isEmptyValue(_vm.toEdit.value) },
+                    on: { click: _vm.onUpdate }
+                  },
+                  [_vm._v("update")]
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/echo/values/TricuspidValues.vue?vue&type=template&id=1ae7470d&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card shadow shadow-sm" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("Tricuspid Values")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", {}, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Value")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.toAdd.value,
+                    expression: "toAdd.value",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3" },
+                domProps: { value: _vm.toAdd.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.toAdd, "value", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { disabled: _vm.isEmptyValue(_vm.toAdd.value) },
+                  on: { click: _vm.onSave }
+                },
+                [_vm._v("Save")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-3" }, [
+            _c("hr"),
+            _vm._v(" "),
+            !_vm.isEmptyList
+              ? _c(
+                  "table",
+                  { staticClass: "table table-bordered table-sm" },
+                  _vm._l(_vm.values, function(item) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(item.value))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          staticStyle: { width: "100px" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-warning",
+                              on: {
+                                click: function($event) {
+                                  return _vm.openEditModal(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.onDelete(item)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _c("div", { staticClass: "text-center" }, [
+                  _vm._v("No values in the database, please add something.")
+                ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { id: "edit-window", visible: _vm.modalEditWindowVisible },
+          on: { close: _vm.closeEditModal },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Edit Item")]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c("div", [
+            _c("div", {}, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Value")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.toEdit.value,
+                      expression: "toEdit.value",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { rows: "3" },
+                  domProps: { value: _vm.toEdit.value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.toEdit, "value", $event.target.value.trim())
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { disabled: _vm.isEmptyValue(_vm.toEdit.value) },
+                    on: { click: _vm.onUpdate }
+                  },
+                  [_vm._v("update")]
+                )
               ])
             ])
           ])
@@ -31851,7 +33360,7 @@ module.exports = index_cjs;
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	__webpack_require__("./vue/echo/mitral-valve-values/mitral-valve-values.app.js");
+/******/ 	__webpack_require__("./vue/echo/values/values.app.js");
 /******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;

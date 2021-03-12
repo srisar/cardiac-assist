@@ -72,9 +72,17 @@ use App\Models\User;
                         Echocardiography
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/mitral-valve-values.php">Mitral Valve Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/diseases/manage.php">Diseases</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#mitral">Mitral Valve Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aortic">Aortic Valve Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pulmonic">Pulmonic Valve Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#tricuspid">Tricuspid Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aorta">Aorta Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-atrium">Left atrium Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-atrium">Right atrium Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-ventricle">Left Ventricle Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-ventricle">Right Ventricle Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Pericardium Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Doppler Values</a>
                     </div>
                 </li><!-- end nav-item -->
 

@@ -2,27 +2,28 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoMitralValveValue;
+use App\Models\EchoAorticValveValue;
 
 require_once "../../../_bootstrap.inc.php";
 
 try {
 
     $fields = [
+        'id'    => Request::getAsInteger('id'),
         'value' => Request::getAsString('value'),
+
     ];
 
-    $object = EchoMitralValveValue::build($fields);
+    $object = EchoAorticValveValue::build($fields);
 
-    $result = $object->insert();
+    $result = $object->update();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    if ( empty($result) ) throw new Exception('Update failed');
 
-    $object = EchoMitralValveValue::find($result);
-
-    JSONResponse::validResponse(['data' => $object]);
+    JSONResponse::validResponse();
     return;
 
 } catch ( Exception $exception ) {
     JSONResponse::exceptionResponse($exception);
 }
+

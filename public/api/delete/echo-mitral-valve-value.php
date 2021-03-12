@@ -9,19 +9,20 @@ require_once "../../../_bootstrap.inc.php";
 try {
 
     $fields = [
-        'value' => Request::getAsString('value'),
+        'id' => Request::getAsInteger('id'),
     ];
 
     $object = EchoMitralValveValue::build($fields);
 
-    $result = $object->insert();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    $result = $object->delete();
 
-    $object = EchoMitralValveValue::find($result);
-
-    JSONResponse::validResponse(['data' => $object]);
-    return;
+    if ( $result ) {
+        JSONResponse::validResponse('Deleted');
+        return;
+    } else {
+        throw new Exception('Failed');
+    }
 
 } catch ( Exception $exception ) {
     JSONResponse::exceptionResponse($exception);

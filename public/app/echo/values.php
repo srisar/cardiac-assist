@@ -18,5 +18,5 @@ App::setTitle("Mitral Valve Values");
 
 <?php include_once BASE_PATH . "/inc.footer.php"; ?>
 
-<script src="mitral-valve-values.app.js"></script>
+<script src="values.app.js"></script>
 

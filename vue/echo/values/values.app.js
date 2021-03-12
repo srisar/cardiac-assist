@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex'
-import MitralValveValues from "./MitralValveValues";
+import AllValues from "./AllValues";
 
 Vue.use(Vuex);
 
 new Vue({
-    render: h => h(MitralValveValues),
+    render: h => h(AllValues),
 }).$mount('#app');
