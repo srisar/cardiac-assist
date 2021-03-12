@@ -148,9 +148,9 @@
         </div><!-- col-->
 
         <div class="col-12 col-lg-5 mb-3">
-          <ListVisits class="mb-2"/>
+          <ListVisits class="mb-3"/>
 
-          <ListAppointments class="mb-2"/>
+          <ListAppointments class="mb-3"/>
 
         </div>
 

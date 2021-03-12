@@ -99,9 +99,9 @@ export default {
 
   data() {
     return {
-      visitLipidsExpanded    : false,
-      visitECGExpanded       : false,
-      visitCoronaryCTExpanded: false,
+      visitLipidsExpanded    : true,
+      visitECGExpanded       : true,
+      visitCoronaryCTExpanded: true,
       visitEchoExpanded      : true,
     }
   },

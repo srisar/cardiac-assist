@@ -109,9 +109,16 @@
         </tbody>
       </table>
 
-      <div class="text-center mt-3">
+      <div class="text-center my-3">
         <button class="btn btn-success" @click="onUpdate">Update</button>
       </div>
+
+      <!-- Reports -->
+
+      <VisitEchoReports/>
+
+      <!-- Reports -->
+
 
     </div>
 
@@ -120,9 +127,12 @@
 </template>
 
 <script>
-export default {
-  name: "VisitEchocardiography",
 
+import VisitEchoReports from "./VisitEchoReports";
+
+export default {
+  name      : "VisitEchocardiography",
+  components: { VisitEchoReports },
   /* ### DATA ### */
   data() {
     return {

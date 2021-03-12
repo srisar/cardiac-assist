@@ -136,6 +136,7 @@ const moduleAppointments = {
             return new Promise((resolve, reject) => {
                 $.post(`${getSiteURL()}/api/save/appointment.php`, appointment)
                     .done(r => {
+                        dispatch('fetchAppointments')
                         resolve()
                     })
                     .fail(e => {

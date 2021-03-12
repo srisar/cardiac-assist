@@ -85,11 +85,10 @@ export default {
 
       $.post(`${getSiteURL()}/api/update/visit-lipids.php`, params)
           .done(r => {
-            alert("Lipid details updated");
+            bootbox.alert("Lipid details updated");
           })
           .fail(e => {
-            console.log(e);
-            alert("Failed to update lipid details");
+            bootbox.alert("Failed to update lipid details");
           });
     }, /* update */
 

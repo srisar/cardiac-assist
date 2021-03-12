@@ -66,11 +66,11 @@ export default {
 
       $.post(`${getSiteURL()}/api/update/visit-ecg.php`, params)
           .done(r => {
-            alert("ECG details updated")
+            bootbox.alert('ECG details updated')
           })
           .fail(e => {
             console.log(e);
-            alert("Failed to update ECG details")
+            bootbox.alert('Failed to update ECG details')
           });
 
     },
