@@ -3,13 +3,12 @@
   <div>
 
     <div class="card shadow shadow-sm">
-      <div class="card-header">Right Ventricle Values</div>
+      <div class="card-header">Right Ventricle Remarks</div>
       <div class="card-body">
 
 
         <div class="">
           <div class="form-group">
-            <label>Value</label>
             <textarea rows="3" class="form-control" v-model.trim="toAdd.value"></textarea>
           </div>
 

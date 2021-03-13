@@ -17,7 +17,7 @@ $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $db_config = [
-    'HOST' => $_ENV['DB_HOST'],
+    'HOST'     => $_ENV['DB_HOST'],
     'DATABASE' => $_ENV['DB_NAME'],
     'USERNAME' => $_ENV['DB_USERNAME'],
     'PASSWORD' => $_ENV['DB_PASSWORD'],
@@ -33,7 +33,7 @@ Database::init($db_config);
 define('SITE_URL', 'http://localhost');
 define('BASE_PATH', __DIR__ . '/public');
 define('APP_NAME', $_ENV['APP_NAME']);
-define('APP_VERSION', '0.8.1');
+define('APP_VERSION', '0.8.3');
 
 
 App::setTitle("");

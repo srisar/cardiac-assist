@@ -17,90 +17,90 @@
         <tbody>
 
         <tr>
-          <td class="text-right align-middle">LA Systolic Diameter</td>
+          <td class="text-right align-middle">LA Systolic Diameter (mm)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_la_systolic_diameter"></td>
-          <td class="text-right align-middle">Peak Aortic Velocity</td>
+          <td class="text-right align-middle">Peak Aortic Velocity (cm/s)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_peak_aortic_velocity"></td>
-          <td class="text-right align-middle">Stroke Volume</td>
+          <td class="text-right align-middle">Stroke Volume (ml)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_stroke_volume"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">Aortic Root Diameter</td>
+          <td class="text-right align-middle">Aortic Root Diameter (mm)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_aortic_root_diameter"></td>
-          <td class="text-right align-middle">Peak LVOT Velocity</td>
+          <td class="text-right align-middle">Peak LVOT Velocity (cm/s)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_peak_lvot_velocity"></td>
-          <td class="text-right align-middle">Cardiac Output</td>
+          <td class="text-right align-middle">Cardiac Output (l/s)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_cardiac_output"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">LVOT Diameter</td>
+          <td class="text-right align-middle">LVOT Diameter (mm)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_lvot_diameter"></td>
-          <td class="text-right align-middle">Aortic/LVOT Velocity</td>
+          <td class="text-right align-middle">Aortic/LVOT Velocity (cm/s)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_aortic_lvot_velocity"></td>
-          <td class="text-right align-middle">Cardiac Index</td>
+          <td class="text-right align-middle">Cardiac Index (l/min/m²)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_cardiac_index"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">RVID</td>
+          <td class="text-right align-middle">RVID (mm)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_rvid"></td>
-          <td class="text-right align-middle">Peak Aortic Gradient</td>
+          <td class="text-right align-middle">Peak Aortic Gradient (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_peak_aortic_gradient"></td>
-          <td class="text-right align-middle">BP</td>
+          <td class="text-right align-middle">BP (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_bp"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">IVS Diastolic Thickness</td>
+          <td class="text-right align-middle">IVS Diastolic Thickness (mm)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_ivs_diastolic_thickness"></td>
-          <td class="text-right align-middle">Mean Aortic Gradient</td>
+          <td class="text-right align-middle">Mean Aortic Gradient (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_mean_aortic_gradient"></td>
-          <td class="text-right align-middle">HR</td>
+          <td class="text-right align-middle">HR (beat/min)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_hr"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">PW Diastolic Thickness</td>
+          <td class="text-right align-middle">PW Diastolic Thickness (mm)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_pw_diastolic_thickness"></td>
-          <td class="text-right align-middle">Aortic Valve Area</td>
+          <td class="text-right align-middle">Aortic Valve Area (mm²)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_aortic_valve_area"></td>
-          <td class="text-right align-middle">Est. RVSP</td>
+          <td class="text-right align-middle">Est. RVSP (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_est_rvsp"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">LVID Diastole</td>
+          <td class="text-right align-middle">LVID Diastole (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_lvid_diastole"></td>
-          <td class="text-right align-middle">Mitral Pressure 1/2 T</td>
+          <td class="text-right align-middle">Mitral Pressure 1/2 T (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_mitral_pressure"></td>
-          <td class="text-right align-middle">Est. CVP</td>
+          <td class="text-right align-middle">Est. CVP (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_est_cvp"></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">LVID Systole</td>
+          <td class="text-right align-middle">LVID Systole (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_lvid_systole"></td>
-          <td class="text-right align-middle">Mean Mitral Gradient</td>
+          <td class="text-right align-middle">Mean Mitral Gradient (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_mean_mitral_gradient"></td>
-          <td class="text-right align-middle">Est. PASP</td>
+          <td class="text-right align-middle">Est. PASP (mmHg)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_est_pasp"></td>
         </tr>
 
         <tr>
           <td class="text-right align-middle">Fractional Shortening</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_fractional_shortening"></td>
-          <td class="text-right align-middle">Mitral Valve Area</td>
+          <td class="text-right align-middle">Mitral Valve Area (mm²)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_mitral_valve_area"></td>
           <td class="text-right"></td>
           <td></td>
         </tr>
 
         <tr>
-          <td class="text-right align-middle">LVEF</td>
+          <td class="text-right align-middle">LVEF (%)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_lvef"></td>
-          <td class="text-right align-middle">Peak Tricuspid Velocity</td>
+          <td class="text-right align-middle">Peak Tricuspid Velocity (cm/s)</td>
           <td><input type="number" class="form-control form-control-sm text-right" v-model.number="visitEcho.param_peak_tricuspid_velocity"></td>
           <td class="text-right"></td>
           <td></td>
@@ -201,10 +201,9 @@ export default {
 
       $.get(`${getSiteURL()}/api/get/visit-echo.php`, params)
           .done(response => {
-            console.log(response.data)
             this.visitEcho = response.data
           })
-          .fail(error => { })
+          .fail(() => { })
 
     }, /* fetch */
 
@@ -243,11 +242,17 @@ export default {
 
       $.post(`${getSiteURL()}/api/update/visit-echo.php`, params)
           .done(() => {
-            alert("Echocardiography details updated");
+            bootbox.alert({
+              title  : '<i class="bi bi-info-circle"></i> Success',
+              message: 'Echocardiography details updated'
+            })
           })
           .fail(e => {
-            console.log(e);
-            alert("Failed to update echocardiography details");
+
+            bootbox.alert({
+              title  : '<i class="bi bi-exclamation-circle-fill"></i> Error',
+              message: 'Failed to update echocardiography details'
+            })
           });
 
     },

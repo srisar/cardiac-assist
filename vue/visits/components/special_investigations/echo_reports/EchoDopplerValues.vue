@@ -1,18 +1,28 @@
 <template>
 
-  <div class="report-section">
+  <div class="report-section" @mouseover="inputVisible = true" @mouseleave="inputVisible = false">
 
     <div class="alert alert-dark shadow shadow-sm p-2">
 
-      <div class="report-section__title text-uppercase">Doppler</div>
-      <div class="input-group mb-3">
-        <select class="form-control" v-model="selectedItem">
-          <option value="-1" disabled>SELECT</option>
-          <option v-for="item in allValues" :value="item">{{ item.value }}</option>
-        </select>
-        <div class="input-group-append">
-          <button class="btn btn-success" type="button" @click="onAdd">Add</button>
+
+      <div class="report-section__title text-uppercase mb-2 d-flex justify-content-between">
+
+        <div>Doppler</div>
+
+        <div>
+          <div class="btn-group dropleft">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+              Remarks
+            </button>
+            <div class="dropdown-menu" style="width: 800px">
+              <button style="white-space: initial;" class="dropdown-item" type="button" v-for="item in allValues" @click="onAdd(item)">{{ item.value }}</button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-sm" type="button" @click="onNew('echo-doppler-value.php')"><i class="bi bi-plus-circle"></i></button>
+
         </div>
+
       </div>
 
       <table class="table table-sm table-bordered">
@@ -32,11 +42,11 @@
 </template>
 
 <script>
-
-const REPORT_TYPE = 'echo_doppler_values'
+import mixins from "./mixins";
 
 export default {
-  name: "EchoDopplerValues",
+  name  : "EchoDopplerValues",
+  mixins: [mixins],
 
   /* ### DATA ### */
   data() {
@@ -44,6 +54,7 @@ export default {
       allValues   : [],
       visitValues : [],
       selectedItem: -1,
+      REPORT_TYPE : 'echo_doppler_values'
     }
   }, /* DATA */
 
@@ -76,57 +87,6 @@ export default {
             console.log(error)
           })
     }, /* fetch all values */
-
-    fetchVisitValues: function () {
-      const params = {
-        visit_id   : this.visit.id,
-        report_type: REPORT_TYPE
-      }
-
-      $.get(`${getSiteURL()}/api/get/visit-echo-report-values.php`, params)
-          .done(response => {
-            this.visitValues = response.data
-          })
-          .fail(error => {
-
-          })
-    }, /* fetch visit values */
-
-    onRemove: function (item) {
-
-      const params = {
-        visit_id   : item.visit_id,
-        value_id   : item.id,
-        report_type: REPORT_TYPE
-      }
-
-      $.get(`${getSiteURL()}/api/delete/visit-echo-report-value.php`, params)
-          .done(response => {
-            this.fetchVisitValues()
-          })
-          .fail(error => {
-            bootbox.alert('<p class="lead">Failed to remove</p>')
-          })
-    }, /* on remove */
-
-    onAdd: function () {
-
-      const params = {
-        visit_id   : this.visit.id,
-        value_id   : this.selectedItem.id,
-        report_type: REPORT_TYPE
-      }
-
-      $.get(`${getSiteURL()}/api/save/visit-echo-report-value.php`, params)
-          .done(response => {
-            this.fetchVisitValues()
-            this.selectedItem = -1
-          })
-          .fail(error => {
-            bootbox.alert('<p class="lead">Failed to add</p><p>Please select a valid option</p>')
-          })
-
-    },
 
 
   }, /* METHODS */

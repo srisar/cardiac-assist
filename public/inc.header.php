@@ -15,7 +15,7 @@ use App\Models\User;
 
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/fonts/clear-sans/stylesheet.css">
-    <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/bs-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/DataTables/datatables.min.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/daterangepicker-3.1/daterangepicker.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/app.css">
@@ -72,17 +72,17 @@ use App\Models\User;
                         Echocardiography
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#mitral">Mitral Valve Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aortic">Aortic Valve Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pulmonic">Pulmonic Valve Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#tricuspid">Tricuspid Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aorta">Aorta Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-atrium">Left atrium Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-atrium">Right atrium Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-ventricle">Left Ventricle Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-ventricle">Right Ventricle Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Pericardium Values</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#doppler">Doppler Values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#mitral">Mitral Valve Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aortic">Aortic Valve Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pulmonic">Pulmonic Valve Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#tricuspid">Tricuspid Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aorta">Aorta Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-atrium">Left atrium Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-atrium">Right atrium Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-ventricle">Left Ventricle Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-ventricle">Right Ventricle Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Pericardium Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#doppler">Doppler Remarks</a>
                     </div>
                 </li><!-- end nav-item -->
 
