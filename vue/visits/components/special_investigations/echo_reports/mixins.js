@@ -44,11 +44,11 @@ export default {
         }, /* on new */
 
         /* on add */
-        onAdd: function (item) {
+        onAdd: function (payload) {
 
             const params = {
                 visit_id   : this.visit.id,
-                value_id   : item.id,
+                value_id   : payload.item.id,
                 report_type: this.REPORT_TYPE
             }
 
@@ -79,11 +79,11 @@ export default {
                 })
         }, /* fetch visit values */
 
-        onRemove: function (item) {
+        onRemove: function (payload) {
 
             const params = {
-                visit_id   : item.visit_id,
-                value_id   : item.id,
+                visit_id   : payload.item.visit_id,
+                value_id   : payload.item.id,
                 report_type: this.REPORT_TYPE
             }
 

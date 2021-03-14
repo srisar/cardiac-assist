@@ -102,7 +102,7 @@ export default {
       visitLipidsExpanded    : false,
       visitECGExpanded       : false,
       visitCoronaryCTExpanded: false,
-      visitEchoExpanded      : true,
+      visitEchoExpanded      : false,
     }
   },
 

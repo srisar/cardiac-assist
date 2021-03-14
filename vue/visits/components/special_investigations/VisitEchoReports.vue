@@ -7,7 +7,6 @@
     <EchoTricuspidValues/>
     <EchoPulmonicValveValues/>
     <EchoAortaValues/>
-    <EchoAorticValveValues/>
     <EchoLeftAtriumValues/>
     <EchoRightAtriumValues/>
     <EchoLeftVentricleValues/>
