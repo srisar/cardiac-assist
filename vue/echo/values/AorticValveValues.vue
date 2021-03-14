@@ -106,7 +106,7 @@ export default {
     * Fetch all values
     * */
     fetchAll: function () {
-      $.get(`${getSiteURL()}/api/get/echo-aortic-valve-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-aortic-valve-values.php`)
           .done(response => {
             this.values = response.data
           })
@@ -122,7 +122,7 @@ export default {
         value: this.toAdd.value
       }
 
-      $.post(`${getSiteURL()}/api/save/echo-aortic-valve-value.php`, param)
+      $.post(`${getSiteURL()}/api/save/echo/echo-aortic-valve-value.php`, param)
           .done(() => {
             // fetch everything again
             this.fetchAll()
@@ -140,7 +140,7 @@ export default {
         value: this.toEdit.value,
       }
 
-      $.post(`${getSiteURL()}/api/update/echo-aortic-valve-value.php`, param)
+      $.post(`${getSiteURL()}/api/update/echo/echo-aortic-valve-value.php`, param)
           .done(() => {
 
             // fetch everything again
@@ -167,7 +167,7 @@ export default {
 
           console.log(param)
 
-          $.post(`${getSiteURL()}/api/delete/echo-aortic-valve-value.php`, param)
+          $.post(`${getSiteURL()}/api/delete/echo/echo-aortic-valve-value.php`, param)
               .done(() => {
                 // fetch everything again
                 this.fetchAll()

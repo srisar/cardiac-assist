@@ -59,7 +59,7 @@ export default {
     },
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-mitral-valve-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-mitral-valve-values.php`)
           .done(response => {
             this.allValues = response.data
           })

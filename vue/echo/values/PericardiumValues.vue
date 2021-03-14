@@ -89,7 +89,7 @@ export default {
     * Fetch all values
     * */
     fetchAll: function () {
-      $.get(`${getSiteURL()}/api/get/echo-pericardium-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-pericardium-values.php`)
           .done(response => {
             this.values = response.data
           })
@@ -105,7 +105,7 @@ export default {
         value: this.toAdd.value
       }
 
-      $.post(`${getSiteURL()}/api/save/echo-pericardium-value.php`, param)
+      $.post(`${getSiteURL()}/api/save/echo/echo-pericardium-value.php`, param)
           .done(() => {
             // fetch everything again
             this.fetchAll()
@@ -123,7 +123,7 @@ export default {
         value: this.toEdit.value,
       }
 
-      $.post(`${getSiteURL()}/api/update/echo-pericardium-value.php`, param)
+      $.post(`${getSiteURL()}/api/update/echo/echo-pericardium-value.php`, param)
           .done(() => {
 
             // fetch everything again
@@ -151,7 +151,7 @@ export default {
             id: item.id,
           }
 
-          $.post(`${getSiteURL()}/api/delete/echo-pericardium-value.php`, param)
+          $.post(`${getSiteURL()}/api/delete/echo/echo-pericardium-value.php`, param)
               .done(() => {
                 // fetch everything again
                 this.fetchAll()

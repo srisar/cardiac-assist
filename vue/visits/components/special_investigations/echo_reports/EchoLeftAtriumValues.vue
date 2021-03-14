@@ -53,7 +53,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-left-atrium-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-left-atrium-values.php`)
           .done(response => {
             this.allValues = response.data
           })

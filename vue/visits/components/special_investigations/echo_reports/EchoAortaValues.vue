@@ -53,7 +53,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-aorta-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-aorta-values.php`)
           .done(response => {
             this.allValues = response.data
           })

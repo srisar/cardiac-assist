@@ -64,7 +64,7 @@ export default {
         description: this.visitECG.description
       };
 
-      $.post(`${getSiteURL()}/api/update/visit-ecg.php`, params)
+      $.post(`${getSiteURL()}/api/update/visit/visit-ecg.php`, params)
           .done(r => {
             bootbox.alert('ECG details updated')
           })
@@ -85,7 +85,7 @@ export default {
         visit_id: this.visit.id,
       }
 
-      $.get(`${getSiteURL()}/api/get/visit-ecg.php`, params)
+      $.get(`${getSiteURL()}/api/get/visit/visit-ecg.php`, params)
           .done(response => {
             this.visitECG = response.data
           })

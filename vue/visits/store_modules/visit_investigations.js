@@ -60,7 +60,7 @@ export default {
         fetchVisitInvestigations: function ({commit, state}, visitId) {
             return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/visit-investigations.php`, {
+                $.get(`${getSiteURL()}/api/get/visit/visit-investigations.php`, {
                     visit_id: visitId
                 }).done(r => {
 
@@ -88,7 +88,7 @@ export default {
 
                 console.log(params);
 
-                $.get(`${getSiteURL()}/api/save/visit-investigation.php`, params)
+                $.get(`${getSiteURL()}/api/save/visit/visit-investigation.php`, params)
                     .done(r => {
 
                         dispatch('fetchVisitInvestigations', params.visit_id);
@@ -112,7 +112,7 @@ export default {
                     id: investigation.id,
                 }
 
-                $.get(`${getSiteURL()}/api/delete/visit-investigation.php`, params)
+                $.get(`${getSiteURL()}/api/delete/visit/visit-investigation.php`, params)
                     .done(r => {
 
                         const visit_id = rootState.visit.id;
@@ -136,7 +136,7 @@ export default {
                     remarks: visitInvestigation.remarks
                 };
 
-                $.get(`${getSiteURL()}/api/update/visit-investigation.php`, params)
+                $.get(`${getSiteURL()}/api/update/visit/visit-investigation.php`, params)
                     .done(r => {
 
                         const visit_id = rootState.visit.id;

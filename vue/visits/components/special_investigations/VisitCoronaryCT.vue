@@ -124,7 +124,7 @@ export default {
     _fetch: function () {
       const params = { visit_id: this.visit.id }
 
-      $.get(`${getSiteURL()}/api/get/visit-coronary-ct.php`, params)
+      $.get(`${getSiteURL()}/api/get/visit/visit-coronary-ct.php`, params)
           .done(response => {
             this.visitCoronaryCT = response.data
           })
@@ -149,7 +149,7 @@ export default {
         impression            : this.visitCoronaryCT.impression,
       }
 
-      $.post(`${getSiteURL()}/api/update/visit-coronary-ct.php`, params)
+      $.post(`${getSiteURL()}/api/update/visit/visit-coronary-ct.php`, params)
           .done(() => {
             bootbox.alert("Coronary CT details updated");
           })

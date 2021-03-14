@@ -89,7 +89,7 @@ export default {
     * Fetch all values
     * */
     fetchAll: function () {
-      $.get(`${getSiteURL()}/api/get/echo-doppler-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-doppler-values.php`)
           .done(response => {
             this.values = response.data
           })
@@ -105,7 +105,7 @@ export default {
         value: this.toAdd.value
       }
 
-      $.post(`${getSiteURL()}/api/save/echo-doppler-value.php`, param)
+      $.post(`${getSiteURL()}/api/save/echo/echo-doppler-value.php`, param)
           .done(() => {
             // fetch everything again
             this.fetchAll()
@@ -123,7 +123,7 @@ export default {
         value: this.toEdit.value,
       }
 
-      $.post(`${getSiteURL()}/api/update/echo-doppler-value.php`, param)
+      $.post(`${getSiteURL()}/api/update/echo/echo-doppler-value.php`, param)
           .done(() => {
 
             // fetch everything again
@@ -151,7 +151,7 @@ export default {
             id: item.id,
           }
 
-          $.post(`${getSiteURL()}/api/delete/echo-doppler-value.php`, param)
+          $.post(`${getSiteURL()}/api/delete/echo/echo-doppler-value.php`, param)
               .done(() => {
                 // fetch everything again
                 this.fetchAll()

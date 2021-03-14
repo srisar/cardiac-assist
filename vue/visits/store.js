@@ -48,7 +48,7 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/visits.php`, {
+                $.get(`${getSiteURL()}/api/get/visit/visits.php`, {
                     id: id
                 }).done(r => {
 
@@ -81,7 +81,7 @@ export default new Vuex.Store({
                     sbp: visit.sbp,
                 };
 
-                $.post(`${getSiteURL()}/api/update/visit.php`, params)
+                $.post(`${getSiteURL()}/api/update/visit/visit.php`, params)
                     .done(r => {
                         resolve(r);
                     })
@@ -101,7 +101,7 @@ export default new Vuex.Store({
                     status: status,
                 }
 
-                $.post(`${getSiteURL()}/api/update/visit-status.php`, params)
+                $.post(`${getSiteURL()}/api/update/visit/visit-status.php`, params)
                     .done(r => {
                         resolve();
                     })

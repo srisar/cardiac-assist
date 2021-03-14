@@ -199,7 +199,7 @@ export default {
         visit_id: this.visit.id,
       }
 
-      $.get(`${getSiteURL()}/api/get/visit-echo.php`, params)
+      $.get(`${getSiteURL()}/api/get/visit/visit-echo.php`, params)
           .done(response => {
             this.visitEcho = response.data
           })
@@ -240,7 +240,7 @@ export default {
         param_est_pasp               : this.visitEcho.param_est_pasp,
       }
 
-      $.post(`${getSiteURL()}/api/update/visit-echo.php`, params)
+      $.post(`${getSiteURL()}/api/update/visit/visit-echo.php`, params)
           .done(() => {
             bootbox.alert({
               title  : '<i class="bi bi-info-circle"></i> Success',

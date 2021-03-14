@@ -54,7 +54,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-pericardium-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-pericardium-values.php`)
           .done(response => {
             this.allValues = response.data
           })

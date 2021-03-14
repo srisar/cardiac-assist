@@ -53,7 +53,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-doppler-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-doppler-values.php`)
           .done(response => {
             this.allValues = response.data
           })

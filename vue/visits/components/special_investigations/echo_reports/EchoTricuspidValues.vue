@@ -54,7 +54,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-tricuspid-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-tricuspid-values.php`)
           .done(response => {
             this.allValues = response.data
           })

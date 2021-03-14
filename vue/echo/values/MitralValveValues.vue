@@ -90,7 +90,7 @@ export default {
     * Fetch all values
     * */
     fetchAll: function () {
-      $.get(`${getSiteURL()}/api/get/echo-mitral-valve-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-mitral-valve-values.php`)
           .done(response => {
             this.values = response.data
           })
@@ -106,7 +106,7 @@ export default {
         value: this.toAdd.value
       }
 
-      $.post(`${getSiteURL()}/api/save/echo-mitral-valve-value.php`, param)
+      $.post(`${getSiteURL()}/api/save/echo/echo-mitral-valve-value.php`, param)
           .done(() => {
             // fetch everything again
             this.fetchAll()
@@ -124,7 +124,7 @@ export default {
         value: this.toEdit.value,
       }
 
-      $.post(`${getSiteURL()}/api/update/echo-mitral-valve-value.php`, param)
+      $.post(`${getSiteURL()}/api/update/echo/echo-mitral-valve-value.php`, param)
           .done(() => {
 
             // fetch everything again
@@ -152,7 +152,7 @@ export default {
             id: item.id,
           }
 
-          $.post(`${getSiteURL()}/api/delete/echo-mitral-valve-value.php`, param)
+          $.post(`${getSiteURL()}/api/delete/echo/echo-mitral-valve-value.php`, param)
               .done(() => {
                 // fetch everything again
                 this.fetchAll()

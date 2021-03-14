@@ -57,7 +57,7 @@ export default {
                     visit_id: visitId
                 }
 
-                $.get(`${getSiteURL()}/api/get/visit-symptoms.php`, params)
+                $.get(`${getSiteURL()}/api/get/visit/visit-symptoms.php`, params)
                     .done(r => {
 
                         commit('updateVisitSymptomsList', r.data);
@@ -99,7 +99,7 @@ export default {
                     symptom_id: symptom.id,
                 }
 
-                $.get(`${getSiteURL()}/api/save/visit-symptom.php`, params)
+                $.get(`${getSiteURL()}/api/save/visit/visit-symptom.php`, params)
                     .done(r => {
 
                         dispatch('fetchVisitSymptoms', params.visit_id);
@@ -122,7 +122,7 @@ export default {
                     id: visitSymptom.id,
                 }
 
-                $.get(`${getSiteURL()}/api/delete/visit-symptom.php`, params)
+                $.get(`${getSiteURL()}/api/delete/visit/visit-symptom.php`, params)
                     .done(r => {
 
                         dispatch('fetchVisitSymptoms', params.visit_id);

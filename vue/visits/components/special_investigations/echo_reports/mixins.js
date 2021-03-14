@@ -52,7 +52,7 @@ export default {
                 report_type: this.REPORT_TYPE
             }
 
-            $.get(`${getSiteURL()}/api/save/visit-echo-report-value.php`, params)
+            $.get(`${getSiteURL()}/api/save/visit/visit-echo-report-value.php`, params)
                 .done(() => {
                     this.fetchVisitValues()
                     this.selectedItem = -1
@@ -70,7 +70,7 @@ export default {
                 report_type: this.REPORT_TYPE
             }
 
-            $.get(`${getSiteURL()}/api/get/visit-echo-report-values.php`, params)
+            $.get(`${getSiteURL()}/api/get/visit/visit-echo-report-values.php`, params)
                 .done(response => {
                     this.visitValues = response.data
                 })
@@ -87,7 +87,7 @@ export default {
                 report_type: this.REPORT_TYPE
             }
 
-            $.get(`${getSiteURL()}/api/delete/visit-echo-report-value.php`, params)
+            $.get(`${getSiteURL()}/api/delete/visit/visit-echo-report-value.php`, params)
                 .done(() => {
                     this.fetchVisitValues()
                 })

@@ -54,7 +54,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-pulmonic-valve-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-pulmonic-valve-values.php`)
           .done(response => {
             this.allValues = response.data
           })

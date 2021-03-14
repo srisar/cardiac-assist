@@ -54,7 +54,7 @@ export default {
   methods: {
 
     fetchAllValues: function () {
-      $.get(`${getSiteURL()}/api/get/echo-right-ventricle-values.php`)
+      $.get(`${getSiteURL()}/api/get/echo/echo-right-ventricle-values.php`)
           .done(response => {
             this.allValues = response.data
           })

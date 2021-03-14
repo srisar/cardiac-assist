@@ -83,7 +83,7 @@ export default {
         nhc: this.visitLipids.nhc,
       };
 
-      $.post(`${getSiteURL()}/api/update/visit-lipids.php`, params)
+      $.post(`${getSiteURL()}/api/update/visit/visit-lipids.php`, params)
           .done(r => {
             bootbox.alert("Lipid details updated");
           })
@@ -97,7 +97,7 @@ export default {
 
       const params = { visit_id: this.visit.id, };
 
-      $.get(`${getSiteURL()}/api/get/visit-lipids.php`, params)
+      $.get(`${getSiteURL()}/api/get/visit/visit-lipids.php`, params)
           .done(response => {
             this.visitLipids = response.data
           })
