@@ -37,3 +37,21 @@ define('APP_VERSION', '0.8.4');
 
 
 App::setTitle("");
+
+
+/*
+ * HELPER FUNCTIONS
+ */
+
+/**
+ * Logs data value into php error log file.
+ * @param $data
+ */
+function __log($data)
+{
+    // https://gist.github.com/mkolb/2379498
+
+    ob_start();
+    print_r($data);
+    error_log(ob_get_clean());
+}
