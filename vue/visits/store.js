@@ -16,9 +16,9 @@ import visitInvestigations from "./store_modules/visit_investigations";
 export default new Vuex.Store({
 
     modules: {
-        visitSymptoms: visitSymptoms,
+        visitSymptoms        : visitSymptoms,
         differentialDiagnosis: differentialDiagnosis,
-        visitInvestigations: visitInvestigations,
+        visitInvestigations  : visitInvestigations,
     },
 
     state: {
@@ -44,7 +44,7 @@ export default new Vuex.Store({
         /*
         * Fetch visit details
         * */
-        fetchVisit({commit}, id) {
+        fetchVisit({ commit }, id) {
 
             return new Promise((resolve, reject) => {
 
@@ -66,22 +66,11 @@ export default new Vuex.Store({
         /*
         * Update visit details
         * */
-        updateVisit({commit}, visit) {
+        updateVisit({ commit }, visit) {
             return new Promise((resolve, reject) => {
 
-                const params = {
-                    id: visit.id,
-                    visit_date: visit.visit_date,
-                    remarks: visit.remarks,
-                    height: visit.height,
-                    weight: visit.weight,
-                    bmi: visit.bmi,
-                    bsa: visit.bsa,
-                    dbp: visit.dbp,
-                    sbp: visit.sbp,
-                };
 
-                $.post(`${getSiteURL()}/api/update/visit/visit.php`, params)
+                $.post(`${getSiteURL()}/api/update/visit/visit.php`, visit)
                     .done(r => {
                         resolve(r);
                     })
@@ -92,12 +81,12 @@ export default new Vuex.Store({
             });
         },
 
-        visitSetAsComplete({commit,}, {visit, status}) {
+        visitSetAsComplete({ commit, }, { visit, status }) {
 
             return new Promise(((resolve, reject) => {
 
                 const params = {
-                    id: visit.id,
+                    id    : visit.id,
                     status: status,
                 }
 

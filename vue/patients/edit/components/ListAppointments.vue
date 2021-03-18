@@ -128,11 +128,13 @@ const _ = require('lodash');
 
 export default {
   name: "ListAppointments",
-  components: {ModalWindow, DateField},
+
+  components: { ModalWindow, DateField },
+
   data() {
     return {
 
-      modalAddAppointment: {
+      modalAddAppointment : {
         visible: false,
       },
       modalEditAppointment: {
@@ -141,27 +143,28 @@ export default {
 
       appointmentToAdd: {
         patient_id: undefined,
-        date: moment().format('YYYY-MM-DD'),
-        remarks: "",
+        date      : moment().format('YYYY-MM-DD'),
+        remarks   : "",
       },
 
       appointmentToEdit: {
-        id: undefined,
+        id        : undefined,
         patient_id: undefined,
-        date: undefined,
-        remarks: undefined,
-        status: undefined,
+        date      : undefined,
+        remarks   : undefined,
+        status    : undefined,
       },
 
       statusList: {
-        PENDING: 'Pending',
+        PENDING  : 'Pending',
         COMPLETED: 'Completed',
         CANCELLED: 'Cancelled',
-        MISSED: 'Missed',
+        MISSED   : 'Missed',
       }
 
     }
   },
+  /* *** DATA *** */
 
   computed: {
 
@@ -178,17 +181,15 @@ export default {
     },
 
   },
+  /* *** COMPUTED *** */
 
-  /*
-  * === MOUNTED ===
-  * */
+
   mounted() {
 
   },
+  /* *** MOUNTED *** */
 
-  /*
-  * === METHODS ===
-  * */
+
   methods: {
 
     /*
@@ -198,8 +199,8 @@ export default {
 
       const appointment = {
         patient_id: this.patient.id,
-        date: this.appointmentToAdd.date,
-        remarks: this.appointmentToAdd.remarks,
+        date      : this.appointmentToAdd.date,
+        remarks   : this.appointmentToAdd.remarks,
       }
 
       this.$store.dispatch('addAppointment', appointment)
@@ -221,10 +222,10 @@ export default {
     onClickUpdate: function () {
 
       const appointment = {
-        id: this.appointmentToEdit.id,
-        date: this.appointmentToEdit.date,
+        id     : this.appointmentToEdit.id,
+        date   : this.appointmentToEdit.date,
         remarks: this.appointmentToEdit.remarks,
-        status: this.appointmentToEdit.status,
+        status : this.appointmentToEdit.status,
       }
 
       this.$store.dispatch('editAppointment', appointment)
@@ -242,7 +243,7 @@ export default {
 
       const id = this.appointmentToEdit.id
 
-      if (confirm('Are you sure to delete?')) {
+      if ( confirm('Are you sure to delete?') ) {
 
         this.$store.dispatch('deleteAppointment', id)
             .then(() => {
@@ -271,6 +272,7 @@ export default {
     }
 
   },
+  /* *** METHODS *** */
 
 }
 </script>

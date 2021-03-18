@@ -186,10 +186,9 @@ export default {
       dsDivisions: values.DS_DIVISIONS
     }
   },
+  /* *** DATA *** */
 
-  /*
-  * === COMPUTED ===
-  * */
+
   computed: {
 
     patient: function () {
@@ -211,22 +210,17 @@ export default {
     },
 
   },
+  /* *** COMPUTED *** */
 
-  /*
-  * === MOUNTED ===
-  * */
   mounted() {
 
     this.fetchPatient();
 
   },
+  /* *** MOUNTED *** */
 
 
-  /*
-  * === METHODS ===
-  * */
   methods: {
-    //
 
     fetchPatient: function () {
 
@@ -276,6 +270,7 @@ export default {
       return Math.round(diff.asYears())
     }
   },
+  /* *** METHODS *** */
 
 }
 </script>

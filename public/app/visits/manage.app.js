@@ -1128,6 +1128,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1146,6 +1215,8 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
       cardCollapsed: false
     };
   },
+
+  /* *** DATA *** */
   computed: {
     visit: function visit() {
       return this.$store.getters.getVisit;
@@ -1175,13 +1246,19 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
     /* card collapse icons */
     collapseButtonIcon: function collapseButtonIcon() {
       if (this.cardCollapsed) return 'bi-arrow-down-short';else return 'bi-arrow-up-short';
+    },
+    visitDl: function visitDl() {
+      return this.visit.dl ? 'YES' : 'NO';
+    },
+    visitDm: function visitDm() {
+      return this.visit.dm ? 'YES' : 'NO';
+    },
+    visitHt: function visitHt() {
+      return this.visit.ht ? 'YES' : 'NO';
     }
   },
 
-  /*
-  *
-  * WATCH
-  * */
+  /* *** COMPUTED *** */
   watch: {
     /*
     * Watch for the toggle, and send request accordingly
@@ -1194,7 +1271,6 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
           visit: this.visit,
           status: 'COMPLETE'
         })["catch"](function (e) {
-          console.log(e);
           _this.completed = false;
         });
       } else {
@@ -1202,25 +1278,18 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
           visit: this.visit,
           status: 'INCOMPLETE'
         })["catch"](function (e) {
-          console.log(e);
           _this.completed = true;
         });
       }
     }
   },
 
-  /*
-  *
-  * MOUNTED
-  * */
+  /* *** WATCH *** */
   mounted: function mounted() {
     this.completed = this.status === 'COMPLETE';
   },
 
-  /*
-  *
-  * METHODS
-  * */
+  /* *** MOUNTED *** */
   methods: {
     /*
     * Modal event handlers
@@ -1243,9 +1312,12 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
         bmi: this.bmi,
         bsa: this.bsa,
         dbp: this.visit.dbp,
-        sbp: this.visit.sbp
+        sbp: this.visit.sbp,
+        dm: this.visit.dm,
+        ht: this.visit.ht,
+        dl: this.visit.dl,
+        ef: this.visit.ef
       };
-      console.table(visit);
       this.$store.dispatch('updateVisit', visit).then(function () {
         _this2.modalEditVisitVisible = false;
       })["catch"](function (e) {
@@ -1257,6 +1329,8 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
       return "".concat(getSiteURL(), "/app/patients/edit.php?id=").concat(this.patient.id);
     }
   }
+  /* *** METHODS *** */
+
 });
 
 /***/ }),
@@ -3712,18 +3786,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuex__WEBPACK_IMPORTED_MODULE_1___
     updateVisit: function updateVisit(_ref2, visit) {
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
-        var params = {
-          id: visit.id,
-          visit_date: visit.visit_date,
-          remarks: visit.remarks,
-          height: visit.height,
-          weight: visit.weight,
-          bmi: visit.bmi,
-          bsa: visit.bsa,
-          dbp: visit.dbp,
-          sbp: visit.sbp
-        };
-        $.post("".concat(getSiteURL(), "/api/update/visit/visit.php"), params).done(function (r) {
+        $.post("".concat(getSiteURL(), "/api/update/visit/visit.php"), visit).done(function (r) {
           resolve(r);
         }).fail(function (e) {
           reject(e);
@@ -4182,7 +4245,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\n.slide-fade-enter-active[data-v-4c4bff20] {\r\n  transition: all .3s ease;\n}\n.slide-fade-leave-active[data-v-4c4bff20] {\r\n  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-4c4bff20], .slide-fade-leave-to[data-v-4c4bff20]\r\n  /* .slide-fade-leave-active below version 2.1.8 */\r\n{\r\n  transform: translateY(10px);\r\n  opacity: 0;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* Enter and leave animations can use different */\r\n/* durations and timing functions.              */\n.slide-fade-enter-active[data-v-4c4bff20] {\r\n  transition: all .3s ease;\n}\n.slide-fade-leave-active[data-v-4c4bff20] {\r\n  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-4c4bff20], .slide-fade-leave-to[data-v-4c4bff20]\r\n  /* .slide-fade-leave-active below version 2.1.8 */\r\n{\r\n  transform: translateY(10px);\r\n  opacity: 0;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24912,6 +24975,116 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-row justify-content-center" },
+                          [
+                            _c("div", { staticClass: "col-1" }, [
+                              _c(
+                                "div",
+                                { staticClass: "input-group input-group-sm" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-text" },
+                                        [_vm._v("DM")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "form-control bg-white",
+                                    attrs: { type: "text", readonly: "" },
+                                    domProps: { value: _vm.visitDm }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c(
+                                "div",
+                                { staticClass: "input-group input-group-sm" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-text" },
+                                        [_vm._v("HT")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "form-control bg-white",
+                                    attrs: { type: "text", readonly: "" },
+                                    domProps: { value: _vm.visitHt }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c(
+                                "div",
+                                { staticClass: "input-group input-group-sm" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-text" },
+                                        [_vm._v("DL")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "form-control bg-white",
+                                    attrs: { type: "text", readonly: "" },
+                                    domProps: { value: _vm.visitDl }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-1" }, [
+                              _c(
+                                "div",
+                                { staticClass: "input-group input-group-sm" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-text" },
+                                        [_vm._v("EF")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "form-control bg-white",
+                                    attrs: { type: "text", readonly: "" },
+                                    domProps: { value: _vm.visit.ef }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
                         _c("div", { staticClass: "form-row mb-2" }, [
                           _c("div", { staticClass: "col" }, [
                             _c("div", { staticClass: "form-group" }, [
@@ -24981,7 +25154,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-row justify-content-center" }, [
-              _c("div", { staticClass: "col-auto" }, [
+              _c("div", { staticClass: "col" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Height (m)")]),
                   _vm._v(" "),
@@ -25009,7 +25182,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
+              _c("div", { staticClass: "col" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Weight (kg)")]),
                   _vm._v(" "),
@@ -25037,7 +25210,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
+              _c("div", { staticClass: "col" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("BMI (kg/m²)")]),
                   _vm._v(" "),
@@ -25049,7 +25222,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
+              _c("div", { staticClass: "col" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("BSA (m²)")]),
                   _vm._v(" "),
@@ -25059,11 +25232,9 @@ var render = function() {
                     domProps: { value: _vm.bsa }
                   })
                 ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row justify-content-center" }, [
-              _c("div", { staticClass: "col-auto" }, [
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Systolic BP")]),
                   _vm._v(" "),
@@ -25091,7 +25262,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
+              _c("div", { staticClass: "col" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Diastolic BP")]),
                   _vm._v(" "),
@@ -25113,6 +25284,199 @@ var render = function() {
                           return
                         }
                         _vm.$set(_vm.visit, "dbp", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row justify-content-center" }, [
+              _c("div", { staticClass: "col-4 text-center" }, [
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visit.dm,
+                        expression: "visit.dm"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", id: "check-dm" },
+                    domProps: {
+                      checked: Array.isArray(_vm.visit.dm)
+                        ? _vm._i(_vm.visit.dm, null) > -1
+                        : _vm.visit.dm
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.visit.dm,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.visit, "dm", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.visit,
+                                "dm",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.visit, "dm", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "check-dm" }
+                    },
+                    [_vm._v("DM")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visit.ht,
+                        expression: "visit.ht"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", id: "check-ht" },
+                    domProps: {
+                      checked: Array.isArray(_vm.visit.ht)
+                        ? _vm._i(_vm.visit.ht, null) > -1
+                        : _vm.visit.ht
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.visit.ht,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.visit, "ht", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.visit,
+                                "ht",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.visit, "ht", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "check-ht" }
+                    },
+                    [_vm._v("HT")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visit.dl,
+                        expression: "visit.dl"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", id: "check-dl" },
+                    domProps: {
+                      checked: Array.isArray(_vm.visit.dl)
+                        ? _vm._i(_vm.visit.dl, null) > -1
+                        : _vm.visit.dl
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.visit.dl,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.visit, "dl", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.visit,
+                                "dl",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.visit, "dl", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "check-dl" }
+                    },
+                    [_vm._v("DL")]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row justify-content-center mt-2" }, [
+              _c("div", { staticClass: "col-2 text-center" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("EF")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visit.ef,
+                        expression: "visit.ef"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visit.ef },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visit, "ef", $event.target.value)
                       }
                     }
                   })

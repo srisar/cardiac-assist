@@ -65,19 +65,7 @@ const moduleVisits = {
 
             return new Promise((resolve, reject) => {
 
-                const params = {
-                    patient_id: visit.patient_id,
-                    visit_date: visit.visit_date,
-                    remarks   : visit.remarks,
-                    height    : visit.height,
-                    weight    : visit.weight,
-                    bmi       : visit.bmi,
-                    bsa       : visit.bsa,
-                    sbp       : visit.sbp,
-                    dbp       : visit.dbp,
-                };
-
-                $.get(`${getSiteURL()}/api/save/visit.php`, params)
+                $.get(`${getSiteURL()}/api/save/visit/visit.php`, visit)
                     .done(r => {
 
                         dispatch('fetchVisits')

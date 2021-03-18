@@ -4,10 +4,12 @@
 namespace App\Core\Requests;
 
 
+use Exception;
+
 class Request
 {
 
-    public const REQUEST_GET = 'GET';
+    public const REQUEST_GET  = 'GET';
     public const REQUEST_POST = 'POST';
 
     /**
@@ -99,6 +101,21 @@ class Request
     public static function getAsRawString(string $key): ?string
     {
         return self::getParam($key);
+    }
+
+    /**
+     * @param string $key
+     * @return bool|null
+     * @throws Exception
+     */
+    public static function getAsBoolean(string $key): ?bool
+    {
+        $data = self::getParam($key);
+        if ( !is_null($data) ) {
+            return filter_var($data, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        throw new Exception('Invalid boolean value');
     }
 
 }

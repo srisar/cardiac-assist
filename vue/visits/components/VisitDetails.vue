@@ -145,11 +145,49 @@
                 </div>
               </div><!-- col -->
 
+            </div><!-- row -->
+
+            <div class="form-row justify-content-center">
+
+              <div class="col-1">
+                <div class="input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">DM</div>
+                  </div>
+                  <input type="text" class="form-control bg-white" :value="visitDm" readonly>
+                </div>
+              </div>
+              <div class="col-1">
+
+                <div class="input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">HT</div>
+                  </div>
+                  <input type="text" class="form-control bg-white" :value="visitHt" readonly>
+                </div>
+              </div>
+
+              <div class="col-1">
+                <div class="input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">DL</div>
+                  </div>
+                  <input type="text" class="form-control bg-white" :value="visitDl" readonly>
+                </div>
+              </div>
+
+              <div class="col-1">
+                <div class="input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">EF</div>
+                  </div>
+                  <input type="text" class="form-control bg-white" :value="visit.ef" readonly>
+                </div>
+              </div>
 
             </div><!-- row -->
 
             <div class="form-row mb-2">
-
 
               <div class="col">
 
@@ -188,46 +226,42 @@
 
         <div class="form-row justify-content-center">
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Height (m)</label>
               <input type="number" class="form-control" v-model="visit.height">
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Weight (kg)</label>
               <input type="number" class="form-control" v-model="visit.weight">
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>BMI (kg/m&sup2;)</label>
               <input type="number" class="form-control" :value="bmi" readonly>
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>BSA (m&sup2;)</label>
               <input type="number" class="form-control" :value="bsa" readonly>
             </div>
           </div><!-- col -->
 
-        </div><!-- row -->
-
-        <div class="form-row justify-content-center">
-
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Systolic BP</label>
               <input type="number" class="form-control" v-model="visit.sbp">
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Diastolic BP</label>
               <input type="number" class="form-control" v-model="visit.dbp">
@@ -235,6 +269,40 @@
           </div><!-- col -->
 
         </div><!-- row -->
+
+        <div class="form-row justify-content-center">
+
+          <div class="col-4 text-center">
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="check-dm" v-model="visit.dm">
+              <label class="form-check-label" for="check-dm">DM</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="check-ht" v-model="visit.ht">
+              <label class="form-check-label" for="check-ht">HT</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="check-dl" v-model="visit.dl">
+              <label class="form-check-label" for="check-dl">DL</label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row justify-content-center mt-2">
+          <div class="col-2 text-center">
+
+            <div class="form-group">
+              <label>EF</label>
+              <input type="number" class="form-control" v-model="visit.ef">
+            </div>
+
+          </div>
+        </div>
+
 
         <div class="form-row">
           <div class="col">
@@ -253,6 +321,7 @@
           </div>
         </div>
 
+
       </slot>
     </ModalWindow><!-- EDIT Modal: Visit Details-->
 
@@ -267,19 +336,20 @@ import DateField from "../../_common/components/DateField";
 const _ = require('lodash');
 
 export default {
-  name: "VisitDetails",
-  components: {ModalWindow, DateField},
+  name      : "VisitDetails",
+  components: { ModalWindow, DateField },
 
   data() {
     return {
 
       modalEditVisitVisible: false,
-      completed: false,
+      completed            : false,
 
       cardCollapsed: false,
 
     }
   },
+  /* *** DATA *** */
 
   computed: {
     visit: function () {
@@ -296,7 +366,7 @@ export default {
 
 
     statusSwitchLabel: function () {
-      if (this.completed) return 'Completed';
+      if ( this.completed ) return 'Completed';
       else return 'Incomplete';
     },
 
@@ -317,16 +387,25 @@ export default {
 
     /* card collapse icons */
     collapseButtonIcon: function () {
-      if (this.cardCollapsed) return 'bi-arrow-down-short'
+      if ( this.cardCollapsed ) return 'bi-arrow-down-short'
       else return 'bi-arrow-up-short';
     },
 
-  },
+    visitDl: function () {
+      return this.visit.dl ? 'YES' : 'NO'
+    },
+    visitDm: function () {
+      return this.visit.dm ? 'YES' : 'NO'
+    },
+    visitHt: function () {
+      return this.visit.ht ? 'YES' : 'NO'
+    },
 
-  /*
-  *
-  * WATCH
-  * */
+
+  },
+  /* *** COMPUTED *** */
+
+
   watch: {
 
     /*
@@ -334,16 +413,14 @@ export default {
     * */
     completed: function (value) {
 
-      if (value) {
-        this.$store.dispatch('visitSetAsComplete', {visit: this.visit, status: 'COMPLETE'})
+      if ( value ) {
+        this.$store.dispatch('visitSetAsComplete', { visit: this.visit, status: 'COMPLETE' })
             .catch(e => {
-              console.log(e);
               this.completed = false;
             });
       } else {
-        this.$store.dispatch('visitSetAsComplete', {visit: this.visit, status: 'INCOMPLETE'})
+        this.$store.dispatch('visitSetAsComplete', { visit: this.visit, status: 'INCOMPLETE' })
             .catch(e => {
-              console.log(e);
               this.completed = true;
             });
       }
@@ -351,21 +428,16 @@ export default {
     },
 
   },
+  /* *** WATCH *** */
 
-  /*
-  *
-  * MOUNTED
-  * */
   mounted() {
 
     this.completed = this.status === 'COMPLETE';
 
   },
+  /* *** MOUNTED *** */
 
-  /*
-  *
-  * METHODS
-  * */
+
   methods: {
 
     /*
@@ -383,18 +455,21 @@ export default {
     onUpdateVisitDetails: function () {
 
       const visit = {
-        id: this.visit.id,
+        id        : this.visit.id,
         visit_date: this.visit.visit_date,
-        remarks: this.visit.remarks,
-        height: this.visit.height,
-        weight: this.visit.weight,
-        bmi: this.bmi,
-        bsa: this.bsa,
-        dbp: this.visit.dbp,
-        sbp: this.visit.sbp,
+        remarks   : this.visit.remarks,
+        height    : this.visit.height,
+        weight    : this.visit.weight,
+        bmi       : this.bmi,
+        bsa       : this.bsa,
+        dbp       : this.visit.dbp,
+        sbp       : this.visit.sbp,
+        dm        : this.visit.dm,
+        ht        : this.visit.ht,
+        dl        : this.visit.dl,
+        ef        : this.visit.ef,
       }
 
-      console.table(visit);
 
       this.$store.dispatch('updateVisit', visit)
           .then(() => {
@@ -414,6 +489,8 @@ export default {
     },
 
   },
+  /* *** METHODS *** */
+
 }
 </script>
 

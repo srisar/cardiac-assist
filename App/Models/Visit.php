@@ -14,9 +14,12 @@ class Visit implements IModel
     private const TABLE = 'visits';
 
     public ?int $id, $patient_id;
-    public ?string   $visit_date, $remarks;
 
-    public ?float $weight, $height, $bmi, $bsa, $dbp, $sbp;
+    public ?string $visit_date, $remarks;
+
+    public ?float $weight, $height, $bmi, $bsa, $dbp, $sbp, $ef;
+
+    public ?bool $dm, $ht, $dl;
 
     public ?string $added_at, $updated_at, $status;
 
@@ -69,6 +72,7 @@ class Visit implements IModel
         $db = Database::instance();
 
         try {
+
             $data = [
                 'patient_id' => $this->patient_id,
                 'visit_date' => $this->visit_date,
@@ -79,8 +83,11 @@ class Visit implements IModel
                 'bsa'        => $this->bsa,
                 'sbp'        => $this->sbp,
                 'dbp'        => $this->dbp,
+                'dm'         => $this->dm ? 1 : 0,
+                'ht'         => $this->ht ? 1 : 0,
+                'dl'         => $this->dl ? 1 : 0,
+                'ef'         => $this->ef,
             ];
-
 
             $db->beginTransaction();
 
@@ -128,6 +135,10 @@ class Visit implements IModel
             'bsa'        => $this->bsa,
             'sbp'        => $this->sbp,
             'dbp'        => $this->dbp,
+            'dm'         => $this->dm ? 1 : 0,
+            'ht'         => $this->ht ? 1 : 0,
+            'dl'         => $this->dl ? 1 : 0,
+            'ef'         => $this->ef,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);

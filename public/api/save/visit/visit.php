@@ -11,14 +11,21 @@ try {
     $fields = [
         'patient_id' => Request::getAsInteger('patient_id'),
         'visit_date' => Request::getAsString('visit_date'),
-        'remarks' => Request::getAsString('remarks'),
-        'height' => Request::getAsFloat('height'),
-        'weight' => Request::getAsFloat('weight'),
-        'bmi' => Request::getAsFloat('bmi'),
-        'bsa' => Request::getAsFloat('bsa'),
-        'dbp' => Request::getAsFloat('dbp'),
-        'sbp' => Request::getAsFloat('sbp'),
+        'remarks'    => Request::getAsString('remarks'),
+        'height'     => Request::getAsFloat('height'),
+        'weight'     => Request::getAsFloat('weight'),
+        'bmi'        => Request::getAsFloat('bmi'),
+        'bsa'        => Request::getAsFloat('bsa'),
+        'dbp'        => Request::getAsFloat('dbp'),
+        'sbp'        => Request::getAsFloat('sbp'),
+        'ef'         => Request::getAsFloat('ef'),
+        'dm'         => Request::getAsBoolean('dm'),
+        'ht'         => Request::getAsBoolean('ht'),
+        'dl'         => Request::getAsBoolean('dl'),
     ];
+
+    error_log(print_r($fields, true));
+
 
     $object = Visit::build($fields);
 

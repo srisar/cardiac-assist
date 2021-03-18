@@ -49,46 +49,42 @@
 
         <div class="form-row">
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Height (m)</label>
               <input type="number" class="form-control" v-model="visitToAdd.height">
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Weight (kg)</label>
               <input type="number" class="form-control" v-model="visitToAdd.weight">
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>BMI (kg/m&sup2;)</label>
               <input type="number" class="form-control" :value="bmi" readonly>
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>BSA (m&sup2;)</label>
               <input type="number" class="form-control" :value="bsa" readonly>
             </div>
           </div><!-- col -->
 
-        </div><!-- row -->
-
-        <div class="form-row">
-
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Systolic BP</label>
               <input type="number" class="form-control" v-model="visitToAdd.sbp">
             </div>
           </div><!-- col -->
 
-          <div class="col-auto">
+          <div class="col">
             <div class="form-group">
               <label>Diastolic BP</label>
               <input type="number" class="form-control" v-model="visitToAdd.dsp">
@@ -96,6 +92,41 @@
           </div><!-- col -->
 
         </div><!-- row -->
+
+        <div class="form-row justify-content-center">
+
+          <div class="col-4 text-center">
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="check-dm" v-model="visitToAdd.dm">
+              <label class="form-check-label" for="check-dm">DM</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="check-ht" v-model="visitToAdd.ht">
+              <label class="form-check-label" for="check-ht">HT</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="check-dl" v-model="visitToAdd.dl">
+              <label class="form-check-label" for="check-dl">DL</label>
+            </div>
+
+          </div>
+
+        </div><!-- row -->
+
+        <div class="row justify-content-center mt-2">
+          <div class="col-2 text-center">
+
+            <div class="form-group">
+              <label>EF</label>
+              <input type="number" class="form-control" v-model="visitToAdd.ef">
+            </div>
+
+          </div>
+        </div>
+
 
         <div class="form-row">
           <div class="col">
@@ -127,8 +158,11 @@ import DateField from "../../../_common/components/DateField";
 const _ = require('lodash');
 
 export default {
-  name      : "ListVisits",
+
+  name: "ListVisits",
+
   components: { ModalWindow, DateField },
+
   data() {
     return {
 
@@ -142,19 +176,23 @@ export default {
         height    : 1,
         weight    : 1,
         sbp       : 0,
-        dsp       : 0
-      }
+        dsp       : 0,
+        dm        : false,
+        ht        : false,
+        dl        : false,
+        ef        : 0,
+      },
+
 
     }
   },
+  /* *** DATA *** */
 
   computed: {
 
     visitsList: function () { return this.$store.getters.getVisitsList },
-
-    patient: function () { return this.$store.getters.getPatient },
-
-    fullName: function () { return this.patient.first_name + " " + this.patient.last_name },
+    patient   : function () { return this.$store.getters.getPatient },
+    fullName  : function () { return this.patient.first_name + " " + this.patient.last_name },
 
     /* BMI calculation */
     bmi: function () {
@@ -167,13 +205,14 @@ export default {
     },
 
   },
+  /* *** COMPUTED *** */
 
   mounted() {
 
   },
+  /* *** MOUNTED *** */
 
   methods: {
-
 
     createVisitLink: function (visit) {
       return `${getSiteURL()}/app/visits/manage.php?id=${visit.id}`;
@@ -185,7 +224,6 @@ export default {
     * */
     onClickSave: function () {
 
-
       const visit = {
         patient_id: this.patient.id,
         visit_date: this.visitToAdd.visit_date,
@@ -196,7 +234,14 @@ export default {
         bsa       : this.bsa,
         dbp       : this.visitToAdd.dsp,
         sbp       : this.visitToAdd.sbp,
+        dm        : this.visitToAdd.dm,
+        ht        : this.visitToAdd.ht,
+        dl        : this.visitToAdd.dl,
+        ef        : this.visitToAdd.ef,
       }
+
+      console.log(visit)
+
 
       this.$store.dispatch('addVisit', visit)
           .then(() => {
@@ -205,11 +250,15 @@ export default {
             this.modalAddVisit.visible = false;
 
             // clear fields
-            this.visitToAdd.remarks = "";
-            this.visitToAdd.height = 1;
-            this.visitToAdd.weight = 1;
-            this.visitToAdd.dsp = 0;
-            this.visitToAdd.sbp = 0;
+            this.visitToAdd.remarks = ''
+            this.visitToAdd.height = 1
+            this.visitToAdd.weight = 1
+            this.visitToAdd.dsp = 0
+            this.visitToAdd.sbp = 0
+            this.visitToAdd.dm = false
+            this.visitToAdd.ht = false
+            this.visitToAdd.dl = false
+            this.visitToAdd.ef = 0
 
           })
           .catch(() => {
@@ -228,6 +277,7 @@ export default {
     },
 
   },
+  /* *** METHODS *** */
 
 }
 </script>
