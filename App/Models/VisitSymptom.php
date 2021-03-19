@@ -12,9 +12,9 @@ class VisitSymptom implements IModel
 
     private const TABLE = 'visit_symptoms';
 
-    public ?int $id, $visit_id, $symptom_id;
+    public ?int $id, $visit_id, $symptom_id, $duration;
 
-    public ?Visit $visit;
+    public ?Visit   $visit;
     public ?Symptom $symptom;
 
     /**
@@ -39,7 +39,7 @@ class VisitSymptom implements IModel
     {
         $result = Database::find(self::TABLE, $id, self::class);
         if ( !empty($result) ) {
-            $result->visit = Visit::find($result->visit_id);
+            $result->visit   = Visit::find($result->visit_id);
             $result->symptom = Symptom::find($result->symptom_id);
 
             return $result;
@@ -58,11 +58,12 @@ class VisitSymptom implements IModel
         return Database::findAll(self::TABLE, $limit, $offset, self::class, 'visit_id');
     }
 
-    public function insert()
+    public function insert(): int
     {
         $data = [
-            'visit_id' => $this->visit_id,
+            'visit_id'   => $this->visit_id,
             'symptom_id' => $this->symptom_id,
+            'duration'   => $this->duration,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -87,7 +88,7 @@ class VisitSymptom implements IModel
      */
     public static function findByVisit(Visit $visit): array
     {
-        $db = Database::instance();
+        $db        = Database::instance();
         $statement = $db->prepare('select * from visit_symptoms where visit_id=?');
         $statement->execute([$visit->id]);
 
@@ -100,9 +101,9 @@ class VisitSymptom implements IModel
         if ( !empty($results) ) {
 
             foreach ( $results as $result ) {
-                $result->visit = Visit::find($result->visit_id);
+                $result->visit   = Visit::find($result->visit_id);
                 $result->symptom = Symptom::find($result->symptom_id);
-                $output[] = $result;
+                $output[]        = $result;
             }
 
         }

@@ -50,7 +50,7 @@ export default {
         /*
         * Fetch all visit-symptoms
         * */
-        fetchVisitSymptoms: function ({commit}, visitId) {
+        fetchVisitSymptoms: function ({ commit }, visitId) {
             return new Promise((resolve, reject) => {
 
                 const params = {
@@ -74,7 +74,7 @@ export default {
         /*
         * Fetch all symptoms for the select dropdown
         * */
-        fetchSymptoms: function ({commit}) {
+        fetchSymptoms: function ({ commit }) {
             return new Promise((resolve, reject) => {
 
                 $.get(`${getSiteURL()}/api/get/symptoms.php`)
@@ -91,47 +91,48 @@ export default {
             });
         },
 
-        addVisitSymptom: function ({commit, dispatch, rootGetters}, symptom) {
+        addVisitSymptom: function ({ commit, dispatch, rootGetters }, payload) {
             return new Promise((resolve, reject) => {
 
                 const params = {
-                    visit_id: rootGetters.getVisit.id,
-                    symptom_id: symptom.id,
+                    visit_id  : rootGetters.getVisit.id,
+                    symptom_id: payload.symptom.id,
+                    duration  : payload.duration,
                 }
 
                 $.get(`${getSiteURL()}/api/save/visit/visit-symptom.php`, params)
                     .done(r => {
 
-                        dispatch('fetchVisitSymptoms', params.visit_id);
+                        dispatch('fetchVisitSymptoms', params.visit_id)
 
-                        resolve();
+                        resolve()
 
                     })
                     .fail(e => {
-                        reject(e);
+                        reject(e)
                     });
 
             });
         },
 
-        deleteVisitSymptom: function ({commit, dispatch, rootGetters}, visitSymptom) {
+        deleteVisitSymptom: function ({ commit, dispatch, rootGetters }, visitSymptom) {
             return new Promise((resolve, reject) => {
 
                 const params = {
                     visit_id: rootGetters.getVisit.id,
-                    id: visitSymptom.id,
+                    id      : visitSymptom.id,
                 }
 
                 $.get(`${getSiteURL()}/api/delete/visit/visit-symptom.php`, params)
                     .done(r => {
 
-                        dispatch('fetchVisitSymptoms', params.visit_id);
+                        dispatch('fetchVisitSymptoms', params.visit_id)
 
-                        resolve();
+                        resolve()
 
                     })
                     .fail(e => {
-                        reject(e);
+                        reject(e)
                     });
 
             });

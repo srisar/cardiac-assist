@@ -4,11 +4,10 @@
 
     <div class="card shadow shadow-sm">
       <div class="card-header d-flex justify-content-between">
-        <div>Differential Diagnoses</div>
+        <div>Diagnoses</div>
         <div>
-          <button class="btn btn-tiny btn-success" @click="onOpenAddDiffDiagModal">Add</button>
+          <button class="btn btn-tiny btn-success" @click="onOpenAddModal">Add</button>
         </div>
-
       </div><!-- card-header -->
 
       <div class="card-body">
@@ -25,7 +24,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(item, index) in diffDiagnosisList">
+          <tr v-for="item in visitDiagnosisList">
             <td>{{ item.disease.disease_code }}</td>
             <td>{{ item.disease.disease }}</td>
             <td>
@@ -35,7 +34,7 @@
                                        class="btn btn-tiny btn-secondary"><i class="bi bi-bookmark-star-fill"></i></a>
             </td>
             <td class="text-center">
-              <button class="btn btn-tiny btn-primary" @click="onOpenEditDiffDiagModal(item)"><i
+              <button class="btn btn-tiny btn-primary" @click="onOpenEditModal(item)"><i
                   class="bi bi-pencil"></i></button>
               <button class="btn btn-tiny btn-danger" @click="onDelete(item)"><i class="bi bi-trash-fill"></i></button>
             </td>
@@ -44,7 +43,7 @@
         </table>
 
         <div v-else>
-          <p>No items. Start adding some differential diagnoses</p>
+          <p>No items. Start adding some diagnoses</p>
         </div>
 
       </div><!-- card-body -->
@@ -53,7 +52,7 @@
 
 
     <!-- Modal Add Diff Diagnosis -->
-    <ModalWindow id="modal-add-diff-diagnosis" :visible="addModalVisible" @close="onCloseAddDiffDiagModal">
+    <ModalWindow id="modal-add-diff-diagnosis" :visible="addModalVisible" @close="onCloseAddModal">
       <template v-slot:title>Add a differential diagnosis</template>
       <slot>
 
@@ -63,7 +62,7 @@
 
             <div class="form-group">
               <label>Disease</label>
-              <select class="form-control" v-model="diffDiagnosisToAdd.disease">
+              <select class="form-control" v-model="visitDiagnosisToAdd.disease">
                 <option value="-1" disabled>SELECT</option>
                 <option v-for="item in diseasesList" :value="item">{{ item.disease }}</option>
               </select>
@@ -79,7 +78,7 @@
 
             <div class="form-group">
               <label>Remarks</label>
-              <textarea rows="5" class="form-control" v-model="diffDiagnosisToAdd.remarks"></textarea>
+              <textarea rows="5" class="form-control" v-model="visitDiagnosisToAdd.remarks"></textarea>
             </div>
 
           </div><!-- col -->
@@ -94,27 +93,27 @@
         </div>
 
       </slot>
-    </ModalWindow><!-- Modal Add Diff Diagnosis -->
+    </ModalWindow><!-- Modal Add Visit Diagnosis -->
 
 
-    <!-- Modal Edit Diff Diagnosis -->
-    <ModalWindow id="modal-edit-diff-diagnosis" @close="onCloseEditDiffDiagModal" :visible="editModalVisible">
-      <template v-slot:title v-if="diffDiagnosisToEdit">Edit {{ diffDiagnosisToEdit.disease.disease }}</template>
-      <slot v-if="diffDiagnosisToEdit">
+    <!-- Modal Edit Visit Diagnosis -->
+    <ModalWindow id="modal-edit-diff-diagnosis" @close="onCloseEditModal" :visible="editModalVisible">
+      <template v-slot:title v-if="visitDiagnosisToEdit">Edit {{ visitDiagnosisToEdit.disease.disease }}</template>
+      <slot v-if="visitDiagnosisToEdit">
 
         <div class="form-row">
           <div class="col">
 
             <div class="form-group">
               <label>Disease</label>
-              <input class="form-control" type="text" readonly :value="diffDiagnosisToEdit.disease.disease">
+              <input class="form-control" type="text" readonly :value="visitDiagnosisToEdit.disease.disease">
             </div>
 
             <div class="w-100"></div>
 
             <div class="form-group">
               <label>Remarks</label>
-              <textarea class="form-control" rows="5" v-model="diffDiagnosisToEdit.remarks"></textarea>
+              <textarea class="form-control" rows="5" v-model="visitDiagnosisToEdit.remarks"></textarea>
             </div>
 
           </div><!-- col -->
@@ -127,7 +126,7 @@
         </div>
 
       </slot>
-    </ModalWindow><!-- Modal Edit Diff Diagnosis -->
+    </ModalWindow><!-- Modal Edit Visit Diagnosis -->
 
   </div><!-- Template -->
 
@@ -140,35 +139,28 @@ import ModalWindow from "../../_common/components/ModalWindow";
 const _ = require('lodash');
 
 export default {
-  name: "DifferentialDiagnosis",
+  name: "VisitDiagnosis",
   components: {ModalWindow},
 
-  /*
-  * --------------------------------------------------------------
-  * DATA
-  * */
   data() {
     return {
       addModalVisible: false,
       editModalVisible: false,
 
-      diffDiagnosisToAdd: {
+      visitDiagnosisToAdd: {
         disease: "-1",
         remarks: "",
       },
 
-      diffDiagnosisToEdit: null,
-
+      visitDiagnosisToEdit: null,
     }
   },
+  /* *** DATA *** */
 
-  /*
-  * --------------------------------------------------------------
-  * COMPUTED
-  * */
+
   computed: {
-    diffDiagnosisList: function () {
-      return this.$store.getters.differentialDiagnosisList;
+    visitDiagnosisList: function () {
+      return this.$store.getters.getVisitDiagnosisList;
     },
 
     diseasesList: function () {
@@ -176,23 +168,19 @@ export default {
     },
 
     isEmpty: function () {
-      return this.diffDiagnosisList.length === 0;
-    }
+      return this.visitDiagnosisList.length === 0;
+    },
 
   },
+  /* *** COMPUTED *** */
 
-  /*
-  * --------------------------------------------------------------
-  * MOUNTED
-  * */
+
   mounted() {
     this.$store.dispatch('fetchDiseases');
   },
+  /* *** MOUNTED *** */
 
-  /*
-  * --------------------------------------------------------------
-  * METHODS
-  * */
+
   methods: {
 
     createDiseaseLink: function (disease) {
@@ -206,17 +194,17 @@ export default {
     onAdd: function () {
 
       // check if selected symptom is already added
-      const s = _.find(this.diffDiagnosisList, (o) => {
-        return o.disease.id === this.diffDiagnosisToAdd.disease.id;
+      const s = _.find(this.visitDiagnosisList, (o) => {
+        return o.disease.id === this.visitDiagnosisToAdd.disease.id;
       });
 
       if (s !== undefined) {
-        alert(`${this.diffDiagnosisToAdd.disease.disease} is already added`);
+        alert(`${this.visitDiagnosisToAdd.disease.disease} is already added`);
       } else {
 
-        this.$store.dispatch('addDifferentialDiagnosis', this.diffDiagnosisToAdd)
+        this.$store.dispatch('addVisitDiagnosis', this.visitDiagnosisToAdd)
             .catch(e => {
-              console.log("Failed to add diff. diagnosis");
+              console.log("Failed to add diagnosis");
               console.log(e);
             });
       }
@@ -226,38 +214,38 @@ export default {
 
     onUpdate: function () {
 
-      this.$store.dispatch('updateDiffDiagnosis', this.diffDiagnosisToEdit)
-          .then(r => {
+      this.$store.dispatch('updateVisitDiagnosis', this.visitDiagnosisToEdit)
+          .then(() => {
             this.editModalVisible = false;
           })
           .catch(e => {
-            alert("Failed to update differential diagnosis");
+            alert("Failed to update diagnosis");
             console.log(e);
           })
 
     },
 
-    onDelete: function (diffDiagnosis) {
+    onDelete: function (diagnosis) {
 
-      this.$store.dispatch('deleteDiffDiagnosis', diffDiagnosis);
+      this.$store.dispatch('deleteVisitDiagnosis', diagnosis);
 
     },
 
-    onOpenAddDiffDiagModal: function () {
+    onOpenAddModal: function () {
       this.addModalVisible = true;
     },
 
-    onCloseAddDiffDiagModal: function () {
+    onCloseAddModal: function () {
       this.addModalVisible = false;
     },
 
 
-    onOpenEditDiffDiagModal: function (diffDiagnosis) {
-      this.diffDiagnosisToEdit = diffDiagnosis;
+    onOpenEditModal: function (diagnosis) {
+      this.visitDiagnosisToEdit = diagnosis;
       this.editModalVisible = true;
     },
 
-    onCloseEditDiffDiagModal: function () {
+    onCloseEditModal: function () {
       this.editModalVisible = false;
     },
 

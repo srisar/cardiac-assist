@@ -7,10 +7,10 @@ namespace App\Models;
 use App\Core\Database\Database;
 use PDO;
 
-class DifferentialDiagnosis implements IModel
+class VisitDiagnosis implements IModel
 {
 
-    private const TABLE = 'differential_diagnoses';
+    private const TABLE = 'visit_diagnoses';
 
     public ?int $id = 0, $visit_id = 0, $disease_id = 0;
     public ?string $remarks;
@@ -20,9 +20,9 @@ class DifferentialDiagnosis implements IModel
 
     /**
      * @param $array
-     * @return DifferentialDiagnosis
+     * @return VisitDiagnosis
      */
-    public static function build($array): DifferentialDiagnosis
+    public static function build($array): VisitDiagnosis
     {
         $object = new self();
         foreach ($array as $key => $value) {
@@ -33,12 +33,12 @@ class DifferentialDiagnosis implements IModel
 
     /**
      * @param int $id
-     * @return DifferentialDiagnosis|null
+     * @return VisitDiagnosis|null
      */
-    public static function find(int $id): ?DifferentialDiagnosis
+    public static function find(int $id): ?VisitDiagnosis
     {
 
-        /** @var DifferentialDiagnosis $result */
+        /** @var VisitDiagnosis $result */
         $result = Database::find(self::TABLE, $id, self::class);
 
         if (!empty($result)) {
@@ -54,7 +54,7 @@ class DifferentialDiagnosis implements IModel
     /**
      * @param int $limit
      * @param int $offset
-     * @return DifferentialDiagnosis[]
+     * @return VisitDiagnosis[]
      */
     public static function findAll($limit = 1000, $offset = 0): array
     {
@@ -92,16 +92,16 @@ class DifferentialDiagnosis implements IModel
 
     /**
      * @param Visit $visit
-     * @return DifferentialDiagnosis[]
+     * @return VisitDiagnosis[]
      */
     public static function findByVisit(Visit $visit): array
     {
         $db = Database::instance();
-        $statement = $db->prepare('select * from differential_diagnoses where visit_id=?');
+        $statement = $db->prepare('select * from visit_diagnoses where visit_id=?');
         $statement->execute([$visit->id]);
 
 
-        /** @var DifferentialDiagnosis[] $results */
+        /** @var VisitDiagnosis[] $results */
         $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         $output = [];

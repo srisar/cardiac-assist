@@ -30,8 +30,10 @@
                 <pre>{{ item.remarks }}</pre>
               </td>
               <td class="text-center">
-                <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)">Edit</button>
-                <button class="btn btn-danger btn-tiny" @click="onDelete(item)">Delete</button>
+                <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)"><i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-danger btn-tiny" @click="onDelete(item)"><i class="bi bi-trash-fill"></i>
+                </button>
               </td>
             </tr>
             </tbody>
@@ -59,7 +61,9 @@
             <div class="form-group">
               <select class="form-control" v-model="investigationToAdd.investigation_id">
                 <option value="-1" disabled>SELECT</option>
-                <option v-for="item in investigationsList" :disabled="existingInvestigation(item)" :value="item.id">{{ item.investigation_name }}</option>
+                <option v-for="item in investigationsList" :disabled="existingInvestigation(item)" :value="item.id">
+                  {{ item.investigation_name }}
+                </option>
               </select>
             </div>
 
@@ -117,7 +121,8 @@
             <button class="btn btn-success" @click="onUpdate">Update</button>
 
             <span v-if="confirmDelete">
-              <button class="btn btn-danger" @click="onDelete({id: selectedVisitInvestigation.id}) & (confirmDelete = false)">Confirm</button>
+              <button class="btn btn-danger"
+                      @click="onDelete({id: selectedVisitInvestigation.id}) & (confirmDelete = false)">Confirm</button>
               <button class="btn btn-secondary" @click="confirmDelete = !confirmDelete">Cancel</button>
             </span>
             <span v-else>

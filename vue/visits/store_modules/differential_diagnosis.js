@@ -40,7 +40,7 @@ export default {
     actions: {
 
         /*
-        * Fetch all diseases
+        * Fetch all differential diagnoses
         * */
         fetchDifferentialDiagnosis: function ({commit}, visitId) {
             return new Promise((resolve, reject) => {

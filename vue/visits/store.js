@@ -1,24 +1,21 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
+import Vuex from 'vuex'
+import Vue from 'vue'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-import visitSymptoms from './store_modules/visit_symptoms';
-import differentialDiagnosis from './store_modules/differential_diagnosis';
-import visitInvestigations from "./store_modules/visit_investigations";
+import visitSymptoms from './store_modules/visit_symptoms'
+import differentialDiagnosis from './store_modules/differential_diagnosis'
+import visitInvestigations from "./store_modules/visit_investigations"
+import visitDiagnosis from './store_modules/visit_diagnosis'
 
-/*
-* -------------------------------------------------------------------------
-* MAIN STORE
-* -------------------------------------------------------------------------
-* */
 
 export default new Vuex.Store({
 
     modules: {
-        visitSymptoms        : visitSymptoms,
+        visitSymptoms: visitSymptoms,
         differentialDiagnosis: differentialDiagnosis,
-        visitInvestigations  : visitInvestigations,
+        visitInvestigations: visitInvestigations,
+        visitDiagnosis: visitDiagnosis,
     },
 
     state: {
@@ -26,25 +23,28 @@ export default new Vuex.Store({
         visit: {},
 
     },
+    /* *** STATE *** */
 
     mutations: {
         updateVisit(state, payload) {
-            state.visit = payload;
+            state.visit = payload
         }
     },
+    /* *** MUTATIONS *** */
 
     getters: {
         getVisit: state => {
-            return state.visit;
+            return state.visit
         }
     },
+    /* *** GETTERS *** */
 
     actions: {
 
         /*
         * Fetch visit details
         * */
-        fetchVisit({ commit }, id) {
+        fetchVisit({commit}, id) {
 
             return new Promise((resolve, reject) => {
 
@@ -52,11 +52,11 @@ export default new Vuex.Store({
                     id: id
                 }).done(r => {
 
-                    commit('updateVisit', r.data);
-                    resolve();
+                    commit('updateVisit', r.data)
+                    resolve()
 
                 }).fail(e => {
-                    reject(e);
+                    reject(e)
                 })
 
             });
@@ -66,42 +66,42 @@ export default new Vuex.Store({
         /*
         * Update visit details
         * */
-        updateVisit({ commit }, visit) {
+        updateVisit({commit}, visit) {
             return new Promise((resolve, reject) => {
 
 
                 $.post(`${getSiteURL()}/api/update/visit/visit.php`, visit)
                     .done(r => {
-                        resolve(r);
+                        resolve(r)
                     })
                     .fail(e => {
-                        reject(e);
+                        reject(e)
                     });
 
             });
         },
 
-        visitSetAsComplete({ commit, }, { visit, status }) {
+        visitSetAsComplete({commit,}, {visit, status}) {
 
             return new Promise(((resolve, reject) => {
 
                 const params = {
-                    id    : visit.id,
+                    id: visit.id,
                     status: status,
                 }
 
                 $.post(`${getSiteURL()}/api/update/visit/visit-status.php`, params)
                     .done(r => {
-                        resolve();
+                        resolve()
                     })
                     .fail(e => {
-                        reject(e);
+                        reject(e)
                     });
 
-            }));
+            }))
         },
 
+    },
+    /* *** ACTIONS *** */
 
-    }
-
-});
+})

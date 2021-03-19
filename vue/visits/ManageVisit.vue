@@ -33,6 +33,12 @@
       </div><!-- row -->
 
       <div class="row mb-3">
+        <div class="col-12">
+          <VisitDiagnosis/>
+        </div>
+      </div><!-- row -->
+
+      <div class="row mb-3">
 
         <!-- Special Investigations -->
         <div class="col-12">
@@ -56,15 +62,17 @@
 
 <script>
 
-import VisitDetails          from "./components/VisitDetails";
-import VisitSymptoms         from "./components/VisitSymptoms";
+import VisitDetails from "./components/VisitDetails";
+import VisitSymptoms from "./components/VisitSymptoms";
 import DifferentialDiagnosis from "./components/DifferentialDiagnosis";
-import VisitInvestigations   from "./components/VisitInvestigations";
+import VisitInvestigations from "./components/VisitInvestigations";
 import SpecialInvestigations from "./components/SpecialInvestigations";
+import VisitDiagnosis from "./components/VisitDiagnosis";
 
 export default {
-  name      : "ManageVisit",
+  name: "ManageVisit",
   components: {
+    VisitDiagnosis,
     VisitInvestigations,
     VisitDetails,
     VisitSymptoms,
@@ -108,23 +116,22 @@ export default {
 
                       this.$store.dispatch('fetchVisitInvestigations', this.visitId)
                           .then(() => {
-                            this.isLoading = false;
-                          });
-                    });
-              });
-        })
+
+                            this.$store.dispatch('fetchVisitDiagnosis', this.visitId)
+                                .then(() => {
+                                  this.isLoading = false
+                                })
+                          }) /* fetch visit investigations */
+                    }) /* fetch diff diagnoses */
+              }) /* fetch visit symptoms */
+        }) /* fetch visit */
         .catch(e => {
           console.log(e);
         });
 
   },
+  /* *** MOUNTED *** */
 
-  /*
-  * === METHODS ===
-  * */
-  methods: {
-    //
-  },
 }
 </script>
 

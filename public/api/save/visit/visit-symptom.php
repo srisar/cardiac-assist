@@ -13,6 +13,7 @@ try {
     $fields = [
         'visit_id' => Request::getAsString('visit_id'),
         'symptom_id' => Request::getAsInteger('symptom_id'),
+        'duration' => Request::getAsInteger('duration'),
     ];
 
     $object = VisitSymptom::build($fields);
@@ -22,13 +23,13 @@ try {
 
     $result = $object->insert();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    if (empty($result)) throw new Exception('Failed');
 
     $object = Symptom::find($result);
 
     JSONResponse::validResponse(['data' => $object]);
     return;
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }

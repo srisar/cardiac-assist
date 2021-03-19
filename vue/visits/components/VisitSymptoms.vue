@@ -3,12 +3,13 @@
   <div>
 
     <div class="card shadow shadow-sm">
-      <div class="card-header">
-        Symptoms
-        <div class="float-right">
+      <div class="card-header d-flex justify-content-between">
+        <div>Clinical Details</div>
+        <div>
           <button class="btn btn-tiny btn-success" @click="onShowAddModal">Add</button>
         </div>
-      </div>
+
+      </div><!-- card-header -->
 
       <div class="card-body">
 
@@ -17,16 +18,17 @@
           <thead>
           <tr>
             <th>Symptom</th>
-            <th style="width: 50px" class="text-center"></th>
-            <th style="width: 50px" class="text-center"></th>
+            <th style="width: 50px" class="text-center">Days</th>
+            <th style="width: 30px" class="text-center"></th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(item, index) in visitSymptomsList">
-            <td>{{ item.symptom.symptom_name }}</td>
-            <td class="text-center"><a :href="createSymptomLink(item.symptom)" target="_blank" class="btn btn-tiny btn-secondary">View</a></td>
+          <tr v-for="item in visitSymptomsList">
+            <td><a :href="createSymptomLink(item.symptom)" target="_blank">{{ item.symptom.symptom_name }}</a></td>
+            <td class="text-center">{{ item.duration }}</td>
             <td class="text-center">
-              <button class="btn btn-tiny btn-danger" @click="onClickDelete(item)">Delete</button>
+              <button class="btn btn-tiny btn-danger" @click="onClickDelete(item)"><i class="bi bi-trash-fill"></i>
+              </button>
             </td>
           </tr>
           </tbody>
@@ -42,27 +44,45 @@
 
 
     <ModalWindow id="modal-add-visit-symptom" :visible="modalAddVisitSymptomVisible" @close="onCloseAddModal">
-      <template v-slot:title>Add a symptom</template>
+      <template v-slot:title>Add a symptom to clinical details</template>
       <slot>
 
         <!-- section : add symptom -->
-        <div class="row mb-3">
+        <div class="row text-center justify-content-center">
           <div class="col">
 
-            <div class="input-group">
-
-              <select class="form-control" v-model="selectedSymptom">
+            <div class="form-group">
+              <label>Symptom</label>
+              <select class="custom-select" v-model="selectedSymptom">
                 <option value="-1" disabled>SELECT</option>
                 <option v-for="item in symptomsList" :value="item">{{ item.symptom_name }}</option>
               </select>
-
-              <div class="input-group-append">
-                <button class="btn btn-success" @click="onClickAdd">Add</button>
-              </div>
             </div>
 
           </div><!-- col -->
+
+          <div class="w-100"></div>
+
+          <div class="col-2">
+            <div class="form-group">
+              <label>Days</label>
+              <input type="text" class="form-control" v-model="symptomDuration">
+            </div>
+          </div>
+
         </div><!-- row -->
+
+        <div class="form-row text-center">
+          <div class="col">
+            <button class="btn btn-success" @click="onClickAdd">Add</button>
+          </div>
+        </div>
+
+
+        <div class="row">
+
+        </div><!-- row -->
+
         <!-- section: add symptom -->
 
       </slot>
@@ -89,9 +109,13 @@ export default {
   * */
   data() {
     return {
+      modalAddVisitSymptomVisible: false,
+
       selectedSymptom: "-1",
 
-      modalAddVisitSymptomVisible: false,
+      /* symptom duration*/
+      symptomDuration: 0,
+
     }
   },
 
@@ -148,7 +172,13 @@ export default {
       if (s !== undefined) {
         alert(`${this.selectedSymptom.symptom_name} is already added`);
       } else {
-        this.$store.dispatch('addVisitSymptom', this.selectedSymptom);
+
+        const payload = {
+          symptom: this.selectedSymptom,
+          duration: this.symptomDuration
+        }
+
+        this.$store.dispatch('addVisitSymptom', payload);
       }
 
     },
