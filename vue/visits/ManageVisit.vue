@@ -2,58 +2,94 @@
 
   <div>
 
-    <div class="container" v-if="!isLoading">
+    <div class="pt-2">
 
-      <div class="row mb-3">
-        <div class="col">
-          <VisitDetails/>
-        </div><!-- col -->
-      </div><!-- row -->
 
-      <div class="row mb-3">
-        <!-- Symptoms -->
-        <div class="col-12 col-lg-4">
-          <VisitSymptoms/>
-        </div><!-- col -->
+      <div class="container pb-5">
 
-        <!-- Differential diagnosis -->
-        <div class="col-12 col-lg-8">
-          <DifferentialDiagnosis/>
-        </div><!-- col -->
+        <div class="row">
+          <div class="col">
+            <h3 class="text-center">Basic Details</h3>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <VisitDetails/>
+          </div><!-- col -->
+        </div><!-- row -->
+      </div>
+
+    </div><!-- Visit details section -->
+
+
+    <div class="bg-diagnosis pt-3">
+
+      <div class="container pb-5">
+
+        <div class="row">
+          <div class="col">
+            <h3 class="text-center">Investigations & Diagnoses</h3>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <!-- Symptoms -->
+          <div class="col">
+            <VisitSymptoms/>
+          </div><!-- col -->
+        </div>
+
+        <div class="row mb-3">
+          <!-- Differential diagnosis -->
+          <div class="col">
+            <DifferentialDiagnosis/>
+          </div><!-- col -->
+
+        </div>
+
+        <div class="row mb-3">
+
+          <!-- Investigations -->
+          <div class="col-12">
+            <VisitInvestigations/>
+          </div><!-- col -->
+
+        </div><!-- row -->
+
+        <div class="row">
+          <div class="col-12">
+            <VisitDiagnosis/>
+          </div>
+        </div><!-- row -->
 
       </div>
 
-      <div class="row mb-3">
+    </div><!-- section diagnosis -->
 
-        <!-- Investigations -->
-        <div class="col-12">
-          <VisitInvestigations/>
-        </div><!-- col -->
 
-      </div><!-- row -->
+    <div class="bg-special-investigations pt-3">
 
-      <div class="row mb-3">
-        <div class="col-12">
-          <VisitDiagnosis/>
+      <div class="container pb-5">
+
+        <div class="row">
+          <div class="col">
+            <h3 class="text-center">Special Investigations</h3>
+          </div>
         </div>
-      </div><!-- row -->
 
-      <div class="row mb-3">
+        <div class="row mb-3">
 
-        <!-- Special Investigations -->
-        <div class="col-12">
-          <SpecialInvestigations/>
-        </div><!-- col -->
+          <!-- Special Investigations -->
+          <div class="col-12">
+            <SpecialInvestigations/>
+          </div><!-- col -->
 
-      </div><!-- row -->
+        </div><!-- row -->
 
-    </div><!-- container -->
+      </div><!-- container -->
 
-    <!--  -->
-    <!--  -->
-    <!-- Display page loading message -->
-    <div v-else class="text-center">
-      <p class="lead">Loading</p>
     </div>
 
   </div><!-- template -->
@@ -136,5 +172,13 @@ export default {
 </script>
 
 <style scoped>
+
+.bg-diagnosis {
+  background-color: #FEF5E6;
+}
+
+.bg-special-investigations {
+  background-color: #EEE1FE;
+}
 
 </style>

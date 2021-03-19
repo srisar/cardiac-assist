@@ -2,10 +2,6 @@
 
   <div>
 
-    <div class="section">
-      <h2 class="section__title">Special Investigations</h2>
-    </div>
-
     <!-- section: visit ecg -->
     <div id="section-visit-ecg" class="my-2">
       <div class="card shadow shadow-sm">
@@ -95,14 +91,14 @@ import VisitEchocardiography from "./special_investigations/VisitEcho";
 export default {
   name: "SpecialInvestigations",
 
-  components: { VisitEchocardiography, VisitCoronaryCT, VisitLipids, VisitECG },
+  components: {VisitEchocardiography, VisitCoronaryCT, VisitLipids, VisitECG},
 
   data() {
     return {
-      visitLipidsExpanded    : false,
-      visitECGExpanded       : false,
-      visitCoronaryCTExpanded: false,
-      visitEchoExpanded      : false,
+      visitLipidsExpanded: true,
+      visitECGExpanded: true,
+      visitCoronaryCTExpanded: true,
+      visitEchoExpanded: true,
     }
   },
 
@@ -111,7 +107,7 @@ export default {
   methods: {
     //
     iconToggle: function (value) {
-      if ( value ) return 'bi-arrow-up';
+      if (value) return 'bi-arrow-up';
       else return 'bi-arrow-down';
     },
 
