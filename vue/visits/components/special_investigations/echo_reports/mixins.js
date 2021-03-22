@@ -31,7 +31,7 @@ export default {
                             value: result
                         }
 
-                        $.post(`${getSiteURL()}/api/save/${urlEndPoint}`, param)
+                        $.post(`${getSiteURL()}/api/save/echo/${urlEndPoint}`, param)
                             .done(() => {
                                 // fetch everything again
                                 this.fetchAllValues()
@@ -41,10 +41,7 @@ export default {
                             })
 
                     } else {
-                        bootbox.alert({
-                            title: '<i class="bi bi-exclamation-circle-fill"></i> Error',
-                            message: 'Empty values cannot be saved!'
-                        })
+                        errorMessage('Empty value cannot be saved')
                     }
                 }
             })

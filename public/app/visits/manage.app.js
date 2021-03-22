@@ -4065,17 +4065,14 @@ __webpack_require__.r(__webpack_exports__);
             var param = {
               value: result
             };
-            $.post("".concat(getSiteURL(), "/api/save/").concat(urlEndPoint), param).done(function () {
+            $.post("".concat(getSiteURL(), "/api/save/echo/").concat(urlEndPoint), param).done(function () {
               // fetch everything again
               _this.fetchAllValues();
             }).fail(function (e) {
               console.log(e);
             });
           } else {
-            bootbox.alert({
-              title: '<i class="bi bi-exclamation-circle-fill"></i> Error',
-              message: 'Empty values cannot be saved!'
-            });
+            errorMessage('Empty value cannot be saved');
           }
         }
       });
