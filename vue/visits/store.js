@@ -21,6 +21,7 @@ export default new Vuex.Store({
     state: {
 
         visit: {},
+        visitId: -1,
 
     },
     /* *** STATE *** */
@@ -28,14 +29,23 @@ export default new Vuex.Store({
     mutations: {
         updateVisit(state, payload) {
             state.visit = payload
-        }
+        },
+
+        updateVisitId(state, payload) {
+            state.visitId = payload
+        },
+
     },
     /* *** MUTATIONS *** */
 
     getters: {
         getVisit: state => {
             return state.visit
-        }
+        },
+
+        getVisitId: state => {
+            return state.visitId
+        },
     },
     /* *** GETTERS *** */
 
@@ -52,8 +62,12 @@ export default new Vuex.Store({
                     id: id
                 }).done(r => {
 
-                    commit('updateVisit', r.data)
-                    resolve()
+                    if (r.data == null) {
+                        reject('empty')
+                    } else {
+                        commit('updateVisit', r.data)
+                        resolve()
+                    }
 
                 }).fail(e => {
                     reject(e)

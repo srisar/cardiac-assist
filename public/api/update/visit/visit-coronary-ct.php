@@ -23,6 +23,9 @@ try {
         'impression'             => Request::getAsString('impression'),
     ];
 
+
+
+
     if ( empty($fields['id']) ) throw new Exception('Invalid id');
 
     $object = VisitCoronaryCT::build($fields);

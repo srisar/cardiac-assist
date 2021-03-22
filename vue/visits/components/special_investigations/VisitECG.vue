@@ -28,13 +28,13 @@ const _ = require('lodash');
 export default {
   name: "VisitECG",
 
-  components: { RichEditorV2, ModalWindow },
+  components: {RichEditorV2, ModalWindow},
 
   data() {
     return {
 
       visitECG: {
-        visit_id   : undefined,
+        visit_id: undefined,
         description: ""
       },
 
@@ -43,9 +43,9 @@ export default {
   },
 
   computed: {
-    visit: function () {
-      return this.$store.getters.getVisit
-    }
+    visitId: function () {
+      return this.$store.getters.getVisitId
+    },
   },
 
   mounted() {
@@ -60,7 +60,7 @@ export default {
     * */
     onUpdate: function () {
       const params = {
-        id         : this.visitECG.id,
+        id: this.visitECG.id,
         description: this.visitECG.description
       };
 
@@ -82,7 +82,7 @@ export default {
     _fetch: function () {
 
       const params = {
-        visit_id: this.visit.id,
+        visit_id: this.visitId,
       }
 
       $.get(`${getSiteURL()}/api/get/visit/visit-ecg.php`, params)

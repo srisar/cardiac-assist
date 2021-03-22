@@ -37,9 +37,6 @@ export default {
   /* ### COMPUTED ### */
   computed: {
 
-    visit: function () {
-      return this.$store.getters.getVisit;
-    },
 
   }, /* COMPUTED */
 

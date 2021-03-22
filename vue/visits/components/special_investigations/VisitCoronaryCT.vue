@@ -86,18 +86,18 @@ export default {
   data() {
     return {
       visitCoronaryCT: {
-        id                    : undefined,
-        visit_id              : undefined,
-        total_calcium_score   : undefined,
-        origin                : undefined,
-        dominance             : undefined,
-        left_main             : undefined,
-        lad                   : undefined,
-        lcx                   : undefined,
-        cardiac_valves        : undefined,
-        pericardium           : undefined,
+        id: undefined,
+        visit_id: undefined,
+        total_calcium_score: undefined,
+        origin: undefined,
+        dominance: undefined,
+        left_main: undefined,
+        lad: undefined,
+        lcx: undefined,
+        cardiac_valves: undefined,
+        pericardium: undefined,
         extra_cardiac_findings: undefined,
-        impression            : undefined,
+        impression: undefined,
       },
     }
   }, /* data */
@@ -106,7 +106,9 @@ export default {
   * === COMPUTED ===
   * */
   computed: {
-    visit: function () { return this.$store.getters.getVisit }
+    visitId: function () {
+      return this.$store.getters.getVisitId
+    },
   },
 
   /*
@@ -122,7 +124,9 @@ export default {
     * check if visit-coronary-ct exist
     * */
     _fetch: function () {
-      const params = { visit_id: this.visit.id }
+      const params = {
+        visit_id: this.visitId,
+      }
 
       $.get(`${getSiteURL()}/api/get/visit/visit-coronary-ct.php`, params)
           .done(response => {
@@ -136,17 +140,17 @@ export default {
 
     onUpdate: function () {
       const params = {
-        id                    : this.visitCoronaryCT.id,
-        total_calcium_score   : this.visitCoronaryCT.total_calcium_score,
-        origin                : this.visitCoronaryCT.origin,
-        dominance             : this.visitCoronaryCT.dominance,
-        left_main             : this.visitCoronaryCT.left_main,
-        lad                   : this.visitCoronaryCT.lad,
-        lcx                   : this.visitCoronaryCT.lcx,
-        cardiac_valves        : this.visitCoronaryCT.cardiac_valves,
-        pericardium           : this.visitCoronaryCT.pericardium,
+        id: this.visitCoronaryCT.id,
+        total_calcium_score: this.visitCoronaryCT.total_calcium_score,
+        origin: this.visitCoronaryCT.origin,
+        dominance: this.visitCoronaryCT.dominance,
+        left_main: this.visitCoronaryCT.left_main,
+        lad: this.visitCoronaryCT.lad,
+        lcx: this.visitCoronaryCT.lcx,
+        cardiac_valves: this.visitCoronaryCT.cardiac_valves,
+        pericardium: this.visitCoronaryCT.pericardium,
         extra_cardiac_findings: this.visitCoronaryCT.extra_cardiac_findings,
-        impression            : this.visitCoronaryCT.impression,
+        impression: this.visitCoronaryCT.impression,
       }
 
       $.post(`${getSiteURL()}/api/update/visit/visit-coronary-ct.php`, params)

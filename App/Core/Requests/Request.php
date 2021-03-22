@@ -9,7 +9,7 @@ use Exception;
 class Request
 {
 
-    public const REQUEST_GET  = 'GET';
+    public const REQUEST_GET = 'GET';
     public const REQUEST_POST = 'POST';
 
     /**
@@ -42,7 +42,7 @@ class Request
      */
     private static function getParam(string $key): ?string
     {
-        if ( isset($_REQUEST[$key]) ) {
+        if (isset($_REQUEST[$key])) {
             return $_REQUEST[$key];
         }
         return null;
@@ -57,8 +57,9 @@ class Request
     {
         $data = self::getParam($key);
 
-        if ( !is_null($data) ) {
-            if ( filter_var($data, FILTER_VALIDATE_INT) ) {
+        if (!is_null($data)) {
+            if ($data == '0') return 0;
+            if (filter_var($data, FILTER_VALIDATE_INT)) {
                 return (int)$data;
             }
         }
@@ -74,7 +75,10 @@ class Request
     {
         $data = self::getParam($key);
 
-        if ( !is_null($data) ) {
+        if (!is_null($data)) {
+
+            if ($data == '0') return 0;
+
             return filter_var($data, FILTER_VALIDATE_FLOAT);
         }
         return null;
@@ -88,7 +92,7 @@ class Request
     public static function getAsString(string $key): ?string
     {
         $data = self::getParam($key);
-        if ( !is_null($data) ) {
+        if (!is_null($data)) {
             return filter_var($data, FILTER_SANITIZE_STRING);
         }
         return null;
@@ -111,7 +115,7 @@ class Request
     public static function getAsBoolean(string $key): ?bool
     {
         $data = self::getParam($key);
-        if ( !is_null($data) ) {
+        if (!is_null($data)) {
             return filter_var($data, FILTER_VALIDATE_BOOLEAN);
         }
 

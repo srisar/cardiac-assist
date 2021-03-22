@@ -77,19 +77,17 @@
         </div><!-- row -->
         <!-- section: add symptom -->
 
-      </slot>
-
-      <template v-slot:footer>
         <div class="row">
-          <div class="col">
+          <div class="col text-center">
             <button class="btn btn-success" @click="onAdd" :disabled="!isSaveFormValid">Add</button>
           </div>
         </div>
-      </template><!-- footer -->
 
+      </slot>
     </ModalWindow>
 
 
+    <!-- MODAL EDIT -->
     <ModalWindow id="modal-edit-investigation" :visible="modalEditVisible" @close="onCloseEditModal">
       <template v-slot:title v-if="modalEditVisible">Add common investigations</template>
       <slot v-if="modalEditVisible">
@@ -113,9 +111,7 @@
         </div><!-- row -->
         <!-- section: add symptom -->
 
-      </slot>
 
-      <template v-slot:footer>
         <div class="row">
           <div class="col">
             <button class="btn btn-success" @click="onUpdate">Update</button>
@@ -131,8 +127,8 @@
 
           </div>
         </div>
-      </template><!-- footer -->
 
+      </slot>
     </ModalWindow>
 
 
@@ -228,7 +224,6 @@ export default {
         remarks: this.investigationToAdd.remarks
       }
 
-      console.table(investigation);
 
       this.$store.dispatch('addVisitInvestigation', investigation)
           .then(() => {

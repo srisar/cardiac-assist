@@ -12,9 +12,10 @@ class VisitSymptom implements IModel
 
     private const TABLE = 'visit_symptoms';
 
-    public ?int $id, $visit_id, $symptom_id, $duration;
+    public ?int $id, $visit_id, $symptom_id;
+    public ?string $duration;
 
-    public ?Visit   $visit;
+    public ?Visit $visit;
     public ?Symptom $symptom;
 
     /**
@@ -24,7 +25,7 @@ class VisitSymptom implements IModel
     public static function build($array): VisitSymptom
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -38,8 +39,8 @@ class VisitSymptom implements IModel
     public static function find(int $id): ?VisitSymptom
     {
         $result = Database::find(self::TABLE, $id, self::class);
-        if ( !empty($result) ) {
-            $result->visit   = Visit::find($result->visit_id);
+        if (!empty($result)) {
+            $result->visit = Visit::find($result->visit_id);
             $result->symptom = Symptom::find($result->symptom_id);
 
             return $result;
@@ -61,9 +62,9 @@ class VisitSymptom implements IModel
     public function insert(): int
     {
         $data = [
-            'visit_id'   => $this->visit_id,
+            'visit_id' => $this->visit_id,
             'symptom_id' => $this->symptom_id,
-            'duration'   => $this->duration,
+            'duration' => $this->duration,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -88,7 +89,7 @@ class VisitSymptom implements IModel
      */
     public static function findByVisit(Visit $visit): array
     {
-        $db        = Database::instance();
+        $db = Database::instance();
         $statement = $db->prepare('select * from visit_symptoms where visit_id=?');
         $statement->execute([$visit->id]);
 
@@ -98,12 +99,12 @@ class VisitSymptom implements IModel
 
         $output = [];
 
-        if ( !empty($results) ) {
+        if (!empty($results)) {
 
-            foreach ( $results as $result ) {
-                $result->visit   = Visit::find($result->visit_id);
+            foreach ($results as $result) {
+                $result->visit = Visit::find($result->visit_id);
                 $result->symptom = Symptom::find($result->symptom_id);
-                $output[]        = $result;
+                $output[] = $result;
             }
 
         }

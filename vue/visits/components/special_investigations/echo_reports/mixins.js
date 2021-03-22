@@ -6,20 +6,26 @@ export default {
         }
     },
 
+    computed: {
+        visitId: function () {
+            return this.$store.getters.getVisitId;
+        },
+    },
+
     methods: {
 
         onNew: function (urlEndPoint) {
 
             bootbox.prompt({
-                size    : 'large',
-                title   : 'ADD A NEW REMARK',
+                size: 'large',
+                title: 'ADD A NEW REMARK',
                 callback: result => {
 
-                    if ( result == null ) return
+                    if (result == null) return
 
                     result = _.trim(result)
 
-                    if ( !_.isEmpty(result) ) {
+                    if (!_.isEmpty(result)) {
 
                         const param = {
                             value: result
@@ -30,11 +36,13 @@ export default {
                                 // fetch everything again
                                 this.fetchAllValues()
                             })
-                            .fail(e => { console.log(e) })
+                            .fail(e => {
+                                console.log(e)
+                            })
 
                     } else {
                         bootbox.alert({
-                            title  : '<i class="bi bi-exclamation-circle-fill"></i> Error',
+                            title: '<i class="bi bi-exclamation-circle-fill"></i> Error',
                             message: 'Empty values cannot be saved!'
                         })
                     }
@@ -47,8 +55,8 @@ export default {
         onAdd: function (payload) {
 
             const params = {
-                visit_id   : this.visit.id,
-                value_id   : payload.item.id,
+                visit_id: this.visitId,
+                value_id: payload.item.id,
                 report_type: this.REPORT_TYPE
             }
 
@@ -66,7 +74,7 @@ export default {
 
         fetchVisitValues: function () {
             const params = {
-                visit_id   : this.visit.id,
+                visit_id: this.visitId,
                 report_type: this.REPORT_TYPE
             }
 
@@ -82,8 +90,8 @@ export default {
         onRemove: function (payload) {
 
             const params = {
-                visit_id   : payload.item.visit_id,
-                value_id   : payload.item.id,
+                visit_id: payload.item.visit_id,
+                value_id: payload.item.id,
                 report_type: this.REPORT_TYPE
             }
 

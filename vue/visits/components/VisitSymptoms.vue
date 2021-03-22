@@ -4,7 +4,7 @@
 
     <div class="card shadow shadow-sm">
       <div class="card-header d-flex justify-content-between">
-        <div>Clinical Details</div>
+        <div>Clinical Details (Symptoms)</div>
         <div>
           <button class="btn btn-tiny btn-success" @click="onShowAddModal">Add</button>
         </div>
@@ -18,7 +18,7 @@
           <thead>
           <tr>
             <th>Symptom</th>
-            <th style="width: 50px" class="text-center">Days</th>
+            <th style="width: 50px" class="text-center">Duration</th>
             <th style="width: 30px" class="text-center"></th>
           </tr>
           </thead>
@@ -65,7 +65,7 @@
 
           <div class="col-2">
             <div class="form-group">
-              <label>Days</label>
+              <label>Duration</label>
               <input type="text" class="form-control" v-model="symptomDuration">
             </div>
           </div>
@@ -114,7 +114,7 @@ export default {
       selectedSymptom: "-1",
 
       /* symptom duration*/
-      symptomDuration: 0,
+      symptomDuration: "1/",
 
     }
   },

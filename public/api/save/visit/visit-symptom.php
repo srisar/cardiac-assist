@@ -13,7 +13,7 @@ try {
     $fields = [
         'visit_id' => Request::getAsString('visit_id'),
         'symptom_id' => Request::getAsInteger('symptom_id'),
-        'duration' => Request::getAsInteger('duration'),
+        'duration' => Request::getAsString('duration'),
     ];
 
     $object = VisitSymptom::build($fields);
