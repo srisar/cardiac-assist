@@ -80,6 +80,8 @@
 </template>
 
 <script>
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+
 export default {
   name: "VisitCoronaryCT",
 
@@ -155,11 +157,10 @@ export default {
 
       $.post(`${getSiteURL()}/api/update/visit/visit-coronary-ct.php`, params)
           .done(() => {
-            bootbox.alert("Coronary CT details updated");
+            successMessageBox('Coronary CT details updated')
           })
           .fail(e => {
-            console.log(e);
-            bootbox.alert("Failed to update coronary CT details");
+            errorMessageBox('Failed to update coronary CT details')
           });
 
     },

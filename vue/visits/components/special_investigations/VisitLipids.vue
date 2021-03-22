@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+
 export default {
   name: "VisitLipids",
 
@@ -95,10 +97,10 @@ export default {
 
       $.post(`${getSiteURL()}/api/update/visit/visit-lipids.php`, params)
           .done(r => {
-            bootbox.alert("Lipid details updated");
+            successMessageBox('Lipid details updated')
           })
           .fail(e => {
-            bootbox.alert("Failed to update lipid details");
+            errorMessageBox('Failed to update lipid details')
           });
     }, /* update */
 
@@ -115,8 +117,6 @@ export default {
 
       $.get(`${getSiteURL()}/api/get/visit/visit-lipids.php`, params)
           .done(response => {
-
-            console.log(response.data)
 
             this.visitLipids = response.data
           })

@@ -665,6 +665,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2209,6 +2221,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
 //
 //
 //
@@ -2290,6 +2303,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitCoronaryCT",
   data: function data() {
@@ -2361,10 +2375,9 @@ __webpack_require__.r(__webpack_exports__);
         impression: this.visitCoronaryCT.impression
       };
       $.post("".concat(getSiteURL(), "/api/update/visit/visit-coronary-ct.php"), params).done(function () {
-        bootbox.alert("Coronary CT details updated");
+        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.successMessageBox)('Coronary CT details updated');
       }).fail(function (e) {
-        console.log(e);
-        bootbox.alert("Failed to update coronary CT details");
+        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.errorMessageBox)('Failed to update coronary CT details');
       });
     }
   }
@@ -2385,6 +2398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
 /* harmony import */ var _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/RichEditorV2 */ "./vue/_common/components/RichEditorV2.vue");
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
 //
 //
 //
@@ -2406,6 +2420,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -2446,10 +2461,9 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
         description: this.visitECG.description
       };
       $.post("".concat(getSiteURL(), "/api/update/visit/visit-ecg.php"), params).done(function (r) {
-        bootbox.alert('ECG details updated');
+        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.successMessageBox)('ECG details updated');
       }).fail(function (e) {
-        console.log(e);
-        bootbox.alert('Failed to update ECG details');
+        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)('Failed to update ECG details');
       });
     },
 
@@ -2464,7 +2478,7 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
       };
       $.get("".concat(getSiteURL(), "/api/get/visit/visit-ecg.php"), params).done(function (response) {
         _this.visitECG = response.data;
-      }).fail(function (error) {});
+      }).fail(function () {});
     }
     /* fetch visit ECG */
 
@@ -2863,6 +2877,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
 //
 //
 //
@@ -2902,6 +2917,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitLipids",
   data: function data() {
@@ -2946,9 +2962,9 @@ __webpack_require__.r(__webpack_exports__);
         nhc: this.visitLipids.nhc
       };
       $.post("".concat(getSiteURL(), "/api/update/visit/visit-lipids.php"), params).done(function (r) {
-        bootbox.alert("Lipid details updated");
+        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.successMessageBox)('Lipid details updated');
       }).fail(function (e) {
-        bootbox.alert("Failed to update lipid details");
+        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.errorMessageBox)('Failed to update lipid details');
       });
     },
 
@@ -2961,7 +2977,6 @@ __webpack_require__.r(__webpack_exports__);
       };
       console.log(params);
       $.get("".concat(getSiteURL(), "/api/get/visit/visit-lipids.php"), params).done(function (response) {
-        console.log(response.data);
         _this.visitLipids = response.data;
       }).fail(function (error) {
         console.log(error);
@@ -4000,13 +4015,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function successMessageBox(message) {
   bootbox.alert({
-    title: '<i class="bi bi-info-circle"></i> Success',
-    message: message
+    title: '<span class="text-success"><i class="bi bi-info-circle-fill"></i> SUCCESS</span>',
+    message: "<div class=\"text-center\">".concat(message, "</div>")
   });
 }
 function errorMessageBox(message) {
   bootbox.alert({
-    title: '<i class="bi bi-exclamation-circle-fill"></i> Error',
+    title: '<span class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> ERROR</span>',
     message: message
   });
 }
@@ -25021,146 +25036,173 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "my-2", attrs: { id: "section-visit-ecg" } }, [
-      _c("div", { staticClass: "card shadow shadow-sm" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("div", { staticClass: "d-flex" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-tiny btn-warning mr-2",
-                on: {
-                  click: function($event) {
-                    _vm.visitECGExpanded = !_vm.visitECGExpanded
-                  }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "bi",
-                  class: _vm.iconToggle(_vm.visitECGExpanded)
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", [_vm._v("Electrocardiogram (ECG)")])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm.visitECGExpanded
-          ? _c("div", { staticClass: "card-body" }, [_c("VisitECG")], 1)
-          : _vm._e()
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "my-2", attrs: { id: "section-visit-lipids" } }, [
-      _c("div", { staticClass: "card shadow shadow-sm" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("div", { staticClass: "d-flex" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-tiny btn-warning mr-2",
-                on: {
-                  click: function($event) {
-                    _vm.visitLipidsExpanded = !_vm.visitLipidsExpanded
-                  }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "bi",
-                  class: _vm.iconToggle(_vm.visitLipidsExpanded)
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", [_vm._v("Lipid Profiles")])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm.visitLipidsExpanded
-          ? _c("div", { staticClass: "card-body" }, [_c("VisitLipids")], 1)
-          : _vm._e()
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "my-2", attrs: { id: "section-visit-coronary-ct" } },
-      [
-        _c("div", { staticClass: "card shadow shadow-sm" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("div", { staticClass: "d-flex" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tiny btn-warning mr-2",
-                  on: {
-                    click: function($event) {
-                      _vm.visitCoronaryCTExpanded = !_vm.visitCoronaryCTExpanded
-                    }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "bi",
-                    class: _vm.iconToggle(_vm.visitCoronaryCTExpanded)
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", [_vm._v("Coronary CT")])
-            ])
-          ]),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "div",
+            { staticClass: "my-2", attrs: { id: "section-visit-ecg" } },
+            [
+              _c("div", { staticClass: "card shadow shadow-sm" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "d-flex" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-tiny btn-warning mr-2",
+                        on: {
+                          click: function($event) {
+                            _vm.visitECGExpanded = !_vm.visitECGExpanded
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "bi",
+                          class: _vm.iconToggle(_vm.visitECGExpanded)
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Electrocardiogram (ECG)")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.visitECGExpanded
+                  ? _c("div", { staticClass: "card-body" }, [_c("VisitECG")], 1)
+                  : _vm._e()
+              ])
+            ]
+          ),
           _vm._v(" "),
-          _vm.visitCoronaryCTExpanded
-            ? _c(
-                "div",
-                { staticClass: "card-body" },
-                [_c("VisitCoronaryCT")],
-                1
-              )
-            : _vm._e()
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "my-2", attrs: { id: "section-visit-echocardiography" } },
-      [
-        _c("div", { staticClass: "card shadow shadow-sm" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("div", { staticClass: "d-flex" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tiny btn-warning mr-2",
-                  on: {
-                    click: function($event) {
-                      _vm.visitEchoExpanded = !_vm.visitEchoExpanded
-                    }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "bi",
-                    class: _vm.iconToggle(_vm.visitEchoExpanded)
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", [_vm._v("Echocardiography")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "my-2", attrs: { id: "section-visit-lipids" } },
+            [
+              _c("div", { staticClass: "card shadow shadow-sm" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "d-flex" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-tiny btn-warning mr-2",
+                        on: {
+                          click: function($event) {
+                            _vm.visitLipidsExpanded = !_vm.visitLipidsExpanded
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "bi",
+                          class: _vm.iconToggle(_vm.visitLipidsExpanded)
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Lipid Profiles")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.visitLipidsExpanded
+                  ? _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [_c("VisitLipids")],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ]
+          ),
           _vm._v(" "),
-          _vm.visitEchoExpanded
-            ? _c("div", { staticClass: "card-body" }, [_c("VisitEcho")], 1)
-            : _vm._e()
+          _c(
+            "div",
+            { staticClass: "my-2", attrs: { id: "section-visit-coronary-ct" } },
+            [
+              _c("div", { staticClass: "card shadow shadow-sm" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "d-flex" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-tiny btn-warning mr-2",
+                        on: {
+                          click: function($event) {
+                            _vm.visitCoronaryCTExpanded = !_vm.visitCoronaryCTExpanded
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "bi",
+                          class: _vm.iconToggle(_vm.visitCoronaryCTExpanded)
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Coronary CT")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.visitCoronaryCTExpanded
+                  ? _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [_c("VisitCoronaryCT")],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "my-2",
+              attrs: { id: "section-visit-echocardiography" }
+            },
+            [
+              _c("div", { staticClass: "card shadow shadow-sm" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "d-flex" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-tiny btn-warning mr-2",
+                        on: {
+                          click: function($event) {
+                            _vm.visitEchoExpanded = !_vm.visitEchoExpanded
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "bi",
+                          class: _vm.iconToggle(_vm.visitEchoExpanded)
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", [_vm._v("Echocardiography")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.visitEchoExpanded
+                  ? _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [_c("VisitEcho")],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ]
+          )
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

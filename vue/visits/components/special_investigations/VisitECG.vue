@@ -22,6 +22,7 @@
 <script>
 import ModalWindow from "../../../_common/components/ModalWindow";
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
 
 const _ = require('lodash');
 
@@ -66,11 +67,10 @@ export default {
 
       $.post(`${getSiteURL()}/api/update/visit/visit-ecg.php`, params)
           .done(r => {
-            bootbox.alert('ECG details updated')
+            successMessageBox('ECG details updated')
           })
           .fail(e => {
-            console.log(e);
-            bootbox.alert('Failed to update ECG details')
+            errorMessageBox('Failed to update ECG details')
           });
 
     },
@@ -89,8 +89,9 @@ export default {
           .done(response => {
             this.visitECG = response.data
           })
-          .fail(error => {
+          .fail(() => {
           })
+
     }, /* fetch visit ECG */
 
 

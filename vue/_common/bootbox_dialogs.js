@@ -1,14 +1,14 @@
 export function successMessageBox(message) {
     bootbox.alert({
-        title: '<i class="bi bi-info-circle"></i> Success',
-        message: message
+        title: '<span class="text-success"><i class="bi bi-info-circle-fill"></i> SUCCESS</span>',
+        message: `<div class="text-center">${message}</div>`
     })
 }
 
 
 export function errorMessageBox(message) {
     bootbox.alert({
-        title: '<i class="bi bi-exclamation-circle-fill"></i> Error',
+        title: '<span class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> ERROR</span>',
         message: message
     })
 }
