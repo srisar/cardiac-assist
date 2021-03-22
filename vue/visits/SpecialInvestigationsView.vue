@@ -10,11 +10,9 @@
           <div id="section-visit-ecg" class="my-2">
             <div class="card shadow shadow-sm">
 
-              <div class="card-header">
+              <div class="card-header" @click.stop="visitECGExpanded = !visitECGExpanded">
                 <div class="d-flex">
-                  <button class="btn btn-tiny btn-warning mr-2" @click="visitECGExpanded = !visitECGExpanded">
-                    <i class="bi" :class="iconToggle(visitECGExpanded)"></i>
-                  </button>
+                  <span><i class="bi" :class="iconToggle(visitECGExpanded)"></i></span>
                   <div>Electrocardiogram (ECG)</div>
                 </div>
               </div>
@@ -25,15 +23,14 @@
             </div><!-- card -->
           </div><!-- visit ecg -->
 
+
           <!-- section: visit lipids -->
           <div id="section-visit-lipids" class="my-2">
             <div class="card shadow shadow-sm">
 
-              <div class="card-header">
+              <div class="card-header" @click="visitLipidsExpanded = !visitLipidsExpanded">
                 <div class="d-flex">
-                  <button class="btn btn-tiny btn-warning mr-2" @click="visitLipidsExpanded = !visitLipidsExpanded">
-                    <i class="bi" :class="iconToggle(visitLipidsExpanded)"></i>
-                  </button>
+                  <span><i class="bi" :class="iconToggle(visitLipidsExpanded)"></i></span>
                   <div>Lipid Profiles</div>
                 </div>
               </div>
@@ -44,15 +41,14 @@
             </div><!-- card -->
           </div><!-- visit lipids -->
 
+
           <!-- section: visit coronary ct -->
           <div id="section-visit-coronary-ct" class="my-2">
             <div class="card shadow shadow-sm">
 
-              <div class="card-header">
+              <div class="card-header" @click="visitCoronaryCTExpanded = !visitCoronaryCTExpanded">
                 <div class="d-flex">
-                  <button class="btn btn-tiny btn-warning mr-2" @click="visitCoronaryCTExpanded = !visitCoronaryCTExpanded">
-                    <i class="bi" :class="iconToggle(visitCoronaryCTExpanded)"></i>
-                  </button>
+                  <span><i class="bi" :class="iconToggle(visitCoronaryCTExpanded)"></i></span>
                   <div>Coronary CT</div>
                 </div>
               </div>
@@ -63,15 +59,14 @@
             </div><!-- card -->
           </div><!-- visit coronary ct -->
 
+
           <!-- section: visit coronary ct -->
           <div id="section-visit-echocardiography" class="my-2">
             <div class="card shadow shadow-sm">
 
-              <div class="card-header">
+              <div class="card-header" @click="visitEchoExpanded = !visitEchoExpanded">
                 <div class="d-flex">
-                  <button class="btn btn-tiny btn-warning mr-2" @click="visitEchoExpanded = !visitEchoExpanded">
-                    <i class="bi" :class="iconToggle(visitEchoExpanded)"></i>
-                  </button>
+                  <span><i class="bi" :class="iconToggle(visitEchoExpanded)"></i></span>
                   <div>Echocardiography</div>
                 </div>
               </div>
@@ -104,9 +99,9 @@ export default {
   components: {VisitEcho, VisitCoronaryCT, VisitECG, VisitLipids},
   data() {
     return {
-      visitECGExpanded: false,
-      visitLipidsExpanded: false,
-      visitCoronaryCTExpanded: false,
+      visitECGExpanded: true,
+      visitLipidsExpanded: true,
+      visitCoronaryCTExpanded: true,
       visitEchoExpanded: true,
     }
   },
@@ -120,8 +115,8 @@ export default {
   methods: {
 
     iconToggle: function (value) {
-      if (value) return 'bi-arrow-up';
-      else return 'bi-arrow-down';
+      if (value) return 'bi-arrow-bar-up';
+      else return 'bi-arrow-bar-down';
     },
 
   },
@@ -129,5 +124,9 @@ export default {
 </script>
 
 <style scoped>
+
+.card-header {
+  cursor: pointer;
+}
 
 </style>

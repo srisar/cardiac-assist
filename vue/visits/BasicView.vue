@@ -38,50 +38,9 @@ export default {
     VisitDetails,
   },
 
-  /*
-  * === DATA ===
-  * */
-  data() {
-    return {}
-  },
-
-  /*
-  * === COMPUTED ===
-  * */
-  computed: {},
-
-
-  created() {
-
-    // $.get(`${getSiteURL()}/api/get/visit/visit-exist.php`, {id: this.visitId})
-    //     .done(response => {
-    //       if (response.data === false) redirect(`${getSiteURL()}/app/patients/list.php`)
-    //     })
-    //     .fail(error => {
-    //       redirect(`${getSiteURL()}/app/patients/list.php`)
-    //     })
-  },
-
-  /*
-  * === MOUNTED ===
-  * */
-  mounted() {
-
-
-  },
-  /* *** MOUNTED *** */
 
 }
 </script>
 
 <style scoped>
-
-.bg-diagnosis {
-  background-color: #FEF5E6;
-}
-
-.bg-special-investigations {
-  background-color: #EEE1FE;
-}
-
 </style>

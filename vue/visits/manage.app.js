@@ -7,6 +7,7 @@ import BasicView from "./BasicView";
 import DiagnosesView from "./DiagnosesView";
 import SpecialInvestigationsView from "./SpecialInvestigationsView";
 import AppView from "./AppView";
+import EditVisitDetails from "./EditVisitDetails";
 
 
 Vue.use(Vuex)
@@ -17,6 +18,7 @@ const routes = [
     {path: '', component: BasicView},
     {path: '/diagnoses', component: DiagnosesView},
     {path: '/special', component: SpecialInvestigationsView},
+    {path: '/edit/:id', component: EditVisitDetails},
 ]
 
 const router = new VueRouter({

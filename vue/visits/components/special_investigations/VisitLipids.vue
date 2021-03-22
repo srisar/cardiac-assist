@@ -112,9 +112,6 @@ export default {
         visit_id: this.visitId,
       }
 
-      console.log(params)
-
-
       $.get(`${getSiteURL()}/api/get/visit/visit-lipids.php`, params)
           .done(response => {
 

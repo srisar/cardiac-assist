@@ -7,15 +7,13 @@
 
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <!-- collapse/un-collapse button -->
-            <button class="btn btn-tiny btn-warning" @click="cardCollapsed = !cardCollapsed"><i class="bi" :class="collapseButtonIcon"></i></button>
 
             <a :href="createPatientPageLink()" class="btn btn-tiny btn-secondary">Back to patient</a>
             <button class="btn btn-tiny btn-primary" @click="onShowEditVisit">Edit</button>
           </div><!-- left -->
 
           <div>
-            Visit Details
+
           </div><!-- center -->
 
           <div>
@@ -31,178 +29,174 @@
       </div>
       <div class="card-body">
 
-        <transition name="slide-fade">
+        <section>
 
-          <section v-if="!cardCollapsed">
+          <div class="form-row mb-2">
 
-            <div class="form-row mb-2">
+            <div class="col-6 col-lg-2 mb-2 mb-lg-0">
 
-              <div class="col-6 col-lg-2 mb-2 mb-lg-0">
-
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Date</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.visit_date" readonly>
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Date</div>
                 </div>
-
-              </div><!-- col -->
-
-              <div class="col-6 col-lg-4 mb-2 mb-lg-0">
-
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Patient</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="patientFullName" readonly>
-                </div>
-
-              </div><!-- col -->
-
-              <div class="col-6 col-lg-2 mb-2 mb-lg-0">
-
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Age</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="patient.age" readonly>
-                </div>
-
-              </div><!-- col -->
-
-              <div class="col-6 col-lg-2 mb-2 mb-lg-0">
-
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Gender</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="patient.gender" readonly>
-                </div>
-
-              </div><!-- col -->
-
-
-              <div class="col-12 col-lg-2 mb-2 mb-lg-0 text-lg-right text-center">
-              </div><!-- col -->
-
-            </div><!-- row -->
-
-            <!-- --- -->
-
-            <div class="form-row mb-2">
-
-              <div class="col">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Height (m)</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.height" readonly>
-                </div>
-              </div><!-- col -->
-
-              <div class="col">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Weight (kg)</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.weight" readonly>
-                </div>
-              </div><!-- col -->
-
-              <div class="col">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">BMI (kg/m&sup2;)</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.bmi" readonly>
-                </div>
-              </div><!-- col -->
-
-              <div class="col">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">BSA (m&sup2;)</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.bsa" readonly>
-                </div>
-              </div><!-- col -->
-
-              <div class="col">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">DBP</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.dbp" readonly>
-                </div>
-              </div><!-- col -->
-
-              <div class="col">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">SBP</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.sbp" readonly>
-                </div>
-              </div><!-- col -->
-
-            </div><!-- row -->
-
-            <div class="form-row justify-content-center">
-
-              <div class="col-1">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">DM</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visitDm" readonly>
-                </div>
-              </div>
-              <div class="col-1">
-
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">HT</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visitHt" readonly>
-                </div>
+                <input type="text" class="form-control bg-white" :value="visit.visit_date" readonly>
               </div>
 
-              <div class="col-1">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">DL</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visitDl" readonly>
+            </div><!-- col -->
+
+            <div class="col-6 col-lg-4 mb-2 mb-lg-0">
+
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Patient</div>
                 </div>
+                <input type="text" class="form-control bg-white" :value="patientFullName" readonly>
               </div>
 
-              <div class="col-1">
-                <div class="input-group input-group-sm">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">EF</div>
-                  </div>
-                  <input type="text" class="form-control bg-white" :value="visit.ef" readonly>
+            </div><!-- col -->
+
+            <div class="col-6 col-lg-2 mb-2 mb-lg-0">
+
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Age</div>
                 </div>
+                <input type="text" class="form-control bg-white" :value="patient.age" readonly>
               </div>
 
-            </div><!-- row -->
+            </div><!-- col -->
 
-            <div class="form-row mb-2">
+            <div class="col-6 col-lg-2 mb-2 mb-lg-0">
 
-              <div class="col">
-
-                <div class="form-group">
-                  <label>Remarks</label>
-                  <textarea rows="3" class="form-control" readonly>{{ visit.remarks }}</textarea>
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Gender</div>
                 </div>
+                <input type="text" class="form-control bg-white" :value="patient.gender" readonly>
+              </div>
 
-              </div><!-- col -->
+            </div><!-- col -->
 
-            </div><!-- row -->
 
-          </section>
+            <div class="col-12 col-lg-2 mb-2 mb-lg-0 text-lg-right text-center">
+            </div><!-- col -->
 
-        </transition>
+          </div><!-- row -->
+
+          <!-- --- -->
+
+          <div class="form-row mb-2">
+
+            <div class="col">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Height (m)</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.height" readonly>
+              </div>
+            </div><!-- col -->
+
+            <div class="col">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Weight (kg)</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.weight" readonly>
+              </div>
+            </div><!-- col -->
+
+            <div class="col">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">BMI (kg/m&sup2;)</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.bmi" readonly>
+              </div>
+            </div><!-- col -->
+
+            <div class="col">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">BSA (m&sup2;)</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.bsa" readonly>
+              </div>
+            </div><!-- col -->
+
+            <div class="col">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">DBP</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.dbp" readonly>
+              </div>
+            </div><!-- col -->
+
+            <div class="col">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">SBP</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.sbp" readonly>
+              </div>
+            </div><!-- col -->
+
+          </div><!-- row -->
+
+          <div class="form-row justify-content-center">
+
+            <div class="col-2">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">DM</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visitDm" readonly>
+              </div>
+            </div>
+            <div class="col-2">
+
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">HT</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visitHt" readonly>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">DL</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visitDl" readonly>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">EF</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.ef" readonly>
+              </div>
+            </div>
+
+          </div><!-- row -->
+
+          <div class="form-row mb-2">
+
+            <div class="col">
+
+              <div class="form-group">
+                <label>Remarks</label>
+                <textarea rows="3" class="form-control" readonly>{{ visit.remarks }}</textarea>
+              </div>
+
+            </div><!-- col -->
+
+          </div><!-- row -->
+
+        </section>
 
       </div><!-- card-body -->
 
@@ -336,16 +330,14 @@ import DateField from "../../_common/components/DateField";
 const _ = require('lodash');
 
 export default {
-  name      : "VisitDetails",
-  components: { ModalWindow, DateField },
+  name: "VisitDetails",
+  components: {ModalWindow, DateField},
 
   data() {
     return {
 
       modalEditVisitVisible: false,
-      completed            : false,
-
-      cardCollapsed: false,
+      completed: false,
 
     }
   },
@@ -366,7 +358,7 @@ export default {
 
 
     statusSwitchLabel: function () {
-      if ( this.completed ) return 'Completed';
+      if (this.completed) return 'Completed';
       else return 'Incomplete';
     },
 
@@ -385,11 +377,6 @@ export default {
       return _.round(Math.sqrt(((this.visit.height / 100.0) * this.visit.weight) / 3600.0), 2);
     },
 
-    /* card collapse icons */
-    collapseButtonIcon: function () {
-      if ( this.cardCollapsed ) return 'bi-arrow-down-short'
-      else return 'bi-arrow-up-short';
-    },
 
     visitDl: function () {
       return this.visit.dl ? 'YES' : 'NO'
@@ -413,13 +400,13 @@ export default {
     * */
     completed: function (value) {
 
-      if ( value ) {
-        this.$store.dispatch('visitSetAsComplete', { visit: this.visit, status: 'COMPLETE' })
+      if (value) {
+        this.$store.dispatch('visitSetAsComplete', {visit: this.visit, status: 'COMPLETE'})
             .catch(e => {
               this.completed = false;
             });
       } else {
-        this.$store.dispatch('visitSetAsComplete', { visit: this.visit, status: 'INCOMPLETE' })
+        this.$store.dispatch('visitSetAsComplete', {visit: this.visit, status: 'INCOMPLETE'})
             .catch(e => {
               this.completed = true;
             });
@@ -427,12 +414,15 @@ export default {
 
     },
 
+    status: function (value) {
+      this.completed = value === 'COMPLETE'
+    }
+
+
   },
   /* *** WATCH *** */
 
   mounted() {
-
-    this.completed = this.status === 'COMPLETE';
 
   },
   /* *** MOUNTED *** */
@@ -455,19 +445,19 @@ export default {
     onUpdateVisitDetails: function () {
 
       const visit = {
-        id        : this.visit.id,
+        id: this.visit.id,
         visit_date: this.visit.visit_date,
-        remarks   : this.visit.remarks,
-        height    : this.visit.height,
-        weight    : this.visit.weight,
-        bmi       : this.bmi,
-        bsa       : this.bsa,
-        dbp       : this.visit.dbp,
-        sbp       : this.visit.sbp,
-        dm        : this.visit.dm,
-        ht        : this.visit.ht,
-        dl        : this.visit.dl,
-        ef        : this.visit.ef,
+        remarks: this.visit.remarks,
+        height: this.visit.height,
+        weight: this.visit.weight,
+        bmi: this.bmi,
+        bsa: this.bsa,
+        dbp: this.visit.dbp,
+        sbp: this.visit.sbp,
+        dm: this.visit.dm,
+        ht: this.visit.ht,
+        dl: this.visit.dl,
+        ef: this.visit.ef,
       }
 
 
@@ -495,22 +485,5 @@ export default {
 </script>
 
 <style scoped>
-
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-
-.slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active below version 2.1.8 */
-{
-  transform: translateY(10px);
-  opacity: 0;
-}
 
 </style>
