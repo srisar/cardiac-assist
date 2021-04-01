@@ -1,5 +1,8 @@
 function getSiteURL() {
-    return `${window.location.protocol}//${window.location.hostname}`
+
+    let port = window.location.port
+
+    return `${window.location.protocol}//${window.location.hostname}:${port}`
 }
 
 function redirect(path) {
