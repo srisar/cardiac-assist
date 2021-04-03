@@ -7,6 +7,8 @@ mix.options({
 });
 
 
+mix.browserSync('localhost')
+
 mix.sass('public/assets/css/app.scss', 'public/assets/css/app.css');
 
 mix.js('vue/users/manage/manage-users.js', 'public/app/users/').vue();
