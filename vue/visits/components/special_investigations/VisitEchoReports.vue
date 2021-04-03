@@ -2,53 +2,55 @@
 
   <div>
 
-    <EchoMitralValveValues/>
-    <EchoAorticValveValues/>
-    <EchoTricuspidValues/>
-    <EchoPulmonicValveValues/>
-    <EchoAortaValues/>
-    <EchoLeftAtriumValues/>
-    <EchoRightAtriumValues/>
-    <EchoLeftVentricleValues/>
-    <EchoRightVentricleValues/>
-    <EchoPericardiumValues/>
-    <EchoDopplerValues/>
+    <div id="add-echo-values">
+      <div class="alert alert-secondary">
+
+        <div class="form-group">
+          <label>Value</label>
+          <input type="text" class="form-control" v-model="valueToAdd.value">
+        </div>
+
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-control" v-model="valueToAdd.type">
+            <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
 
   </div><!-- template -->
 
 </template>
 
 <script>
-import EchoMitralValveValues from "./echo_reports/EchoMitralValveValues";
-import EchoAortaValues from "./echo_reports/EchoAortaValues";
-import EchoAorticValveValues from "./echo_reports/EchoAorticValveValues";
-import EchoDopplerValues from "./echo_reports/EchoDopplerValues";
-import EchoLeftAtriumValues from "./echo_reports/EchoLeftAtriumValues";
-import EchoLeftVentricleValues from "./echo_reports/EchoLeftVentricleValues";
-import EchoPericardiumValues from "./echo_reports/EchoPericardiumValues";
-import EchoRightAtriumValues from "./echo_reports/EchoRightAtriumValues";
-import EchoRightVentricleValues from "./echo_reports/EchoRightVentricleValues";
-import EchoTricuspidValues from "./echo_reports/EchoTricuspidValues";
-import EchoPulmonicValveValues from "./echo_reports/EchoPulmonicValveValues";
+
 
 export default {
-  name      : "VisitEchoReports",
-  components: {
-    EchoPulmonicValveValues,
-    EchoMitralValveValues,
-    EchoAortaValues,
-    EchoAorticValveValues,
-    EchoDopplerValues,
-    EchoLeftVentricleValues,
-    EchoLeftAtriumValues,
-    EchoRightVentricleValues,
-    EchoRightAtriumValues,
-    EchoPericardiumValues,
-    EchoTricuspidValues,
-  },
+  name: "VisitEchoReports",
+  components: {},
   data() {
     return {
-      //
+
+      echoValueTypes: {
+        'AORTA': 'Aorta',
+        'AORTIC_VALVE': 'Aortic Valve',
+        'DOPPLER': 'Doppler',
+        'LEFT_ATRIUM': 'Left Atrium',
+        'MITRAL_VALVE': 'Mitral Valve',
+        'PERICARDIUM': 'Pericardium',
+        'PULMONIC_VALVE': 'Pulmonic Valve',
+        'RIGHT_ATRIUM': 'Right Atrium',
+        'RIGHT_VENTRICLE': 'Right Ventricle',
+        'TRICUSPID': 'Tricuspid',
+      },
+
+      valueToAdd: {
+        value: "",
+        type: "AORTA"
+      }
+
     }
   },
 

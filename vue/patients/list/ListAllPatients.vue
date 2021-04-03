@@ -88,6 +88,8 @@ export default {
           .done(r => {
             this.patientsList = r.data;
 
+            console.log(r)
+
             this.dataTable.rows.add(this.patientsList);
             this.dataTable.draw();
 

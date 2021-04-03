@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex'
-import AllValues from "./AllValues";
+import Vue from 'vue'
+import AllValues from "./AllValues"
 
-Vue.use(Vuex);
+import Store from './store'
 
 new Vue({
     render: h => h(AllValues),
-}).$mount('#app');
+    store: Store
+}).$mount('#app')

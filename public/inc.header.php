@@ -64,25 +64,7 @@ use App\Models\User;
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/symptoms/manage.php">Symptoms</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/diseases/manage.php">Diseases</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
-                    </div>
-                </li><!-- end nav-item -->
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Echocardiography
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#mitral">Mitral Valve Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aortic">Aortic Valve Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pulmonic">Pulmonic Valve Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#tricuspid">Tricuspid Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#aorta">Aorta Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-atrium">Left atrium Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-atrium">Right atrium Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#left-ventricle">Left Ventricle Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#right-ventricle">Right Ventricle Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#pericardium">Pericardium Remarks</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php#doppler">Doppler Remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php">Echo values</a>
                     </div>
                 </li><!-- end nav-item -->
 

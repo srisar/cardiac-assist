@@ -12,12 +12,13 @@ require_once "vendor/autoload.php";
 
 use App\Core\App;
 use App\Core\Database\Database;
+use App\Core\Requests\Request;
 
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $db_config = [
-    'HOST'     => $_ENV['DB_HOST'],
+    'HOST' => $_ENV['DB_HOST'],
     'DATABASE' => $_ENV['DB_NAME'],
     'USERNAME' => $_ENV['DB_USERNAME'],
     'PASSWORD' => $_ENV['DB_PASSWORD'],
@@ -38,6 +39,8 @@ define('APP_VERSION', '0.9.1');
 
 App::setTitle("");
 
+
+Request::cors();
 
 /*
  * HELPER FUNCTIONS
