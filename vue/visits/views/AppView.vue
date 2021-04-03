@@ -52,8 +52,8 @@ export default {
     const visitId = document.getElementById('php_visit_id').value
 
     /* 1. fetch visit details */
-    this.$store.commit('updateVisitId', visitId)
-    this.$store.dispatch('fetchVisit', visitId)
+    this.$store.commit('updateVisitId', parseInt(visitId))
+    this.$store.dispatch('fetchVisit', parseInt(visitId))
   },
 
   computed: {

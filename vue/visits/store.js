@@ -7,6 +7,7 @@ import visitSymptoms from './store_modules/visit_symptoms'
 import differentialDiagnosis from './store_modules/differential_diagnosis'
 import visitInvestigations from "./store_modules/visit_investigations"
 import visitDiagnosis from './store_modules/visit_diagnosis'
+import visitEchoValues from './store_modules/visit_echo_values'
 
 
 export default new Vuex.Store({
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         differentialDiagnosis: differentialDiagnosis,
         visitInvestigations: visitInvestigations,
         visitDiagnosis: visitDiagnosis,
+        visitEchoValues: visitEchoValues,
     },
 
     state: {

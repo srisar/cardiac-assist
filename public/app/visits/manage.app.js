@@ -2432,6 +2432,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitEchoReports",
   components: {},
@@ -2450,16 +2489,57 @@ __webpack_require__.r(__webpack_exports__);
         'TRICUSPID': 'Tricuspid'
       },
       valueToAdd: {
-        value: "",
+        echoValue: null,
         type: "AORTA"
       }
     };
   },
-  computed: {//
+  computed: {
+    allEchoValues: function allEchoValues() {
+      return this.$store.getters.getEchoValues;
+    },
+    visitEchoValues: function visitEchoValues() {
+      return this.$store.getters.getVisitEchoValues;
+    },
+    selectedEchoValues: function selectedEchoValues() {
+      return this.allEchoValues[this.valueToAdd.type];
+    },
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
+    },
+    validated: function validated() {
+      return this.valueToAdd.echoValue !== null;
+    }
   },
-  mounted: function mounted() {//
+  watch: {
+    selectedEchoValues: function selectedEchoValues(newValue, oldValue) {
+      this.valueToAdd.echoValue = null;
+    }
   },
-  methods: {//
+  mounted: function mounted() {
+    this.$store.dispatch('FETCH_ALL_ECHO_VALUES').then();
+    this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', this.visitId).then();
+  },
+  methods: {
+    onAdd: function onAdd() {
+      var _this = this;
+
+      var item = {
+        visit_id: this.visitId,
+        echo_value_id: this.valueToAdd.echoValue.id,
+        type: this.valueToAdd.type
+      };
+      this.$store.dispatch('ADD_VISIT_ECHO_VALUE', item).then(function () {
+        _this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', _this.visitId).then();
+      });
+    },
+    onDelete: function onDelete(item) {
+      var _this2 = this;
+
+      this.$store.dispatch('DELETE_VISIT_ECHO_VALUE', item.id).then(function () {
+        _this2.$store.dispatch('FETCH_VISIT_ECHO_VALUES', _this2.visitId).then();
+      });
+    }
   }
 });
 
@@ -2647,8 +2727,8 @@ __webpack_require__.r(__webpack_exports__);
     var visitId = document.getElementById('php_visit_id').value;
     /* 1. fetch visit details */
 
-    this.$store.commit('updateVisitId', visitId);
-    this.$store.dispatch('fetchVisit', visitId);
+    this.$store.commit('updateVisitId', parseInt(visitId));
+    this.$store.dispatch('fetchVisit', parseInt(visitId));
   },
   computed: {//
   },
@@ -3139,9 +3219,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_modules_differential_diagnosis__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store_modules/differential_diagnosis */ "./vue/visits/store_modules/differential_diagnosis.js");
 /* harmony import */ var _store_modules_visit_investigations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store_modules/visit_investigations */ "./vue/visits/store_modules/visit_investigations.js");
 /* harmony import */ var _store_modules_visit_diagnosis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store_modules/visit_diagnosis */ "./vue/visits/store_modules/visit_diagnosis.js");
+/* harmony import */ var _store_modules_visit_echo_values__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store_modules/visit_echo_values */ "./vue/visits/store_modules/visit_echo_values.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuex__WEBPACK_IMPORTED_MODULE_1___default()));
+
 
 
 
@@ -3151,7 +3233,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuex__WEBPACK_IMPORTED_MODULE_1___
     visitSymptoms: _store_modules_visit_symptoms__WEBPACK_IMPORTED_MODULE_2__.default,
     differentialDiagnosis: _store_modules_differential_diagnosis__WEBPACK_IMPORTED_MODULE_3__.default,
     visitInvestigations: _store_modules_visit_investigations__WEBPACK_IMPORTED_MODULE_4__.default,
-    visitDiagnosis: _store_modules_visit_diagnosis__WEBPACK_IMPORTED_MODULE_5__.default
+    visitDiagnosis: _store_modules_visit_diagnosis__WEBPACK_IMPORTED_MODULE_5__.default,
+    visitEchoValues: _store_modules_visit_echo_values__WEBPACK_IMPORTED_MODULE_6__.default
   },
   state: {
     visit: {},
@@ -3495,6 +3578,113 @@ __webpack_require__.r(__webpack_exports__);
   }
   /* *** ACTIONS *** */
 
+});
+
+/***/ }),
+
+/***/ "./vue/visits/store_modules/visit_echo_values.js":
+/*!*******************************************************!*\
+  !*** ./vue/visits/store_modules/visit_echo_values.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: {
+    echoValueTypes: {
+      'AORTA': 'Aorta',
+      'AORTIC_VALVE': 'Aortic Valve',
+      'DOPPLER': 'Doppler',
+      'LEFT_ATRIUM': 'Left Atrium',
+      'MITRAL_VALVE': 'Mitral Valve',
+      'PERICARDIUM': 'Pericardium',
+      'PULMONIC_VALVE': 'Pulmonic Valve',
+      'RIGHT_ATRIUM': 'Right Atrium',
+      'RIGHT_VENTRICLE': 'Right Ventricle',
+      'TRICUSPID': 'Tricuspid'
+    },
+    echoValues: [],
+    visitEchoValues: []
+  },
+  getters: {
+    getEchoValues: function getEchoValues(state) {
+      return state.echoValues;
+    },
+    getVisitEchoValues: function getVisitEchoValues(state) {
+      return state.visitEchoValues;
+    },
+    getEchoValueTypes: function getEchoValueTypes(state) {
+      return state.echoValueTypes;
+    }
+  },
+  mutations: {
+    setEchoValues: function setEchoValues(state, values) {
+      state.echoValues = values;
+    },
+    setVisitEchoValues: function setVisitEchoValues(state, values) {
+      state.visitEchoValues = values;
+    }
+  },
+  actions: {
+    FETCH_ALL_ECHO_VALUES: function FETCH_ALL_ECHO_VALUES(_ref) {
+      var commit = _ref.commit;
+      return new Promise(function (resolve, reject) {
+        $.get("".concat(getSiteURL(), "/api/get/echo/echo-values.php")).done(function (response) {
+          commit('setEchoValues', response);
+          resolve();
+        }).fail(function (error) {
+          reject(error);
+        });
+      });
+    },
+
+    /* fetch all */
+    FETCH_VISIT_ECHO_VALUES: function FETCH_VISIT_ECHO_VALUES(_ref2, visit_id) {
+      var commit = _ref2.commit;
+      return new Promise(function (resolve, reject) {
+        $.get("".concat(getSiteURL(), "/api/get/visit/visit-echo-values.php"), {
+          visit_id: visit_id
+        }).done(function (response) {
+          commit('setVisitEchoValues', response);
+          resolve();
+        }).fail(function (error) {
+          reject(error);
+        });
+      });
+    },
+
+    /* fetch all */
+    ADD_VISIT_ECHO_VALUE: function ADD_VISIT_ECHO_VALUE(_ref3, item) {
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
+      return new Promise(function (resolve, reject) {
+        $.post("".concat(getSiteURL(), "/api/save/visit/visit-echo-value.php"), item).done(function (response) {
+          resolve();
+        }).fail(function (error) {
+          reject(error);
+        });
+      });
+    },
+
+    /* add visit echo value */
+    DELETE_VISIT_ECHO_VALUE: function DELETE_VISIT_ECHO_VALUE(_ref4, id) {
+      var commit = _ref4.commit,
+          dispatch = _ref4.dispatch;
+      return new Promise(function (resolve, reject) {
+        $.post("".concat(getSiteURL(), "/api/delete/visit/visit-echo-value.php"), {
+          id: id
+        }).done(function (response) {
+          resolve();
+        }).fail(function (error) {
+          reject(error);
+        });
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -26917,81 +27107,187 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { attrs: { id: "add-echo-values" } }, [
-      _c("div", { staticClass: "alert alert-secondary" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Value")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.valueToAdd.value,
-                expression: "valueToAdd.value"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.valueToAdd.value },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.valueToAdd, "value", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Type")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.valueToAdd.type,
-                  expression: "valueToAdd.type"
-                }
-              ],
-              staticClass: "form-control",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.valueToAdd,
-                    "type",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            _vm._l(_vm.echoValueTypes, function(item, key) {
-              return _c("option", { domProps: { value: key } }, [
-                _vm._v(_vm._s(item))
+  return _c(
+    "div",
+    [
+      _c("div", { attrs: { id: "add-echo-values" } }, [
+        _c("div", { staticClass: "alert alert-secondary" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12 col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Type")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.valueToAdd.type,
+                        expression: "valueToAdd.type"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.valueToAdd,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.echoValueTypes, function(item, key) {
+                    return _c("option", { domProps: { value: key } }, [
+                      _vm._v(_vm._s(item))
+                    ])
+                  }),
+                  0
+                )
               ])
-            }),
-            0
-          )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Values")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.valueToAdd.echoValue,
+                    expression: "valueToAdd.echoValue"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.valueToAdd,
+                      "echoValue",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  {
+                    attrs: { selected: "", disabled: "" },
+                    domProps: { value: null }
+                  },
+                  [_vm._v("Choose a value")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.selectedEchoValues, function(item, key) {
+                  return _c("option", { domProps: { value: item } }, [
+                    _vm._v(_vm._s(item.value))
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { disabled: !_vm.validated },
+                on: { click: _vm.onAdd }
+              },
+              [_vm._v("Add")]
+            )
+          ])
         ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.visitEchoValues, function(items, key) {
+        return _c("div", { staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(_vm._s(_vm.echoValueTypes[key]))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-sm table-bordered" }, [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(items, function(item) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(item.echoValue.value))]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-center" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-tiny",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.onDelete(item)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "bi bi-trash-fill" })]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Value")]),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center", staticStyle: { width: "100px" } },
+          [_vm._v("Options")]
+        )
       ])
     ])
-  ])
-}
-var staticRenderFns = []
+  }
+]
 render._withStripped = true
 
 
