@@ -2,51 +2,63 @@
 
   <div>
 
-    <div id="add-echo-values">
-      <div class="alert alert-secondary">
+    <div id="add-echo-values" class="mb-3">
 
-        <div class="row">
-          <div class="col-12 col-md-4">
-            <div class="form-group">
-              <label>Type</label>
-              <select class="form-control" v-model="valueToAdd.type">
-                <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
-              </select>
-            </div>
+      <div class="card bg-gradient bg-secondary text-white">
+        <div class="card-header d-flex justify-content-between">
+          <div>Add Echo Report Values</div>
+          <div>
+            <button class="btn btn-primary btn-tiny" @click="addModalVisible = true">Add new value</button>
           </div>
         </div>
+        <div class="card-body">
 
-        <div class="form-group">
-          <label>Values</label>
-          <select class="form-control" v-model="valueToAdd.echoValue">
-            <option selected disabled :value="null">Choose a value</option>
-            <option v-for="(item, key) in selectedEchoValues" :value="item">{{ item.value }}</option>
-          </select>
-        </div>
+          <div class="row">
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label>Type</label>
+                <select class="form-control" v-model="valueToAdd.type">
+                  <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
+                </select>
+              </div>
+            </div>
 
-        <div class="text-center">
-          <button class="btn btn-success" @click="onAdd" :disabled="!validated">Add</button>
-        </div>
+          </div>
 
-      </div>
+          <div class="form-group">
+            <label>Values</label>
+            <select class="form-control" v-model="valueToAdd.echoValue">
+              <option selected disabled :value="null">Choose a value</option>
+              <option v-for="(item, key) in selectedEchoValues" :value="item">{{ item.value }}</option>
+            </select>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-success" @click="onAdd" :disabled="!validated">Add</button>
+          </div>
+
+        </div><!-- card-body -->
+      </div><!-- card -->
+
+
     </div>
 
+    <hr>
 
-    <div class="card mb-3" v-for="(items, key) in visitEchoValues">
-      <div class="card-header">{{ echoValueTypes[key] }}</div>
-      <div class="card-body">
+    <div class="text-center">
+      <p class="lead font-weight-bold">Echocardiography Report Details</p>
+    </div>
 
-        <table class="table table-sm table-bordered">
-          <thead>
-          <tr>
-            <th>Value</th>
-            <th style="width: 100px" class="text-center">Options</th>
-          </tr>
-          </thead>
+    <div class="mb-3 p-1" v-for="(items, key) in visitEchoValues">
+      <hr class="m-0">
+      <div class="lead font-weight-bold mb-2">{{ echoValueTypes[key] }}</div>
+      <div class="">
+
+        <table class="table table-sm table-bordered table-hover">
           <tbody>
           <tr v-for="item in items">
             <td>{{ item.echoValue.value }}</td>
-            <td class="text-center">
+            <td class="text-center" style="width: 40px">
               <button type="button" class="btn btn-danger btn-tiny" @click="onDelete(item)">
                 <i class="bi bi-trash-fill"></i>
               </button>
@@ -58,6 +70,37 @@
       </div>
     </div>
 
+    <!-- MODAL: Add new echo value -->
+
+    <!-- EDIT Modal -->
+    <ModalWindow :visible="addModalVisible" @close="addModalVisible = false">
+
+      <template slot="title">Add new echo report value</template>
+
+      <div class="form-group">
+        <label>Value</label>
+        <textarea class="form-control" rows="4" v-model="commonEchoValueToAdd.value"></textarea>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-4">
+
+          <div class="form-group text-center">
+            <label class="text-center">Type of...</label>
+            <select class="form-control" v-model="commonEchoValueToAdd.type">
+              <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
+            </select>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-success" @click="onSaveNewEchoValue">Save</button>
+          </div>
+
+        </div>
+      </div>
+
+    </ModalWindow>
+
 
   </div><!-- template -->
 
@@ -66,9 +109,11 @@
 <script>
 
 
+import ModalWindow from "../../../_common/components/ModalWindow";
+
 export default {
   name: "VisitEchoReports",
-  components: {},
+  components: {ModalWindow},
   data() {
     return {
 
@@ -88,6 +133,13 @@ export default {
       valueToAdd: {
         echoValue: null,
         type: "AORTA"
+      },
+
+      addModalVisible: false,
+
+      commonEchoValueToAdd: {
+        value: '',
+        type: 'AORTA'
       }
 
     }
@@ -161,7 +213,25 @@ export default {
                 .then()
           })
 
-    }
+    },
+
+    onSaveNewEchoValue: function () {
+
+      let item = {
+        value: this.commonEchoValueToAdd.value,
+        type: this.commonEchoValueToAdd.type
+      }
+
+      this.$store.dispatch('SAVE_NEW_ECHO_VALUE', item)
+          .then(() => {
+
+            this.commonEchoValueToAdd.value = ''
+
+            this.addModalVisible = false
+
+          })
+
+    },
 
 
   },

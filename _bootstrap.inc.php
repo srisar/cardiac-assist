@@ -34,7 +34,7 @@ Database::init($db_config);
 define('SITE_URL', 'http://localhost');
 define('BASE_PATH', __DIR__ . '/public');
 define('APP_NAME', $_ENV['APP_NAME']);
-define('APP_VERSION', '0.9.1');
+define('APP_VERSION', '0.9.7');
 
 
 App::setTitle("");

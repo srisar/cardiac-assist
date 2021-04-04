@@ -40,17 +40,13 @@
             <div class="card-header">{{ echoValueTypes[key] }}</div>
             <div class="card-body">
 
-              <table class="table table-sm table-bordered">
-                <thead>
-                <tr>
-                  <th>Value</th>
-                  <th style="width: 100px" class="text-center">Options</th>
-                </tr>
-                </thead>
+              <table class="table table-sm table-bordered table-hover">
+
                 <tbody>
                 <tr v-for="item in items">
                   <td>{{ item.value }}</td>
-                  <td class="text-center">
+
+                  <td class="text-center" style="width: 60px">b
                     <button type="button" class="btn btn-warning btn-tiny" @click="onOpenEditModal(item)">
                       <i class="bi bi-pencil-fill"></i>
                     </button>

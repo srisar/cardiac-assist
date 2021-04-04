@@ -125,7 +125,30 @@ export default {
 
             })
 
-        }
+        }, /* delete */
+
+
+        SAVE_NEW_ECHO_VALUE: function ({commit, dispatch}, item) {
+
+            return new Promise((resolve, reject) => {
+
+                $.post(`${getSiteURL()}/api/save/echo/echo-value.php`, item)
+                    .done(response => {
+
+                        dispatch('FETCH_ALL_ECHO_VALUES')
+                            .catch(() => {
+                                reject()
+                            })
+
+                        resolve()
+                    })
+                    .fail(error => {
+                        reject(error)
+                    })
+
+            })
+
+        },/* save new echo value */
 
     },
 
