@@ -64,7 +64,7 @@ use App\Models\User;
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/symptoms/manage.php">Symptoms</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/diseases/manage.php">Diseases</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/values.php">Echo values</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/remarks.php">Echo remarks</a>
                     </div>
                 </li><!-- end nav-item -->
 

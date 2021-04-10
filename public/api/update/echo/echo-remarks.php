@@ -2,7 +2,7 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoValue;
+use App\Models\EchoRemarks;
 
 require_once "../../../../_bootstrap.inc.php";
 
@@ -14,7 +14,7 @@ try {
 
     ];
 
-    $object = EchoValue::build($fields);
+    $object = EchoRemarks::build($fields);
 
     $result = $object->update();
 

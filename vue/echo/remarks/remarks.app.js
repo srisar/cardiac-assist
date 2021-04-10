@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import AllValues from "./AllValues"
 
 import Store from './store'
+import EchoRemarks from "./EchoRemarks";
 
 new Vue({
-    render: h => h(AllValues),
+    render: h => h(EchoRemarks),
     store: Store
 }).$mount('#app')

@@ -11,6 +11,6 @@
     "/public/app/investigations/manage.app.js": "/public/app/investigations/manage.app.js",
     "/public/app/investigations/view.app.js": "/public/app/investigations/view.app.js",
     "/public/app/visits/manage.app.js": "/public/app/visits/manage.app.js",
-    "/public/app/echo/values.app.js": "/public/app/echo/values.app.js",
+    "/public/app/echo/remarks.app.js": "/public/app/echo/remarks.app.js",
     "/public/assets/css/app.css": "/public/assets/css/app.css"
 }

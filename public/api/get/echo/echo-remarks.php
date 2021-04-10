@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoValue;
+use App\Models\EchoRemarks;
 
 require_once "../../../../_bootstrap.inc.php";
 
@@ -11,16 +11,17 @@ Authentication::isAdminOrRedirect();
 
 
 $types = [
-    'AORTA',
-    'AORTIC_VALVE',
-    'DOPPLER',
+    'LEFT_VENTRICLE',
     'LEFT_ATRIUM',
     'MITRAL_VALVE',
-    'PERICARDIUM',
-    'PULMONIC_VALVE',
-    'RIGHT_ATRIUM',
+    'AORTIC_VALVE',
+    'AORTA',
     'RIGHT_VENTRICLE',
+    'RIGHT_ATRIUM',
+    'PULMONIC_VALVE',
     'TRICUSPID',
+    'PERICARDIUM',
+    'CONCLUSION',
 ];
 
 try {
@@ -31,7 +32,7 @@ try {
     if (!is_null($id)) {
         // fetch by id
 
-        $value = EchoValue::find($id);
+        $value = EchoRemarks::find($id);
         JSONResponse::validResponse($value);
         return;
     }
@@ -40,7 +41,7 @@ try {
 
         if (!in_array(strtoupper($type), $types)) throw new Exception('Invalid type');
 
-        $values = EchoValue::findByType($type);
+        $values = EchoRemarks::findByType($type);
         JSONResponse::validResponse($values);
         return;
 
@@ -50,7 +51,7 @@ try {
     $output = [];
 
     foreach ($types as $type){
-        $output[$type] = EchoValue::findByType($type);
+        $output[$type] = EchoRemarks::findByType($type);
     }
 
     JSONResponse::validResponse($output);

@@ -15,7 +15,7 @@ class VisitEchoValue implements IModel
     public ?int $id, $visit_id, $echo_value_id;
     public ?string $type;
 
-    public ?EchoValue $echoValue;
+    public ?EchoRemarks $echoValue;
 
     public const TYPE_AORTA = 'AORTA';
     public const TYPE_AORTIC_VALVE = 'AORTIC_VALVE';
@@ -112,7 +112,7 @@ class VisitEchoValue implements IModel
 
             $output = [];
             foreach ($result as $visitEchoValue) {
-                $visitEchoValue->echoValue = EchoValue::find($visitEchoValue->echo_value_id);
+                $visitEchoValue->echoValue = EchoRemarks::find($visitEchoValue->echo_value_id);
                 $output[] = $visitEchoValue;
             }
 

@@ -5,30 +5,30 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
-use JetBrains\PhpStorm\Pure;
 use PDO;
 
-class EchoValue implements IModel
+class EchoRemarks implements IModel
 {
 
-    private const TABLE = 'echo_values';
+    private const TABLE = 'echo_remarks';
 
     public ?int $id;
     public ?string $value, $type;
 
-    public const TYPE_AORTA = 'AORTA';
-    public const TYPE_AORTIC_VALVE = 'AORTIC_VALVE';
-    public const TYPE_DOPPLER = 'DOPPLER';
+    public const TYPE_LEFT_VENTRICLE = 'LEFT_VENTRICLE';
     public const TYPE_LEFT_ATRIUM = 'LEFT_ATRIUM';
     public const TYPE_MITRAL_VALVE = 'MITRAL_VALVE';
-    public const TYPE_PERICARDIUM = 'PERICARDIUM';
-    public const TYPE_PULMONIC_VALVE = 'PULMONIC_VALVE';
-    public const TYPE_RIGHT_ATRIUM = 'RIGHT_ATRIUM';
+    public const TYPE_AORTIC_VALVE = 'AORTIC_VALVE';
+    public const TYPE_AORTA = 'AORTA';
     public const TYPE_RIGHT_VENTRICLE = 'RIGHT_VENTRICLE';
+    public const TYPE_RIGHT_ATRIUM = 'RIGHT_ATRIUM';
+    public const TYPE_PULMONIC_VALVE = 'PULMONIC_VALVE';
     public const TYPE_TRICUSPID = 'TRICUSPID';
+    public const TYPE_PERICARDIUM = 'PERICARDIUM';
+    public const TYPE_CONCLUSION = 'CONCLUSION';
 
 
-    public static function build($array): EchoValue
+    public static function build($array): EchoRemarks
     {
         $object = new self();
         foreach ($array as $key => $value) {
@@ -37,7 +37,7 @@ class EchoValue implements IModel
         return $object;
     }
 
-    public static function find(int $id): ?EchoValue
+    public static function find(int $id): ?EchoRemarks
     {
         return Database::find(self::TABLE, $id, self::class);
     }
@@ -45,7 +45,7 @@ class EchoValue implements IModel
     /**
      * @param int $limit
      * @param int $offset
-     * @return EchoValue[]
+     * @return EchoRemarks[]
      */
     public static function findAll($limit = 1000, $offset = 0): array
     {
@@ -83,16 +83,16 @@ class EchoValue implements IModel
 
     /**
      * @param $type
-     * @return EchoValue[]
+     * @return EchoRemarks[]
      */
     public static function findByType($type): array
     {
 
         $db = Database::instance();
-        $statement = $db->prepare('select * from echo_values where type=?');
+        $statement = $db->prepare(sprintf("select * from %s where type=?", self::TABLE));
         $statement->execute([$type]);
 
-        /** @var EchoValue[] $result */
+        /** @var EchoRemarks[] $result */
         $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         if (!empty($result)) return $result;

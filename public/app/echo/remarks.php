@@ -2,7 +2,6 @@
 
 use App\Core\App;
 use App\Core\Authentication;
-use App\Core\Requests\Request;
 
 require_once "../../../_bootstrap.inc.php";
 
@@ -18,5 +17,5 @@ App::setTitle("Mitral Valve Values");
 
 <?php include_once BASE_PATH . "/inc.footer.php"; ?>
 
-<script src="values.app.js"></script>
+<script src="remarks.app.js"></script>
 

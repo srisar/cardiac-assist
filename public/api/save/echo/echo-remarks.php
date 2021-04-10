@@ -2,21 +2,22 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoValue;
+use App\Models\EchoRemarks;
 
 require_once "../../../../_bootstrap.inc.php";
 
 $types = [
-    'AORTA',
-    'AORTIC_VALVE',
-    'DOPPLER',
+    'LEFT_VENTRICLE',
     'LEFT_ATRIUM',
     'MITRAL_VALVE',
-    'PERICARDIUM',
-    'PULMONIC_VALVE',
-    'RIGHT_ATRIUM',
+    'AORTIC_VALVE',
+    'AORTA',
     'RIGHT_VENTRICLE',
+    'RIGHT_ATRIUM',
+    'PULMONIC_VALVE',
     'TRICUSPID',
+    'PERICARDIUM',
+    'CONCLUSION',
 ];
 
 try {
@@ -30,12 +31,12 @@ try {
 
         if (!in_array(strtoupper($fields['type']), $types)) throw new Exception('Invalid type');
 
-        $echoValue = EchoValue::build($fields);
+        $echoValue = EchoRemarks::build($fields);
 
         $result = $echoValue->insert();
 
         if ($result) {
-            JSONResponse::validResponse([EchoValue::find($result)]);
+            JSONResponse::validResponse([EchoRemarks::find($result)]);
             return;
         }
 

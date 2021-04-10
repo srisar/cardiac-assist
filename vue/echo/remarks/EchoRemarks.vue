@@ -46,7 +46,7 @@
                 <tr v-for="item in items">
                   <td>{{ item.value }}</td>
 
-                  <td class="text-center" style="width: 60px">b
+                  <td class="text-center" style="width: 60px">
                     <button type="button" class="btn btn-warning btn-tiny" @click="onOpenEditModal(item)">
                       <i class="bi bi-pencil-fill"></i>
                     </button>
@@ -93,7 +93,7 @@
 import ModalWindow from "../../_common/components/ModalWindow";
 
 export default {
-  name: "AllValues",
+  name: "EchoRemarks",
 
   components: {ModalWindow},
 

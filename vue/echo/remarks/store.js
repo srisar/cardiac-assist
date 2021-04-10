@@ -8,16 +8,17 @@ export default new Vuex.Store({
     state: {
 
         echoValueTypes: {
-            'AORTA': 'Aorta',
-            'AORTIC_VALVE': 'Aortic Valve',
-            'DOPPLER': 'Doppler',
+            'LEFT_VENTRICLE': 'Left Ventricle',
             'LEFT_ATRIUM': 'Left Atrium',
             'MITRAL_VALVE': 'Mitral Valve',
-            'PERICARDIUM': 'Pericardium',
-            'PULMONIC_VALVE': 'Pulmonic Valve',
+            'AORTIC_VALVE': 'Aortic Valve',
+            'AORTA': 'Aorta',
+            'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
             'RIGHT_ATRIUM': 'Right Atrium',
-            'RIGHT_VENTRICLE': 'Right Ventricle',
+            'PULMONIC_VALVE': 'Pulmonic Valve',
             'TRICUSPID': 'Tricuspid',
+            'PERICARDIUM': 'Pericardium',
+            'CONCLUSION': 'Conclusion',
         },
 
         echoValues: [],
@@ -50,7 +51,7 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/echo/echo-values.php`)
+                $.get(`${getSiteURL()}/api/get/echo/echo-remarks.php`)
                     .done(response => {
 
                         commit('setEchoValues', response)
@@ -70,7 +71,7 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/update/echo/echo-value.php`, item)
+                $.post(`${getSiteURL()}/api/update/echo/echo-remarks.php`, item)
                     .done(response => {
 
                         dispatch('FETCH_ALL')
@@ -93,7 +94,7 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/save/echo/echo-value.php`, item)
+                $.post(`${getSiteURL()}/api/save/echo/echo-remarks.php`, item)
                     .done(response => {
 
                         dispatch('FETCH_ALL')
@@ -115,7 +116,7 @@ export default new Vuex.Store({
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/delete/echo/echo-value.php`, {id: id})
+                $.post(`${getSiteURL()}/api/delete/echo/echo-remarks.php`, {id: id})
                     .done(response => {
 
                         dispatch('FETCH_ALL')

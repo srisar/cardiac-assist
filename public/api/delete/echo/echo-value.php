@@ -2,7 +2,7 @@
 
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoValue;
+use App\Models\EchoRemarks;
 
 require_once "../../../../_bootstrap.inc.php";
 
@@ -14,7 +14,7 @@ try {
 
     if (is_null($fields['id'])) throw new Exception('Invalid Id');
 
-    $echoValue = EchoValue::find($fields['id']);
+    $echoValue = EchoRemarks::find($fields['id']);
 
     if (is_null($echoValue)) throw new Exception('Invalid echo value');
 
