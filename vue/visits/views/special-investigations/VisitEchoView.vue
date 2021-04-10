@@ -8,7 +8,7 @@
           <div class="card shadow shadow-sm">
 
             <div class="card-header">
-              Lipids
+              Echocardiography
             </div>
 
             <div class="card-body">
