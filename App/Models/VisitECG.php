@@ -12,7 +12,7 @@ class VisitECG implements IModel
     private const TABLE = 'visit_ecg';
 
     public ?int $id, $visit_id;
-    public ?string   $description;
+    public ?string $description, $performed_on, $indication;
 
     public ?Visit $visit;
 
@@ -25,7 +25,7 @@ class VisitECG implements IModel
     public static function build($array): VisitECG
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -37,7 +37,7 @@ class VisitECG implements IModel
         /** @var VisitECG $visitEcg */
         $visitEcg = Database::find(self::TABLE, $id, self::class);
 
-        if ( !empty($visitEcg) ) {
+        if (!empty($visitEcg)) {
             $visitEcg->visit = Visit::find($visitEcg->visit_id);
         }
 
@@ -55,11 +55,11 @@ class VisitECG implements IModel
         /** @var VisitECG[] $result */
         $result = Database::findAll(self::TABLE, $limit, $offset, self::class, ['visit_id']);
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $output = [];
-            foreach ( $result as $visitECG ) {
+            foreach ($result as $visitECG) {
                 $visitECG->visit = Visit::find($visitECG->visit_id);
-                $output[]        = $visitECG;
+                $output[] = $visitECG;
             }
 
             return $output;
@@ -72,7 +72,7 @@ class VisitECG implements IModel
     public function insert(): int
     {
         $data = [
-            'visit_id'    => $this->visit_id,
+            'visit_id' => $this->visit_id,
         ];
         return Database::insert(self::TABLE, $data);
     }
@@ -80,7 +80,9 @@ class VisitECG implements IModel
     public function update(): bool
     {
         $data = [
-            'description' => $this->description
+            'description' => $this->description,
+            'performed_on' => $this->performed_on,
+            'indication' => $this->indication,
         ];
         return Database::update(self::TABLE, $data, ['id' => $this->id]);
 
@@ -94,18 +96,18 @@ class VisitECG implements IModel
 
     /**
      * @param Visit $visit
-     * @return VisitECG
+     * @return VisitECG|null
      */
     public static function findByVisit(Visit $visit): ?VisitECG
     {
-        $db        = Database::instance();
+        $db = Database::instance();
         $statement = $db->prepare('select * from visit_ecg where visit_id=? limit 1');
         $statement->execute([$visit->id]);
 
         /** @var VisitECG $results */
         $result = $statement->fetchObject(self::class);
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $result->visit = Visit::find($result->visit_id);
             return $result;
         }

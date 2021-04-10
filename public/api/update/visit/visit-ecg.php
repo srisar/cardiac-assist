@@ -11,19 +11,21 @@ try {
     $fields = [
         'id' => Request::getAsInteger('id'),
         'description' => Request::getAsRawString('description'),
+        'performed_on' => Request::getAsString('performed_on'),
+        'indication' => Request::getAsRawString('indication'),
     ];
 
-    if ( empty($fields['id']) ) throw new Exception('Invalid id');
+    if (empty($fields['id'])) throw new Exception('Invalid id');
 
     $object = VisitECG::build($fields);
 
     $result = $object->update();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    if (empty($result)) throw new Exception('Failed');
 
     JSONResponse::validResponse();
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }
 

@@ -31,10 +31,10 @@ Database::init($db_config);
  * Init global variables
  */
 
-define('SITE_URL', 'http://localhost');
-define('BASE_PATH', __DIR__ . '/public');
+const SITE_URL = 'http://localhost';
+const BASE_PATH = __DIR__ . '/public';
 define('APP_NAME', $_ENV['APP_NAME']);
-define('APP_VERSION', '0.9.7');
+const APP_VERSION = '0.9.9';
 
 
 App::setTitle("");
