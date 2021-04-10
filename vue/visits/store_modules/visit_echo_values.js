@@ -2,63 +2,50 @@ export default {
 
     state: {
 
-        echoValueTypes: {
-            'AORTA': 'Aorta',
-            'AORTIC_VALVE': 'Aortic Valve',
-            'DOPPLER': 'Doppler',
+        echoRemarksTypes: {
+            'LEFT_VENTRICLE': 'Left Ventricle',
             'LEFT_ATRIUM': 'Left Atrium',
             'MITRAL_VALVE': 'Mitral Valve',
-            'PERICARDIUM': 'Pericardium',
-            'PULMONIC_VALVE': 'Pulmonic Valve',
+            'AORTIC_VALVE': 'Aortic Valve',
+            'AORTA': 'Aorta',
+            'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
             'RIGHT_ATRIUM': 'Right Atrium',
-            'RIGHT_VENTRICLE': 'Right Ventricle',
+            'PULMONIC_VALVE': 'Pulmonic Valve',
             'TRICUSPID': 'Tricuspid',
+            'PERICARDIUM': 'Pericardium',
+            'CONCLUSION': 'Conclusion',
         },
 
-        echoValues: [],
+        echoRemarks: [],
 
-        visitEchoValues: [],
+        visitEchoRemarks: [],
 
     },
 
     getters: {
 
-        getEchoValues: function (state) {
-            return state.echoValues
-        },
-
-        getVisitEchoValues: function (state) {
-            return state.visitEchoValues
-        },
-
-        getEchoValueTypes: function (state) {
-            return state.echoValueTypes
-        },
-
+        getEchoRemarks: function (state) { return state.echoRemarks },
+        getVisitEchoRemarks: function (state) { return state.visitEchoRemarks },
+        getEchoRemarksTypes: function (state) { return state.echoRemarksTypes },
 
     },
 
     mutations: {
-        setEchoValues: function (state, values) {
-            state.echoValues = values
-        },
-
-        setVisitEchoValues: function (state, values) {
-            state.visitEchoValues = values
-        },
+        setEchoRemarks: function (state, values) { state.echoRemarks = values },
+        setVisitEchoRemarks: function (state, values) { state.visitEchoRemarks = values },
 
     },
 
     actions: {
 
-        FETCH_ALL_ECHO_VALUES: function ({commit}) {
+        FETCH_ALL_ECHO_REMARKS: function ({commit}) {
 
             return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/echo/echo-values.php`)
+                $.get(`${getSiteURL()}/api/get/echo/echo-remarks.php`)
                     .done(response => {
 
-                        commit('setEchoValues', response)
+                        commit('setEchoRemarks', response)
 
                         resolve()
 
@@ -71,14 +58,14 @@ export default {
 
         },/* fetch all */
 
-        FETCH_VISIT_ECHO_VALUES: function ({commit}, visit_id) {
+        FETCH_VISIT_ECHO_REMARKS: function ({commit}, visit_id) {
 
             return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/visit/visit-echo-values.php`, {visit_id: visit_id})
+                $.get(`${getSiteURL()}/api/get/visit/visit-echo-remarks.php`, {visit_id: visit_id})
                     .done(response => {
 
-                        commit('setVisitEchoValues', response)
+                        commit('setVisitEchoRemarks', response)
                         resolve()
 
                     })
@@ -91,11 +78,11 @@ export default {
         },/* fetch all */
 
 
-        ADD_VISIT_ECHO_VALUE: function ({commit, dispatch}, item) {
+        ADD_VISIT_ECHO_REMARK: function ({commit, dispatch}, item) {
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/save/visit/visit-echo-value.php`, item)
+                $.post(`${getSiteURL()}/api/save/visit/visit-echo-remarks.php`, item)
                     .done(response => {
 
                         resolve()
@@ -107,13 +94,13 @@ export default {
 
             })
 
-        }, /* add visit echo value */
+        }, /* add visit echo remark */
 
-        DELETE_VISIT_ECHO_VALUE: function ({commit, dispatch}, id) {
+        DELETE_VISIT_ECHO_REMARK: function ({commit, dispatch}, id) {
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/delete/visit/visit-echo-value.php`, {id: id})
+                $.post(`${getSiteURL()}/api/delete/visit/visit-echo-remarks.php`, {id: id})
                     .done(response => {
 
                         resolve()
@@ -128,14 +115,14 @@ export default {
         }, /* delete */
 
 
-        SAVE_NEW_ECHO_VALUE: function ({commit, dispatch}, item) {
+        SAVE_NEW_ECHO_REMARK: function ({commit, dispatch}, item) {
 
             return new Promise((resolve, reject) => {
 
-                $.post(`${getSiteURL()}/api/save/echo/echo-value.php`, item)
+                $.post(`${getSiteURL()}/api/save/echo/echo-remarks.php`, item)
                     .done(response => {
 
-                        dispatch('FETCH_ALL_ECHO_VALUES')
+                        dispatch('FETCH_ALL_ECHO_REMARKS')
                             .catch(() => {
                                 reject()
                             })
@@ -148,7 +135,7 @@ export default {
 
             })
 
-        },/* save new echo value */
+        },/* save new echo remark */
 
     },
 

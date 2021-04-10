@@ -2515,6 +2515,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitEchoReports",
@@ -2523,84 +2530,89 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      echoValueTypes: {
-        'AORTA': 'Aorta',
-        'AORTIC_VALVE': 'Aortic Valve',
-        'DOPPLER': 'Doppler',
+      echoRemarksTypes: {
+        'LEFT_VENTRICLE': 'Left Ventricle',
         'LEFT_ATRIUM': 'Left Atrium',
         'MITRAL_VALVE': 'Mitral Valve',
-        'PERICARDIUM': 'Pericardium',
-        'PULMONIC_VALVE': 'Pulmonic Valve',
+        'AORTIC_VALVE': 'Aortic Valve',
+        'AORTA': 'Aorta',
+        'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
         'RIGHT_ATRIUM': 'Right Atrium',
-        'RIGHT_VENTRICLE': 'Right Ventricle',
-        'TRICUSPID': 'Tricuspid'
+        'PULMONIC_VALVE': 'Pulmonic Valve',
+        'TRICUSPID': 'Tricuspid',
+        'PERICARDIUM': 'Pericardium',
+        'CONCLUSION': 'Conclusion'
       },
-      valueToAdd: {
-        echoValue: null,
-        type: "AORTA"
+      remarkToAdd: {
+        echoRemark: null,
+        type: "LEFT_VENTRICLE"
       },
       addModalVisible: false,
-      commonEchoValueToAdd: {
-        value: '',
-        type: 'AORTA'
+      commonEchoRemarkToAdd: {
+        remark: '',
+        type: 'LEFT_VENTRICLE'
       }
     };
   },
   computed: {
-    allEchoValues: function allEchoValues() {
-      return this.$store.getters.getEchoValues;
+    allEchoRemarks: function allEchoRemarks() {
+      return this.$store.getters.getEchoRemarks;
     },
-    visitEchoValues: function visitEchoValues() {
-      return this.$store.getters.getVisitEchoValues;
+    visitEchoRemarks: function visitEchoRemarks() {
+      return this.$store.getters.getVisitEchoRemarks;
     },
-    selectedEchoValues: function selectedEchoValues() {
-      return this.allEchoValues[this.valueToAdd.type];
+    selectedEchoRemarks: function selectedEchoRemarks() {
+      return this.allEchoRemarks[this.remarkToAdd.type];
     },
     visitId: function visitId() {
       return this.$store.getters.getVisitId;
     },
     validated: function validated() {
-      return this.valueToAdd.echoValue !== null;
+      return this.remarkToAdd.echoValue !== null;
     }
   },
   watch: {
-    selectedEchoValues: function selectedEchoValues(newValue, oldValue) {
-      this.valueToAdd.echoValue = null;
+    selectedEchoRemarks: function selectedEchoRemarks() {
+      this.remarkToAdd.echoValue = null;
     }
   },
+
+  /* *** WATCH *** */
   mounted: function mounted() {
-    this.$store.dispatch('FETCH_ALL_ECHO_VALUES').then();
-    this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', this.visitId).then();
+    this.$store.dispatch('FETCH_ALL_ECHO_REMARKS').then();
+    this.$store.dispatch('FETCH_VISIT_ECHO_REMARKS', this.visitId).then();
   },
+
+  /* *** MOUNTED *** */
   methods: {
     onAdd: function onAdd() {
       var _this = this;
 
       var item = {
         visit_id: this.visitId,
-        echo_value_id: this.valueToAdd.echoValue.id,
-        type: this.valueToAdd.type
+        echo_value_id: this.remarkToAdd.echoValue.id,
+        type: this.remarkToAdd.type
       };
-      this.$store.dispatch('ADD_VISIT_ECHO_VALUE', item).then(function () {
-        _this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', _this.visitId).then();
+      this.$store.dispatch('ADD_VISIT_ECHO_REMARK', item).then(function () {
+        _this.$store.dispatch('FETCH_VISIT_ECHO_REMARKS', _this.visitId).then();
       });
     },
     onDelete: function onDelete(item) {
       var _this2 = this;
 
-      this.$store.dispatch('DELETE_VISIT_ECHO_VALUE', item.id).then(function () {
-        _this2.$store.dispatch('FETCH_VISIT_ECHO_VALUES', _this2.visitId).then();
+      this.$store.dispatch('DELETE_VISIT_ECHO_REMARK', item.id).then(function () {
+        _this2.$store.dispatch('FETCH_VISIT_ECHO_REMARKS', _this2.visitId).then();
       });
     },
     onSaveNewEchoValue: function onSaveNewEchoValue() {
       var _this3 = this;
 
       var item = {
-        value: this.commonEchoValueToAdd.value,
-        type: this.commonEchoValueToAdd.type
+        value: this.commonEchoRemarkToAdd.value,
+        type: this.commonEchoRemarkToAdd.type
       };
-      this.$store.dispatch('SAVE_NEW_ECHO_VALUE', item).then(function () {
-        _this3.commonEchoValueToAdd.value = '';
+      this.$store.dispatch('SAVE_NEW_ECHO_REMARK', item).then(function () {
+        _this3.commonEchoRemarkToAdd.value = '';
         _this3.addModalVisible = false;
       });
     }
@@ -3659,46 +3671,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    echoValueTypes: {
-      'AORTA': 'Aorta',
-      'AORTIC_VALVE': 'Aortic Valve',
-      'DOPPLER': 'Doppler',
+    echoRemarksTypes: {
+      'LEFT_VENTRICLE': 'Left Ventricle',
       'LEFT_ATRIUM': 'Left Atrium',
       'MITRAL_VALVE': 'Mitral Valve',
-      'PERICARDIUM': 'Pericardium',
-      'PULMONIC_VALVE': 'Pulmonic Valve',
+      'AORTIC_VALVE': 'Aortic Valve',
+      'AORTA': 'Aorta',
+      'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
       'RIGHT_ATRIUM': 'Right Atrium',
-      'RIGHT_VENTRICLE': 'Right Ventricle',
-      'TRICUSPID': 'Tricuspid'
+      'PULMONIC_VALVE': 'Pulmonic Valve',
+      'TRICUSPID': 'Tricuspid',
+      'PERICARDIUM': 'Pericardium',
+      'CONCLUSION': 'Conclusion'
     },
-    echoValues: [],
-    visitEchoValues: []
+    echoRemarks: [],
+    visitEchoRemarks: []
   },
   getters: {
-    getEchoValues: function getEchoValues(state) {
-      return state.echoValues;
+    getEchoRemarks: function getEchoRemarks(state) {
+      return state.echoRemarks;
     },
-    getVisitEchoValues: function getVisitEchoValues(state) {
-      return state.visitEchoValues;
+    getVisitEchoRemarks: function getVisitEchoRemarks(state) {
+      return state.visitEchoRemarks;
     },
-    getEchoValueTypes: function getEchoValueTypes(state) {
-      return state.echoValueTypes;
+    getEchoRemarksTypes: function getEchoRemarksTypes(state) {
+      return state.echoRemarksTypes;
     }
   },
   mutations: {
-    setEchoValues: function setEchoValues(state, values) {
-      state.echoValues = values;
+    setEchoRemarks: function setEchoRemarks(state, values) {
+      state.echoRemarks = values;
     },
-    setVisitEchoValues: function setVisitEchoValues(state, values) {
-      state.visitEchoValues = values;
+    setVisitEchoRemarks: function setVisitEchoRemarks(state, values) {
+      state.visitEchoRemarks = values;
     }
   },
   actions: {
-    FETCH_ALL_ECHO_VALUES: function FETCH_ALL_ECHO_VALUES(_ref) {
+    FETCH_ALL_ECHO_REMARKS: function FETCH_ALL_ECHO_REMARKS(_ref) {
       var commit = _ref.commit;
       return new Promise(function (resolve, reject) {
-        $.get("".concat(getSiteURL(), "/api/get/echo/echo-values.php")).done(function (response) {
-          commit('setEchoValues', response);
+        $.get("".concat(getSiteURL(), "/api/get/echo/echo-remarks.php")).done(function (response) {
+          commit('setEchoRemarks', response);
           resolve();
         }).fail(function (error) {
           reject(error);
@@ -3707,13 +3720,13 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     /* fetch all */
-    FETCH_VISIT_ECHO_VALUES: function FETCH_VISIT_ECHO_VALUES(_ref2, visit_id) {
+    FETCH_VISIT_ECHO_REMARKS: function FETCH_VISIT_ECHO_REMARKS(_ref2, visit_id) {
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
-        $.get("".concat(getSiteURL(), "/api/get/visit/visit-echo-values.php"), {
+        $.get("".concat(getSiteURL(), "/api/get/visit/visit-echo-remarks.php"), {
           visit_id: visit_id
         }).done(function (response) {
-          commit('setVisitEchoValues', response);
+          commit('setVisitEchoRemarks', response);
           resolve();
         }).fail(function (error) {
           reject(error);
@@ -3722,11 +3735,11 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     /* fetch all */
-    ADD_VISIT_ECHO_VALUE: function ADD_VISIT_ECHO_VALUE(_ref3, item) {
+    ADD_VISIT_ECHO_REMARK: function ADD_VISIT_ECHO_REMARK(_ref3, item) {
       var commit = _ref3.commit,
           dispatch = _ref3.dispatch;
       return new Promise(function (resolve, reject) {
-        $.post("".concat(getSiteURL(), "/api/save/visit/visit-echo-value.php"), item).done(function (response) {
+        $.post("".concat(getSiteURL(), "/api/save/visit/visit-echo-remarks.php"), item).done(function (response) {
           resolve();
         }).fail(function (error) {
           reject(error);
@@ -3734,12 +3747,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
 
-    /* add visit echo value */
-    DELETE_VISIT_ECHO_VALUE: function DELETE_VISIT_ECHO_VALUE(_ref4, id) {
+    /* add visit echo remark */
+    DELETE_VISIT_ECHO_REMARK: function DELETE_VISIT_ECHO_REMARK(_ref4, id) {
       var commit = _ref4.commit,
           dispatch = _ref4.dispatch;
       return new Promise(function (resolve, reject) {
-        $.post("".concat(getSiteURL(), "/api/delete/visit/visit-echo-value.php"), {
+        $.post("".concat(getSiteURL(), "/api/delete/visit/visit-echo-remarks.php"), {
           id: id
         }).done(function (response) {
           resolve();
@@ -3750,12 +3763,12 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     /* delete */
-    SAVE_NEW_ECHO_VALUE: function SAVE_NEW_ECHO_VALUE(_ref5, item) {
+    SAVE_NEW_ECHO_REMARK: function SAVE_NEW_ECHO_REMARK(_ref5, item) {
       var commit = _ref5.commit,
           dispatch = _ref5.dispatch;
       return new Promise(function (resolve, reject) {
-        $.post("".concat(getSiteURL(), "/api/save/echo/echo-value.php"), item).done(function (response) {
-          dispatch('FETCH_ALL_ECHO_VALUES')["catch"](function () {
+        $.post("".concat(getSiteURL(), "/api/save/echo/echo-remarks.php"), item).done(function (response) {
+          dispatch('FETCH_ALL_ECHO_REMARKS')["catch"](function () {
             reject();
           });
           resolve();
@@ -3764,7 +3777,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     }
-    /* save new echo value */
+    /* save new echo remark */
 
   }
 });
@@ -4042,30 +4055,6 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".modal[data-v-572c4ac0] {\n  background-color: rgba(108, 117, 125, 0.5);\n  overflow-y: auto;\n}\n.show[data-v-572c4ac0] {\n  display: block;\n}\n.hide[data-v-572c4ac0] {\n  display: none;\n}\n.expanded[data-v-572c4ac0] {\n  max-width: 90%;\n}\n.header-button[data-v-572c4ac0] {\n  border: solid 1px #d0d0d0;\n  background-color: #f8fafc;\n  padding: 2px;\n  margin: 0;\n  border-radius: 5px;\n  width: 28px;\n  height: 28px;\n}\n.modal-header[data-v-572c4ac0] {\n  background-color: #212529;\n  color: whitesmoke;\n  line-height: 2em;\n}\n.modal-header h3[data-v-572c4ac0] {\n  font-size: 1em;\n  line-height: 2em;\n  font-weight: bold;\n}\n.modal-footer[data-v-572c4ac0] {\n  /* modal footer display option */\n  justify-content: center;\n}", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.report-section {\n}\n.report-section__title {\r\n  font-size: 1em;\r\n  font-weight: bold;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21366,36 +21355,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEchoReports.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/AppView.vue?vue&type=style&index=0&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/AppView.vue?vue&type=style&index=0&lang=css& ***!
@@ -22149,17 +22108,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=template&id=f47a8c64& */ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64&");
 /* harmony import */ var _VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=script&lang=js& */ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js&");
-/* harmony import */ var _VisitEchoReports_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=style&index=0&lang=css& */ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
-;
 
 
 /* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__.render,
   _VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -22875,19 +22832,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalWindow_vue_vue_type_style_index_0_id_572c4ac0_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ModalWindow.vue?vue&type=style&index=0&id=572c4ac0&scoped=true&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/ModalWindow.vue?vue&type=style&index=0&id=572c4ac0&scoped=true&lang=scss&");
-
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEchoReports.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -27193,12 +27137,12 @@ var render = function() {
     "div",
     [
       _c("div", { staticClass: "mb-3", attrs: { id: "add-echo-values" } }, [
-        _c("div", { staticClass: "card bg-gradient bg-secondary text-white" }, [
+        _c("div", { staticClass: "card" }, [
           _c(
             "div",
             { staticClass: "card-header d-flex justify-content-between" },
             [
-              _c("div", [_vm._v("Add Echo Report Values")]),
+              _c("div", [_vm._v("Add Echo Report Remarks")]),
               _vm._v(" "),
               _c("div", [
                 _c(
@@ -27217,7 +27161,7 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "card-body gray-bg" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-12 col-md-4" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -27230,8 +27174,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.valueToAdd.type,
-                          expression: "valueToAdd.type"
+                          value: _vm.remarkToAdd.type,
+                          expression: "remarkToAdd.type"
                         }
                       ],
                       staticClass: "form-control",
@@ -27246,7 +27190,7 @@ var render = function() {
                               return val
                             })
                           _vm.$set(
-                            _vm.valueToAdd,
+                            _vm.remarkToAdd,
                             "type",
                             $event.target.multiple
                               ? $$selectedVal
@@ -27255,7 +27199,7 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.echoValueTypes, function(item, key) {
+                    _vm._l(_vm.echoRemarksTypes, function(item, key) {
                       return _c("option", { domProps: { value: key } }, [
                         _vm._v(_vm._s(item))
                       ])
@@ -27276,8 +27220,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.valueToAdd.echoValue,
-                      expression: "valueToAdd.echoValue"
+                      value: _vm.remarkToAdd.echoValue,
+                      expression: "remarkToAdd.echoValue"
                     }
                   ],
                   staticClass: "form-control",
@@ -27292,7 +27236,7 @@ var render = function() {
                           return val
                         })
                       _vm.$set(
-                        _vm.valueToAdd,
+                        _vm.remarkToAdd,
                         "echoValue",
                         $event.target.multiple
                           ? $$selectedVal
@@ -27311,7 +27255,7 @@ var render = function() {
                     [_vm._v("Choose a value")]
                   ),
                   _vm._v(" "),
-                  _vm._l(_vm.selectedEchoValues, function(item, key) {
+                  _vm._l(_vm.selectedEchoRemarks, function(item) {
                     return _c("option", { domProps: { value: item } }, [
                       _vm._v(_vm._s(item.value))
                     ])
@@ -27338,58 +27282,71 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._l(_vm.visitEchoValues, function(items, key) {
-        return _c("div", { staticClass: "mb-3 p-1" }, [
-          _c("hr", { staticClass: "m-0" }),
+      _c(
+        "div",
+        { attrs: { id: "visit-echo-remarks" } },
+        [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "lead font-weight-bold mb-2" }, [
-            _vm._v(_vm._s(_vm.echoValueTypes[key]))
-          ]),
-          _vm._v(" "),
-          _c("div", {}, [
-            _c(
-              "table",
-              { staticClass: "table table-sm table-bordered table-hover" },
-              [
-                _c(
-                  "tbody",
-                  _vm._l(items, function(item) {
-                    return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(item.echoValue.value))]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "text-center",
-                          staticStyle: { width: "40px" }
-                        },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger btn-tiny",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.onDelete(item)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "bi bi-trash-fill" })]
-                          )
-                        ]
-                      )
-                    ])
-                  }),
-                  0
-                )
-              ]
-            )
-          ])
-        ])
-      }),
+          _vm._l(_vm.visitEchoRemarks, function(items, key) {
+            return _c("div", [
+              items.length > 0
+                ? _c("div", { staticClass: "border mb-3 p-1" }, [
+                    _c("div", { staticClass: "font-weight-bold mb-2" }, [
+                      _vm._v(_vm._s(_vm.echoRemarksTypes[key]))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "table",
+                      {
+                        staticClass: "table table-sm table-bordered table-hover"
+                      },
+                      [
+                        _c(
+                          "tbody",
+                          _vm._l(items, function(item) {
+                            return _c("tr", [
+                              _c("td", [_vm._v(_vm._s(item.echoValue.value))]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                {
+                                  staticClass: "text-center",
+                                  staticStyle: { width: "40px" }
+                                },
+                                [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger btn-tiny",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.onDelete(item)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "bi bi-trash-fill"
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          })
+        ],
+        2
+      ),
       _vm._v(" "),
       _c(
         "ModalWindow",
@@ -27403,7 +27360,7 @@ var render = function() {
         },
         [
           _c("template", { slot: "title" }, [
-            _vm._v("Add new echo report value")
+            _vm._v("Add new echo report remark")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -27414,20 +27371,20 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.commonEchoValueToAdd.value,
-                  expression: "commonEchoValueToAdd.value"
+                  value: _vm.commonEchoRemarkToAdd.value,
+                  expression: "commonEchoRemarkToAdd.value"
                 }
               ],
               staticClass: "form-control",
               attrs: { rows: "4" },
-              domProps: { value: _vm.commonEchoValueToAdd.value },
+              domProps: { value: _vm.commonEchoRemarkToAdd.value },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
                   _vm.$set(
-                    _vm.commonEchoValueToAdd,
+                    _vm.commonEchoRemarkToAdd,
                     "value",
                     $event.target.value
                   )
@@ -27450,8 +27407,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.commonEchoValueToAdd.type,
-                        expression: "commonEchoValueToAdd.type"
+                        value: _vm.commonEchoRemarkToAdd.type,
+                        expression: "commonEchoRemarkToAdd.type"
                       }
                     ],
                     staticClass: "form-control",
@@ -27466,7 +27423,7 @@ var render = function() {
                             return val
                           })
                         _vm.$set(
-                          _vm.commonEchoValueToAdd,
+                          _vm.commonEchoRemarkToAdd,
                           "type",
                           $event.target.multiple
                             ? $$selectedVal
@@ -27475,7 +27432,7 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.echoValueTypes, function(item, key) {
+                  _vm._l(_vm.echoRemarksTypes, function(item, key) {
                     return _c("option", { domProps: { value: key } }, [
                       _vm._v(_vm._s(item))
                     ])
@@ -27500,7 +27457,7 @@ var render = function() {
         2
       )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = [
@@ -27510,7 +27467,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("p", { staticClass: "lead font-weight-bold" }, [
-        _vm._v("Echocardiography Report Details")
+        _vm._v("Echocardiography Remarks")
       ])
     ])
   }

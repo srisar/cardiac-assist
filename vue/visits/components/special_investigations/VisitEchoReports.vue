@@ -2,23 +2,25 @@
 
   <div>
 
+    <!-- card: add echo report remarks -->
     <div id="add-echo-values" class="mb-3">
 
-      <div class="card bg-gradient bg-secondary text-white">
+
+      <div class="card">
         <div class="card-header d-flex justify-content-between">
-          <div>Add Echo Report Values</div>
+          <div>Add Echo Report Remarks</div>
           <div>
-            <button class="btn btn-primary btn-tiny" @click="addModalVisible = true">Add new value</button>
+            <button class="btn btn-primary btn-tiny" @click="addModalVisible=true">Add new value</button>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body gray-bg">
 
           <div class="row">
             <div class="col-12 col-md-4">
               <div class="form-group">
                 <label>Type</label>
-                <select class="form-control" v-model="valueToAdd.type">
-                  <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
+                <select class="form-control" v-model="remarkToAdd.type">
+                  <option v-for="(item, key) in echoRemarksTypes" :value="key">{{ item }}</option>
                 </select>
               </div>
             </div>
@@ -27,9 +29,9 @@
 
           <div class="form-group">
             <label>Values</label>
-            <select class="form-control" v-model="valueToAdd.echoValue">
+            <select class="form-control" v-model="remarkToAdd.echoValue">
               <option selected disabled :value="null">Choose a value</option>
-              <option v-for="(item, key) in selectedEchoValues" :value="item">{{ item.value }}</option>
+              <option v-for="(item) in selectedEchoRemarks" :value="item">{{ item.value }}</option>
             </select>
           </div>
 
@@ -39,47 +41,52 @@
 
         </div><!-- card-body -->
       </div><!-- card -->
-
-
     </div>
+    <!-- end: card: echo report remarks -->
 
     <hr>
 
-    <div class="text-center">
-      <p class="lead font-weight-bold">Echocardiography Report Details</p>
-    </div>
-
-    <div class="mb-3 p-1" v-for="(items, key) in visitEchoValues">
-      <hr class="m-0">
-      <div class="lead font-weight-bold mb-2">{{ echoValueTypes[key] }}</div>
-      <div class="">
-
-        <table class="table table-sm table-bordered table-hover">
-          <tbody>
-          <tr v-for="item in items">
-            <td>{{ item.echoValue.value }}</td>
-            <td class="text-center" style="width: 40px">
-              <button type="button" class="btn btn-danger btn-tiny" @click="onDelete(item)">
-                <i class="bi bi-trash-fill"></i>
-              </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-
+    <!-- visit echo remarks -->
+    <div id="visit-echo-remarks">
+      <div class="text-center">
+        <p class="lead font-weight-bold">Echocardiography Remarks</p>
       </div>
+
+      <div v-for="(items, key) in visitEchoRemarks">
+
+        <div v-if="items.length > 0" class="border mb-3 p-1">
+
+          <div class="font-weight-bold mb-2">{{ echoRemarksTypes[key] }}</div>
+
+          <table class="table table-sm table-bordered table-hover">
+            <tbody>
+            <tr v-for="item in items">
+              <td>{{ item.echoValue.value }}</td>
+              <td class="text-center" style="width: 40px">
+                <button type="button" class="btn btn-danger btn-tiny" @click="onDelete(item)">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
     </div>
+    <!-- end: visit echo remarks -->
 
     <!-- MODAL: Add new echo value -->
 
     <!-- EDIT Modal -->
     <ModalWindow :visible="addModalVisible" @close="addModalVisible = false">
 
-      <template slot="title">Add new echo report value</template>
+      <template slot="title">Add new echo report remark</template>
 
       <div class="form-group">
         <label>Value</label>
-        <textarea class="form-control" rows="4" v-model="commonEchoValueToAdd.value"></textarea>
+        <textarea class="form-control" rows="4" v-model="commonEchoRemarkToAdd.value"></textarea>
       </div>
 
       <div class="row justify-content-center">
@@ -87,8 +94,8 @@
 
           <div class="form-group text-center">
             <label class="text-center">Type of...</label>
-            <select class="form-control" v-model="commonEchoValueToAdd.type">
-              <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
+            <select class="form-control" v-model="commonEchoRemarkToAdd.type">
+              <option v-for="(item, key) in echoRemarksTypes" :value="key">{{ item }}</option>
             </select>
           </div>
 
@@ -117,29 +124,30 @@ export default {
   data() {
     return {
 
-      echoValueTypes: {
-        'AORTA': 'Aorta',
-        'AORTIC_VALVE': 'Aortic Valve',
-        'DOPPLER': 'Doppler',
+      echoRemarksTypes: {
+        'LEFT_VENTRICLE': 'Left Ventricle',
         'LEFT_ATRIUM': 'Left Atrium',
         'MITRAL_VALVE': 'Mitral Valve',
-        'PERICARDIUM': 'Pericardium',
-        'PULMONIC_VALVE': 'Pulmonic Valve',
+        'AORTIC_VALVE': 'Aortic Valve',
+        'AORTA': 'Aorta',
+        'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
         'RIGHT_ATRIUM': 'Right Atrium',
-        'RIGHT_VENTRICLE': 'Right Ventricle',
+        'PULMONIC_VALVE': 'Pulmonic Valve',
         'TRICUSPID': 'Tricuspid',
+        'PERICARDIUM': 'Pericardium',
+        'CONCLUSION': 'Conclusion',
       },
 
-      valueToAdd: {
-        echoValue: null,
-        type: "AORTA"
+      remarkToAdd: {
+        echoRemark: null,
+        type: "LEFT_VENTRICLE"
       },
 
       addModalVisible: false,
 
-      commonEchoValueToAdd: {
-        value: '',
-        type: 'AORTA'
+      commonEchoRemarkToAdd: {
+        remark: '',
+        type: 'LEFT_VENTRICLE'
       }
 
     }
@@ -147,43 +155,30 @@ export default {
 
   computed: {
 
-    allEchoValues: function () {
-      return this.$store.getters.getEchoValues
-    },
+    allEchoRemarks: function () { return this.$store.getters.getEchoRemarks },
+    visitEchoRemarks: function () { return this.$store.getters.getVisitEchoRemarks },
+    selectedEchoRemarks: function () { return this.allEchoRemarks[this.remarkToAdd.type] },
 
-    visitEchoValues: function () {
-      return this.$store.getters.getVisitEchoValues
-    },
-
-    selectedEchoValues: function () {
-      return this.allEchoValues[this.valueToAdd.type]
-    },
-
-    visitId: function () {
-      return this.$store.getters.getVisitId
-    },
-
-    validated: function () {
-      return this.valueToAdd.echoValue !== null;
-    }
+    visitId: function () { return this.$store.getters.getVisitId },
+    validated: function () { return this.remarkToAdd.echoValue !== null }
 
   },
 
   watch: {
-    selectedEchoValues(newValue, oldValue) {
-      this.valueToAdd.echoValue = null
+    selectedEchoRemarks() {
+      this.remarkToAdd.echoValue = null
     }
   },
+  /* *** WATCH *** */
 
   mounted() {
 
-    this.$store.dispatch('FETCH_ALL_ECHO_VALUES')
-        .then()
+    this.$store.dispatch('FETCH_ALL_ECHO_REMARKS').then()
 
-    this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', this.visitId)
-        .then()
+    this.$store.dispatch('FETCH_VISIT_ECHO_REMARKS', this.visitId).then()
 
   },
+  /* *** MOUNTED *** */
 
   methods: {
 
@@ -191,14 +186,14 @@ export default {
 
       let item = {
         visit_id: this.visitId,
-        echo_value_id: this.valueToAdd.echoValue.id,
-        type: this.valueToAdd.type,
+        echo_value_id: this.remarkToAdd.echoValue.id,
+        type: this.remarkToAdd.type,
       }
 
-      this.$store.dispatch('ADD_VISIT_ECHO_VALUE', item)
+      this.$store.dispatch('ADD_VISIT_ECHO_REMARK', item)
           .then(() => {
 
-            this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', this.visitId)
+            this.$store.dispatch('FETCH_VISIT_ECHO_REMARKS', this.visitId)
                 .then()
           })
     },
@@ -206,10 +201,10 @@ export default {
 
     onDelete: function (item) {
 
-      this.$store.dispatch('DELETE_VISIT_ECHO_VALUE', item.id)
+      this.$store.dispatch('DELETE_VISIT_ECHO_REMARK', item.id)
           .then(() => {
 
-            this.$store.dispatch('FETCH_VISIT_ECHO_VALUES', this.visitId)
+            this.$store.dispatch('FETCH_VISIT_ECHO_REMARKS', this.visitId)
                 .then()
           })
 
@@ -218,14 +213,14 @@ export default {
     onSaveNewEchoValue: function () {
 
       let item = {
-        value: this.commonEchoValueToAdd.value,
-        type: this.commonEchoValueToAdd.type
+        value: this.commonEchoRemarkToAdd.value,
+        type: this.commonEchoRemarkToAdd.type
       }
 
-      this.$store.dispatch('SAVE_NEW_ECHO_VALUE', item)
+      this.$store.dispatch('SAVE_NEW_ECHO_REMARK', item)
           .then(() => {
 
-            this.commonEchoValueToAdd.value = ''
+            this.commonEchoRemarkToAdd.value = ''
 
             this.addModalVisible = false
 
@@ -240,13 +235,5 @@ export default {
 
 <style>
 
-.report-section {
-
-}
-
-.report-section__title {
-  font-size: 1em;
-  font-weight: bold;
-}
 
 </style>

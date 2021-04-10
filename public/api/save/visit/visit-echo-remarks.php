@@ -9,16 +9,17 @@ require_once "../../../../_bootstrap.inc.php";
 try {
 
     $types = [
-        'AORTA',
-        'AORTIC_VALVE',
-        'DOPPLER',
+        'LEFT_VENTRICLE',
         'LEFT_ATRIUM',
         'MITRAL_VALVE',
-        'PERICARDIUM',
-        'PULMONIC_VALVE',
-        'RIGHT_ATRIUM',
+        'AORTIC_VALVE',
+        'AORTA',
         'RIGHT_VENTRICLE',
+        'RIGHT_ATRIUM',
+        'PULMONIC_VALVE',
         'TRICUSPID',
+        'PERICARDIUM',
+        'CONCLUSION',
     ];
 
 
