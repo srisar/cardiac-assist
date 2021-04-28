@@ -26,7 +26,6 @@ try {
         'dl' => Request::getAsBoolean('dl'),
     ];
 
-    __log($fields);
 
     $object = Visit::build($fields);
 

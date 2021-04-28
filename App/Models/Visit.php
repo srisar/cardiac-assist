@@ -26,13 +26,13 @@ class Visit implements IModel
     public ?Patient $patient;
 
 
-    private const STATUS_COMPLETE   = 'COMPLETE';
+    private const STATUS_COMPLETE = 'COMPLETE';
     private const STATUS_INCOMPLETE = 'INCOMPLETE';
 
     public static function build($array): Visit
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -48,7 +48,7 @@ class Visit implements IModel
         /** @var Visit $visit */
         $visit = Database::find(self::TABLE, $id, self::class);
 
-        if ( !empty($visit) ) {
+        if (!empty($visit)) {
             $visit->patient = Patient::find($visit->patient_id);
         }
 
@@ -76,46 +76,51 @@ class Visit implements IModel
             $data = [
                 'patient_id' => $this->patient_id,
                 'visit_date' => $this->visit_date,
-                'remarks'    => $this->remarks,
-                'height'     => $this->height,
-                'weight'     => $this->weight,
-                'bmi'        => $this->bmi,
-                'bsa'        => $this->bsa,
-                'sbp'        => $this->sbp,
-                'dbp'        => $this->dbp,
-                'dm'         => $this->dm ? 1 : 0,
-                'ht'         => $this->ht ? 1 : 0,
-                'dl'         => $this->dl ? 1 : 0,
-                'ef'         => $this->ef,
+                'remarks' => $this->remarks,
+                'height' => $this->height,
+                'weight' => $this->weight,
+                'bmi' => $this->bmi,
+                'bsa' => $this->bsa,
+                'sbp' => $this->sbp,
+                'dbp' => $this->dbp,
+                'dm' => $this->dm ? 1 : 0,
+                'ht' => $this->ht ? 1 : 0,
+                'dl' => $this->dl ? 1 : 0,
+                'ef' => $this->ef,
             ];
 
             $db->beginTransaction();
 
             $visitId = Database::insert(self::TABLE, $data);
 
-            if ( $visitId != -1 ) {
-                $visitECG           = new VisitECG();
+            if ($visitId != -1) {
+                $visitECG = new VisitECG();
                 $visitECG->visit_id = $visitId;
                 $visitECG->insert();
 
-                $visitCCT           = new VisitCoronaryCT();
+                $visitCCT = new VisitCoronaryCT();
                 $visitCCT->visit_id = $visitId;
                 $visitCCT->insert();
 
-                $visitLipids           = new VisitLipid();
+                $visitLipids = new VisitLipid();
                 $visitLipids->visit_id = $visitId;
                 $visitLipids->insert();
 
-                $visitEcho           = new VisitEchocardiography();
+                $visitEcho = new VisitEchocardiography();
                 $visitEcho->visit_id = $visitId;
                 $visitEcho->insert();
+
+                $visitAngio = new VisitAngiography();
+                $visitAngio->visit_id = $visitId;
+                $visitAngio->insert();
             }
 
             $db->commit();
 
             return true;
 
-        } catch ( PDOException $exception ) {
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
             $db->rollBack();
             return false;
         }
@@ -128,17 +133,17 @@ class Visit implements IModel
     {
         $data = [
             'visit_date' => $this->visit_date,
-            'remarks'    => $this->remarks,
-            'height'     => $this->height,
-            'weight'     => $this->weight,
-            'bmi'        => $this->bmi,
-            'bsa'        => $this->bsa,
-            'sbp'        => $this->sbp,
-            'dbp'        => $this->dbp,
-            'dm'         => $this->dm ? 1 : 0,
-            'ht'         => $this->ht ? 1 : 0,
-            'dl'         => $this->dl ? 1 : 0,
-            'ef'         => $this->ef,
+            'remarks' => $this->remarks,
+            'height' => $this->height,
+            'weight' => $this->weight,
+            'bmi' => $this->bmi,
+            'bsa' => $this->bsa,
+            'sbp' => $this->sbp,
+            'dbp' => $this->dbp,
+            'dm' => $this->dm ? 1 : 0,
+            'ht' => $this->ht ? 1 : 0,
+            'dl' => $this->dl ? 1 : 0,
+            'ef' => $this->ef,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);
@@ -184,13 +189,13 @@ class Visit implements IModel
      */
     public static function findByPatient(Patient $patient): array
     {
-        $db        = Database::instance();
+        $db = Database::instance();
         $statement = $db->prepare('select * from visits where patient_id=?');
         $statement->execute([$patient->id]);
 
         $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        if ( !empty($results) ) return $results;
+        if (!empty($results)) return $results;
         return [];
 
     }

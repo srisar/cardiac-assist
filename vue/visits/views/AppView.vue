@@ -21,6 +21,7 @@
                 <router-link to="/special/lipids" class="dropdown-item">Lipids</router-link>
                 <router-link to="/special/coronary-ct" class="dropdown-item">Coronary CT</router-link>
                 <router-link to="/special/echo" class="dropdown-item">Echocardiogram</router-link>
+                <router-link to="/special/angio" class="dropdown-item">Angiography</router-link>
               </div>
             </div>
 

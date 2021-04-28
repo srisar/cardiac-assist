@@ -91,7 +91,7 @@ class VisitCoronaryCT implements IModel
 
     /**
      * @param Visit $visit
-     * @return VisitCoronaryCT
+     * @return VisitCoronaryCT|null
      */
     public static function findByVisit(Visit $visit): ?VisitCoronaryCT
     {

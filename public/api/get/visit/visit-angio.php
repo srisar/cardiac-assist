@@ -4,7 +4,7 @@ use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
 use App\Models\Visit;
-use App\Models\VisitCoronaryCT;
+use App\Models\VisitAngiography;
 
 require_once "../../../../_bootstrap.inc.php";
 
@@ -19,13 +19,12 @@ try {
     if (!empty($id) || !empty($visit_id)) {
 
         if (!empty($id)) {
-            JSONResponse::validResponse(['data' => VisitCoronaryCT::find($id)]);
+            JSONResponse::validResponse(['data' => VisitAngiography::find($id)]);
             die();
 
         } elseif (!empty($visit_id)) {
             $visit = Visit::find($visit_id);
-
-            if (!empty($visit)) JSONResponse::validResponse(['data' => VisitCoronaryCT::findByVisit($visit)]);
+            if (!empty($visit)) JSONResponse::validResponse(['data' => VisitAngiography::findByVisit($visit)]);
             else throw new Exception('Invalid visit');
         }
 

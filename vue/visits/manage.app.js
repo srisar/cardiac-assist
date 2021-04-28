@@ -11,6 +11,7 @@ import VisitECGView from "./views/special-investigations/VisitECGView";
 import VisitLipidsView from "./views/special-investigations/VisitLipidsView";
 import VisitCoronaryCTView from "./views/special-investigations/VisitCoronaryCTView";
 import VisitEchoView from "./views/special-investigations/VisitEchoView";
+import VisitAngiographyView from "./views/special-investigations/VisitAngiographyView";
 
 
 Vue.use(Vuex)
@@ -25,6 +26,7 @@ const routes = [
     {path: '/special/lipids', component: VisitLipidsView},
     {path: '/special/coronary-ct', component: VisitCoronaryCTView},
     {path: '/special/echo', component: VisitEchoView},
+    {path: '/special/angio', component: VisitAngiographyView},
 ]
 
 const router = new VueRouter({
