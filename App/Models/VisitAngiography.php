@@ -13,10 +13,18 @@ class VisitAngiography implements IModel
 
     public ?int $id, $visit_id;
     public ?string $instruments, $dominance_left, $dominance_right, $notes,
-        $prox_rca_stenosis, $prox_rca_lesion_type, $prox_rca_timi_flow, $mid_rca_stenosis, $mid_rca_lesion_type, $mid_rca_timi_flow,
-        $rpl1_stenosis, $rpl1_lesion_type, $rpl1_timi_flow, $rpl2_stenosis, $rpl2_lesion_type, $rpl2_timi_flow,
-        $mid_lad_stenosis, $mid_lad_lesion_type, $mid_lad_timi_flow, $dist_lad_stenosis, $dist_lad_lesion_type, $dist_lad_timi_flow,
-        $left_main_stenosis, $left_main_lesion_type, $left_main_timi_flow, $left_circumflex_stenosis, $left_circumflex_lesion_type, $left_circumflex_timi_flow;
+        $prox_rca_stenosis, $prox_rca_lesion_type, $prox_rca_timi_flow,
+        $mid_rca_stenosis, $mid_rca_lesion_type, $mid_rca_timi_flow,
+        $rpl1_stenosis, $rpl1_lesion_type, $rpl1_timi_flow,
+        $rpl2_stenosis, $rpl2_lesion_type, $rpl2_timi_flow,
+        $mid_lad_stenosis, $mid_lad_lesion_type, $mid_lad_timi_flow,
+        $dist_lad_stenosis, $dist_lad_lesion_type, $dist_lad_timi_flow,
+        $left_main_stenosis, $left_main_lesion_type, $left_main_timi_flow,
+        $left_circumflex_stenosis, $left_circumflex_lesion_type, $left_circumflex_timi_flow,
+        $prox_lad_stenosis, $prox_lad_lesion_type, $prox_lad_timi_flow,
+        $om1_stenosis, $om1_lesion_type, $om1_timi_flow,
+        $om2_stenosis, $om2_lesion_type, $om2_timi_flow,
+        $pda_stenosis, $pda_lesion_type, $pda_timi_flow;
 
 
     public ?Visit $visit;
@@ -88,6 +96,10 @@ class VisitAngiography implements IModel
             'prox_rca_lesion_type' => $this->prox_rca_lesion_type,
             'prox_rca_timi_flow' => $this->prox_rca_timi_flow,
 
+            'prox_lad_stenosis' => $this->prox_lad_stenosis,
+            'prox_lad_lesion_type' => $this->prox_lad_lesion_type,
+            'prox_lad_timi_flow' => $this->prox_lad_timi_flow,
+
             'mid_rca_stenosis' => $this->mid_rca_stenosis,
             'mid_rca_lesion_type' => $this->mid_rca_lesion_type,
             'mid_rca_timi_flow' => $this->mid_rca_timi_flow,
@@ -115,6 +127,18 @@ class VisitAngiography implements IModel
             'left_circumflex_stenosis' => $this->left_circumflex_stenosis,
             'left_circumflex_lesion_type' => $this->left_circumflex_lesion_type,
             'left_circumflex_timi_flow' => $this->left_circumflex_timi_flow,
+
+            'om1_stenosis' => $this->om1_stenosis,
+            'om1_lesion_type' => $this->om1_lesion_type,
+            'om1_timi_flow' => $this->om1_timi_flow,
+
+            'om2_stenosis' => $this->om2_stenosis,
+            'om2_lesion_type' => $this->om2_lesion_type,
+            'om2_timi_flow' => $this->om2_timi_flow,
+
+            'pda_stenosis' => $this->pda_stenosis,
+            'pda_lesion_type' => $this->pda_lesion_type,
+            'pda_timi_flow' => $this->pda_timi_flow,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);

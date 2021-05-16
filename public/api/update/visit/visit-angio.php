@@ -20,6 +20,10 @@ try {
         'prox_rca_lesion_type' => Request::getAsString('prox_rca_lesion_type'),
         'prox_rca_timi_flow' => Request::getAsString('prox_rca_timi_flow'),
 
+        'prox_lad_stenosis' => Request::getAsInteger('prox_lad_stenosis'),
+        'prox_lad_lesion_type' => Request::getAsString('prox_lad_lesion_type'),
+        'prox_lad_timi_flow' => Request::getAsString('prox_lad_timi_flow'),
+
         'mid_rca_stenosis' => Request::getAsInteger('mid_rca_stenosis'),
         'mid_rca_lesion_type' => Request::getAsString('mid_rca_lesion_type'),
         'mid_rca_timi_flow' => Request::getAsString('mid_rca_timi_flow'),
@@ -48,9 +52,21 @@ try {
         'left_circumflex_lesion_type' => Request::getAsString('left_circumflex_lesion_type'),
         'left_circumflex_timi_flow' => Request::getAsString('left_circumflex_timi_flow'),
 
+        'om1_stenosis' => Request::getAsInteger('om1_stenosis'),
+        'om1_lesion_type' => Request::getAsString('om1_lesion_type'),
+        'om1_timi_flow' => Request::getAsString('om1_timi_flow'),
+
+        'om2_stenosis' => Request::getAsInteger('om2_stenosis'),
+        'om2_lesion_type' => Request::getAsString('om2_lesion_type'),
+        'om2_timi_flow' => Request::getAsString('om2_timi_flow'),
+
+        'pda_stenosis' => Request::getAsInteger('pda_stenosis'),
+        'pda_lesion_type' => Request::getAsString('pda_lesion_type'),
+        'pda_timi_flow' => Request::getAsString('pda_timi_flow'),
+
     ];
 
-    __log($fields);
+//    __log($fields);
 
 
     if (empty($fields['id'])) throw new Exception('Invalid id');

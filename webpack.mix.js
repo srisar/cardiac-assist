@@ -7,7 +7,8 @@ mix.options({
 });
 
 
-mix.browserSync('localhost')
+mix.browserSync('localhost');
+mix.disableSuccessNotifications();
 
 mix.sass('public/assets/css/app.scss', 'public/assets/css/app.css');
 

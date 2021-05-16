@@ -125,6 +125,24 @@
                       </tr>
 
                       <tr>
+                        <td class="align-middle">Prox LAD</td>
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" v-model.number="visitAngio.prox_lad_stenosis">
+                            <div class="input-group-append">
+                              <span class="input-group-text">%</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" list="lesion-type-list" v-model="visitAngio.prox_lad_lesion_type">
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" v-model="visitAngio.prox_lad_timi_flow">
+                        </td>
+                      </tr>
+
+                      <tr>
                         <td class="align-middle">Mid LAD</td>
                         <td>
                           <div class="input-group">
@@ -196,6 +214,60 @@
                         </td>
                       </tr>
 
+                      <tr>
+                        <td class="align-middle">OM1</td>
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" v-model.number="visitAngio.om1_stenosis">
+                            <div class="input-group-append">
+                              <span class="input-group-text">%</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" list="lesion-type-list" v-model="visitAngio.om1_lesion_type">
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" v-model="visitAngio.om1_timi_flow">
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="align-middle">OM2</td>
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" v-model.number="visitAngio.om2_stenosis">
+                            <div class="input-group-append">
+                              <span class="input-group-text">%</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" list="lesion-type-list" v-model="visitAngio.om2_lesion_type">
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" v-model="visitAngio.om2_timi_flow">
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="align-middle">PDA</td>
+                        <td>
+                          <div class="input-group">
+                            <input type="text" class="form-control" v-model.number="visitAngio.pda_stenosis">
+                            <div class="input-group-append">
+                              <span class="input-group-text">%</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" list="lesion-type-list" v-model="visitAngio.pda_lesion_type">
+                        </td>
+                        <td>
+                          <input type="text" class="form-control" v-model="visitAngio.pda_timi_flow">
+                        </td>
+                      </tr>
+
 
                       </tbody>
                     </table>
@@ -256,6 +328,10 @@ export default {
         prox_rca_lesion_type: "",
         prox_rca_timi_flow: "",
 
+        prox_lad_stenosis: 0,
+        prox_lad_lesion_type: "",
+        prox_lad_timi_flow: "",
+
         mid_rca_stenosis: 0,
         mid_rca_lesion_type: "",
         mid_rca_timi_flow: "",
@@ -283,6 +359,18 @@ export default {
         left_circumflex_stenosis: 0,
         left_circumflex_lesion_type: "",
         left_circumflex_timi_flow: "",
+
+        om1_stenosis: 0,
+        om1_lesion_type: "",
+        om1_timi_flow: "",
+
+        om2_stenosis: 0,
+        om2_lesion_type: "",
+        om2_timi_flow: "",
+
+        pda_stenosis: 0,
+        pda_lesion_type: "",
+        pda_timi_flow: "",
 
       },
 
