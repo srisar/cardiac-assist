@@ -1,13 +1,8 @@
-body {
-  font-family: "clearsans", sans-serif;
-}
-
 footer a:hover {
   text-decoration: underline;
 }
 
 pre {
-  font-family: "clearsans", sans-serif;
   margin-bottom: 0;
   font-size: inherit;
   white-space: pre-line;
@@ -76,6 +71,14 @@ table {
 
 .gray-bg {
   background-color: #e7e7e7;
+}
+
+.daterangepicker {
+  font-family: "Farro", sans-serif;
+}
+
+.btn-link {
+  cursor: pointer;
 }
 
 /*

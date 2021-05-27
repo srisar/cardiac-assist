@@ -14,9 +14,9 @@ class Authentication
 
         $user = User::findByUsername($username);
 
-        if ( !is_null($user) ) {
+        if (!is_null($user)) {
 
-            if ( password_verify($password, $user->password) ) {
+            if (password_verify($password, $user->password)) {
 
                 self::initUserSession($user);
                 return true;
@@ -46,8 +46,8 @@ class Authentication
      */
     public static function isAuthenticated($access = User::ROLE_USER): bool
     {
-        if ( isset($_SESSION['user']) ) {
-            if ( $_SESSION['user']['role'] == $access ) {
+        if (isset($_SESSION['user'])) {
+            if ($_SESSION['user']['role'] == $access) {
                 return true;
             }
         }
@@ -59,30 +59,33 @@ class Authentication
     public static function isLoggedInOrRedirect()
     {
 
-        if ( !(self::isAuthenticated(User::ROLE_ADMIN) || self::isAuthenticated(User::ROLE_USER) || self::isAuthenticated(User::ROLE_MANAGER)) ) {
+        if (!(self::isAuthenticated(User::ROLE_ADMIN) || self::isAuthenticated(User::ROLE_USER) || self::isAuthenticated(User::ROLE_MANAGER))) {
             App::redirect('/login.php');
         }
 
     }
 
 
-    public static function isAdminOrRedirect()
+    public static function isAdminOrRedirect(): bool
     {
-        if ( !self::isAuthenticated(User::ROLE_ADMIN) ) {
+
+        if (DEBUG) return true;
+
+        if (!self::isAuthenticated(User::ROLE_ADMIN)) {
             App::redirect('/login.php');
         }
     }
 
     public static function isManagerOrRedirect()
     {
-        if ( !(self::isAuthenticated(User::ROLE_ADMIN) || self::isAuthenticated(User::ROLE_MANAGER)) ) {
+        if (!(self::isAuthenticated(User::ROLE_ADMIN) || self::isAuthenticated(User::ROLE_MANAGER))) {
             App::redirect('/login.php');
         }
     }
 
     public static function isUserOrRedirect()
     {
-        if ( !(self::isAuthenticated(User::ROLE_ADMIN) || self::isAuthenticated(User::ROLE_USER) || self::isAuthenticated(User::ROLE_MANAGER)) ) {
+        if (!(self::isAuthenticated(User::ROLE_ADMIN) || self::isAuthenticated(User::ROLE_USER) || self::isAuthenticated(User::ROLE_MANAGER))) {
             App::redirect('/login.php');
         }
     }

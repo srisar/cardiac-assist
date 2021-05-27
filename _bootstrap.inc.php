@@ -13,9 +13,18 @@ require_once "vendor/autoload.php";
 use App\Core\App;
 use App\Core\Database\Database;
 use App\Core\Requests\Request;
+use Dotenv\Dotenv;
 
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+if (isset($_ENV["DEBUG"])) {
+
+    if ($_ENV["DEBUG"] == "true") define("DEBUG", true);
+    else define("DEBUG", false);
+} else {
+    define("DEBUG", false);
+}
 
 $db_config = [
     'HOST' => $_ENV['DB_HOST'],

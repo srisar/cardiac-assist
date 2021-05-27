@@ -1,13 +1,14 @@
-import Vuex from 'vuex'
-import Vue from 'vue'
+import Vuex from "vuex";
+import Vue from "vue";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-import visitSymptoms from './store_modules/visit_symptoms'
-import differentialDiagnosis from './store_modules/differential_diagnosis'
-import visitInvestigations from "./store_modules/visit_investigations"
-import visitDiagnosis from './store_modules/visit_diagnosis'
-import visitEchoValues from './store_modules/visit_echo_values'
+import visitSymptoms from "./store_modules/visit_symptoms";
+import differentialDiagnosis from "./store_modules/differential_diagnosis";
+import visitInvestigations from "./store_modules/visit_investigations";
+import visitDiagnosis from "./store_modules/visit_diagnosis";
+import visitEchoValues from "./store_modules/visit_echo_values";
+import {visitPrescriptions} from "./store_modules/visit_prescriptions";
 
 
 export default new Vuex.Store({
@@ -18,6 +19,7 @@ export default new Vuex.Store({
         visitInvestigations: visitInvestigations,
         visitDiagnosis: visitDiagnosis,
         visitEchoValues: visitEchoValues,
+        visitPrescriptions: visitPrescriptions,
     },
 
     state: {
@@ -65,9 +67,9 @@ export default new Vuex.Store({
                 }).done(r => {
 
                     if (r.data == null) {
-                        reject('empty')
+                        reject("empty")
                     } else {
-                        commit('updateVisit', r.data)
+                        commit("updateVisit", r.data)
                         resolve()
                     }
 

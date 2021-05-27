@@ -13,6 +13,9 @@ use App\Models\User;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= App::getTitle() ?></title>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Farro&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/fonts/clear-sans/stylesheet.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
@@ -65,6 +68,7 @@ use App\Models\User;
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/diseases/manage.php">Diseases</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/remarks.php">Echo remarks</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/drugs/manage.php">Drugs</a>
                     </div>
                 </li><!-- end nav-item -->
 

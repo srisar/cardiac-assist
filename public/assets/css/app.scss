@@ -1,6 +1,6 @@
 
 body {
-  font-family: 'clearsans', sans-serif;
+  //font-family: 'Farro', sans-serif;
   //background: #4e4e4e;
 
 }
@@ -21,7 +21,7 @@ footer {
 }
 
 pre {
-  font-family: 'clearsans', sans-serif;
+  //font-family: 'Farro', sans-serif;
   margin-bottom: 0;
   font-size: inherit;
   white-space: pre-line;
@@ -103,6 +103,13 @@ table {
   background-color: #e7e7e7;
 }
 
+.daterangepicker {
+  font-family: "Farro", sans-serif;
+}
+
+.btn-link{
+  cursor: pointer;
+}
 
 /*
 BOOTSTRAP MODAL FULLSCREEN OPTION

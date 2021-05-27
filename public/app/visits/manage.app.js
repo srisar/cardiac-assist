@@ -1894,6 +1894,144 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "Prescriptions",
+  components: {
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      isAddModalVisible: false,
+      prescription: {
+        remarks: ""
+      }
+    };
+  },
+  computed: {
+    prescrptionsList: function prescrptionsList() {
+      return this.$store.getters.getVisitPrescriptions;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var visit_id;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              visit_id = _this.$store.getters.getVisitId;
+              _context.next = 4;
+              return _this.$store.dispatch("prescriptions_fetchAll", visit_id);
+
+            case 4:
+              _context.next = 9;
+              break;
+
+            case 6:
+              _context.prev = 6;
+              _context.t0 = _context["catch"](0);
+              alert("Failed to fetch prescriptions");
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 6]]);
+    }))();
+  },
+  methods: {
+    onCloseAddModal: function onCloseAddModal() {
+      this.isAddModalVisible = false;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js& ***!
@@ -2887,6 +3025,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppView",
   data: function data() {
@@ -3080,6 +3224,53 @@ __webpack_require__.r(__webpack_exports__);
   name: "EditVisitDetails",
   mounted: function mounted() {
     console.log(this.$route.params);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _components_plan_of_management_Prescriptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/plan-of-management/Prescriptions */ "./vue/visits/components/plan-of-management/Prescriptions.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "ProblemsListView",
+  components: {
+    Prescriptions: _components_plan_of_management_Prescriptions__WEBPACK_IMPORTED_MODULE_0__.default
   }
 });
 
@@ -3805,10 +3996,10 @@ var TYPE_INFO = 'INFO';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.common.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.common.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./vue/visits/store.js");
 /* harmony import */ var _views_BasicView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/BasicView */ "./vue/visits/views/BasicView.vue");
 /* harmony import */ var _views_DiagnosesView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/DiagnosesView */ "./vue/visits/views/DiagnosesView.vue");
@@ -3819,6 +4010,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_special_investigations_VisitCoronaryCTView__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/special-investigations/VisitCoronaryCTView */ "./vue/visits/views/special-investigations/VisitCoronaryCTView.vue");
 /* harmony import */ var _views_special_investigations_VisitEchoView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./views/special-investigations/VisitEchoView */ "./vue/visits/views/special-investigations/VisitEchoView.vue");
 /* harmony import */ var _views_special_investigations_VisitAngiographyView__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/special-investigations/VisitAngiographyView */ "./vue/visits/views/special-investigations/VisitAngiographyView.vue");
+/* harmony import */ var _views_plan_of_management_ProblemsListView__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./views/plan-of-management/ProblemsListView */ "./vue/visits/views/plan-of-management/ProblemsListView.vue");
 
 
 
@@ -3832,8 +4024,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_10__.default.use((vuex__WEBPACK_IMPORTED_MODULE_11___default()));
-vue__WEBPACK_IMPORTED_MODULE_10__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_12__.default);
+
+vue__WEBPACK_IMPORTED_MODULE_11__.default.use((vuex__WEBPACK_IMPORTED_MODULE_12___default()));
+vue__WEBPACK_IMPORTED_MODULE_11__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_13__.default);
 var routes = [{
   path: '',
   component: _views_BasicView__WEBPACK_IMPORTED_MODULE_1__.default
@@ -3858,11 +4051,14 @@ var routes = [{
 }, {
   path: '/special/angio',
   component: _views_special_investigations_VisitAngiographyView__WEBPACK_IMPORTED_MODULE_9__.default
+}, {
+  path: '/pom/problems',
+  component: _views_plan_of_management_ProblemsListView__WEBPACK_IMPORTED_MODULE_10__.default
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_12__.default({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_13__.default({
   routes: routes
 });
-new vue__WEBPACK_IMPORTED_MODULE_10__.default({
+new vue__WEBPACK_IMPORTED_MODULE_11__.default({
   render: function render(h) {
     return h(_views_AppView__WEBPACK_IMPORTED_MODULE_3__.default);
   },
@@ -3891,9 +4087,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_modules_visit_investigations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store_modules/visit_investigations */ "./vue/visits/store_modules/visit_investigations.js");
 /* harmony import */ var _store_modules_visit_diagnosis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store_modules/visit_diagnosis */ "./vue/visits/store_modules/visit_diagnosis.js");
 /* harmony import */ var _store_modules_visit_echo_values__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store_modules/visit_echo_values */ "./vue/visits/store_modules/visit_echo_values.js");
+/* harmony import */ var _store_modules_visit_prescriptions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store_modules/visit_prescriptions */ "./vue/visits/store_modules/visit_prescriptions.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuex__WEBPACK_IMPORTED_MODULE_1___default()));
+
 
 
 
@@ -3905,7 +4103,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuex__WEBPACK_IMPORTED_MODULE_1___
     differentialDiagnosis: _store_modules_differential_diagnosis__WEBPACK_IMPORTED_MODULE_3__.default,
     visitInvestigations: _store_modules_visit_investigations__WEBPACK_IMPORTED_MODULE_4__.default,
     visitDiagnosis: _store_modules_visit_diagnosis__WEBPACK_IMPORTED_MODULE_5__.default,
-    visitEchoValues: _store_modules_visit_echo_values__WEBPACK_IMPORTED_MODULE_6__.default
+    visitEchoValues: _store_modules_visit_echo_values__WEBPACK_IMPORTED_MODULE_6__.default,
+    visitPrescriptions: _store_modules_visit_prescriptions__WEBPACK_IMPORTED_MODULE_7__.visitPrescriptions
   },
   state: {
     visit: {},
@@ -3944,9 +4143,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuex__WEBPACK_IMPORTED_MODULE_1___
           id: id
         }).done(function (r) {
           if (r.data == null) {
-            reject('empty');
+            reject("empty");
           } else {
-            commit('updateVisit', r.data);
+            commit("updateVisit", r.data);
             resolve();
           }
         }).fail(function (e) {
@@ -4515,6 +4714,78 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./vue/visits/store_modules/visit_prescriptions.js":
+/*!*********************************************************!*\
+  !*** ./vue/visits/store_modules/visit_prescriptions.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "visitPrescriptions": () => /* binding */ visitPrescriptions
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var visitPrescriptions = {
+  state: {
+    visitPrescriptions: [],
+    selectedPrescription: {}
+  },
+  getters: {
+    getVisitPrescriptions: function getVisitPrescriptions(state) {
+      return state.visitPrescriptions;
+    }
+  },
+  mutations: {
+    setVisitPrescriptions: function setVisitPrescriptions(state, data) {
+      state.visitPrescriptions = data;
+    }
+  },
+  actions: {
+    prescriptions_fetchAll: function prescriptions_fetchAll(context, visit_id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return $.get("".concat(getSiteURL(), "/api/get/visit/visit-prescriptions.php"), {
+                  visit_id: visit_id
+                });
+
+              case 3:
+                response = _context.sent;
+                context.commit("setVisitPrescriptions", response.data);
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                throw _context.t0;
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./vue/visits/store_modules/visit_symptoms.js":
 /*!****************************************************!*\
   !*** ./vue/visits/store_modules/visit_symptoms.js ***!
@@ -4673,7 +4944,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n@media (max-width: 768px) {\n.btn-group a, .btn-group button{\r\n    font-size: 0.7em !important;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n@media (max-width: 768px) {\n.btn-group a, .btn-group button {\r\n    font-size: 0.7em !important;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23370,6 +23641,45 @@ component.options.__file = "vue/visits/components/VisitSymptoms.vue"
 
 /***/ }),
 
+/***/ "./vue/visits/components/plan-of-management/Prescriptions.vue":
+/*!********************************************************************!*\
+  !*** ./vue/visits/components/plan-of-management/Prescriptions.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _Prescriptions_vue_vue_type_template_id_49de6748_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Prescriptions.vue?vue&type=template&id=49de6748&scoped=true& */ "./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=template&id=49de6748&scoped=true&");
+/* harmony import */ var _Prescriptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Prescriptions.vue?vue&type=script&lang=js& */ "./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Prescriptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Prescriptions_vue_vue_type_template_id_49de6748_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Prescriptions_vue_vue_type_template_id_49de6748_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "49de6748",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/visits/components/plan-of-management/Prescriptions.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue":
 /*!**************************************************************************!*\
   !*** ./vue/visits/components/special_investigations/VisitCoronaryCT.vue ***!
@@ -23723,6 +24033,45 @@ component.options.__file = "vue/visits/views/EditVisitDetails.vue"
 
 /***/ }),
 
+/***/ "./vue/visits/views/plan-of-management/ProblemsListView.vue":
+/*!******************************************************************!*\
+  !*** ./vue/visits/views/plan-of-management/ProblemsListView.vue ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _ProblemsListView_vue_vue_type_template_id_ad8bb040_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true& */ "./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true&");
+/* harmony import */ var _ProblemsListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProblemsListView.vue?vue&type=script&lang=js& */ "./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _ProblemsListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ProblemsListView_vue_vue_type_template_id_ad8bb040_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ProblemsListView_vue_vue_type_template_id_ad8bb040_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "ad8bb040",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/visits/views/plan-of-management/ProblemsListView.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./vue/visits/views/special-investigations/VisitAngiographyView.vue":
 /*!**************************************************************************!*\
   !*** ./vue/visits/views/special-investigations/VisitAngiographyView.vue ***!
@@ -24062,6 +24411,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Prescriptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Prescriptions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Prescriptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************!*\
   !*** ./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js& ***!
@@ -24203,6 +24568,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditVisitDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditVisitDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/EditVisitDetails.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditVisitDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProblemsListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProblemsListView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProblemsListView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -24465,6 +24846,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=template&id=49de6748&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=template&id=49de6748&scoped=true& ***!
+  \***************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Prescriptions_vue_vue_type_template_id_49de6748_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Prescriptions_vue_vue_type_template_id_49de6748_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Prescriptions_vue_vue_type_template_id_49de6748_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Prescriptions.vue?vue&type=template&id=49de6748&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=template&id=49de6748&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true&":
 /*!*********************************************************************************************************************!*\
   !*** ./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true& ***!
@@ -24614,6 +25012,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditVisitDetails_vue_vue_type_template_id_04953e42_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditVisitDetails_vue_vue_type_template_id_04953e42_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditVisitDetails.vue?vue&type=template&id=04953e42&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/EditVisitDetails.vue?vue&type=template&id=04953e42&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true& ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProblemsListView_vue_vue_type_template_id_ad8bb040_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProblemsListView_vue_vue_type_template_id_ad8bb040_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProblemsListView_vue_vue_type_template_id_ad8bb040_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true&");
 
 
 /***/ }),
@@ -27094,6 +27509,151 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=template&id=49de6748&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/plan-of-management/Prescriptions.vue?vue&type=template&id=49de6748&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card shadow shadow-sm" }, [
+        _c(
+          "div",
+          { staticClass: "card-header d-flex justify-content-between" },
+          [
+            _c("div", [_vm._v("Prescriptions")]),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-tiny btn-success",
+                  on: {
+                    click: function($event) {
+                      _vm.isAddModalVisible = true
+                    }
+                  }
+                },
+                [_vm._v("Add")]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("table", { staticClass: "table table-sm table-bordered" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.prescrptionsList, function(item) {
+                return _c("tr", { key: item.id }, [
+                  _c("td", [_vm._v(_vm._s(item.remarks))]),
+                  _vm._v(" "),
+                  _c("td")
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { visible: _vm.isAddModalVisible },
+          on: {
+            close: function($event) {
+              return _vm.onCloseAddModal()
+            }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Add a prescription")]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _vm._t("default", [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                { staticClass: "form-label", attrs: { for: "text-remarks" } },
+                [_vm._v("Remarks")]
+              ),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.prescription.remarks,
+                    expression: "prescription.remarks"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3", id: "text-remarks" },
+                domProps: { value: _vm.prescription.remarks },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.prescription, "remarks", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c("button", { staticClass: "btn btn-success" }, [_vm._v("Add")])
+            ])
+          ])
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Remarks")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true& ***!
@@ -29352,6 +29912,50 @@ var render = function() {
                       1
                     )
                   ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "btn-group", attrs: { role: "group" } },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary dropdown-toggle",
+                        attrs: {
+                          id: "btnPlanOfManagement",
+                          type: "button",
+                          "data-toggle": "dropdown",
+                          "aria-haspopup": "true",
+                          "aria-expanded": "false"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n              Plan of Management\n            "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { "aria-labelledby": "btnGroupDrop1" }
+                      },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/pom/problems" }
+                          },
+                          [_vm._v("Problems List")]
+                        )
+                      ],
+                      1
+                    )
+                  ]
                 )
               ],
               1
@@ -29495,6 +30099,50 @@ var render = function() {
   return _c("div")
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/plan-of-management/ProblemsListView.vue?vue&type=template&id=ad8bb040&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "container pb-5" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mb-3" }, [
+        _c("div", { staticClass: "col" }, [_c("Prescriptions")], 1)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Problems List")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

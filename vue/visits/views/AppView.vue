@@ -10,8 +10,6 @@
             <router-link to="/" class="btn btn-primary">Visit Details</router-link>
             <router-link to="/diagnoses" class="btn btn-primary">Diagnoses</router-link>
 
-            <!--            <router-link to="/special" class="btn btn-primary">Special investigations</router-link>-->
-
             <div class="btn-group" role="group">
               <button id="btnGroupSpecialInvestigations" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Special Investigations
@@ -25,6 +23,14 @@
               </div>
             </div>
 
+            <div class="btn-group" role="group">
+              <button id="btnPlanOfManagement" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Plan of Management
+              </button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <router-link to="/pom/problems" class="dropdown-item">Problems List</router-link>
+              </div>
+            </div>
 
           </div>
 
@@ -77,7 +83,7 @@ export default {
 
 @media (max-width: 768px) {
 
-  .btn-group a, .btn-group button{
+  .btn-group a, .btn-group button {
     font-size: 0.7em !important;
   }
 

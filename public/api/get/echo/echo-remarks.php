@@ -50,7 +50,7 @@ try {
     // find all values by their types
     $output = [];
 
-    foreach ($types as $type){
+    foreach ($types as $type) {
         $output[$type] = EchoRemarks::findByType($type);
     }
 
