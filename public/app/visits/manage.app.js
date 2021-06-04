@@ -1973,6 +1973,69 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Prescriptions",
@@ -1981,15 +2044,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      isAddModalVisible: false,
-      prescription: {
+      isAddPrescriptionModalVisible: false,
+      isAddDrugModalVisible: false,
+      prescriptionToAdd: {
         remarks: ""
-      }
+      },
+      selectedPrescription: {}
     };
   },
   computed: {
-    prescrptionsList: function prescrptionsList() {
+    prescriptionsList: function prescriptionsList() {
       return this.$store.getters.getVisitPrescriptions;
+    },
+    isSelectedPrescriptionEmpty: function isSelectedPrescriptionEmpty() {
+      return _.isEmpty(this.selectedPrescription);
     }
   },
   mounted: function mounted() {
@@ -2024,8 +2092,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    onCloseAddModal: function onCloseAddModal() {
-      this.isAddModalVisible = false;
+    onOpenPrescription: function onOpenPrescription(prescription) {
+      this.selectedPrescription = prescription;
     }
   }
 });
@@ -27528,7 +27596,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "card shadow shadow-sm" }, [
+      _c("div", { staticClass: "card shadow shadow-sm mb-3" }, [
         _c(
           "div",
           { staticClass: "card-header d-flex justify-content-between" },
@@ -27542,7 +27610,7 @@ var render = function() {
                   staticClass: "btn btn-tiny btn-success",
                   on: {
                     click: function($event) {
-                      _vm.isAddModalVisible = true
+                      _vm.isAddPrescriptionModalVisible = true
                     }
                   }
                 },
@@ -27558,11 +27626,24 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.prescrptionsList, function(item) {
+              _vm._l(_vm.prescriptionsList, function(item) {
                 return _c("tr", { key: item.id }, [
                   _c("td", [_vm._v(_vm._s(item.remarks))]),
                   _vm._v(" "),
-                  _c("td")
+                  _c("td", { staticClass: "text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-tiny btn-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.onOpenPrescription(item)
+                          }
+                        }
+                      },
+                      [_vm._v("Open")]
+                    )
+                  ])
                 ])
               }),
               0
@@ -27571,13 +27652,89 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      !_vm.isSelectedPrescriptionEmpty
+        ? _c("div", { staticClass: "card shadow shadow-sm mb-3" }, [
+            _c(
+              "div",
+              { staticClass: "card-header d-flex justify-content-between" },
+              [
+                _c("div", [_vm._v("Selected prescription details")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-tiny btn-secondary",
+                      on: {
+                        click: function($event) {
+                          _vm.selectedPrescription = {}
+                        }
+                      }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Remarks")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedPrescription.remarks,
+                      expression: "selectedPrescription.remarks"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { rows: "3" },
+                  domProps: { value: _vm.selectedPrescription.remarks },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.selectedPrescription,
+                        "remarks",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-primary",
+                    on: {
+                      click: function($event) {
+                        _vm.isAddDrugModalVisible = true
+                      }
+                    }
+                  },
+                  [_vm._v("Add a drug")]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "ModalWindow",
         {
-          attrs: { visible: _vm.isAddModalVisible },
+          attrs: { visible: _vm.isAddPrescriptionModalVisible },
           on: {
             close: function($event) {
-              return _vm.onCloseAddModal()
+              _vm.isAddPrescriptionModalVisible = false
             }
           },
           scopedSlots: _vm._u([
@@ -27605,19 +27762,23 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.prescription.remarks,
-                    expression: "prescription.remarks"
+                    value: _vm.prescriptionToAdd.remarks,
+                    expression: "prescriptionToAdd.remarks"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { rows: "3", id: "text-remarks" },
-                domProps: { value: _vm.prescription.remarks },
+                domProps: { value: _vm.prescriptionToAdd.remarks },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.prescription, "remarks", $event.target.value)
+                    _vm.$set(
+                      _vm.prescriptionToAdd,
+                      "remarks",
+                      $event.target.value
+                    )
                   }
                 }
               })
@@ -27628,6 +27789,29 @@ var render = function() {
             ])
           ])
         ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { visible: _vm.isAddDrugModalVisible },
+          on: {
+            close: function($event) {
+              _vm.isAddDrugModalVisible = false
+            }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Add a drug")]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [_vm._v(" "), _vm._t("default")],
         2
       )
     ],
@@ -27643,8 +27827,30 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Remarks")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Actions")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Actions")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "table table-bordered table-sm" }, [
+      _c("thead", [
+        _c("tr", [
+          _c("th", [_vm._v("Drug")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Dose")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Frequency")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Duration")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Actions")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tbody", [_c("tr")])
     ])
   }
 ]

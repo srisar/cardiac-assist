@@ -6,6 +6,8 @@ namespace App\Models;
 
 use App\Core\Database\Database;
 use Exception;
+use mysql_xdevapi\Statement;
+use PDO;
 
 class Drug implements IModel
 {
@@ -86,6 +88,22 @@ class Drug implements IModel
 
         if (!empty($result)) return $result;
         return null;
+    }
+
+    public static function search(string $keyword): array
+    {
+
+        $db = Database::instance();
+        $statement = $db->prepare("select * from drugs where drug_name like :q or remarks like :q");
+        $statement->execute([
+            ":q" => "%" . $keyword . "%"
+        ]);
+
+        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if (!empty($result)) return $result;
+        return [];
+
     }
 
 }
