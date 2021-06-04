@@ -2,45 +2,71 @@
 
   <div>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col text-center py-3">
 
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <router-link to="/" class="btn btn-primary">Visit Details</router-link>
-            <router-link to="/diagnoses" class="btn btn-primary">Diagnoses</router-link>
+        <div class="col-12 col-md-3">
 
-            <div class="btn-group" role="group">
-              <button id="btnGroupSpecialInvestigations" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Special Investigations
-              </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <router-link to="/special/ecg" class="dropdown-item">Electrocardiogram (ECG)</router-link>
-                <router-link to="/special/lipids" class="dropdown-item">Lipids</router-link>
-                <router-link to="/special/coronary-ct" class="dropdown-item">Coronary CT</router-link>
-                <router-link to="/special/echo" class="dropdown-item">Echocardiogram</router-link>
-                <router-link to="/special/angio" class="dropdown-item">Angiography</router-link>
-              </div>
-            </div>
+          <div class="card mb-3">
+            <div class="card-header">Basics</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <router-link to="/" class="">Visit Details</router-link>
+              </li>
+            </ul>
+          </div><!-- card -->
 
-            <div class="btn-group" role="group">
-              <button id="btnPlanOfManagement" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Plan of Management
-              </button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <router-link to="/pom/problems" class="dropdown-item">Problems List</router-link>
-              </div>
-            </div>
-
-          </div>
+          <div class="card mb-3">
+            <div class="card-header">Diagnoses</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <router-link to="/diagnoses" class="">Diagnoses</router-link>
+              </li>
+            </ul>
+          </div><!-- card -->
 
 
-        </div>
-      </div>
-    </div>
+          <div class="card mb-3">
+            <div class="card-header">Special Investigations</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <router-link to="/special/ecg" class="">Electrocardiogram (ECG)</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/special/lipids" class="">Lipids</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/special/coronary-ct" class="">Coronary CT</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/special/echo" class="">Echocardiogram</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/special/angio" class="">Angiography</router-link>
+              </li>
+            </ul>
+          </div><!-- card -->
+
+          <div class="card mb-3">
+            <div class="card-header">Problems List</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <router-link to="/pom/prescriptions" class="">Prescriptions</router-link>
+              </li>
+            </ul>
+          </div><!-- card -->
 
 
-    <router-view></router-view>
+        </div><!-- col -->
+
+        <div class="col-md-9">
+          <router-view></router-view>
+        </div><!-- col -->
+
+      </div><!-- row -->
+
+    </div><!-- container -->
+
   </div>
 
 </template>

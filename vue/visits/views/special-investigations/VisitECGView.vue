@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container">
+  <div>
     <div class="row">
       <div class="col">
 
@@ -19,7 +19,8 @@
 
       </div>
     </div>
-  </div>
+
+  </div><!-- template -->
 
 </template>
 

@@ -2,45 +2,41 @@
 
   <div>
 
-    <div class="container pb-5">
-
-      <div class="row">
-        <div class="col">
-          <h3 class="text-center">Investigations & Diagnoses</h3>
-        </div>
+    <div class="row">
+      <div class="col">
+        <h3 class="text-center">Investigations & Diagnoses</h3>
       </div>
+    </div>
 
-      <div class="row mb-3">
-        <!-- Symptoms -->
-        <div class="col">
-          <VisitSymptoms/>
-        </div><!-- col -->
-      </div>
+    <div class="row mb-3">
+      <!-- Symptoms -->
+      <div class="col">
+        <VisitSymptoms/>
+      </div><!-- col -->
+    </div>
 
-      <div class="row mb-3">
-        <!-- Differential diagnosis -->
-        <div class="col">
-          <DifferentialDiagnosis/>
-        </div><!-- col -->
-
-      </div>
-
-      <div class="row mb-3">
-
-        <!-- Investigations -->
-        <div class="col-12">
-          <VisitInvestigations/>
-        </div><!-- col -->
-
-      </div><!-- row -->
-
-      <div class="row">
-        <div class="col-12">
-          <VisitDiagnosis/>
-        </div>
-      </div><!-- row -->
+    <div class="row mb-3">
+      <!-- Differential diagnosis -->
+      <div class="col">
+        <DifferentialDiagnosis/>
+      </div><!-- col -->
 
     </div>
+
+    <div class="row mb-3">
+
+      <!-- Investigations -->
+      <div class="col-12">
+        <VisitInvestigations/>
+      </div><!-- col -->
+
+    </div><!-- row -->
+
+    <div class="row">
+      <div class="col-12">
+        <VisitDiagnosis/>
+      </div>
+    </div><!-- row -->
 
   </div>
 

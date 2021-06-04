@@ -13,7 +13,7 @@
 
       <div class="card-body">
 
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered mb-5">
           <thead>
           <tr>
             <th>Remarks</th>
@@ -32,57 +32,60 @@
           </tbody>
         </table>
 
+
+        <!-- start: edit prescription -->
+
+        <div class="card shadow shadow-sm mb-3" v-if="! isSelectedPrescriptionEmpty">
+          <div class="card-header d-flex justify-content-between">
+            <div>Selected prescription details</div>
+            <div>
+              <button class="btn btn-tiny btn-secondary" @click="selectedPrescription = {}">Close</button>
+            </div>
+          </div>
+
+          <div class="card-body">
+
+            <div class="form-group">
+              <label>Remarks</label>
+              <textarea rows="3" class="form-control" v-model="selectedPrescription.remarks"></textarea>
+            </div>
+
+
+            <div class="mb-3">
+              <button class="btn btn-sm btn-primary" @click="isAddDrugModalVisible = true">Add a drug</button>
+            </div>
+            <table class="table table-bordered table-sm">
+              <thead>
+              <tr>
+                <th>Drug</th>
+                <th>Dose</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+
+              </tr>
+              </tbody>
+
+            </table>
+
+          </div><!-- card-body -->
+
+        </div><!-- card -->
+
+        <!-- end: edit prescription -->
+
+
       </div><!-- card-body -->
 
     </div><!-- card -->
 
     <!-- --------------------------------------------------------------------------------------------------- -->
 
-    <!-- start: edit prescription -->
-
-    <div class="card shadow shadow-sm mb-3" v-if="! isSelectedPrescriptionEmpty">
-      <div class="card-header d-flex justify-content-between">
-        <div>Selected prescription details</div>
-        <div>
-          <button class="btn btn-tiny btn-secondary" @click="selectedPrescription = {}">Close</button>
-        </div>
-      </div>
-
-      <div class="card-body">
-
-        <div class="form-group">
-          <label>Remarks</label>
-          <textarea rows="3" class="form-control" v-model="selectedPrescription.remarks"></textarea>
-        </div>
-
-
-        <div class="mb-3">
-          <button class="btn btn-sm btn-primary" @click="isAddDrugModalVisible = true">Add a drug</button>
-        </div>
-        <table class="table table-bordered table-sm">
-          <thead>
-          <tr>
-            <th>Drug</th>
-            <th>Dose</th>
-            <th>Frequency</th>
-            <th>Duration</th>
-            <th>Actions</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr>
-
-          </tr>
-          </tbody>
-
-        </table>
-
-      </div><!-- card-body -->
-
-    </div><!-- card -->
-
-    <!-- end: edit prescription -->
 
     <!-- --------------------------------------------------------------------------------------------------- -->
 
@@ -124,7 +127,7 @@
 import ModalWindow from "../../../_common/components/ModalWindow";
 
 export default {
-  name: "Prescriptions",
+  name: "PrescriptionView",
   components: {ModalWindow},
   data() {
     return {
@@ -170,7 +173,6 @@ export default {
 
 
   },
-
 }
 </script>
 
