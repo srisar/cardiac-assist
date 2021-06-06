@@ -8,7 +8,7 @@ use App\Models\VisitPrescription;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 try {
@@ -18,7 +18,12 @@ try {
     if (!empty($id) || !empty($visit_id)) {
 
         if (!empty($id)) {
-            JSONResponse::validResponse(['data' => VisitPrescription::find($id)]);
+
+            $data = VisitPrescription::find($id);
+
+            if(empty($data)) throw new Exception("Invalid id");
+
+            JSONResponse::validResponse(['data' => $data]);
 
         } elseif (!empty($visit_id)) {
             $visit = Visit::find($visit_id);

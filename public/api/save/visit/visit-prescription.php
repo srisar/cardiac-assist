@@ -14,10 +14,11 @@ try {
     $fields = [
         "visit_id" => Request::getAsInteger("visit_id"),
         "remarks" => Request::getAsRawString("remarks"),
+        "date" => Request::getAsString("date"),
     ];
 
 
-    if (empty($fields["visit_id"]) || empty($fields["remarks"])) throw new Exception("Required fields are empty");
+    if (empty($fields["visit_id"]) || is_null($fields["remarks"]) || is_null($fields["date"])) throw new Exception("Required fields are empty");
 
     $object = VisitPrescription::build($fields);
 

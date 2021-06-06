@@ -66,10 +66,10 @@ class Authentication
     }
 
 
-    public static function isAdminOrRedirect(): bool
+    public static function isAdminOrRedirect(bool $debug = false)
     {
 
-        if (DEBUG) return true;
+        if ($debug) return;
 
         if (!self::isAuthenticated(User::ROLE_ADMIN)) {
             App::redirect('/login.php');

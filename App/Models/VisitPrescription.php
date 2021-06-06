@@ -14,7 +14,8 @@ class VisitPrescription implements IModel
     private const TABLE = "visit_prescriptions";
 
     public ?int $id, $visit_id;
-    public ?string $remarks;
+    public ?string $remarks, $date;
+    public ?array $prescription_items;
 
 
     public static function build($array): self
@@ -32,7 +33,16 @@ class VisitPrescription implements IModel
      */
     public static function find(int $id): ?VisitPrescription
     {
-        return Database::find(self::TABLE, $id, self::class);
+        /** @var self $result */
+        $result = Database::find(self::TABLE, $id, self::class);
+
+        if (!empty($result)) {
+            $result->prescription_items = VisitPrescriptionItem::findByPrescription($result);
+            return $result;
+        }
+
+        return null;
+
     }
 
     /**
@@ -49,6 +59,7 @@ class VisitPrescription implements IModel
         $data = [
             "remarks" => $this->remarks,
             "visit_id" => $this->visit_id,
+            "date" => $this->date,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -57,16 +68,16 @@ class VisitPrescription implements IModel
     public function update(): bool
     {
         $data = [
-            "remarks" => $this->remarks
+            "remarks" => $this->remarks,
+            "date" => $this->date,
         ];
 
         return Database::update(self::TABLE, $data, ["id" => $this->id]);
     }
 
-    public function delete()
+    public function delete(): bool
     {
-        /* before deleting the prescription,
-        all drugs in the prescription must be deleted */
+        return Database::delete(self::TABLE, "id", $this->id);
     }
 
 

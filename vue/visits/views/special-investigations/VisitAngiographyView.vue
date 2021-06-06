@@ -3,6 +3,12 @@
   <div>
 
     <div class="row">
+      <div class="col">
+        <h3 class="text-center">Special Investigations</h3>
+      </div>
+    </div>
+
+    <div class="row">
 
       <div class="col">
 

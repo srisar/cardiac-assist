@@ -6,16 +6,16 @@ namespace App\Models;
 
 use App\Core\Database\Database;
 use Exception;
+use PDO;
 
 class VisitPrescriptionItem implements IModel
 {
 
     private const TABLE = "visit_prescription_items";
 
-    public ?int $id, $visit_id, $prescription_id, $drug_id;
-    public ?string $date, $frequency, $duration, $remarks;
+    public ?int $id, $prescription_id, $drug_id;
+    public ?string $dose, $frequency, $duration, $remarks;
 
-    public ?Visit $visit;
     public ?VisitPrescription $prescription;
     public ?Drug $drug;
 
@@ -43,8 +43,7 @@ class VisitPrescriptionItem implements IModel
 
         if (!empty($result)) {
 
-            $result->visit = Visit::find($result->visit_id);
-            $result->prescription = VisitPrescription::find($result->prescription_id);
+//            $result->prescription = VisitPrescription::find($result->prescription_id);
             $result->drug = Drug::find($result->drug_id);
 
             return $result;
@@ -64,10 +63,9 @@ class VisitPrescriptionItem implements IModel
     public function insert(): int
     {
         $data = [
-            "visit_id" => $this->visit_id,
             "prescription_id" => $this->prescription_id,
             "drug_id" => $this->drug_id,
-            "date" => $this->date,
+            "dose" => $this->dose,
             "frequency" => $this->frequency,
             "duration" => $this->duration,
             "remarks" => $this->remarks,
@@ -80,7 +78,7 @@ class VisitPrescriptionItem implements IModel
     public function update(): bool
     {
         $data = [
-            "date" => $this->date,
+            "dose" => $this->dose,
             "frequency" => $this->frequency,
             "duration" => $this->duration,
             "remarks" => $this->remarks,
@@ -92,5 +90,35 @@ class VisitPrescriptionItem implements IModel
     public function delete(): bool
     {
         return Database::delete(self::TABLE, "id", $this->id);
+    }
+
+
+    /**
+     * @param VisitPrescription $prescription
+     * @return self[]
+     */
+    public static function findByPrescription(VisitPrescription $prescription): array
+    {
+
+        $db = Database::instance();
+        $statement = $db->prepare("select * from visit_prescription_items where prescription_id=?");
+        $statement->execute([$prescription->id]);
+
+        /** @var self[] $results */
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if (!empty($results)) {
+
+            $output = [];
+
+            foreach ($results as $result) {
+                $result->drug = Drug::find($result->drug_id);
+
+                $output[] = $result;
+            }
+            return $output;
+        }
+        return [];
+
     }
 }

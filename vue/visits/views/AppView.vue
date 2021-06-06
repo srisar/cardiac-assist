@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
 
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 col-xl-2">
 
           <div class="card mb-3">
             <div class="card-header">Basics</div>
@@ -51,7 +51,7 @@
             <div class="card-header">Problems List</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <router-link to="/pom/prescriptions" class="">Prescriptions</router-link>
+                <router-link to="/prescriptions" class="">Prescriptions</router-link>
               </li>
             </ul>
           </div><!-- card -->
@@ -59,7 +59,7 @@
 
         </div><!-- col -->
 
-        <div class="col-md-9">
+        <div class="col-md-9 col-xl-10">
           <router-view></router-view>
         </div><!-- col -->
 

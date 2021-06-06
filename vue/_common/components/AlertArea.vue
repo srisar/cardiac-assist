@@ -49,6 +49,7 @@ export default {
 
         setTimeout(() => {
           this.message = "";
+          this.$emit("clear");
         }, 3000);
 
       },
