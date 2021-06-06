@@ -12,8 +12,8 @@ import VisitLipidsView from "./views/special-investigations/VisitLipidsView";
 import VisitCoronaryCTView from "./views/special-investigations/VisitCoronaryCTView";
 import VisitEchoView from "./views/special-investigations/VisitEchoView";
 import VisitAngiographyView from "./views/special-investigations/VisitAngiographyView";
-import PrescriptionView from "./views/problems-list/prescriptions/PrescriptionView";
-import EditPrescription from "./views/problems-list/prescriptions/EditPrescription";
+import PrescriptionView from "./views/intervention/prescriptions/PrescriptionView";
+import EditPrescription from "./views/intervention/prescriptions/EditPrescription";
 
 
 Vue.use(Vuex)

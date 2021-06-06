@@ -7,7 +7,7 @@
 
         <div class="col-12 col-md-3 col-xl-2">
 
-          <div class="card mb-3">
+          <div class="card mb-3 shadow shadow-sm">
             <div class="card-header">Basics</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
@@ -16,7 +16,7 @@
             </ul>
           </div><!-- card -->
 
-          <div class="card mb-3">
+          <div class="card mb-3 shadow shadow-sm">
             <div class="card-header">Diagnoses</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
@@ -26,7 +26,7 @@
           </div><!-- card -->
 
 
-          <div class="card mb-3">
+          <div class="card mb-3 shadow shadow-sm">
             <div class="card-header">Special Investigations</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
@@ -47,12 +47,33 @@
             </ul>
           </div><!-- card -->
 
-          <div class="card mb-3">
-            <div class="card-header">Problems List</div>
+          <div class="card mb-3 shadow shadow-sm">
+            <div class="card-header">Interventions</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <router-link to="/prescriptions" class="">Prescriptions</router-link>
               </li>
+
+              <li class="list-group-item">
+                <router-link to="/referral-letters" class="">Referral letter</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/review" class="">Review</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/further-investigations" class="">Further investigations</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/others" class="">Others</router-link>
+              </li>
+            </ul>
+          </div><!-- card -->
+
+          <div class="card mb-3 shadow shadow-sm">
+            <div class="card-header">Reports</div>
+            <ul class="list-group list-group-flush">
+
+
             </ul>
           </div><!-- card -->
 
