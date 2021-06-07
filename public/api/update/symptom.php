@@ -1,17 +1,20 @@
 <?php
 
+use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
 use App\Models\Symptom;
 
 require_once "../../../_bootstrap.inc.php";
 
+Authentication::isAdminOrRedirect(DEBUG);
+
 try {
 
     $fields = [
-        'id' => Request::getAsInteger('id'),
-        'symptom_name' => Request::getAsString('symptom_name'),
-        'description' => Request::getAsRawString('description'),
+        "id" => Request::getAsInteger("id"),
+        "symptom_name" => Request::getAsString("symptom_name"),
+        "description" => Request::getAsRawString("description"),
 
     ];
 
@@ -19,7 +22,7 @@ try {
 
     $result = $object->update();
 
-    if ( empty($result) ) throw new Exception('Update failed');
+    if ( empty($result) ) throw new Exception("Update failed");
 
     JSONResponse::validResponse();
     return;

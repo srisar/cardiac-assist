@@ -7,17 +7,17 @@ use App\Models\Visit;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 try {
 
-    $id = Request::getAsInteger('id');
+    $id = Request::getAsInteger("id");
 
     if (!empty($id)) {
 
-        if (!empty(Visit::find($id))) JSONResponse::validResponse(['data' => true]);
-        else JSONResponse::validResponse(['data' => false]);
+        if (!empty(Visit::find($id))) JSONResponse::validResponse(["data" => true]);
+        else JSONResponse::validResponse(["data" => false]);
 
     }
 

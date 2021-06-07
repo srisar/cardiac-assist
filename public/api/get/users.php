@@ -6,6 +6,6 @@ use App\Models\User;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
-JSONResponse::validResponse(['data' => User::findAll()]);
+JSONResponse::validResponse(["data" => User::findAll()]);

@@ -76,9 +76,9 @@
       </div>
     </div>
 
-    <div class="alert alert-danger" v-if="chkConfirmDeletePrescription">
+    <div class="alert alert-danger text-center" v-if="chkConfirmDeletePrescription">
       <h5 class="text-center">Confirm deleting the prescription</h5>
-      <p>Deleting the prescription is undoable operation. All associated items such as drug details associated with this prescription will be lost.</p>
+      <p>All associated items such as drug details associated with this prescription will be lost.</p>
 
       <div class="text-center">
         <button class="btn btn-danger" @click="onDeletePrescription()">Delete</button>
@@ -97,7 +97,7 @@
 
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="search for drugs..." v-model="drugSearchQuery">
+          <input type="text" class="form-control" placeholder="search for drugs..." v-model="drugSearchQuery" @keyup.enter="onSearchDrugs()">
           <div class="input-group-append">
             <button class="btn btn-success" @click="onSearchDrugs()">Search</button>
           </div>
@@ -194,6 +194,7 @@
 
         <div class="text-center">
           <button class="btn btn-success" @click="onUpdatePrescriptionItem()">Update</button>
+          <button class="btn btn-danger" @click="onDeletePrescriptionItem()">Delete</button>
         </div>
 
 
@@ -423,6 +424,31 @@ export default {
 
       } catch (e) {
         errorMessageBox("Failed to delete the prescription");
+      }
+
+    },
+
+    /*
+    * On delete prescription item
+    * */
+    async onDeletePrescriptionItem() {
+
+      try {
+
+        const params = {
+          id: this.selectedPrescriptionItem.id,
+        };
+
+        await this.$store.dispatch("prescriptions_deletePrescriptionItem", params);
+
+        /* fetch updated prescription details */
+        await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
+        this.selectedPrescription = this.$store.getters.getSelectedPrescription;
+
+        this.isEditPrescriptionItemModalVisible = false;
+
+      } catch (e) {
+        errorMessageBox("Failed to delete prescription item");
       }
 
     }

@@ -7,20 +7,20 @@ use App\Models\Patient;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 try {
-    $id = Request::getAsInteger('id');
+    $id = Request::getAsInteger("id");
 
     if ( !empty($id) ) {
 
         $patient = Patient::find($id);
 
-        JSONResponse::validResponse(['data' => $patient->getAppointments()]);
+        JSONResponse::validResponse(["data" => $patient->getAppointments()]);
 
     } else {
-        throw new Exception('Invalid patient');
+        throw new Exception("Invalid patient");
     }
 
 } catch ( Exception $exception ) {

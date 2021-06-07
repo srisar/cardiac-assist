@@ -8,32 +8,32 @@ use App\Models\VisitEchoValue;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 $types = [
-    'LEFT_VENTRICLE',
-    'LEFT_ATRIUM',
-    'MITRAL_VALVE',
-    'AORTIC_VALVE',
-    'AORTA',
-    'RIGHT_VENTRICLE',
-    'RIGHT_ATRIUM',
-    'PULMONIC_VALVE',
-    'TRICUSPID',
-    'PERICARDIUM',
-    'CONCLUSION',
+    "LEFT_VENTRICLE",
+    "LEFT_ATRIUM",
+    "MITRAL_VALVE",
+    "AORTIC_VALVE",
+    "AORTA",
+    "RIGHT_VENTRICLE",
+    "RIGHT_ATRIUM",
+    "PULMONIC_VALVE",
+    "TRICUSPID",
+    "PERICARDIUM",
+    "CONCLUSION",
 ];
 
 
 try {
 
-    $visit_id = Request::getAsInteger('visit_id');
+    $visit_id = Request::getAsInteger("visit_id");
 
-    if (is_null($visit_id)) throw new Exception('Invalid visit');
+    if (is_null($visit_id)) throw new Exception("Invalid visit");
 
     $visit = Visit::find($visit_id);
 
-    if (is_null($visit)) throw new Exception('Invalid visit');
+    if (is_null($visit)) throw new Exception("Invalid visit");
 
 
     // find all values by their types

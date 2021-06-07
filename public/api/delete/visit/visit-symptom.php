@@ -7,7 +7,7 @@ use App\Models\VisitSymptom;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 

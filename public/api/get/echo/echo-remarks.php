@@ -7,27 +7,27 @@ use App\Models\EchoRemarks;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 $types = [
-    'LEFT_VENTRICLE',
-    'LEFT_ATRIUM',
-    'MITRAL_VALVE',
-    'AORTIC_VALVE',
-    'AORTA',
-    'RIGHT_VENTRICLE',
-    'RIGHT_ATRIUM',
-    'PULMONIC_VALVE',
-    'TRICUSPID',
-    'PERICARDIUM',
-    'CONCLUSION',
+    "LEFT_VENTRICLE",
+    "LEFT_ATRIUM",
+    "MITRAL_VALVE",
+    "AORTIC_VALVE",
+    "AORTA",
+    "RIGHT_VENTRICLE",
+    "RIGHT_ATRIUM",
+    "PULMONIC_VALVE",
+    "TRICUSPID",
+    "PERICARDIUM",
+    "CONCLUSION",
 ];
 
 try {
 
-    $id = Request::getAsInteger('id');
-    $type = Request::getAsString('type');
+    $id = Request::getAsInteger("id");
+    $type = Request::getAsString("type");
 
     if (!is_null($id)) {
         // fetch by id
@@ -39,7 +39,7 @@ try {
 
     if (!is_null($type)) {
 
-        if (!in_array(strtoupper($type), $types)) throw new Exception('Invalid type');
+        if (!in_array(strtoupper($type), $types)) throw new Exception("Invalid type");
 
         $values = EchoRemarks::findByType($type);
         JSONResponse::validResponse($values);

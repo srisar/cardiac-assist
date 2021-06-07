@@ -7,21 +7,21 @@ use App\Models\Appointment;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 
     $fields = [
-        'patient_id' => Request::getAsInteger('patient_id'),
-        'date' => Request::getAsString('date'),
-        'remarks' => Request::getAsString('remarks'),
+        "patient_id" => Request::getAsInteger("patient_id"),
+        "date" => Request::getAsString("date"),
+        "remarks" => Request::getAsString("remarks"),
     ];
 
     $object = Appointment::build($fields);
 
     $result = $object->insert();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    if ( empty($result) ) throw new Exception("Failed");
 
     JSONResponse::validResponse();
     return;

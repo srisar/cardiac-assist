@@ -1,23 +1,26 @@
 <?php
 
+use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
 use App\Models\VisitDiagnosis;
 
 require_once "../../../../_bootstrap.inc.php";
 
+Authentication::isAdminOrRedirect(DEBUG);
+
 try {
 
     $fields = [
-        'id' => Request::getAsInteger('id'),
-        'remarks' => Request::getAsString('remarks'),
+        "id" => Request::getAsInteger("id"),
+        "remarks" => Request::getAsString("remarks"),
     ];
 
     $object = VisitDiagnosis::build($fields);
 
     $result = $object->update();
 
-    if (empty($result)) throw new Exception('Update failed');
+    if (empty($result)) throw new Exception("Update failed");
 
     JSONResponse::validResponse();
     return;

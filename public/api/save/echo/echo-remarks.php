@@ -7,32 +7,32 @@ use App\Models\EchoRemarks;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 $types = [
-    'LEFT_VENTRICLE',
-    'LEFT_ATRIUM',
-    'MITRAL_VALVE',
-    'AORTIC_VALVE',
-    'AORTA',
-    'RIGHT_VENTRICLE',
-    'RIGHT_ATRIUM',
-    'PULMONIC_VALVE',
-    'TRICUSPID',
-    'PERICARDIUM',
-    'CONCLUSION',
+    "LEFT_VENTRICLE",
+    "LEFT_ATRIUM",
+    "MITRAL_VALVE",
+    "AORTIC_VALVE",
+    "AORTA",
+    "RIGHT_VENTRICLE",
+    "RIGHT_ATRIUM",
+    "PULMONIC_VALVE",
+    "TRICUSPID",
+    "PERICARDIUM",
+    "CONCLUSION",
 ];
 
 try {
 
     $fields = [
-        'value' => Request::getAsString('value'),
-        'type' => strtoupper(Request::getAsString('type'))
+        "value" => Request::getAsString("value"),
+        "type" => strtoupper(Request::getAsString("type"))
     ];
 
-    if (!is_null($fields['type'])) {
+    if (!is_null($fields["type"])) {
 
-        if (!in_array(strtoupper($fields['type']), $types)) throw new Exception('Invalid type');
+        if (!in_array(strtoupper($fields["type"]), $types)) throw new Exception("Invalid type");
 
         $echoValue = EchoRemarks::build($fields);
 
@@ -43,7 +43,7 @@ try {
             return;
         }
 
-        throw new Exception('Failed');
+        throw new Exception("Failed");
     }
 
     return;

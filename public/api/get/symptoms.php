@@ -7,14 +7,14 @@ use App\Models\Symptom;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
-$id = Request::getAsInteger('id');
+$id = Request::getAsInteger("id");
 
 if ( !empty($id) ) {
-    JSONResponse::validResponse(['data' => Symptom::find($id)]);
+    JSONResponse::validResponse(["data" => Symptom::find($id)]);
 } else {
-    JSONResponse::validResponse(['data' => Symptom::findAll()]);
+    JSONResponse::validResponse(["data" => Symptom::findAll()]);
 }
 

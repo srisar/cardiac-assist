@@ -9,21 +9,21 @@ use App\Models\Patient;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 try {
 
-    $date   = Request::getAsString('date');
-    $status = Request::getAsString('status');
+    $date   = Request::getAsString("date");
+    $status = Request::getAsString("status");
 
-    if ( empty($date) ) $date = date('Y-m-d');
+    if ( empty($date) ) $date = date("Y-m-d");
     if ( empty($status) ) $status = Appointment::STATUS_PENDING;
 
 
     $appointments = Appointment::findByDate($date, $status);
 
-    JSONResponse::validResponse(['data' => $appointments]);
+    JSONResponse::validResponse(["data" => $appointments]);
 
 
 } catch ( Exception $exception ) {

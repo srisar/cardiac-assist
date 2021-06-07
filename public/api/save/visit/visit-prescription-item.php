@@ -7,7 +7,7 @@ use App\Models\VisitPrescriptionItem;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 

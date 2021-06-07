@@ -7,28 +7,28 @@ use App\Models\DifferentialDiagnosis;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 
     $fields = [
-        'visit_id' => Request::getAsInteger('visit_id'),
-        'disease_id' => Request::getAsInteger('disease_id'),
-        'remarks' => Request::getAsString('remarks'),
+        "visit_id" => Request::getAsInteger("visit_id"),
+        "disease_id" => Request::getAsInteger("disease_id"),
+        "remarks" => Request::getAsString("remarks"),
     ];
 
     $object = DifferentialDiagnosis::build($fields);
 
     // check if name already exist in the database
-//    if ( !empty(Symptom::findByName($object->symptom_name)) ) throw new Exception('Symptom already exist');
+//    if ( !empty(Symptom::findByName($object->symptom_name)) ) throw new Exception("Symptom already exist");
 
     $result = $object->insert();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    if ( empty($result) ) throw new Exception("Failed");
 
     $object = DifferentialDiagnosis::find($result);
 
-    JSONResponse::validResponse(['data' => $object]);
+    JSONResponse::validResponse(["data" => $object]);
     return;
 
 } catch ( Exception $exception ) {

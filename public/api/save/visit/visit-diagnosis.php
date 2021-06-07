@@ -7,14 +7,14 @@ use App\Models\VisitDiagnosis;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 
     $fields = [
-        'visit_id' => Request::getAsInteger('visit_id'),
-        'disease_id' => Request::getAsInteger('disease_id'),
-        'remarks' => Request::getAsString('remarks'),
+        "visit_id" => Request::getAsInteger("visit_id"),
+        "disease_id" => Request::getAsInteger("disease_id"),
+        "remarks" => Request::getAsString("remarks"),
     ];
 
     $object = VisitDiagnosis::build($fields);
@@ -22,11 +22,11 @@ try {
 
     $result = $object->insert();
 
-    if (empty($result)) throw new Exception('Failed');
+    if (empty($result)) throw new Exception("Failed");
 
     $object = VisitDiagnosis::find($result);
 
-    JSONResponse::validResponse(['data' => $object]);
+    JSONResponse::validResponse(["data" => $object]);
     return;
 
 } catch (Exception $exception) {

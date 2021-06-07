@@ -7,17 +7,17 @@ use App\Models\Investigation;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 try {
 
-    $id = Request::getAsInteger('id');
+    $id = Request::getAsInteger("id");
 
     if ( !empty($id) ) {
-        JSONResponse::validResponse(['data' => Investigation::find($id)]);
+        JSONResponse::validResponse(["data" => Investigation::find($id)]);
     } else {
-        JSONResponse::validResponse(['data' => Investigation::findAll()]);
+        JSONResponse::validResponse(["data" => Investigation::findAll()]);
     }
 
 

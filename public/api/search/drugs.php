@@ -7,14 +7,12 @@ use App\Models\Drug;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 try {
 
     $query = Request::getAsString("query");
-
-//    if (empty($query)) throw new Exception("Empty query");
 
     $drugs = Drug::search($query);
     JSONResponse::validResponse(["drugs" => $drugs]);

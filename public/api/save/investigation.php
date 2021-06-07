@@ -8,27 +8,27 @@ use App\Models\Symptom;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 
     $fields = [
-        'investigation_name' => Request::getAsString('investigation_name'),
-        'description' => Request::getAsRawString('description'),
+        "investigation_name" => Request::getAsString("investigation_name"),
+        "description" => Request::getAsRawString("description"),
     ];
 
     $object = Investigation::build($fields);
 
     // check if name already exist in the database
-    if ( !empty(Investigation::findByName($object->investigation_name)) ) throw new Exception('Investigation already exist');
+    if ( !empty(Investigation::findByName($object->investigation_name)) ) throw new Exception("Investigation already exist");
 
     $result = $object->insert();
 
-    if ( empty($result) ) throw new Exception('Failed');
+    if ( empty($result) ) throw new Exception("Failed");
 
     $object = Symptom::find($result);
 
-    JSONResponse::validResponse(['data' => $object]);
+    JSONResponse::validResponse(["data" => $object]);
     return;
 
 } catch ( Exception $exception ) {

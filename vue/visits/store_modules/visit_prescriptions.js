@@ -62,7 +62,7 @@ export const visitPrescriptions = {
         },
 
         /* add prescription */
-        async prescription_add(context, params){
+        async prescription_add(context, params) {
             try {
 
                 await $.post(`${getSiteURL()}/api/save/visit/visit-prescription.php`, params);
@@ -136,6 +136,8 @@ export const visitPrescriptions = {
         /* delete prescription item */
         async prescriptions_deletePrescriptionItem(context, params) {
             try {
+
+                await $.post(`${getSiteURL()}/api/delete/visit/visit-prescription-item.php`, params);
 
             } catch (e) {
                 throw e;

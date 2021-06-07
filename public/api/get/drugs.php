@@ -7,7 +7,7 @@ use App\Models\Drug;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
 $id = Request::getAsInteger("id");

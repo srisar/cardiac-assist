@@ -7,14 +7,14 @@ use App\Models\Patient;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect();
+Authentication::isAdminOrRedirect(DEBUG);
 
 
-$id = Request::getAsInteger('id');
+$id = Request::getAsInteger("id");
 
 if ( !empty($id) ) {
-    JSONResponse::validResponse(['data' => Patient::find($id)]);
+    JSONResponse::validResponse(["data" => Patient::find($id)]);
 } else {
-    JSONResponse::validResponse(['data' => Patient::findAll()]);
+    JSONResponse::validResponse(["data" => Patient::findAll()]);
 }
 
