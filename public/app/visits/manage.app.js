@@ -3128,6 +3128,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "FurtherInvestigationsView"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/prescriptions/EditPrescription.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/prescriptions/EditPrescription.vue?vue&type=script&lang=js& ***!
@@ -3152,6 +3197,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -3741,7 +3790,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -24587,6 +24635,45 @@ component.options.__file = "vue/visits/views/EditVisitDetails.vue"
 
 /***/ }),
 
+/***/ "./vue/visits/views/intervention/FurtherInvestigationsView.vue":
+/*!*********************************************************************!*\
+  !*** ./vue/visits/views/intervention/FurtherInvestigationsView.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FurtherInvestigationsView_vue_vue_type_template_id_5e123323_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true& */ "./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true&");
+/* harmony import */ var _FurtherInvestigationsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FurtherInvestigationsView.vue?vue&type=script&lang=js& */ "./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _FurtherInvestigationsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _FurtherInvestigationsView_vue_vue_type_template_id_5e123323_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FurtherInvestigationsView_vue_vue_type_template_id_5e123323_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "5e123323",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/visits/views/intervention/FurtherInvestigationsView.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./vue/visits/views/intervention/prescriptions/EditPrescription.vue":
 /*!**************************************************************************!*\
   !*** ./vue/visits/views/intervention/prescriptions/EditPrescription.vue ***!
@@ -25150,6 +25237,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FurtherInvestigationsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FurtherInvestigationsView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FurtherInvestigationsView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./vue/visits/views/intervention/prescriptions/EditPrescription.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************!*\
   !*** ./vue/visits/views/intervention/prescriptions/EditPrescription.vue?vue&type=script&lang=js& ***!
@@ -25564,6 +25667,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditVisitDetails_vue_vue_type_template_id_04953e42_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditVisitDetails_vue_vue_type_template_id_04953e42_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditVisitDetails.vue?vue&type=template&id=04953e42&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/EditVisitDetails.vue?vue&type=template&id=04953e42&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true&":
+/*!****************************************************************************************************************!*\
+  !*** ./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true& ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FurtherInvestigationsView_vue_vue_type_template_id_5e123323_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FurtherInvestigationsView_vue_vue_type_template_id_5e123323_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FurtherInvestigationsView_vue_vue_type_template_id_5e123323_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true&");
 
 
 /***/ }),
@@ -30596,6 +30716,54 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/FurtherInvestigationsView.vue?vue&type=template&id=5e123323&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("h3", { staticClass: "text-center" }, [_vm._v("Interventions")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "card shadow shadow-sm" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Further Investigations")
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/prescriptions/EditPrescription.vue?vue&type=template&id=cf425a3e&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/intervention/prescriptions/EditPrescription.vue?vue&type=template&id=cf425a3e&scoped=true& ***!
@@ -30640,13 +30808,13 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-2" }, [
+          _c("div", { staticClass: "row mb-3" }, [
+            _c("div", { staticClass: "col-3" }, [
               _c(
                 "div",
-                { staticClass: "form-group" },
+                { staticClass: "input-group" },
                 [
-                  _c("label", [_vm._v("Date")]),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c("DateField", {
                     model: {
@@ -30664,8 +30832,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Remarks")]),
-            _vm._v(" "),
             _c("textarea", {
               directives: [
                 {
@@ -30676,7 +30842,10 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { rows: "3" },
+              attrs: {
+                rows: "2",
+                placeholder: "Add a remark about the prescription..."
+              },
               domProps: { value: _vm.selectedPrescription.remarks },
               on: {
                 input: function($event) {
@@ -30722,7 +30891,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("table", { staticClass: "table table-bordered table-sm" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -30730,18 +30899,20 @@ var render = function() {
                 item
               ) {
                 return _c("tr", { key: item.id }, [
-                  _c(
-                    "td",
-                    {
-                      staticClass: "clickable-td",
-                      on: {
-                        click: function($event) {
-                          return _vm.onOpenEditPrescriptionItem(item)
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.onOpenEditPrescriptionItem(item)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v(_vm._s(item.drug.drug_name))]
-                  ),
+                      },
+                      [_vm._v(_vm._s(item.drug.drug_name))]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(item.dose))]),
                   _vm._v(" "),
@@ -31146,32 +31317,38 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "text-center" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: {
-                    click: function($event) {
-                      return _vm.onUpdatePrescriptionItem()
-                    }
-                  }
-                },
-                [_vm._v("Update")]
-              ),
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c("div"),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  on: {
-                    click: function($event) {
-                      return _vm.onDeletePrescriptionItem()
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-success",
+                    on: {
+                      click: function($event) {
+                        return _vm.onUpdatePrescriptionItem()
+                      }
                     }
-                  }
-                },
-                [_vm._v("Delete")]
-              )
+                  },
+                  [_vm._v("Update")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-danger",
+                    on: {
+                      click: function($event) {
+                        return _vm.onDeletePrescriptionItem()
+                      }
+                    }
+                  },
+                  [_vm._v("Delete")]
+                )
+              ])
             ])
           ])
         ],
@@ -31182,6 +31359,14 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Date")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -31223,181 +31408,145 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "card shadow shadow-sm mb-3" }, [
-        _c(
-          "div",
-          { staticClass: "card-header d-flex justify-content-between" },
-          [
-            _c("div", [_vm._v("Prescriptions")]),
-            _vm._v(" "),
-            _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tiny btn-success",
-                  on: {
-                    click: function($event) {
-                      _vm.isAddPrescriptionModalVisible = true
-                    }
-                  }
-                },
-                [_vm._v("Add")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-sm table-bordered mb-5" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.prescriptionsList, function(item) {
-                return _c("tr", { key: item.id }, [
-                  _c("td", [_vm._v(_vm._s(item.remarks))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "text-center" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-tiny btn-secondary",
-                          attrs: { to: _vm.generateEditPrescriptionLink(item) }
-                        },
-                        [_vm._v("Open")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              }),
-              0
-            )
-          ])
-        ])
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card shadow shadow-sm mb-3" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("Add a new prescription")
       ]),
       _vm._v(" "),
-      _c(
-        "ModalWindow",
-        {
-          attrs: { visible: _vm.isAddPrescriptionModalVisible },
-          on: {
-            close: function($event) {
-              _vm.isAddPrescriptionModalVisible = false
-            }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "title",
-              fn: function() {
-                return [_vm._v("Add a prescription")]
-              },
-              proxy: true
-            }
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "col-4" }, [
+            _c(
+              "div",
+              { staticClass: "input-group mb-3" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("DateField", {
+                  model: {
+                    value: _vm.prescriptionToAdd.date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.prescriptionToAdd, "date", $$v)
+                    },
+                    expression: "prescriptionToAdd.date"
+                  }
+                })
+              ],
+              1
+            )
           ])
-        },
-        [
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.prescriptionToAdd.remarks,
+                expression: "prescriptionToAdd.remarks"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              rows: "2",
+              placeholder: "Add a remark about the prescription..."
+            },
+            domProps: { value: _vm.prescriptionToAdd.remarks },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.prescriptionToAdd, "remarks", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              on: {
+                click: function($event) {
+                  return _vm.onAddNewPrescription()
+                }
+              }
+            },
+            [_vm._v("Add")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card shadow shadow-sm mb-3" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("\n      List of prescriptions\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("table", { staticClass: "table table-sm table-bordered" }, [
+          _vm._m(2),
           _vm._v(" "),
-          _vm._t("default", [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-4" }, [
+          _c(
+            "tbody",
+            _vm._l(_vm.prescriptionsList, function(item) {
+              return _c("tr", { key: item.id }, [
                 _c(
-                  "div",
-                  { staticClass: "form-group" },
+                  "td",
                   [
-                    _c("label", [_vm._v("Date")]),
-                    _vm._v(" "),
-                    _c("DateField", {
-                      model: {
-                        value: _vm.prescriptionToAdd.date,
-                        callback: function($$v) {
-                          _vm.$set(_vm.prescriptionToAdd, "date", $$v)
-                        },
-                        expression: "prescriptionToAdd.date"
-                      }
-                    })
+                    _c(
+                      "router-link",
+                      { attrs: { to: _vm.generateEditPrescriptionLink(item) } },
+                      [_vm._v(_vm._s(item.date))]
+                    )
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(item.remarks))])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                { staticClass: "form-label", attrs: { for: "text-remarks" } },
-                [_vm._v("Remarks")]
-              ),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.prescriptionToAdd.remarks,
-                    expression: "prescriptionToAdd.remarks"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "3", id: "text-remarks" },
-                domProps: { value: _vm.prescriptionToAdd.remarks },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.prescriptionToAdd,
-                      "remarks",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-center" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: {
-                    click: function($event) {
-                      return _vm.onAddNewPrescription()
-                    }
-                  }
-                },
-                [_vm._v("Add")]
-              )
-            ])
-          ])
-        ],
-        2
-      )
-    ],
-    1
-  )
+            }),
+            0
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Interventions")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Date")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Remarks")]),
+        _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Date")]),
         _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-center", staticStyle: { width: "30px" } },
-          [_vm._v("Actions")]
-        )
+        _c("th", [_vm._v("Remarks")])
       ])
     ])
   }
@@ -50237,10 +50386,10 @@ var __webpack_exports__ = {};
   !*** ./vue/visits/manage.app.js ***!
   \**********************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.common.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.common.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(vuex__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./vue/visits/store.js");
 /* harmony import */ var _views_BasicView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/BasicView */ "./vue/visits/views/BasicView.vue");
 /* harmony import */ var _views_DiagnosesView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/DiagnosesView */ "./vue/visits/views/DiagnosesView.vue");
@@ -50253,6 +50402,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_special_investigations_VisitAngiographyView__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/special-investigations/VisitAngiographyView */ "./vue/visits/views/special-investigations/VisitAngiographyView.vue");
 /* harmony import */ var _views_intervention_prescriptions_PrescriptionView__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./views/intervention/prescriptions/PrescriptionView */ "./vue/visits/views/intervention/prescriptions/PrescriptionView.vue");
 /* harmony import */ var _views_intervention_prescriptions_EditPrescription__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./views/intervention/prescriptions/EditPrescription */ "./vue/visits/views/intervention/prescriptions/EditPrescription.vue");
+/* harmony import */ var _views_intervention_FurtherInvestigationsView__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./views/intervention/FurtherInvestigationsView */ "./vue/visits/views/intervention/FurtherInvestigationsView.vue");
 
 
 
@@ -50268,8 +50418,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_12__.default.use((vuex__WEBPACK_IMPORTED_MODULE_13___default()));
-vue__WEBPACK_IMPORTED_MODULE_12__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_14__.default);
+
+vue__WEBPACK_IMPORTED_MODULE_13__.default.use((vuex__WEBPACK_IMPORTED_MODULE_14___default()));
+vue__WEBPACK_IMPORTED_MODULE_13__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_15__.default);
 var routes = [{
   path: '',
   component: _views_BasicView__WEBPACK_IMPORTED_MODULE_1__.default
@@ -50300,11 +50451,14 @@ var routes = [{
 }, {
   path: "/prescription/edit/:id",
   component: _views_intervention_prescriptions_EditPrescription__WEBPACK_IMPORTED_MODULE_11__.default
+}, {
+  path: "/further-investigations",
+  component: _views_intervention_FurtherInvestigationsView__WEBPACK_IMPORTED_MODULE_12__.default
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_14__.default({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_15__.default({
   routes: routes
 });
-new vue__WEBPACK_IMPORTED_MODULE_12__.default({
+new vue__WEBPACK_IMPORTED_MODULE_13__.default({
   render: function render(h) {
     return h(_views_AppView__WEBPACK_IMPORTED_MODULE_3__.default);
   },

@@ -14,6 +14,7 @@ import VisitEchoView from "./views/special-investigations/VisitEchoView";
 import VisitAngiographyView from "./views/special-investigations/VisitAngiographyView";
 import PrescriptionView from "./views/intervention/prescriptions/PrescriptionView";
 import EditPrescription from "./views/intervention/prescriptions/EditPrescription";
+import FurtherInvestigationsView from "./views/intervention/FurtherInvestigationsView";
 
 
 Vue.use(Vuex)
@@ -33,6 +34,7 @@ const routes = [
 
     {path: '/prescriptions', component: PrescriptionView},
     {path: "/prescription/edit/:id", component: EditPrescription},
+    {path: "/further-investigations", component: FurtherInvestigationsView},
 ]
 
 const router = new VueRouter({

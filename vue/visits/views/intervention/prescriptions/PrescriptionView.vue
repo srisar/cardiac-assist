@@ -2,57 +2,24 @@
 
   <div>
 
+    <div class="row">
+      <div class="col">
+        <h3 class="text-center">Interventions</h3>
+      </div>
+    </div>
+
     <div class="card shadow shadow-sm mb-3">
 
-      <div class="card-header d-flex justify-content-between">
-        <div>Prescriptions</div>
-        <div>
-          <button class="btn btn-tiny btn-success" @click="isAddPrescriptionModalVisible=true">Add</button>
-        </div>
-      </div><!-- card-header -->
-
+      <div class="card-header">Add a new prescription</div>
       <div class="card-body">
 
-        <table class="table table-sm table-bordered mb-5">
-          <thead>
-          <tr>
-            <th>Remarks</th>
-            <th class="text-center" style="width: 30px">Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-
-          <tr v-for="item in prescriptionsList" :key="item.id">
-            <td>{{ item.remarks }}</td>
-            <td class="text-center">
-              <router-link class="btn btn-tiny btn-secondary" :to="generateEditPrescriptionLink(item)">Open</router-link>
-            </td>
-          </tr>
-
-          </tbody>
-        </table>
-
-
-      </div><!-- card-body -->
-
-    </div><!-- card -->
-
-    <!-- --------------------------------------------------------------------------------------------------- -->
-
-
-    <!-- --------------------------------------------------------------------------------------------------- -->
-
-    <!-- modal: add prescription -->
-    <ModalWindow :visible="isAddPrescriptionModalVisible" @close="isAddPrescriptionModalVisible = false">
-      <template v-slot:title>Add a prescription</template>
-
-      <slot>
-
-        <div class="row">
+        <div class="form-row">
           <div class="col-4">
 
-            <div class="form-group">
-              <label>Date</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Date</span>
+              </div>
               <DateField v-model="prescriptionToAdd.date"/>
             </div>
 
@@ -60,17 +27,49 @@
         </div>
 
         <div class="form-group">
-          <label for="text-remarks" class="form-label">Remarks</label>
-          <textarea rows="3" id="text-remarks" class="form-control" v-model="prescriptionToAdd.remarks"></textarea>
+          <textarea rows="2" class="form-control" v-model="prescriptionToAdd.remarks" placeholder="Add a remark about the prescription..."></textarea>
         </div>
 
         <div class="text-center">
           <button class="btn btn-success" @click="onAddNewPrescription()">Add</button>
         </div>
 
-      </slot>
-    </ModalWindow>
-    <!-- end: modal add prescription -->
+      </div>
+    </div><!-- card -->
+
+
+    <div class="card shadow shadow-sm mb-3">
+
+      <div class="card-header">
+        List of prescriptions
+      </div><!-- card-header -->
+
+      <div class="card-body">
+
+
+        <!-- list of prescriptions -->
+        <table class="table table-sm table-bordered">
+          <thead>
+          <tr>
+            <th style="width: 100px">Date</th>
+            <th>Remarks</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr v-for="item in prescriptionsList" :key="item.id">
+            <td>
+              <router-link :to="generateEditPrescriptionLink(item)">{{ item.date }}</router-link>
+            </td>
+            <td>{{ item.remarks }}</td>
+          </tr>
+
+          </tbody>
+        </table>
+
+
+      </div><!-- card-body -->
+    </div><!-- card -->
 
 
   </div><!-- template -->
