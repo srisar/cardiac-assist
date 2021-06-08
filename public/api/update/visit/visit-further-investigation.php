@@ -13,8 +13,13 @@ try {
 
     $fields = [
         "id" => Request::getAsInteger("id"),
+        "investigation_id" => Request::getAsInteger("investigation_id"),
         "remarks" => Request::getAsRawString("remarks"),
     ];
+
+    $o = VisitFurtherInvestigation::find($fields["id"]);
+
+    if (empty($o)) throw new Exception("Invalid further investigation");
 
     $object = VisitFurtherInvestigation::build($fields);
 

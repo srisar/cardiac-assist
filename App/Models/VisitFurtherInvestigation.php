@@ -63,9 +63,9 @@ class VisitFurtherInvestigation implements IModel
     public function insert(): int
     {
         $data = [
-            'visit_id' => $this->visit_id,
-            'investigation_id' => $this->investigation_id,
-            'remarks' => $this->remarks,
+            "visit_id" => $this->visit_id,
+            "investigation_id" => $this->investigation_id,
+            "remarks" => $this->remarks,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -74,15 +74,16 @@ class VisitFurtherInvestigation implements IModel
     public function update(): bool
     {
         $data = [
-            'remarks' => $this->remarks,
+            "remarks" => $this->remarks,
+            "investigation_id" => $this->investigation_id
         ];
 
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
     }
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, 'id', $this->id);
+        return Database::delete(self::TABLE, "id", $this->id);
     }
 
     /**
@@ -92,7 +93,7 @@ class VisitFurtherInvestigation implements IModel
     public static function findByVisit(Visit $visit): array
     {
         $db = Database::instance();
-        $statement = $db->prepare('select * from visit_further_investigations where visit_id=?');
+        $statement = $db->prepare("select * from visit_further_investigations where visit_id=?");
         $statement->execute([$visit->id]);
 
 
