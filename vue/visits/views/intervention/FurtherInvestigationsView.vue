@@ -45,7 +45,7 @@
 
           <div class="card-body">
 
-            <table class="table table-sm table-bordered">
+            <table class="table table-sm table-bordered table-hover">
               <tbody>
               <tr v-for="item in furtherInvestigationsList" :key="item.id">
                 <td>
@@ -55,8 +55,14 @@
                   <div style="white-space: pre-line">{{ item.remarks }}</div>
 
                   <div class="my-2 d-flex justify-content-between">
-                    <button class="btn btn-tiny btn-primary" @click="onOpenEditModal(item)">Edit</button>
-                    <button class="btn btn-tiny btn-danger">Remove</button>
+                    <div>
+                      <button class="btn btn-tiny btn-primary" @click="onOpenEditModal(item)">Edit</button>
+                    </div>
+
+                    <div>
+                      <button class="btn btn-tiny btn-danger" @click="showDeleteConfirmModal(item)">Confirm</button>
+                    </div>
+
                   </div>
 
                 </td>
@@ -96,6 +102,24 @@
 
       </slot>
     </ModalWindow>
+    <!-- end: modal: edit further investigations -->
+
+
+    <!-- modal: delete confirm -->
+    <ModalWindow :visible="isDeleteConfirmModalVisible" @close="isDeleteConfirmModalVisible = false">
+      <template v-slot:title>Confirm Delete</template>
+      <slot>
+
+        <p class="lead text-center">Confirm delete the following added investigation</p>
+        <p class="text-center">{{ investigationToEdit.investigation.investigation_name }}</p>
+
+        <div class="text-center">
+          <button class="btn btn-danger" @click="onDelete()">Delete</button>
+        </div>
+
+      </slot>
+    </ModalWindow>
+    <!-- end: modal: delete confirm -->
 
 
   </div><!-- template -->
@@ -113,6 +137,9 @@ export default {
     return {
 
       isEditModalVisible: false,
+
+      isDeleteConfirmModalVisible: false,
+
 
       /* all investigations the db */
       investigationsList: [],
@@ -201,6 +228,9 @@ export default {
       this.isEditModalVisible = true;
     },
 
+    /*
+    * On update
+    * */
     async onUpdate() {
 
       try {
@@ -223,6 +253,34 @@ export default {
       }
 
     },
+
+    /*
+    * On show delete confirm modal
+    * */
+    showDeleteConfirmModal(item) {
+
+      this.investigationToEdit = item;
+      this.isDeleteConfirmModalVisible = true;
+
+    },
+
+    /*
+    * On delete
+    * */
+    async onDelete() {
+
+      try {
+
+        await this.$store.dispatch("furtherInvestigations_delete", this.investigationToEdit.id);
+        await this.$store.dispatch("furtherInvestigations_fetchAll", this.visitId);
+
+        this.isDeleteConfirmModalVisible = false;
+
+      } catch (e) {
+        errorMessageBox("Failed to remove selected investigation");
+      }
+
+    }
 
   },
 

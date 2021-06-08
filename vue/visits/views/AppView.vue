@@ -81,7 +81,9 @@
         </div><!-- col -->
 
         <div class="col-md-9 col-xl-10">
-          <router-view></router-view>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
         </div><!-- col -->
 
       </div><!-- row -->
@@ -134,6 +136,15 @@ export default {
     font-size: 0.7em !important;
   }
 
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 </style>

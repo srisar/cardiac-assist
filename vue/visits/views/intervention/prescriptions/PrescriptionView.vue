@@ -71,6 +71,9 @@
       </div><!-- card-body -->
     </div><!-- card -->
 
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
 
   </div><!-- template -->
 
@@ -133,7 +136,7 @@ export default {
     * Generate edit prescription link
     * */
     generateEditPrescriptionLink(prescription) {
-      return `/prescription/edit/${prescription.id}`;
+      return `/prescriptions/edit/${prescription.id}`;
     },
 
 
@@ -165,5 +168,13 @@ export default {
 </script>
 
 <style scoped>
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 </style>

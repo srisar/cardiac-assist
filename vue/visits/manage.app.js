@@ -32,8 +32,15 @@ const routes = [
     {path: '/special/echo', component: VisitEchoView},
     {path: '/special/angio', component: VisitAngiographyView},
 
-    {path: '/prescriptions', component: PrescriptionView},
-    {path: "/prescription/edit/:id", component: EditPrescription},
+    {
+        path: '/prescriptions',
+        component: PrescriptionView,
+        children: [
+            {path: "edit/:id", component: EditPrescription},
+        ],
+    },
+
+
     {path: "/further-investigations", component: FurtherInvestigationsView},
 ]
 

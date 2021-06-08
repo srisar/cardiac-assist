@@ -79,10 +79,10 @@ export const visitFurtherInvestigation = {
         },
 
         /* delete */
-        async furtherInvestigations_delete(context, params) {
+        async furtherInvestigations_delete(context, id) {
             try {
 
-                let response = await $.post(`${getSiteURL()}/api/delete/visit/visit-further-investigation.php`, params);
+                let response = await $.post(`${getSiteURL()}/api/delete/visit/visit-further-investigation.php`, {id: id});
 
             } catch (e) {
                 throw e;

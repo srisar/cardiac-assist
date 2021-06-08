@@ -3,7 +3,10 @@
   <div>
 
     <!-- start: edit prescription -->
-    <div class="card shadow shadow-sm mb-3">
+
+    <div v-if="isLoading" class="text-center font-weight-bold">Fetching selected prescription details</div>
+
+    <div class="card shadow shadow-sm mb-3" v-else>
       <div class="card-header d-flex justify-content-between">
         <div>Prescription details</div>
         <div>
@@ -225,7 +228,13 @@ export default {
   data() {
     return {
 
+      /* prescription id from route */
+      prescriptionId: undefined,
+      isLoading: true,
+
+
       isAddDrugModalVisible: false,
+
 
       selectedPrescription: {
         id: undefined,
@@ -261,35 +270,53 @@ export default {
       feedback: {
         message: "",
         type: TYPE_SUCCESS
-      }
-    }
-  },
-
-
-  computed: {
-
-    prescriptionId() {
-      return this.$route.params.id;
-    }
+      },
+    };
 
   },
+
+
+  computed: {},
 
 
   async mounted() {
 
     try {
 
+      this.isLoading = true;
+
+      this.prescriptionId = this.$route.params.id;
 
       await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
       this.selectedPrescription = this.$store.getters.getSelectedPrescription;
 
+      this.isLoading = false;
+
     } catch (e) {
-      console.log(e);
       await this.$router.push("/prescriptions");
     }
 
   },
 
+  async beforeRouteUpdate(to, from, next) {
+
+    try {
+
+      this.isLoading = true;
+
+      this.prescriptionId = to.params.id;
+
+      await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
+      this.selectedPrescription = this.$store.getters.getSelectedPrescription;
+
+      this.isLoading = false;
+      next();
+
+    } catch (e) {
+      await this.$router.push("/prescriptions");
+    }
+
+  },
 
   methods: {
 
