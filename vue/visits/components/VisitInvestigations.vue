@@ -6,7 +6,7 @@
       <div class="card-header">
         Investigations
         <div class="float-right">
-          <button class="btn btn-tiny btn-success" @click="onShowAddModal">Add</button>
+          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
         </div>
       </div><!-- card-header -->
 
@@ -15,26 +15,30 @@
         <!-- investigations list -->
         <div id="visit-investigations-list" class="">
 
-          <table class="table table-bordered table-sm" v-if="!isEmpty">
-            <thead>
-            <tr>
-              <th>Investigation</th>
-              <th style="width: 70%">Remarks</th>
-              <th style="width: 100px" class="text-center">Actions</th>
-            </tr>
-            </thead>
+          <table class="table table-bordered table-hover table-sm" v-if="!isEmptyInvestigationsList">
+
             <tbody>
-            <tr v-for="(item) in visitInvestigationsList">
-              <td><a href="#">{{ item.investigation.investigation_name }}</a></td>
+            <tr v-for="item in visitInvestigationsList">
+
               <td>
-                <pre>{{ item.remarks }}</pre>
+                <p class="font-weight-bold">
+                  <a :href="'/app/investigations/manage.php#/edit/' + item.investigation.id" target="_blank">{{ item.investigation.investigation_name }}</a>
+                </p>
+                <div style="white-space: pre-line">{{ item.remarks }}</div>
+
+                <div class="my-2 d-flex justify-content-between">
+                  <div>
+                    <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)">Edit</button>
+                  </div>
+
+                  <div>
+                    <button class="btn btn-tiny btn-danger" @click="showDeleteConfirmModal(item)">Remove</button>
+                  </div>
+
+                </div>
+
               </td>
-              <td class="text-center">
-                <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)"><i class="bi bi-pencil"></i>
-                </button>
-                <button class="btn btn-danger btn-tiny" @click="onDelete(item)"><i class="bi bi-trash-fill"></i>
-                </button>
-              </td>
+
             </tr>
             </tbody>
           </table>
@@ -49,8 +53,12 @@
     </div><!-- card -->
 
 
-    <!-- MODAL Add Investigation -->
-    <ModalWindow id="modal-add-visit-investigation" :visible="modalAddVisible" @close="onCloseAddModal">
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+
+    <!--
+    modal: add visit investigations
+    -->
+    <ModalWindow id="modal-add-visit-investigation" :visible="modalAddVisible" @close="modalAddVisible = false">
       <template v-slot:title>Add common investigations</template>
       <slot>
 
@@ -60,8 +68,8 @@
 
             <div class="form-group">
               <select class="form-control" v-model="investigationToAdd.investigation_id">
-                <option value="-1" disabled>SELECT</option>
-                <option v-for="item in investigationsList" :disabled="existingInvestigation(item)" :value="item.id">
+                <option value="-1" disabled>SELECT ONE</option>
+                <option v-for="item in investigationsList" :value="item.id">
                   {{ item.investigation_name }}
                 </option>
               </select>
@@ -79,18 +87,24 @@
 
         <div class="row">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onAdd" :disabled="!isSaveFormValid">Add</button>
+            <button class="btn btn-success" @click="onAdd()">Add</button>
           </div>
         </div>
 
       </slot>
     </ModalWindow>
+    <!--
+     end: modal: add visit investigation
+     -->
 
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
 
-    <!-- MODAL EDIT -->
-    <ModalWindow id="modal-edit-investigation" :visible="modalEditVisible" @close="onCloseEditModal">
-      <template v-slot:title v-if="modalEditVisible">Add common investigations</template>
-      <slot v-if="modalEditVisible">
+    <!--
+     modal: edit visit investigation
+     -->
+    <ModalWindow id="modal-edit-investigation" :visible="modalEditVisible" @close="modalEditVisible = false">
+      <template v-slot:title>Add common investigations</template>
+      <slot>
 
         <!-- section : add symptom -->
         <div class="row">
@@ -98,12 +112,14 @@
 
             <div class="form-group">
               <label>Investigation</label>
-              <input type="text" readonly class="form-control" :value="selectedVisitInvestigation.investigation_name">
+              <select class="custom-select" v-model.number="investigationToEdit.investigation_id">
+                <option v-for="item in investigationsList" :value="item.id">{{ item.investigation_name }}</option>
+              </select>
             </div>
 
             <div class="form-group">
               <label>Remarks</label>
-              <textarea rows="5" class="form-control" v-model="selectedVisitInvestigation.remarks"></textarea>
+              <textarea rows="5" class="form-control" v-model="investigationToEdit.remarks"></textarea>
             </div>
 
 
@@ -112,24 +128,38 @@
         <!-- section: add symptom -->
 
 
-        <div class="row">
-          <div class="col">
-            <button class="btn btn-success" @click="onUpdate">Update</button>
-
-            <span v-if="confirmDelete">
-              <button class="btn btn-danger"
-                      @click="onDelete({id: selectedVisitInvestigation.id}) & (confirmDelete = false)">Confirm</button>
-              <button class="btn btn-secondary" @click="confirmDelete = !confirmDelete">Cancel</button>
-            </span>
-            <span v-else>
-              <button class="btn btn-danger" @click="confirmDelete = true">Delete</button>
-            </span>
-
-          </div>
+        <div class="text-center">
+          <button class="btn btn-success" @click="onUpdate()">Update</button>
         </div>
 
       </slot>
     </ModalWindow>
+    <!--
+     end: modal: visit investigation
+     -->
+
+
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+
+    <!--
+    modal: delete confirm
+    -->
+    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
+      <template v-slot:title>Confirm Removal</template>
+      <slot>
+
+        <p class="lead text-center">Confirm removing the following added investigation</p>
+        <p class="text-center">{{ investigationToEdit.investigation.investigation_name }}</p>
+
+        <div class="text-center">
+          <button class="btn btn-danger" @click="onDelete()">Remove</button>
+        </div>
+
+      </slot>
+    </ModalWindow>
+    <!--
+    end: modal: delete confirm
+    -->
 
 
   </div><!-- template -->
@@ -139,8 +169,9 @@
 <script>
 import RichEditorV2 from "../../_common/components/RichEditorV2";
 import ModalWindow from "../../_common/components/ModalWindow";
+import {errorMessageBox, successMessageBox} from "../../_common/bootbox_dialogs";
 
-const _ = require('lodash');
+const _ = require("lodash");
 
 export default {
   name: "VisitInvestigations",
@@ -154,19 +185,20 @@ export default {
       modalAddVisible: false,
       modalEditVisible: false,
 
-      confirmDelete: false,
+      modalDeleteVisible: false,
+
 
       investigationToAdd: {
-        visit_id: undefined, // needs to be set when saving or updating the visit investigation
         investigation_id: -1,
-        remarks: "",
+        remarks: ""
       },
 
-      selectedVisitInvestigation: {
+      investigationToEdit: {
         id: undefined,
-        investigation_name: "",
+        investigation: {},
+        investigation_id: -1,
         remarks: "",
-      },
+      }
 
     }
   },
@@ -176,37 +208,42 @@ export default {
   * */
   computed: {
 
+    visitId() {
+      return this.$store.getters.getVisitId;
+    },
+
     visitInvestigationsList: function () {
       return this.$store.getters.getVisitInvestigationsList;
     },
 
-    investigationsList: function () {
+    investigationsList() {
       return this.$store.getters.getInvestigationsList;
     },
 
-    isSaveFormValid: function () {
-      return this.investigationToAdd.investigation_id !== -1;
+    isEmptyInvestigationsList() {
+      return _.isEmpty(this.visitInvestigationsList);
     },
 
-
-    isEmpty: function () {
-      return this.visitInvestigationsList.length === 0;
-    },
 
   },
 
   /*
   * MOUNTED
   * */
-  mounted() {
+  async mounted() {
 
-    /*
-    * Fetch investigations for the dropdown
-    * */
-    this.$store.dispatch('fetchInvestigations')
-        .catch(e => {
-          console.log(e);
-        });
+    try {
+
+      /*
+       * Fetch investigations for the dropdown
+       * */
+      await this.$store.dispatch("investigations_fetchAllAvailableInvestigation");
+
+      await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+
+    } catch (e) {
+      errorMessageBox("Failed to fetch visit investigations");
+    }
 
   },
 
@@ -215,122 +252,93 @@ export default {
   * */
   methods: {
 
+    /*
+    * On add
+    * */
+    async onAdd() {
 
-    onAdd: function () {
+      try {
 
-      const investigation = {
-        visit_id: this.$store.state.visit.id,
-        investigation_id: this.investigationToAdd.investigation_id,
-        remarks: this.investigationToAdd.remarks
+        const params = {
+          visit_id: this.visitId,
+          investigation_id: this.investigationToAdd.investigation_id,
+          remarks: this.investigationToAdd.remarks
+        }
+
+        await this.$store.dispatch("visitInvestigations_add", params);
+
+        await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+
+        this.modalAddVisible = false;
+
+
+      } catch (e) {
+        errorMessageBox("Failed to add investigation");
       }
 
-
-      this.$store.dispatch('addVisitInvestigation', investigation)
-          .then(() => {
-
-            // clearing out the form
-            this.investigationToAdd = {
-              investigation_id: -1,
-              remarks: "",
-            };
-
-          })
-          .catch(() => {
-            alert('Failed to add investigation');
-          });
-
-    },
-
-    /*
-    * Update selected visit investigation
-    * */
-    onUpdate: function () {
-
-      const visitInvestigation = {
-        id: this.selectedVisitInvestigation.id,
-        remarks: this.selectedVisitInvestigation.remarks,
-      }
-
-      this.$store.dispatch('updateVisitInvestigation', visitInvestigation)
-          .then(() => {
-          })
-          .catch(() => {
-            alert('Failed to update investigation remarks');
-          });
-
-    },
-
-    onDelete: function (item) {
-
-      const investigation = {
-        id: item.id,
-      }
-
-      this.$store.dispatch('deleteVisitInvestigation', investigation)
-          .then(() => {
-            this.onCloseEditModal();
-          })
-          .catch(() => {
-            alert('Failed to delete visit investigation');
-          });
-
-    },
-
-    /*
-    *
-    * HELPERS
-    * */
-    createViewInvestigationLink: function (investigation) {
-      return `${getSiteURL()}/app/investigations/view.php?id=${investigation.id}`;
     },
 
 
     /*
-    * Check if investigation from the dropdown already added
+    * On show edit modal
     * */
-    existingInvestigation(investigation) {
+    onShowEditModal(item) {
 
-      const i = _.find(this.visitInvestigationsList, (o) => {
-        return o.investigation_id === investigation.id;
-      });
-
-      return i !== undefined;
-    },
-
-    /*
-    *
-    * Modal event handlers
-    * */
-    onShowAddModal: function () {
-      this.modalAddVisible = true;
-    },
-
-    onCloseAddModal: function () {
-      this.modalAddVisible = false;
-    },
-
-    /*
-    * Show edit selected investigation modal
-    * */
-    onShowEditModal: function (item) {
-
-      console.table(item);
-
-      this.selectedVisitInvestigation.id = item.id;
-      this.selectedVisitInvestigation.investigation_name = item.investigation.investigation_name;
-      this.selectedVisitInvestigation.remarks = item.remarks;
-
+      this.investigationToEdit = _.cloneDeep(item);
       this.modalEditVisible = true;
+
     },
 
-    onCloseEditModal: function () {
-      this.selectedVisitInvestigation.id = undefined;
-      this.selectedVisitInvestigation.investigation_name = "";
-      this.selectedVisitInvestigation.remarks = "";
+    /*
+    * On show delete confirm modal
+    * */
+    showDeleteConfirmModal(item) {
 
-      this.modalEditVisible = false;
+      this.investigationToEdit = item;
+      this.modalDeleteVisible = true;
+
     },
 
+
+    async onUpdate() {
+
+      try {
+
+        const params = {
+          id: this.investigationToEdit.id,
+          investigation_id: this.investigationToEdit.investigation_id,
+          remarks: this.investigationToEdit.remarks
+        };
+
+        await this.$store.dispatch("visitInvestigations_update", params);
+        this.modalEditVisible = false;
+        successMessageBox("Investigation details updated");
+
+        await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+
+      } catch (e) {
+        errorMessageBox("Failed to update investigation details");
+      }
+
+    },
+
+    /*
+    * On delete
+    * */
+    async onDelete() {
+
+      try {
+
+        await this.$store.dispatch("visitInvestigations_delete", this.investigationToEdit.id);
+        await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+
+        this.modalDeleteVisible = false;
+
+      } catch (e) {
+        errorMessageBox("Failed to remove selected investigation");
+      }
+
+    }
 
   },
 

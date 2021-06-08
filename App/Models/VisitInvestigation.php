@@ -9,7 +9,7 @@ use PDO;
 
 class VisitInvestigation implements IModel
 {
-    private const TABLE = 'visit_investigations';
+    private const TABLE = "visit_investigations";
 
     public ?int $id = -1, $visit_id = -1, $investigation_id = -1;
     public ?string $remarks = "";
@@ -59,9 +59,9 @@ class VisitInvestigation implements IModel
     public function insert(): int
     {
         $data = [
-            'visit_id' => $this->visit_id,
-            'investigation_id' => $this->investigation_id,
-            'remarks' => $this->remarks,
+            "visit_id" => $this->visit_id,
+            "investigation_id" => $this->investigation_id,
+            "remarks" => $this->remarks,
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -70,15 +70,16 @@ class VisitInvestigation implements IModel
     public function update(): bool
     {
         $data = [
-            'remarks' => $this->remarks,
+            "remarks" => $this->remarks,
+            "investigation_id" => $this->investigation_id
         ];
 
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
     }
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, 'id', $this->id);
+        return Database::delete(self::TABLE, "id", $this->id);
     }
 
     /**
@@ -88,7 +89,7 @@ class VisitInvestigation implements IModel
     public static function findByVisit(Visit $visit): array
     {
         $db = Database::instance();
-        $statement = $db->prepare('select * from visit_investigations where visit_id=?');
+        $statement = $db->prepare("select * from visit_investigations where visit_id=?");
         $statement->execute([$visit->id]);
 
 

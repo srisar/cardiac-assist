@@ -139,6 +139,11 @@ export default {
 }
 
 
+.router-link-exact-active {
+  font-weight: bold;
+  color: #28a745;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s;
 }

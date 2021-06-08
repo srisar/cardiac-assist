@@ -12,11 +12,11 @@ export default {
 
     mutations: {
 
-        updateInvestigationsList: function (state, data) {
+        setInvestigationsList: function (state, data) {
             state.investigationsList = data;
         },
 
-        updateVisitInvestigationsList: function (state, data) {
+        setVisitInvestigationsList: function (state, data) {
             state.visitInvestigationsList = data;
         },
 
@@ -34,123 +34,61 @@ export default {
 
     actions: {
 
-        /*
-        * Fetch all investigations available
-        * */
-        fetchInvestigations: function ({state, commit}) {
+        /* fetch all available investigations */
+        async investigations_fetchAllAvailableInvestigation(context) {
 
-            return new Promise(((resolve, reject) => {
+            try {
 
-                $.get(`${getSiteURL()}/api/get/investigations.php`)
-                    .done(r => {
+                const response = await $.get(`${getSiteURL()}/api/get/investigations.php`);
+                context.commit("setInvestigationsList", response.data);
 
-                        commit('updateInvestigationsList', r.data);
-                        resolve();
+            } catch (e) {
+                throw e;
+            }
 
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-            }));
         },
 
-        /*
-        * Fetch all investigations for the visit
-        * */
-        fetchVisitInvestigations: function ({commit, state}, visitId) {
-            return new Promise((resolve, reject) => {
+        /* fetch all visit investigations */
+        async visitInvestigations_fetchAll(context, visitId) {
 
-                $.get(`${getSiteURL()}/api/get/visit/visit-investigations.php`, {
-                    visit_id: visitId
-                }).done(r => {
+            try {
 
-                    commit('updateVisitInvestigationsList', r.data);
-                    resolve();
+                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-investigations.php`, {visit_id: visitId});
+                context.commit("setVisitInvestigationsList", response.data);
+            } catch (e) {
+                throw e;
+            }
 
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
         },
 
-        /*
-        * Add diff. diagnosis
-        * */
-        addVisitInvestigation: function ({commit, dispatch, rootState}, investigation) {
-            return new Promise((resolve, reject) => {
+        /* add */
+        async visitInvestigations_add(context, params) {
 
-                const params = {
-                    visit_id: rootState.visit.id,
-                    investigation_id: investigation.investigation_id,
-                    remarks: investigation.remarks
-                };
+            try {
+                await $.post(`${getSiteURL()}/api/save/visit/visit-investigation.php`, params);
+            } catch (e) {
+                throw e;
+            }
 
-                console.log(params);
-
-                $.get(`${getSiteURL()}/api/save/visit/visit-investigation.php`, params)
-                    .done(r => {
-
-                        dispatch('fetchVisitInvestigations', params.visit_id);
-                        resolve(r);
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
         },
 
-        /*
-        * Delete diff. diagnosis
-        * */
-        deleteVisitInvestigation: function ({commit, dispatch, rootState}, investigation) {
-            return new Promise((resolve, reject) => {
-
-                const params = {
-                    id: investigation.id,
-                }
-
-                $.get(`${getSiteURL()}/api/delete/visit/visit-investigation.php`, params)
-                    .done(r => {
-
-                        const visit_id = rootState.visit.id;
-                        dispatch('fetchVisitInvestigations', visit_id);
-
-                        resolve();
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
+        /* delete */
+        async visitInvestigations_delete(context, id) {
+            try {
+                await $.post(`${getSiteURL()}/api/delete/visit/visit-investigation.php`, {id: id});
+            } catch (e) {
+                throw e;
+            }
         },
 
-        updateVisitInvestigation: function ({commit, dispatch, rootState}, visitInvestigation) {
-            return new Promise((resolve, reject) => {
-
-                const params = {
-                    id: visitInvestigation.id,
-                    remarks: visitInvestigation.remarks
-                };
-
-                $.get(`${getSiteURL()}/api/update/visit/visit-investigation.php`, params)
-                    .done(r => {
-
-                        const visit_id = rootState.visit.id;
-                        dispatch('fetchVisitInvestigations', visit_id);
-
-                        resolve();
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
-        }
+        /* update */
+        async visitInvestigations_update(context, params) {
+            try {
+                await $.post(`${getSiteURL()}/api/update/visit/visit-investigation.php`, params)
+            } catch (e) {
+                throw e;
+            }
+        },
 
     }
 };

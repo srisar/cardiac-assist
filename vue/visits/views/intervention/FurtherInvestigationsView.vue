@@ -60,7 +60,7 @@
                     </div>
 
                     <div>
-                      <button class="btn btn-tiny btn-danger" @click="showDeleteConfirmModal(item)">Confirm</button>
+                      <button class="btn btn-tiny btn-danger" @click="showDeleteConfirmModal(item)">Remove</button>
                     </div>
 
                   </div>
@@ -107,14 +107,14 @@
 
     <!-- modal: delete confirm -->
     <ModalWindow :visible="isDeleteConfirmModalVisible" @close="isDeleteConfirmModalVisible = false">
-      <template v-slot:title>Confirm Delete</template>
+      <template v-slot:title>Confirm Removal</template>
       <slot>
 
-        <p class="lead text-center">Confirm delete the following added investigation</p>
+        <p class="lead text-center">Confirm removing the following added investigation</p>
         <p class="text-center">{{ investigationToEdit.investigation.investigation_name }}</p>
 
         <div class="text-center">
-          <button class="btn btn-danger" @click="onDelete()">Delete</button>
+          <button class="btn btn-danger" @click="onDelete()">Remove</button>
         </div>
 
       </slot>
@@ -184,7 +184,7 @@ export default {
     try {
 
       /* 1.fetch all investigations */
-      this.$store.dispatch("fetchInvestigations").then(() => {
+      this.$store.dispatch("investigations_fetchAllAvailableInvestigation").then(() => {
         this.investigationsList = this.$store.getters.getInvestigationsList;
       });
 
