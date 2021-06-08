@@ -9,6 +9,7 @@ import visitInvestigations from "./store_modules/visit_investigations";
 import visitDiagnosis from "./store_modules/visit_diagnosis";
 import visitEchoValues from "./store_modules/visit_echo_values";
 import {visitPrescriptions} from "./store_modules/visit_prescriptions";
+import {visitFurtherInvestigation} from "./store_modules/visit_further_investigations";
 
 
 export default new Vuex.Store({
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         visitDiagnosis: visitDiagnosis,
         visitEchoValues: visitEchoValues,
         visitPrescriptions: visitPrescriptions,
+        visitFurtherInvestigation: visitFurtherInvestigation
     },
 
     state: {

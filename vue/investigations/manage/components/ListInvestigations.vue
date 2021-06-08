@@ -7,21 +7,18 @@
       <div class="card-header d-flex justify-content-between">
         <div>Investigations</div>
         <div>
-          <button class="btn btn-success btn-tiny" @click="onClickAdd">Add a new investigation</button>
+          <router-link class="btn btn-tiny btn-success" to="/add">Add a new investigation</router-link>
         </div>
       </div>
 
       <div class="card-body p-2">
 
         <table class="table table-sm table-bordered table-striped">
-          <thead>
-          <tr>
-            <th>Investigation name</th>
-          </tr>
-          </thead>
           <tbody>
-          <tr v-for="(item, index) in investigationsList">
-            <td><a href="#" @click="setSelected(item)">{{ item.investigation_name }}</a></td>
+          <tr v-for="item in investigationsList" :key="item.id">
+            <td>
+              <router-link :to="'/edit/' + item.id">{{ item.investigation_name }}</router-link>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -37,49 +34,36 @@
 <script>
 
 
-export default {
-  name      : "ListInvestigations",
-  components: {},
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
-  props: [],
+export default {
+  name: "ListInvestigations",
+
 
   data() {
-    return {}
+    return {};
   },
 
   computed: {
 
-    investigationsList: function () {
-      return this.$store.state.investigationsList;
+    investigationsList() {
+      return this.$store.getters.getInvestigationsList;
     }
 
   },
 
-  mounted() {
-    //
-    this.fetchAll();
+  async mounted() {
 
-  },
+    try {
 
-  methods: {
-    //
+      await this.$store.dispatch("investigations_fetchAll");
 
-    /*
-    * Fetch existing symptoms
-    * */
-    fetchAll: function () {
-      this.$store.dispatch('fetchInvestigations');
-    },
-
-    setSelected: function (investigation) {
-      this.$store.dispatch('setSelectedInvestigation', investigation);
-    },
-
-    onClickAdd: function () {
-      this.$store.commit('setPanelModeAdd');
+    } catch (e) {
+      errorMessageBox("Failed to load investigations");
     }
 
   },
+
 
 }
 </script>

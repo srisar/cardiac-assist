@@ -20,12 +20,12 @@ try {
 
     $result = $object->update();
 
-    if ( empty($result) ) throw new Exception("Failed");
+    if (empty($result)) throw new Exception("Failed");
 
     JSONResponse::validResponse();
     return;
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }
 

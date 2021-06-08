@@ -23,7 +23,7 @@ class Investigation implements IModel
     public static function build($array): Investigation
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -32,15 +32,11 @@ class Investigation implements IModel
 
     /**
      * @param int $id
-     * @return Investigation
+     * @return Investigation|null
      */
-    public static function find(int $id): Investigation
+    public static function find(int $id): ?Investigation
     {
-        /** @var Investigation $investigation */
-        $investigation = Database::find(self::TABLE, $id, self::class);
-
-        return $investigation;
-
+        return Database::find(self::TABLE, $id, self::class);
     }
 
     /**
@@ -90,7 +86,7 @@ class Investigation implements IModel
 
         $result = $statement->fetchObject(self::class);
 
-        if ( !empty($result) ) return $result;
+        if (!empty($result)) return $result;
         return null;
     }
 

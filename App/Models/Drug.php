@@ -6,7 +6,6 @@ namespace App\Models;
 
 use App\Core\Database\Database;
 use Exception;
-use mysql_xdevapi\Statement;
 use PDO;
 
 class Drug implements IModel

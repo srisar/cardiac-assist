@@ -14,13 +14,20 @@ try {
 
     $id = Request::getAsInteger("id");
 
-    if ( !empty($id) ) {
+    if (!empty($id)) {
+
+        $investigation = Investigation::find($id);
+
+        if (empty($investigation)) throw new Exception("Invalid investigation");
+
         JSONResponse::validResponse(["data" => Investigation::find($id)]);
+        return;
+
     } else {
         JSONResponse::validResponse(["data" => Investigation::findAll()]);
     }
 
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }

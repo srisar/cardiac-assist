@@ -20,13 +20,13 @@ try {
 
     $result = $object->delete();
 
-    if ( $result ) {
+    if ($result) {
         JSONResponse::validResponse("Deleted");
         return;
     } else {
         throw new Exception("Failed");
     }
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }

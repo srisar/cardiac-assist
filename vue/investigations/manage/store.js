@@ -1,140 +1,101 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
-
-const PANEL_EDIT = "EDIT"
-const PANEL_ADD = "ADD"
-
 
 export default new Vuex.Store({
 
     state: {
         investigationsList: [],
         selectedInvestigation: null,
+    },
 
-        panelMode: PANEL_ADD,
-        editButtonText: "Edit"
+    getters: {
+
+        getInvestigationsList(state) {
+            return state.investigationsList;
+        },
+
+        getSelectedInvestigation(state) {
+            return state.selectedInvestigation;
+        }
+
     },
 
     mutations: {
 
-        updateInvestigationsList(state, payload) {
-            state.investigationsList = payload;
+        setInvestigationsList(state, data) {
+            state.investigationsList = data;
         },
 
-        updateSelectedInvestigation(state, payload) {
-            state.selectedInvestigation = payload;
+        setSelectedInvestigation(state, data) {
+            state.selectedInvestigation = data;
         },
-
-        setPanelModeEdit(state) {
-            state.panelMode = PANEL_EDIT;
-        },
-
-        setPanelModeAdd(state) {
-            state.panelMode = PANEL_ADD;
-        },
-
-        setEditButtonText(state, textValue) {
-            state.editButtonText = textValue;
-        }
 
     },
 
-    getters: {},
-
     actions: {
-        fetchInvestigations({commit}, payload) {
 
-            $.get(`${getSiteURL()}/api/get/investigations.php`)
-                .done(r => {
-                    commit('updateInvestigationsList', r.data);
-                })
-                .fail(e => {
-                    console.log(e.responseJSON.message);
-                });
 
-        },
+        /* fetch all */
+        async investigations_fetchAll(context) {
 
-        saveInvestigation({commit, dispatch}, investigation) {
+            try {
 
-            return new Promise((resolve, reject) => {
+                const response = await $.get(`${getSiteURL()}/api/get/investigations.php`);
+                context.commit("setInvestigationsList", response.data);
 
-                const params = {
-                    investigation_name: investigation.investigation_name,
-                    description: investigation.description
-                };
-
-                $.post(`${getSiteURL()}/api/save/investigation.php`, params)
-                    .done(r => {
-                        dispatch('fetchInvestigations');
-                        resolve(r);
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
+            } catch (e) {
+                throw e;
+            }
 
         },
 
-        updateInvestigation({commit, dispatch}, investigation) {
+        /* fetch */
+        async investigations_fetch(context, id) {
 
-            return new Promise((resolve, reject) => {
+            try {
 
-                const params = {
-                    id: investigation.id,
-                    investigation_name: investigation.investigation_name,
-                    description: investigation.description
-                };
+                const response = await $.get(`${getSiteURL()}/api/get/investigations.php`, {id: id});
+                context.commit("setSelectedInvestigation", response.data);
 
-
-                $.post(`${getSiteURL()}/api/update/investigation.php`, params)
-                    .done(r => {
-
-                        dispatch('fetchInvestigations');
-                        resolve();
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
+            } catch (e) {
+                throw e;
+            }
 
         },
 
+        /* add */
+        async investigations_add(context, params) {
 
-        deleteInvestigation({commit, dispatch}, investigation) {
-
-            return new Promise((resolve, reject) => {
-
-                const params = {
-                    id: investigation.id,
-                }
-
-                $.get(`${getSiteURL()}/api/delete/investigation.php`, params)
-                    .done(r => {
-
-                        dispatch('fetchInvestigations');
-                        resolve();
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
-
+            try {
+                await $.post(`${getSiteURL()}/api/save/investigation.php`, params);
+            } catch (e) {
+                throw e;
+            }
         },
 
 
-        setSelectedInvestigation({commit, dispatch}, investigation) {
-            commit('updateSelectedInvestigation', investigation);
-            commit('setPanelModeEdit');
-            commit('setEditButtonText', 'Edit');
+        /* update */
+        async investigations_update(context, params) {
 
-        }
+            try {
+                await $.post(`${getSiteURL()}/api/update/investigation.php`, params);
+            } catch (e) {
+                throw e;
+            }
+        },
+
+        /* update */
+        async investigations_delete(context, id) {
+
+            try {
+                await $.post(`${getSiteURL()}/api/delete/investigation.php`, {id: id});
+            } catch (e) {
+                throw e;
+            }
+        },
+
     }
 
 });

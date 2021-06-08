@@ -3,17 +3,15 @@
 
     <div class="container-fluid">
 
-      <div class="row">
+      <div class="form-row">
 
         <div class="col-12 col-md-4">
           <ListInvestigations/>
         </div>
 
         <div class="col-12 col-md-8 mb-2">
-          <SaveInvestigation v-if="panelMode === 'ADD'"/>
-          <EditInvestigation v-if="panelMode === 'EDIT'"/>
+          <router-view></router-view>
         </div><!-- col -->
-
 
       </div><!-- row -->
 
@@ -31,27 +29,6 @@ import EditInvestigation from "./components/EditInvestigation";
 export default {
   name: "ManageInvestigations",
   components: {SaveInvestigation, ListInvestigations, EditInvestigation},
-  props: [],
-
-  data() {
-    return {
-      //
-    }
-  },
-
-  computed: {
-    panelMode: function () {
-      return this.$store.state.panelMode;
-    }
-  },
-
-  mounted() {
-    //
-  },
-
-  methods: {
-    //
-  },
 
 }
 </script>

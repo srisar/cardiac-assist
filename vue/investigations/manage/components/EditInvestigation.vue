@@ -6,19 +6,19 @@
       <div class="card-header d-flex justify-content-between">
         <!-- left -->
         <div>
-          <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
-          {{ investigation.investigation_name }}
+          <button class="btn btn-tiny" :class="{'btn-secondary': editable, 'btn-primary': !editable}" @click="editable=!editable">{{ editButtonText }}</button>
+          {{ selectedInvestigation.investigation_name }}
         </div>
 
         <!-- right -->
         <div>
           <div v-if="confirmDelete">
-            <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
-            <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+            <button class="btn btn-tiny btn-danger" @click="onDelete()">Confirm</button>
+            <button class="btn btn-tiny btn-secondary" @click="confirmDelete=false">Cancel</button>
           </div>
 
           <div v-else>
-            <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+            <button class="btn btn-tiny btn-danger" @click="confirmDelete=true">Delete</button>
           </div>
         </div>
 
@@ -31,7 +31,7 @@
             <div class="col">
               <div class="form-group">
                 <label>Investigation name</label>
-                <input type="text" class="form-control" v-model.trim="investigation.investigation_name">
+                <input type="text" class="form-control" v-model.trim="selectedInvestigation.investigation_name">
               </div>
             </div><!-- col -->
 
@@ -40,20 +40,20 @@
 
           <div class="form-row">
             <div class="col">
-              <RichEditorV2 v-model="investigation.description"/>
+              <RichEditorV2 v-model="selectedInvestigation.description"/>
             </div>
           </div>
 
           <div class="form-row my-2">
             <div class="col text-center">
-              <button class="btn btn-success" @click="onClickUpdate">Update</button>
+              <button class="btn btn-success" @click="onUpdate()">Update</button>
             </div>
           </div>
         </div><!-- edit-form -->
 
 
         <div v-else class="view-form">
-          <RichEditorV2 v-model="investigation.description" disabled/>
+          <RichEditorV2 v-model="selectedInvestigation.description" disabled/>
         </div><!-- view-form -->
 
       </div>
@@ -67,86 +67,129 @@
 
 
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
 
 export default {
-  name      : "EditInvestigation",
-  components: { RichEditorV2 },
-  props     : [],
+  name: "EditInvestigation",
+  components: {RichEditorV2},
 
 
   data() {
     return {
+
+      /* editable form */
       editable: false,
 
-      // delete
+      /* delete confirm */
       confirmDelete: false,
 
+      selectedInvestigation: {
+        id: undefined,
+        investigation_name: "",
+        description: ""
+      }
 
     }
   },
 
   computed: {
 
-    investigation: function () {
-      this.editable = false;
-      return this.$store.state.selectedInvestigation;
-    },
-
     editButtonText: function () {
-      return this.$store.state.editButtonText;
+      return this.editable ? "Cancel" : "Edit";
     },
 
   },
 
-  watch: {},
 
+  async mounted() {
+
+    try {
+
+      const id = this.$route.params.id;
+
+      await this.$store.dispatch("investigations_fetch", id);
+      this.selectedInvestigation = this.$store.getters.getSelectedInvestigation;
+
+    } catch (e) {
+      errorMessageBox("Failed to load selected investigation data");
+      await this.$router.push("/");
+    }
+
+  },
+
+  /*
+  * this is needed to catch the id params from the route
+  * and fetch the investigation for that id
+  * */
+  async beforeRouteUpdate(to, from, next) {
+
+
+    try {
+
+      const id = to.params.id;
+
+      await this.$store.dispatch("investigations_fetch", id);
+      this.selectedInvestigation = this.$store.getters.getSelectedInvestigation;
+
+      next();
+
+    } catch (e) {
+      errorMessageBox("Failed to load selected investigation data");
+      await this.$router.push("/");
+    }
+
+  },
 
   methods: {
 
-    onClickUpdate: function () {
+    /*
+    * On update
+    * */
+    async onUpdate() {
 
-      this.$store.dispatch('updateInvestigation', this.investigation)
-          .then(r => {
-            alert('Investigation updated');
-          })
-          .catch(e => {
-            alert(e.responseJSON.message);
-          });
+      try {
 
-    },
+        const params = {
+          id: this.selectedInvestigation.id,
+          investigation_name: this.selectedInvestigation.investigation_name,
+          description: this.selectedInvestigation.description
+        }
 
-    onClickEdit: function () {
-      if ( this.editable ) {
+        await this.$store.dispatch("investigations_update", params);
+
+        await this.$store.dispatch("investigations_fetchAll");
+
         this.editable = false;
-        this.$store.commit('setEditButtonText', 'Edit');
-      } else {
-        this.editable = true;
-        this.$store.commit('setEditButtonText', 'View');
-      }
-    },
 
+        successMessageBox("Investigation details updated");
+
+      } catch (e) {
+        errorMessageBox("Failed to update the investigation");
+      }
+
+    },
 
     /*
-    * Delete investigations event handlers
+    * On delete
     * */
 
-    onClickConfirmDelete: function () {
-      this.confirmDelete = true;
-    },
+    async onDelete() {
 
-    onClickCancelDelete: function () {
-      this.confirmDelete = false;
-    },
+      try {
 
-    onClickDelete: function () {
+        await this.$store.dispatch("investigations_delete", this.selectedInvestigation.id);
 
-      this.$store.dispatch('deleteInvestigation', this.investigation)
-          .then(r => {
-            this.$store.commit('setPanelModeAdd');
-          })
-          .catch(e => {
-            console.log(e);
-          });
+        await this.$store.dispatch("investigations_fetchAll");
+
+        this.editable = false;
+
+        successMessageBox("Investigation deleted");
+
+        await this.$router.push("/");
+
+      } catch (e) {
+        errorMessageBox("Failed to delete the investigation");
+      }
 
     },
 

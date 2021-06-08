@@ -25,7 +25,7 @@
 
         <div class="form-row my-2">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onClickSave" :disabled="!isValidForm">Save</button>
+            <button class="btn btn-success" @click="onSave()" :disabled="!isValidForm">Save</button>
           </div>
         </div>
       </div>
@@ -39,13 +39,13 @@
 <script>
 
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 
 export default {
   name: "SaveInvestigation",
   components: {RichEditorV2,},
 
-  props: [],
 
   data() {
     return {
@@ -71,22 +71,24 @@ export default {
   methods: {
     //
 
-    onClickSave: function () {
+    async onSave() {
 
-      this.$store.dispatch('saveInvestigation', this.investigation)
-          .then(r => {
-            alert('Saved.');
+      try {
 
-            //clear form fields
-            this.investigation = {
-              investigation_name: "",
-              description: "",
-            }
+        const params = {
+          investigation_name: this.investigation.investigation_name,
+          description: this.investigation.description,
+        };
 
-          })
-          .catch(e => {
-            alert(e.responseJSON.message);
-          });
+        this.$emit("saved", params);
+
+        await this.$store.dispatch("investigations_add", params);
+        await this.$store.dispatch("investigations_fetchAll");
+
+
+      } catch (e) {
+        errorMessageBox("Failed to add the investigation");
+      }
 
     },
 

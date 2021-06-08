@@ -108,15 +108,14 @@ export default {
           'highlight',
           '|',
           'alignment',
-          'indent',
-          'outdent',
+          // 'indent',
+          // 'outdent',
           '|',
           'CKFinder',
-          'imageInsert',
           'insertTable',
           'mediaEmbed',
-          'undo',
-          'redo'
+          // 'undo',
+          // 'redo'
         ]
       },
       language: 'en',

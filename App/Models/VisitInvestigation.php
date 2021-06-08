@@ -20,12 +20,12 @@ class VisitInvestigation implements IModel
 
     /**
      * @param $array
-     * @return VisitInvestigation
+     * @return self
      */
-    public static function build($array): VisitInvestigation
+    public static function build($array): self
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -41,7 +41,7 @@ class VisitInvestigation implements IModel
         /** @var VisitInvestigation $result */
         $result = Database::find(self::TABLE, $id, self::class);
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $result->visit = Visit::find($result->visit_id);
             $result->investigation = Investigation::find($result->investigation_id);
 
@@ -56,7 +56,7 @@ class VisitInvestigation implements IModel
 
     }
 
-    public function insert()
+    public function insert(): int
     {
         $data = [
             'visit_id' => $this->visit_id,
@@ -76,14 +76,14 @@ class VisitInvestigation implements IModel
         return Database::update(self::TABLE, $data, ['id' => $this->id]);
     }
 
-    public function delete()
+    public function delete(): bool
     {
         return Database::delete(self::TABLE, 'id', $this->id);
     }
 
     /**
      * @param Visit $visit
-     * @return VisitInvestigation[]
+     * @return self[]
      */
     public static function findByVisit(Visit $visit): array
     {
@@ -92,14 +92,14 @@ class VisitInvestigation implements IModel
         $statement->execute([$visit->id]);
 
 
-        /** @var VisitInvestigation[] $results */
+        /** @var self[] $results */
         $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         $output = [];
 
-        if ( !empty($results) ) {
+        if (!empty($results)) {
 
-            foreach ( $results as $result ) {
+            foreach ($results as $result) {
                 $result->visit = Visit::find($result->visit_id);
                 $result->investigation = Investigation::find($result->investigation_id);
                 $output[] = $result;
