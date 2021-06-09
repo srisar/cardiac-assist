@@ -13,7 +13,7 @@
 
       <div class="card-body p-2">
 
-        <table class="table table-sm table-bordered table-striped">
+        <table class="table table-sm table-bordered table-hover">
           <tbody>
           <tr v-for="item in investigationsList" :key="item.id">
             <td>

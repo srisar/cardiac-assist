@@ -5,18 +5,21 @@
     <div class="card shadow shadow-sm">
       <div class="card-header d-flex justify-content-between">
 
+        <!-- left -->
         <div>
-          <button class="btn btn-tiny btn-primary" @click="onClickEdit">{{ editButtonText }}</button>
-          {{ symptom.symptom_name }}
+          <button class="btn btn-tiny" :class="{'btn-secondary': editable, 'btn-primary': !editable}" @click="editable=!editable">{{ editButtonText }}</button>
+          {{ selectedSymptom.symptom_name }}
         </div>
+
+        <!-- right -->
         <div>
           <div v-if="confirmDelete">
-            <button class="btn btn-tiny btn-danger" @click="onClickDelete">Confirm</button>
-            <button class="btn btn-tiny btn-secondary" @click="onClickCancelDelete">Cancel</button>
+            <button class="btn btn-tiny btn-danger" @click="onDelete()">Confirm</button>
+            <button class="btn btn-tiny btn-secondary" @click="confirmDelete=false">Cancel</button>
           </div>
 
           <div v-else>
-            <button class="btn btn-tiny btn-danger" @click="onClickConfirmDelete">Delete</button>
+            <button class="btn btn-tiny btn-danger" @click="confirmDelete=true">Delete</button>
           </div>
         </div>
 
@@ -29,27 +32,27 @@
             <div class="col">
               <div class="form-group">
                 <label>Symptom name</label>
-                <input type="text" class="form-control" v-model.trim="symptom.symptom_name">
+                <input type="text" class="form-control" v-model.trim="selectedSymptom.symptom_name">
               </div>
             </div><!-- col -->
           </div><!-- row -->
 
           <div class="form-row">
             <div class="col">
-              <RichEditorV2 v-model="symptom.description"/>
+              <RichEditorV2 v-model="selectedSymptom.description"/>
             </div>
           </div>
 
           <div class="form-row my-2">
             <div class="col text-center">
-              <button class="btn btn-success" @click="onClickUpdate">Update</button>
+              <button class="btn btn-success" @click="onUpdate()">Update</button>
             </div>
           </div>
         </div><!-- edit-form -->
 
 
         <div v-else class="view-form">
-          <RichEditorV2 v-model="symptom.description" disabled/>
+          <RichEditorV2 v-model="selectedSymptom.description" disabled/>
         </div><!-- view-form -->
 
       </div>
@@ -61,95 +64,129 @@
 
 <script>
 
-import RichViewer from "../../../_common/components/RichViewer";
-import RichEditor from "../../../_common/components/RichEditor";
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
 
 export default {
 
-  name      : "EditSymptom",
-  components: { RichEditor, RichViewer, RichEditorV2 },
-  props     : [],
+  name: "EditSymptom",
+  components: {RichEditorV2},
+  props: [],
 
 
   data() {
     return {
-      editable          : false,
-      symptomDescription: this.$store.getters.getSelectedSymptom.description,
 
-      // delete
+      /* editable form */
+      editable: false,
+
+      /* delete confirm */
       confirmDelete: false,
+
+      selectedSymptom: {
+        id: undefined,
+        symptom_name: "",
+        description: "",
+      }
 
     }
   },
 
   computed: {
 
-    symptom: function () {
-      this.editable = false;
-      return this.$store.getters.getSelectedSymptom;
+    editButtonText: function () {
+      return this.editable ? "Cancel" : "Edit";
     },
 
-    editButtonText: function () {
-      return this.$store.getters.getEditButtonText;
-    }
 
   },
 
-  watch: {},
+  async mounted() {
+
+    const id = this.$route.params.id;
+    await this.fetchSelected(id);
+
+  },
+
+  async beforeRouteUpdate(to, from, next) {
+
+    const id = to.params.id;
+    await this.fetchSelected(id);
+    await next();
+
+  },
 
 
   methods: {
 
+    async fetchSelected(id) {
+      try {
 
-    onClickUpdate: function () {
+        await this.$store.dispatch("symptoms_fetch", id);
+        this.selectedSymptom = this.$store.getters.getSelectedSymptom;
 
-      const symptom = {};
-
-      this.$store.dispatch('updateSymptom', this.symptom)
-          .then(() => {
-            alert(this.symptom.symptom_name + ' updated');
-          })
-          .catch(() => {
-            alert('Failed to update symptom');
-          });
-
-    },
-
-    onClickEdit: function () {
-      if ( this.editable ) {
-        this.editable = false;
-        this.$store.commit('setEditButtonText', 'Edit');
-      } else {
-        this.editable = true;
-        this.$store.commit('setEditButtonText', 'View');
+      } catch (e) {
+        errorMessageBox("Failed to load selected investigation data");
+        await this.$router.push("/");
       }
     },
 
+    /*
+    * On update
+    * */
+    async onUpdate() {
+
+      try {
+
+        const params = {
+          id: this.selectedSymptom.id,
+          symptom_name: this.selectedSymptom.symptom_name,
+          description: this.selectedSymptom.description
+        }
+
+        await this.$store.dispatch("symptoms_update", params);
+
+
+        this.editable = false;
+
+        successMessageBox("Symptom details updated");
+
+      } catch (e) {
+        errorMessageBox("Failed to update the symptom");
+      }
+
+      try {
+        await this.$store.dispatch("symptoms_fetchAll");
+      } catch (e) {
+        errorMessageBox("Failed to load symptoms data");
+      }
+
+    },
 
     /*
-    * Delete symptom event handlers
+    * On delete
     * */
+    async onDelete() {
 
-    onClickConfirmDelete: function () {
-      this.confirmDelete = true;
+      try {
+
+        await this.$store.dispatch("symptoms_delete", this.selectedSymptom.id);
+
+        await this.$store.dispatch("symptoms_fetchAll");
+
+        this.editable = false;
+
+        successMessageBox("Symptom deleted");
+
+        await this.$router.push("/");
+
+      } catch (e) {
+        errorMessageBox("Failed to delete the symptom");
+      }
+
+
     },
 
-    onClickCancelDelete: function () {
-      this.confirmDelete = false;
-    },
-
-    onClickDelete: function () {
-
-      this.$store.dispatch('deleteSymptom', this.symptom)
-          .then(r => {
-            this.$store.commit('setPanelModeAdd');
-          })
-          .catch(e => {
-            console.log(e);
-          });
-
-    },
 
   },
 

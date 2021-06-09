@@ -103,17 +103,8 @@ export default {
 
   async mounted() {
 
-    try {
-
-      const id = this.$route.params.id;
-
-      await this.$store.dispatch("investigations_fetch", id);
-      this.selectedInvestigation = this.$store.getters.getSelectedInvestigation;
-
-    } catch (e) {
-      errorMessageBox("Failed to load selected investigation data");
-      await this.$router.push("/");
-    }
+    const id = this.$route.params.id;
+    await this.fetchSelected(id);
 
   },
 
@@ -123,24 +114,27 @@ export default {
   * */
   async beforeRouteUpdate(to, from, next) {
 
+    this.editable = false;
 
-    try {
+    const id = to.params.id;
+    await this.fetchSelected(id);
 
-      const id = to.params.id;
-
-      await this.$store.dispatch("investigations_fetch", id);
-      this.selectedInvestigation = this.$store.getters.getSelectedInvestigation;
-
-      next();
-
-    } catch (e) {
-      errorMessageBox("Failed to load selected investigation data");
-      await this.$router.push("/");
-    }
-
+    await next();
   },
 
   methods: {
+
+    async fetchSelected(id) {
+      try {
+
+        await this.$store.dispatch("investigations_fetch", id);
+        this.selectedInvestigation = this.$store.getters.getSelectedInvestigation;
+
+      } catch (e) {
+        errorMessageBox("Failed to load selected investigation data");
+        await this.$router.push("/");
+      }
+    },
 
     /*
     * On update

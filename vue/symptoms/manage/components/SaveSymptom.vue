@@ -25,7 +25,7 @@
 
         <div class="form-row my-2">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onClickSave" :disabled="!isValidForm">Save</button>
+            <button class="btn btn-success" @click="onSave()" :disabled="!isValidForm">Save</button>
           </div>
         </div>
       </div>
@@ -38,14 +38,12 @@
 
 <script>
 
-import RichEditor from "../../../_common/components/RichEditor";
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 export default {
   name: "SaveSymptom",
-  components: {RichEditor, RichEditorV2},
-
-  props: [],
+  components: {RichEditorV2},
 
   data() {
     return {
@@ -71,15 +69,21 @@ export default {
   methods: {
     //
 
-    onClickSave: function () {
+    async onSave() {
 
-      this.$store.dispatch('saveSymptom', this.symptom)
-          .then(r => {
-            alert('Saved.');
-          })
-          .catch(e => {
-            alert(e.responseJSON.message);
-          });
+      try {
+
+        const params = {
+          symptom_name: this.symptom.symptom_name,
+          description: this.symptom.description,
+        };
+
+        await this.$store.dispatch("symptoms_add", params);
+        await this.$store.dispatch("symptoms_fetchAll");
+
+      } catch (e) {
+        errorMessageBox("Failed to add the symptom");
+      }
 
     },
 

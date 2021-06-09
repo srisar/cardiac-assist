@@ -1,10 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
-
-const PANEL_EDIT = "EDIT"
-const PANEL_ADD = "ADD"
 
 
 export default new Vuex.Store({
@@ -13,149 +10,94 @@ export default new Vuex.Store({
         symptomsList: [],
         selectedSymptom: null,
 
-        panelMode: PANEL_ADD,
-        editButtonText: "Edit"
+    },
+
+
+    getters: {
+        getSymptomsList(state) {
+            return state.symptomsList;
+        },
+
+        getSelectedSymptom(state) {
+            return state.selectedSymptom;
+        },
+
+
     },
 
     mutations: {
 
-        updateSymptomsList(state, payload) {
+        setSymptomsList(state, payload) {
             state.symptomsList = payload;
         },
 
-        updateSelectedSymptom(state, payload) {
+        setSelectedSymptom(state, payload) {
             state.selectedSymptom = payload;
         },
 
-        setPanelModeEdit(state) {
-            state.panelMode = PANEL_EDIT;
-        },
-
-        setPanelModeAdd(state) {
-            state.panelMode = PANEL_ADD;
-        },
-
-        setEditButtonText(state, textValue) {
-            state.editButtonText = textValue;
-        }
-
     },
 
-    getters: {
-        getSymptomsList: state => {
-            return state.symptomsList;
-        },
-
-        getSelectedSymptom: state => {
-            return state.selectedSymptom;
-        },
-
-        getPanelMode: state => {
-            return state.panelMode;
-        },
-        getEditButtonText: state => {
-            return state.editButtonText;
-        },
-    },
 
     actions: {
 
+        /* fetch all */
+        async symptoms_fetchAll(context) {
 
-        setSelectedSymptom({commit, dispatch}, symptom) {
-            commit('updateSelectedSymptom', symptom);
-            commit('setPanelModeEdit');
-            commit('setEditButtonText', 'Edit');
+            try {
 
-        },
+                const response = await $.get(`${getSiteURL()}/api/get/symptoms.php`);
+                context.commit("setSymptomsList", response.data);
 
-        /*
-        * Fetch all symptoms
-        * */
-        fetchSymptoms({commit}) {
-
-            $.get(`${getSiteURL()}/api/get/symptoms.php`)
-                .done(r => {
-                    commit('updateSymptomsList', r.data);
-                })
-                .fail(e => {
-                    console.log(e.responseJSON.message);
-                });
+            } catch (e) {
+                throw e;
+            }
 
         },
 
-        /*
-        * Save a new symptom
-        * */
-        saveSymptom({commit, dispatch}, symptom) {
+        /* fetch */
+        async symptoms_fetch(context, id) {
 
-            return new Promise((resolve, reject) => {
+            try {
 
-                const params = {
-                    symptom_name: symptom.symptom_name,
-                    description: symptom.description,
-                };
+                const response = await $.get(`${getSiteURL()}/api/get/symptoms.php`, {id: id});
+                context.commit("setSelectedSymptom", response.data);
 
-                $.post(`${getSiteURL()}/api/save/symptom.php`, params)
-                    .done(r => {
-                        dispatch('fetchSymptoms');
-                        resolve(r);
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
+            } catch (e) {
+                throw e;
+            }
 
         },
 
-        /*
-        * Update existing symptom
-        * */
-        updateSymptom({commit, dispatch}, symptom) {
+        /* add */
+        async symptoms_add(context, params) {
 
-            return new Promise((resolve, reject) => {
-
-                const params = {
-                    id: symptom.id,
-                    symptom_name: symptom.symptom_name,
-                    description: symptom.description,
-                };
-
-                $.post(`${getSiteURL()}/api/update/symptom.php`, params)
-                    .done(r => {
-                        resolve(r);
-                        dispatch('fetchSymptoms');
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
-
+            try {
+                await $.post(`${getSiteURL()}/api/save/symptom.php`, params);
+            } catch (e) {
+                throw e;
+            }
         },
 
-        /*
-        * Delete existing symptom
-        * */
-        deleteSymptom({commit, dispatch}, symptom) {
 
-            return new Promise((resolve, reject) => {
+        /* update */
+        async symptoms_update(context, params) {
 
-                $.post(`${getSiteURL()}/api/delete/symptom.php`, {
-                    id: symptom.id,
-                }).done(r => {
+            try {
+                await $.post(`${getSiteURL()}/api/update/symptom.php`, params);
+            } catch (e) {
+                throw e;
+            }
+        },
 
-                    dispatch('fetchSymptoms');
-                    resolve();
+        /* delete */
+        async symptoms_delete(context, id) {
 
-                }).fail(e => {
-                    reject(e);
-                });
-
-
-            });
-
-        }
+            try {
+                await $.post(`${getSiteURL()}/api/delete/symptom.php`, {id: id});
+            } catch (e) {
+                throw e;
+            }
+        },
 
 
     }

@@ -7,7 +7,7 @@
 
         <div class="card shadow-sm shadow">
 
-          <div class="card-header">Review In</div>
+          <div class="card-header">Review On</div>
 
           <div class="card-body">
 

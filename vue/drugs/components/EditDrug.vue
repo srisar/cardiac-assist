@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card">
+  <div class="card shadow shadow-sm">
     <div class="card-header">Edit {{ selectedDrug.drug_name }}</div>
     <div class="card-body">
 
@@ -38,7 +38,9 @@ export default {
   },
 
   computed: {
-    selectedDrug() { return _.cloneDeep(this.$store.getters.getSelectedDrug) },
+    selectedDrug() {
+      return _.cloneDeep(this.$store.getters.getSelectedDrug)
+    },
 
     isFormValid() {
       return this.selectedDrug.drug_name !== "";
@@ -46,12 +48,38 @@ export default {
 
   },
 
-  mounted() {
-    //
+  async mounted() {
+
+    const id = this.$route.params.id;
+    await this.fetchSelected(id);
+
+  },
+
+  async beforeRouteUpdate(to, from, next) {
+
+    const id = to.params.id;
+    await this.fetchSelected(id);
+    await next();
+
   },
 
   methods: {
 
+    async fetchSelected(id) {
+      try {
+
+        await this.$store.dispatch("drugs_fetch", id);
+        this.selectedSymptom = this.$store.getters.getSelectedSymptom;
+
+      } catch (e) {
+        errorMessageBox("Failed to load selected drug data");
+        await this.$router.push("/");
+      }
+    },
+
+    /*
+    * On update
+    * */
     async onUpdate() {
 
       try {

@@ -86,7 +86,7 @@ export default new Vuex.Store({
             }
         },
 
-        /* update */
+        /* delete */
         async investigations_delete(context, id) {
 
             try {

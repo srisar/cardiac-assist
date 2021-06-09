@@ -80,7 +80,6 @@ export default {
           description: this.investigation.description,
         };
 
-        this.$emit("saved", params);
 
         await this.$store.dispatch("investigations_add", params);
         await this.$store.dispatch("investigations_fetchAll");
@@ -91,10 +90,6 @@ export default {
       }
 
     },
-
-    getDescription: function (data) {
-      this.investigation.description = data;
-    }
 
   },
 

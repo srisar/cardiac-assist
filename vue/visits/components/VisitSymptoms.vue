@@ -25,7 +25,7 @@
           <tbody>
           <tr v-for="item in visitSymptomsList">
             <td>
-              <a href="#" target="_blank">{{ item.symptom.symptom_name }}</a>
+              <a :href="'/app/symptoms/manage.php#/edit/' + item.symptom.id" target="_blank">{{ item.symptom.symptom_name }}</a>
             </td>
             <td class="text-center">{{ item.duration }}</td>
             <td class="text-center">

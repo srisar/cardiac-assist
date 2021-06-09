@@ -59,13 +59,14 @@
                 <router-link to="/referral-letters" class="">Referral letter</router-link>
               </li>
               <li class="list-group-item">
-                <router-link to="/review-in" class="">Review</router-link>
-              </li>
-              <li class="list-group-item">
                 <router-link to="/further-investigations" class="">Further investigations</router-link>
               </li>
+
               <li class="list-group-item">
-                <router-link to="/other-remarks" class="">Others</router-link>
+                <router-link to="/other-remarks" class="">Other remarks</router-link>
+              </li>
+              <li class="list-group-item">
+                <router-link to="/review-in" class="">Review</router-link>
               </li>
             </ul>
           </div><!-- card -->

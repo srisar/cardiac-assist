@@ -2,36 +2,40 @@
 
   <div>
 
-    <div class="container-fluid">
+    <div class="container">
 
-      <div class="row">
+      <div class="form-row">
 
         <div class="col-12 col-md-4">
           <!-- list drugs -->
 
-          <div class="card">
+          <div class="card shadow shadow-sm">
             <div class="card-header d-flex justify-content-between">
               <div>Drugs</div>
               <div>
-                <button class="btn btn-tiny btn-success" @click="onAddNewDrug()">Add a drug</button>
+                <router-link class="btn btn-tiny btn-success" to="/add">Add</router-link>
               </div>
             </div>
 
             <div class="card-body">
 
-              <table class="table table-sm table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Drug</th>
-                  <th>Remarks</th>
-                </tr>
-                </thead>
+
+              <div class="mb-3">
+
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Filter drugs" v-model="filterText">
+                </div>
+
+              </div>
+
+
+              <table class="table table-sm table-bordered table-hover">
+
                 <tbody>
-                <tr v-for="drug in drugsList" :key="drug.id">
+                <tr v-for="drug in filteredDrugsList" :key="drug.id">
                   <td class="text-left">
-                    <a class="btn-link" @click="onSelectDrug(drug)">{{ drug.drug_name }}</a>
+                    <router-link :to="'/edit/' + drug.id">{{ drug.drug_name }}</router-link>
                   </td>
-                  <td>{{ drug.remarks }}</td>
                 </tr>
                 </tbody>
               </table>
@@ -43,10 +47,10 @@
         </div>
 
 
-        <div class="col-12 col-md-8">
-          <EditDrug v-if="panelMode === 'EDIT'"/>
-          <SaveDrug v-if="panelMode === 'ADD'"/>
-        </div>
+        <div class="col-12 col-md-8 mb-2">
+          <router-view></router-view>
+        </div><!-- col -->
+
 
       </div><!-- row -->
 
@@ -57,21 +61,35 @@
 </template>
 
 <script>
-import EditDrug from "./components/EditDrug";
-import SaveDrug from "./components/SaveDrug";
 
 export default {
   name: "ManageDrugs",
-  components: {SaveDrug, EditDrug},
+  components: {},
   data() {
-    return {}
+    return {
+
+      filterText: "",
+
+    }
   },
 
   computed: {
 
-    drugsList() { return this.$store.getters.getDrugs; },
+    drugsList() {
+      return this.$store.getters.getDrugs;
+    },
 
-    panelMode() { return this.$store.getters.getPanelMode; },
+    filteredDrugsList() {
+
+      const filteredTextUpper = _.upperCase(this.filterText);
+
+      return _.filter(this.drugsList, (obj) => {
+        const drugName = _.upperCase(obj.drug_name);
+
+        if (drugName.includes(filteredTextUpper)) return obj;
+      });
+
+    },
 
   },
 
@@ -87,19 +105,6 @@ export default {
 
   },
 
-  methods: {
-
-    onSelectDrug(drug) {
-      this.$store.commit("setSelectedDrug", drug);
-      this.$store.commit("setPanelModeEdit");
-    },
-
-    onAddNewDrug() {
-      this.$store.commit("setPanelModeAdd");
-    }
-
-
-  },
 
 }
 </script>

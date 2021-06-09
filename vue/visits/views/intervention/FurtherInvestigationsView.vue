@@ -12,7 +12,7 @@
             <div class="form-group">
               <label>Investigation</label>
               <select class="custom-select" v-model.number="investigationToAdd.investigation_id" :class="{'is-invalid': isAddFormInvalid}">
-                <option value="-1" disabled selected>SELECT ONE</option>
+                <option value="-1" disabled selected>CHOOSE ONE</option>
                 <option v-for="item in investigationsList" :value="item.id">{{ item.investigation_name }}</option>
               </select>
             </div>

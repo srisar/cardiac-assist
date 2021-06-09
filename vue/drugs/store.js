@@ -10,25 +10,45 @@ const Store = new Vuex.Store({
         drugs: [],
         selectedDrug: {},
 
-        panelMode: "ADD",
-
     },
     getters: {
-        getDrugs(state) {return state.drugs; },
-        getSelectedDrug(state) {return state.selectedDrug; },
+        getDrugs(state) {
+            return state.drugs;
+        },
 
-        getPanelMode(state) { return state.panelMode; },
+        getSelectedDrug(state) {
+            return state.selectedDrug;
+        },
+
     },
+
     mutations: {
 
-        setDrugs(state, data) { state.drugs = data; },
-        setSelectedDrug(state, data) { state.selectedDrug = data; },
+        setDrugs(state, data) {
+            state.drugs = data;
+        },
 
-        setPanelModeAdd(state) { state.panelMode = "ADD"; },
-        setPanelModeEdit(state) { state.panelMode = "EDIT"; },
+        setSelectedDrug(state, data) {
+            state.selectedDrug = data;
+        },
 
     },
+
     actions: {
+
+
+        async drugs_fetch(context, id) {
+
+            try {
+
+                const response = await $.get(`${getSiteURL()}/api/get/drugs.php`, {id: id});
+                context.commit("setSelectedDrug", response.data);
+
+            } catch (e) {
+                throw e;
+            }
+
+        }, /* fetch all */
 
         async drugs_fetchAll(context) {
 
@@ -56,13 +76,13 @@ const Store = new Vuex.Store({
 
         }, /* save */
 
-        async drugs_update(context, params){
+        async drugs_update(context, params) {
 
-            try{
+            try {
 
                 await $.post(`${getSiteURL()}/api/update/drug.php`, params);
 
-            }catch (e) {
+            } catch (e) {
                 throw e;
             }
 

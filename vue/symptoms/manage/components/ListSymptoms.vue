@@ -5,24 +5,21 @@
     <div class="card shadow shadow-sm">
 
       <div class="card-header d-flex justify-content-between">
+        <div> Symptoms</div>
         <div>
-          Symptoms
-        </div>
-        <div>
-          <button class="btn btn-success btn-tiny" @click="onClickAddSymptom">Add a new symptom</button>
+          <router-link class="btn btn-tiny btn-success" to="/add">Add</router-link>
         </div>
       </div>
+
       <div class="card-body p-2">
 
-        <table class="table table-sm table-bordered table-striped">
-          <thead>
-          <tr>
-            <th>Symptom</th>
-          </tr>
-          </thead>
+        <table class="table table-sm table-bordered table-hover">
+
           <tbody>
-          <tr v-for="(item, index) in symptomsList">
-            <td><a href="#" @click="setSelectedSymptom(item)">{{ item.symptom_name }}</a></td>
+          <tr v-for="item in symptomsList">
+            <td>
+              <router-link :to="'/edit/' + item.id">{{ item.symptom_name }}</router-link>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -38,11 +35,12 @@
 <script>
 
 
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+
 export default {
-  name      : "ListSymptoms",
+  name: "ListSymptoms",
   components: {},
 
-  props: [],
 
   data() {
     return {}
@@ -50,41 +48,24 @@ export default {
 
   computed: {
 
-    symptomsList: function () {
+    symptomsList() {
       return this.$store.getters.getSymptomsList;
     }
 
   },
 
-  mounted() {
-    //
-    this.fetchAll();
+  async mounted() {
+    try {
 
-  },
+      await this.$store.dispatch("symptoms_fetchAll");
 
-  methods: {
-    //
-
-    /*
-    * Fetch existing symptoms
-    * */
-    fetchAll: function () {
-      this.$store.dispatch('fetchSymptoms');
-    },
-
-    setSelectedSymptom: function (symptom) {
-      this.$store.dispatch('setSelectedSymptom', symptom);
-    },
-
-    onCloseViewSelectedSymptom: function () {
-      this.selectedSymptom = null;
-    },
-
-    onClickAddSymptom: function () {
-      this.$store.commit('setPanelModeAdd');
+    } catch (e) {
+      errorMessageBox("Failed to load symptoms");
     }
 
   },
+
+  methods: {},
 
 }
 </script>

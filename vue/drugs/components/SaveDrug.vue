@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card">
+  <div class="card shadow shadow-sm">
     <div class="card-header">Add a drug</div>
     <div class="card-body">
 
@@ -55,6 +55,9 @@ export default {
 
   methods: {
 
+    /*
+    * On save
+    * */
     async onSave() {
 
       try {
@@ -66,10 +69,14 @@ export default {
 
         await this.$store.dispatch("drugs_save", params);
 
-        await this.$store.dispatch("drugs_fetchAll");
-
       } catch (e) {
         errorMessageBox("Failed to save");
+      }
+
+      try {
+        await this.$store.dispatch("drugs_fetchAll");
+      } catch (e) {
+        errorMessageBox("Failed to fetch drugs details");
       }
 
     },
