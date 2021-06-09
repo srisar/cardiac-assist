@@ -15,7 +15,7 @@ class Visit implements IModel
 
     public ?int $id, $patient_id;
 
-    public ?string $visit_date, $remarks;
+    public ?string $visit_date, $remarks, $review_in, $other_remarks;
 
     public ?float $weight, $height, $bmi, $bsa, $dbp, $sbp, $ef;
 
@@ -199,4 +199,28 @@ class Visit implements IModel
         return [];
 
     }
+
+    /**
+     *  Update review in date value
+     * @return bool
+     */
+    public function updateReviewIn(): bool
+    {
+        $data = [
+            "review_in" => $this->review_in
+        ];
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+
+    }
+
+    public function updateOtherRemarks(): bool
+    {
+        $data = [
+            "other_remarks" => $this->other_remarks,
+        ];
+
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+    }
+
+
 }

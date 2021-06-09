@@ -15,6 +15,8 @@ import VisitAngiographyView from "./views/special-investigations/VisitAngiograph
 import PrescriptionView from "./views/intervention/prescriptions/PrescriptionView";
 import EditPrescription from "./views/intervention/prescriptions/EditPrescription";
 import FurtherInvestigationsView from "./views/intervention/FurtherInvestigationsView";
+import VisitReviewInView from "./views/intervention/VisitReviewInView";
+import OtherRemarksView from "./views/intervention/OtherRemarksView";
 
 
 Vue.use(Vuex)
@@ -42,6 +44,8 @@ const routes = [
 
 
     {path: "/further-investigations", component: FurtherInvestigationsView},
+    {path: "/review-in", component: VisitReviewInView},
+    {path: "/other-remarks", component: OtherRemarksView},
 ]
 
 const router = new VueRouter({
