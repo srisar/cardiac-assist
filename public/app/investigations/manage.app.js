@@ -19360,7 +19360,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "form-row" }, [
         _c(
           "div",
@@ -19617,7 +19617,7 @@ var render = function() {
                 staticClass: "btn btn-tiny btn-success",
                 attrs: { to: "/add" }
               },
-              [_vm._v("Add a new investigation")]
+              [_vm._v("Add")]
             )
           ],
           1

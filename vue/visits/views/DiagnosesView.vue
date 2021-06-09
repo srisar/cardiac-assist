@@ -2,12 +2,6 @@
 
   <div>
 
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center">Investigations & Diagnoses</h3>
-      </div>
-    </div>
-
     <div class="row mb-3">
       <!-- Symptoms -->
       <div class="col">
@@ -34,7 +28,7 @@
 
     <div class="row">
       <div class="col-12">
-        <!--        <VisitDiagnosis/>-->
+        <VisitDiagnosis/>
       </div>
     </div><!-- row -->
 

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="container-fluid">
+    <div class="container">
 
       <div class="form-row">
 

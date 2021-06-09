@@ -12,7 +12,7 @@ export default {
 
     mutations: {
 
-        updateVisitDiagnosisList(state, payload) {
+        setVisitDiagnosisList(state, payload) {
             state.visitDiagnosisList = payload;
         },
 
@@ -22,7 +22,7 @@ export default {
 
     getters: {
 
-        getVisitDiagnosisList: state => {
+        getVisitDiagnosisList(state) {
             return state.visitDiagnosisList;
         },
 
@@ -34,98 +34,63 @@ export default {
         /*
        * Fetch all visit diagnoses
        * */
-        fetchVisitDiagnosis: function ({commit}, visitId) {
-            return new Promise((resolve, reject) => {
 
-                $.get(`${getSiteURL()}/api/get/visit/visit-diagnosis.php`, {
-                    visit_id: visitId
-                }).done(r => {
+        async diagnoses_fetchAll(context, visitId) {
 
-                    commit('updateVisitDiagnosisList', r.data);
-                    resolve();
 
-                }).fail(e => {
-                    reject(e);
-                });
+            try {
 
-            });
+                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-diagnosis.php`, {visit_id: visitId});
+                context.commit("setVisitDiagnosisList", response.data);
+
+            } catch (e) {
+                throw e;
+            }
+
         },
 
 
         /*
         * Add visit diagnosis
         * */
-        addVisitDiagnosis: function ({commit, dispatch, rootGetters}, visitDiagnosis) {
-            return new Promise((resolve, reject) => {
 
-                const visit_id = rootGetters.getVisit.id;
-                const disease_id = visitDiagnosis.disease.id;
-                const remarks = visitDiagnosis.remarks;
+        async diagnoses_add(context, params) {
+            try {
 
-                $.get(`${getSiteURL()}/api/save/visit/visit-diagnosis.php`, {
-                    visit_id: visit_id,
-                    disease_id: disease_id,
-                    remarks: remarks
-                }).done(r => {
+                await $.get(`${getSiteURL()}/api/save/visit/visit-diagnosis.php`, params);
 
-                    dispatch('fetchVisitDiagnosis', visit_id);
+            } catch (e) {
+                throw e;
+            }
 
-                    resolve();
-
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
         },
+
 
         /*
         * Delete visit diagnosis
         * */
-        deleteVisitDiagnosis: function ({commit, dispatch, rootGetters}, visitDiagnosis) {
-            return new Promise((resolve, reject) => {
 
-                const id = visitDiagnosis.id;
+        async diagnoses_delete(context, id) {
 
-                $.get(`${getSiteURL()}/api/delete/visit/visit-diagnosis.php`, {
-                    id: id,
-                }).done(r => {
+            try {
 
-                    const visit_id = rootGetters.getVisit.id;
-                    dispatch('fetchVisitDiagnosis', visit_id);
+                await $.get(`${getSiteURL()}/api/delete/visit/visit-diagnosis.php`, {id: id,});
 
-                    resolve();
+            } catch (e) {
+                throw e;
+            }
 
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
         },
 
-        updateVisitDiagnosis: function ({commit, dispatch, rootGetters}, visitDiagnosis) {
-            return new Promise((resolve, reject) => {
+        /* update */
+        async diagnoses_update(context, params) {
 
-                const params = {
-                    id: visitDiagnosis.id,
-                    remarks: visitDiagnosis.remarks,
-                };
+            try {
+                await $.get(`${getSiteURL()}/api/update/visit/visit-diagnosis.php`, params);
+            } catch (e) {
+                throw e;
+            }
 
-                $.get(`${getSiteURL()}/api/update/visit/visit-diagnosis.php`, {
-                    id: params.id,
-                    remarks: params.remarks
-                }).done(() => {
-
-                    const visit_id = rootGetters.getVisit.id;
-                    dispatch('fetchVisitDiagnosis', visit_id);
-
-                    resolve();
-
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
         },
 
     },

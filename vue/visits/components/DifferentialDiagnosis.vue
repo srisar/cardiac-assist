@@ -240,9 +240,7 @@ export default {
     },
 
 
-    /*
-   * Add selected disease to diff. diagnosis
-   * */
+    /* On add */
     async onAdd() {
 
 
@@ -267,6 +265,7 @@ export default {
     },
 
 
+    /* On update */
     async onUpdate() {
       try {
 
@@ -286,13 +285,8 @@ export default {
 
     },
 
-    onShowDeleteConfirmModal(item) {
 
-      this.diffDiagnosisToEdit = item;
-      this.modalDeleteVisible = true;
-
-    },
-
+    /* On delete */
     async onDelete() {
 
       try {
@@ -312,6 +306,12 @@ export default {
     onShowEditModal(item) {
       this.diffDiagnosisToEdit = _.cloneDeep(item);
       this.modalEditVisible = true;
+    },
+
+    onShowDeleteConfirmModal(item) {
+
+      this.diffDiagnosisToEdit = item;
+      this.modalDeleteVisible = true;
     },
 
   },

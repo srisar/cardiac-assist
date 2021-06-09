@@ -2,12 +2,6 @@
 
   <div>
 
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center">Interventions</h3>
-      </div>
-    </div>
-
     <div class="card shadow shadow-sm mb-3">
 
       <div class="card-header">Add a new prescription</div>

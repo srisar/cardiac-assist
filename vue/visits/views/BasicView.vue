@@ -2,19 +2,7 @@
 
   <div>
 
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center">Basic Details</h3>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col">
-        <VisitDetails/>
-      </div><!-- col -->
-    </div><!-- row -->
-
+    <VisitDetails/>
 
   </div><!-- template -->
 

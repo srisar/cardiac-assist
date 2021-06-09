@@ -2,10 +2,11 @@
 
   <div>
 
-    <div class="container-fluid">
-      <div class="row">
+    <div class="container container-sm">
+      <div class="form-row">
 
-        <div class="col-12 col-md-3 col-xl-2">
+        <!-- start: sidebar -->
+        <div class="col-12 col-md-3">
 
           <div class="card mb-3 shadow shadow-sm">
             <div class="card-header">Basics</div>
@@ -30,7 +31,7 @@
             <div class="card-header">Special Investigations</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <router-link to="/special/ecg" class="">Electrocardiogram (ECG)</router-link>
+                <router-link to="/special/ecg" class="">Electrocardiogram</router-link>
               </li>
               <li class="list-group-item">
                 <router-link to="/special/lipids" class="">Lipids</router-link>
@@ -77,10 +78,12 @@
             </ul>
           </div><!-- card -->
 
+          <!-- end: sidebar -->
+
 
         </div><!-- col -->
 
-        <div class="col-md-9 col-xl-10">
+        <div class="col-md-9">
           <transition name="fade" mode="out-in">
             <router-view></router-view>
           </transition>

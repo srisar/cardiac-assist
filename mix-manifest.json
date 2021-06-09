@@ -10,7 +10,6 @@
     "/public/app/diseases/view.app.js": "/public/app/diseases/view.app.js",
     "/public/app/drugs/manage.app.js": "/public/app/drugs/manage.app.js",
     "/public/app/investigations/manage.app.js": "/public/app/investigations/manage.app.js",
-    "/public/app/investigations/view.app.js": "/public/app/investigations/view.app.js",
     "/public/app/visits/manage.app.js": "/public/app/visits/manage.app.js",
     "/public/app/echo/remarks.app.js": "/public/app/echo/remarks.app.js",
     "/public/assets/css/app.css": "/public/assets/css/app.css"
