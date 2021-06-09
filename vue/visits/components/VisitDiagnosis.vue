@@ -176,7 +176,7 @@ export default {
 
 
   mounted() {
-    this.$store.dispatch('fetchDiseases');
+    this.$store.dispatch('diffDiagnoses_fetchAllDiseases');
   },
   /* *** MOUNTED *** */
 

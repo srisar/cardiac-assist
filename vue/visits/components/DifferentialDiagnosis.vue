@@ -6,7 +6,7 @@
       <div class="card-header d-flex justify-content-between">
         <div>Differential Diagnoses</div>
         <div>
-          <button class="btn btn-tiny btn-success" @click="onOpenAddDiffDiagModal">Add</button>
+          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
         </div>
 
       </div><!-- card-header -->
@@ -14,31 +14,31 @@
       <div class="card-body">
 
 
-        <table class="table table-sm table-bordered" v-if="!isEmpty">
-          <thead>
-          <tr>
-            <th style="width: 50px">Code</th>
-            <th style="width: 200px">Disease</th>
-            <th>Remarks</th>
-            <th style="width: 30px" class="text-center"></th>
-            <th style="width: 60px" class="text-center"></th>
-          </tr>
-          </thead>
+        <table class="table table-sm table-striped table-bordered" v-if="!isEmpty">
+
           <tbody>
-          <tr v-for="(item, index) in diffDiagnosisList">
-            <td>{{ item.disease.disease_code }}</td>
-            <td>{{ item.disease.disease }}</td>
+          <tr v-for="item in diffDiagnosisList" :key="item.id">
+
+
             <td>
-              <pre>{{ item.remarks }}</pre>
+
+              <p class="font-weight-bold"><a href="#">{{ item.disease.disease }}</a> ({{ item.disease.disease_code }})</p>
+              <div style="white-space: pre-line">{{ item.remarks }}</div>
+
+
+              <div class="my-2 d-flex justify-content-between">
+                <div>
+                  <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)">Edit</button>
+                </div>
+
+                <div>
+                  <button class="btn btn-tiny btn-danger" @click="onShowDeleteConfirmModal(item)">Remove</button>
+                </div>
+
+              </div>
+
             </td>
-            <td class="text-center"><a :href="createDiseaseLink(item.disease)" target="_blank"
-                                       class="btn btn-tiny btn-secondary"><i class="bi bi-bookmark-star-fill"></i></a>
-            </td>
-            <td class="text-center">
-              <button class="btn btn-tiny btn-primary" @click="onOpenEditDiffDiagModal(item)"><i
-                  class="bi bi-pencil"></i></button>
-              <button class="btn btn-tiny btn-danger" @click="onDelete(item)"><i class="bi bi-trash-fill"></i></button>
-            </td>
+
           </tr>
           </tbody>
         </table>
@@ -53,7 +53,7 @@
 
 
     <!-- Modal Add Diff Diagnosis -->
-    <ModalWindow id="modal-add-diff-diagnosis" :visible="addModalVisible" @close="onCloseAddDiffDiagModal">
+    <ModalWindow id="modal-add-diff-diagnosis" :visible="modalAddVisible" @close="modalAddVisible = false">
       <template v-slot:title>Add a differential diagnosis</template>
       <slot>
 
@@ -88,7 +88,7 @@
         <div class="form-row">
           <div class="col text-center">
 
-            <button class="btn btn-success" @click="onAdd">Add</button>
+            <button class="btn btn-success" @click="onAdd()">Add</button>
 
           </div>
         </div>
@@ -96,9 +96,10 @@
       </slot>
     </ModalWindow><!-- Modal Add Diff Diagnosis -->
 
+    <!-- ------------------------------------------------------------------------------------------------------------ -->
 
     <!-- Modal Edit Diff Diagnosis -->
-    <ModalWindow id="modal-edit-diff-diagnosis" @close="onCloseEditDiffDiagModal" :visible="editModalVisible">
+    <ModalWindow id="modal-edit-diff-diagnosis" :visible="modalEditVisible" @close="modalEditVisible = false">
       <template v-slot:title v-if="diffDiagnosisToEdit">Edit {{ diffDiagnosisToEdit.disease.disease }}</template>
       <slot v-if="diffDiagnosisToEdit">
 
@@ -122,12 +123,36 @@
 
         <div class="row">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onUpdate">Update</button>
+            <button class="btn btn-success" @click="onUpdate()">Update</button>
           </div>
         </div>
 
       </slot>
     </ModalWindow><!-- Modal Edit Diff Diagnosis -->
+
+
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+
+    <!--
+    modal: delete confirm
+    -->
+    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
+      <template v-slot:title>Confirm Removal</template>
+      <slot>
+
+        <p class="lead text-center">Confirm removing the following added diagnosis</p>
+        <p class="text-center">{{ diffDiagnosisToEdit.disease.disease }}</p>
+
+        <div class="text-center">
+          <button class="btn btn-danger" @click="onDelete()">Remove</button>
+        </div>
+
+      </slot>
+    </ModalWindow>
+    <!--
+    end: modal: delete confirm
+    -->
+
 
   </div><!-- Template -->
 
@@ -136,6 +161,7 @@
 <script>
 
 import ModalWindow from "../../_common/components/ModalWindow";
+import {errorMessageBox} from "../../_common/bootbox_dialogs";
 
 const _ = require('lodash');
 
@@ -143,122 +169,149 @@ export default {
   name: "DifferentialDiagnosis",
   components: {ModalWindow},
 
-  /*
-  * --------------------------------------------------------------
-  * DATA
-  * */
+
   data() {
     return {
-      addModalVisible: false,
-      editModalVisible: false,
+
+
+      /* modal hooks */
+      modalAddVisible: false,
+      modalEditVisible: false,
+      modalDeleteVisible: false,
+
 
       diffDiagnosisToAdd: {
         disease: "-1",
         remarks: "",
       },
 
-      diffDiagnosisToEdit: null,
+      diffDiagnosisToEdit: {
+        disease: {},
+        remarks: ""
+      },
 
     }
   },
 
-  /*
-  * --------------------------------------------------------------
-  * COMPUTED
-  * */
+
   computed: {
     diffDiagnosisList: function () {
-      return this.$store.getters.differentialDiagnosisList;
+      return this.$store.getters.getDifferentialDiagnosisList;
     },
 
     diseasesList: function () {
-      return this.$store.getters.diseasesList;
+      return this.$store.getters.getDiseasesList;
     },
 
     isEmpty: function () {
       return this.diffDiagnosisList.length === 0;
+    },
+
+    visitId() {
+      return this.$store.getters.getVisitId;
     }
 
   },
 
-  /*
-  * --------------------------------------------------------------
-  * MOUNTED
-  * */
-  mounted() {
-    this.$store.dispatch('fetchDiseases');
+
+  async mounted() {
+
+    try {
+
+      await this.$store.dispatch("diffDiagnoses_fetchAllDiseases");
+      await this.$store.dispatch("diffDiagnoses_fetchAll", this.visitId);
+
+    } catch (e) {
+      errorMessageBox("Failed to fetch differential diagnoses data");
+    }
+
   },
 
-  /*
-  * --------------------------------------------------------------
-  * METHODS
-  * */
+
   methods: {
 
-    createDiseaseLink: function (disease) {
-      return `${getSiteURL()}/app/diseases/view.php?id=${disease.id}`;
+    async fetchAllDiffDiagnoses() {
+      try {
+        await this.$store.dispatch("diffDiagnoses_fetchAll", this.visitId);
+      } catch (e) {
+        errorMessageBox("Failed to fetch diagnoses");
+      }
+
     },
 
 
     /*
    * Add selected disease to diff. diagnosis
    * */
-    onAdd: function () {
+    async onAdd() {
 
-      // check if selected symptom is already added
-      const s = _.find(this.diffDiagnosisList, (o) => {
-        return o.disease.id === this.diffDiagnosisToAdd.disease.id;
-      });
 
-      if (s !== undefined) {
-        alert(`${this.diffDiagnosisToAdd.disease.disease} is already added`);
-      } else {
+      try {
 
-        this.$store.dispatch('addDifferentialDiagnosis', this.diffDiagnosisToAdd)
-            .catch(e => {
-              console.log("Failed to add diff. diagnosis");
-              console.log(e);
-            });
+        const params = {
+          visit_id: this.visitId,
+          disease_id: this.diffDiagnosisToAdd.disease.id,
+          remarks: this.diffDiagnosisToAdd.remarks
+        };
+
+        await this.$store.dispatch("diffDiagnoses_add", params);
+        this.modalAddVisible = false;
+
+      } catch (e) {
+        errorMessageBox("Failed to add diagnosis details");
       }
 
+      await this.fetchAllDiffDiagnoses();
+
+
     },
 
 
-    onUpdate: function () {
+    async onUpdate() {
+      try {
 
-      this.$store.dispatch('updateDiffDiagnosis', this.diffDiagnosisToEdit)
-          .then(r => {
-            this.editModalVisible = false;
-          })
-          .catch(e => {
-            alert("Failed to update differential diagnosis");
-            console.log(e);
-          })
+        const params = {
+          id: this.diffDiagnosisToEdit.id,
+          remarks: this.diffDiagnosisToEdit.remarks
+        }
+
+        await this.$store.dispatch("diffDiagnoses_update", params);
+        this.modalEditVisible = false;
+
+      } catch (e) {
+        errorMessageBox("Failed to update differential diagnosis");
+      }
+
+      await this.fetchAllDiffDiagnoses();
 
     },
 
-    onDelete: function (diffDiagnosis) {
+    onShowDeleteConfirmModal(item) {
 
-      this.$store.dispatch('deleteDiffDiagnosis', diffDiagnosis);
+      this.diffDiagnosisToEdit = item;
+      this.modalDeleteVisible = true;
 
     },
 
-    onOpenAddDiffDiagModal: function () {
-      this.addModalVisible = true;
+    async onDelete() {
+
+      try {
+
+        await this.$store.dispatch("diffDiagnoses_delete", this.diffDiagnosisToEdit.id);
+        this.modalDeleteVisible = false;
+
+      } catch (e) {
+        errorMessageBox("Failed to delete differential diagnosis");
+      }
+
+      await this.fetchAllDiffDiagnoses();
+
     },
 
-    onCloseAddDiffDiagModal: function () {
-      this.addModalVisible = false;
-    },
 
-
-    onOpenEditDiffDiagModal: function (diffDiagnosis) {
-      this.diffDiagnosisToEdit = diffDiagnosis;
-      this.editModalVisible = true;
-    },
-
-    onCloseEditDiffDiagModal: function () {
-      this.editModalVisible = false;
+    onShowEditModal(item) {
+      this.diffDiagnosisToEdit = _.cloneDeep(item);
+      this.modalEditVisible = true;
     },
 
   },

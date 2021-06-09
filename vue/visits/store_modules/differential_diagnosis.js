@@ -14,11 +14,11 @@ export default {
 
     mutations: {
 
-        updateDifferentialDiagnosisList(state, payload) {
+        setDifferentialDiagnosisList(state, payload) {
             state.differentialDiagnosisList = payload;
         },
 
-        updateDiseasesList(state, payload) {
+        setDiseasesList(state, payload) {
             state.diseasesList = payload;
         },
 
@@ -26,11 +26,11 @@ export default {
 
     getters: {
 
-        diseasesList: state => {
+        getDiseasesList(state) {
             return state.diseasesList;
         },
 
-        differentialDiagnosisList: state => {
+        getDifferentialDiagnosisList(state) {
             return state.differentialDiagnosisList;
         },
 
@@ -42,118 +42,76 @@ export default {
         /*
         * Fetch all differential diagnoses
         * */
-        fetchDifferentialDiagnosis: function ({commit}, visitId) {
-            return new Promise((resolve, reject) => {
+        async diffDiagnoses_fetchAll(context, visitId) {
 
-                $.get(`${getSiteURL()}/api/get/diff-diagnosis.php`, {
-                    visit_id: visitId
-                }).done(r => {
 
-                    commit('updateDifferentialDiagnosisList', r.data);
-                    resolve();
+            try {
 
-                }).fail(e => {
-                    reject(e);
-                });
+                const response = await $.get(`${getSiteURL()}/api/get/diff-diagnosis.php`, {visit_id: visitId});
+                context.commit("setDifferentialDiagnosisList", response.data);
 
-            });
+            } catch (e) {
+                throw e;
+            }
+
         },
 
         /*
         * Fetch all diseases
         * */
-        fetchDiseases: function ({commit}) {
-            return new Promise((resolve, reject) => {
+        async diffDiagnoses_fetchAllDiseases(context) {
 
-                $.get(`${getSiteURL()}/api/get/diseases.php`)
-                    .done(r => {
+            try {
 
-                        commit('updateDiseasesList', r.data);
-                        resolve();
+                const response = await $.get(`${getSiteURL()}/api/get/diseases.php`);
+                context.commit("setDiseasesList", response.data);
 
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
+            } catch (e) {
+                throw e;
+            }
 
-            });
         },
 
         /*
         * Add diff. diagnosis
         * */
-        addDifferentialDiagnosis: function ({commit, dispatch, rootGetters}, diffDiagnosis) {
-            return new Promise((resolve, reject) => {
+        async diffDiagnoses_add(context, params) {
+            try {
 
-                const visit_id = rootGetters.getVisit.id;
-                const disease_id = diffDiagnosis.disease.id;
-                const remarks = diffDiagnosis.remarks;
+                await $.get(`${getSiteURL()}/api/save/diff-diagnosis.php`, params);
 
-                $.get(`${getSiteURL()}/api/save/diff-diagnosis.php`, {
-                    visit_id: visit_id,
-                    disease_id: disease_id,
-                    remarks: remarks
-                }).done(r => {
+            } catch (e) {
+                throw e;
+            }
 
-                    dispatch('fetchDifferentialDiagnosis', visit_id);
-
-                    resolve();
-
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
         },
 
         /*
         * Delete diff. diagnosis
         * */
-        deleteDiffDiagnosis: function ({commit, dispatch, rootGetters}, diffDiagnosis) {
-            return new Promise((resolve, reject) => {
+        async diffDiagnoses_delete(context, id) {
 
-                const id = diffDiagnosis.id;
 
-                $.get(`${getSiteURL()}/api/delete/diff-diagnosis.php`, {
-                    id: id,
-                }).done(r => {
+            try {
 
-                    const visit_id = rootGetters.getVisit.id;
-                    dispatch('fetchDifferentialDiagnosis', visit_id);
+                await $.get(`${getSiteURL()}/api/delete/diff-diagnosis.php`, {id: id,});
 
-                    resolve();
+            } catch (e) {
+                throw e;
+            }
 
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
         },
 
-        updateDiffDiagnosis: function ({commit, dispatch, rootGetters}, diffDiagnosis) {
-            return new Promise((resolve, reject) => {
+        /* update */
+        async diffDiagnoses_update(context, params) {
 
-                const params = {
-                    id: diffDiagnosis.id,
-                    remarks: diffDiagnosis.remarks,
-                };
+            try {
+                await $.get(`${getSiteURL()}/api/update/diff-diagnosis.php`, params);
+            } catch (e) {
+                throw e;
+            }
 
-                $.get(`${getSiteURL()}/api/update/diff-diagnosis.php`, {
-                    id: params.id,
-                    remarks: params.remarks
-                }).done(r => {
-
-                    const visit_id = rootGetters.getVisit.id;
-                    dispatch('fetchDifferentialDiagnosis', visit_id);
-
-                    resolve();
-
-                }).fail(e => {
-                    reject(e);
-                });
-
-            });
-        }
+        },
 
     }
 };
