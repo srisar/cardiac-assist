@@ -14,7 +14,7 @@
       <div class="card-body">
 
 
-        <table class="table table-sm table-striped table-bordered" v-if="!isEmpty">
+        <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
 
           <tbody>
           <tr v-for="item in diffDiagnosisList" :key="item.id">

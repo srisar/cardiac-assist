@@ -9,134 +9,86 @@ export default {
 
         visitSymptomsList: [],
 
-        addVisitSymptom: {
-            showModal: false,
-        }
     },
 
     mutations: {
 
-        updateSymptomsList(state, payload) {
+        setSymptomsList(state, payload) {
             state.symptomsList = payload;
         },
 
-        updateVisitSymptomsList(state, payload) {
+        setVisitSymptomsList(state, payload) {
             state.visitSymptomsList = payload;
         },
-
-        setAddModalVisible(state, payload) {
-            state.addVisitSymptom.showModal = payload;
-        }
 
     },
 
     getters: {
 
-        getVisitSymptomsList: state => {
+        getVisitSymptomsList(state) {
             return state.visitSymptomsList;
         },
 
-        getModalVisibleState: state => {
-            return state.addVisitSymptom.showModal;
+        getSymptomsList(state) {
+            return state.symptomsList;
         },
 
-        getSymptomsList: state => {
-            return state.symptomsList;
-        }
     },
 
     actions: {
 
-        /*
-        * Fetch all visit-symptoms
-        * */
-        fetchVisitSymptoms: function ({ commit }, visitId) {
-            return new Promise((resolve, reject) => {
+        /* fetch all visit symptoms */
+        async symptoms_fetchAll(context, visitId) {
+            try {
 
-                const params = {
-                    visit_id: visitId
-                }
+                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-symptoms.php`, {visit_id: visitId});
+                context.commit("setVisitSymptomsList", response.data);
 
-                $.get(`${getSiteURL()}/api/get/visit/visit-symptoms.php`, params)
-                    .done(r => {
+            } catch (e) {
+                throw e;
+            }
 
-                        commit('updateVisitSymptomsList', r.data);
-                        resolve();
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
         },
 
-        /*
-        * Fetch all symptoms for the select dropdown
-        * */
-        fetchSymptoms: function ({ commit }) {
-            return new Promise((resolve, reject) => {
+        /* fetch all available symptoms */
+        async symptoms_fetchAllSymptoms(context) {
 
-                $.get(`${getSiteURL()}/api/get/symptoms.php`)
-                    .done(r => {
+            try {
 
-                        commit('updateSymptomsList', r.data);
-                        resolve();
+                const response = await $.get(`${getSiteURL()}/api/get/symptoms.php`);
+                context.commit("setSymptomsList", response.data);
 
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
+            } catch (e) {
+                throw e;
+            }
         },
 
-        addVisitSymptom: function ({ commit, dispatch, rootGetters }, payload) {
-            return new Promise((resolve, reject) => {
+        /* add */
+        async symptoms_add(context, params) {
 
-                const params = {
-                    visit_id  : rootGetters.getVisit.id,
-                    symptom_id: payload.symptom.id,
-                    duration  : payload.duration,
-                }
+            try {
 
-                $.get(`${getSiteURL()}/api/save/visit/visit-symptom.php`, params)
-                    .done(r => {
+                await $.get(`${getSiteURL()}/api/save/visit/visit-symptom.php`, params);
 
-                        dispatch('fetchVisitSymptoms', params.visit_id)
+            } catch (e) {
+                throw e;
+            }
 
-                        resolve()
-
-                    })
-                    .fail(e => {
-                        reject(e)
-                    });
-
-            });
         },
 
-        deleteVisitSymptom: function ({ commit, dispatch, rootGetters }, visitSymptom) {
-            return new Promise((resolve, reject) => {
+        /* delete */
+        async symptoms_delete(context, id) {
 
-                const params = {
-                    visit_id: rootGetters.getVisit.id,
-                    id      : visitSymptom.id,
-                }
+            try {
 
-                $.get(`${getSiteURL()}/api/delete/visit/visit-symptom.php`, params)
-                    .done(r => {
+                await $.get(`${getSiteURL()}/api/delete/visit/visit-symptom.php`, {id: id});
 
-                        dispatch('fetchVisitSymptoms', params.visit_id)
+            } catch (e) {
+                throw e;
+            }
 
-                        resolve()
+        },
 
-                    })
-                    .fail(e => {
-                        reject(e)
-                    });
-
-            });
-        }
 
     }
 };

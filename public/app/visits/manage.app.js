@@ -1976,7 +1976,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2072,6 +2081,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
@@ -2079,7 +2113,7 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitSymptoms",
   components: {
-    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__.default
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__.default
   },
 
   /*
@@ -2088,18 +2122,22 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
   * */
   data: function data() {
     return {
-      modalAddVisitSymptomVisible: false,
-      selectedSymptom: "-1",
+      modalAddVisible: false,
+      modalDeleteVisible: false,
 
       /* symptom duration*/
-      symptomDuration: "1/"
+      symptomDuration: "1/",
+      symptomToAdd: {
+        selectedSymptom: "-1",
+        duration: "1 days"
+      },
+      symptomToDelete: {
+        id: undefined,
+        duration: "",
+        symptom: {}
+      }
     };
   },
-
-  /*
-  *
-  * COMPUTED
-  * */
   computed: {
     visitSymptomsList: function visitSymptomsList() {
       return this.$store.getters.getVisitSymptomsList;
@@ -2109,60 +2147,123 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
     },
     isEmpty: function isEmpty() {
       return this.visitSymptomsList.length === 0;
+    },
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
     }
   },
-
-  /*
-  *
-  * MOUNTED
-  * */
   mounted: function mounted() {
-    this.$store.dispatch('fetchSymptoms');
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _this.$store.dispatch("symptoms_fetchAll", _this.visitId);
+
+            case 3:
+              _context.next = 5;
+              return _this.$store.dispatch("symptoms_fetchAllSymptoms");
+
+            case 5:
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch clinical details");
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 7]]);
+    }))();
   },
-
-  /*
-  *
-  * METHODS
-  * */
   methods: {
-    createSymptomLink: function createSymptomLink(symptom) {
-      return "".concat(getSiteURL(), "/app/symptoms/view.php?id=").concat(symptom.id);
-    },
+    /* On save */
+    onSave: function onSave() {
+      var _this2 = this;
 
-    /*
-    * Add selected symptom to the visit
-    * */
-    onClickAdd: function onClickAdd() {
-      var _this = this;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                params = {
+                  visit_id: _this2.visitId,
+                  symptom_id: _this2.symptomToAdd.selectedSymptom.id,
+                  duration: _this2.symptomToAdd.duration
+                };
+                _context2.next = 4;
+                return _this2.$store.dispatch("symptoms_add", params);
 
-      // check if selected symptom is already added
-      var s = _.find(this.visitSymptomsList, function (o) {
-        return o.symptom.id === _this.selectedSymptom.id;
-      });
+              case 4:
+                _this2.modalAddVisible = false;
+                _context2.next = 7;
+                return _this2.$store.dispatch("symptoms_fetchAll", _this2.visitId);
 
-      if (s !== undefined) {
-        alert("".concat(this.selectedSymptom.symptom_name, " is already added"));
-      } else {
-        var payload = {
-          symptom: this.selectedSymptom,
-          duration: this.symptomDuration
-        };
-        this.$store.dispatch('addVisitSymptom', payload);
-      }
-    },
-    onClickDelete: function onClickDelete(visitSymptom) {
-      this.$store.dispatch('deleteVisitSymptom', visitSymptom);
-    },
+              case 7:
+                _context2.next = 12;
+                break;
 
-    /*
-     *
-     * Modal event handler
-     * */
-    onShowAddModal: function onShowAddModal() {
-      this.modalAddVisitSymptomVisible = true;
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to add clinical detail");
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 9]]);
+      }))();
     },
-    onCloseAddModal: function onCloseAddModal() {
-      this.modalAddVisitSymptomVisible = false;
+    onDelete: function onDelete() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _this3.$store.dispatch("symptoms_delete", _this3.symptomToDelete.id);
+
+              case 3:
+                _this3.modalDeleteVisible = false;
+                _context3.next = 6;
+                return _this3.$store.dispatch("symptoms_fetchAll", _this3.visitId);
+
+              case 6:
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to delete clinical detail");
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 8]]);
+      }))();
+    },
+    onShowDeleteModal: function onShowDeleteModal(item) {
+      this.symptomToDelete = item;
+      this.modalDeleteVisible = true;
     }
   }
 });
@@ -6649,106 +6750,163 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /*
 * Visit Symptoms
 * */
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
     symptomsList: [],
-    visitSymptomsList: [],
-    addVisitSymptom: {
-      showModal: false
-    }
+    visitSymptomsList: []
   },
   mutations: {
-    updateSymptomsList: function updateSymptomsList(state, payload) {
+    setSymptomsList: function setSymptomsList(state, payload) {
       state.symptomsList = payload;
     },
-    updateVisitSymptomsList: function updateVisitSymptomsList(state, payload) {
+    setVisitSymptomsList: function setVisitSymptomsList(state, payload) {
       state.visitSymptomsList = payload;
-    },
-    setAddModalVisible: function setAddModalVisible(state, payload) {
-      state.addVisitSymptom.showModal = payload;
     }
   },
   getters: {
     getVisitSymptomsList: function getVisitSymptomsList(state) {
       return state.visitSymptomsList;
     },
-    getModalVisibleState: function getModalVisibleState(state) {
-      return state.addVisitSymptom.showModal;
-    },
     getSymptomsList: function getSymptomsList(state) {
       return state.symptomsList;
     }
   },
   actions: {
-    /*
-    * Fetch all visit-symptoms
-    * */
-    fetchVisitSymptoms: function fetchVisitSymptoms(_ref, visitId) {
-      var commit = _ref.commit;
-      return new Promise(function (resolve, reject) {
-        var params = {
-          visit_id: visitId
-        };
-        $.get("".concat(getSiteURL(), "/api/get/visit/visit-symptoms.php"), params).done(function (r) {
-          commit('updateVisitSymptomsList', r.data);
-          resolve();
-        }).fail(function (e) {
-          reject(e);
-        });
-      });
+    /* fetch all visit symptoms */
+    symptoms_fetchAll: function symptoms_fetchAll(context, visitId) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return $.get("".concat(getSiteURL(), "/api/get/visit/visit-symptoms.php"), {
+                  visit_id: visitId
+                });
+
+              case 3:
+                response = _context.sent;
+                context.commit("setVisitSymptomsList", response.data);
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                throw _context.t0;
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
     },
 
-    /*
-    * Fetch all symptoms for the select dropdown
-    * */
-    fetchSymptoms: function fetchSymptoms(_ref2) {
-      var commit = _ref2.commit;
-      return new Promise(function (resolve, reject) {
-        $.get("".concat(getSiteURL(), "/api/get/symptoms.php")).done(function (r) {
-          commit('updateSymptomsList', r.data);
-          resolve();
-        }).fail(function (e) {
-          reject(e);
-        });
-      });
+    /* fetch all available symptoms */
+    symptoms_fetchAllSymptoms: function symptoms_fetchAllSymptoms(context) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return $.get("".concat(getSiteURL(), "/api/get/symptoms.php"));
+
+              case 3:
+                response = _context2.sent;
+                context.commit("setSymptomsList", response.data);
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                throw _context2.t0;
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
     },
-    addVisitSymptom: function addVisitSymptom(_ref3, payload) {
-      var commit = _ref3.commit,
-          dispatch = _ref3.dispatch,
-          rootGetters = _ref3.rootGetters;
-      return new Promise(function (resolve, reject) {
-        var params = {
-          visit_id: rootGetters.getVisit.id,
-          symptom_id: payload.symptom.id,
-          duration: payload.duration
-        };
-        $.get("".concat(getSiteURL(), "/api/save/visit/visit-symptom.php"), params).done(function (r) {
-          dispatch('fetchVisitSymptoms', params.visit_id);
-          resolve();
-        }).fail(function (e) {
-          reject(e);
-        });
-      });
+
+    /* add */
+    symptoms_add: function symptoms_add(context, params) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return $.get("".concat(getSiteURL(), "/api/save/visit/visit-symptom.php"), params);
+
+              case 3:
+                _context3.next = 8;
+                break;
+
+              case 5:
+                _context3.prev = 5;
+                _context3.t0 = _context3["catch"](0);
+                throw _context3.t0;
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 5]]);
+      }))();
     },
-    deleteVisitSymptom: function deleteVisitSymptom(_ref4, visitSymptom) {
-      var commit = _ref4.commit,
-          dispatch = _ref4.dispatch,
-          rootGetters = _ref4.rootGetters;
-      return new Promise(function (resolve, reject) {
-        var params = {
-          visit_id: rootGetters.getVisit.id,
-          id: visitSymptom.id
-        };
-        $.get("".concat(getSiteURL(), "/api/delete/visit/visit-symptom.php"), params).done(function (r) {
-          dispatch('fetchVisitSymptoms', params.visit_id);
-          resolve();
-        }).fail(function (e) {
-          reject(e);
-        });
-      });
+
+    /* delete */
+    symptoms_delete: function symptoms_delete(context, id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return $.get("".concat(getSiteURL(), "/api/delete/visit/visit-symptom.php"), {
+                  id: id
+                });
+
+              case 3:
+                _context4.next = 8;
+                break;
+
+              case 5:
+                _context4.prev = 5;
+                _context4.t0 = _context4["catch"](0);
+                throw _context4.t0;
+
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 5]]);
+      }))();
     }
   }
 });
@@ -26994,7 +27152,7 @@ var render = function() {
           !_vm.isEmpty
             ? _c(
                 "table",
-                { staticClass: "table table-sm table-striped table-bordered" },
+                { staticClass: "table table-sm table-hover table-bordered" },
                 [
                   _c(
                     "tbody",
@@ -29064,7 +29222,11 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-tiny btn-success",
-                  on: { click: _vm.onShowAddModal }
+                  on: {
+                    click: function($event) {
+                      _vm.modalAddVisible = true
+                    }
+                  }
                 },
                 [_vm._v("Add")]
               )
@@ -29074,49 +29236,46 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           !_vm.isEmpty
-            ? _c("table", { staticClass: "table table-sm table-bordered" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.visitSymptomsList, function(item) {
-                    return _c("tr", [
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: _vm.createSymptomLink(item.symptom),
-                              target: "_blank"
-                            }
-                          },
-                          [_vm._v(_vm._s(item.symptom.symptom_name))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(item.duration))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-tiny btn-danger",
-                            on: {
-                              click: function($event) {
-                                return _vm.onClickDelete(item)
+            ? _c(
+                "table",
+                { staticClass: "table table-sm table-hover table-bordered" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.visitSymptomsList, function(item) {
+                      return _c("tr", [
+                        _c("td", [
+                          _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                            _vm._v(_vm._s(item.symptom.symptom_name))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(item.duration))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-tiny btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.onShowDeleteModal(item)
+                                }
                               }
-                            }
-                          },
-                          [_c("i", { staticClass: "bi bi-trash-fill" })]
-                        )
+                            },
+                            [_vm._v("Remove")]
+                          )
+                        ])
                       ])
-                    ])
-                  }),
-                  0
-                )
-              ])
+                    }),
+                    0
+                  )
+                ]
+              )
             : _c("div", [
                 _c("p", [_vm._v("No items. Start adding some symptoms.")])
               ])
@@ -29128,9 +29287,13 @@ var render = function() {
         {
           attrs: {
             id: "modal-add-visit-symptom",
-            visible: _vm.modalAddVisitSymptomVisible
+            visible: _vm.modalAddVisible
           },
-          on: { close: _vm.onCloseAddModal },
+          on: {
+            close: function($event) {
+              _vm.modalAddVisible = false
+            }
+          },
           scopedSlots: _vm._u([
             {
               key: "title",
@@ -29159,8 +29322,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.selectedSymptom,
-                            expression: "selectedSymptom"
+                            value: _vm.symptomToAdd.selectedSymptom,
+                            expression: "symptomToAdd.selectedSymptom"
                           }
                         ],
                         staticClass: "custom-select",
@@ -29174,15 +29337,19 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.selectedSymptom = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                            _vm.$set(
+                              _vm.symptomToAdd,
+                              "selectedSymptom",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
                           }
                         }
                       },
                       [
                         _c("option", { attrs: { value: "-1", disabled: "" } }, [
-                          _vm._v("SELECT")
+                          _vm._v("CHOOSE ONE")
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.symptomsList, function(item) {
@@ -29207,19 +29374,23 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.symptomDuration,
-                          expression: "symptomDuration"
+                          value: _vm.symptomToAdd.duration,
+                          expression: "symptomToAdd.duration"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: { value: _vm.symptomDuration },
+                      domProps: { value: _vm.symptomToAdd.duration },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.symptomDuration = $event.target.value
+                          _vm.$set(
+                            _vm.symptomToAdd,
+                            "duration",
+                            $event.target.value
+                          )
                         }
                       }
                     })
@@ -29234,7 +29405,11 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-success",
-                    on: { click: _vm.onClickAdd }
+                    on: {
+                      click: function($event) {
+                        return _vm.onSave()
+                      }
+                    }
                   },
                   [_vm._v("Add")]
                 )
@@ -29242,6 +29417,59 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" })
+          ])
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { visible: _vm.modalDeleteVisible },
+          on: {
+            close: function($event) {
+              _vm.modalDeleteVisible = false
+            }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Confirm Removal")]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _vm._t("default", [
+            _c("p", { staticClass: "lead text-center" }, [
+              _vm._v("Confirm removing the following clinical detail")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v(
+                _vm._s(_vm.symptomToDelete.symptom.symptom_name) +
+                  " for " +
+                  _vm._s(_vm.symptomToDelete.duration)
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.onDelete()
+                    }
+                  }
+                },
+                [_vm._v("Remove")]
+              )
+            ])
           ])
         ],
         2
@@ -31599,11 +31827,15 @@ var render = function() {
       _c("div", { staticClass: "col" }, [_c("VisitSymptoms")], 1)
     ]),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col" }, [_c("DifferentialDiagnosis")], 1)
+    ]),
     _vm._v(" "),
-    _vm._m(2),
+    _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-12" }, [_c("VisitInvestigations")], 1)
+    ]),
     _vm._v(" "),
-    _vm._m(3)
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -31617,22 +31849,6 @@ var staticRenderFns = [
           _vm._v("Investigations & Diagnoses")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-3" }, [
-      _c("div", { staticClass: "col" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-3" }, [
-      _c("div", { staticClass: "col-12" })
     ])
   },
   function() {

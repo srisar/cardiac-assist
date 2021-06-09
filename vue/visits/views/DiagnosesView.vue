@@ -18,7 +18,7 @@
     <div class="row mb-3">
       <!-- Differential diagnosis -->
       <div class="col">
-<!--        <DifferentialDiagnosis/>-->
+        <DifferentialDiagnosis/>
       </div><!-- col -->
 
     </div>
@@ -27,14 +27,14 @@
 
       <!-- Investigations -->
       <div class="col-12">
-<!--        <VisitInvestigations/>-->
+        <VisitInvestigations/>
       </div><!-- col -->
 
     </div><!-- row -->
 
     <div class="row">
       <div class="col-12">
-<!--        <VisitDiagnosis/>-->
+        <!--        <VisitDiagnosis/>-->
       </div>
     </div><!-- row -->
 

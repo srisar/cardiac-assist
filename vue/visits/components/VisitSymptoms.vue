@@ -6,7 +6,7 @@
       <div class="card-header d-flex justify-content-between">
         <div>Clinical Details (Symptoms)</div>
         <div>
-          <button class="btn btn-tiny btn-success" @click="onShowAddModal">Add</button>
+          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
         </div>
 
       </div><!-- card-header -->
@@ -14,7 +14,7 @@
       <div class="card-body">
 
 
-        <table class="table table-sm table-bordered" v-if="!isEmpty">
+        <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
           <thead>
           <tr>
             <th>Symptom</th>
@@ -24,11 +24,12 @@
           </thead>
           <tbody>
           <tr v-for="item in visitSymptomsList">
-            <td><a :href="createSymptomLink(item.symptom)" target="_blank">{{ item.symptom.symptom_name }}</a></td>
+            <td>
+              <a href="#" target="_blank">{{ item.symptom.symptom_name }}</a>
+            </td>
             <td class="text-center">{{ item.duration }}</td>
             <td class="text-center">
-              <button class="btn btn-tiny btn-danger" @click="onClickDelete(item)"><i class="bi bi-trash-fill"></i>
-              </button>
+              <button class="btn btn-tiny btn-danger" @click="onShowDeleteModal(item)">Remove</button>
             </td>
           </tr>
           </tbody>
@@ -43,7 +44,7 @@
     </div><!-- card -->
 
 
-    <ModalWindow id="modal-add-visit-symptom" :visible="modalAddVisitSymptomVisible" @close="onCloseAddModal">
+    <ModalWindow id="modal-add-visit-symptom" :visible="modalAddVisible" @close="modalAddVisible = false">
       <template v-slot:title>Add a symptom to clinical details</template>
       <slot>
 
@@ -53,8 +54,8 @@
 
             <div class="form-group">
               <label>Symptom</label>
-              <select class="custom-select" v-model="selectedSymptom">
-                <option value="-1" disabled>SELECT</option>
+              <select class="custom-select" v-model="symptomToAdd.selectedSymptom">
+                <option value="-1" disabled>CHOOSE ONE</option>
                 <option v-for="item in symptomsList" :value="item">{{ item.symptom_name }}</option>
               </select>
             </div>
@@ -66,7 +67,7 @@
           <div class="col-2">
             <div class="form-group">
               <label>Duration</label>
-              <input type="text" class="form-control" v-model="symptomDuration">
+              <input type="text" class="form-control" v-model="symptomToAdd.duration">
             </div>
           </div>
 
@@ -74,7 +75,7 @@
 
         <div class="form-row text-center">
           <div class="col">
-            <button class="btn btn-success" @click="onClickAdd">Add</button>
+            <button class="btn btn-success" @click="onSave()">Add</button>
           </div>
         </div>
 
@@ -89,6 +90,29 @@
     </ModalWindow>
 
 
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+
+    <!--
+    modal: delete confirm
+    -->
+    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
+      <template v-slot:title>Confirm Removal</template>
+      <slot>
+
+        <p class="lead text-center">Confirm removing the following clinical detail</p>
+        <p class="text-center">{{ symptomToDelete.symptom.symptom_name }} for {{ symptomToDelete.duration }}</p>
+
+        <div class="text-center">
+          <button class="btn btn-danger" @click="onDelete()">Remove</button>
+        </div>
+
+      </slot>
+    </ModalWindow>
+    <!--
+    end: modal: delete confirm
+    -->
+
+
   </div><!-- Template -->
 
 </template>
@@ -96,6 +120,7 @@
 <script>
 
 import ModalWindow from "../../_common/components/ModalWindow";
+import {errorMessageBox} from "../../_common/bootbox_dialogs";
 
 const _ = require('lodash');
 
@@ -109,20 +134,28 @@ export default {
   * */
   data() {
     return {
-      modalAddVisitSymptomVisible: false,
 
-      selectedSymptom: "-1",
+      modalAddVisible: false,
+      modalDeleteVisible: false,
 
       /* symptom duration*/
       symptomDuration: "1/",
 
+      symptomToAdd: {
+        selectedSymptom: "-1",
+        duration: "1 days"
+      },
+
+      symptomToDelete: {
+        id: undefined,
+        duration: "",
+        symptom: {}
+      },
+
     }
   },
 
-  /*
-  *
-  * COMPUTED
-  * */
+
   computed: {
     visitSymptomsList: function () {
       return this.$store.getters.getVisitSymptomsList;
@@ -136,70 +169,72 @@ export default {
       return this.visitSymptomsList.length === 0;
     },
 
+    visitId() {
+      return this.$store.getters.getVisitId;
+    }
+
   },
 
 
-  /*
-  *
-  * MOUNTED
-  * */
-  mounted() {
-    this.$store.dispatch('fetchSymptoms');
+  async mounted() {
+
+    try {
+
+      await this.$store.dispatch("symptoms_fetchAll", this.visitId);
+      await this.$store.dispatch("symptoms_fetchAllSymptoms");
+
+    } catch (e) {
+      errorMessageBox("Failed to fetch clinical details");
+    }
+
   },
 
 
-  /*
-  *
-  * METHODS
-  * */
   methods: {
 
-    createSymptomLink: function (symptom) {
-      return `${getSiteURL()}/app/symptoms/view.php?id=${symptom.id}`;
-    },
+    /* On save */
+    async onSave() {
+
+      try {
+
+        const params = {
+          visit_id: this.visitId,
+          symptom_id: this.symptomToAdd.selectedSymptom.id,
+          duration: this.symptomToAdd.duration
+        };
+
+        await this.$store.dispatch("symptoms_add", params);
+        this.modalAddVisible = false;
+
+        await this.$store.dispatch("symptoms_fetchAll", this.visitId);
 
 
-    /*
-   * Add selected symptom to the visit
-   * */
-    onClickAdd: function () {
-
-      // check if selected symptom is already added
-      const s = _.find(this.visitSymptomsList, (o) => {
-        return o.symptom.id === this.selectedSymptom.id;
-      });
-
-      if (s !== undefined) {
-        alert(`${this.selectedSymptom.symptom_name} is already added`);
-      } else {
-
-        const payload = {
-          symptom: this.selectedSymptom,
-          duration: this.symptomDuration
-        }
-
-        this.$store.dispatch('addVisitSymptom', payload);
+      } catch (e) {
+        errorMessageBox("Failed to add clinical detail");
       }
 
     },
 
-    onClickDelete: function (visitSymptom) {
 
-      this.$store.dispatch('deleteVisitSymptom', visitSymptom);
+    async onDelete() {
+
+      try {
+
+        await this.$store.dispatch("symptoms_delete", this.symptomToDelete.id);
+        this.modalDeleteVisible = false;
+
+        await this.$store.dispatch("symptoms_fetchAll", this.visitId);
+
+      } catch (e) {
+        errorMessageBox("Failed to delete clinical detail");
+      }
 
     },
 
+    onShowDeleteModal(item) {
+      this.symptomToDelete = item;
+      this.modalDeleteVisible = true;
 
-    /*
-     *
-     * Modal event handler
-     * */
-    onShowAddModal: function () {
-      this.modalAddVisitSymptomVisible = true;
-    },
-
-    onCloseAddModal: function () {
-      this.modalAddVisitSymptomVisible = false;
     }
 
   },
