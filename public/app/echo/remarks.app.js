@@ -201,6 +201,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EchoRemarks",
@@ -209,10 +213,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      editModalVisible: false,
-      valueToSave: {
+      modalEditVisible: false,
+      modalAddVisible: false,
+      echoRemarkToAdd: {
         value: "",
-        type: "AORTA"
+        type: "AORTA",
+        typeLabel: ""
       },
       valueToEdit: {
         value: "",
@@ -235,7 +241,7 @@ __webpack_require__.r(__webpack_exports__);
     onOpenEditModal: function onOpenEditModal(item) {
       this.valueToEdit.id = item.id;
       this.valueToEdit.value = item.value;
-      this.editModalVisible = true;
+      this.modalEditVisible = true;
     },
     onUpdate: function onUpdate() {
       var _this = this;
@@ -245,18 +251,23 @@ __webpack_require__.r(__webpack_exports__);
         id: this.valueToEdit.id
       };
       this.$store.dispatch('UPDATE', item).then(function () {
-        _this.editModalVisible = false;
+        _this.modalEditVisible = false;
       });
     },
-    onSave: function onSave() {
-      var item = {
-        value: this.valueToSave.value,
-        type: this.valueToSave.type
+    onAdd: function onAdd() {
+      var params = {
+        value: this.echoRemarkToAdd.value,
+        type: this.echoRemarkToAdd.type
       };
-      this.$store.dispatch('SAVE', item).then();
+      this.$store.dispatch('SAVE', params).then();
     },
     onDelete: function onDelete(item) {
       this.$store.dispatch('DELETE', item.id).then();
+    },
+    onOpenAddModal: function onOpenAddModal(type) {
+      this.echoRemarkToAdd.type = type;
+      this.echoRemarkToAdd.typeLabel = this.echoValueTypes[type];
+      this.modalAddVisible = true;
     }
   }
 });
@@ -756,176 +767,102 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col" },
-            [
-              _c("div", { attrs: { id: "add-echo-values" } }, [
-                _c("div", { staticClass: "alert alert-secondary" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Value")]),
+            _vm._l(_vm.allValues, function(items, key) {
+              return _c("div", { staticClass: "card shadow-sm shadow mb-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "card-header d-flex justify-content-between" },
+                  [
+                    _c("div", [_vm._v(_vm._s(_vm.echoValueTypes[key]))]),
                     _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
+                    _c("div", [
+                      _c(
+                        "button",
                         {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.valueToSave.value,
-                          expression: "valueToSave.value"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { rows: "4" },
-                      domProps: { value: _vm.valueToSave.value },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.valueToSave,
-                            "value",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("div", { staticClass: "col-12 col-md-4" }, [
-                      _c("div", { staticClass: "form-group text-center" }, [
-                        _c("label", { staticClass: "text-center" }, [
-                          _vm._v("Type of...")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.valueToSave.type,
-                                expression: "valueToSave.type"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.valueToSave,
-                                  "type",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
+                          staticClass: "btn btn-success btn-tiny",
+                          on: {
+                            click: function($event) {
+                              return _vm.onOpenAddModal(key)
                             }
-                          },
-                          _vm._l(_vm.echoValueTypes, function(item, key) {
-                            return _c("option", { domProps: { value: key } }, [
-                              _vm._v(_vm._s(item))
-                            ])
-                          }),
-                          0
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success",
-                            on: { click: _vm.onSave }
-                          },
-                          [_vm._v("Save")]
-                        )
-                      ])
+                          }
+                        },
+                        [_vm._v("Add")]
+                      )
                     ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.allValues, function(items, key) {
-                return _c("div", { staticClass: "card mb-3" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _vm._v(_vm._s(_vm.echoValueTypes[key]))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "table",
-                      {
-                        staticClass: "table table-sm table-bordered table-hover"
-                      },
-                      [
-                        _c(
-                          "tbody",
-                          _vm._l(items, function(item) {
-                            return _c("tr", [
-                              _c("td", [_vm._v(_vm._s(item.value))]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "text-center",
-                                  staticStyle: { width: "60px" }
-                                },
-                                [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-warning btn-tiny",
-                                      attrs: { type: "button" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.onOpenEditModal(item)
-                                        }
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-sm table-bordered table-hover"
+                    },
+                    [
+                      _c(
+                        "tbody",
+                        _vm._l(items, function(item) {
+                          return _c("tr", [
+                            _c(
+                              "td",
+                              { staticStyle: { "white-space": "pre-line" } },
+                              [_vm._v(_vm._s(item.value))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass: "text-center",
+                                staticStyle: { width: "110px" }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning btn-tiny",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.onOpenEditModal(item)
                                       }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "bi bi-pencil-fill"
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-danger btn-tiny",
-                                      attrs: { type: "button" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.onDelete(item)
-                                        }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                    edit\n                  "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-tiny",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.onDelete(item)
                                       }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "bi bi-trash-fill"
-                                      })
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ])
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                    Delete\n                  "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
                 ])
-              })
-            ],
-            2
+              ])
+            }),
+            0
           )
         ])
       ]),
@@ -933,19 +870,25 @@ var render = function() {
       _c(
         "ModalWindow",
         {
-          attrs: { visible: _vm.editModalVisible },
+          attrs: { visible: _vm.modalEditVisible },
           on: {
             close: function($event) {
-              _vm.editModalVisible = false
+              _vm.modalEditVisible = false
             }
-          }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Edit Value")]
+              },
+              proxy: true
+            }
+          ])
         },
         [
-          _c("template", { slot: "title" }, [_vm._v("Edit Value")]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Value")]),
-            _vm._v(" "),
             _c("textarea", {
               directives: [
                 {
@@ -972,9 +915,126 @@ var render = function() {
           _c("div", { staticClass: "text-center" }, [
             _c(
               "button",
-              { staticClass: "btn btn-success", on: { click: _vm.onUpdate } },
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    return _vm.onUpdate()
+                  }
+                }
+              },
               [_vm._v("Update")]
             )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { visible: _vm.modalAddVisible },
+          on: {
+            close: function($event) {
+              _vm.modalAddVisible = false
+            }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [
+                  _vm._v(
+                    "Add new remark for " +
+                      _vm._s(_vm.echoRemarkToAdd.typeLabel)
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _vm._t("default", [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Type")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.echoRemarkToAdd.typeLabel,
+                    expression: "echoRemarkToAdd.typeLabel"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", readonly: "" },
+                domProps: { value: _vm.echoRemarkToAdd.typeLabel },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.echoRemarkToAdd,
+                      "typeLabel",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Value")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.echoRemarkToAdd.value,
+                    expression: "echoRemarkToAdd.value",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3" },
+                domProps: { value: _vm.echoRemarkToAdd.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.echoRemarkToAdd,
+                      "value",
+                      $event.target.value.trim()
+                    )
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { disabled: _vm.echoRemarkToAdd.value === "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.onAdd()
+                    }
+                  }
+                },
+                [_vm._v("Add")]
+              )
+            ])
           ])
         ],
         2

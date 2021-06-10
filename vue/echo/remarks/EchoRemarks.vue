@@ -7,51 +7,29 @@
         <div class="col">
 
 
-          <div id="add-echo-values">
-            <div class="alert alert-secondary">
+          <div class="card shadow-sm shadow mb-3" v-for="(items, key) in allValues">
 
-              <div class="form-group">
-                <label>Value</label>
-                <textarea class="form-control" rows="4" v-model="valueToSave.value"></textarea>
+            <div class="card-header d-flex justify-content-between">
+              <div>{{ echoValueTypes[key] }}</div>
+              <div>
+                <button class="btn btn-success btn-tiny" @click="onOpenAddModal(key)">Add</button>
               </div>
-
-              <div class="row justify-content-center">
-                <div class="col-12 col-md-4">
-
-                  <div class="form-group text-center">
-                    <label class="text-center">Type of...</label>
-                    <select class="form-control" v-model="valueToSave.type">
-                      <option v-for="(item, key) in echoValueTypes" :value="key">{{ item }}</option>
-                    </select>
-                  </div>
-
-                  <div class="text-center">
-                    <button class="btn btn-success" @click="onSave">Save</button>
-                  </div>
-
-                </div>
-              </div>
-
             </div>
-          </div><!-- add echo values -->
 
-
-          <div class="card mb-3" v-for="(items, key) in allValues">
-            <div class="card-header">{{ echoValueTypes[key] }}</div>
             <div class="card-body">
 
               <table class="table table-sm table-bordered table-hover">
 
                 <tbody>
                 <tr v-for="item in items">
-                  <td>{{ item.value }}</td>
+                  <td style="white-space: pre-line">{{ item.value }}</td>
 
-                  <td class="text-center" style="width: 60px">
+                  <td class="text-center" style="width: 110px">
                     <button type="button" class="btn btn-warning btn-tiny" @click="onOpenEditModal(item)">
-                      <i class="bi bi-pencil-fill"></i>
+                      edit
                     </button>
                     <button type="button" class="btn btn-danger btn-tiny" @click="onDelete(item)">
-                      <i class="bi bi-trash-fill"></i>
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -66,20 +44,46 @@
       </div><!-- row -->
     </div>
 
-    <!-- EDIT Modal -->
-    <ModalWindow :visible="editModalVisible" @close="editModalVisible = false">
 
-      <template slot="title">Edit Value</template>
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- EDIT Modal -->
+    <ModalWindow :visible="modalEditVisible" @close="modalEditVisible= false">
+
+      <template v-slot:title>Edit Value</template>
 
       <div class="form-group">
-        <label>Value</label>
         <textarea class="form-control" rows="4" v-model="valueToEdit.value"></textarea>
       </div>
 
       <div class="text-center">
-        <button class="btn btn-success" @click="onUpdate">Update</button>
+        <button class="btn btn-success" @click="onUpdate()">Update</button>
       </div>
 
+    </ModalWindow>
+
+
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <ModalWindow :visible="modalAddVisible" @close="modalAddVisible = false">
+      <template v-slot:title>Add new remark for {{ echoRemarkToAdd.typeLabel }}</template>
+      <slot>
+
+        <div class="form-group">
+          <label>Type</label>
+          <input type="text" class="form-control" readonly v-model="echoRemarkToAdd.typeLabel">
+        </div>
+
+        <div class="form-group">
+          <label>Value</label>
+          <textarea class="form-control" rows="3" v-model.trim="echoRemarkToAdd.value"></textarea>
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-success" @click="onAdd()" :disabled="echoRemarkToAdd.value === ''">Add</button>
+        </div>
+
+      </slot>
     </ModalWindow>
 
 
@@ -100,11 +104,13 @@ export default {
   data() {
     return {
 
-      editModalVisible: false,
+      modalEditVisible: false,
+      modalAddVisible: false,
 
-      valueToSave: {
+      echoRemarkToAdd: {
         value: "",
-        type: "AORTA"
+        type: "AORTA",
+        typeLabel: "",
       },
 
       valueToEdit: {
@@ -128,7 +134,7 @@ export default {
 
   mounted() {
 
-    this.$store.dispatch('FETCH_ALL')
+    this.$store.dispatch('FETCH_ALL');
 
   },
 
@@ -137,10 +143,10 @@ export default {
 
     onOpenEditModal: function (item) {
 
-      this.valueToEdit.id = item.id
-      this.valueToEdit.value = item.value
+      this.valueToEdit.id = item.id;
+      this.valueToEdit.value = item.value;
 
-      this.editModalVisible = true
+      this.modalEditVisible = true;
 
     },
 
@@ -149,24 +155,23 @@ export default {
       let item = {
         value: this.valueToEdit.value,
         id: this.valueToEdit.id
-      }
+      };
 
       this.$store.dispatch('UPDATE', item)
           .then(() => {
-            this.editModalVisible = false
-          })
+            this.modalEditVisible = false;
+          });
 
     },
 
-    onSave: function () {
+    onAdd() {
 
-      let item = {
-        value: this.valueToSave.value,
-        type: this.valueToSave.type
+      const params = {
+        value: this.echoRemarkToAdd.value,
+        type: this.echoRemarkToAdd.type
       }
 
-      this.$store.dispatch('SAVE', item)
-          .then()
+      this.$store.dispatch('SAVE', params).then()
 
     },
 
@@ -175,7 +180,16 @@ export default {
       this.$store.dispatch('DELETE', item.id)
           .then()
 
-    }
+    },
+
+    onOpenAddModal(type) {
+
+      this.echoRemarkToAdd.type = type;
+      this.echoRemarkToAdd.typeLabel = this.echoValueTypes[type];
+
+      this.modalAddVisible = true;
+
+    },
 
 
   },
