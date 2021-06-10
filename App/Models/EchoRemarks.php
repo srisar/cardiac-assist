@@ -10,22 +10,22 @@ use PDO;
 class EchoRemarks implements IModel
 {
 
-    private const TABLE = 'echo_remarks';
+    private const TABLE = "echo_remarks";
 
     public ?int $id;
     public ?string $value, $type;
 
-    public const TYPE_LEFT_VENTRICLE = 'LEFT_VENTRICLE';
-    public const TYPE_LEFT_ATRIUM = 'LEFT_ATRIUM';
-    public const TYPE_MITRAL_VALVE = 'MITRAL_VALVE';
-    public const TYPE_AORTIC_VALVE = 'AORTIC_VALVE';
-    public const TYPE_AORTA = 'AORTA';
-    public const TYPE_RIGHT_VENTRICLE = 'RIGHT_VENTRICLE';
-    public const TYPE_RIGHT_ATRIUM = 'RIGHT_ATRIUM';
-    public const TYPE_PULMONIC_VALVE = 'PULMONIC_VALVE';
-    public const TYPE_TRICUSPID = 'TRICUSPID';
-    public const TYPE_PERICARDIUM = 'PERICARDIUM';
-    public const TYPE_CONCLUSION = 'CONCLUSION';
+    public const TYPE_LEFT_VENTRICLE = "LEFT_VENTRICLE";
+    public const TYPE_LEFT_ATRIUM = "LEFT_ATRIUM";
+    public const TYPE_MITRAL_VALVE = "MITRAL_VALVE";
+    public const TYPE_AORTIC_VALVE = "AORTIC_VALVE";
+    public const TYPE_AORTA = "AORTA";
+    public const TYPE_RIGHT_VENTRICLE = "RIGHT_VENTRICLE";
+    public const TYPE_RIGHT_ATRIUM = "RIGHT_ATRIUM";
+    public const TYPE_PULMONIC_VALVE = "PULMONIC_VALVE";
+    public const TYPE_TRICUSPID = "TRICUSPID";
+    public const TYPE_PERICARDIUM = "PERICARDIUM";
+    public const TYPE_CONCLUSION = "CONCLUSION";
 
 
     public static function build($array): EchoRemarks
@@ -49,7 +49,7 @@ class EchoRemarks implements IModel
      */
     public static function findAll($limit = 1000, $offset = 0): array
     {
-        return Database::findAll(self::TABLE, $limit, $offset, self::class, 'type');
+        return Database::findAll(self::TABLE, $limit, $offset, self::class, "type");
     }
 
     /**
@@ -58,8 +58,8 @@ class EchoRemarks implements IModel
     public function insert(): int
     {
         $data = [
-            'value' => $this->value,
-            'type' => $this->type
+            "value" => $this->value,
+            "type" => $this->type
         ];
 
         return Database::insert(self::TABLE, $data);
@@ -69,16 +69,16 @@ class EchoRemarks implements IModel
     public function update(): bool
     {
         $data = [
-            'value' => $this->value,
+            "value" => $this->value,
         ];
 
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
 
     }
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, 'id', $this->id);
+        return Database::delete(self::TABLE, "id", $this->id);
     }
 
     /**

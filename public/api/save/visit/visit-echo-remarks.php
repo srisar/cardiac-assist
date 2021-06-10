@@ -11,28 +11,11 @@ Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 
-    $types = [
-        "LEFT_VENTRICLE",
-        "LEFT_ATRIUM",
-        "MITRAL_VALVE",
-        "AORTIC_VALVE",
-        "AORTA",
-        "RIGHT_VENTRICLE",
-        "RIGHT_ATRIUM",
-        "PULMONIC_VALVE",
-        "TRICUSPID",
-        "PERICARDIUM",
-        "CONCLUSION",
-    ];
-
 
     $fields = [
         "visit_id" => Request::getAsInteger("visit_id"),
         "echo_value_id" => Request::getAsInteger("echo_value_id"),
-        "type" => strtoupper(Request::getAsString("type")),
     ];
-
-    if (!in_array($fields["type"], $types)) throw new Exception("Invalid type");
 
 
     $object = VisitEchoValue::build($fields);
