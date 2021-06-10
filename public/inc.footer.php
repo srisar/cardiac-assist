@@ -11,7 +11,7 @@ use App\Core\App;
             <footer>
                 <hr>
                 <div class="text-center">
-                    &copy; <?= date('Y') ?> Cardiac Assist. All rights reserved. Developed by <a href="https://gravitide.dev">gravitide.dev</a>.
+                    &copy; <?= date('Y') ?> Cardiac Clinic System. All rights reserved. Developed by <a href="https://srisar.dev">srisar.dev</a>.
                     <span class="badge badge-warning"><?= APP_VERSION ?></span>
                 </div>
             </footer>

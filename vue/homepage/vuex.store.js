@@ -6,15 +6,39 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     /* *** STATE *** */
-    state: {},
+    state: {
+
+        patientsStats: {}
+
+    },
     /* *** STATE *** */
+
+    getters: {
+        getPatientsStats(state) {
+            return state.patientsStats;
+        },
+    },
 
     /* *** MUTATIONS *** */
     mutations: {},
     /* *** MUTATIONS *** */
 
     /* *** ACTIONS *** */
-    actions: {},
+    actions: {
+
+        async patients_getStats(context) {
+            try {
+
+                const response = await $.get(`${getSiteURL()}/api/stats/patients.php`);
+                console.log(response);
+                context.state.patientsStats = response;
+
+            } catch (e) {
+                throw e;
+            }
+        }
+
+    },
     /* *** ACTIONS *** */
 
 })

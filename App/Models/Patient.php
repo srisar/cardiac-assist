@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Core\Database\Database;
 use PDO;
+use stdClass;
 
 class Patient implements IModel
 {
@@ -26,7 +27,7 @@ class Patient implements IModel
     public static function build($array): Patient
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -119,7 +120,7 @@ class Patient implements IModel
 
         $db = Database::instance();
 
-        if ( strtoupper($gender) == 'ALL' ) {
+        if (strtoupper($gender) == 'ALL') {
             $statement = $db->prepare('select * from ' . self::TABLE .
                 ' where age between :age_start and :age_end 
                 order by first_name');
@@ -145,7 +146,7 @@ class Patient implements IModel
 
         $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        if ( !empty($result) ) return $result;
+        if (!empty($result)) return $result;
         return null;
 
     }
@@ -165,6 +166,37 @@ class Patient implements IModel
     public function getAppointments(): array
     {
         return Appointment::findByPatient($this);
+    }
+
+    /**
+     * @return int[]
+     */
+    public static function getTotalCount(): array
+    {
+        $db = Database::instance();
+
+        $output = [
+            "total" => 0,
+            "male" => 0,
+            "female" => 0
+        ];
+
+        $statement = $db->prepare("select count(*) as total from patients");
+        $statement->execute();
+        $result = $statement->fetchObject(stdClass::class);
+        $output["total"] = (int)$result->total;
+
+        $statement = $db->prepare("select count(*) as total from patients where gender='MALE'");
+        $statement->execute();
+        $result = $statement->fetchObject(stdClass::class);
+        $output["male"] = (int)$result->total;
+
+        $statement = $db->prepare("select count(*) as total from patients where gender='FEMALE'");
+        $statement->execute();
+        $result = $statement->fetchObject(stdClass::class);
+        $output["female"] = (int)$result->total;
+
+        return $output;
     }
 
 }
