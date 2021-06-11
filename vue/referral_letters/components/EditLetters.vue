@@ -1,18 +1,18 @@
 <template>
 
   <div class="card shadow shadow-sm">
-    <div class="card-header">Edit {{ selectedDrug.drug_name }}</div>
+    <div class="card-header">Edit {{ selectedLetter.title }}</div>
     <div class="card-body">
 
       <div class="">
         <div class="form-group">
-          <label for="text-drug-name">Drug name</label>
-          <input type="text" id="text-drug-name" class="form-control" v-model="selectedDrug.drug_name">
+          <label>Title</label>
+          <input type="text" class="form-control" v-model="selectedLetter.title">
         </div>
 
         <div class="form-group">
-          <label for="text-remarks">Remarks</label>
-          <textarea rows="3" id="text-remarks" class="form-control" v-model="selectedDrug.remarks"></textarea>
+          <label>Letter Model</label>
+          <RichEditorV2 v-model="selectedLetter.letter_model"></RichEditorV2>
         </div>
 
         <div class="text-center mt-3">
@@ -27,23 +27,26 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../../_common/bootbox_dialogs";
+import {errorMessageBox, successMessageBox} from "../../_common/bootbox_dialogs";
+import RichEditorV2 from "../../_common/components/RichEditorV2";
 
 const _ = require("lodash");
 
 export default {
   name: "EditLetters",
+  components: {RichEditorV2},
   data() {
-    return {}
+    return {
+
+      selectedLetter: {},
+
+    }
   },
 
   computed: {
-    selectedDrug() {
-      return _.cloneDeep(this.$store.getters.getSelectedDrug)
-    },
 
     isFormValid() {
-      return this.selectedDrug.drug_name !== "";
+      return this.selectedLetter.title !== "";
     }
 
   },
@@ -68,11 +71,11 @@ export default {
     async fetchSelected(id) {
       try {
 
-        await this.$store.dispatch("drugs_fetch", id);
-        this.selectedSymptom = this.$store.getters.getSelectedSymptom;
+        await this.$store.dispatch("letters_fetch", id);
+        this.selectedLetter = _.cloneDeep(this.$store.getters.getSelectedLetter);
 
       } catch (e) {
-        errorMessageBox("Failed to load selected drug data");
+        errorMessageBox("Failed to load selected letter data");
         await this.$router.push("/");
       }
     },
@@ -85,17 +88,23 @@ export default {
       try {
 
         const params = {
-          id: this.selectedDrug.id,
-          drug_name: this.selectedDrug.drug_name,
-          remarks: this.selectedDrug.remarks,
+          id: this.selectedLetter.id,
+          title: this.selectedLetter.title,
+          letter_model: this.selectedLetter.letter_model,
         };
 
-        await this.$store.dispatch("drugs_update", params);
+        await this.$store.dispatch("letters_update", params);
 
-        await this.$store.dispatch("drugs_fetchAll");
+        successMessageBox("Letter details updated");
 
       } catch (e) {
-        errorMessageBox("Failed to update drugs details");
+        errorMessageBox("Failed to update letter details");
+      }
+
+      try {
+        await this.$store.dispatch("letters_fetchAll");
+      } catch (e) {
+        errorMessageBox("Failed to fetch letter details");
       }
 
     }

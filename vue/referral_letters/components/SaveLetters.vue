@@ -1,18 +1,18 @@
 <template>
 
   <div class="card shadow shadow-sm">
-    <div class="card-header">Add a drug</div>
+    <div class="card-header">Add a new letter</div>
     <div class="card-body">
 
       <div class="">
         <div class="form-group">
-          <label for="text-drug-name">Drug name</label>
-          <input type="text" id="text-drug-name" class="form-control" v-model="drug.drug_name">
+          <label>Title</label>
+          <input type="text" class="form-control" v-model="letter.title">
         </div>
 
         <div class="form-group">
-          <label for="text-remarks">Remarks</label>
-          <textarea rows="3" id="text-remarks" class="form-control" v-model="drug.remarks"></textarea>
+          <label>Remarks</label>
+          <RichEditorV2 v-model="letter.letter_model"/>
         </div>
 
         <div class="text-center mt-3">
@@ -28,15 +28,16 @@
 
 <script>
 import {errorMessageBox} from "../../_common/bootbox_dialogs";
+import RichEditorV2 from "../../_common/components/RichEditorV2";
 
 export default {
   name: "SaveLetters",
-
+  components: {RichEditorV2},
   data() {
     return {
-      drug: {
-        drug_name: "",
-        remarks: "",
+      letter: {
+        title: "",
+        letter_model: "",
       }
     }
   },
@@ -44,7 +45,7 @@ export default {
   computed: {
 
     isFormValid() {
-      return this.drug.drug_name !== "";
+      return this.letter.title !== "";
     }
 
   },
@@ -63,20 +64,20 @@ export default {
       try {
 
         const params = {
-          drug_name: this.drug.drug_name,
-          remarks: this.drug.remarks,
+          title: this.letter.title,
+          letter_model: this.letter.letter_model,
         };
 
-        await this.$store.dispatch("drugs_save", params);
+        await this.$store.dispatch("letters_save", params);
 
       } catch (e) {
         errorMessageBox("Failed to save");
       }
 
       try {
-        await this.$store.dispatch("drugs_fetchAll");
+        await this.$store.dispatch("letters_fetchAll");
       } catch (e) {
-        errorMessageBox("Failed to fetch drugs details");
+        errorMessageBox("Failed to fetch letter details");
       }
 
     },

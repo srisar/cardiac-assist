@@ -12,8 +12,11 @@ Authentication::isAdminOrRedirect(DEBUG);
 try {
 
     $fields = [
-        'id' => Request::getAsInteger('id'),
+        "id" => Request::getAsInteger("id"),
     ];
+
+    $object = Appointment::find($fields["id"]);
+    if (empty($object)) throw new Exception("Invalid id");
 
     $object = Appointment::build($fields);
 
@@ -21,10 +24,10 @@ try {
     $result = $object->delete();
 
     if ($result) {
-        JSONResponse::validResponse('Deleted');
+        JSONResponse::validResponse("Deleted");
         return;
     } else {
-        throw new Exception('Failed');
+        throw new Exception("Failed");
     }
 
 } catch (Exception $exception) {

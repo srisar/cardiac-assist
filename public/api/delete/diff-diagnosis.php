@@ -15,18 +15,20 @@ try {
         "id" => Request::getAsInteger("id"),
     ];
 
-    $object = DifferentialDiagnosis::build($fields);
+    $object = DifferentialDiagnosis::find($fields["id"]);
+    if (empty($object)) throw new Exception("Invalid id");
 
+    $object = DifferentialDiagnosis::build($fields);
 
     $result = $object->delete();
 
-    if ( $result ) {
+    if ($result) {
         JSONResponse::validResponse("Deleted");
         return;
     } else {
         throw new Exception("Failed");
     }
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }

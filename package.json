@@ -43,5 +43,7 @@
     "vue-template-compiler": "^2.6.12",
     "vuex": "^3.6.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "voca": "^1.4.0"
+  }
 }

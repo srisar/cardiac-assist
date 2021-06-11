@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\Symptom;
+use App\Models\ReferralLetter;
 
 require_once "../../../_bootstrap.inc.php";
 
@@ -15,20 +15,21 @@ try {
         "id" => Request::getAsInteger("id"),
     ];
 
-    $object = Symptom::find($fields["id"]);
+    $object = ReferralLetter::find($fields["id"]);
     if (empty($object)) throw new Exception("Invalid id");
 
-    $object = Symptom::build($fields);
+    $object = ReferralLetter::build($fields);
+
 
     $result = $object->delete();
 
-    if ( $result ) {
+    if ($result) {
         JSONResponse::validResponse("Deleted");
         return;
     } else {
         throw new Exception("Failed");
     }
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }

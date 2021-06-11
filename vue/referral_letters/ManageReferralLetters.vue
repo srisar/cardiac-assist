@@ -6,10 +6,10 @@
 
       <div class="form-row">
 
-        <div class="col-12 col-md-4">
-          <!-- list drugs -->
+        <div class="col-12 col-md-4 mb-3">
+          <!-- list -->
 
-          <div class="card shadow shadow-sm">
+          <div class="card mb-3 shadow shadow-sm">
             <div class="card-header d-flex justify-content-between">
               <div>Referral Letters</div>
               <div>
@@ -19,22 +19,12 @@
 
             <div class="card-body">
 
-
-              <div class="mb-3">
-
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Filter drugs" v-model="filterText">
-                </div>
-
-              </div>
-
-
               <table class="table table-sm table-bordered table-hover">
 
                 <tbody>
                 <tr v-for="item in lettersList" :key="item.id">
                   <td class="text-left">
-                    <router-link :to="'/edit/' + item.id">{{ item.letter_model }}</router-link>
+                    <router-link :to="'/edit/' + item.id">{{ item.title }}</router-link>
                   </td>
                 </tr>
                 </tbody>
@@ -42,6 +32,20 @@
 
             </div>
 
+          </div><!-- card -->
+
+          <div class="card mb-3 shadow shadow-sm">
+            <div class="card-header">Help</div>
+            <div class="card-body">
+
+              <p class="font-weight-bold">The following template tags can be used to automatically insert
+                dynamic values when adding these letters to patient visits.</p>
+              <p>{DATE}</p>
+              <p>{DR_NAME}, {DR_ADDRESS}</p>
+              <p>{PATIENT_NAME}, {PRONOUN}, {PRONOUN|START}, {PRONOUN|POSSESSIVE}</p>
+              <p>{TREATMENT}, {DIAGNOSES}, {SYMPTOMS}, {DISEASE}</p>
+
+            </div>
           </div>
 
         </div>

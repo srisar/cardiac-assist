@@ -42,7 +42,7 @@ const Store = new Vuex.Store({
             try {
 
                 const response = await $.get(`${getSiteURL()}/api/get/referral-letters.php`, {id: id});
-                context.commit("setSelectedDrug", response.data);
+                context.commit("setSelectedLetter", response.data);
 
             } catch (e) {
                 throw e;
@@ -55,7 +55,7 @@ const Store = new Vuex.Store({
             try {
 
                 const response = await $.get(`${getSiteURL()}/api/get/referral-letters.php`);
-                context.commit("setDrugs", response.data);
+                context.commit("setLetters", response.data);
 
             } catch (e) {
                 throw e;
@@ -86,7 +86,7 @@ const Store = new Vuex.Store({
                 throw e;
             }
 
-        }
+        },
 
 
     },

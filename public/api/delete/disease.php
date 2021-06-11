@@ -15,8 +15,10 @@ try {
         "id" => Request::getAsInteger("id"),
     ];
 
-    $object = Disease::build($fields);
+    $object = Disease::find($fields["id"]);
+    if (empty($object)) throw new Exception("Invalid id");
 
+    $object = Disease::build($fields);
 
     $result = $object->delete();
 

@@ -1,8 +1,5 @@
 import Vuex from "vuex";
 import Vue from "vue";
-
-Vue.use(Vuex);
-
 import visitSymptoms from "./store_modules/visit_symptoms";
 import differentialDiagnosis from "./store_modules/differential_diagnosis";
 import visitInvestigations from "./store_modules/visit_investigations";
@@ -10,6 +7,9 @@ import visitDiagnosis from "./store_modules/visit_diagnosis";
 import visitEchoValues from "./store_modules/visit_echo_values";
 import {visitPrescriptions} from "./store_modules/visit_prescriptions";
 import {visitFurtherInvestigation} from "./store_modules/visit_further_investigations";
+import {visitReferralLetters} from "./store_modules/visit_referral_letters";
+
+Vue.use(Vuex);
 
 
 export default new Vuex.Store({
@@ -21,7 +21,8 @@ export default new Vuex.Store({
         visitDiagnosis: visitDiagnosis,
         visitEchoValues: visitEchoValues,
         visitPrescriptions: visitPrescriptions,
-        visitFurtherInvestigation: visitFurtherInvestigation
+        visitFurtherInvestigation: visitFurtherInvestigation,
+        visitReferralLetters: visitReferralLetters,
     },
 
     state: {
