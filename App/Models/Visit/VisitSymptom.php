@@ -1,10 +1,12 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
+use App\Models\IModel;
+use App\Models\Symptom;
 use PDO;
 
 class VisitSymptom implements IModel
@@ -59,30 +61,6 @@ class VisitSymptom implements IModel
         return Database::findAll(self::TABLE, $limit, $offset, self::class, 'visit_id');
     }
 
-    public function insert(): int
-    {
-        $data = [
-            'visit_id' => $this->visit_id,
-            'symptom_id' => $this->symptom_id,
-            'duration' => $this->duration,
-        ];
-
-        return Database::insert(self::TABLE, $data);
-    }
-
-    public function update()
-    {
-
-    }
-
-    /**
-     * @return bool
-     */
-    public function delete(): bool
-    {
-        return Database::delete(self::TABLE, 'id', $this->id);
-    }
-
     /**
      * @param Visit $visit
      * @return VisitSymptom[]
@@ -110,6 +88,30 @@ class VisitSymptom implements IModel
         }
 
         return $output;
+    }
+
+    public function insert(): int
+    {
+        $data = [
+            'visit_id' => $this->visit_id,
+            'symptom_id' => $this->symptom_id,
+            'duration' => $this->duration,
+        ];
+
+        return Database::insert(self::TABLE, $data);
+    }
+
+    public function update()
+    {
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function delete(): bool
+    {
+        return Database::delete(self::TABLE, 'id', $this->id);
     }
 
 }

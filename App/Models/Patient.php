@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use App\Models\Visit\Visit;
 use PDO;
 use stdClass;
 
@@ -15,10 +16,9 @@ class Patient implements IModel
 
     public ?int $id, $age, $income;
     public ?string $first_name, $last_name, $address, $ds_division, $nic, $phone, $job, $job_type, $dob, $gender, $status;
-    public ?string $created_at, $updated_at;
 
     public const STATUS_ACTIVE = 'ACTIVE';
-    public const STATUS_INACTIVE = 'INACTIVE';
+//    public const STATUS_INACTIVE = 'INACTIVE';
 
     /**
      * @param $array
@@ -53,10 +53,7 @@ class Patient implements IModel
     }
 
 
-    /**
-     * @return bool|int|null
-     */
-    public function insert()
+    public function insert(): int
     {
         $data = [
             'first_name' => $this->first_name,
@@ -111,11 +108,11 @@ class Patient implements IModel
 
 
     /**
-     * @param $gender
-     * @param $age
-     * @return Patient[]|null
+     * @param string $gender
+     * @param array $age
+     * @return Patient[]
      */
-    public static function filter($gender = "ALL", $age = [0, 100]): ?array
+    public static function filter(string $gender = "ALL", array $age = [0, 100]): array
     {
 
         $db = Database::instance();
@@ -147,7 +144,23 @@ class Patient implements IModel
         $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         if (!empty($result)) return $result;
-        return null;
+        return [];
+
+    }
+
+
+    public static function search(string $keyword): array
+    {
+        $db = Database::instance();
+        $statement = $db->prepare("select * from patients 
+                                            where first_name like :q or last_name like :q or phone like :q or address like :q");
+
+        $statement->execute([":q" => "%" . $keyword . "%"]);
+
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+
+        if (!empty($results)) return $results;
+        return [];
 
     }
 

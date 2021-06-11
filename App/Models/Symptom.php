@@ -14,8 +14,6 @@ class Symptom implements IModel
     public ?int $id;
     public ?string $symptom_name, $description;
 
-    public ?string $created_at, $updated_at;
-
     /**
      * @param $array
      * @return Symptom
@@ -50,9 +48,9 @@ class Symptom implements IModel
     }
 
     /**
-     * @return bool|int|null
+     * @return int
      */
-    public function insert()
+    public function insert(): int
     {
         $data = [
             'symptom_name' => $this->symptom_name,

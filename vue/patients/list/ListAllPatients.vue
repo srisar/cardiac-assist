@@ -1,24 +1,29 @@
 <template>
   <div>
 
-    <div class="container-fluid">
 
-      <div class="row mb-3">
-        <div class="col">
-          <PatientsFilter @update="onFilterUpdate"></PatientsFilter>
+    <div class="container">
+
+      <div class="row justify-content-center mb-3">
+        <div class="col-12 col-md-6">
+          <PatientsFilter/>
         </div>
       </div>
+
+    </div><!-- container -->
+
+    <div class="container-fluid">
 
       <div class="row">
 
         <div class="col">
 
-          <table class="table table-bordered data-table-full">
+          <table class="table table-bordered data-table-full text-right">
             <thead>
             <tr>
               <th>Full name</th>
               <th>Gender</th>
-              <th>Date of birth</th>
+              <th>DoB</th>
               <th>Age</th>
               <th>Address</th>
               <th>Phone</th>
@@ -47,9 +52,10 @@ import DateField from "../../_common/components/DateField";
 import ModalWindow from "../../_common/components/ModalWindow";
 import PatientsFilter from "./PatientsFilter";
 
-import * as values from '../values';
+import * as values from "../values";
+import {errorMessageBox} from "../../_common/bootbox_dialogs";
 
-const _ = require('lodash');
+const _ = require("lodash");
 
 export default {
   name: "ListAllPatients",
@@ -57,11 +63,10 @@ export default {
 
   data() {
     return {
-      patientsList: [],
       dataTable: null,
 
       filters: {
-        gender: 'SELECT'
+        gender: "SELECT"
       },
 
       GENDERS: values.GENDERS,
@@ -69,62 +74,38 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
 
-  mounted() {
+    patientsList() {
+      return this.$store.getters.getPatientsList;
+    },
+
+  },
+
+  async mounted() {
 
     this.generateDataTable();
-    this.fetchAllPatients();
+
+    try {
+
+      await this.$store.dispatch("patients_fetchAll");
+
+    } catch (e) {
+      errorMessageBox("Failed to fetch patients data");
+    }
+
+
+    try {
+      this.dataTable.rows.add(this.patientsList);
+      this.dataTable.draw();
+    } catch (e) {
+      alert("Failed to populate data table");
+    }
+
 
   },
 
   methods: {
-
-    /*
-    * Fetch all patients
-    * */
-    fetchAllPatients: function () {
-      $.get(`${getSiteURL()}/api/get/patients.php`)
-          .done(r => {
-            this.patientsList = r.data;
-
-            console.log(r)
-
-            this.dataTable.rows.add(this.patientsList);
-            this.dataTable.draw();
-
-          })
-          .fail(e => {
-
-          });
-    },
-
-    onFilterUpdate: function (payload) {
-
-      $.get(`${getSiteURL()}/api/filter/patients.php`, {
-        gender: payload.gender,
-        age_start: payload.age_start,
-        age_end: payload.age_end,
-      }).done(r => {
-
-        if (r.data != null) {
-
-          this.patientsList = r.data;
-
-          this.dataTable.clear();
-          this.dataTable.rows.add(this.patientsList);
-          this.dataTable.draw();
-
-        } else {
-          this.dataTable.clear();
-          this.dataTable.draw();
-        }
-
-
-      }).fail(e => {
-
-      });
-    },
 
 
     /**
@@ -137,31 +118,45 @@ export default {
         autoWidth: false,
         columns: [
           {
-            'data': 'first_name',
-            render: function (data, type, row) {
+            "data": "first_name",
+            render(data, type, row) {
               return `<a href="${getSiteURL()}/app/patients/edit.php?id=${row.id}">${data} ${row.last_name}</a>`;
             }
           },
           {
-            'data': 'gender',
-            render: function (data, type, row) {
+            "data": "gender",
+            render(data, type, row) {
               return values.GENDERS[data];
             }
           },
-          {'data': 'dob'},
-          {'data': 'age'},
+          {"data": "dob"},
           {
-            'data': 'address',
-            render: function (data, type, row) {
+            "data": "age",
+            render(data, type, row) {
+
+
+              if (!_.isEmpty(row.dob)) {
+
+                const today = moment();
+                const diff = moment.duration(today.diff(moment(row.dob)));
+                return Math.round(diff.asYears());
+              }
+
+              return data;
+            }
+          },
+          {
+            "data": "address",
+            render(data, type, row) {
               return toBrString(data);
             }
           },
-          {'data': 'phone'},
-          {'data': 'job'},
-          {'data': 'job_type'},
+          {"data": "phone"},
+          {"data": "job"},
+          {"data": "job_type"},
           {
-            'data': 'income',
-            render: function (data, type, row) {
+            "data": "income",
+            render(data, type, row) {
               return toCurrency(data);
             }
           },

@@ -1,36 +1,20 @@
 <template>
 
-  <div class="card">
-    <div class="card-header">Filters</div>
+  <div class="card shadow shadow-sm">
     <div class="card-body">
 
-      <div class="form-row">
-        <div class="col-auto">
+      <div class="row">
 
-          <div class="input-group input-group-sm">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Gender</div>
+        <div class="col">
+          <div class="input-group">
+            <input type="text" class="form-control"
+                   v-model.trim="query"
+                   @keyup.enter="onSearch()"
+                   placeholder="Search for names, addresses and phones">
+            <div class="input-group-append">
+              <button class="btn btn-primary" @click="onSearch()">Search</button>
             </div>
-            <select class="form-control" v-model="filters.gender">
-              <option value="ALL">ALL</option>
-              <option v-for="(item, index) in GENDERS" :value="index">{{ item }}</option>
-            </select>
-          </div><!-- input-group -->
-
-        </div><!-- col -->
-
-        <div class="col-auto">
-          <div class="input-group input-group-sm">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Age</div>
-            </div>
-            <input type="number" class="form-control field-age" min="1" v-model="filters.age_start">
-            <input type="number" class="form-control field-age" min="1" v-model="filters.age_end">
-          </div><!-- input-group -->
-        </div>
-
-        <div class="col-auto">
-          <button class="btn btn-success btn-sm" @click="onClickFilter">Filter</button>
+          </div>
         </div>
 
       </div><!-- row -->
@@ -42,21 +26,14 @@
 
 <script>
 
-import * as values from '../values'
-
 export default {
   name: "PatientsFilter",
 
   data() {
     return {
 
-      filters: {
-        gender: "ALL",
-        age_start: 1,
-        age_end: 100,
-      },
+      query: "",
 
-      GENDERS: values.GENDERS,
     }
   },
 
@@ -65,17 +42,20 @@ export default {
   },
 
   mounted() {
-    //
+
+    this.query = this.$route.params.keyword;
+
   },
 
   methods: {
-    //
 
-    onClickFilter: function () {
+    onSearch() {
 
-      this.$emit('update', this.filters);
+      if (!_.isEmpty(this.query) && this.$route.params.keyword !== this.query) {
+        this.$router.push("/search/" + this.query);
+      }
 
-    },
+    }
 
   },
 

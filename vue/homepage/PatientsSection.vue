@@ -2,16 +2,11 @@
 
   <div>
 
-    <div class="container my-5">
-      <div class="row mb-3">
-        <div class="col">
-          <h3 class="text-center text-uppercase">Patients</h3>
-        </div>
-      </div>
+    <div class="container mt-3">
 
 
       <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
 
           <div class="card shadow shadow-sm">
 
@@ -49,11 +44,28 @@
                 </div>
               </div><!-- row -->
 
-              <div class="row mt-2">
+              <div class="row my-3">
                 <div class="col text-center">
                   <a href="app/patients/add.php" class="btn btn-success btn-sm">Add new patient</a>
+                  <a href="app/patients/list.php" class="btn btn-primary btn-sm">View all patients</a>
                 </div>
               </div>
+
+              <div class="row my-3">
+
+                <div class="col">
+                  <div class="input-group">
+                    <input type="text" class="form-control"
+                           v-model.trim="patients.search.query"
+                           @keyup.enter="onSearch()"
+                           placeholder="Search for names, addresses and phones">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" @click="onSearch()">Search</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div><!-- row -->
 
 
             </div>
@@ -69,12 +81,21 @@
 </template>
 
 <script>
+
+let _ = require("lodash");
+
 export default {
   name: "PatientsSection",
 
   data() {
     return {
-      //
+
+      patients: {
+        search: {
+          query: "",
+        }
+      }
+
     }
   },
 
@@ -94,13 +115,25 @@ export default {
 
   },
 
+  methods: {
+
+    onSearch() {
+
+      if (!_.isEmpty(this.patients.search.query)) {
+        window.location.href = `${getSiteURL()}/app/patients/list.php#search/${this.patients.search.query}`;
+      }
+
+    },
+
+  },
+
 }
 </script>
 
 <style scoped>
 
 .icon {
-  width: 64px;
+  width: 48px;
 }
 
 </style>

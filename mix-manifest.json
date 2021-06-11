@@ -7,6 +7,7 @@
     "/public/app/symptoms/manage.app.js": "/public/app/symptoms/manage.app.js",
     "/public/app/diseases/manage.app.js": "/public/app/diseases/manage.app.js",
     "/public/app/drugs/manage.app.js": "/public/app/drugs/manage.app.js",
+    "/public/app/referral-letters/manage.app.js": "/public/app/referral-letters/manage.app.js",
     "/public/app/investigations/manage.app.js": "/public/app/investigations/manage.app.js",
     "/public/app/visits/manage.app.js": "/public/app/visits/manage.app.js",
     "/public/app/echo/remarks.app.js": "/public/app/echo/remarks.app.js",

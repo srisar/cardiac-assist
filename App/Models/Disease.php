@@ -5,7 +5,6 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class Disease implements IModel
 {
@@ -15,8 +14,6 @@ class Disease implements IModel
     public ?int $id;
     public ?string $disease, $disease_code, $description;
 
-    public ?string $created_at, $updated_at;
-
     /**
      * @param $array
      * @return Disease
@@ -24,7 +21,7 @@ class Disease implements IModel
     public static function build($array): Disease
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -51,10 +48,7 @@ class Disease implements IModel
     }
 
 
-    /**
-     * @return bool|int|null
-     */
-    public function insert()
+    public function insert(): int
     {
         $data = [
             'disease' => $this->disease,
@@ -102,7 +96,7 @@ class Disease implements IModel
 
         $result = $statement->fetchObject(self::class);
 
-        if ( !empty($result) ) return $result;
+        if (!empty($result)) return $result;
         return null;
     }
 

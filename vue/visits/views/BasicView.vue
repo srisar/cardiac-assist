@@ -200,6 +200,17 @@
 
           </div><!-- row -->
 
+          <div class="form-row justify-content-center mb-2">
+            <div class="col-4 text-center">
+
+              <div class="form-group">
+                <label>Review on</label>
+                <p class="lead">{{ visit.review_in }}</p>
+              </div>
+
+            </div>
+          </div>
+
 
           <div class="row mb-2 justify-content-center">
 
@@ -222,6 +233,8 @@
 
     </div>
 
+
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
     <!-- EDIT Modal: Visit Details -->
     <ModalWindow :visible="modalEditVisitVisible" @close="onHideEditVisit">

@@ -3,9 +3,8 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\Visit;
-use App\Models\VisitECG;
-use App\Models\VisitLipid;
+use App\Models\Visit\Visit;
+use App\Models\Visit\VisitLipid;
 
 require_once "../../../../_bootstrap.inc.php";
 

@@ -1,10 +1,12 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
+use App\Models\EchoRemarks;
+use App\Models\IModel;
 use PDO;
 
 class VisitEchoValue implements IModel

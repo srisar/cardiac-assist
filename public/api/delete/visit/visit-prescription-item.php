@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\VisitPrescriptionItem;
+use App\Models\Visit\VisitPrescriptionItem;
 
 require_once "../../../../_bootstrap.inc.php";
 

@@ -55,7 +55,8 @@ use App\Models\User;
             <img class="img-fluid" style="width: 30px" src="<?= App::siteURL() ?>/assets/images/app-icon.svg" alt="Bookstore management system">
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,7 +71,8 @@ use App\Models\User;
 
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
                         Patients
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -80,7 +82,8 @@ use App\Models\User;
                 </li><!-- end nav-item -->
 
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
                         Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -89,6 +92,7 @@ use App\Models\User;
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/remarks.php">Echo remarks</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/drugs/manage.php">Drugs</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/referral-letters/manage.php">Referral Letters</a>
                     </div>
                 </li><!-- end nav-item -->
 

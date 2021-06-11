@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use App\Models\Visit\Visit;
 use PDO;
 
 class DifferentialDiagnosis implements IModel

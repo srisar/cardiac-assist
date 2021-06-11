@@ -1,12 +1,11 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
-use PDO;
-use Symfony\Component\VarDumper\Cloner\Data;
+use App\Models\IModel;
 
 class VisitLipid implements IModel
 {
@@ -14,7 +13,7 @@ class VisitLipid implements IModel
     private const TABLE = 'visit_lipids';
 
     public ?int $id, $visit_id;
-    public ?float    $tc, $ldl, $hdl, $tg, $nhc;
+    public ?float $tc, $ldl, $hdl, $tg, $nhc;
 
     public ?Visit $visit;
 
@@ -26,7 +25,7 @@ class VisitLipid implements IModel
     public static function build($array): VisitLipid
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -37,7 +36,7 @@ class VisitLipid implements IModel
         /** @var VisitLipid $result */
         $result = Database::find(self::TABLE, $id, self::class);
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $result->visit = Visit::find($result->visit_id);
         }
 
@@ -72,10 +71,10 @@ class VisitLipid implements IModel
     public function update(): bool
     {
         $data = [
-            'tc'  => $this->tc,
+            'tc' => $this->tc,
             'ldl' => $this->ldl,
             'hdl' => $this->hdl,
-            'tg'  => $this->tg,
+            'tg' => $this->tg,
             'nhc' => $this->nhc,
         ];
 
@@ -102,7 +101,7 @@ class VisitLipid implements IModel
      */
     public static function findByVisit(Visit $visit): ?VisitLipid
     {
-        $db        = Database::instance();
+        $db = Database::instance();
         $statement = $db->prepare('select * from visit_lipids where visit_id=? limit 1');
         $statement->execute([$visit->id]);
 
@@ -110,7 +109,7 @@ class VisitLipid implements IModel
         $result = $statement->fetchObject(self::class);
 
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $result->visit = Visit::find($result->visit_id);
             return $result;
         }

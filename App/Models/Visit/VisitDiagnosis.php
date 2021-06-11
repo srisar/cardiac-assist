@@ -1,10 +1,12 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
+use App\Models\Disease;
+use App\Models\IModel;
 use PDO;
 
 class VisitDiagnosis implements IModel

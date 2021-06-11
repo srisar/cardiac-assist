@@ -5,8 +5,6 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
-use PDO;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class Investigation implements IModel
 {
@@ -49,7 +47,7 @@ class Investigation implements IModel
         return Database::findAll(self::TABLE, $limit, $offset, self::class, 'investigation_name');
     }
 
-    public function insert()
+    public function insert(): int
     {
         $data = [
             'investigation_name' => $this->investigation_name,

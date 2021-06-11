@@ -1,10 +1,15 @@
+import Vue from "vue";
+import VueRouter from "vue-router";
 import HomepageView from "./HomepageView";
 
-import Vue from 'vue';
+import store from "./vuex.store";
 
-import store from './vuex.store'
+const routes = [];
+
+const router = new VueRouter({routes});
 
 new Vue({
     render: h => h(HomepageView),
-    store : store,
+    store: store,
+    router: router,
 }).$mount("#app");

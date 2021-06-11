@@ -32,7 +32,7 @@ class User implements IModel
     public static function build($array): User
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -52,7 +52,7 @@ class User implements IModel
 
         $result = $statement->fetchObject(self::class);
 
-        if ( !empty($result) ) return $result;
+        if (!empty($result)) return $result;
         return null;
 
     }
@@ -69,9 +69,9 @@ class User implements IModel
     }
 
     /**
-     * @return bool|int
+     * @return int
      */
-    public function insert()
+    public function insert(): int
     {
 
         $hashedPassword = password_hash($this->password_string, PASSWORD_DEFAULT);
@@ -133,7 +133,7 @@ class User implements IModel
 
         $result = $statement->fetchObject(self::class);
 
-        if ( !empty($result) ) return $result;
+        if (!empty($result)) return $result;
         return null;
     }
 

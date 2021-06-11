@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Visit;
 
 use App\Core\Database\Database;
-use PDO;
+use App\Models\IModel;
 
 class VisitECG implements IModel
 {

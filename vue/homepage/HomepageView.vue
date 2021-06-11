@@ -6,15 +6,12 @@
       <div class="row">
         <div class="col text-right">
 
-          <h3>Dr Arulnithi's</h3>
-          <h2>Cardiac Clinic System</h2>
+          <h3>Dr Arulnithy's Cardiac Clinic System</h3>
 
         </div>
       </div>
     </div>
     <!-- title area -->
-
-    <hr>
 
     <PatientsSection/>
 

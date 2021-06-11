@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\VisitEchocardiography;
+use App\Models\Visit\VisitEchocardiography;
 
 require_once "../../../../_bootstrap.inc.php";
 

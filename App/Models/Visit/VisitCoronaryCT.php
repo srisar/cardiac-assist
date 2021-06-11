@@ -1,20 +1,20 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
-use PDO;
+use App\Models\IModel;
 
 class VisitCoronaryCT implements IModel
 {
     private const TABLE = 'visit_coronary_ct';
 
     public ?int $id, $visit_id;
-    public ?string   $total_calcium_score, $origin, $dominance, $left_main,
-                     $lad, $lcx, $cardiac_valves, $pericardium,
-                     $extra_cardiac_findings, $impression;
+    public ?string $total_calcium_score, $origin, $dominance, $left_main,
+        $lad, $lcx, $cardiac_valves, $pericardium,
+        $extra_cardiac_findings, $impression;
 
     public ?Visit $visit;
 
@@ -25,7 +25,7 @@ class VisitCoronaryCT implements IModel
     public static function build($array): VisitCoronaryCT
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
@@ -40,7 +40,7 @@ class VisitCoronaryCT implements IModel
         /** @var VisitCoronaryCT $result */
         $result = Database::find(self::TABLE, $id, self::class);
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $result->visit = Visit::find($result->visit_id);
             return $result;
         }
@@ -68,16 +68,16 @@ class VisitCoronaryCT implements IModel
     public function update(): bool
     {
         $data = [
-            'total_calcium_score'    => $this->total_calcium_score,
-            'origin'                 => $this->origin,
-            'dominance'              => $this->dominance,
-            'left_main'              => $this->left_main,
-            'lad'                    => $this->lad,
-            'lcx'                    => $this->lcx,
-            'cardiac_valves'         => $this->cardiac_valves,
-            'pericardium'            => $this->pericardium,
+            'total_calcium_score' => $this->total_calcium_score,
+            'origin' => $this->origin,
+            'dominance' => $this->dominance,
+            'left_main' => $this->left_main,
+            'lad' => $this->lad,
+            'lcx' => $this->lcx,
+            'cardiac_valves' => $this->cardiac_valves,
+            'pericardium' => $this->pericardium,
             'extra_cardiac_findings' => $this->extra_cardiac_findings,
-            'impression'             => $this->impression,
+            'impression' => $this->impression,
         ];
 
         return Database::update(self::TABLE, $data, ['id' => $this->id]);
@@ -95,14 +95,14 @@ class VisitCoronaryCT implements IModel
      */
     public static function findByVisit(Visit $visit): ?VisitCoronaryCT
     {
-        $db        = Database::instance();
+        $db = Database::instance();
         $statement = $db->prepare('select * from visit_coronary_ct where visit_id=? limit 1');
         $statement->execute([$visit->id]);
 
         /** @var VisitCoronaryCT $result */
         $result = $statement->fetchObject(self::class);
 
-        if ( !empty($result) ) {
+        if (!empty($result)) {
             $result->visit = Visit::find($result->visit_id);
             return $result;
         }

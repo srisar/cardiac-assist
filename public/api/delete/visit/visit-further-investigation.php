@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\VisitFurtherInvestigation;
+use App\Models\Visit\VisitFurtherInvestigation;
 
 require_once "../../../../_bootstrap.inc.php";
 
