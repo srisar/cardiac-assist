@@ -27,10 +27,10 @@ try {
 
         } elseif (!empty($visit_id)) {
             $visit = Visit::find($visit_id);
-
             if (empty($visit)) throw new Exception("Invalid visit");
 
             JSONResponse::validResponse(["data" => VisitPrescription::findByVisit($visit)]);
+            return;
         }
 
     } else {

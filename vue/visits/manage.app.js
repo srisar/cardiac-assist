@@ -18,6 +18,7 @@ import FurtherInvestigationsView from "./views/intervention/FurtherInvestigation
 import VisitReviewInView from "./views/intervention/VisitReviewInView";
 import OtherRemarksView from "./views/intervention/OtherRemarksView";
 import ReferralLettersView from "./views/intervention/referral-letters/ReferralLettersView";
+import EditReferralLetter from "./views/intervention/referral-letters/EditReferralLetter";
 
 
 Vue.use(Vuex)
@@ -43,11 +44,11 @@ const routes = [
         ],
     },
 
-
     {path: "/further-investigations", component: FurtherInvestigationsView},
     {path: "/review-in", component: VisitReviewInView},
     {path: "/other-remarks", component: OtherRemarksView},
     {path: "/referral-letters", component: ReferralLettersView},
+    {path: "/referral-letters/edit/:id", component: EditReferralLetter},
 ]
 
 const router = new VueRouter({
