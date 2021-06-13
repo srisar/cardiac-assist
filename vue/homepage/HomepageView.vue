@@ -88,24 +88,36 @@
       </div><!-- row -->
 
       <div class="row my-4 justify-content-center">
-        <div class="col-4">
+        <div class="col-3">
+          <div class="card shadow shadow-sm">
+            <div class="card-body text-center">
 
-          <div class="col">
-            <div class="card shadow shadow-sm">
-              <div class="card-body text-center">
+              <a href="/app/echo/remarks.php">
+                <div>
+                  <img src="assets/images/icon-remarks.svg" alt="" class="icon">
+                </div>
+                <div>Echo Remarks</div>
+              </a>
 
-                <a href="/app/echo/remarks.php">
-                  <div>
-                    <img src="assets/images/icon-remarks.svg" alt="" class="icon">
-                  </div>
-                  <div>Echo Remarks</div>
-                </a>
-
-              </div>
             </div>
           </div>
+        </div><!-- col -->
 
-        </div>
+        <div class="col-3">
+          <div class="card shadow shadow-sm">
+            <div class="card-body text-center">
+
+              <a href="/app/referral-letters/manage.php">
+                <div>
+                  <img src="assets/images/icon-letters.svg" alt="" class="icon">
+                </div>
+                <div>Referral letter models</div>
+              </a>
+
+            </div>
+          </div>
+        </div><!-- col -->
+
       </div>
 
     </div>
