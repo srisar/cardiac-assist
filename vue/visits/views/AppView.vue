@@ -74,8 +74,9 @@
           <div class="card mb-3 shadow shadow-sm">
             <div class="card-header">Reports</div>
             <ul class="list-group list-group-flush">
-
-
+              <li class="list-group-item">
+                <router-link to="/reports" class="">Generate reports</router-link>
+              </li>
             </ul>
           </div><!-- card -->
 

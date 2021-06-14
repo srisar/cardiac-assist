@@ -4,7 +4,7 @@ import VueRouter from "vue-router";
 
 import store from "./store"
 import BasicView from "./views/BasicView";
-import DiagnosesView from "./views/DiagnosesView";
+import DiagnosesView from "./views/diagnoses/DiagnosesView";
 import AppView from "./views/AppView";
 import EditVisitDetails from "./views/EditVisitDetails";
 import VisitECGView from "./views/special-investigations/VisitECGView";
@@ -19,6 +19,7 @@ import VisitReviewInView from "./views/intervention/VisitReviewInView";
 import OtherRemarksView from "./views/intervention/OtherRemarksView";
 import ReferralLettersView from "./views/intervention/referral-letters/ReferralLettersView";
 import EditReferralLetter from "./views/intervention/referral-letters/EditReferralLetter";
+import ReportView from "./views/ReportView";
 
 
 Vue.use(Vuex)
@@ -49,6 +50,8 @@ const routes = [
     {path: "/other-remarks", component: OtherRemarksView},
     {path: "/referral-letters", component: ReferralLettersView},
     {path: "/referral-letters/edit/:id", component: EditReferralLetter},
+
+    {path: "/reports", component: ReportView},
 ]
 
 const router = new VueRouter({

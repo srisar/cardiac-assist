@@ -38,10 +38,10 @@
 
 <script>
 
-import VisitSymptoms from "./../components/VisitSymptoms";
-import DifferentialDiagnosis from "./../components/DifferentialDiagnosis";
-import VisitDiagnosis from "./../components/VisitDiagnosis";
-import VisitInvestigations from "./../components/VisitInvestigations";
+import VisitSymptoms from "./VisitSymptoms";
+import DifferentialDiagnosis from "./DifferentialDiagnosis";
+import VisitDiagnosis from "./VisitDiagnosis";
+import VisitInvestigations from "./VisitInvestigations";
 
 export default {
   name: "DiagnosesView",

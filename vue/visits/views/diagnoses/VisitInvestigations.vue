@@ -167,9 +167,10 @@
 </template>
 
 <script>
-import RichEditorV2 from "../../_common/components/RichEditorV2";
-import ModalWindow from "../../_common/components/ModalWindow";
-import {errorMessageBox, successMessageBox} from "../../_common/bootbox_dialogs";
+
+import ModalWindow from "../../../_common/components/ModalWindow";
+import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 const _ = require("lodash");
 
