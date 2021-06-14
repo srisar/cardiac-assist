@@ -75,8 +75,8 @@
 <script>
 
 
-import ModalWindow from "../../../_common/components/ModalWindow";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import ModalWindow from "../../../../_common/components/ModalWindow";
+import {errorMessageBox} from "../../../../_common/bootbox_dialogs";
 
 export default {
   name: "VisitEchoReports",

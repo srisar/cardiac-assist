@@ -15,16 +15,16 @@
             <div class="card-body">
 
 
-             <div class="row">
-               <div class="col-4">
+              <div class="row">
+                <div class="col-5">
 
-                 <div class="input-group mb-3">
-                   <div class="input-group-prepend"><span class="input-group-text">Performed On</span></div>
-                   <DateField id="date-performed-on" v-model="visitECG.performed_on"/>
-                 </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend"><span class="input-group-text">Performed On</span></div>
+                    <DateField id="date-performed-on" v-model="visitECG.performed_on"/>
+                  </div>
 
-               </div>
-             </div>
+                </div>
+              </div>
 
               <div class="form-group">
                 <label>Indication</label>
@@ -92,47 +92,50 @@ export default {
     /*
     * Add visit ecg investigation
     * */
-    onUpdate: function () {
+    async onUpdate() {
 
-      const params = {
-        id: this.visitECG.id,
-        description: this.visitECG.description,
-        indication: this.visitECG.indication,
-        performed_on: this.visitECG.performed_on,
-      };
+      try {
 
-      $.post(`${getSiteURL()}/api/update/visit/visit-ecg.php`, params)
-          .done(r => {
-            successMessageBox('ECG details updated')
-          })
-          .fail(e => {
-            errorMessageBox('Failed to update ECG details')
-          });
+        const params = {
+          id: this.visitECG.id,
+          description: this.visitECG.description,
+          indication: this.visitECG.indication,
+          performed_on: this.visitECG.performed_on,
+        };
+
+
+        await $.post(`${getSiteURL()}/api/update/visit/visit-ecg.php`, params);
+
+        successMessageBox('ECG details updated');
+      } catch (e) {
+        errorMessageBox('Failed to update ECG details');
+      }
     },
 
 
     /*
     * Fetch visit ECG
     * */
-    _fetch: function () {
+    async _fetch() {
 
-      const params = {
-        visit_id: this.visitId,
+      try {
+
+        const params = {
+          visit_id: this.visitId,
+        }
+
+        const response = await $.get(`${getSiteURL()}/api/get/visit/visit-ecg.php`, params);
+
+        if (response.data.performed_on === null) {
+          response.data.performed_on = moment().format('YYYY-MM-DD')
+        }
+
+        this.visitECG = response.data;
+
+
+      } catch (e) {
+        errorMessageBox("Failed to fetch ECG details");
       }
-
-      $.get(`${getSiteURL()}/api/get/visit/visit-ecg.php`, params)
-          .done(response => {
-
-            // check of performed_on has null value
-
-            if (response.data.performed_on === null) {
-              response.data.performed_on = moment().format('YYYY-MM-DD')
-            }
-
-            this.visitECG = response.data
-          })
-          .fail(() => {
-          })
 
     }, /* fetch visit ECG */
 

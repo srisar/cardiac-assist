@@ -412,937 +412,6 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitCoronaryCT",
-  data: function data() {
-    return {
-      visitCoronaryCT: {
-        id: undefined,
-        visit_id: undefined,
-        total_calcium_score: undefined,
-        origin: undefined,
-        dominance: undefined,
-        left_main: undefined,
-        lad: undefined,
-        lcx: undefined,
-        cardiac_valves: undefined,
-        pericardium: undefined,
-        extra_cardiac_findings: undefined,
-        impression: undefined
-      }
-    };
-  },
-
-  /* data */
-
-  /*
-  * === COMPUTED ===
-  * */
-  computed: {
-    visitId: function visitId() {
-      return this.$store.getters.getVisitId;
-    }
-  },
-
-  /*
-  * === MOUNTED ===
-  * */
-  mounted: function mounted() {
-    this._fetch();
-  },
-  methods: {
-    /*
-    * check if visit-coronary-ct exist
-    * */
-    _fetch: function _fetch() {
-      var _this = this;
-
-      var params = {
-        visit_id: this.visitId
-      };
-      $.get("".concat(getSiteURL(), "/api/get/visit/visit-coronary-ct.php"), params).done(function (response) {
-        _this.visitCoronaryCT = response.data;
-      }).fail(function (error) {
-        console.log(error);
-      });
-    },
-
-    /* check if coronary ct exist in db*/
-    onUpdate: function onUpdate() {
-      var params = {
-        id: this.visitCoronaryCT.id,
-        total_calcium_score: this.visitCoronaryCT.total_calcium_score,
-        origin: this.visitCoronaryCT.origin,
-        dominance: this.visitCoronaryCT.dominance,
-        left_main: this.visitCoronaryCT.left_main,
-        lad: this.visitCoronaryCT.lad,
-        lcx: this.visitCoronaryCT.lcx,
-        cardiac_valves: this.visitCoronaryCT.cardiac_valves,
-        pericardium: this.visitCoronaryCT.pericardium,
-        extra_cardiac_findings: this.visitCoronaryCT.extra_cardiac_findings,
-        impression: this.visitCoronaryCT.impression
-      };
-      $.post("".concat(getSiteURL(), "/api/update/visit/visit-coronary-ct.php"), params).done(function () {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.successMessageBox)('Coronary CT details updated');
-      }).fail(function (e) {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.errorMessageBox)('Failed to update coronary CT details');
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _VisitEchoReports__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitEchoReports */ "./vue/visits/components/special_investigations/VisitEchoReports.vue");
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitEcho",
-  components: {
-    VisitEchoReports: _VisitEchoReports__WEBPACK_IMPORTED_MODULE_0__.default
-  },
-
-  /* ### DATA ### */
-  data: function data() {
-    return {
-      exist: false,
-      loaded: false,
-      visitEcho: {
-        id: undefined,
-        visit_id: undefined,
-        param_la_systolic_diameter: 0,
-        param_aortic_root_diameter: 0,
-        param_lvot_diameter: 0,
-        param_ivs_diastolic_thickness: 0,
-        param_pw_diastolic_thickness: 0,
-        param_lvid_diastole: 0,
-        param_lvid_systole: 0,
-        param_fractional_shortening: 0,
-        param_lvef: 0,
-        param_rvid: 0,
-        param_peak_aortic_velocity: 0,
-        param_peak_lvot_velocity: 0,
-        param_aortic_lvot_velocity: 0,
-        param_peak_aortic_gradient: 0,
-        param_mean_aortic_gradient: 0,
-        param_aortic_valve_area: 0,
-        param_mitral_pressure: 0,
-        param_mean_mitral_gradient: 0,
-        param_mitral_valve_area: 0,
-        param_peak_tricuspid_velocity: 0,
-        param_stroke_volume: 0,
-        param_cardiac_output: 0,
-        param_cardiac_index: 0,
-        param_bp: 0,
-        param_hr: 0,
-        param_est_rvsp: 0,
-        param_est_cvp: 0,
-        param_est_pasp: 0
-      }
-    };
-  },
-
-  /* *** DATA *** */
-  computed: {
-    visitId: function visitId() {
-      return this.$store.getters.getVisitId;
-    }
-  },
-
-  /* *** COMPUTED *** */
-  mounted: function mounted() {
-    this._fetch();
-  },
-
-  /* *** MOUNTED *** */
-  methods: {
-    /*
-    * Fetch the initial values
-    * */
-    _fetch: function _fetch() {
-      var _this = this;
-
-      var params = {
-        visit_id: this.visitId
-      };
-      $.get("".concat(getSiteURL(), "/api/get/visit/visit-echo.php"), params).done(function (response) {
-        _this.visitEcho = response.data;
-        _this.loaded = true;
-      }).fail(function () {});
-    },
-
-    /*
-    * Update new values
-    * */
-    onUpdate: function onUpdate() {
-      var params = {
-        id: this.visitEcho.id,
-        param_la_systolic_diameter: this.visitEcho.param_la_systolic_diameter,
-        param_aortic_root_diameter: this.visitEcho.param_aortic_root_diameter,
-        param_lvot_diameter: this.visitEcho.param_lvot_diameter,
-        param_ivs_diastolic_thickness: this.visitEcho.param_ivs_diastolic_thickness,
-        param_pw_diastolic_thickness: this.visitEcho.param_pw_diastolic_thickness,
-        param_lvid_diastole: this.visitEcho.param_lvid_diastole,
-        param_lvid_systole: this.visitEcho.param_lvid_systole,
-        param_fractional_shortening: this.visitEcho.param_fractional_shortening,
-        param_lvef: this.visitEcho.param_lvef,
-        param_rvid: this.visitEcho.param_rvid,
-        param_peak_aortic_velocity: this.visitEcho.param_peak_aortic_velocity,
-        param_peak_lvot_velocity: this.visitEcho.param_peak_lvot_velocity,
-        param_aortic_lvot_velocity: this.visitEcho.param_aortic_lvot_velocity,
-        param_peak_aortic_gradient: this.visitEcho.param_peak_aortic_gradient,
-        param_mean_aortic_gradient: this.visitEcho.param_mean_aortic_gradient,
-        param_aortic_valve_area: this.visitEcho.param_aortic_valve_area,
-        param_mitral_pressure: this.visitEcho.param_mitral_pressure,
-        param_mean_mitral_gradient: this.visitEcho.param_mean_mitral_gradient,
-        param_mitral_valve_area: this.visitEcho.param_mitral_valve_area,
-        param_peak_tricuspid_velocity: this.visitEcho.param_peak_tricuspid_velocity,
-        param_stroke_volume: this.visitEcho.param_stroke_volume,
-        param_cardiac_output: this.visitEcho.param_cardiac_output,
-        param_cardiac_index: this.visitEcho.param_cardiac_index,
-        param_bp: this.visitEcho.param_bp,
-        param_hr: this.visitEcho.param_hr,
-        param_est_rvsp: this.visitEcho.param_est_rvsp,
-        param_est_cvp: this.visitEcho.param_est_cvp,
-        param_est_pasp: this.visitEcho.param_est_pasp
-      };
-      console.log(params);
-      $.post("".concat(getSiteURL(), "/api/update/visit/visit-echo.php"), params).done(function () {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)('Echocardiography details updated');
-      }).fail(function () {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to update echocardiography details');
-      });
-    }
-  }
-  /* METHODS */
-
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitEchoReports",
-  components: {
-    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__.default
-  },
-  data: function data() {
-    return {
-      /* modal */
-      modalAddVisible: false,
-      echoRemarksTypes: {
-        'LEFT_VENTRICLE': 'Left Ventricle',
-        'LEFT_ATRIUM': 'Left Atrium',
-        'MITRAL_VALVE': 'Mitral Valve',
-        'AORTIC_VALVE': 'Aortic Valve',
-        'AORTA': 'Aorta',
-        'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
-        'RIGHT_ATRIUM': 'Right Atrium',
-        'PULMONIC_VALVE': 'Pulmonic Valve',
-        'TRICUSPID': 'Tricuspid',
-        'PERICARDIUM': 'Pericardium',
-        'CONCLUSION': 'Conclusion'
-      },
-      selectedRemarks: {
-        'LEFT_VENTRICLE': 0,
-        'LEFT_ATRIUM': 0,
-        'MITRAL_VALVE': 0,
-        'AORTIC_VALVE': 0,
-        'AORTA': 0,
-        'RIGHT_VENTRICLE': 0,
-        'RIGHT_ATRIUM': 0,
-        'PULMONIC_VALVE': 0,
-        'TRICUSPID': 0,
-        'PERICARDIUM': 0,
-        'CONCLUSION': 0
-      },
-      echoRemarkToAdd: {
-        value: "",
-        type: "",
-        typeLabel: ""
-      }
-    };
-  },
-  computed: {
-    allEchoRemarks: function allEchoRemarks() {
-      return this.$store.getters.getEchoRemarks;
-    },
-    visitEchoRemarks: function visitEchoRemarks() {
-      return this.$store.getters.getVisitEchoRemarks;
-    },
-    visitId: function visitId() {
-      return this.$store.getters.getVisitId;
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return _this.$store.dispatch("echo_fetchAllRemarks");
-
-            case 3:
-              _context.next = 5;
-              return _this.$store.dispatch("echo_fetchAllVisitRemarks", _this.visitId);
-
-            case 5:
-              _context.next = 10;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch remarks");
-
-            case 10:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 7]]);
-    }))();
-  },
-
-  /* *** MOUNTED *** */
-  methods: {
-    onInsert: function onInsert(group) {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var index, item, params;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                index = _this2.selectedRemarks[group];
-                item = _this2.allEchoRemarks[group][index];
-                params = {
-                  visit_id: _this2.visitId,
-                  echo_value_id: item.id
-                };
-                _context2.next = 6;
-                return _this2.$store.dispatch("echo_addVisitRemark", params);
-
-              case 6:
-                _context2.next = 11;
-                break;
-
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to insert");
-
-              case 11:
-                _context2.prev = 11;
-                _context2.next = 14;
-                return _this2.$store.dispatch("echo_fetchAllVisitRemarks", _this2.visitId);
-
-              case 14:
-                _context2.next = 19;
-                break;
-
-              case 16:
-                _context2.prev = 16;
-                _context2.t1 = _context2["catch"](11);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch remarks");
-
-              case 19:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 8], [11, 16]]);
-      }))();
-    },
-    onAdd: function onAdd() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var params;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.prev = 0;
-                params = {
-                  type: _this3.echoRemarkToAdd.type,
-                  value: _this3.echoRemarkToAdd.value
-                };
-                _context3.next = 4;
-                return _this3.$store.dispatch("echo_addEchoRemark", params);
-
-              case 4:
-                _context3.next = 6;
-                return _this3.$store.dispatch("echo_fetchAllRemarks");
-
-              case 6:
-                _this3.modalAddVisible = false;
-                _context3.next = 12;
-                break;
-
-              case 9:
-                _context3.prev = 9;
-                _context3.t0 = _context3["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to add new echo remark item");
-
-              case 12:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[0, 9]]);
-      }))();
-    },
-    onDelete: function onDelete(item) {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.prev = 0;
-                _context4.next = 3;
-                return _this4.$store.dispatch("echo_delete", item.id);
-
-              case 3:
-                _context4.next = 8;
-                break;
-
-              case 5:
-                _context4.prev = 5;
-                _context4.t0 = _context4["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to delete selected remark item");
-
-              case 8:
-                _context4.prev = 8;
-                _context4.next = 11;
-                return _this4.$store.dispatch("echo_fetchAllVisitRemarks", _this4.visitId);
-
-              case 11:
-                _context4.next = 16;
-                break;
-
-              case 13:
-                _context4.prev = 13;
-                _context4.t1 = _context4["catch"](8);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch remarks");
-
-              case 16:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, null, [[0, 5], [8, 13]]);
-      }))();
-    },
-
-    /*
-    * On opening add modal
-    * */
-    onOpenAddModal: function onOpenAddModal(type) {
-      this.echoRemarkToAdd.type = type;
-      this.echoRemarkToAdd.typeLabel = this.echoRemarksTypes[type];
-      this.modalAddVisible = true;
-    },
-
-    /*
-    * check if theres items in the echo remarks
-    * */
-    hasRemarks: function hasRemarks(group) {
-      return !!_.isEmpty(this.allEchoRemarks[group]);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitLipids",
-  data: function data() {
-    return {
-      exist: false,
-      visitLipids: {
-        id: undefined,
-        visit_id: undefined,
-        tc: 0,
-        ldl: 0,
-        hdl: 0,
-        tg: 0,
-        nhc: 0
-      }
-    };
-  },
-
-  /* *** DATA *** */
-  computed: {
-    visit: function visit() {
-      return this.$store.getters.getVisit;
-    },
-    visitId: function visitId() {
-      return this.$store.getters.getVisitId;
-    }
-  },
-
-  /* *** COMPUTED *** */
-  mounted: function mounted() {
-    this._fetch();
-  },
-
-  /* *** MOUNTED *** */
-  methods: {
-    onUpdate: function onUpdate() {
-      var params = {
-        id: this.visitLipids.id,
-        tc: this.visitLipids.tc,
-        ldl: this.visitLipids.ldl,
-        hdl: this.visitLipids.hdl,
-        tg: this.visitLipids.tg,
-        nhc: this.visitLipids.nhc
-      };
-      $.post("".concat(getSiteURL(), "/api/update/visit/visit-lipids.php"), params).done(function (r) {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.successMessageBox)('Lipid details updated');
-      }).fail(function (e) {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_0__.errorMessageBox)('Failed to update lipid details');
-      });
-    },
-
-    /* update */
-    _fetch: function _fetch() {
-      var _this = this;
-
-      var params = {
-        visit_id: this.visitId
-      };
-      $.get("".concat(getSiteURL(), "/api/get/visit/visit-lipids.php"), params).done(function (response) {
-        _this.visitLipids = response.data;
-      }).fail(function (error) {
-        console.log(error);
-      });
-    }
-    /* fetch from database */
-
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/AppView.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/AppView.vue?vue&type=script&lang=js& ***!
@@ -6212,7 +5281,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_special_investigations_VisitCoronaryCT__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/special_investigations/VisitCoronaryCT */ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6243,8 +5382,109 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitCoronaryCTView",
-  components: {
-    VisitCoronaryCT: _components_special_investigations_VisitCoronaryCT__WEBPACK_IMPORTED_MODULE_0__.default
+  data: function data() {
+    return {
+      visitCoronaryCT: {
+        id: undefined,
+        visit_id: undefined,
+        total_calcium_score: undefined,
+        origin: undefined,
+        dominance: undefined,
+        left_main: undefined,
+        lad: undefined,
+        lcx: undefined,
+        cardiac_valves: undefined,
+        pericardium: undefined,
+        extra_cardiac_findings: undefined,
+        impression: undefined
+      }
+    };
+  },
+  computed: {
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var params, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              params = {
+                visit_id: _this.visitId
+              };
+              _context.next = 4;
+              return $.get("".concat(getSiteURL(), "/api/get/visit/visit-coronary-ct.php"), params);
+
+            case 4:
+              response = _context.sent;
+              _this.visitCoronaryCT = response.data;
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch coronary ct details");
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }))();
+  },
+  methods: {
+    onUpdate: function onUpdate() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                params = {
+                  id: _this2.visitCoronaryCT.id,
+                  total_calcium_score: _this2.visitCoronaryCT.total_calcium_score,
+                  origin: _this2.visitCoronaryCT.origin,
+                  dominance: _this2.visitCoronaryCT.dominance,
+                  left_main: _this2.visitCoronaryCT.left_main,
+                  lad: _this2.visitCoronaryCT.lad,
+                  lcx: _this2.visitCoronaryCT.lcx,
+                  cardiac_valves: _this2.visitCoronaryCT.cardiac_valves,
+                  pericardium: _this2.visitCoronaryCT.pericardium,
+                  extra_cardiac_findings: _this2.visitCoronaryCT.extra_cardiac_findings,
+                  impression: _this2.visitCoronaryCT.impression
+                };
+                _context2.next = 4;
+                return $.post("".concat(getSiteURL(), "/api/update/visit/visit-coronary-ct.php"), params);
+
+              case 4:
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)("Coronary CT details updated");
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update coronary CT details");
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
+    }
   }
 });
 
@@ -6261,10 +5501,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _common_components_DateField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/components/DateField */ "./vue/_common/components/DateField.vue");
-/* harmony import */ var _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/RichEditorV2 */ "./vue/_common/components/RichEditorV2.vue");
-/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_components_DateField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/DateField */ "./vue/_common/components/DateField.vue");
+/* harmony import */ var _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/RichEditorV2 */ "./vue/_common/components/RichEditorV2.vue");
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -6326,9 +5574,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitECGView",
   components: {
-    DateField: _common_components_DateField__WEBPACK_IMPORTED_MODULE_0__.default,
-    RichEditorV2: _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_1__.default,
-    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_2__.default
+    DateField: _common_components_DateField__WEBPACK_IMPORTED_MODULE_1__.default,
+    RichEditorV2: _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_2__.default,
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
@@ -6356,36 +5604,85 @@ __webpack_require__.r(__webpack_exports__);
     * Add visit ecg investigation
     * */
     onUpdate: function onUpdate() {
-      var params = {
-        id: this.visitECG.id,
-        description: this.visitECG.description,
-        indication: this.visitECG.indication,
-        performed_on: this.visitECG.performed_on
-      };
-      $.post("".concat(getSiteURL(), "/api/update/visit/visit-ecg.php"), params).done(function (r) {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.successMessageBox)('ECG details updated');
-      }).fail(function (e) {
-        (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)('Failed to update ECG details');
-      });
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                params = {
+                  id: _this.visitECG.id,
+                  description: _this.visitECG.description,
+                  indication: _this.visitECG.indication,
+                  performed_on: _this.visitECG.performed_on
+                };
+                _context.next = 4;
+                return $.post("".concat(getSiteURL(), "/api/update/visit/visit-ecg.php"), params);
+
+              case 4:
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__.successMessageBox)('ECG details updated');
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__.errorMessageBox)('Failed to update ECG details');
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
     },
 
     /*
     * Fetch visit ECG
     * */
     _fetch: function _fetch() {
-      var _this = this;
+      var _this2 = this;
 
-      var params = {
-        visit_id: this.visitId
-      };
-      $.get("".concat(getSiteURL(), "/api/get/visit/visit-ecg.php"), params).done(function (response) {
-        // check of performed_on has null value
-        if (response.data.performed_on === null) {
-          response.data.performed_on = moment().format('YYYY-MM-DD');
-        }
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var params, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                params = {
+                  visit_id: _this2.visitId
+                };
+                _context2.next = 4;
+                return $.get("".concat(getSiteURL(), "/api/get/visit/visit-ecg.php"), params);
 
-        _this.visitECG = response.data;
-      }).fail(function () {});
+              case 4:
+                response = _context2.sent;
+
+                if (response.data.performed_on === null) {
+                  response.data.performed_on = moment().format('YYYY-MM-DD');
+                }
+
+                _this2.visitECG = response.data;
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__.errorMessageBox)("Failed to fetch ECG details");
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 9]]);
+      }))();
     }
     /* fetch visit ECG */
 
@@ -6407,7 +5704,148 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_special_investigations_VisitEcho__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/special_investigations/VisitEcho */ "./vue/visits/components/special_investigations/VisitEcho.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _echo_VisitEchoReports__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./echo/VisitEchoReports */ "./vue/visits/views/special-investigations/echo/VisitEchoReports.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6436,10 +5874,157 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitEchoView",
   components: {
-    VisitEcho: _components_special_investigations_VisitEcho__WEBPACK_IMPORTED_MODULE_0__.default
+    VisitEchoReports: _echo_VisitEchoReports__WEBPACK_IMPORTED_MODULE_2__.default
+  },
+  data: function data() {
+    return {
+      exist: false,
+      loaded: false,
+      visitEcho: {
+        id: undefined,
+        visit_id: undefined,
+        param_la_systolic_diameter: 0,
+        param_aortic_root_diameter: 0,
+        param_lvot_diameter: 0,
+        param_ivs_diastolic_thickness: 0,
+        param_pw_diastolic_thickness: 0,
+        param_lvid_diastole: 0,
+        param_lvid_systole: 0,
+        param_fractional_shortening: 0,
+        param_lvef: 0,
+        param_rvid: 0,
+        param_peak_aortic_velocity: 0,
+        param_peak_lvot_velocity: 0,
+        param_aortic_lvot_velocity: 0,
+        param_peak_aortic_gradient: 0,
+        param_mean_aortic_gradient: 0,
+        param_aortic_valve_area: 0,
+        param_mitral_pressure: 0,
+        param_mean_mitral_gradient: 0,
+        param_mitral_valve_area: 0,
+        param_peak_tricuspid_velocity: 0,
+        param_stroke_volume: 0,
+        param_cardiac_output: 0,
+        param_cardiac_index: 0,
+        param_bp: 0,
+        param_hr: 0,
+        param_est_rvsp: 0,
+        param_est_cvp: 0,
+        param_est_pasp: 0
+      }
+    };
+  },
+  computed: {
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var params, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              params = {
+                visit_id: _this.visitId
+              };
+              _context.next = 4;
+              return $.get("".concat(getSiteURL(), "/api/get/visit/visit-echo.php"), params);
+
+            case 4:
+              response = _context.sent;
+              _this.visitEcho = response.data;
+              _this.loaded = true;
+              _context.next = 12;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](0);
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch echo details");
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 9]]);
+    }))();
+  },
+  methods: {
+    /*
+    * Update new values
+    * */
+    onUpdate: function onUpdate() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                params = {
+                  id: _this2.visitEcho.id,
+                  param_la_systolic_diameter: _this2.visitEcho.param_la_systolic_diameter,
+                  param_aortic_root_diameter: _this2.visitEcho.param_aortic_root_diameter,
+                  param_lvot_diameter: _this2.visitEcho.param_lvot_diameter,
+                  param_ivs_diastolic_thickness: _this2.visitEcho.param_ivs_diastolic_thickness,
+                  param_pw_diastolic_thickness: _this2.visitEcho.param_pw_diastolic_thickness,
+                  param_lvid_diastole: _this2.visitEcho.param_lvid_diastole,
+                  param_lvid_systole: _this2.visitEcho.param_lvid_systole,
+                  param_fractional_shortening: _this2.visitEcho.param_fractional_shortening,
+                  param_lvef: _this2.visitEcho.param_lvef,
+                  param_rvid: _this2.visitEcho.param_rvid,
+                  param_peak_aortic_velocity: _this2.visitEcho.param_peak_aortic_velocity,
+                  param_peak_lvot_velocity: _this2.visitEcho.param_peak_lvot_velocity,
+                  param_aortic_lvot_velocity: _this2.visitEcho.param_aortic_lvot_velocity,
+                  param_peak_aortic_gradient: _this2.visitEcho.param_peak_aortic_gradient,
+                  param_mean_aortic_gradient: _this2.visitEcho.param_mean_aortic_gradient,
+                  param_aortic_valve_area: _this2.visitEcho.param_aortic_valve_area,
+                  param_mitral_pressure: _this2.visitEcho.param_mitral_pressure,
+                  param_mean_mitral_gradient: _this2.visitEcho.param_mean_mitral_gradient,
+                  param_mitral_valve_area: _this2.visitEcho.param_mitral_valve_area,
+                  param_peak_tricuspid_velocity: _this2.visitEcho.param_peak_tricuspid_velocity,
+                  param_stroke_volume: _this2.visitEcho.param_stroke_volume,
+                  param_cardiac_output: _this2.visitEcho.param_cardiac_output,
+                  param_cardiac_index: _this2.visitEcho.param_cardiac_index,
+                  param_bp: _this2.visitEcho.param_bp,
+                  param_hr: _this2.visitEcho.param_hr,
+                  param_est_rvsp: _this2.visitEcho.param_est_rvsp,
+                  param_est_cvp: _this2.visitEcho.param_est_cvp,
+                  param_est_pasp: _this2.visitEcho.param_est_pasp
+                };
+                _context2.next = 4;
+                return $.post("".concat(getSiteURL(), "/api/update/visit/visit-echo.php"), params);
+
+              case 4:
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)("Echo details updated");
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update echocardiography details");
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
+    }
   }
 });
 
@@ -6456,7 +6041,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_special_investigations_VisitLipids__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/special_investigations/VisitLipids */ "./vue/visits/components/special_investigations/VisitLipids.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6487,8 +6100,444 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VisitLipidsView",
+  data: function data() {
+    return {
+      exist: false,
+      visitLipids: {
+        id: undefined,
+        visit_id: undefined,
+        tc: 0,
+        ldl: 0,
+        hdl: 0,
+        tg: 0,
+        nhc: 0
+      }
+    };
+  },
+  computed: {
+    visit: function visit() {
+      return this.$store.getters.getVisit;
+    },
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var params, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              params = {
+                visit_id: _this.visitId
+              };
+              _context.next = 4;
+              return $.get("".concat(getSiteURL(), "/api/get/visit/visit-lipids.php"), params);
+
+            case 4:
+              response = _context.sent;
+              _this.visitLipids = response.data;
+              _context.next = 11;
+              break;
+
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch lipids details");
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 8]]);
+    }))();
+  },
+  methods: {
+    onUpdate: function onUpdate() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                params = {
+                  id: _this2.visitLipids.id,
+                  tc: _this2.visitLipids.tc,
+                  ldl: _this2.visitLipids.ldl,
+                  hdl: _this2.visitLipids.hdl,
+                  tg: _this2.visitLipids.tg,
+                  nhc: _this2.visitLipids.nhc
+                };
+                _context2.next = 4;
+                return $.post("".concat(getSiteURL(), "/api/update/visit/visit-lipids.php"), params);
+
+              case 4:
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)("Lipid details updated");
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update lipids details");
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }))();
+    }
+    /* update */
+
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "VisitEchoReports",
   components: {
-    VisitLipids: _components_special_investigations_VisitLipids__WEBPACK_IMPORTED_MODULE_0__.default
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      /* modal */
+      modalAddVisible: false,
+      echoRemarksTypes: {
+        'LEFT_VENTRICLE': 'Left Ventricle',
+        'LEFT_ATRIUM': 'Left Atrium',
+        'MITRAL_VALVE': 'Mitral Valve',
+        'AORTIC_VALVE': 'Aortic Valve',
+        'AORTA': 'Aorta',
+        'RIGHT_VENTRICLE': 'Right Ventricle / Pulmonary Artery',
+        'RIGHT_ATRIUM': 'Right Atrium',
+        'PULMONIC_VALVE': 'Pulmonic Valve',
+        'TRICUSPID': 'Tricuspid',
+        'PERICARDIUM': 'Pericardium',
+        'CONCLUSION': 'Conclusion'
+      },
+      selectedRemarks: {
+        'LEFT_VENTRICLE': 0,
+        'LEFT_ATRIUM': 0,
+        'MITRAL_VALVE': 0,
+        'AORTIC_VALVE': 0,
+        'AORTA': 0,
+        'RIGHT_VENTRICLE': 0,
+        'RIGHT_ATRIUM': 0,
+        'PULMONIC_VALVE': 0,
+        'TRICUSPID': 0,
+        'PERICARDIUM': 0,
+        'CONCLUSION': 0
+      },
+      echoRemarkToAdd: {
+        value: "",
+        type: "",
+        typeLabel: ""
+      }
+    };
+  },
+  computed: {
+    allEchoRemarks: function allEchoRemarks() {
+      return this.$store.getters.getEchoRemarks;
+    },
+    visitEchoRemarks: function visitEchoRemarks() {
+      return this.$store.getters.getVisitEchoRemarks;
+    },
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _this.$store.dispatch("echo_fetchAllRemarks");
+
+            case 3:
+              _context.next = 5;
+              return _this.$store.dispatch("echo_fetchAllVisitRemarks", _this.visitId);
+
+            case 5:
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch remarks");
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 7]]);
+    }))();
+  },
+
+  /* *** MOUNTED *** */
+  methods: {
+    onInsert: function onInsert(group) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var index, item, params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                index = _this2.selectedRemarks[group];
+                item = _this2.allEchoRemarks[group][index];
+                params = {
+                  visit_id: _this2.visitId,
+                  echo_value_id: item.id
+                };
+                _context2.next = 6;
+                return _this2.$store.dispatch("echo_addVisitRemark", params);
+
+              case 6:
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to insert");
+
+              case 11:
+                _context2.prev = 11;
+                _context2.next = 14;
+                return _this2.$store.dispatch("echo_fetchAllVisitRemarks", _this2.visitId);
+
+              case 14:
+                _context2.next = 19;
+                break;
+
+              case 16:
+                _context2.prev = 16;
+                _context2.t1 = _context2["catch"](11);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch remarks");
+
+              case 19:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8], [11, 16]]);
+      }))();
+    },
+    onAdd: function onAdd() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var params;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                params = {
+                  type: _this3.echoRemarkToAdd.type,
+                  value: _this3.echoRemarkToAdd.value
+                };
+                _context3.next = 4;
+                return _this3.$store.dispatch("echo_addEchoRemark", params);
+
+              case 4:
+                _context3.next = 6;
+                return _this3.$store.dispatch("echo_fetchAllRemarks");
+
+              case 6:
+                _this3.modalAddVisible = false;
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to add new echo remark item");
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 9]]);
+      }))();
+    },
+    onDelete: function onDelete(item) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return _this4.$store.dispatch("echo_delete", item.id);
+
+              case 3:
+                _context4.next = 8;
+                break;
+
+              case 5:
+                _context4.prev = 5;
+                _context4.t0 = _context4["catch"](0);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to delete selected remark item");
+
+              case 8:
+                _context4.prev = 8;
+                _context4.next = 11;
+                return _this4.$store.dispatch("echo_fetchAllVisitRemarks", _this4.visitId);
+
+              case 11:
+                _context4.next = 16;
+                break;
+
+              case 13:
+                _context4.prev = 13;
+                _context4.t1 = _context4["catch"](8);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_2__.errorMessageBox)("Failed to fetch remarks");
+
+              case 16:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 5], [8, 13]]);
+      }))();
+    },
+
+    /*
+    * On opening add modal
+    * */
+    onOpenAddModal: function onOpenAddModal(type) {
+      this.echoRemarkToAdd.type = type;
+      this.echoRemarkToAdd.typeLabel = this.echoRemarksTypes[type];
+      this.modalAddVisible = true;
+    },
+
+    /*
+    * check if theres items in the echo remarks
+    * */
+    hasRemarks: function hasRemarks(group) {
+      return !!_.isEmpty(this.allEchoRemarks[group]);
+    }
   }
 });
 
@@ -30672,162 +30721,6 @@ component.options.__file = "vue/_common/components/RichEditorV2.vue"
 
 /***/ }),
 
-/***/ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue":
-/*!**************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitCoronaryCT.vue ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _VisitCoronaryCT_vue_vue_type_template_id_5eb76ed0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true& */ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true&");
-/* harmony import */ var _VisitCoronaryCT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitCoronaryCT.vue?vue&type=script&lang=js& */ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _VisitCoronaryCT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _VisitCoronaryCT_vue_vue_type_template_id_5eb76ed0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _VisitCoronaryCT_vue_vue_type_template_id_5eb76ed0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "5eb76ed0",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/visits/components/special_investigations/VisitCoronaryCT.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEcho.vue":
-/*!********************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEcho.vue ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _VisitEcho_vue_vue_type_template_id_b17dad3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true& */ "./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true&");
-/* harmony import */ var _VisitEcho_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitEcho.vue?vue&type=script&lang=js& */ "./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _VisitEcho_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _VisitEcho_vue_vue_type_template_id_b17dad3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _VisitEcho_vue_vue_type_template_id_b17dad3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "b17dad3e",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/visits/components/special_investigations/VisitEcho.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEchoReports.vue":
-/*!***************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEchoReports.vue ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=template&id=f47a8c64& */ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64&");
-/* harmony import */ var _VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=script&lang=js& */ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__.render,
-  _VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/visits/components/special_investigations/VisitEchoReports.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitLipids.vue":
-/*!**********************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitLipids.vue ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _VisitLipids_vue_vue_type_template_id_60b87d81_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true& */ "./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true&");
-/* harmony import */ var _VisitLipids_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitLipids.vue?vue&type=script&lang=js& */ "./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _VisitLipids_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _VisitLipids_vue_vue_type_template_id_60b87d81_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _VisitLipids_vue_vue_type_template_id_60b87d81_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "60b87d81",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "vue/visits/components/special_investigations/VisitLipids.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./vue/visits/views/AppView.vue":
 /*!**************************************!*\
   !*** ./vue/visits/views/AppView.vue ***!
@@ -31653,6 +31546,45 @@ component.options.__file = "vue/visits/views/special-investigations/VisitLipidsV
 
 /***/ }),
 
+/***/ "./vue/visits/views/special-investigations/echo/VisitEchoReports.vue":
+/*!***************************************************************************!*\
+  !*** ./vue/visits/views/special-investigations/echo/VisitEchoReports.vue ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _VisitEchoReports_vue_vue_type_template_id_645045e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=template&id=645045e0& */ "./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=template&id=645045e0&");
+/* harmony import */ var _VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisitEchoReports.vue?vue&type=script&lang=js& */ "./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _VisitEchoReports_vue_vue_type_template_id_645045e0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _VisitEchoReports_vue_vue_type_template_id_645045e0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "vue/visits/views/special-investigations/echo/VisitEchoReports.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./vue/_common/components/AlertArea.vue?vue&type=script&lang=js&":
 /*!***********************************************************************!*\
   !*** ./vue/_common/components/AlertArea.vue?vue&type=script&lang=js& ***!
@@ -31714,70 +31646,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RichEditorV2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RichEditorV2.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichEditorV2.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RichEditorV2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitCoronaryCT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitCoronaryCT.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitCoronaryCT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEcho_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEcho.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEcho_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEchoReports.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitLipids_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitLipids.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitLipids_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -32117,6 +31985,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEchoReports.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./vue/_common/components/AlertArea.vue?vue&type=template&id=739072e8&scoped=true&":
 /*!*****************************************************************************************!*\
   !*** ./vue/_common/components/AlertArea.vue?vue&type=template&id=739072e8&scoped=true& ***!
@@ -32181,74 +32065,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RichEditorV2_vue_vue_type_template_id_39182192_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RichEditorV2_vue_vue_type_template_id_39182192_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RichEditorV2.vue?vue&type=template&id=39182192&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/_common/components/RichEditorV2.vue?vue&type=template&id=39182192&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true&":
-/*!*********************************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true& ***!
-  \*********************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitCoronaryCT_vue_vue_type_template_id_5eb76ed0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitCoronaryCT_vue_vue_type_template_id_5eb76ed0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitCoronaryCT_vue_vue_type_template_id_5eb76ed0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true&":
-/*!***************************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true& ***!
-  \***************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEcho_vue_vue_type_template_id_b17dad3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEcho_vue_vue_type_template_id_b17dad3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEcho_vue_vue_type_template_id_b17dad3e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64&":
-/*!**********************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64& ***!
-  \**********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_template_id_f47a8c64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEchoReports.vue?vue&type=template&id=f47a8c64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64&");
-
-
-/***/ }),
-
-/***/ "./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true&":
-/*!*****************************************************************************************************************!*\
-  !*** ./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true& ***!
-  \*****************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitLipids_vue_vue_type_template_id_60b87d81_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitLipids_vue_vue_type_template_id_60b87d81_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitLipids_vue_vue_type_template_id_60b87d81_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true&");
 
 
 /***/ }),
@@ -32610,6 +32426,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=template&id=645045e0&":
+/*!**********************************************************************************************************!*\
+  !*** ./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=template&id=645045e0& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_template_id_645045e0___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_template_id_645045e0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisitEchoReports_vue_vue_type_template_id_645045e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VisitEchoReports.vue?vue&type=template&id=645045e0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=template&id=645045e0&");
+
+
+/***/ }),
+
 /***/ "./vue/_common/components/ModalWindow.vue?vue&type=style&index=0&id=572c4ac0&scoped=true&lang=scss&":
 /*!**********************************************************************************************************!*\
   !*** ./vue/_common/components/ModalWindow.vue?vue&type=style&index=0&id=572c4ac0&scoped=true&lang=scss& ***!
@@ -32846,1932 +32679,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true&":
-/*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitCoronaryCT.vue?vue&type=template&id=5eb76ed0&scoped=true& ***!
-  \************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("table", { staticClass: "table table-bordered table-sm" }, [
-          _c("tr", [
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Total Calcium Score")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitCoronaryCT.total_calcium_score,
-                    expression: "visitCoronaryCT.total_calcium_score",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitCoronaryCT.total_calcium_score },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "total_calcium_score",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td")
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Origin")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.origin,
-                    expression: "visitCoronaryCT.origin"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.origin },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitCoronaryCT, "origin", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Dominance")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.dominance,
-                    expression: "visitCoronaryCT.dominance"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.dominance },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "dominance",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Left Main")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.left_main,
-                    expression: "visitCoronaryCT.left_main"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.left_main },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "left_main",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [_vm._v("LAD")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.lad,
-                    expression: "visitCoronaryCT.lad"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.lad },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitCoronaryCT, "lad", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [_vm._v("LCX")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.lcx,
-                    expression: "visitCoronaryCT.lcx"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.lcx },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitCoronaryCT, "lcx", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Cardiac Valves")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.cardiac_valves,
-                    expression: "visitCoronaryCT.cardiac_valves"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.cardiac_valves },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "cardiac_valves",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Pericardium")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.pericardium,
-                    expression: "visitCoronaryCT.pericardium"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.pericardium },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "pericardium",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("div", { staticClass: "font-weight-bold" }, [
-                _vm._v("Extra Cardiac Findings")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.extra_cardiac_findings,
-                    expression: "visitCoronaryCT.extra_cardiac_findings"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.extra_cardiac_findings },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "extra_cardiac_findings",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", { attrs: { colspan: "2" } }, [
-              _c("label", { staticClass: "font-weight-bold" }, [
-                _vm._v("Impression")
-              ]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitCoronaryCT.impression,
-                    expression: "visitCoronaryCT.impression"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "2" },
-                domProps: { value: _vm.visitCoronaryCT.impression },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitCoronaryCT,
-                      "impression",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex justify-content-center" }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-success", on: { click: _vm.onUpdate } },
-            [_vm._v("Update")]
-          )
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEcho.vue?vue&type=template&id=b17dad3e&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      [
-        _c("table", { staticClass: "table table-sm table-bordered" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("LA Systolic Diameter (mm)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_la_systolic_diameter,
-                      expression: "visitEcho.param_la_systolic_diameter",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_la_systolic_diameter },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_la_systolic_diameter",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Peak Aortic Velocity (cm/s)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_peak_aortic_velocity,
-                      expression: "visitEcho.param_peak_aortic_velocity",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_peak_aortic_velocity },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_peak_aortic_velocity",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Stroke Volume (ml)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_stroke_volume,
-                      expression: "visitEcho.param_stroke_volume",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_stroke_volume },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_stroke_volume",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Aortic Root Diameter (mm)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_aortic_root_diameter,
-                      expression: "visitEcho.param_aortic_root_diameter",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_aortic_root_diameter },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_aortic_root_diameter",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Peak LVOT Velocity (cm/s)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_peak_lvot_velocity,
-                      expression: "visitEcho.param_peak_lvot_velocity",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_peak_lvot_velocity },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_peak_lvot_velocity",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Cardiac Output (l/s)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_cardiac_output,
-                      expression: "visitEcho.param_cardiac_output",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_cardiac_output },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_cardiac_output",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("LVOT Diameter (mm)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_lvot_diameter,
-                      expression: "visitEcho.param_lvot_diameter",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_lvot_diameter },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_lvot_diameter",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Aortic/LVOT Velocity (cm/s)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_aortic_lvot_velocity,
-                      expression: "visitEcho.param_aortic_lvot_velocity",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_aortic_lvot_velocity },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_aortic_lvot_velocity",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Cardiac Index (l/min/m²)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_cardiac_index,
-                      expression: "visitEcho.param_cardiac_index",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_cardiac_index },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_cardiac_index",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("RVID (mm)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_rvid,
-                      expression: "visitEcho.param_rvid",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_rvid },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_rvid",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Peak Aortic Gradient (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_peak_aortic_gradient,
-                      expression: "visitEcho.param_peak_aortic_gradient",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_peak_aortic_gradient },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_peak_aortic_gradient",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("BP (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_bp,
-                      expression: "visitEcho.param_bp",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_bp },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_bp",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("IVS Diastolic Thickness (mm)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_ivs_diastolic_thickness,
-                      expression: "visitEcho.param_ivs_diastolic_thickness",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: {
-                    value: _vm.visitEcho.param_ivs_diastolic_thickness
-                  },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_ivs_diastolic_thickness",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Mean Aortic Gradient (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_mean_aortic_gradient,
-                      expression: "visitEcho.param_mean_aortic_gradient",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_mean_aortic_gradient },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_mean_aortic_gradient",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("HR (beat/min)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_hr,
-                      expression: "visitEcho.param_hr",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_hr },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_hr",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("PW Diastolic Thickness (mm)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_pw_diastolic_thickness,
-                      expression: "visitEcho.param_pw_diastolic_thickness",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: {
-                    value: _vm.visitEcho.param_pw_diastolic_thickness
-                  },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_pw_diastolic_thickness",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Aortic Valve Area (mm²)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_aortic_valve_area,
-                      expression: "visitEcho.param_aortic_valve_area",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_aortic_valve_area },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_aortic_valve_area",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Est. RVSP (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_est_rvsp,
-                      expression: "visitEcho.param_est_rvsp",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_est_rvsp },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_est_rvsp",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("LVID Diastole (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_lvid_diastole,
-                      expression: "visitEcho.param_lvid_diastole",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_lvid_diastole },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_lvid_diastole",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Mitral Pressure 1/2 T (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_mitral_pressure,
-                      expression: "visitEcho.param_mitral_pressure",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_mitral_pressure },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_mitral_pressure",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Est. CVP (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_est_cvp,
-                      expression: "visitEcho.param_est_cvp",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_est_cvp },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_est_cvp",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("LVID Systole (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_lvid_systole,
-                      expression: "visitEcho.param_lvid_systole",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_lvid_systole },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_lvid_systole",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Mean Mitral Gradient (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_mean_mitral_gradient,
-                      expression: "visitEcho.param_mean_mitral_gradient",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_mean_mitral_gradient },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_mean_mitral_gradient",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Est. PASP (mmHg)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_est_pasp,
-                      expression: "visitEcho.param_est_pasp",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_est_pasp },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_est_pasp",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Fractional Shortening")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_fractional_shortening,
-                      expression: "visitEcho.param_fractional_shortening",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: {
-                    value: _vm.visitEcho.param_fractional_shortening
-                  },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_fractional_shortening",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Mitral Valve Area (mm²)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_mitral_valve_area,
-                      expression: "visitEcho.param_mitral_valve_area",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_mitral_valve_area },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_mitral_valve_area",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right" }),
-              _vm._v(" "),
-              _c("td")
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("LVEF (%)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_lvef,
-                      expression: "visitEcho.param_lvef",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.visitEcho.param_lvef },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_lvef",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right align-middle" }, [
-                _vm._v("Peak Tricuspid Velocity (cm/s)")
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.visitEcho.param_peak_tricuspid_velocity,
-                      expression: "visitEcho.param_peak_tricuspid_velocity",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticClass: "form-control form-control-sm text-right",
-                  attrs: { type: "number" },
-                  domProps: {
-                    value: _vm.visitEcho.param_peak_tricuspid_velocity
-                  },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.visitEcho,
-                        "param_peak_tricuspid_velocity",
-                        _vm._n($event.target.value)
-                      )
-                    },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right" }),
-              _vm._v(" "),
-              _c("td")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "text-center my-3" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success",
-              attrs: { disabled: !_vm.loaded },
-              on: { click: _vm.onUpdate }
-            },
-            [_vm._v("Update")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("VisitEchoReports")
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-right", staticStyle: { width: "20%" } }, [
-          _vm._v("Parameter")
-        ]),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-right", staticStyle: { width: "13.3%" } },
-          [_vm._v("Value")]
-        ),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-right", staticStyle: { width: "20%" } }, [
-          _vm._v("Doppler Velocities & Hemodynamic Measures")
-        ]),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-right", staticStyle: { width: "13.3%" } },
-          [_vm._v("Value")]
-        ),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-right", staticStyle: { width: "20%" } }, [
-          _vm._v("Doppler Velocities & Hemodynamic Measures")
-        ]),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-right", staticStyle: { width: "13.3%" } },
-          [_vm._v("Value")]
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64&":
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitEchoReports.vue?vue&type=template&id=f47a8c64& ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("hr"),
-      _vm._v(" "),
-      _c("h5", { staticClass: "text-center font-weight-bold text-uppercase" }, [
-        _vm._v("Remarks")
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.echoRemarksTypes, function(item, key) {
-        return _c("div", { staticClass: "card mb-3" }, [
-          _c(
-            "div",
-            { staticClass: "card-header d-flex justify-content-between" },
-            [_c("div", [_vm._v(_vm._s(item))])]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "mb-3" }, [
-              _c("div", { staticClass: "input-group input-group-sm" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedRemarks[key],
-                        expression: "selectedRemarks[key]"
-                      }
-                    ],
-                    staticClass: "custom-select",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.selectedRemarks,
-                          key,
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  _vm._l(_vm.allEchoRemarks[key], function(item, key) {
-                    return _c("option", { domProps: { value: key } }, [
-                      _vm._v(_vm._s(item.value))
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { disabled: _vm.hasRemarks(key) },
-                      on: {
-                        click: function($event) {
-                          return _vm.onInsert(key)
-                        }
-                      }
-                    },
-                    [_vm._v("Insert")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      on: {
-                        click: function($event) {
-                          return _vm.onOpenAddModal(key)
-                        }
-                      }
-                    },
-                    [_vm._v("Add")]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "table",
-              { staticClass: "table table-bordered table-sm table-hover" },
-              [
-                _c(
-                  "tbody",
-                  _vm._l(_vm.visitEchoRemarks[key], function(item) {
-                    return _c("tr", [
-                      _c("td", { staticStyle: { "white-space": "pre-line" } }, [
-                        _vm._v(_vm._s(item.value))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticStyle: { width: "30px" } }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-tiny btn-danger",
-                            on: {
-                              click: function($event) {
-                                return _vm.onDelete(item)
-                              }
-                            }
-                          },
-                          [_vm._v("Remove")]
-                        )
-                      ])
-                    ])
-                  }),
-                  0
-                )
-              ]
-            )
-          ])
-        ])
-      }),
-      _vm._v(" "),
-      _c(
-        "ModalWindow",
-        {
-          attrs: { visible: _vm.modalAddVisible },
-          on: {
-            close: function($event) {
-              _vm.modalAddVisible = false
-            }
-          }
-        },
-        [
-          _vm._t("default", [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Type")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.echoRemarkToAdd.typeLabel,
-                    expression: "echoRemarkToAdd.typeLabel"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", readonly: "" },
-                domProps: { value: _vm.echoRemarkToAdd.typeLabel },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.echoRemarkToAdd,
-                      "typeLabel",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Value")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.echoRemarkToAdd.value,
-                    expression: "echoRemarkToAdd.value",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "3" },
-                domProps: { value: _vm.echoRemarkToAdd.value },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.echoRemarkToAdd,
-                      "value",
-                      $event.target.value.trim()
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-center" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  attrs: { disabled: _vm.echoRemarkToAdd.value === "" },
-                  on: {
-                    click: function($event) {
-                      return _vm.onAdd()
-                    }
-                  }
-                },
-                [_vm._v("Add")]
-              )
-            ])
-          ])
-        ],
-        2
-      )
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/components/special_investigations/VisitLipids.vue?vue&type=template&id=60b87d81&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("table", { staticClass: "table table-bordered table-sm" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitLipids.tc,
-                    expression: "visitLipids.tc"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.visitLipids.tc },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitLipids, "tc", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitLipids.ldl,
-                    expression: "visitLipids.ldl"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.visitLipids.ldl },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitLipids, "ldl", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitLipids.hdl,
-                    expression: "visitLipids.hdl"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.visitLipids.hdl },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitLipids, "hdl", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitLipids.tg,
-                    expression: "visitLipids.tg"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.visitLipids.tg },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitLipids, "tg", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.visitLipids.nhc,
-                    expression: "visitLipids.nhc"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.visitLipids.nhc },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.visitLipids, "nhc", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col text-center" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-success", on: { click: _vm.onUpdate } },
-          [_vm._v("Update")]
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("TC")]),
-      _vm._v(" "),
-      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("LDL")]),
-      _vm._v(" "),
-      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("HDL")]),
-      _vm._v(" "),
-      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("TG")]),
-      _vm._v(" "),
-      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("NHC")])
-    ])
-  }
-]
 render._withStripped = true
 
 
@@ -41300,15 +39207,363 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { attrs: { id: "section-visit-ecg" } }, [
-          _c("div", { staticClass: "card shadow shadow-sm" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("\n            Coronary CT\n          ")
+    _c("div", { staticClass: "card shadow shadow-sm" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v(" Coronary CT")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("table", { staticClass: "table table-bordered table-sm" }, [
+              _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Total Calcium Score")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitCoronaryCT.total_calcium_score,
+                        expression: "visitCoronaryCT.total_calcium_score",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitCoronaryCT.total_calcium_score
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "total_calcium_score",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td")
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Origin")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.origin,
+                        expression: "visitCoronaryCT.origin"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.origin },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "origin",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Dominance")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.dominance,
+                        expression: "visitCoronaryCT.dominance"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.dominance },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "dominance",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Left Main")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.left_main,
+                        expression: "visitCoronaryCT.left_main"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.left_main },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "left_main",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("LAD")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.lad,
+                        expression: "visitCoronaryCT.lad"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.lad },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "lad",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("LCX")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.lcx,
+                        expression: "visitCoronaryCT.lcx"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.lcx },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "lcx",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Cardiac Valves")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.cardiac_valves,
+                        expression: "visitCoronaryCT.cardiac_valves"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.cardiac_valves },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "cardiac_valves",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Pericardium")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.pericardium,
+                        expression: "visitCoronaryCT.pericardium"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.pericardium },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "pericardium",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("div", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Extra Cardiac Findings")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.extra_cardiac_findings,
+                        expression: "visitCoronaryCT.extra_cardiac_findings"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: {
+                      value: _vm.visitCoronaryCT.extra_cardiac_findings
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "extra_cardiac_findings",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { attrs: { colspan: "2" } }, [
+                  _c("label", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Impression")
+                  ]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitCoronaryCT.impression,
+                        expression: "visitCoronaryCT.impression"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.visitCoronaryCT.impression },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitCoronaryCT,
+                          "impression",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [_c("VisitCoronaryCT")], 1)
+            _c("div", { staticClass: "d-flex justify-content-center" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-success", on: { click: _vm.onUpdate } },
+                [_vm._v("Update")]
+              )
+            ])
           ])
         ])
       ])
@@ -41349,7 +39604,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-4" }, [
+                _c("div", { staticClass: "col-5" }, [
                   _c(
                     "div",
                     { staticClass: "input-group mb-3" },
@@ -41467,22 +39722,1138 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { attrs: { id: "section-visit-ecg" } }, [
-          _c("div", { staticClass: "card shadow shadow-sm" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("\n            Echocardiography\n          ")
-            ]),
+    _c("div", { staticClass: "card shadow shadow-sm" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _vm._v("\n      Echocardiography\n    ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("table", { staticClass: "table table-sm table-bordered" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [_c("VisitEcho")], 1)
-          ])
-        ])
-      ])
+            _c("tbody", [
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("LA Systolic Diameter (mm)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_la_systolic_diameter,
+                        expression: "visitEcho.param_la_systolic_diameter",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_la_systolic_diameter
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_la_systolic_diameter",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Peak Aortic Velocity (cm/s)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_peak_aortic_velocity,
+                        expression: "visitEcho.param_peak_aortic_velocity",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_peak_aortic_velocity
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_peak_aortic_velocity",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Stroke Volume (ml)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_stroke_volume,
+                        expression: "visitEcho.param_stroke_volume",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_stroke_volume },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_stroke_volume",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Aortic Root Diameter (mm)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aortic_root_diameter,
+                        expression: "visitEcho.param_aortic_root_diameter",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_aortic_root_diameter
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aortic_root_diameter",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Peak LVOT Velocity (cm/s)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_peak_lvot_velocity,
+                        expression: "visitEcho.param_peak_lvot_velocity",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_peak_lvot_velocity },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_peak_lvot_velocity",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Cardiac Output (l/s)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_cardiac_output,
+                        expression: "visitEcho.param_cardiac_output",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_cardiac_output },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_cardiac_output",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("LVOT Diameter (mm)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_lvot_diameter,
+                        expression: "visitEcho.param_lvot_diameter",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_lvot_diameter },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_lvot_diameter",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Aortic/LVOT Velocity (cm/s)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aortic_lvot_velocity,
+                        expression: "visitEcho.param_aortic_lvot_velocity",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_aortic_lvot_velocity
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aortic_lvot_velocity",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Cardiac Index (l/min/m²)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_cardiac_index,
+                        expression: "visitEcho.param_cardiac_index",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_cardiac_index },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_cardiac_index",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("RVID (mm)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_rvid,
+                        expression: "visitEcho.param_rvid",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_rvid },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_rvid",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Peak Aortic Gradient (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_peak_aortic_gradient,
+                        expression: "visitEcho.param_peak_aortic_gradient",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_peak_aortic_gradient
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_peak_aortic_gradient",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("BP (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_bp,
+                        expression: "visitEcho.param_bp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_bp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_bp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("IVS Diastolic Thickness (mm)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_ivs_diastolic_thickness,
+                        expression: "visitEcho.param_ivs_diastolic_thickness",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_ivs_diastolic_thickness
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_ivs_diastolic_thickness",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Mean Aortic Gradient (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_mean_aortic_gradient,
+                        expression: "visitEcho.param_mean_aortic_gradient",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_mean_aortic_gradient
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_mean_aortic_gradient",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("HR (beat/min)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_hr,
+                        expression: "visitEcho.param_hr",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_hr },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_hr",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("PW Diastolic Thickness (mm)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_pw_diastolic_thickness,
+                        expression: "visitEcho.param_pw_diastolic_thickness",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_pw_diastolic_thickness
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_pw_diastolic_thickness",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Aortic Valve Area (mm²)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aortic_valve_area,
+                        expression: "visitEcho.param_aortic_valve_area",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_aortic_valve_area },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aortic_valve_area",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Est. RVSP (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_rvsp,
+                        expression: "visitEcho.param_est_rvsp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_rvsp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_rvsp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("LVID Diastole (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_lvid_diastole,
+                        expression: "visitEcho.param_lvid_diastole",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_lvid_diastole },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_lvid_diastole",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Mitral Pressure 1/2 T (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_mitral_pressure,
+                        expression: "visitEcho.param_mitral_pressure",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_mitral_pressure },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_mitral_pressure",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Est. CVP (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_cvp,
+                        expression: "visitEcho.param_est_cvp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_cvp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_cvp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("LVID Systole (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_lvid_systole,
+                        expression: "visitEcho.param_lvid_systole",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_lvid_systole },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_lvid_systole",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Mean Mitral Gradient (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_mean_mitral_gradient,
+                        expression: "visitEcho.param_mean_mitral_gradient",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_mean_mitral_gradient
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_mean_mitral_gradient",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Est. PASP (mmHg)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_pasp,
+                        expression: "visitEcho.param_est_pasp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_pasp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_pasp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Fractional Shortening")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_fractional_shortening,
+                        expression: "visitEcho.param_fractional_shortening",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_fractional_shortening
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_fractional_shortening",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Mitral Valve Area (mm²)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_mitral_valve_area,
+                        expression: "visitEcho.param_mitral_valve_area",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_mitral_valve_area },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_mitral_valve_area",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right" }),
+                _vm._v(" "),
+                _c("td")
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("LVEF (%)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_lvef,
+                        expression: "visitEcho.param_lvef",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_lvef },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_lvef",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right align-middle" }, [
+                  _vm._v("Peak Tricuspid Velocity (cm/s)")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_peak_tricuspid_velocity,
+                        expression: "visitEcho.param_peak_tricuspid_velocity",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm text-right",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_peak_tricuspid_velocity
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_peak_tricuspid_velocity",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right" }),
+                _vm._v(" "),
+                _c("td")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center my-3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { disabled: !_vm.loaded },
+                on: { click: _vm.onUpdate }
+              },
+              [_vm._v("Update")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("VisitEchoReports")
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-right", staticStyle: { width: "20%" } }, [
+          _vm._v("Parameter")
+        ]),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-right", staticStyle: { width: "13.3%" } },
+          [_vm._v("Value")]
+        ),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-right", staticStyle: { width: "20%" } }, [
+          _vm._v("Doppler Velocities & Hemodynamic Measures")
+        ]),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-right", staticStyle: { width: "13.3%" } },
+          [_vm._v("Value")]
+        ),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-right", staticStyle: { width: "20%" } }, [
+          _vm._v("Doppler Velocities & Hemodynamic Measures")
+        ]),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-right", staticStyle: { width: "13.3%" } },
+          [_vm._v("Value")]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -41506,20 +40877,425 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { attrs: { id: "section-visit-ecg" } }, [
-          _c("div", { staticClass: "card shadow shadow-sm" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("\n            Lipids\n          ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [_c("VisitLipids")], 1)
+    _c("div", { staticClass: "card shadow shadow-sm" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v(" Lipids")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("table", { staticClass: "table table-bordered table-sm" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitLipids.tc,
+                        expression: "visitLipids.tc"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.visitLipids.tc },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitLipids, "tc", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitLipids.ldl,
+                        expression: "visitLipids.ldl"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.visitLipids.ldl },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitLipids, "ldl", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitLipids.hdl,
+                        expression: "visitLipids.hdl"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.visitLipids.hdl },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitLipids, "hdl", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitLipids.tg,
+                        expression: "visitLipids.tg"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.visitLipids.tg },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitLipids, "tg", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.visitLipids.nhc,
+                        expression: "visitLipids.nhc"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.visitLipids.nhc },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.visitLipids, "nhc", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "col text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    return _vm.onUpdate()
+                  }
+                }
+              },
+              [_vm._v("Update")]
+            )
           ])
         ])
       ])
     ])
   ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("TC")]),
+      _vm._v(" "),
+      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("LDL")]),
+      _vm._v(" "),
+      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("HDL")]),
+      _vm._v(" "),
+      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("TG")]),
+      _vm._v(" "),
+      _c("td", { staticClass: "font-weight-bold" }, [_vm._v("NHC")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=template&id=645045e0&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/visits/views/special-investigations/echo/VisitEchoReports.vue?vue&type=template&id=645045e0& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("hr"),
+      _vm._v(" "),
+      _c("h5", { staticClass: "text-center font-weight-bold text-uppercase" }, [
+        _vm._v("Remarks")
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.echoRemarksTypes, function(item, key) {
+        return _c("div", { staticClass: "card mb-3" }, [
+          _c(
+            "div",
+            { staticClass: "card-header d-flex justify-content-between" },
+            [_c("div", [_vm._v(_vm._s(item))])]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "mb-3" }, [
+              _c("div", { staticClass: "input-group input-group-sm" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedRemarks[key],
+                        expression: "selectedRemarks[key]"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.selectedRemarks,
+                          key,
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.allEchoRemarks[key], function(item, key) {
+                    return _c("option", { domProps: { value: key } }, [
+                      _vm._v(_vm._s(item.value))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { disabled: _vm.hasRemarks(key) },
+                      on: {
+                        click: function($event) {
+                          return _vm.onInsert(key)
+                        }
+                      }
+                    },
+                    [_vm._v("Insert")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.onOpenAddModal(key)
+                        }
+                      }
+                    },
+                    [_vm._v("Add")]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "table",
+              { staticClass: "table table-bordered table-sm table-hover" },
+              [
+                _c(
+                  "tbody",
+                  _vm._l(_vm.visitEchoRemarks[key], function(item) {
+                    return _c("tr", [
+                      _c("td", { staticStyle: { "white-space": "pre-line" } }, [
+                        _vm._v(_vm._s(item.value))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticStyle: { width: "30px" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-tiny btn-danger",
+                            on: {
+                              click: function($event) {
+                                return _vm.onDelete(item)
+                              }
+                            }
+                          },
+                          [_vm._v("Remove")]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "ModalWindow",
+        {
+          attrs: { visible: _vm.modalAddVisible },
+          on: {
+            close: function($event) {
+              _vm.modalAddVisible = false
+            }
+          }
+        },
+        [
+          _vm._t("default", [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Type")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.echoRemarkToAdd.typeLabel,
+                    expression: "echoRemarkToAdd.typeLabel"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", readonly: "" },
+                domProps: { value: _vm.echoRemarkToAdd.typeLabel },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.echoRemarkToAdd,
+                      "typeLabel",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Value")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.echoRemarkToAdd.value,
+                    expression: "echoRemarkToAdd.value",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { rows: "3" },
+                domProps: { value: _vm.echoRemarkToAdd.value },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.echoRemarkToAdd,
+                      "value",
+                      $event.target.value.trim()
+                    )
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { disabled: _vm.echoRemarkToAdd.value === "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.onAdd()
+                    }
+                  }
+                },
+                [_vm._v("Add")]
+              )
+            ])
+          ])
+        ],
+        2
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
