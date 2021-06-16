@@ -14,11 +14,8 @@ class Symptom implements IModel
     public ?int $id;
     public ?string $symptom_name, $description;
 
-    /**
-     * @param $array
-     * @return Symptom
-     */
-    public static function build($array): Symptom
+
+    public static function build($array): self
     {
         $object = new self();
         foreach ( $array as $key => $value ) {

@@ -89,10 +89,13 @@ use App\Models\User;
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/symptoms/manage.php">Symptoms</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/diseases/manage.php">Diseases</a>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/problems/manage.php">Problems</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/investigations/manage.php">Investigations</a>
-                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/remarks.php">Echo remarks</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/drugs/manage.php">Drugs</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/referral-letters/manage.php">Referral Letters</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/app/echo/remarks.php">Echo remarks</a>
                     </div>
                 </li><!-- end nav-item -->
 

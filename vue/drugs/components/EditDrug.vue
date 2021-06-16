@@ -39,7 +39,7 @@ export default {
 
   computed: {
     selectedDrug() {
-      return _.cloneDeep(this.$store.getters.getSelectedDrug)
+      return _.cloneDeep(this.$store.getters.getSelectedDrug);
     },
 
     isFormValid() {
@@ -69,7 +69,6 @@ export default {
       try {
 
         await this.$store.dispatch("drugs_fetch", id);
-        this.selectedSymptom = this.$store.getters.getSelectedSymptom;
 
       } catch (e) {
         errorMessageBox("Failed to load selected drug data");

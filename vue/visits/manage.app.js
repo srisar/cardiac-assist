@@ -20,6 +20,7 @@ import OtherRemarksView from "./views/intervention/OtherRemarksView";
 import ReferralLettersView from "./views/intervention/referral-letters/ReferralLettersView";
 import EditReferralLetter from "./views/intervention/referral-letters/EditReferralLetter";
 import ReportView from "./views/ReportView";
+import BasicReportView from "./views/reports/BasicReportView";
 
 
 Vue.use(Vuex)
@@ -52,15 +53,30 @@ const routes = [
     {path: "/referral-letters/edit/:id", component: EditReferralLetter},
 
     {path: "/reports", component: ReportView},
+    {path: "/reports/basic", component: BasicReportView},
 ]
 
 const router = new VueRouter({
-    routes
-})
+    routes,
+    scrollBehavior(to) {
+        if (to.hash) {
+            return {
+                selector: to.hash,
+                behavior: "smooth"
+            }
+        }
+    }
+});
+
+
+router.beforeEach((to, from, next) => {
+    store.commit("hasSidebar", true);
+    next();
+});
 
 
 new Vue({
     render: h => h(AppView),
     store: store,
     router
-}).$mount("#app")
+}).$mount("#app");

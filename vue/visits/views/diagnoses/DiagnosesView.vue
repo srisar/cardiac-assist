@@ -5,14 +5,14 @@
     <div class="row mb-3">
       <!-- Symptoms -->
       <div class="col">
-        <VisitSymptoms/>
+        <VisitSymptoms id="visit-symptoms"/>
       </div><!-- col -->
     </div>
 
     <div class="row mb-3">
       <!-- Differential diagnosis -->
       <div class="col">
-        <DifferentialDiagnosis/>
+        <DifferentialDiagnosis id="visit-diff-diagnoses"/>
       </div><!-- col -->
 
     </div>
@@ -21,14 +21,14 @@
 
       <!-- Investigations -->
       <div class="col-12">
-        <VisitInvestigations/>
+        <VisitInvestigations id="visit-investigation"/>
       </div><!-- col -->
 
     </div><!-- row -->
 
     <div class="row">
       <div class="col-12">
-        <VisitDiagnosis/>
+        <VisitDiagnosis id="visit-diagnoses"/>
       </div>
     </div><!-- row -->
 

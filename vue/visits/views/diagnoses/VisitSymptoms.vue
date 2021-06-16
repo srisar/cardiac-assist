@@ -181,8 +181,8 @@ export default {
 
     try {
 
-      await this.$store.dispatch("symptoms_fetchAll", this.visitId);
-      await this.$store.dispatch("symptoms_fetchAllSymptoms");
+      await this.$store.dispatch("visitSymptoms_fetchAll", this.visitId);
+      await this.$store.dispatch("visitSymptoms_fetchAllSymptoms");
 
     } catch (e) {
       errorMessageBox("Failed to fetch clinical details");
@@ -204,10 +204,10 @@ export default {
           duration: this.symptomToAdd.duration
         };
 
-        await this.$store.dispatch("symptoms_add", params);
+        await this.$store.dispatch("visitSymptoms_add", params);
         this.modalAddVisible = false;
 
-        await this.$store.dispatch("symptoms_fetchAll", this.visitId);
+        await this.$store.dispatch("visitSymptoms_fetchAll", this.visitId);
 
 
       } catch (e) {
@@ -221,10 +221,10 @@ export default {
 
       try {
 
-        await this.$store.dispatch("symptoms_delete", this.symptomToDelete.id);
+        await this.$store.dispatch("visitSymptoms_delete", this.symptomToDelete.id);
         this.modalDeleteVisible = false;
 
-        await this.$store.dispatch("symptoms_fetchAll", this.visitId);
+        await this.$store.dispatch("visitSymptoms_fetchAll", this.visitId);
 
       } catch (e) {
         errorMessageBox("Failed to delete clinical detail");

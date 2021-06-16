@@ -38,7 +38,7 @@ export default {
     actions: {
 
         /* fetch all visit symptoms */
-        async symptoms_fetchAll(context, visitId) {
+        async visitSymptoms_fetchAll(context, visitId) {
             try {
 
                 const response = await $.get(`${getSiteURL()}/api/get/visit/visit-symptoms.php`, {visit_id: visitId});
@@ -51,7 +51,7 @@ export default {
         },
 
         /* fetch all available symptoms */
-        async symptoms_fetchAllSymptoms(context) {
+        async visitSymptoms_fetchAllSymptoms(context) {
 
             try {
 
@@ -64,7 +64,7 @@ export default {
         },
 
         /* add */
-        async symptoms_add(context, params) {
+        async visitSymptoms_add(context, params) {
 
             try {
 
@@ -77,7 +77,7 @@ export default {
         },
 
         /* delete */
-        async symptoms_delete(context, id) {
+        async visitSymptoms_delete(context, id) {
 
             try {
 

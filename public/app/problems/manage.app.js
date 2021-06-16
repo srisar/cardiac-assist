@@ -12,10 +12,10 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/ManageDrugs.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/ManageDrugs.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/ManageProblems.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/ManageProblems.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -25,6 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -83,36 +84,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ManageDrugs",
-  components: {},
+  name: "ManageProblems",
   data: function data() {
     return {
       filterText: ""
     };
   },
   computed: {
-    drugsList: function drugsList() {
-      return this.$store.getters.getDrugs;
-    },
-    filteredDrugsList: function filteredDrugsList() {
-      var filteredTextUpper = _.upperCase(this.filterText);
-
-      return _.filter(this.drugsList, function (obj) {
-        var drugName = _.upperCase(obj.drug_name);
-
-        if (drugName.includes(filteredTextUpper)) return obj;
-      });
+    problemsList: function problemsList() {
+      return this.$store.getters.getProblems;
     }
   },
   mounted: function mounted() {
@@ -125,7 +107,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _this.$store.dispatch("drugs_fetchAll");
+              return _this.$store.dispatch("problems_fetchAll");
 
             case 3:
               _context.next = 8;
@@ -134,7 +116,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 5:
               _context.prev = 5;
               _context.t0 = _context["catch"](0);
-              console.log(_context.t0);
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch problems");
 
             case 8:
             case "end":
@@ -148,10 +130,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/EditDrug.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/EditDrug.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/EditProblem.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/EditProblem.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -193,24 +175,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 
 var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "EditDrug",
-  data: function data() {
-    return {};
-  },
+  name: "EditProblem",
   computed: {
-    selectedDrug: function selectedDrug() {
-      return _.cloneDeep(this.$store.getters.getSelectedDrug);
+    selectedProblem: function selectedProblem() {
+      return _.cloneDeep(this.$store.getters.getSelectedProblem);
     },
     isFormValid: function isFormValid() {
-      return this.selectedDrug.drug_name !== "";
+      return this.selectedProblem.problem !== "";
     }
   },
   mounted: function mounted() {
@@ -270,7 +246,7 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return _this3.$store.dispatch("drugs_fetch", id);
+                return _this3.$store.dispatch("problems_fetch", id);
 
               case 3:
                 _context3.next = 10;
@@ -279,7 +255,7 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
               case 5:
                 _context3.prev = 5;
                 _context3.t0 = _context3["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to load selected drug data");
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to load selected problem");
                 _context3.next = 10;
                 return _this3.$router.push("/");
 
@@ -306,32 +282,42 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
               case 0:
                 _context4.prev = 0;
                 params = {
-                  id: _this4.selectedDrug.id,
-                  drug_name: _this4.selectedDrug.drug_name,
-                  remarks: _this4.selectedDrug.remarks
+                  id: _this4.selectedProblem.id,
+                  problem: _this4.selectedProblem.problem
                 };
                 _context4.next = 4;
-                return _this4.$store.dispatch("drugs_update", params);
+                return _this4.$store.dispatch("problem_update", params);
 
               case 4:
-                _context4.next = 6;
-                return _this4.$store.dispatch("drugs_fetchAll");
-
-              case 6:
-                _context4.next = 11;
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)("Problem updated");
+                _context4.next = 10;
                 break;
 
-              case 8:
-                _context4.prev = 8;
+              case 7:
+                _context4.prev = 7;
                 _context4.t0 = _context4["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update drugs details");
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update problem");
 
-              case 11:
+              case 10:
+                _context4.prev = 10;
+                _context4.next = 13;
+                return _this4.$store.dispatch("problems_fetchAll");
+
+              case 13:
+                _context4.next = 18;
+                break;
+
+              case 15:
+                _context4.prev = 15;
+                _context4.t1 = _context4["catch"](10);
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch problems");
+
+              case 18:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 8]]);
+        }, _callee4, null, [[0, 7], [10, 15]]);
       }))();
     }
   }
@@ -339,10 +325,10 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/SaveDrug.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/SaveDrug.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/SaveProblem.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/SaveProblem.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -384,31 +370,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "SaveDrug",
+  name: "SaveProblem",
   data: function data() {
     return {
-      drug: {
-        drug_name: "",
-        remarks: ""
+      problem: {
+        problem: ""
       }
     };
   },
   computed: {
     isFormValid: function isFormValid() {
-      return this.drug.drug_name !== "";
+      return this.problem.problem !== "";
     }
   },
-  mounted: function mounted() {//
-  },
   methods: {
-    /*
-    * On save
-    * */
     onSave: function onSave() {
       var _this = this;
 
@@ -420,11 +397,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 params = {
-                  drug_name: _this.drug.drug_name,
-                  remarks: _this.drug.remarks
+                  problem: _this.problem.problem
                 };
                 _context.next = 4;
-                return _this.$store.dispatch("drugs_save", params);
+                return _this.$store.dispatch("problem_save", params);
 
               case 4:
                 _context.next = 9;
@@ -438,7 +414,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 _context.prev = 9;
                 _context.next = 12;
-                return _this.$store.dispatch("drugs_fetchAll");
+                return _this.$store.dispatch("problems_fetchAll");
 
               case 12:
                 _context.next = 17;
@@ -447,7 +423,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 14:
                 _context.prev = 14;
                 _context.t1 = _context["catch"](9);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch drugs details");
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch problems");
 
               case 17:
               case "end":
@@ -457,6 +433,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 6], [9, 14]]);
       }))();
     }
+    /* on save */
+
   }
 });
 
@@ -489,16 +467,16 @@ function errorMessageBox(message) {
 
 /***/ }),
 
-/***/ "./vue/drugs/store.js":
-/*!****************************!*\
-  !*** ./vue/drugs/store.js ***!
-  \****************************/
+/***/ "./vue/problems/store.js":
+/*!*******************************!*\
+  !*** ./vue/problems/store.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -514,29 +492,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__.default.use((vuex__WEBPACK_IMPORTED_MODULE_2___default()));
-var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
+var store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
   state: {
-    drugs: [],
-    selectedDrug: {}
+    problems: [],
+    selectedProblem: {}
   },
   getters: {
-    getDrugs: function getDrugs(state) {
-      return state.drugs;
+    getProblems: function getProblems(state) {
+      return state.problems;
     },
-    getSelectedDrug: function getSelectedDrug(state) {
-      return state.selectedDrug;
+    getSelectedProblem: function getSelectedProblem(state) {
+      return state.selectedProblem;
     }
   },
-  mutations: {
-    setDrugs: function setDrugs(state, data) {
-      state.drugs = data;
-    },
-    setSelectedDrug: function setSelectedDrug(state, data) {
-      state.selectedDrug = data;
-    }
-  },
+  mutations: {},
   actions: {
-    drugs_fetch: function drugs_fetch(context, id) {
+    problems_fetch: function problems_fetch(context, id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -545,13 +516,13 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return $.get("".concat(getSiteURL(), "/api/get/drugs.php"), {
+                return $.get("".concat(getSiteURL(), "/api/get/problems.php"), {
                   id: id
                 });
 
               case 3:
                 response = _context.sent;
-                context.commit("setSelectedDrug", response.data);
+                context.state.selectedProblem = response.data;
                 _context.next = 10;
                 break;
 
@@ -570,7 +541,7 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
     },
 
     /* fetch all */
-    drugs_fetchAll: function drugs_fetchAll(context) {
+    problems_fetchAll: function problems_fetchAll(context) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -579,11 +550,11 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return $.get("".concat(getSiteURL(), "/api/get/drugs.php"));
+                return $.get("".concat(getSiteURL(), "/api/get/problems.php"));
 
               case 3:
                 response = _context2.sent;
-                context.commit("setDrugs", response.data);
+                context.state.problems = response.data;
                 _context2.next = 10;
                 break;
 
@@ -602,7 +573,7 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
     },
 
     /* fetch all */
-    drugs_save: function drugs_save(context, params) {
+    problem_save: function problem_save(context, params) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
@@ -610,7 +581,7 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return $.post("".concat(getSiteURL(), "/api/save/drug.php"), params);
+                return $.post("".concat(getSiteURL(), "/api/save/problem.php"), params);
 
               case 3:
                 _context3.next = 8;
@@ -631,7 +602,7 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
     },
 
     /* save */
-    drugs_update: function drugs_update(context, params) {
+    problem_update: function problem_update(context, params) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
@@ -639,7 +610,7 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return $.post("".concat(getSiteURL(), "/api/update/drug.php"), params);
+                return $.post("".concat(getSiteURL(), "/api/update/problem.php"), params);
 
               case 3:
                 _context4.next = 8;
@@ -658,9 +629,10 @@ var Store = new (vuex__WEBPACK_IMPORTED_MODULE_2___default().Store)({
         }, _callee4, null, [[0, 5]]);
       }))();
     }
+    /* update */
+
   }
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Store);
 
 /***/ }),
 
@@ -18634,10 +18606,10 @@ try {
 
 /***/ }),
 
-/***/ "./vue/drugs/ManageDrugs.vue":
-/*!***********************************!*\
-  !*** ./vue/drugs/ManageDrugs.vue ***!
-  \***********************************/
+/***/ "./vue/problems/ManageProblems.vue":
+/*!*****************************************!*\
+  !*** ./vue/problems/ManageProblems.vue ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18645,8 +18617,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ManageDrugs_vue_vue_type_template_id_062005ab_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true& */ "./vue/drugs/ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true&");
-/* harmony import */ var _ManageDrugs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageDrugs.vue?vue&type=script&lang=js& */ "./vue/drugs/ManageDrugs.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ManageProblems_vue_vue_type_template_id_ea118e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true& */ "./vue/problems/ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true&");
+/* harmony import */ var _ManageProblems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageProblems.vue?vue&type=script&lang=js& */ "./vue/problems/ManageProblems.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -18656,27 +18628,27 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _ManageDrugs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ManageDrugs_vue_vue_type_template_id_062005ab_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ManageDrugs_vue_vue_type_template_id_062005ab_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ManageProblems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ManageProblems_vue_vue_type_template_id_ea118e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ManageProblems_vue_vue_type_template_id_ea118e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "062005ab",
+  "ea118e26",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/drugs/ManageDrugs.vue"
+component.options.__file = "vue/problems/ManageProblems.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./vue/drugs/components/EditDrug.vue":
-/*!*******************************************!*\
-  !*** ./vue/drugs/components/EditDrug.vue ***!
-  \*******************************************/
+/***/ "./vue/problems/components/EditProblem.vue":
+/*!*************************************************!*\
+  !*** ./vue/problems/components/EditProblem.vue ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18684,8 +18656,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _EditDrug_vue_vue_type_template_id_08778fa0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditDrug.vue?vue&type=template&id=08778fa0&scoped=true& */ "./vue/drugs/components/EditDrug.vue?vue&type=template&id=08778fa0&scoped=true&");
-/* harmony import */ var _EditDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditDrug.vue?vue&type=script&lang=js& */ "./vue/drugs/components/EditDrug.vue?vue&type=script&lang=js&");
+/* harmony import */ var _EditProblem_vue_vue_type_template_id_8b8c06a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true& */ "./vue/problems/components/EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true&");
+/* harmony import */ var _EditProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditProblem.vue?vue&type=script&lang=js& */ "./vue/problems/components/EditProblem.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -18695,27 +18667,27 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _EditDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _EditDrug_vue_vue_type_template_id_08778fa0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _EditDrug_vue_vue_type_template_id_08778fa0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _EditProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _EditProblem_vue_vue_type_template_id_8b8c06a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EditProblem_vue_vue_type_template_id_8b8c06a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "08778fa0",
+  "8b8c06a0",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/drugs/components/EditDrug.vue"
+component.options.__file = "vue/problems/components/EditProblem.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./vue/drugs/components/SaveDrug.vue":
-/*!*******************************************!*\
-  !*** ./vue/drugs/components/SaveDrug.vue ***!
-  \*******************************************/
+/***/ "./vue/problems/components/SaveProblem.vue":
+/*!*************************************************!*\
+  !*** ./vue/problems/components/SaveProblem.vue ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18723,8 +18695,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _SaveDrug_vue_vue_type_template_id_6d38c013_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true& */ "./vue/drugs/components/SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true&");
-/* harmony import */ var _SaveDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SaveDrug.vue?vue&type=script&lang=js& */ "./vue/drugs/components/SaveDrug.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SaveProblem_vue_vue_type_template_id_b041d946_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SaveProblem.vue?vue&type=template&id=b041d946&scoped=true& */ "./vue/problems/components/SaveProblem.vue?vue&type=template&id=b041d946&scoped=true&");
+/* harmony import */ var _SaveProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SaveProblem.vue?vue&type=script&lang=js& */ "./vue/problems/components/SaveProblem.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -18734,27 +18706,27 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _SaveDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SaveDrug_vue_vue_type_template_id_6d38c013_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SaveDrug_vue_vue_type_template_id_6d38c013_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _SaveProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SaveProblem_vue_vue_type_template_id_b041d946_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SaveProblem_vue_vue_type_template_id_b041d946_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "6d38c013",
+  "b041d946",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "vue/drugs/components/SaveDrug.vue"
+component.options.__file = "vue/problems/components/SaveProblem.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./vue/drugs/ManageDrugs.vue?vue&type=script&lang=js&":
-/*!************************************************************!*\
-  !*** ./vue/drugs/ManageDrugs.vue?vue&type=script&lang=js& ***!
-  \************************************************************/
+/***/ "./vue/problems/ManageProblems.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./vue/problems/ManageProblems.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18762,15 +18734,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDrugs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageDrugs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/ManageDrugs.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDrugs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageProblems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageProblems.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/ManageProblems.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageProblems_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./vue/drugs/components/EditDrug.vue?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./vue/drugs/components/EditDrug.vue?vue&type=script&lang=js& ***!
-  \********************************************************************/
+/***/ "./vue/problems/components/EditProblem.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./vue/problems/components/EditProblem.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18778,15 +18750,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditDrug.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/EditDrug.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditProblem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/EditProblem.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./vue/drugs/components/SaveDrug.vue?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./vue/drugs/components/SaveDrug.vue?vue&type=script&lang=js& ***!
-  \********************************************************************/
+/***/ "./vue/problems/components/SaveProblem.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./vue/problems/components/SaveProblem.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18794,66 +18766,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveDrug.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/SaveDrug.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDrug_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveProblem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/SaveProblem.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveProblem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./vue/drugs/ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true&":
-/*!******************************************************************************!*\
-  !*** ./vue/drugs/ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true& ***!
-  \******************************************************************************/
+/***/ "./vue/problems/ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true&":
+/*!************************************************************************************!*\
+  !*** ./vue/problems/ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true& ***!
+  \************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDrugs_vue_vue_type_template_id_062005ab_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDrugs_vue_vue_type_template_id_062005ab_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageProblems_vue_vue_type_template_id_ea118e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageProblems_vue_vue_type_template_id_ea118e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageDrugs_vue_vue_type_template_id_062005ab_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageProblems_vue_vue_type_template_id_ea118e26_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./vue/drugs/components/EditDrug.vue?vue&type=template&id=08778fa0&scoped=true&":
-/*!**************************************************************************************!*\
-  !*** ./vue/drugs/components/EditDrug.vue?vue&type=template&id=08778fa0&scoped=true& ***!
-  \**************************************************************************************/
+/***/ "./vue/problems/components/EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./vue/problems/components/EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDrug_vue_vue_type_template_id_08778fa0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDrug_vue_vue_type_template_id_08778fa0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditProblem_vue_vue_type_template_id_8b8c06a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditProblem_vue_vue_type_template_id_8b8c06a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditDrug_vue_vue_type_template_id_08778fa0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditDrug.vue?vue&type=template&id=08778fa0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/EditDrug.vue?vue&type=template&id=08778fa0&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditProblem_vue_vue_type_template_id_8b8c06a0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./vue/drugs/components/SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true&":
-/*!**************************************************************************************!*\
-  !*** ./vue/drugs/components/SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true& ***!
-  \**************************************************************************************/
+/***/ "./vue/problems/components/SaveProblem.vue?vue&type=template&id=b041d946&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./vue/problems/components/SaveProblem.vue?vue&type=template&id=b041d946&scoped=true& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDrug_vue_vue_type_template_id_6d38c013_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDrug_vue_vue_type_template_id_6d38c013_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveProblem_vue_vue_type_template_id_b041d946_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveProblem_vue_vue_type_template_id_b041d946_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveDrug_vue_vue_type_template_id_6d38c013_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SaveProblem_vue_vue_type_template_id_b041d946_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SaveProblem.vue?vue&type=template&id=b041d946&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/SaveProblem.vue?vue&type=template&id=b041d946&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/ManageDrugs.vue?vue&type=template&id=062005ab&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/ManageProblems.vue?vue&type=template&id=ea118e26&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18869,13 +18841,13 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "col-12 col-md-4" }, [
+        _c("div", { staticClass: "col-12 col-md-6" }, [
           _c("div", { staticClass: "card shadow shadow-sm" }, [
             _c(
               "div",
               { staticClass: "card-header d-flex justify-content-between" },
               [
-                _c("div", [_vm._v("Drugs")]),
+                _c("div", [_vm._v("Problems")]),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -18895,48 +18867,22 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "mb-3" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.filterText,
-                        expression: "filterText"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Filter drugs" },
-                    domProps: { value: _vm.filterText },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.filterText = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
               _c(
                 "table",
                 { staticClass: "table table-sm table-bordered table-hover" },
                 [
                   _c(
                     "tbody",
-                    _vm._l(_vm.filteredDrugsList, function(drug) {
-                      return _c("tr", { key: drug.id }, [
+                    _vm._l(_vm.problemsList, function(item) {
+                      return _c("tr", { key: item.id }, [
                         _c(
                           "td",
                           { staticClass: "text-left" },
                           [
                             _c(
                               "router-link",
-                              { attrs: { to: "/edit/" + drug.id } },
-                              [_vm._v(_vm._s(drug.drug_name))]
+                              { attrs: { to: "/edit/" + item.id } },
+                              [_vm._v(_vm._s(item.problem))]
                             )
                           ],
                           1
@@ -18953,7 +18899,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-12 col-md-8 mb-2" },
+          { staticClass: "col-12 col-md-6 mb-2" },
           [_c("router-view")],
           1
         )
@@ -18968,10 +18914,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/EditDrug.vue?vue&type=template&id=08778fa0&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/EditDrug.vue?vue&type=template&id=08778fa0&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/EditProblem.vue?vue&type=template&id=8b8c06a0&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18985,61 +18931,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card shadow shadow-sm" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _vm._v("Edit " + _vm._s(_vm.selectedDrug.drug_name))
-    ]),
+    _c("div", { staticClass: "card-header" }, [_vm._v("Edit Problem")]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("div", {}, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "text-drug-name" } }, [
-            _vm._v("Drug name")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.selectedDrug.drug_name,
-                expression: "selectedDrug.drug_name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "text-drug-name" },
-            domProps: { value: _vm.selectedDrug.drug_name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.selectedDrug, "drug_name", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "text-remarks" } }, [_vm._v("Remarks")]),
+          _c("label", { attrs: { for: "text-remarks" } }, [_vm._v("Problem")]),
           _vm._v(" "),
           _c("textarea", {
             directives: [
               {
                 name: "model",
-                rawName: "v-model",
-                value: _vm.selectedDrug.remarks,
-                expression: "selectedDrug.remarks"
+                rawName: "v-model.trim",
+                value: _vm.selectedProblem.problem,
+                expression: "selectedProblem.problem",
+                modifiers: { trim: true }
               }
             ],
             staticClass: "form-control",
             attrs: { rows: "3", id: "text-remarks" },
-            domProps: { value: _vm.selectedDrug.remarks },
+            domProps: { value: _vm.selectedProblem.problem },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.selectedDrug, "remarks", $event.target.value)
+                _vm.$set(
+                  _vm.selectedProblem,
+                  "problem",
+                  $event.target.value.trim()
+                )
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
               }
             }
           })
@@ -19071,10 +18995,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/drugs/components/SaveDrug.vue?vue&type=template&id=6d38c013&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/SaveProblem.vue?vue&type=template&id=b041d946&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./vue/problems/components/SaveProblem.vue?vue&type=template&id=b041d946&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19088,38 +19012,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card shadow shadow-sm" }, [
-    _c("div", { staticClass: "card-header" }, [_vm._v("Add a drug")]),
+    _c("div", { staticClass: "card-header" }, [_vm._v("Add a problem")]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("div", {}, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "text-drug-name" } }, [
-            _vm._v("Drug name")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.drug.drug_name,
-                expression: "drug.drug_name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "text-drug-name" },
-            domProps: { value: _vm.drug.drug_name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.drug, "drug_name", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "text-remarks" } }, [_vm._v("Remarks")]),
           _vm._v(" "),
@@ -19127,20 +19023,24 @@ var render = function() {
             directives: [
               {
                 name: "model",
-                rawName: "v-model",
-                value: _vm.drug.remarks,
-                expression: "drug.remarks"
+                rawName: "v-model.trim",
+                value: _vm.problem.problem,
+                expression: "problem.problem",
+                modifiers: { trim: true }
               }
             ],
             staticClass: "form-control",
             attrs: { rows: "3", id: "text-remarks" },
-            domProps: { value: _vm.drug.remarks },
+            domProps: { value: _vm.problem.problem },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.drug, "remarks", $event.target.value)
+                _vm.$set(_vm.problem, "problem", $event.target.value.trim())
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
               }
             }
           })
@@ -35784,16 +35684,16 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!*********************************!*\
-  !*** ./vue/drugs/manage.app.js ***!
-  \*********************************/
+/*!************************************!*\
+  !*** ./vue/problems/manage.app.js ***!
+  \************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./vue/problems/store.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _ManageDrugs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageDrugs */ "./vue/drugs/ManageDrugs.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./vue/drugs/store.js");
-/* harmony import */ var _components_SaveDrug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/SaveDrug */ "./vue/drugs/components/SaveDrug.vue");
-/* harmony import */ var _components_EditDrug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/EditDrug */ "./vue/drugs/components/EditDrug.vue");
+/* harmony import */ var _ManageProblems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageProblems */ "./vue/problems/ManageProblems.vue");
+/* harmony import */ var _components_SaveProblem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/SaveProblem */ "./vue/problems/components/SaveProblem.vue");
+/* harmony import */ var _components_EditProblem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/EditProblem */ "./vue/problems/components/EditProblem.vue");
 
 
 
@@ -35803,22 +35703,22 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_5__.default);
 var routes = [{
   path: "/",
-  component: _components_SaveDrug__WEBPACK_IMPORTED_MODULE_2__.default
+  component: _components_SaveProblem__WEBPACK_IMPORTED_MODULE_2__.default
 }, {
   path: "/add",
-  component: _components_SaveDrug__WEBPACK_IMPORTED_MODULE_2__.default
+  component: _components_SaveProblem__WEBPACK_IMPORTED_MODULE_2__.default
 }, {
   path: "/edit/:id",
-  component: _components_EditDrug__WEBPACK_IMPORTED_MODULE_3__.default
+  component: _components_EditProblem__WEBPACK_IMPORTED_MODULE_3__.default
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__.default({
   routes: routes
 });
 new vue__WEBPACK_IMPORTED_MODULE_4__.default({
   render: function render(h) {
-    return h(_ManageDrugs__WEBPACK_IMPORTED_MODULE_0__.default);
+    return h(_ManageProblems__WEBPACK_IMPORTED_MODULE_1__.default);
   },
-  store: _store__WEBPACK_IMPORTED_MODULE_1__.default,
+  store: _store__WEBPACK_IMPORTED_MODULE_0__.store,
   router: router
 }).$mount("#app");
 })();

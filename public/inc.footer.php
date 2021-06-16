@@ -4,7 +4,7 @@ use App\Core\App;
 
 ?>
 
-<div class="container-fluid mt-5 mb-3">
+<div class="container-fluid mt-5 mb-3 d-print-none">
     <div class="row">
         <div class="col">
 

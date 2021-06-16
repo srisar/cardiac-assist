@@ -170,7 +170,7 @@
 
 import ModalWindow from "../../../_common/components/ModalWindow";
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
 
 const _ = require("lodash");
 
@@ -240,10 +240,14 @@ export default {
        * */
       await this.$store.dispatch("investigations_fetchAllAvailableInvestigation");
 
-      await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
-
     } catch (e) {
       errorMessageBox("Failed to fetch visit investigations");
+    }
+
+    try {
+      await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+    } catch (e) {
+      errorMessageBox("Failed to fetch visit investigation details");
     }
 
   },

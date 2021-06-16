@@ -25,13 +25,17 @@ export default new Vuex.Store({
         visitReferralLetters: visitReferralLetters,
     },
 
-    state: {
+    state() {
+        return {
+            visit: {},
+            visitId: -1,
 
-        visit: {},
-        visitId: -1,
+            view: {
+                hasSidebar: true,
+            }
 
-    },
-    /* *** STATE *** */
+        };
+    }, /* state */
 
     mutations: {
         updateVisit(state, payload) {
@@ -42,21 +46,35 @@ export default new Vuex.Store({
             state.visitId = payload
         },
 
-    },
-    /* *** MUTATIONS *** */
+        hasSidebar(state, value) {
+            state.view.hasSidebar = value;
+        },
+
+
+    }, /* mutations */
 
     getters: {
-        getVisit: state => {
+
+        getPatient(state) {
+            return state.visit.patient;
+        },
+
+        getVisit(state) {
             return state.visit
         },
 
-        getVisitId: state => {
+        getVisitId(state) {
             return state.visitId
         },
-    },
-    /* *** GETTERS *** */
+
+    }, /* getters */
 
     actions: {
+
+        async hideSidebar(context) {
+            context.commit("hasSidebar", false);
+        },
+
 
         /*
         * Fetch visit details
