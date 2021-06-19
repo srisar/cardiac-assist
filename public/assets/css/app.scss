@@ -1,4 +1,3 @@
-
 $font-family-custom: 'Sen', sans-serif;
 
 footer {
@@ -113,4 +112,9 @@ BOOTSTRAP MODAL FULLSCREEN OPTION
 
 select {
   font-family: $font-family-custom;
+}
+
+
+.dropdown-menu {
+  z-index: 2000;
 }

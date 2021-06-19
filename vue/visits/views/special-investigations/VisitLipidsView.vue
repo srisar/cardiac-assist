@@ -75,8 +75,12 @@ export default {
     },
 
     visitId: function () {
-      return this.$store.getters.getVisitId
+      return this.$store.getters.getVisitId;
     },
+
+    // visitLipids() {
+    //   return this.$store.getters.getVisitLipids;
+    // }
 
   },
 
@@ -84,12 +88,8 @@ export default {
 
     try {
 
-      const params = {
-        visit_id: this.visitId,
-      }
-
-      const response = await $.get(`${getSiteURL()}/api/get/visit/visit-lipids.php`, params);
-      this.visitLipids = response.data;
+      await this.$store.dispatch("visitLipids_fetchAll", this.visitId);
+      this.visitLipids = this.$store.getters.getVisitLipids;
 
     } catch (e) {
       errorMessageBox("Failed to fetch lipids details");
@@ -112,7 +112,7 @@ export default {
           nhc: this.visitLipids.nhc,
         };
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-lipids.php`, params);
+        await this.$store.dispatch("visitLipids_update", params);
 
         successMessageBox("Lipid details updated");
 

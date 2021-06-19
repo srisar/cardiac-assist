@@ -4,7 +4,7 @@
 
     <div class="container container-sm">
 
-      <div class="form-row" v-if="hasSidebar">
+      <div class="form-row">
         <!-- start: sidebar -->
         <div class="col-12 col-md-3">
           <SidebarGroup/>
@@ -17,14 +17,6 @@
         </div><!-- col -->
 
       </div><!-- row -->
-
-      <div v-else>
-        <div class="col-12">
-          <transition name="fade" mode="out-in">
-            <router-view></router-view>
-          </transition>
-        </div><!-- col -->
-      </div>
 
     </div><!-- container -->
 

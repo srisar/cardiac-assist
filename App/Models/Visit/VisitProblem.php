@@ -68,9 +68,19 @@ class VisitProblem implements IModel
         $statement = $db->prepare("select * from visit_problems where visit_id=?");
         $statement->execute([$visit->id]);
 
+        /** @var self[] $results */
         $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        if (!empty($results)) return $results;
+        if (!empty($results)) {
+
+            $output = [];
+
+            foreach ($results as $result) {
+                $result->problem = Problem::find($result->problem_id);
+                $output[] = $result;
+            }
+            return $output;
+        }
         return [];
 
     }

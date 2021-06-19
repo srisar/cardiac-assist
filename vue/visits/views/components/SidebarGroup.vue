@@ -26,6 +26,9 @@
         <li class="list-group-item">
           <router-link to="/diagnoses#visit-diagnoses" class="">Diagnoses</router-link>
         </li>
+        <li class="list-group-item">
+          <router-link to="/diagnoses#visit-problems" class="">Problems list</router-link>
+        </li>
       </ul>
     </div><!-- card -->
 

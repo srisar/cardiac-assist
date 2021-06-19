@@ -93,10 +93,18 @@ class VisitPrescription implements IModel
         $statement = $db->prepare("select * from visit_prescriptions where visit_id=?");
         $statement->execute([$visit->id]);
 
-        /** @var self[] $result */
-        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        /** @var self[] $results */
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        if (!empty($result)) return $result;
+        if (!empty($results)) {
+            $output = [];
+
+            foreach ($results as $result) {
+                $result->prescription_items = VisitPrescriptionItem::findByPrescription($result);
+                $output [] = $result;
+            }
+            return $output;
+        }
         return [];
 
     }

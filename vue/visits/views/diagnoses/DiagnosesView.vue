@@ -26,9 +26,15 @@
 
     </div><!-- row -->
 
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-12">
         <VisitDiagnosis id="visit-diagnoses"/>
+      </div>
+    </div><!-- row -->
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <VisitProblems id="visit-problems"/>
       </div>
     </div><!-- row -->
 
@@ -42,10 +48,11 @@ import VisitSymptoms from "./VisitSymptoms";
 import DifferentialDiagnosis from "./DifferentialDiagnosis";
 import VisitDiagnosis from "./VisitDiagnosis";
 import VisitInvestigations from "./VisitInvestigations";
+import VisitProblems from "./VisitProblems";
 
 export default {
   name: "DiagnosesView",
-  components: {VisitSymptoms, DifferentialDiagnosis, VisitDiagnosis, VisitInvestigations},
+  components: {VisitProblems, VisitSymptoms, DifferentialDiagnosis, VisitDiagnosis, VisitInvestigations},
 
 }
 </script>
