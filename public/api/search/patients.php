@@ -14,10 +14,19 @@ try {
 
     $query = Request::getAsString("query");
 
-    if(empty($query)) throw new Exception("Query is expected");
+    if (empty($query)) throw new Exception("Query is expected");
 
-    $drugs = Patient::search($query);
-    JSONResponse::validResponse(["data" => $drugs]);
+    if (explode(":", $query)[0] === "id") {
+        $id = explode(":", $query)[1];
+        if (isset($id) && !empty($id)) {
+            JSONResponse::validResponse(["data" => [Patient::find($id)]]);
+            return;
+        }
+    }
+
+    $patients = Patient::search($query);
+    JSONResponse::validResponse(["data" => $patients]);
+    return;
 
 
 } catch (Exception $exception) {

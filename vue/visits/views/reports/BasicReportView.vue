@@ -3,14 +3,20 @@
   <div v-if="loaded">
 
     <div class="paper">
-
-      <div class="lead mb-3">Dr Arulnithy's Cardiac Clinic</div>
-
+      <h4 class="mb-3 font-weight-bold report-heading">Dr Arulnithy's Clinic Report</h4>
       <PatientDetailsDiagnoses/>
-      <div class="page-break"></div>
-      <PrescriptionDetails/>
-
     </div><!-- paper -->
+
+    <div class="page-break"></div>
+
+    <div class="paper">
+      <PrescriptionDetails/>
+    </div>
+
+    <div class="position-absolute d-print-none" style="top: 5px; right: 10px">
+      <button class="btn btn-primary" @click="openPrintDialog()">Print</button>
+    </div>
+
 
   </div><!-- template -->
 
@@ -53,31 +59,39 @@ export default {
   },
 
   methods: {
-    //
+    openPrintDialog() {
+      window.print();
+    }
   },
 
 }
 </script>
 
-<style scoped>
+<style>
 
 
 .paper {
   border: solid 1px #cccccc;
   box-shadow: 0 0 10px #cccccc;
   padding: 5mm;
+  margin-bottom: 5mm;
+}
+
+.lead, .report-heading {
+  margin-left: 10mm;
 }
 
 
 @media print {
 
-  body {
-    margin: 15mm 5mm 10mm 5mm;
-  }
 
   @page {
     size: A5;
-    margin: 15mm 5mm 10mm 5mm;
+    margin: 10mm 5mm;
+  }
+
+  @page :first {
+    margin: 25mm 5mm;
   }
 
 
@@ -89,14 +103,27 @@ export default {
 
   .lead {
     font-size: 14pt;
-    page-break-after: avoid;
   }
 
   .page-break {
     clear: both;
-    page-break-after: always;
+    break-after: page;
   }
 
+  .section {
+    break-inside: avoid;
+  }
+
+
+  .page-footer:after {
+    counter-increment: page;
+    content: "Page " counter(page);
+    position: absolute;
+    right: 5mm;
+    bottom: 5mm;
+    white-space: nowrap;
+    z-index: 20;
+  }
 
 }
 

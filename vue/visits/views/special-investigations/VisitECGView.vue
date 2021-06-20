@@ -16,12 +16,13 @@
 
 
               <div class="row">
-                <div class="col-5">
+                <div class="col">
 
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text">Performed On</span></div>
+                  <div class="form-group">
+                    <label>Performed on <span v-if="performedOnOutput" class="badge badge-danger">{{ performedOnOutput }}</span></label>
                     <DateField id="date-performed-on" v-model="visitECG.performed_on"/>
                   </div>
+
 
                 </div>
               </div>
@@ -65,29 +66,48 @@ export default {
   data() {
     return {
 
-      visitECG: {
-        visit_id: undefined,
-        description: '',
-        performed_on: moment().format('YYYY-MM-DD'),
-        indication: '',
-      },
+      // visitECG: {
+      //   visit_id: undefined,
+      //   description: '',
+      //   performed_on: moment().format('YYYY-MM-DD'),
+      //   indication: '',
+      // },
 
       exist: false,
+      performedOnOutput: "",
     }
   },
 
   computed: {
     visitId: function () {
-      return this.$store.getters.getVisitId
+      return this.$store.getters.getVisitId;
     },
+
+    visitECG() {
+      return this.$store.getters.getVisitECG;
+    }
+
   },
 
-  mounted() {
-    this._fetch()
+  async mounted() {
+
+    try {
+
+      await this.$store.dispatch("visitECG_fetch", this.visitId);
+
+      if (this.visitECG.performed_on === null) {
+        this.visitECG.performed_on = moment().format('YYYY-MM-DD');
+        this.performedOnOutput = "No performed on date. Displaying today's date";
+      }
+
+
+    } catch (e) {
+      errorMessageBox("Failed to fetch ECG details");
+    }
+
   },
 
   methods: {
-    //
 
     /*
     * Add visit ecg investigation
@@ -103,41 +123,16 @@ export default {
           performed_on: this.visitECG.performed_on,
         };
 
+        await this.$store.dispatch("visitECG_update", params);
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-ecg.php`, params);
+        await this.$store.dispatch("visitECG_fetch", this.visitId)
 
         successMessageBox('ECG details updated');
+
       } catch (e) {
         errorMessageBox('Failed to update ECG details');
       }
     },
-
-
-    /*
-    * Fetch visit ECG
-    * */
-    async _fetch() {
-
-      try {
-
-        const params = {
-          visit_id: this.visitId,
-        }
-
-        const response = await $.get(`${getSiteURL()}/api/get/visit/visit-ecg.php`, params);
-
-        if (response.data.performed_on === null) {
-          response.data.performed_on = moment().format('YYYY-MM-DD')
-        }
-
-        this.visitECG = response.data;
-
-
-      } catch (e) {
-        errorMessageBox("Failed to fetch ECG details");
-      }
-
-    }, /* fetch visit ECG */
 
 
   }, /* methods */

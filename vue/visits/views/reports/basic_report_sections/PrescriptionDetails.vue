@@ -3,11 +3,11 @@
   <div v-if="prescription">
 
     <!-- prescriptions -->
-    <div class="lead text-center text-uppercase font-weight-bold">Prescriptions</div>
+    <div class="lead text-uppercase font-weight-bold">Prescriptions</div>
 
     <table class="table table-sm table-bordered">
       <tr>
-        <td>Date: {{ prescription.date }}</td>
+        <td class="font-weight-bold">{{ prescription.date }} | {{ prescription.remarks }}</td>
       </tr>
     </table>
 

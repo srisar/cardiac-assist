@@ -10,6 +10,8 @@ import {visitFurtherInvestigation} from "./store_modules/visit_further_investiga
 import {visitReferralLetters} from "./store_modules/visit_referral_letters";
 import {visitProblems} from "./store_modules/visit_problems";
 import {visitLipids} from "./store_modules/visit_lipids";
+import {visitSpecialEcg} from "./store_modules/special_ecg";
+import {visitSpecialEcho} from "./store_modules/special_echo";
 
 Vue.use(Vuex);
 
@@ -27,6 +29,9 @@ export default new Vuex.Store({
         visitReferralLetters: visitReferralLetters,
         visitProblems: visitProblems,
         visitLipids: visitLipids,
+        visitECG: visitSpecialEcg,
+        visitEcho: visitSpecialEcho,
+
     },
 
     state() {

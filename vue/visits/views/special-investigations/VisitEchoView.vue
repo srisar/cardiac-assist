@@ -170,59 +170,27 @@ export default {
       exist: false,
       loaded: false,
 
-      visitEcho: {
-        id: undefined,
-        visit_id: undefined,
-        param_la_systolic_diameter: 0,
-        param_aortic_root_diameter: 0,
-        param_lvot_diameter: 0,
-        param_ivs_diastolic_thickness: 0,
-        param_pw_diastolic_thickness: 0,
-        param_lvid_diastole: 0,
-        param_lvid_systole: 0,
-        param_fractional_shortening: 0,
-        param_lvef: 0,
-        param_rvid: 0,
-        param_peak_aortic_velocity: 0,
-        param_peak_lvot_velocity: 0,
-        param_aortic_lvot_velocity: 0,
-        param_peak_aortic_gradient: 0,
-        param_mean_aortic_gradient: 0,
-        param_aortic_valve_area: 0,
-        param_mitral_pressure: 0,
-        param_mean_mitral_gradient: 0,
-        param_mitral_valve_area: 0,
-        param_peak_tricuspid_velocity: 0,
-        param_stroke_volume: 0,
-        param_cardiac_output: 0,
-        param_cardiac_index: 0,
-        param_bp: 0,
-        param_hr: 0,
-        param_est_rvsp: 0,
-        param_est_cvp: 0,
-        param_est_pasp: 0,
-      },
     }
   },
 
   computed: {
 
     visitId: function () {
-      return this.$store.getters.getVisitId
+      return this.$store.getters.getVisitId;
     },
 
+    visitEcho() {
+      return this.$store.getters.getVisitEcho;
+    }
 
   },
 
   async mounted() {
 
     try {
-      const params = {
-        visit_id: this.visitId,
-      }
 
-      const response = await $.get(`${getSiteURL()}/api/get/visit/visit-echo.php`, params);
-      this.visitEcho = response.data;
+
+      await this.$store.dispatch("visitEcho_fetch", this.visitId);
       this.loaded = true;
 
     } catch (e) {
@@ -273,7 +241,7 @@ export default {
           param_est_pasp: this.visitEcho.param_est_pasp,
         }
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-echo.php`, params);
+        await this.$store.dispatch("visitEcho_update", params);
 
         successMessageBox("Echo details updated");
 
