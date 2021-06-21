@@ -12,26 +12,26 @@ Authentication::isAdminOrRedirect(DEBUG);
 try {
 
     $fields = [
-        "id" => Request::getAsInteger("id"),
+        "id" => Request::getAsInteger("visit_id"),
         "status" => Request::getAsString("status"),
     ];
 
-    if ( empty($fields["id"]) ) throw new Exception("Invalid id");
+    if (empty($fields["id"])) throw new Exception("Invalid visit id");
 
     $object = Visit::build($fields);
 
-    if ( $fields["status"] == "COMPLETE" ) {
+    if ($fields["status"] == "COMPLETE") {
         $result = $object->setAsComplete();
     } else {
         $result = $object->setAsIncomplete();
     }
 
-    if ( empty($result) ) throw new Exception("Update failed");
+    if (empty($result)) throw new Exception("Update failed");
 
     JSONResponse::validResponse();
     return;
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }
 

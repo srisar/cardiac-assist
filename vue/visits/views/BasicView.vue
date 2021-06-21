@@ -9,7 +9,7 @@
           <div>
 
             <a :href="createPatientPageLink()" class="btn btn-tiny btn-secondary">Back to patient</a>
-            <button class="btn btn-tiny btn-primary" @click="onShowEditVisit">Edit</button>
+            <button class="btn btn-tiny btn-primary" @click="modalEditVisitVisible = true">Edit</button>
           </div><!-- left -->
 
           <div></div><!-- center -->
@@ -125,29 +125,20 @@
           </div><!-- row -->
 
 
-          <div class="form-row mb-3 justify-content-center">
+          <div class="form-row mb-2 justify-content-center">
 
             <div class="col-4">
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">DBP</div>
+                  <div class="input-group-text">DBP/SBP (mmHg)</div>
                 </div>
-                <input type="text" class="form-control bg-white" :value="visit.dbp" readonly>
-              </div>
-            </div><!-- col -->
-
-            <div class="col-4">
-              <div class="input-group input-group-sm">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">SBP</div>
-                </div>
-                <input type="text" class="form-control bg-white" :value="visit.sbp" readonly>
+                <input type="text" class="form-control bg-white" :value="visit.dbp + '/' + visit.sbp" readonly>
               </div>
             </div><!-- col -->
 
           </div>
 
-          <div class="form-row justify-content-center">
+          <div class="form-row justify-content-center mb-2">
 
             <div class="col-2">
               <div class="input-group input-group-sm">
@@ -187,29 +178,55 @@
 
           </div><!-- row -->
 
+
+          <div class="form-row justify-content-center mb-2">
+
+            <div class="col-4">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Smoking</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.smoking | filterSmoking" readonly>
+              </div>
+            </div><!-- col -->
+
+            <div class="col-4">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Family history</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.family_history | filterFamilyHistory" readonly>
+              </div>
+            </div><!-- col -->
+
+          </div>
+
+
           <div class="form-row mb-2">
 
             <div class="col">
 
               <div class="form-group">
                 <label>Remarks</label>
-                <textarea rows="3" class="form-control" readonly>{{ visit.remarks }}</textarea>
+                <textarea rows="3" class="form-control bg-white" readonly>{{ visit.remarks }}</textarea>
               </div>
 
             </div><!-- col -->
 
           </div><!-- row -->
 
-          <div class="form-row justify-content-center mb-2">
+          <div class="form-row justify-content-center mb-2" v-if="visit.review_in">
+
             <div class="col-4 text-center">
 
               <div class="form-group">
-                <label>Review on</label>
-                <p class="lead">{{ visit.review_in }}</p>
+                <div class="text-center">Review on</div>
+                <p class="review-on">{{ visit.review_in }}</p>
               </div>
 
-            </div>
-          </div>
+            </div><!-- col -->
+
+          </div><!-- row -->
 
 
           <div class="row mb-2 justify-content-center">
@@ -237,7 +254,7 @@
     <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
     <!-- EDIT Modal: Visit Details -->
-    <ModalWindow :visible="modalEditVisitVisible" @close="onHideEditVisit">
+    <ModalWindow :visible="modalEditVisitVisible" @close="modalEditVisitVisible = false">
       <template v-slot:title>Edit visit details</template>
       <slot>
 
@@ -246,7 +263,7 @@
 
             <div class="form-group text-center">
               <label class="text-center">Date</label>
-              <DateField v-model="visit.visit_date"/>
+              <DateField class="text-center" v-model="visit.visit_date"/>
             </div>
 
           </div>
@@ -309,7 +326,7 @@
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="check-ht" v-model="visit.ht">
-              <label class="form-check-label" for="check-ht">HT</label>
+              <label class="form-check-label" for="check-ht">Hypertension</label>
             </div>
 
             <div class="form-check form-check-inline">
@@ -323,12 +340,39 @@
         <div class="row justify-content-center mt-2">
           <div class="col-2 text-center">
 
-            <div class="form-group">
-              <label>EF</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">EF</span>
+              </div>
               <input type="number" class="form-control" v-model="visit.ef">
             </div>
 
           </div>
+        </div>
+
+        <div class="form-row justify-content-center">
+          <div class="col-auto">
+
+            <div class="form-group">
+              <label>Smoking</label>
+              <select v-model="visit.smoking" class="custom-select">
+                <option v-for="(item, key) in smokingOptions" :value="key">{{ item }}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="col-auto">
+
+            <div class="form-group">
+              <label>Family history</label>
+              <select v-model="visit.family_history" class="custom-select">
+                <option v-for="(item, key) in familyHistoryOptions" :value="key">{{ item }}</option>
+              </select>
+            </div>
+
+          </div>
+
         </div>
 
 
@@ -361,6 +405,7 @@
 
 import ModalWindow from "../../_common/components/ModalWindow";
 import DateField from "../../_common/components/DateField";
+import {errorMessageBox} from "../../_common/bootbox_dialogs";
 
 export default {
   name: "BasicView",
@@ -370,8 +415,23 @@ export default {
     return {
       modalEditVisitVisible: false,
       completed: false,
+
+      /* dropdown values */
+      familyHistoryOptions: {
+        "Y": "Yes",
+        "N": "No"
+      },
+
+      smokingOptions: {
+        "NO": "No",
+        "SMOKING": "Smoking",
+        "EX_SMOKER": "Ex smoker",
+        "JUST_QUIT": "Just quit",
+      }
+
     }
   },
+  /* -- data -- */
 
   computed: {
 
@@ -390,8 +450,8 @@ export default {
 
     /* status switch label */
     statusSwitchLabel() {
-      if (this.completed) return 'Completed';
-      else return 'Incomplete';
+      if (this.completed) return "Completed";
+      else return "Incomplete";
     },
 
     /* status switch background color */
@@ -418,16 +478,17 @@ export default {
 
 
     visitDl() {
-      return this.visit.dl ? 'YES' : 'NO'
+      return this.visit.dl ? "YES" : "NO"
     },
     visitDm() {
-      return this.visit.dm ? 'YES' : 'NO'
+      return this.visit.dm ? "YES" : "NO"
     },
     visitHt() {
-      return this.visit.ht ? 'YES' : 'NO'
+      return this.visit.ht ? "YES" : "NO"
     },
 
   },
+  /* -- computed -- */
 
 
   watch: {
@@ -438,13 +499,13 @@ export default {
     completed: function (value) {
 
       if (value) {
-        this.$store.dispatch('visitSetAsComplete', {visit: this.visit, status: 'COMPLETE'})
-            .catch(e => {
+        this.$store.dispatch("visit_setStatus", {visit_id: this.visit.id, status: "COMPLETE"})
+            .catch(() => {
               this.completed = false;
             });
       } else {
-        this.$store.dispatch('visitSetAsComplete', {visit: this.visit, status: 'INCOMPLETE'})
-            .catch(e => {
+        this.$store.dispatch("visit_setStatus", {visit_id: this.visit.id, status: "INCOMPLETE"})
+            .catch(() => {
               this.completed = true;
             });
       }
@@ -452,61 +513,72 @@ export default {
     },
 
     status: function (value) {
-      this.completed = value === 'COMPLETE'
+      this.completed = value === "COMPLETE";
     }
 
 
   },
+  /* -- watch -- */
 
+  filters: {
 
-  mounted() {
-    //
+    filterSmoking(value) {
+      switch (value) {
+        case "NO":
+          return "No";
+        case "SMOKING":
+          return "Smoking";
+        case "JUST_QUIT":
+          return "Just quit";
+        case "EX_SMOKER":
+          return "Ex smoker";
+      }
+    },
+
+    filterFamilyHistory(value) {
+      switch (value) {
+        case "Y":
+          return "Yes";
+        case "N" :
+          return "No";
+      }
+    }
+
   },
+  /* -- filters -- */
+
 
   methods: {
 
 
-    /*
-    * Modal event handlers
-    * */
-    onShowEditVisit: function () {
-      this.modalEditVisitVisible = true;
-    },
+    async onUpdateVisitDetails() {
 
-    onHideEditVisit: function () {
-      this.modalEditVisitVisible = false;
-    },
+      try {
 
+        const params = {
+          id: this.visit.id,
+          visit_date: this.visit.visit_date,
+          remarks: this.visit.remarks,
+          height: this.visit.height,
+          weight: this.visit.weight,
+          bmi: this.bmi,
+          bsa: this.bsa,
+          dbp: this.visit.dbp,
+          sbp: this.visit.sbp,
+          dm: this.visit.dm,
+          ht: this.visit.ht,
+          dl: this.visit.dl,
+          ef: this.visit.ef,
+          family_history: this.visit.family_history,
+          smoking: this.visit.smoking,
+        };
 
-    onUpdateVisitDetails: function () {
+        await this.$store.dispatch("visit_update", params);
+        this.modalEditVisitVisible = false;
 
-      const visit = {
-        id: this.visit.id,
-        visit_date: this.visit.visit_date,
-        remarks: this.visit.remarks,
-        height: this.visit.height,
-        weight: this.visit.weight,
-        bmi: this.bmi,
-        bsa: this.bsa,
-        dbp: this.visit.dbp,
-        sbp: this.visit.sbp,
-        dm: this.visit.dm,
-        ht: this.visit.ht,
-        dl: this.visit.dl,
-        ef: this.visit.ef,
+      } catch (e) {
+        errorMessageBox("Failed to update visit details");
       }
-
-
-      this.$store.dispatch('updateVisit', visit)
-          .then(() => {
-
-            this.modalEditVisitVisible = false;
-
-          })
-          .catch(e => {
-            alert('Failed to update visit details');
-            console.log(e);
-          })
 
     },
 
@@ -515,9 +587,15 @@ export default {
     },
 
   },
+  /* -- methods -- */
 
 }
 </script>
 
 <style scoped>
+
+.review-on {
+  font-size: 2em;
+}
+
 </style>

@@ -36,14 +36,7 @@ export default {
       hasSidebar: true,
     }
   },
-
-  computed: {
-
-    // hasSidebar() {
-    //   return this.$store.state.view.hasSidebar;
-    // }
-  },
-
+  /* -- data -- */
 
   beforeCreate() {
 
@@ -53,14 +46,10 @@ export default {
 
     /* 1. fetch visit details */
     this.$store.commit('updateVisitId', parseInt(visitId));
-    this.$store.dispatch('fetchVisit', parseInt(visitId));
+    this.$store.dispatch('visit_fetch', parseInt(visitId));
   },
+  /* -- beforeCreate -- */
 
-
-  mounted() {
-
-
-  },
 
 }
 </script>

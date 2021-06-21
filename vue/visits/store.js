@@ -44,7 +44,8 @@ export default new Vuex.Store({
             }
 
         };
-    }, /* state */
+    },
+    /* -- state -- */
 
     mutations: {
         updateVisit(state, payload) {
@@ -60,7 +61,8 @@ export default new Vuex.Store({
         },
 
 
-    }, /* mutations */
+    },
+    /* -- mutations -- */
 
     getters: {
 
@@ -85,71 +87,42 @@ export default new Vuex.Store({
         },
 
 
-        /*
-        * Fetch visit details
-        * */
-        fetchVisit({commit}, id) {
+        /* fetch visit details */
+        async visit_fetch(context, id) {
 
-            return new Promise((resolve, reject) => {
-
-                $.get(`${getSiteURL()}/api/get/visit/visits.php`, {
-                    id: id
-                }).done(r => {
-
-                    if (r.data == null) {
-                        reject("empty")
-                    } else {
-                        commit("updateVisit", r.data)
-                        resolve()
-                    }
-
-                }).fail(e => {
-                    reject(e)
-                })
-
-            });
-
+            try {
+                let response = await $.get(`${getSiteURL()}/api/get/visit/visits.php`, {id: id});
+                context.commit("updateVisit", response.data);
+            } catch (e) {
+                throw e;
+            }
         },
 
-        /*
-        * Update visit details
-        * */
-        updateVisit({commit}, visit) {
-            return new Promise((resolve, reject) => {
+        /* update visit details */
+        async visit_update(context, params) {
 
-
-                $.post(`${getSiteURL()}/api/update/visit/visit.php`, visit)
-                    .done(r => {
-                        resolve(r)
-                    })
-                    .fail(e => {
-                        reject(e)
-                    });
-
-            });
+            try {
+                await $.post(`${getSiteURL()}/api/update/visit/visit.php`, params);
+            } catch (e) {
+                throw e;
+            }
         },
 
-        visitSetAsComplete({commit,}, {visit, status}) {
+        /* visit set as complete */
+        async visit_setStatus(context, params) {
 
-            return new Promise(((resolve, reject) => {
+            /*
+            * params: visit_id, status
+            * */
 
-                const params = {
-                    id: visit.id,
-                    status: status,
-                }
-
-                $.post(`${getSiteURL()}/api/update/visit/visit-status.php`, params)
-                    .done(r => {
-                        resolve()
-                    })
-                    .fail(e => {
-                        reject(e)
-                    });
-
-            }))
+            try {
+                $.post(`${getSiteURL()}/api/update/visit/visit-status.php`, params);
+            } catch (e) {
+                throw e;
+            }
         },
 
     },
-    /* *** ACTIONS *** */
+    /* -- actions -- */
 
 })

@@ -13,7 +13,7 @@ use PDOException;
 class Visit implements IModel
 {
 
-    private const TABLE = 'visits';
+    private const TABLE = "visits";
 
     public ?int $id, $patient_id;
 
@@ -23,13 +23,13 @@ class Visit implements IModel
 
     public ?bool $dm, $ht, $dl;
 
-    public ?string $added_at, $updated_at, $status;
+    public ?string $smoking, $family_history, $status;
 
     public ?Patient $patient;
 
 
-    private const STATUS_COMPLETE = 'COMPLETE';
-    private const STATUS_INCOMPLETE = 'INCOMPLETE';
+    private const STATUS_COMPLETE = "COMPLETE";
+    private const STATUS_INCOMPLETE = "INCOMPLETE";
 
     public static function build($array): Visit
     {
@@ -65,7 +65,7 @@ class Visit implements IModel
      */
     public static function findAll($limit = 1000, $offset = 0): array
     {
-        return Database::findAll(self::TABLE, $limit, $offset, self::class, 'patient_id');
+        return Database::findAll(self::TABLE, $limit, $offset, self::class, "patient_id");
     }
 
 
@@ -76,19 +76,19 @@ class Visit implements IModel
         try {
 
             $data = [
-                'patient_id' => $this->patient_id,
-                'visit_date' => $this->visit_date,
-                'remarks' => $this->remarks,
-                'height' => $this->height,
-                'weight' => $this->weight,
-                'bmi' => $this->bmi,
-                'bsa' => $this->bsa,
-                'sbp' => $this->sbp,
-                'dbp' => $this->dbp,
-                'dm' => $this->dm ? 1 : 0,
-                'ht' => $this->ht ? 1 : 0,
-                'dl' => $this->dl ? 1 : 0,
-                'ef' => $this->ef,
+                "patient_id" => $this->patient_id,
+                "visit_date" => $this->visit_date,
+                "remarks" => $this->remarks,
+                "height" => $this->height,
+                "weight" => $this->weight,
+                "bmi" => $this->bmi,
+                "bsa" => $this->bsa,
+                "sbp" => $this->sbp,
+                "dbp" => $this->dbp,
+                "dm" => $this->dm ? 1 : 0,
+                "ht" => $this->ht ? 1 : 0,
+                "dl" => $this->dl ? 1 : 0,
+                "ef" => $this->ef,
             ];
 
             $db->beginTransaction();
@@ -134,21 +134,23 @@ class Visit implements IModel
     public function update(): bool
     {
         $data = [
-            'visit_date' => $this->visit_date,
-            'remarks' => $this->remarks,
-            'height' => $this->height,
-            'weight' => $this->weight,
-            'bmi' => $this->bmi,
-            'bsa' => $this->bsa,
-            'sbp' => $this->sbp,
-            'dbp' => $this->dbp,
-            'dm' => $this->dm ? 1 : 0,
-            'ht' => $this->ht ? 1 : 0,
-            'dl' => $this->dl ? 1 : 0,
-            'ef' => $this->ef,
+            "visit_date" => $this->visit_date,
+            "remarks" => $this->remarks,
+            "height" => $this->height,
+            "weight" => $this->weight,
+            "bmi" => $this->bmi,
+            "bsa" => $this->bsa,
+            "sbp" => $this->sbp,
+            "dbp" => $this->dbp,
+            "dm" => $this->dm ? 1 : 0,
+            "ht" => $this->ht ? 1 : 0,
+            "dl" => $this->dl ? 1 : 0,
+            "ef" => $this->ef,
+            "smoking" => $this->smoking,
+            "family_history" => $this->family_history,
         ];
 
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
     }
 
     /**
@@ -158,9 +160,9 @@ class Visit implements IModel
     public function setAsComplete(): bool
     {
         $data = [
-            'status' => self::STATUS_COMPLETE,
+            "status" => self::STATUS_COMPLETE,
         ];
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
     }
 
     /**
@@ -169,9 +171,9 @@ class Visit implements IModel
     public function setAsIncomplete(): bool
     {
         $data = [
-            'status' => self::STATUS_INCOMPLETE,
+            "status" => self::STATUS_INCOMPLETE,
         ];
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
     }
 
     /**
@@ -181,7 +183,7 @@ class Visit implements IModel
      */
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, 'id', $this->id);
+        return Database::delete(self::TABLE, "id", $this->id);
     }
 
 
@@ -192,7 +194,7 @@ class Visit implements IModel
     public static function findByPatient(Patient $patient): array
     {
         $db = Database::instance();
-        $statement = $db->prepare('select * from visits where patient_id=?');
+        $statement = $db->prepare("select * from visits where patient_id=?");
         $statement->execute([$patient->id]);
 
         $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);

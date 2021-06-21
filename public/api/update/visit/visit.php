@@ -12,21 +12,24 @@ Authentication::isAdminOrRedirect(DEBUG);
 try {
 
     $fields = [
-        "id"         => Request::getAsInteger("id"),
+        "id" => Request::getAsInteger("id"),
         "visit_date" => Request::getAsString("visit_date"),
-        "remarks"    => Request::getAsRawString("remarks"),
+        "remarks" => Request::getAsString("remarks"),
 
         "height" => Request::getAsFloat("height"),
         "weight" => Request::getAsFloat("weight"),
-        "bmi"    => Request::getAsFloat("bmi"),
-        "bsa"    => Request::getAsFloat("bsa"),
-        "dbp"    => Request::getAsFloat("dbp"),
-        "sbp"    => Request::getAsFloat("sbp"),
-        "ef"     => Request::getAsFloat("ef"),
+        "bmi" => Request::getAsFloat("bmi"),
+        "bsa" => Request::getAsFloat("bsa"),
+        "dbp" => Request::getAsFloat("dbp"),
+        "sbp" => Request::getAsFloat("sbp"),
+        "ef" => Request::getAsFloat("ef"),
 
         "dm" => Request::getAsBoolean("dm"),
         "ht" => Request::getAsBoolean("ht"),
         "dl" => Request::getAsBoolean("dl"),
+
+        "smoking" => Request::getAsString("smoking"),
+        "family_history" => Request::getAsString("family_history"),
     ];
 
 
@@ -35,12 +38,12 @@ try {
 
     $result = $object->update();
 
-    if ( empty($result) ) throw new Exception("Update failed");
+    if (empty($result)) throw new Exception("Update failed");
 
     JSONResponse::validResponse();
     return;
 
-} catch ( Exception $exception ) {
+} catch (Exception $exception) {
     JSONResponse::exceptionResponse($exception);
 }
 

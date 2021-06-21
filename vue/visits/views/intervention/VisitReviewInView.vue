@@ -102,7 +102,6 @@ export default {
     },
 
     hasReviewInDate() {
-      console.log("visit review date", this.visit.review_in);
       return !_.isNull(this.visit.review_in) || _.isUndefined(this.visit.review_in);
     },
 
@@ -143,7 +142,7 @@ export default {
         };
 
         await $.post(`${getSiteURL()}/api/update/visit/visit-review-date.php`, params);
-        await this.$store.dispatch("fetchVisit", this.visitId);
+        await this.$store.dispatch("visit_fetch", this.visitId);
 
         successMessageBox("Review date updated");
 

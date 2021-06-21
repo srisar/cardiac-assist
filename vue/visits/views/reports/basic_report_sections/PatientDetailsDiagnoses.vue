@@ -7,7 +7,7 @@
       <table class="table table-sm table-bordered">
         <!-- basic patient details -->
         <tr>
-          <td colspan="3">
+          <td colspan="4">
             <div contenteditable="true" class="font-weight-bold">#{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }} ({{
                 patient.gender
               }})
@@ -21,65 +21,80 @@
 
         <!-- basic visit details -->
         <tr>
-          <td style="width: 25%">
-            <div>Height: {{ visit.height }}m</div>
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">H:</span> {{ visit.height }} m</div>
           </td>
 
-          <td style="width: 25%">
-            <div>Weight: {{ visit.weight }}kg</div>
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">W:</span> {{ visit.weight }} kg</div>
           </td>
 
-          <td style="width: 25%">
-            <div>BMI: {{ visit.bmi }}kg/m²</div>
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">BMI</span> {{ visit.bmi }} kg/m²</div>
           </td>
 
-          <td style="width: 25%">
-            <div>{{ visit.dbp }} / {{ visit.sbp }}mmHg</div>
+          <td style="width: 20%">
+            <div>{{ visit.dbp }} / {{ visit.sbp }} mmHg</div>
+          </td>
+
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
           </td>
 
         </tr>
 
         <tr>
-          <td style="width: 25%">
-            <div>DM: {{ visit.dm | boolean }}</div>
+
+
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
           </td>
 
-          <td style="width: 25%">
-            <div>HT: {{ visit.ht | boolean }}</div>
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
           </td>
 
-          <td style="width: 25%">
-            <div>DL: {{ visit.dl | boolean }}</div>
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
           </td>
 
-          <td style="width: 25%">
-            <div>EF: {{ visit.ef }}%</div>
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">SMO:</span> {{ visit.smoking | filterSmoking }}</div>
+          </td>
+
+          <td style="width: 20%">
+            <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
           </td>
 
         </tr>
+
+        <tr>
+
+
+        </tr>
+
       </table>
     </div>
 
     <!-- section: lipids details -->
     <div id="section-lipids" v-if="! isLipidsEmpty">
-      <div class="lead text-uppercase font-weight-bold">Lipid details</div>
       <table class="table table-bordered table-sm">
         <tbody>
         <tr>
           <td>
-            <div>TC: {{ lipids.tc }}</div>
+            <div><span class="font-weight-bold">TC:</span> {{ lipids.tc }}</div>
           </td>
           <td>
-            <div>LDL: {{ lipids.ldl }}</div>
+            <div><span class="font-weight-bold">LDL:</span> {{ lipids.ldl }}</div>
           </td>
           <td>
-            <div>HDL: {{ lipids.hdl }}</div>
+            <div><span class="font-weight-bold">HDL:</span> {{ lipids.hdl }}</div>
           </td>
           <td>
-            <div>TG: {{ lipids.tg }}</div>
+            <div><span class="font-weight-bold">TG:</span> {{ lipids.tg }}</div>
           </td>
           <td>
-            <div>NHC: {{ lipids.nhc }}</div>
+            <div><span class="font-weight-bold">NHC:</span> {{ lipids.nhc }}</div>
           </td>
         </tr>
         </tbody>
@@ -170,10 +185,6 @@ import {errorMessageBox} from "../../../../_common/bootbox_dialogs";
 export default {
   name: "PatientDetailsDiagnoses",
 
-  data() {
-    return {}
-  },
-
   computed: {
 
     visit() {
@@ -236,13 +247,40 @@ export default {
     }
 
   },
+  /* -- computed -- */
 
   filters: {
+
     boolean(value) {
       if (value) return "Yes";
       return "No";
+    },
+
+    filterSmoking(value) {
+      switch (value) {
+        case "NO":
+          return "No";
+        case "SMOKING":
+          return "Smoking";
+        case "JUST_QUIT":
+          return "Just quit";
+        case "EX_SMOKER":
+          return "Ex smoker";
+      }
+    },
+
+    filterFamilyHistory(value) {
+      switch (value) {
+        case "Y":
+          return "Yes";
+        case "N" :
+          return "No";
+      }
     }
+
   },
+  /* -- filters -- */
+
 
   async mounted() {
     try {
@@ -264,11 +302,9 @@ export default {
       errorMessageBox("Failed to load required data");
     }
 
-  },
+  }
+  /* -- mounted -- */
 
-  methods: {
-    //
-  },
 
 }
 </script>
