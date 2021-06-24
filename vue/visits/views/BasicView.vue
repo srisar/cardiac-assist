@@ -317,11 +317,11 @@
 
         <div class="form-row justify-content-center">
 
-          <div class="col-4 text-center">
+          <div class="col-6 text-center">
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="check-dm" v-model="visit.dm">
-              <label class="form-check-label" for="check-dm">DM</label>
+              <label class="form-check-label" for="check-dm">Diabetes</label>
             </div>
 
             <div class="form-check form-check-inline">
@@ -331,18 +331,18 @@
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="check-dl" v-model="visit.dl">
-              <label class="form-check-label" for="check-dl">DL</label>
+              <label class="form-check-label" for="check-dl">Dyslipidemia</label>
             </div>
 
           </div>
         </div>
 
         <div class="row justify-content-center mt-2">
-          <div class="col-2 text-center">
+          <div class="col-4 text-center">
 
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">EF</span>
+                <span class="input-group-text">Ejection fraction</span>
               </div>
               <input type="number" class="form-control" v-model="visit.ef">
             </div>
@@ -350,11 +350,13 @@
           </div>
         </div>
 
-        <div class="form-row justify-content-center">
+        <div class="form-row justify-content-center mt-2">
           <div class="col-auto">
 
-            <div class="form-group">
-              <label>Smoking</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Smoking</span>
+              </div>
               <select v-model="visit.smoking" class="custom-select">
                 <option v-for="(item, key) in smokingOptions" :value="key">{{ item }}</option>
               </select>
@@ -364,8 +366,10 @@
 
           <div class="col-auto">
 
-            <div class="form-group">
-              <label>Family history</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Family history</span>
+              </div>
               <select v-model="visit.family_history" class="custom-select">
                 <option v-for="(item, key) in familyHistoryOptions" :value="key">{{ item }}</option>
               </select>

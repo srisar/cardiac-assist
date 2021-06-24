@@ -21,6 +21,7 @@ import ReferralLettersView from "./views/intervention/referral-letters/ReferralL
 import EditReferralLetter from "./views/intervention/referral-letters/EditReferralLetter";
 import ReportView from "./views/ReportView";
 import BasicReportView from "./views/reports/BasicReportView";
+import VisitEchoViewV2 from "./views/special-investigations/VisitEchoViewV2";
 
 
 Vue.use(Vuex)
@@ -36,6 +37,7 @@ const routes = [
     {path: '/special/lipids', component: VisitLipidsView},
     {path: '/special/coronary-ct', component: VisitCoronaryCTView},
     {path: '/special/echo', component: VisitEchoView},
+    {path: '/special/echo2', component: VisitEchoViewV2},
     {path: '/special/angio', component: VisitAngiographyView},
 
     {

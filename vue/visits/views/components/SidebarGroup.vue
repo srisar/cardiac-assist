@@ -49,6 +49,9 @@
           <router-link to="/special/echo" class="">Echocardiogram</router-link>
         </li>
         <li class="list-group-item">
+          <router-link to="/special/echo2" class="">Echocardiogram v2</router-link>
+        </li>
+        <li class="list-group-item">
           <router-link to="/special/angio" class="">Angiography</router-link>
         </li>
       </ul>
