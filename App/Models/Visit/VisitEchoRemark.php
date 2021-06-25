@@ -5,7 +5,6 @@ namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
-use App\Models\EchoRemark;
 use App\Models\IModel;
 use PDO;
 
@@ -16,18 +15,18 @@ class VisitEchoRemark implements IModel
 
     public ?int $id, $visit_id, $echo_value_id;
 
-    public ?EchoRemark $echoValue;
+//    public ?EchoRemark $echoValue;
 
-    public const TYPE_AORTA = "AORTA";
-    public const TYPE_AORTIC_VALVE = "AORTIC_VALVE";
-    public const TYPE_DOPPLER = "DOPPLER";
-    public const TYPE_LEFT_ATRIUM = "LEFT_ATRIUM";
-    public const TYPE_MITRAL_VALVE = "MITRAL_VALVE";
-    public const TYPE_PERICARDIUM = "PERICARDIUM";
-    public const TYPE_PULMONIC_VALVE = "PULMONIC_VALVE";
-    public const TYPE_RIGHT_ATRIUM = "RIGHT_ATRIUM";
-    public const TYPE_RIGHT_VENTRICLE = "RIGHT_VENTRICLE";
-    public const TYPE_TRICUSPID = "TRICUSPID";
+//    public const TYPE_AORTA = "AORTA";
+//    public const TYPE_AORTIC_VALVE = "AORTIC_VALVE";
+//    public const TYPE_DOPPLER = "DOPPLER";
+//    public const TYPE_LEFT_ATRIUM = "LEFT_ATRIUM";
+//    public const TYPE_MITRAL_VALVE = "MITRAL_VALVE";
+//    public const TYPE_PERICARDIUM = "PERICARDIUM";
+//    public const TYPE_PULMONIC_VALVE = "PULMONIC_VALVE";
+//    public const TYPE_RIGHT_ATRIUM = "RIGHT_ATRIUM";
+//    public const TYPE_RIGHT_VENTRICLE = "RIGHT_VENTRICLE";
+//    public const TYPE_TRICUSPID = "TRICUSPID";
 
 
     public static function build( $array ): self
@@ -83,7 +82,7 @@ class VisitEchoRemark implements IModel
     {
 
         $db = Database::instance();
-        $statement = $db->prepare( "select * from visit_echo_values where visit_id=?" );
+        $statement = $db->prepare( "select * from visit_echo_remarks where visit_id=?" );
         $statement->execute( [ $visit->id ] );
 
         /** @var self[] $result */
