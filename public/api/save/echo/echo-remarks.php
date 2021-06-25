@@ -3,11 +3,11 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoRemarks;
+use App\Models\EchoRemark;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect(DEBUG);
+Authentication::isAdminOrRedirect( DEBUG );
 
 $types = [
     "LEFT_VENTRICLE",
@@ -26,28 +26,28 @@ $types = [
 try {
 
     $fields = [
-        "value" => Request::getAsString("value"),
-        "type" => strtoupper(Request::getAsString("type"))
+        "value" => Request::getAsString( "value" ),
+        "type" => strtoupper( Request::getAsString( "type" ) )
     ];
 
-    if (!is_null($fields["type"])) {
+    if ( !is_null( $fields["type"] ) ) {
 
-        if (!in_array(strtoupper($fields["type"]), $types)) throw new Exception("Invalid type");
+        if ( !in_array( strtoupper( $fields["type"] ), $types ) ) throw new Exception( "Invalid type" );
 
-        $echoValue = EchoRemarks::build($fields);
+        $echoValue = EchoRemark::build( $fields );
 
         $result = $echoValue->insert();
 
-        if ($result) {
-            JSONResponse::validResponse([EchoRemarks::find($result)]);
+        if ( $result ) {
+            JSONResponse::validResponse( [ EchoRemark::find( $result ) ] );
             return;
         }
 
-        throw new Exception("Failed");
+        throw new Exception( "Failed" );
     }
 
     return;
 
-} catch (Exception $exception) {
-    JSONResponse::exceptionResponse($exception);
+} catch ( Exception $exception ) {
+    JSONResponse::exceptionResponse( $exception );
 }

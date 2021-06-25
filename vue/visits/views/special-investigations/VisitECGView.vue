@@ -61,7 +61,7 @@ import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialo
 
 export default {
   name: "VisitECGView",
-  components: {DateField, RichEditorV2, ModalWindow},
+  components: { DateField, RichEditorV2, ModalWindow },
 
   data() {
     return {
@@ -93,16 +93,16 @@ export default {
 
     try {
 
-      await this.$store.dispatch("visitECG_fetch", this.visitId);
+      await this.$store.dispatch( "visitECG_fetch", this.visitId );
 
-      if (this.visitECG.performed_on === null) {
-        this.visitECG.performed_on = moment().format('YYYY-MM-DD');
+      if ( this.visitECG.performed_on === null ) {
+        this.visitECG.performed_on = moment().format( 'YYYY-MM-DD' );
         this.performedOnOutput = "No performed on date. Displaying today's date";
       }
 
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch ECG details");
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch ECG details" );
     }
 
   },
@@ -123,14 +123,14 @@ export default {
           performed_on: this.visitECG.performed_on,
         };
 
-        await this.$store.dispatch("visitECG_update", params);
+        await this.$store.dispatch( "visitECG_update", params );
 
-        await this.$store.dispatch("visitECG_fetch", this.visitId)
+        await this.$store.dispatch( "visitECG_fetch", this.visitId )
 
-        successMessageBox('ECG details updated');
+        successMessageBox( 'ECG details updated' );
 
-      } catch (e) {
-        errorMessageBox('Failed to update ECG details');
+      } catch ( e ) {
+        errorMessageBox( 'Failed to update ECG details' );
       }
     },
 

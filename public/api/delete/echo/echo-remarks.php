@@ -3,33 +3,33 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoRemarks;
+use App\Models\EchoRemark;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect(DEBUG);
+Authentication::isAdminOrRedirect( DEBUG );
 
 try {
 
     $fields = [
-        "id" => Request::getAsInteger("id"),
+        "id" => Request::getAsInteger( "id" ),
     ];
 
-    if (is_null($fields["id"])) throw new Exception("Invalid Id");
+    if ( is_null( $fields["id"] ) ) throw new Exception( "Invalid Id" );
 
-    $echoValue = EchoRemarks::find($fields["id"]);
+    $echoValue = EchoRemark::find( $fields["id"] );
 
-    if (is_null($echoValue)) throw new Exception("Invalid echo value");
+    if ( is_null( $echoValue ) ) throw new Exception( "Invalid echo value" );
 
     $result = $echoValue->delete();
 
-    if ($result) {
-        JSONResponse::validResponse("Deleted");
+    if ( $result ) {
+        JSONResponse::validResponse( "Deleted" );
         return;
     } else {
-        throw new Exception("Failed");
+        throw new Exception( "Failed" );
     }
 
-} catch (Exception $exception) {
-    JSONResponse::exceptionResponse($exception);
+} catch ( Exception $exception ) {
+    JSONResponse::exceptionResponse( $exception );
 }

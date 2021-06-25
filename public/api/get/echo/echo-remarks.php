@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\EchoRemarks;
+use App\Models\EchoRemark;
 
 require_once "../../../../_bootstrap.inc.php";
 
@@ -32,7 +32,7 @@ try {
     if (!is_null($id)) {
         // fetch by id
 
-        $value = EchoRemarks::find($id);
+        $value = EchoRemark::find($id);
         JSONResponse::validResponse($value);
         return;
     }
@@ -41,7 +41,7 @@ try {
 
         if (!in_array(strtoupper($type), $types)) throw new Exception("Invalid type");
 
-        $values = EchoRemarks::findByType($type);
+        $values = EchoRemark::findByType($type);
         JSONResponse::validResponse($values);
         return;
 
@@ -51,7 +51,7 @@ try {
     $output = [];
 
     foreach ($types as $type) {
-        $output[$type] = EchoRemarks::findByType($type);
+        $output[$type] = EchoRemark::findByType($type);
     }
 
     JSONResponse::validResponse($output);

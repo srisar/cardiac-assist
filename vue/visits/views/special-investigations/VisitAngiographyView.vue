@@ -311,7 +311,7 @@ import AlertArea from "../../../_common/components/AlertArea";
 
 export default {
   name: "VisitAngiographyView",
-  components: {AlertArea},
+  components: { AlertArea },
   data() {
     return {
       visitAngio: {
@@ -382,7 +382,9 @@ export default {
   },
 
   computed: {
-    visitId() { return this.$store.getters.getVisitId; }
+    visitId() {
+      return this.$store.getters.getVisitId;
+    }
   },
 
   mounted() {
@@ -398,15 +400,15 @@ export default {
       };
 
       try {
-        const response = await $.get(`${getSiteURL()}/api/get/visit/visit-angio.php`, params);
+        const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-angio.php`, params );
         this.visitAngio = response.data;
         this.visitAngio.dominance_right = this.visitAngio.dominance_right === '1';
         this.visitAngio.dominance_left = this.visitAngio.dominance_left === '1';
 
         this.loaded = true;
 
-      } catch (error) {
-        console.log(error);
+      } catch ( error ) {
+        console.log( error );
       }
 
     },
@@ -418,14 +420,14 @@ export default {
 
       try {
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-angio.php`, this.visitAngio);
+        await $.post( `${ getSiteURL() }/api/update/visit/visit-angio.php`, this.visitAngio );
 
         this.feedback.message = "Updated successfully";
         this.feedback.type = TYPE_SUCCESS;
 
 
-      } catch (e) {
-        console.log(e);
+      } catch ( e ) {
+        console.log( e );
         this.feedback.message = "Failed to update";
         this.feedback.type = TYPE_ERROR;
       }

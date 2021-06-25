@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\Visit\VisitEchoValue;
+use App\Models\Visit\VisitEchoRemark;
 
 require_once "../../../../_bootstrap.inc.php";
 
@@ -18,7 +18,7 @@ try {
     ];
 
 
-    $object = VisitEchoValue::build($fields);
+    $object = VisitEchoRemark::build($fields);
 
     $result = $object->insert();
 

@@ -24,26 +24,26 @@ export default {
 
     getters: {
 
-        getEchoRemarks(state) {
+        getEchoRemarks( state ) {
             return state.echoRemarks
         },
 
-        getVisitEchoRemarks(state) {
+        getVisitEchoRemarks( state ) {
             return state.visitEchoRemarks
         },
 
-        getEchoRemarksTypes: function (state) {
+        getEchoRemarksTypes: function ( state ) {
             return state.echoRemarksTypes
         },
 
     },
 
     mutations: {
-        setEchoRemarks: function (state, values) {
+        setEchoRemarks: function ( state, values ) {
             state.echoRemarks = values
         },
 
-        setVisitEchoRemarks: function (state, values) {
+        setVisitEchoRemarks: function ( state, values ) {
             state.visitEchoRemarks = values
         },
 
@@ -52,14 +52,14 @@ export default {
     actions: {
 
         /* fetch all remarks */
-        async echo_fetchAllRemarks(context) {
+        async echo_fetchAllRemarks( context ) {
 
             try {
 
-                let response = await $.get(`${getSiteURL()}/api/get/echo/echo-remarks.php`);
-                context.commit("setEchoRemarks", response);
+                let response = await $.get( `${ getSiteURL() }/api/get/echo/echo-remarks.php` );
+                context.commit( "setEchoRemarks", response );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
@@ -67,15 +67,15 @@ export default {
 
 
         /* fetch all visit remarks */
-        async echo_fetchAllVisitRemarks(context, visit_id) {
+        async echo_fetchAllVisitRemarks( context, visit_id ) {
 
 
             try {
 
-                let response = await $.get(`${getSiteURL()}/api/get/visit/visit-echo-remarks.php`, {visit_id: visit_id});
-                context.commit("setVisitEchoRemarks", response);
+                let response = await $.get( `${ getSiteURL() }/api/get/visit/visit-echo-remarks.php`, { visit_id: visit_id } );
+                context.commit( "setVisitEchoRemarks", response );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
@@ -83,39 +83,39 @@ export default {
         },
 
         /* add a new visit remark */
-        async echo_addVisitRemark(context, params) {
+        async echo_addVisitRemark( context, params ) {
 
             try {
 
-                await $.post(`${getSiteURL()}/api/save/visit/visit-echo-remarks.php`, params);
+                await $.post( `${ getSiteURL() }/api/save/visit/visit-echo-remarks.php`, params );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
         },
 
         /* delete a remark */
-        async echo_delete(context, id) {
+        async echo_deleteVisitRemark( context, id ) {
 
             try {
 
-                await $.post(`${getSiteURL()}/api/delete/visit/visit-echo-remarks.php`, {id: id});
+                await $.post( `${ getSiteURL() }/api/delete/visit/visit-echo-remarks.php`, { id: id } );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
         },
 
         /* add a new echo remark */
-        async echo_addEchoRemark(context, params) {
+        async echo_addEchoRemark( context, params ) {
 
             try {
 
-                await $.post(`${getSiteURL()}/api/save/echo/echo-remarks.php`, params);
+                await $.post( `${ getSiteURL() }/api/save/echo/echo-remarks.php`, params );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 

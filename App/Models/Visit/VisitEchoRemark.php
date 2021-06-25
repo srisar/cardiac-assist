@@ -5,18 +5,18 @@ namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
-use App\Models\EchoRemarks;
+use App\Models\EchoRemark;
 use App\Models\IModel;
 use PDO;
 
-class VisitEchoValue implements IModel
+class VisitEchoRemark implements IModel
 {
 
-    private const TABLE = "visit_echo_values";
+    private const TABLE = "visit_echo_remarks";
 
     public ?int $id, $visit_id, $echo_value_id;
 
-    public ?EchoRemarks $echoValue;
+    public ?EchoRemark $echoValue;
 
     public const TYPE_AORTA = "AORTA";
     public const TYPE_AORTIC_VALVE = "AORTIC_VALVE";
@@ -30,10 +30,10 @@ class VisitEchoValue implements IModel
     public const TYPE_TRICUSPID = "TRICUSPID";
 
 
-    public static function build($array): self
+    public static function build( $array ): self
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -41,14 +41,14 @@ class VisitEchoValue implements IModel
 
     /**
      * @param int $id
-     * @return VisitEchoValue
+     * @return self|null
      */
-    public static function find(int $id): VisitEchoValue
+    public static function find( int $id ): ?self
     {
-        return Database::find(self::TABLE, $id, self::class);
+        return Database::find( self::TABLE, $id, self::class );
     }
 
-    public static function findAll($limit = 1000, $offset = 0)
+    public static function findAll( $limit = 1000, $offset = 0 )
     {
 
     }
@@ -60,7 +60,7 @@ class VisitEchoValue implements IModel
             "echo_value_id" => $this->echo_value_id,
         ];
 
-        return Database::insert(self::TABLE, $data);
+        return Database::insert( self::TABLE, $data );
 
     }
 
@@ -71,25 +71,25 @@ class VisitEchoValue implements IModel
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, "id", $this->id);
+        return Database::delete( self::TABLE, "id", $this->id );
     }
 
 
     /**
      * @param Visit $visit
-     * @return VisitEchoValue[]
+     * @return self[]
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit( Visit $visit ): array
     {
 
         $db = Database::instance();
-        $statement = $db->prepare("select * from visit_echo_values where visit_id=?");
-        $statement->execute([$visit->id]);
+        $statement = $db->prepare( "select * from visit_echo_values where visit_id=?" );
+        $statement->execute( [ $visit->id ] );
 
-        /** @var VisitEchoValue[] $result */
-        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        /** @var self[] $result */
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($result)) return $result;
+        if ( !empty( $result ) ) return $result;
         return [];
 
     }
@@ -97,26 +97,26 @@ class VisitEchoValue implements IModel
     /**
      * @param Visit $visit
      * @param string $type
-     * @return VisitEchoValue[]
+     * @return self[]
      */
-    public static function findByVisitAndType(Visit $visit, string $type): array
+    public static function findByVisitAndType( Visit $visit, string $type ): array
     {
         $db = Database::instance();
 
-        $statement = $db->prepare("select v.id, v.visit_id, v.echo_value_id, e.type, e.value from visit_echo_values v 
+        $statement = $db->prepare( "select v.id, v.visit_id, v.echo_value_id, e.type, e.value from visit_echo_remarks v 
                                         inner join echo_remarks e 
                                         on v.echo_value_id = e.id
-                                        where visit_id=? and type=?");
+                                        where visit_id=? and type=?" );
 
-        $statement->execute([$visit->id, $type]);
+        $statement->execute( [ $visit->id, $type ] );
 
-        /** @var VisitEchoValue[] $result */
-        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        /** @var self[] $result */
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($result)) {
+        if ( !empty( $result ) ) {
 
             $output = [];
-            foreach ($result as $visitEchoValue) {
+            foreach ( $result as $visitEchoValue ) {
 //                $visitEchoValue->echoValue = EchoRemarks::find($visitEchoValue->echo_value_id);
                 $output[] = $visitEchoValue;
             }

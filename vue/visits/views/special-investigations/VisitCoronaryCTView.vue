@@ -126,11 +126,11 @@ export default {
         visit_id: this.visitId,
       };
 
-      const response = await $.get(`${getSiteURL()}/api/get/visit/visit-coronary-ct.php`, params);
+      const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-coronary-ct.php`, params );
       this.visitCoronaryCT = response.data;
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch coronary ct details");
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch coronary ct details" );
     }
   },
 
@@ -154,11 +154,11 @@ export default {
           impression: this.visitCoronaryCT.impression,
         }
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-coronary-ct.php`, params);
-        successMessageBox("Coronary CT details updated");
+        await $.post( `${ getSiteURL() }/api/update/visit/visit-coronary-ct.php`, params );
+        successMessageBox( "Coronary CT details updated" );
 
-      } catch (e) {
-        errorMessageBox("Failed to update coronary CT details");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update coronary CT details" );
       }
 
     },
