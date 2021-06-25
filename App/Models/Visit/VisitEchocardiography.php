@@ -25,7 +25,8 @@ class VisitEchocardiography implements IModel
         $param_rv_size, $param_rv_ivg, $param_pv_pg, $param_pv_annulus, $param_dd_a, $param_dd_e, $param_dd_e_bar,
         $param_doppler_mitral_valve_area;
 
-    public bool|string $has_diastolic_dysfunction, $is_left_atrium_dilated, $has_asd, $has_mitral_stenosis, $is_diseased_aortic_valve,
+
+    public $has_diastolic_dysfunction, $is_left_atrium_dilated, $has_asd, $has_mitral_stenosis, $is_diseased_aortic_valve,
         $is_diseased_aorta, $has_vsd, $has_ps, $show_advanced;
 
     public ?Visit $visit;
