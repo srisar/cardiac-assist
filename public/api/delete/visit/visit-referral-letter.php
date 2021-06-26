@@ -3,9 +3,9 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\ReferralLetter;
+use App\Models\Visit\VisitReferralLetter;
 
-require_once "../../../_bootstrap.inc.php";
+require_once "../../../../_bootstrap.inc.php";
 
 Authentication::isAdminOrRedirect( DEBUG );
 
@@ -15,11 +15,7 @@ try {
         "id" => Request::getAsInteger( "id" ),
     ];
 
-    $object = ReferralLetter::find( $fields["id"] );
-    if ( empty( $object ) ) throw new Exception( "Invalid id" );
-
-    $object = ReferralLetter::build( $fields );
-
+    $object = VisitReferralLetter::build( $fields );
 
     $result = $object->delete();
 

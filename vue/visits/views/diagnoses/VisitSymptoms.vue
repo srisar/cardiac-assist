@@ -5,14 +5,17 @@
     <div class="card shadow shadow-sm">
       <div class="card-header d-flex justify-content-between">
         <div>Clinical Details (Symptoms)</div>
-        <div>
-          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
-        </div>
+
 
       </div><!-- card-header -->
 
       <div class="card-body">
 
+        <div class="mb-3">
+          <button class="btn btn-sm btn-outline-primary" @click="modalAddVisible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add new
+          </button>
+        </div>
 
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
           <thead>
@@ -29,7 +32,9 @@
             </td>
             <td class="text-center">{{ item.duration }}</td>
             <td class="text-center">
-              <button class="btn btn-tiny btn-danger" @click="onShowDeleteModal(item)">Remove</button>
+              <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteModal(item)">
+                <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+              </button>
             </td>
           </tr>
           </tbody>
@@ -123,11 +128,11 @@ import ModalWindow from "../../../_common/components/ModalWindow";
 import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 
-const _ = require('lodash');
+const _ = require( 'lodash' );
 
 export default {
   name: "VisitSymptoms",
-  components: {ModalWindow},
+  components: { ModalWindow },
 
   /*
   *
@@ -181,11 +186,11 @@ export default {
 
     try {
 
-      await this.$store.dispatch("visitSymptoms_fetchAll", this.visitId);
-      await this.$store.dispatch("visitSymptoms_fetchAllSymptoms");
+      await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
+      await this.$store.dispatch( "visitSymptoms_fetchAllSymptoms" );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch clinical details");
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch clinical details" );
     }
 
   },
@@ -204,14 +209,14 @@ export default {
           duration: this.symptomToAdd.duration
         };
 
-        await this.$store.dispatch("visitSymptoms_add", params);
+        await this.$store.dispatch( "visitSymptoms_add", params );
         this.modalAddVisible = false;
 
-        await this.$store.dispatch("visitSymptoms_fetchAll", this.visitId);
+        await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
 
 
-      } catch (e) {
-        errorMessageBox("Failed to add clinical detail");
+      } catch ( e ) {
+        errorMessageBox( "Failed to add clinical detail" );
       }
 
     },
@@ -221,18 +226,18 @@ export default {
 
       try {
 
-        await this.$store.dispatch("visitSymptoms_delete", this.symptomToDelete.id);
+        await this.$store.dispatch( "visitSymptoms_delete", this.symptomToDelete.id );
         this.modalDeleteVisible = false;
 
-        await this.$store.dispatch("visitSymptoms_fetchAll", this.visitId);
+        await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
 
-      } catch (e) {
-        errorMessageBox("Failed to delete clinical detail");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete clinical detail" );
       }
 
     },
 
-    onShowDeleteModal(item) {
+    onShowDeleteModal( item ) {
       this.symptomToDelete = item;
       this.modalDeleteVisible = true;
 

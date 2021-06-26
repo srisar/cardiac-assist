@@ -21,16 +21,31 @@
         <div class="d-flex justify-content-between">
           <div>
             <button class="btn btn-success" @click="onUpdate()">Update</button>
-            <button class="btn btn-secondary">Print</button>
+            <router-link class="btn btn-secondary" :to="'/referral-letters/print/' + selectedLetter.id">Print Preview</router-link>
+            <router-link class="btn btn-secondary" to="/referral-letters/">Back</router-link>
           </div>
           <div>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" @click="modalDeleteConfirmVisible = true">Delete</button>
           </div>
         </div>
 
       </div>
-
     </div><!-- card -->
+
+
+    <ModalWindow :visible="modalDeleteConfirmVisible" @close="modalDeleteConfirmVisible = false">
+      <template v-slot:title>Confirm delete</template>
+      <slot>
+
+        <h3 class="text-center">Are you sure to delete?</h3>
+        <div class="text-center">
+          <button class="btn btn-danger" @click="onDelete()">Delete</button>
+          <button class="btn btn-secondary" @click="modalDeleteConfirmVisible = false">Cancel</button>
+        </div>
+
+      </slot>
+    </ModalWindow>
+
   </div><!-- template -->
 
 </template>
@@ -38,13 +53,14 @@
 <script>
 import {errorMessageBox, successMessageBox} from "../../../../_common/bootbox_dialogs";
 import RichEditorV2 from "../../../../_common/components/RichEditorV2";
+import ModalWindow from "../../../../_common/components/ModalWindow";
 
 export default {
   name: "EditReferralLetter",
-  components: {RichEditorV2},
+  components: { ModalWindow, RichEditorV2 },
   data() {
     return {
-      //
+      modalDeleteConfirmVisible: false,
     }
   },
 
@@ -61,10 +77,10 @@ export default {
     try {
 
       const id = this.$route.params.id;
-      await this.$store.dispatch("visitLetters_fetch", id);
+      await this.$store.dispatch( "visitLetters_fetch", id );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch the referral letter");
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch the referral letter" );
     }
 
   },
@@ -81,14 +97,28 @@ export default {
           letter: this.selectedLetter.letter
         };
 
-        await this.$store.dispatch("visitLetters_update", params);
-        successMessageBox("Letter updated");
+        await this.$store.dispatch( "visitLetters_update", params );
+        successMessageBox( "Letter updated" );
 
-      } catch (e) {
-        errorMessageBox("Failed to update the letter");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update the letter" );
       }
 
-    },
+    }, /* update */
+
+    async onDelete() {
+
+      try {
+
+        await this.$store.dispatch( "visitLetters_delete", this.selectedLetter.id );
+
+        await this.$router.push( "/referral-letters" );
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete the letter" );
+      }
+
+    }, /* delete */
 
   },
 }

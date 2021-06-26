@@ -12,15 +12,15 @@ export const visitReferralLetters = {
     },
 
     getters: {
-        getLetterModels(state) {
+        getLetterModels( state ) {
             return state.letterModels;
         },
 
-        getVisitLetters(state) {
+        getVisitLetters( state ) {
             return state.visitLetters;
         },
 
-        getSelectedVisitLetter(state) {
+        getSelectedVisitLetter( state ) {
             return state.selectedVisitLetter;
         }
     },
@@ -29,50 +29,58 @@ export const visitReferralLetters = {
 
     actions: {
 
-        async visitLetters_fetchAllModels(context) {
+        async visitLetters_fetchAllModels( context ) {
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/referral-letters.php`);
+                const response = await $.get( `${ getSiteURL() }/api/get/referral-letters.php` );
                 context.state.letterModels = response.data;
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
         },
 
-        async visitLetters_fetchAll(context, visitId) {
+        async visitLetters_fetchAll( context, visitId ) {
             try {
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-referral-letters.php`, {visit_id: visitId});
+                const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-referral-letters.php`, { visit_id: visitId } );
                 context.state.visitLetters = response.data;
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
         },
 
-        async visitLetters_fetch(context, id) {
+        async visitLetters_fetch( context, id ) {
             try {
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-referral-letters.php`, {id: id});
+                const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-referral-letters.php`, { id: id } );
                 context.state.selectedVisitLetter = response.data;
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
         },
 
-        async visitLetters_add(context, params) {
+        async visitLetters_add( context, params ) {
             try {
-                await $.post(`${getSiteURL()}/api/save/visit/visit-referral-letter.php`, params);
-            } catch (e) {
+                await $.post( `${ getSiteURL() }/api/save/visit/visit-referral-letter.php`, params );
+            } catch ( e ) {
                 throw e;
             }
         },
 
-        async visitLetters_update(context, params){
+        async visitLetters_update( context, params ) {
             try {
-                await $.post(`${getSiteURL()}/api/update/visit/visit-referral-letter.php`, params);
-            } catch (e) {
+                await $.post( `${ getSiteURL() }/api/update/visit/visit-referral-letter.php`, params );
+            } catch ( e ) {
                 throw e;
             }
-        }
+        },
+
+        async visitLetters_delete( context, id ) {
+            try {
+                await $.post( `${ getSiteURL() }/api/delete/visit/visit-referral-letter.php`, { id: id } );
+            } catch ( e ) {
+                throw e;
+            }
+        },
 
 
     }

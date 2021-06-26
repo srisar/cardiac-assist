@@ -5,13 +5,15 @@
     <div class="card shadow shadow-sm">
       <div class="card-header d-flex justify-content-between">
         <div>Problems List</div>
-        <div>
-          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
-        </div>
-
       </div><!-- card-header -->
 
       <div class="card-body">
+
+        <div class="mb-3">
+          <button class="btn btn-sm btn-outline-primary" @click="modalAddVisible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add new
+          </button>
+        </div>
 
 
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
@@ -22,7 +24,9 @@
               <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
             </td>
             <td class="text-center" style="width: 20px">
-              <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+              <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+              </button>
             </td>
           </tr>
           </tbody>

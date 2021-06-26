@@ -56,7 +56,7 @@ export default {
     },
 
     prescription() {
-      return this.$store.getters.getVisitPrescriptions[0];
+      return this.$store.getters.getVisitPrescriptions[ 0 ];
     }
 
   },
@@ -67,10 +67,10 @@ export default {
 
       const visitId = this.$store.getters.getVisitId;
 
-      await this.$store.dispatch("prescriptions_fetchAll", visitId);
+      await this.$store.dispatch( "prescriptions_fetchAll", visitId );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch prescription details");
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch prescription details" );
     }
 
   },
@@ -83,5 +83,25 @@ export default {
 </script>
 
 <style scoped>
+
+@media print {
+
+  .paper {
+    font-size: 14pt !important;
+    border: none;
+    /*width: 200mm !important;*/
+  }
+
+
+  .page-break {
+    clear: both;
+    break-after: page;
+  }
+
+  .section, table {
+    break-inside: avoid;
+  }
+
+}
 
 </style>

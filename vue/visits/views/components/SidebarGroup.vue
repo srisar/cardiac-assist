@@ -3,16 +3,18 @@
   <div class="d-print-none sticky-top" style="top: 20px">
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header">Basics</div>
+      <div class="card-header"><img src="/assets/images/icon-basics.svg" class="icon-24" alt="icon"> Basics</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <router-link to="/" class="">Visit Details</router-link>
+          <router-link to="/" class="">
+            Visit Details
+          </router-link>
         </li>
       </ul>
     </div><!-- card -->
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header">Diagnoses</div>
+      <div class="card-header"><img src="/assets/images/icon-diagnoses.svg" class="icon-24" alt="icon"> Diagnoses</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <router-link to="/diagnoses#visit-symptoms" class="">Clinical details</router-link>
@@ -34,7 +36,7 @@
 
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header">Special Investigations</div>
+      <div class="card-header"><img src="/assets/images/icon-special-investigations.svg" class="icon-24" alt="icon"> Investigations</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <router-link to="/special/ecg" class="">Electrocardiogram</router-link>
@@ -55,7 +57,7 @@
     </div><!-- card -->
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header">Interventions</div>
+      <div class="card-header"><img src="/assets/images/icon-interventions.svg" class="icon-24" alt="icon"> Interventions</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <router-link to="/prescriptions" class="">Prescriptions</router-link>
@@ -78,7 +80,7 @@
     </div><!-- card -->
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header">Reports</div>
+      <div class="card-header"><img src="/assets/images/icon-reports.svg" class="icon-24" alt="icon"> Reports</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <router-link to="/reports" class="">Generate reports</router-link>

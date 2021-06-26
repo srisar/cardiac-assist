@@ -197,10 +197,10 @@ export default {
 
 
     patientAge() {
-      if (!_.isEmpty(this.patient.dob)) {
+      if ( !_.isEmpty( this.patient.dob ) ) {
         const today = moment();
-        const diff = moment.duration(today.diff(moment(this.patient.dob)));
-        return Math.round(diff.asYears());
+        const diff = moment.duration( today.diff( moment( this.patient.dob ) ) );
+        return Math.round( diff.asYears() );
       }
       return "";
     },
@@ -251,13 +251,13 @@ export default {
 
   filters: {
 
-    boolean(value) {
-      if (value) return "Yes";
+    boolean( value ) {
+      if ( value ) return "Yes";
       return "No";
     },
 
-    filterSmoking(value) {
-      switch (value) {
+    filterSmoking( value ) {
+      switch ( value ) {
         case "NO":
           return "No";
         case "SMOKING":
@@ -269,8 +269,8 @@ export default {
       }
     },
 
-    filterFamilyHistory(value) {
-      switch (value) {
+    filterFamilyHistory( value ) {
+      switch ( value ) {
         case "Y":
           return "Yes";
         case "N" :
@@ -287,19 +287,19 @@ export default {
 
       const visitId = this.$store.getters.getVisitId;
 
-      await this.$store.dispatch("visitSymptoms_fetchAll", visitId);
-      await this.$store.dispatch("diffDiagnoses_fetchAll", visitId);
-      await this.$store.dispatch("visitInvestigations_fetchAll", visitId);
-      await this.$store.dispatch("diagnoses_fetchAll", visitId);
-      await this.$store.dispatch("visitProblems_fetchAll", visitId);
-      await this.$store.dispatch("visitLipids_fetchAll", visitId);
-      await this.$store.dispatch("visitECG_fetch", visitId);
+      await this.$store.dispatch( "visitSymptoms_fetchAll", visitId );
+      await this.$store.dispatch( "diffDiagnoses_fetchAll", visitId );
+      await this.$store.dispatch( "visitInvestigations_fetchAll", visitId );
+      await this.$store.dispatch( "diagnoses_fetchAll", visitId );
+      await this.$store.dispatch( "visitProblems_fetchAll", visitId );
+      await this.$store.dispatch( "visitLipids_fetchAll", visitId );
+      await this.$store.dispatch( "visitECG_fetch", visitId );
 
 
       // window.print();
 
-    } catch (e) {
-      errorMessageBox("Failed to load required data");
+    } catch ( e ) {
+      errorMessageBox( "Failed to load required data" );
     }
 
   }
@@ -310,5 +310,28 @@ export default {
 </script>
 
 <style scoped>
+
+@media print {
+
+  .paper {
+    font-size: 12pt !important;
+    border: none;
+    /*width: 200mm !important;*/
+  }
+
+  .lead {
+    font-size: 14pt;
+  }
+
+  .page-break {
+    clear: both;
+    break-after: page;
+  }
+
+  .section {
+    break-inside: avoid;
+  }
+
+}
 
 </style>

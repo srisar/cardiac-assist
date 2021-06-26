@@ -5,12 +5,16 @@
     <div class="card shadow shadow-sm">
       <div class="card-header">
         Investigations
-        <div class="float-right">
-          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
-        </div>
       </div><!-- card-header -->
 
       <div class="card-body">
+
+        <div class="mb-3">
+          <button class="btn btn-sm btn-outline-primary" @click="modalAddVisible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add new
+          </button>
+        </div>
+
 
         <!-- investigations list -->
         <div id="visit-investigations-list" class="">
@@ -26,15 +30,14 @@
                 </p>
                 <div style="white-space: pre-line">{{ item.remarks }}</div>
 
-                <div class="my-2 d-flex justify-content-between">
-                  <div>
-                    <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)">Edit</button>
-                  </div>
+                <div class="my-2 text-right">
+                  <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
+                    <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
+                  </button>
 
-                  <div>
-                    <button class="btn btn-tiny btn-danger" @click="showDeleteConfirmModal(item)">Remove</button>
-                  </div>
-
+                  <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteConfirmModal(item)">
+                    <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                  </button>
                 </div>
 
               </td>
@@ -172,11 +175,11 @@ import ModalWindow from "../../../_common/components/ModalWindow";
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
 import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
 
-const _ = require("lodash");
+const _ = require( "lodash" );
 
 export default {
   name: "VisitInvestigations",
-  components: {ModalWindow, RichEditorV2},
+  components: { ModalWindow, RichEditorV2 },
 
   /*
   * DATA
@@ -222,7 +225,7 @@ export default {
     },
 
     isEmptyInvestigationsList() {
-      return _.isEmpty(this.visitInvestigationsList);
+      return _.isEmpty( this.visitInvestigationsList );
     },
 
 
@@ -238,16 +241,16 @@ export default {
       /*
        * Fetch investigations for the dropdown
        * */
-      await this.$store.dispatch("investigations_fetchAllAvailableInvestigation");
+      await this.$store.dispatch( "investigations_fetchAllAvailableInvestigation" );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch visit investigations");
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch visit investigations" );
     }
 
     try {
-      await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
-    } catch (e) {
-      errorMessageBox("Failed to fetch visit investigation details");
+      await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch visit investigation details" );
     }
 
   },
@@ -270,15 +273,15 @@ export default {
           remarks: this.investigationToAdd.remarks
         }
 
-        await this.$store.dispatch("visitInvestigations_add", params);
+        await this.$store.dispatch( "visitInvestigations_add", params );
 
-        await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+        await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
 
         this.modalAddVisible = false;
 
 
-      } catch (e) {
-        errorMessageBox("Failed to add investigation");
+      } catch ( e ) {
+        errorMessageBox( "Failed to add investigation" );
       }
 
     },
@@ -287,9 +290,9 @@ export default {
     /*
     * On show edit modal
     * */
-    onShowEditModal(item) {
+    onShowEditModal( item ) {
 
-      this.investigationToEdit = _.cloneDeep(item);
+      this.investigationToEdit = _.cloneDeep( item );
       this.modalEditVisible = true;
 
     },
@@ -297,7 +300,7 @@ export default {
     /*
     * On show delete confirm modal
     * */
-    showDeleteConfirmModal(item) {
+    showDeleteConfirmModal( item ) {
 
       this.investigationToEdit = item;
       this.modalDeleteVisible = true;
@@ -315,14 +318,14 @@ export default {
           remarks: this.investigationToEdit.remarks
         };
 
-        await this.$store.dispatch("visitInvestigations_update", params);
+        await this.$store.dispatch( "visitInvestigations_update", params );
         this.modalEditVisible = false;
-        successMessageBox("Investigation details updated");
+        successMessageBox( "Investigation details updated" );
 
-        await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+        await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
 
-      } catch (e) {
-        errorMessageBox("Failed to update investigation details");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update investigation details" );
       }
 
     },
@@ -334,13 +337,13 @@ export default {
 
       try {
 
-        await this.$store.dispatch("visitInvestigations_delete", this.investigationToEdit.id);
-        await this.$store.dispatch("visitInvestigations_fetchAll", this.visitId);
+        await this.$store.dispatch( "visitInvestigations_delete", this.investigationToEdit.id );
+        await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
 
         this.modalDeleteVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to remove selected investigation");
+      } catch ( e ) {
+        errorMessageBox( "Failed to remove selected investigation" );
       }
 
     }

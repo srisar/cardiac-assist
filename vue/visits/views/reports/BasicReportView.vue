@@ -3,17 +3,13 @@
   <div v-if="loaded">
 
     <div class="paper">
-      <h4 class="mb-3 font-weight-bold report-heading">Dr Arulnithy's Clinic Report</h4>
-      <PatientDetailsDiagnoses/>
+      <PatientDetailsDiagnoses class="section"/>
+
+      <PrescriptionDetails class="section"/>
     </div><!-- paper -->
 
-    <div class="page-break"></div>
 
-    <div class="paper">
-      <PrescriptionDetails/>
-    </div>
-
-    <div class="position-absolute d-print-none" style="top: 5px; right: 10px">
+    <div class="d-print-none">
       <button class="btn btn-primary" @click="openPrintDialog()">Print</button>
     </div>
 
@@ -28,7 +24,7 @@ import PrescriptionDetails from "./basic_report_sections/PrescriptionDetails";
 
 export default {
   name: "BasicReportView",
-  components: {PrescriptionDetails, PatientDetailsDiagnoses},
+  components: { PrescriptionDetails, PatientDetailsDiagnoses },
   data() {
     return {
       //
@@ -67,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 
 .paper {
@@ -96,13 +92,13 @@ export default {
 
 
   .paper {
-    font-size: 12pt !important;
+    font-size: 14pt !important;
     border: none;
-    width: 200mm !important;
+    /*width: 200mm !important;*/
   }
 
   .lead {
-    font-size: 14pt;
+    font-size: 16pt;
   }
 
   .page-break {
@@ -112,17 +108,6 @@ export default {
 
   .section {
     break-inside: avoid;
-  }
-
-
-  .page-footer:after {
-    counter-increment: page;
-    content: "Page " counter(page);
-    position: absolute;
-    right: 5mm;
-    bottom: 5mm;
-    white-space: nowrap;
-    z-index: 20;
   }
 
 }

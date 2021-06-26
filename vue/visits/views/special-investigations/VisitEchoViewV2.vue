@@ -170,7 +170,7 @@
 
             <div class="form-row" v-if="visitEcho.is_left_atrium_dilated">
               <div class="col-3 mb-2">
-                LA Systolic Diameter (mm)
+                LA Systolic Diameter <br> (mm)
                 <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_la_systolic_diameter">
               </div>
               <div class="col-3 mb-2">

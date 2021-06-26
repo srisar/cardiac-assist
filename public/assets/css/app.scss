@@ -42,7 +42,7 @@ pre {
 .btn-tiny {
   padding: .05rem .25rem;
   font-size: .675rem;
-  line-height: 1.5;
+  line-height: 1rem;
   border-radius: .2rem;
 
 }
@@ -117,4 +117,14 @@ select {
 
 .dropdown-menu {
   z-index: 2000;
+}
+
+
+.icon-24 {
+  height: 24px;
+}
+
+
+.icon-16 {
+  height: 16px;
 }

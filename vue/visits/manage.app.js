@@ -21,6 +21,7 @@ import EditReferralLetter from "./views/intervention/referral-letters/EditReferr
 import ReportView from "./views/ReportView";
 import BasicReportView from "./views/reports/BasicReportView";
 import VisitEchoViewV2 from "./views/special-investigations/VisitEchoViewV2";
+import PrintReferralLetter from "./views/intervention/referral-letters/PrintReferralLetter";
 
 
 Vue.use( Vuex )
@@ -51,6 +52,7 @@ const routes = [
     { path: "/other-remarks", component: OtherRemarksView },
     { path: "/referral-letters", component: ReferralLettersView },
     { path: "/referral-letters/edit/:id", component: EditReferralLetter },
+    { path: "/referral-letters/print/:id", component: PrintReferralLetter },
 
     { path: "/reports", component: ReportView },
     { path: "/reports/basic", component: BasicReportView },

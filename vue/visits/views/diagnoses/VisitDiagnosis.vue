@@ -5,13 +5,15 @@
     <div class="card shadow shadow-sm">
       <div class="card-header d-flex justify-content-between">
         <div>Diagnoses</div>
-        <div>
-          <button class="btn btn-tiny btn-success" @click="modalAddVisible = true">Add</button>
-        </div>
       </div><!-- card-header -->
 
       <div class="card-body">
 
+        <div class="mb-3">
+          <button class="btn btn-sm btn-outline-primary" @click="modalAddVisible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add new
+          </button>
+        </div>
 
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
 
@@ -25,15 +27,14 @@
               <div style="white-space: pre-line">{{ item.remarks }}</div>
 
 
-              <div class="my-2 d-flex justify-content-between">
-                <div>
-                  <button class="btn btn-tiny btn-primary" @click="onShowEditModal(item)">Edit</button>
-                </div>
+              <div class="my-2 text-right">
+                <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
+                  <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
+                </button>
 
-                <div>
-                  <button class="btn btn-tiny btn-danger" @click="onShowDeleteConfirmModal(item)">Remove</button>
-                </div>
-
+                <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteConfirmModal(item)">
+                  <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                </button>
               </div>
 
             </td>
@@ -162,11 +163,11 @@
 import ModalWindow from "../../../_common/components/ModalWindow";
 import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
-const _ = require('lodash');
+const _ = require( 'lodash' );
 
 export default {
   name: "VisitDiagnosis",
-  components: {ModalWindow},
+  components: { ModalWindow },
 
   data() {
     return {
@@ -217,11 +218,11 @@ export default {
 
     try {
 
-      await this.$store.dispatch("diffDiagnoses_fetchAllDiseases");
-      await this.$store.dispatch("diagnoses_fetchAll", this.visitId);
+      await this.$store.dispatch( "diffDiagnoses_fetchAllDiseases" );
+      await this.$store.dispatch( "diagnoses_fetchAll", this.visitId );
 
-    } catch (e) {
-      errorMessageBox("Failed to load diagnoses");
+    } catch ( e ) {
+      errorMessageBox( "Failed to load diagnoses" );
     }
 
   },
@@ -232,9 +233,9 @@ export default {
 
     async fetchAllVisitDiagnoses() {
       try {
-        await this.$store.dispatch("diagnoses_fetchAll", this.visitId);
-      } catch (e) {
-        errorMessageBox("Failed to fetch diagnoses");
+        await this.$store.dispatch( "diagnoses_fetchAll", this.visitId );
+      } catch ( e ) {
+        errorMessageBox( "Failed to fetch diagnoses" );
       }
 
     },
@@ -252,11 +253,11 @@ export default {
           remarks: this.visitDiagnosisToAdd.remarks
         };
 
-        await this.$store.dispatch("diagnoses_add", params);
+        await this.$store.dispatch( "diagnoses_add", params );
         this.modalAddVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to add diagnosis details");
+      } catch ( e ) {
+        errorMessageBox( "Failed to add diagnosis details" );
       }
 
       await this.fetchAllVisitDiagnoses();
@@ -274,11 +275,11 @@ export default {
           remarks: this.visitDiagnosisToEdit.remarks
         }
 
-        await this.$store.dispatch("diagnoses_update", params);
+        await this.$store.dispatch( "diagnoses_update", params );
         this.modalEditVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to update diagnosis");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update diagnosis" );
       }
 
       await this.fetchAllVisitDiagnoses();
@@ -291,11 +292,11 @@ export default {
 
       try {
 
-        await this.$store.dispatch("diagnoses_delete", this.visitDiagnosisToEdit.id);
+        await this.$store.dispatch( "diagnoses_delete", this.visitDiagnosisToEdit.id );
         this.modalDeleteVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to delete diagnosis");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete diagnosis" );
       }
 
       await this.fetchAllVisitDiagnoses();
@@ -303,12 +304,12 @@ export default {
     },
 
 
-    onShowEditModal(item) {
-      this.visitDiagnosisToEdit = _.cloneDeep(item);
+    onShowEditModal( item ) {
+      this.visitDiagnosisToEdit = _.cloneDeep( item );
       this.modalEditVisible = true;
     },
 
-    onShowDeleteConfirmModal(item) {
+    onShowDeleteConfirmModal( item ) {
 
       this.visitDiagnosisToEdit = item;
       this.modalDeleteVisible = true;
