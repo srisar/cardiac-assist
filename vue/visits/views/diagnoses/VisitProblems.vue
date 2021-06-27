@@ -7,7 +7,7 @@
         <div>Problems List</div>
       </div><!-- card-header -->
 
-      <div class="card-body">
+      <div class="card-body" v-if="loaded">
 
         <div class="mb-3">
           <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
@@ -19,14 +19,14 @@
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
 
           <tbody>
-          <tr v-for="item in visitProblemsList">
+          <tr v-for="item in visitProblemsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
             <td>
-              <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
-            </td>
-            <td class="text-center" style="width: 20px">
-              <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+
+              <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
                 <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
               </button>
+
+              <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
             </td>
           </tr>
           </tbody>
@@ -37,6 +37,10 @@
         </div>
 
       </div><!-- card-body -->
+
+      <div class="card-body" v-else>
+        <TheLoading/>
+      </div>
 
     </div><!-- card -->
 
@@ -101,13 +105,16 @@
 <script>
 import ModalWindow from "../../../_common/components/ModalWindow";
 import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import TheLoading from "../../../_common/components/TheLoading";
 
 export default {
   name: "VisitProblems",
-  components: {ModalWindow},
+  components: { TheLoading, ModalWindow },
 
   data() {
     return {
+
+      loaded: false,
 
       modalAddVisible: false,
       modalDeleteVisible: false,
@@ -121,9 +128,11 @@ export default {
         problem: ""
       },
 
-      newProblemToSave: ""
+      newProblemToSave: "",
 
-    }
+      hoverItemId: null,
+
+    };
   },
 
   computed: {
@@ -150,11 +159,13 @@ export default {
 
     try {
 
-      await this.$store.dispatch("visitProblems_fetchAll", this.visitId);
-      await this.$store.dispatch("visitProblems_fetchAllProblems");
+      await this.$store.dispatch( "visitProblems_fetchAll", this.visitId );
+      await this.$store.dispatch( "visitProblems_fetchAllProblems" );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch visit problems");
+      this.loaded = true;
+
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch visit problems" );
     }
 
   },
@@ -172,38 +183,38 @@ export default {
           problem_id: this.problemToAdd.id,
         };
 
-        await this.$store.dispatch("visitProblems_add", params);
+        await this.$store.dispatch( "visitProblems_add", params );
         this.modalAddVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to add clinical detail");
+      } catch ( e ) {
+        errorMessageBox( "Failed to add clinical detail" );
       }
 
       try {
-        await this.$store.dispatch("visitProblems_fetchAll", this.visitId);
-      } catch (e) {
-        errorMessageBox("Failed to fetch visit problems");
+        await this.$store.dispatch( "visitProblems_fetchAll", this.visitId );
+      } catch ( e ) {
+        errorMessageBox( "Failed to fetch visit problems" );
       }
 
     }, /* on add */
 
 
-    async onDelete(item) {
+    async onDelete( item ) {
 
       try {
 
-        await this.$store.dispatch("visitProblems_delete", item.id);
+        await this.$store.dispatch( "visitProblems_delete", item.id );
         this.modalDeleteVisible = false;
 
-        await this.$store.dispatch("visitProblems_fetchAll", this.visitId);
+        await this.$store.dispatch( "visitProblems_fetchAll", this.visitId );
 
-      } catch (e) {
-        errorMessageBox("Failed to delete visit problem");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete visit problem" );
       }
     }, /* on delete */
 
 
-    onShowDeleteModal(item) {
+    onShowDeleteModal( item ) {
       this.symptomToDelete = item;
       this.modalDeleteVisible = true;
 
@@ -217,20 +228,20 @@ export default {
           problem: this.newProblemToSave
         };
 
-        await this.$store.dispatch("visitProblems_saveProblem", params);
+        await this.$store.dispatch( "visitProblems_saveProblem", params );
 
-        successMessageBox("New problem saved, please choose it from the list now.");
+        successMessageBox( "New problem saved, please choose it from the list now." );
 
         this.newProblemToSave = "";
 
-      } catch (e) {
-        errorMessageBox("Failed to save new problem");
+      } catch ( e ) {
+        errorMessageBox( "Failed to save new problem" );
       }
 
       try {
-        await this.$store.dispatch("visitProblems_fetchAllProblems");
-      } catch (e) {
-        errorMessageBox("Failed to fetch problems list");
+        await this.$store.dispatch( "visitProblems_fetchAllProblems" );
+      } catch ( e ) {
+        errorMessageBox( "Failed to fetch problems list" );
       }
 
     }, /* on save new problem */

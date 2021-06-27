@@ -7,7 +7,7 @@
         <div>Diagnoses</div>
       </div><!-- card-header -->
 
-      <div class="card-body">
+      <div class="card-body" v-if="loaded">
 
         <div class="mb-3">
           <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
@@ -46,6 +46,9 @@
         </div>
 
       </div><!-- card-body -->
+      <div class="card-body" v-else>
+        <TheLoading/>
+      </div>
 
     </div><!-- card -->
 
@@ -160,15 +163,18 @@
 
 import ModalWindow from "../../../_common/components/ModalWindow";
 import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import TheLoading from "../../../_common/components/TheLoading";
 
 const _ = require( 'lodash' );
 
 export default {
   name: "VisitDiagnosis",
-  components: { ModalWindow },
+  components: { TheLoading, ModalWindow },
 
   data() {
     return {
+
+      loaded: false,
 
       /* modal hooks */
       modalAddVisible: false,
@@ -221,6 +227,8 @@ export default {
 
       await this.$store.dispatch( "diffDiagnoses_fetchAllDiseases" );
       await this.$store.dispatch( "diagnoses_fetchAll", this.visitId );
+
+      this.loaded = true;
 
     } catch ( e ) {
       errorMessageBox( "Failed to load diagnoses" );

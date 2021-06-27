@@ -7,7 +7,7 @@
         Investigations
       </div><!-- card-header -->
 
-      <div class="card-body">
+      <div class="card-body" v-if="loaded">
 
         <div class="mb-3">
           <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
@@ -53,8 +53,12 @@
           </div>
 
         </div><!-- investigations list -->
-
       </div><!-- card-body -->
+
+      <div class="card-body" v-else>
+        <TheLoading/>
+      </div>
+
     </div><!-- card -->
 
 
@@ -176,18 +180,22 @@
 import ModalWindow from "../../../_common/components/ModalWindow";
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
 import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import TheLoading from "../../../_common/components/TheLoading";
 
 const _ = require( "lodash" );
 
 export default {
   name: "VisitInvestigations",
-  components: { ModalWindow, RichEditorV2 },
+  components: { TheLoading, ModalWindow, RichEditorV2 },
 
   /*
   * DATA
   * */
   data() {
     return {
+
+      loaded: false,
+
       modalAddVisible: false,
       modalEditVisible: false,
 
@@ -253,6 +261,9 @@ export default {
 
     try {
       await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
+
+      this.loaded = true;
+
     } catch ( e ) {
       errorMessageBox( "Failed to fetch visit investigation details" );
     }

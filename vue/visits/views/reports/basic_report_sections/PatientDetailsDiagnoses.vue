@@ -2,177 +2,184 @@
 
   <div>
 
-    <!-- section: basic -->
-    <div id="section-basic">
-      <table class="table table-sm table-bordered">
-        <!-- basic patient details -->
-        <tr>
-          <td colspan="4">
-            <div contenteditable="true" class="font-weight-bold">#{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }} ({{
-                patient.gender
-              }})
-            </div>
-          </td>
+    <div v-if="loaded">
+      <!-- section: basic -->
+      <div id="section-basic">
+        <table class="table table-sm table-bordered">
+          <!-- basic patient details -->
+          <tr>
+            <td colspan="4">
+              <div contenteditable="true" class="font-weight-bold">#{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }} ({{
+                  patient.gender
+                }})
+              </div>
+            </td>
 
-          <td>
-            <div contenteditable="true">{{ patient.dob }} ({{ patientAge }})</div>
-          </td>
-        </tr>
+            <td>
+              <div contenteditable="true">{{ patient.dob }} ({{ patientAge }})</div>
+            </td>
+          </tr>
 
-        <!-- basic visit details -->
-        <tr>
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">H:</span> {{ visit.height }} m</div>
-          </td>
+          <!-- basic visit details -->
+          <tr>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">H:</span> {{ visit.height }} m</div>
+            </td>
 
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">W:</span> {{ visit.weight }} kg</div>
-          </td>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">W:</span> {{ visit.weight }} kg</div>
+            </td>
 
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">BMI</span> {{ visit.bmi }} kg/m²</div>
-          </td>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">BMI</span> {{ visit.bmi }} kg/m²</div>
+            </td>
 
-          <td style="width: 20%">
-            <div>{{ visit.dbp }} / {{ visit.sbp }} mmHg</div>
-          </td>
+            <td style="width: 20%">
+              <div>{{ visit.dbp }} / {{ visit.sbp }} mmHg</div>
+            </td>
 
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
-          </td>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
+            </td>
 
-        </tr>
+          </tr>
 
-        <tr>
-
-
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
-          </td>
-
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
-          </td>
-
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
-          </td>
-
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">SMO:</span> {{ visit.smoking | filterSmoking }}</div>
-          </td>
-
-          <td style="width: 20%">
-            <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
-          </td>
-
-        </tr>
-
-        <tr>
+          <tr>
 
 
-        </tr>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
+            </td>
 
-      </table>
-    </div>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
+            </td>
 
-    <!-- section: lipids details -->
-    <div id="section-lipids" v-if="! isLipidsEmpty">
-      <table class="table table-bordered table-sm">
-        <tbody>
-        <tr>
-          <td>
-            <div><span class="font-weight-bold">TC:</span> {{ lipids.tc }}</div>
-          </td>
-          <td>
-            <div><span class="font-weight-bold">LDL:</span> {{ lipids.ldl }}</div>
-          </td>
-          <td>
-            <div><span class="font-weight-bold">HDL:</span> {{ lipids.hdl }}</div>
-          </td>
-          <td>
-            <div><span class="font-weight-bold">TG:</span> {{ lipids.tg }}</div>
-          </td>
-          <td>
-            <div><span class="font-weight-bold">NHC:</span> {{ lipids.nhc }}</div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
+            </td>
+
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">SMO:</span> {{ visit.smoking | filterSmoking }}</div>
+            </td>
+
+            <td style="width: 20%">
+              <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
+            </td>
+
+          </tr>
+
+          <tr>
 
 
-    <!-- section: ecg -->
-    <div id="section-ecg" v-if="! isVisitECGEmpty">
-      <div class="lead text-uppercase font-weight-bold">ECG Details</div>
-      <table class="table table-bordered table-sm">
-        <tbody>
-        <tr>
-          <td>
-            <div v-html="visitECG.description" contenteditable="true"></div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+          </tr>
+
+        </table>
+      </div>
+
+      <!-- section: lipids details -->
+      <div id="section-lipids" v-if="! isLipidsEmpty">
+        <table class="table table-bordered table-sm">
+          <tbody>
+          <tr>
+            <td>
+              <div><span class="font-weight-bold">TC:</span> {{ lipids.tc }}</div>
+            </td>
+            <td>
+              <div><span class="font-weight-bold">LDL:</span> {{ lipids.ldl }}</div>
+            </td>
+            <td>
+              <div><span class="font-weight-bold">HDL:</span> {{ lipids.hdl }}</div>
+            </td>
+            <td>
+              <div><span class="font-weight-bold">TG:</span> {{ lipids.tg }}</div>
+            </td>
+            <td>
+              <div><span class="font-weight-bold">NHC:</span> {{ lipids.nhc }}</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
 
-    <!-- section: clinical details -->
-    <div id="section-clinical-details" class="section">
-      <div class="lead font-weight-bold text-uppercase">Clinical details</div>
-      <table class="table table-sm table-bordered">
-        <tbody>
-        <tr v-for="item in visitSymptoms">
-          <td contenteditable="true">{{ item.symptom.symptom_name }}</td>
-          <td contenteditable="true" class="text-right">{{ item.duration }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- section: ecg -->
+      <div id="section-ecg" v-if="! isVisitECGEmpty">
+        <div class="lead text-uppercase font-weight-bold">ECG Details</div>
+        <table class="table table-bordered table-sm">
+          <tbody>
+          <tr>
+            <td>
+              <div class="prescription-details" v-html="visitECG.description" contenteditable="true"></div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="lead font-weight-bold text-uppercase">Differential diagnoses</div>
-    <table class="table table-sm table-bordered">
-      <tbody>
-      <tr>
-        <td contenteditable="true">
-          <span class="mr-2" v-for="item in diffDiagnoses">{{ item.disease.disease }} / </span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
 
-    <!-- section: investigations -->
-    <div id="section-investigations" class="section">
-      <div class="lead font-weight-bold text-uppercase">Investigations</div>
+      <!-- section: clinical details -->
+      <div id="section-clinical-details" class="section">
+        <div class="lead font-weight-bold text-uppercase">Clinical details</div>
+        <table class="table table-sm table-bordered">
+          <tbody>
+          <tr v-for="item in visitSymptoms">
+            <td contenteditable="true">{{ item.symptom.symptom_name }}</td>
+            <td contenteditable="true" class="text-right">{{ item.duration }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lead font-weight-bold text-uppercase">Differential diagnoses</div>
       <table class="table table-sm table-bordered">
         <tbody>
-        <tr v-for="item in investigations">
+        <tr>
           <td contenteditable="true">
-            <div><span class="font-weight-bold">{{ item.investigation.investigation_name }}</span> - {{ item.remarks }}</div>
+            <span class="mr-2" v-for="item in diffDiagnoses">{{ item.disease.disease }} / </span>
           </td>
         </tr>
         </tbody>
       </table>
+
+      <!-- section: investigations -->
+      <div id="section-investigations" class="section">
+        <div class="lead font-weight-bold text-uppercase">Investigations</div>
+        <table class="table table-sm table-bordered">
+          <tbody>
+          <tr v-for="item in investigations">
+            <td contenteditable="true">
+              <div><span class="font-weight-bold">{{ item.investigation.investigation_name }}</span> - {{ item.remarks }}</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- section: visit problems -->
+      <div id="section-problems" class="section">
+        <div class="lead font-weight-bold text-uppercase">Problems + Diagnoses</div>
+        <table class="table table-sm table-bordered">
+          <tbody>
+          <tr v-for="item in diagnoses">
+            <td>
+              <div contenteditable="true">{{ item.disease.disease }}</div>
+            </td>
+          </tr>
+          <tr v-for="item in problems">
+            <td>
+              <div contenteditable="true">{{ item.problem.problem }}</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- section: visit problems -->
-    <div id="section-problems" class="section">
-      <div class="lead font-weight-bold text-uppercase">Problems + Diagnoses</div>
-      <table class="table table-sm table-bordered">
-        <tbody>
-        <tr v-for="item in diagnoses">
-          <td>
-            <div contenteditable="true">{{ item.disease.disease }}</div>
-          </td>
-        </tr>
-        <tr v-for="item in problems">
-          <td>
-            <div contenteditable="true">{{ item.problem.problem }}</div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div v-else>
+      <TheLoading/>
     </div>
+
 
   </div><!-- template -->
 
@@ -181,9 +188,16 @@
 
 <script>
 import {errorMessageBox} from "../../../../_common/bootbox_dialogs";
+import TheLoading from "../../../../_common/components/TheLoading";
 
 export default {
   name: "PatientDetailsDiagnoses",
+  components: { TheLoading },
+  data() {
+    return {
+      loaded: false,
+    }
+  },
 
   computed: {
 
@@ -295,8 +309,7 @@ export default {
       await this.$store.dispatch( "visitLipids_fetchAll", visitId );
       await this.$store.dispatch( "visitECG_fetch", visitId );
 
-
-      // window.print();
+      this.loaded = true;
 
     } catch ( e ) {
       errorMessageBox( "Failed to load required data" );
@@ -310,6 +323,10 @@ export default {
 </script>
 
 <style scoped>
+
+.prescription-details >>> p {
+  margin-bottom: 0 !important;
+}
 
 @media print {
 

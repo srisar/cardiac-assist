@@ -9,7 +9,7 @@
     </div><!-- paper -->
 
 
-    <div class="d-print-none">
+    <div class="d-print-none text-center">
       <button class="btn btn-primary" @click="openPrintDialog()">Print</button>
     </div>
 

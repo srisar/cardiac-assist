@@ -9,7 +9,7 @@
 
       </div><!-- card-header -->
 
-      <div class="card-body">
+      <div class="card-body" v-if="loaded">
 
         <div class="mb-3">
           <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
@@ -22,20 +22,20 @@
           <tr>
             <th>Symptom</th>
             <th style="width: 50px" class="text-center">Duration</th>
-            <th style="width: 30px" class="text-center"></th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="item in visitSymptomsList">
+          <tr v-for="item in visitSymptomsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
             <td>
+
+              <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onShowDeleteModal(item)">
+                <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+              </button>
+
               <a :href="'/app/symptoms/manage.php#/edit/' + item.symptom.id" target="_blank">{{ item.symptom.symptom_name }}</a>
             </td>
             <td class="text-center">{{ item.duration }}</td>
-            <td class="text-center">
-              <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteModal(item)">
-                <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
-              </button>
-            </td>
+
           </tr>
           </tbody>
         </table>
@@ -45,6 +45,10 @@
         </div>
 
       </div><!-- card-body -->
+
+      <div v-else class="card-body">
+        <TheLoading/>
+      </div>
 
     </div><!-- card -->
 
@@ -126,13 +130,14 @@
 
 import ModalWindow from "../../../_common/components/ModalWindow";
 import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import TheLoading from "../../../_common/components/TheLoading";
 
 
 const _ = require( 'lodash' );
 
 export default {
   name: "VisitSymptoms",
-  components: { ModalWindow },
+  components: { TheLoading, ModalWindow },
 
   /*
   *
@@ -140,6 +145,8 @@ export default {
   * */
   data() {
     return {
+
+      loaded: false,
 
       modalAddVisible: false,
       modalDeleteVisible: false,
@@ -157,6 +164,8 @@ export default {
         duration: "",
         symptom: {}
       },
+
+      hoverItemId: null,
 
     }
   },
@@ -188,6 +197,8 @@ export default {
 
       await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
       await this.$store.dispatch( "visitSymptoms_fetchAllSymptoms" );
+
+      this.loaded = true;
 
     } catch ( e ) {
       errorMessageBox( "Failed to fetch clinical details" );

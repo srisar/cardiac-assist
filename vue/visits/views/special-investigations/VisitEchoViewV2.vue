@@ -17,20 +17,20 @@
             <div class="form-row">
 
               <div class="col-3 mb-2">
-                IVS Diastolic Thickness (mm)
+                IVS Diastolic Thickness <br> (mm)
                 <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_ivs_diastolic_thickness">
               </div>
               <div class="col-3 mb-2">
-                LVID Diastole (mmHg)
+                LVID Diastole <br> (mmHg)
                 <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_lvid_diastole">
               </div>
               <div class="col-3 mb-2">
-                PW Diastolic Thickness (mm)
+                PW Diastolic Thickness <br> (mm)
                 <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_pw_diastolic_thickness">
               </div>
 
               <div class="col-3 mb-2">
-                LVEF (%)
+                LVEF <br> (%)
                 <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_lvef">
               </div>
 
