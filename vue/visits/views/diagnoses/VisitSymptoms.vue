@@ -26,13 +26,15 @@
           </thead>
           <tbody>
           <tr v-for="item in visitSymptomsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
-            <td>
-
-              <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onShowDeleteModal(item)">
-                <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
-              </button>
-
+            <td class="position-relative align-middle">
               <a :href="'/app/symptoms/manage.php#/edit/' + item.symptom.id" target="_blank">{{ item.symptom.symptom_name }}</a>
+
+              <div class="position-absolute hover-group rounded">
+                <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onShowDeleteModal(item)">
+                  <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                </button>
+              </div>
+
             </td>
             <td class="text-center">{{ item.duration }}</td>
 
@@ -260,5 +262,9 @@ export default {
 </script>
 
 <style scoped>
+
+.hover-group {
+  top: 5px;
+}
 
 </style>

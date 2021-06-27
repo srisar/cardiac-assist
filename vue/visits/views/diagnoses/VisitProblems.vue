@@ -20,13 +20,15 @@
 
           <tbody>
           <tr v-for="item in visitProblemsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
-            <td>
-
-              <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
-                <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
-              </button>
-
+            <td class="position-relative">
               <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
+
+              <div class="position-absolute rounded hover-group">
+                <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
+                  <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                </button>
+              </div>
+
             </td>
           </tr>
           </tbody>
@@ -254,5 +256,9 @@ export default {
 </script>
 
 <style scoped>
+
+.hover-group {
+  top: 5px;
+}
 
 </style>

@@ -23,13 +23,13 @@
               @mouseover="showHoverItemsById = item.id" @mouseout="showHoverItemsById = null">
 
 
-            <td>
+            <td class="position-relative">
 
               <p class="font-weight-bold"><a href="#">{{ item.disease.disease }}</a> ({{ item.disease.disease_code }})</p>
               <div style="white-space: pre-line">{{ item.remarks }}</div>
 
 
-              <div class="mt-2 text-right" v-show="showHoverItemsById === item.id">
+              <div class="mt-2 position-absolute hover-group p-1 rounded" v-show="showHoverItemsById === item.id">
                 <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
                   <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
                   Edit
@@ -335,5 +335,6 @@ export default {
 </script>
 
 <style scoped>
+
 
 </style>
