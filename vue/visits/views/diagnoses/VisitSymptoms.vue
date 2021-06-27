@@ -32,6 +32,7 @@
               <div class="position-absolute hover-group rounded">
                 <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onShowDeleteModal(item)">
                   <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                  Delete
                 </button>
               </div>
 

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="d-print-none">
+  <div class="d-print-none sticky-top" style="top: 10px">
 
     <div class="card mb-3 shadow shadow-sm">
       <div class="card-header"><img src="/assets/images/icon-basics.svg" class="icon-24" alt="icon"> Basics</div>
