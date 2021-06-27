@@ -48,19 +48,28 @@
           </thead>
 
           <tbody>
-          <tr v-for="item in selectedPrescription.prescription_items" :key="item.id">
+          <tr v-for="item in selectedPrescription.prescription_items" :key="item.id"
+              @mouseover="showDeleteItemById = item.id" @mouseout="showDeleteItemById = null">
 
-            <td class="align-middle" @mouseover="showDeleteItemById = item.id" @mouseout="showDeleteItemById = null">
-              <button class="btn btn-sm btn-outline-danger" @click="onDeletePrescriptionItem(item)" v-show="showDeleteItemById === item.id">
+            <td class="align-middle">
+              <button class="btn btn-tiny btn-outline-danger" @click="onDeletePrescriptionItem(item)" v-show="showDeleteItemById === item.id">
                 <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
               </button>
               {{ item.drug.drug_name }}
             </td>
 
-            <td class="text-right"><input type="text" class="form-control form-control-sm text-right" v-model.trim="item.dose"></td>
-            <td class="text-right"><input type="text" class="form-control form-control-sm text-right" v-model.trim="item.frequency"></td>
-            <td class="text-right"><input type="text" class="form-control form-control-sm text-right" v-model.trim="item.duration"></td>
-            <td class="text-right"><input type="text" class="form-control form-control-sm" v-model.trim="item.remarks"></td>
+            <td class="text-right">
+              <input type="text" class="form-control form-control-sm text-right" v-model.trim="item.dose">
+            </td>
+            <td class="text-right">
+              <input type="text" class="form-control form-control-sm text-right" v-model.trim="item.frequency">
+            </td>
+            <td class="text-right">
+              <input type="text" class="form-control form-control-sm text-right" v-model.trim="item.duration">
+            </td>
+            <td class="text-right">
+              <input type="text" class="form-control form-control-sm" v-model.trim="item.remarks">
+            </td>
           </tr>
           </tbody>
 
@@ -130,7 +139,7 @@
           <tbody>
           <tr v-for="item in drugsSearchResult" :key="item.id">
             <td>
-              <button class="btn btn-tiny btn-outline-primary" @click="onAddToPrescription(item)">
+              <button class="btn btn-tiny btn-outline-dark" @click="onAddToPrescription(item)">
                 <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
                 Add
               </button>

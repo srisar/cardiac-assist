@@ -10,8 +10,8 @@
       <div class="card-body">
 
         <div class="mb-3">
-          <button class="btn btn-sm btn-outline-primary" @click="modalAddVisible = true">
-            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add new
+          <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
           </button>
         </div>
 

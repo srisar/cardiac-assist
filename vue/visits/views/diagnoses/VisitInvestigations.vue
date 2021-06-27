@@ -10,8 +10,8 @@
       <div class="card-body">
 
         <div class="mb-3">
-          <button class="btn btn-sm btn-outline-primary" @click="modalAddVisible = true">
-            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add new
+          <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
           </button>
         </div>
 
@@ -22,7 +22,8 @@
           <table class="table table-bordered table-hover table-sm" v-if="!isEmptyInvestigationsList">
 
             <tbody>
-            <tr v-for="item in visitInvestigationsList">
+            <tr v-for="item in visitInvestigationsList"
+                @mouseover="showHoverItemsById = item.id" @mouseout="showHoverItemsById = null">
 
               <td>
                 <p class="font-weight-bold">
@@ -30,13 +31,14 @@
                 </p>
                 <div style="white-space: pre-line">{{ item.remarks }}</div>
 
-                <div class="my-2 text-right">
+                <div class="mt-2 text-right" v-show="showHoverItemsById === item.id">
                   <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
-                    <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
+                    <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> Edit
                   </button>
 
-                  <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteConfirmModal(item)">
+                  <button class="btn btn-tiny btn-outline-danger" @click="showDeleteConfirmModal(item)">
                     <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                    Delete
                   </button>
                 </div>
 
@@ -202,7 +204,9 @@ export default {
         investigation: {},
         investigation_id: -1,
         remarks: "",
-      }
+      },
+
+      showHoverItemsById: null,
 
     }
   },
