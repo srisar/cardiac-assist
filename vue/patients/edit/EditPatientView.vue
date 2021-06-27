@@ -149,9 +149,7 @@
 
         <div class="col-12 col-lg-5 mb-3">
           <ListVisits class="mb-3"/>
-
           <ListAppointments class="mb-3"/>
-
         </div>
 
       </div><!-- row -->
@@ -169,20 +167,20 @@ import * as values from '../values';
 import ListVisits from "./components/ListVisits";
 import ListAppointments from "./components/ListAppointments";
 
-const _ = require('lodash');
+const _ = require( 'lodash' );
 
 export default {
-  name      : "EditPatientView",
+  name: "EditPatientView",
   components: { ListAppointments, DateField, ListVisits },
 
   data() {
     return {
 
-      patientId: document.getElementById("php_patient_id").value,
+      patientId: document.getElementById( "php_patient_id" ).value,
 
-      genders    : values.GENDERS,
-      jobs       : values.JOBS,
-      jobTypes   : values.JOB_TYPES,
+      genders: values.GENDERS,
+      jobs: values.JOBS,
+      jobTypes: values.JOB_TYPES,
       dsDivisions: values.DS_DIVISIONS
     }
   },
@@ -196,9 +194,9 @@ export default {
     },
 
     formValidated: function () {
-      if ( _.isEmpty(this.patient.first_name) ) return false;
-      if ( _.isEmpty(this.patient.last_name) ) return false;
-      return !_.isEmpty(this.patient.gender);
+      if ( _.isEmpty( this.patient.first_name ) ) return false;
+      if ( _.isEmpty( this.patient.last_name ) ) return false;
+      return !_.isEmpty( this.patient.gender );
     },
 
     calculatedAge: function () {
@@ -224,26 +222,26 @@ export default {
 
     fetchPatient: function () {
 
-      this.$store.dispatch('fetchPatient', this.patientId)
-          .then(r => {
+      this.$store.dispatch( 'fetchPatient', this.patientId )
+          .then( r => {
 
             /*
             * after fetching patient data, fetch visits data
             * */
-            this.$store.dispatch('fetchVisits')
-                .catch(e => {
-                  alert('Failed to get visits')
-                  console.log(e)
-                });
+            this.$store.dispatch( 'fetchVisits' )
+                .catch( e => {
+                  alert( 'Failed to get visits' )
+                  console.log( e )
+                } );
 
 
-            this.$store.dispatch('fetchAppointments')
-                .catch(e => {
-                  alert('failed to get appointments')
-                  console.log(e)
-                })
+            this.$store.dispatch( 'fetchAppointments' )
+                .catch( e => {
+                  alert( 'failed to get appointments' )
+                  console.log( e )
+                } )
 
-          })
+          } )
 
     },
 
@@ -252,22 +250,22 @@ export default {
 
       this.patient.age = this.calculatedAge;
 
-      this.$store.dispatch('updatePatient', this.patient)
-          .then(r => {
-            alert(r.message)
-          })
-          .catch(e => {
-            alert('Failed to update patient details')
-            console.log(e)
-          })
+      this.$store.dispatch( 'updatePatient', this.patient )
+          .then( r => {
+            alert( r.message )
+          } )
+          .catch( e => {
+            alert( 'Failed to update patient details' )
+            console.log( e )
+          } )
 
     },
 
 
     _calculateAge: function () {
       const today = moment()
-      const diff = moment.duration(today.diff(moment(this.patient.dob)))
-      return Math.round(diff.asYears())
+      const diff = moment.duration( today.diff( moment( this.patient.dob ) ) )
+      return Math.round( diff.asYears() )
     }
   },
   /* *** METHODS *** */

@@ -4173,63 +4173,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4258,19 +4201,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       drugSearchQuery: "",
       drugsSearchResult: [],
 
-      /* -- edit selected prescription item -- */
-      isEditPrescriptionItemModalVisible: false,
-      selectedPrescriptionItem: {
-        id: undefined,
-        prescription_id: undefined,
-        drug_id: undefined,
-        drug_name: undefined,
-        dose: undefined,
-        frequency: undefined,
-        duration: undefined,
-        remarks: undefined
-      },
-
       /* delete prescription */
       chkConfirmDeletePrescription: false,
 
@@ -4278,7 +4208,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       feedback: {
         message: "",
         type: _common_message_types__WEBPACK_IMPORTED_MODULE_5__.TYPE_SUCCESS
-      }
+      },
+      showDeleteItemById: null
     };
   },
   computed: {},
@@ -4434,25 +4365,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
 
     /*
-    * On open modal for editing selected drug
+    * On update prescription details
     * */
-    onOpenEditPrescriptionItem: function onOpenEditPrescriptionItem(item) {
-      this.selectedPrescriptionItem = {
-        id: item.id,
-        drug_id: item.drug_id,
-        drug_name: item.drug.drug_name,
-        dose: item.dose,
-        frequency: item.frequency,
-        duration: item.duration,
-        remarks: item.remarks
-      };
-      this.isEditPrescriptionItemModalVisible = true;
-    },
-
-    /*
-    * On update prescription item
-    * */
-    onUpdatePrescriptionItem: function onUpdatePrescriptionItem() {
+    onUpdatePrescription: function onUpdatePrescription() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
@@ -4463,43 +4378,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context5.prev = 0;
                 params = {
-                  id: _this5.selectedPrescriptionItem.id,
-                  dose: _this5.selectedPrescriptionItem.dose,
-                  frequency: _this5.selectedPrescriptionItem.frequency,
-                  duration: _this5.selectedPrescriptionItem.duration,
-                  remarks: _this5.selectedPrescriptionItem.remarks
-                };
+                  id: _this5.selectedPrescription.id,
+                  date: _this5.selectedPrescription.date,
+                  remarks: _this5.selectedPrescription.remarks,
+                  prescription_items: _this5.selectedPrescription.prescription_items
+                }; // console.log(params);
+
                 _context5.next = 4;
-                return _this5.$store.dispatch("prescriptions_updatePrescriptionItem", params);
+                return _this5.$store.dispatch("prescriptions_update", params);
 
               case 4:
-                _context5.next = 6;
-                return _this5.$store.dispatch("prescriptions_fetch", _this5.prescriptionId);
-
-              case 6:
-                _this5.selectedPrescription = _this5.$store.getters.getSelectedPrescription;
-                _this5.isEditPrescriptionItemModalVisible = false;
-                _context5.next = 13;
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.successMessageBox)("Prescription details updated");
+                _context5.next = 10;
                 break;
 
-              case 10:
-                _context5.prev = 10;
+              case 7:
+                _context5.prev = 7;
                 _context5.t0 = _context5["catch"](0);
-                alert("Failed to update");
+                alert("Failed to update prescription details");
 
-              case 13:
+              case 10:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 10]]);
+        }, _callee5, null, [[0, 7]]);
       }))();
     },
 
     /*
-    * On update prescription details
+    * On delete prescription
     * */
-    onUpdatePrescription: function onUpdatePrescription() {
+    onDeletePrescription: function onDeletePrescription() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
@@ -4510,36 +4420,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context6.prev = 0;
                 params = {
-                  id: _this6.selectedPrescription.id,
-                  date: _this6.selectedPrescription.date,
-                  remarks: _this6.selectedPrescription.remarks
+                  id: _this6.selectedPrescription.id
                 };
                 _context6.next = 4;
-                return _this6.$store.dispatch("prescriptions_update", params);
+                return _this6.$store.dispatch("prescriptions_delete", params);
 
               case 4:
-                _this6.feedback.message = "Details updated successfully";
-                _context6.next = 10;
+                _context6.next = 6;
+                return _this6.$router.push("/prescriptions");
+
+              case 6:
+                _context6.next = 11;
                 break;
 
-              case 7:
-                _context6.prev = 7;
+              case 8:
+                _context6.prev = 8;
                 _context6.t0 = _context6["catch"](0);
-                alert("Failed to update prescription details");
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)("Failed to delete the prescription");
 
-              case 10:
+              case 11:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 7]]);
+        }, _callee6, null, [[0, 8]]);
       }))();
     },
 
     /*
-    * On delete prescription
+    * On delete prescription item
     * */
-    onDeletePrescription: function onDeletePrescription() {
+    onDeletePrescriptionItem: function onDeletePrescriptionItem(prescription) {
       var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
@@ -4550,73 +4461,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context7.prev = 0;
                 params = {
-                  id: _this7.selectedPrescription.id
+                  id: prescription.id
                 };
                 _context7.next = 4;
-                return _this7.$store.dispatch("prescriptions_delete", params);
+                return _this7.$store.dispatch("prescriptions_deletePrescriptionItem", params);
 
               case 4:
                 _context7.next = 6;
-                return _this7.$router.push("/prescriptions");
+                return _this7.$store.dispatch("prescriptions_fetch", _this7.prescriptionId);
 
               case 6:
-                _context7.next = 11;
-                break;
-
-              case 8:
-                _context7.prev = 8;
-                _context7.t0 = _context7["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)("Failed to delete the prescription");
-
-              case 11:
-              case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7, null, [[0, 8]]);
-      }))();
-    },
-
-    /*
-    * On delete prescription item
-    * */
-    onDeletePrescriptionItem: function onDeletePrescriptionItem() {
-      var _this8 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var params;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                _context8.prev = 0;
-                params = {
-                  id: _this8.selectedPrescriptionItem.id
-                };
-                _context8.next = 4;
-                return _this8.$store.dispatch("prescriptions_deletePrescriptionItem", params);
-
-              case 4:
-                _context8.next = 6;
-                return _this8.$store.dispatch("prescriptions_fetch", _this8.prescriptionId);
-
-              case 6:
-                _this8.selectedPrescription = _this8.$store.getters.getSelectedPrescription;
-                _this8.isEditPrescriptionItemModalVisible = false;
-                _context8.next = 13;
+                _this7.selectedPrescription = _this7.$store.getters.getSelectedPrescription;
+                _this7.isEditPrescriptionItemModalVisible = false;
+                _context7.next = 13;
                 break;
 
               case 10:
-                _context8.prev = 10;
-                _context8.t0 = _context8["catch"](0);
+                _context7.prev = 10;
+                _context7.t0 = _context7["catch"](0);
                 (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)("Failed to delete prescription item");
 
               case 13:
               case "end":
-                return _context8.stop();
+                return _context7.stop();
             }
           }
-        }, _callee8, null, [[0, 10]]);
+        }, _callee7, null, [[0, 10]]);
       }))();
     }
   }
@@ -40068,28 +39938,182 @@ var render = function() {
                     item
                   ) {
                     return _c("tr", { key: item.id }, [
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.onOpenEditPrescriptionItem(item)
-                              }
+                      _c(
+                        "td",
+                        {
+                          staticClass: "align-middle",
+                          on: {
+                            mouseover: function($event) {
+                              _vm.showDeleteItemById = item.id
+                            },
+                            mouseout: function($event) {
+                              _vm.showDeleteItemById = null
                             }
-                          },
-                          [_vm._v(_vm._s(item.drug.drug_name))]
-                        )
+                          }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.showDeleteItemById === item.id,
+                                  expression: "showDeleteItemById === item.id"
+                                }
+                              ],
+                              staticClass: "btn btn-sm btn-outline-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.onDeletePrescriptionItem(item)
+                                }
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "icon-16",
+                                attrs: {
+                                  src: "/assets/images/actions/remove.svg",
+                                  alt: ""
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(item.drug.drug_name) +
+                              "\n          "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.trim",
+                              value: item.dose,
+                              expression: "item.dose",
+                              modifiers: { trim: true }
+                            }
+                          ],
+                          staticClass:
+                            "form-control form-control-sm text-right",
+                          attrs: { type: "text" },
+                          domProps: { value: item.dose },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(item, "dose", $event.target.value.trim())
+                            },
+                            blur: function($event) {
+                              return _vm.$forceUpdate()
+                            }
+                          }
+                        })
                       ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.dose))]),
+                      _c("td", { staticClass: "text-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.trim",
+                              value: item.frequency,
+                              expression: "item.frequency",
+                              modifiers: { trim: true }
+                            }
+                          ],
+                          staticClass:
+                            "form-control form-control-sm text-right",
+                          attrs: { type: "text" },
+                          domProps: { value: item.frequency },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                item,
+                                "frequency",
+                                $event.target.value.trim()
+                              )
+                            },
+                            blur: function($event) {
+                              return _vm.$forceUpdate()
+                            }
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.frequency))]),
+                      _c("td", { staticClass: "text-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.trim",
+                              value: item.duration,
+                              expression: "item.duration",
+                              modifiers: { trim: true }
+                            }
+                          ],
+                          staticClass:
+                            "form-control form-control-sm text-right",
+                          attrs: { type: "text" },
+                          domProps: { value: item.duration },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                item,
+                                "duration",
+                                $event.target.value.trim()
+                              )
+                            },
+                            blur: function($event) {
+                              return _vm.$forceUpdate()
+                            }
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.duration))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(item.remarks))])
+                      _c("td", { staticClass: "text-right" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.trim",
+                              value: item.remarks,
+                              expression: "item.remarks",
+                              modifiers: { trim: true }
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: { type: "text" },
+                          domProps: { value: item.remarks },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                item,
+                                "remarks",
+                                $event.target.value.trim()
+                              )
+                            },
+                            blur: function($event) {
+                              return _vm.$forceUpdate()
+                            }
+                          }
+                        })
+                      ])
                     ])
                   }),
                   0
@@ -40269,7 +40293,7 @@ var render = function() {
               ? _c("table", { staticClass: "table table-bordered table-sm" }, [
                   _c("thead", [
                     _c("tr", [
-                      _c("th", { staticStyle: { width: "30px" } }),
+                      _c("th", { staticStyle: { width: "65px" } }),
                       _vm._v(" "),
                       _c("th", [_vm._v("Drug")]),
                       _vm._v(" "),
@@ -40281,18 +40305,27 @@ var render = function() {
                     "tbody",
                     _vm._l(_vm.drugsSearchResult, function(item) {
                       return _c("tr", { key: item.id }, [
-                        _c("td", { staticClass: "clickable-td" }, [
+                        _c("td", [
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-tiny btn-primary",
+                              staticClass: "btn btn-tiny btn-outline-primary",
                               on: {
                                 click: function($event) {
                                   return _vm.onAddToPrescription(item)
                                 }
                               }
                             },
-                            [_vm._v("Add")]
+                            [
+                              _c("img", {
+                                staticClass: "icon-16",
+                                attrs: {
+                                  src: "/assets/images/actions/add.svg",
+                                  alt: ""
+                                }
+                              }),
+                              _vm._v("\n              Add\n            ")
+                            ]
                           )
                         ]),
                         _vm._v(" "),
@@ -40309,216 +40342,6 @@ var render = function() {
                     _vm._v("No results")
                   ])
                 ])
-          ])
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "ModalWindow",
-        {
-          attrs: { visible: _vm.isEditPrescriptionItemModalVisible },
-          on: {
-            close: function($event) {
-              _vm.isEditPrescriptionItemModalVisible = false
-            }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "title",
-              fn: function() {
-                return [
-                  _vm._v(
-                    "Editing " + _vm._s(_vm.selectedPrescriptionItem.drug_name)
-                  )
-                ]
-              },
-              proxy: true
-            }
-          ])
-        },
-        [
-          _vm._v(" "),
-          _vm._t("default", [
-            _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "col" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Drug")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text", readonly: "" },
-                    domProps: { value: _vm.selectedPrescriptionItem.drug_name }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "col" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Dose")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedPrescriptionItem.dose,
-                        expression: "selectedPrescriptionItem.dose"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.selectedPrescriptionItem.dose },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.selectedPrescriptionItem,
-                          "dose",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Frequency")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedPrescriptionItem.frequency,
-                        expression: "selectedPrescriptionItem.frequency"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.selectedPrescriptionItem.frequency },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.selectedPrescriptionItem,
-                          "frequency",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Duration")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedPrescriptionItem.duration,
-                        expression: "selectedPrescriptionItem.duration"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.selectedPrescriptionItem.duration },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.selectedPrescriptionItem,
-                          "duration",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "col" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Remarks")]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selectedPrescriptionItem.remarks,
-                        expression: "selectedPrescriptionItem.remarks"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { rows: "3" },
-                    domProps: { value: _vm.selectedPrescriptionItem.remarks },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.selectedPrescriptionItem,
-                          "remarks",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _c("div"),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-success",
-                    on: {
-                      click: function($event) {
-                        return _vm.onUpdatePrescriptionItem()
-                      }
-                    }
-                  },
-                  [_vm._v("Update")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-danger",
-                    on: {
-                      click: function($event) {
-                        return _vm.onDeletePrescriptionItem()
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ])
-            ])
           ])
         ],
         2
@@ -40542,15 +40365,27 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Drug")]),
+        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Drug")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Dose")]),
+        _c(
+          "th",
+          { staticClass: "text-right", staticStyle: { width: "100px" } },
+          [_vm._v("Dose")]
+        ),
         _vm._v(" "),
-        _c("th", [_vm._v("Frequency")]),
+        _c(
+          "th",
+          { staticClass: "text-right", staticStyle: { width: "130px" } },
+          [_vm._v("Frequency")]
+        ),
         _vm._v(" "),
-        _c("th", [_vm._v("Duration")]),
+        _c(
+          "th",
+          { staticClass: "text-right", staticStyle: { width: "100px" } },
+          [_vm._v("Duration")]
+        ),
         _vm._v(" "),
-        _c("th", [_vm._v("Remarks")])
+        _c("th", { staticClass: "text-right" }, [_vm._v("Remarks")])
       ])
     ])
   }

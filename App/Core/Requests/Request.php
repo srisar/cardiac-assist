@@ -38,12 +38,12 @@ class Request
      */
     /**
      * @param string $key
-     * @return string
+     * @return string|array|null
      */
-    private static function getParam(string $key): ?string
+    private static function getParam( string $key )
     {
-        if (isset($_REQUEST[$key])) {
-            return $_REQUEST[$key];
+        if ( isset( $_REQUEST[ $key ] ) ) {
+            return $_REQUEST[ $key ];
         }
         return null;
     }
@@ -53,13 +53,13 @@ class Request
      * @param string $key
      * @return int|null
      */
-    public static function getAsInteger(string $key): ?int
+    public static function getAsInteger( string $key ): ?int
     {
-        $data = self::getParam($key);
+        $data = self::getParam( $key );
 
-        if (!is_null($data)) {
-            if ($data == '0') return 0;
-            if (filter_var($data, FILTER_VALIDATE_INT)) {
+        if ( !is_null( $data ) ) {
+            if ( $data == '0' ) return 0;
+            if ( filter_var( $data, FILTER_VALIDATE_INT ) ) {
                 return (int)$data;
             }
         }
@@ -71,15 +71,15 @@ class Request
      * @param string $key
      * @return float|null
      */
-    public static function getAsFloat(string $key): ?float
+    public static function getAsFloat( string $key ): ?float
     {
-        $data = self::getParam($key);
+        $data = self::getParam( $key );
 
-        if (!is_null($data)) {
+        if ( !is_null( $data ) ) {
 
-            if ($data == '0') return 0;
+            if ( $data == '0' ) return 0;
 
-            return filter_var($data, FILTER_VALIDATE_FLOAT);
+            return filter_var( $data, FILTER_VALIDATE_FLOAT );
         }
         return null;
     }
@@ -89,11 +89,11 @@ class Request
      * @param string $key
      * @return string|null
      */
-    public static function getAsString(string $key): ?string
+    public static function getAsString( string $key ): ?string
     {
-        $data = self::getParam($key);
-        if (!is_null($data)) {
-            return filter_var($data, FILTER_SANITIZE_STRING);
+        $data = self::getParam( $key );
+        if ( !is_null( $data ) ) {
+            return filter_var( $data, FILTER_SANITIZE_STRING );
         }
         return null;
     }
@@ -102,9 +102,9 @@ class Request
      * @param string $key
      * @return string|null
      */
-    public static function getAsRawString(string $key): ?string
+    public static function getAsRawString( string $key ): ?string
     {
-        return self::getParam($key);
+        return self::getParam( $key );
     }
 
     /**
@@ -112,14 +112,20 @@ class Request
      * @return bool|null
      * @throws Exception
      */
-    public static function getAsBoolean(string $key): ?bool
+    public static function getAsBoolean( string $key ): ?bool
     {
-        $data = self::getParam($key);
-        if (!is_null($data)) {
-            return filter_var($data, FILTER_VALIDATE_BOOLEAN);
+        $data = self::getParam( $key );
+        if ( !is_null( $data ) ) {
+            return filter_var( $data, FILTER_VALIDATE_BOOLEAN );
         }
 
-        throw new Exception('Invalid boolean value');
+        throw new Exception( 'Invalid boolean value' );
+    }
+
+
+    public static function getAsArray( string $key )
+    {
+        return self::getParam( $key );
     }
 
 
@@ -127,25 +133,25 @@ class Request
     {
 
         // Allow from any origin
-        if (isset($_SERVER['HTTP_ORIGIN'])) {
+        if ( isset( $_SERVER['HTTP_ORIGIN'] ) ) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
             // you want to allow, and if so:
-            header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-            header('Access-Control-Allow-Credentials: true');
-            header('Access-Control-Max-Age: 86400');    // cache for 1 day
+            header( "Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}" );
+            header( 'Access-Control-Allow-Credentials: true' );
+            header( 'Access-Control-Max-Age: 86400' );    // cache for 1 day
         }
 
         // Access-Control headers are received during OPTIONS requests
-        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+        if ( $_SERVER['REQUEST_METHOD'] == 'OPTIONS' ) {
 
-            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+            if ( isset( $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] ) )
                 // may also be using PUT, PATCH, HEAD etc
-                header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+                header( "Access-Control-Allow-Methods: GET, POST, OPTIONS" );
 
-            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-                header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+            if ( isset( $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'] ) )
+                header( "Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}" );
 
-            exit(0);
+            exit( 0 );
         }
 
     }

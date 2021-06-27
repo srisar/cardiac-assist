@@ -7,13 +7,16 @@
 
         <div class="d-flex align-items-center justify-content-between">
           <div>Visits</div>
-          <button class="btn btn-tiny btn-primary" @click="onClickShowAddVisitModal">Add a visit</button>
+          <button class="btn btn-tiny btn-outline-dark" @click="modalAddVisit.visible = true">
+            <img src="/assets/images/actions/add.svg" alt="" class="icon-16">
+            Add a visit
+          </button>
         </div>
 
       </div>
       <div class="card-body">
 
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered" v-if="visitsList.length > 0">
           <thead>
           <tr>
             <th style="width: 100px">Date</th>
@@ -24,17 +27,19 @@
           <tbody>
           <tr v-for="(item) in visitsList">
             <td><a :href="createVisitLink(item)">{{ item.visit_date }}</a></td>
-            <td>{{ item.remarks }}</td>
+            <td style="white-space: pre-line">{{ item.remarks }}</td>
             <td class="text-center">{{ item.status }}</td>
           </tr>
           </tbody>
         </table>
 
+        <p v-else>There is no visit details. You can add one using the button above.</p>
+
       </div><!-- card-body -->
     </div><!-- card -->
 
     <!-- MODAL: add new visit -->
-    <ModalWindow id="modal-add-visit" :visible="modalAddVisit.visible" @modal-hiding="onHidingAddVisitModal">
+    <ModalWindow id="modal-add-visit" :visible="modalAddVisit.visible" @close="modalAddVisit.visible = false">
       <template v-slot:title>Add a visit for {{ fullName }}</template>
       <slot>
 
@@ -155,7 +160,7 @@
 import ModalWindow from "../../../_common/components/ModalWindow";
 import DateField from "../../../_common/components/DateField";
 
-const _ = require('lodash');
+const _ = require( 'lodash' );
 
 export default {
 
@@ -171,80 +176,95 @@ export default {
       },
 
       visitToAdd: {
-        visit_date: moment().format('YYYY-MM-DD'),
-        remarks   : "",
-        height    : 1,
-        weight    : 1,
-        sbp       : 0,
-        dsp       : 0,
-        dm        : false,
-        ht        : false,
-        dl        : false,
-        ef        : 0,
+        patient_id: null,
+        visit_date: moment().format( 'YYYY-MM-DD' ),
+        remarks: "",
+        height: 1,
+        weight: 1,
+        sbp: 0,
+        dsp: 0,
+        dm: false,
+        ht: false,
+        dl: false,
+        ef: 0,
       },
 
 
     }
   },
-  /* *** DATA *** */
+  /* -- data -- */
+
 
   computed: {
 
-    visitsList: function () { return this.$store.getters.getVisitsList },
-    patient   : function () { return this.$store.getters.getPatient },
-    fullName  : function () { return this.patient.first_name + " " + this.patient.last_name },
+    visitsList() {
+      return this.$store.getters.getVisitsList;
+    },
+
+    patient() {
+      return this.$store.getters.getPatient;
+    },
+
+    fullName() {
+      return this.patient.first_name + " " + this.patient.last_name;
+    },
 
     /* BMI calculation */
-    bmi: function () {
-      return _.round(this.visitToAdd.weight / (this.visitToAdd.height * this.visitToAdd.height), 2);
+    bmi() {
+      return _.round( this.visitToAdd.weight / ( this.visitToAdd.height * this.visitToAdd.height ), 2 );
     },
 
-    bsa: function () {
+    bsa() {
       // https://www.nursingcenter.com/ncblog/august-2017/body-mass-index-and-body-surface-area-what-s-the-d
-      return _.round(Math.sqrt(((this.visitToAdd.height / 100.0) * this.visitToAdd.weight) / 3600.0), 2);
+      return _.round( Math.sqrt( ( ( this.visitToAdd.height / 100.0 ) * this.visitToAdd.weight ) / 3600.0 ), 2 );
     },
 
   },
-  /* *** COMPUTED *** */
+  /* -- computed -- */
+
+  watch: {
+    patient( value ) {
+      this.visitToAdd.patient_id = value.id;
+    }
+  },
+  /* -- watch -- */
 
   mounted() {
-
+    /**/
   },
-  /* *** MOUNTED *** */
+  /* -- mounted -- */
 
   methods: {
 
-    createVisitLink: function (visit) {
-      return `${getSiteURL()}/app/visits/manage.php?id=${visit.id}`;
+    createVisitLink: function ( visit ) {
+      return `${ getSiteURL() }/app/visits/manage.php?id=${ visit.id }`;
     },
 
 
     /*
     * Save a new visit
     * */
-    onClickSave: function () {
+    onClickSave() {
 
       const visit = {
         patient_id: this.patient.id,
         visit_date: this.visitToAdd.visit_date,
-        remarks   : this.visitToAdd.remarks,
-        height    : this.visitToAdd.height,
-        weight    : this.visitToAdd.weight,
-        bmi       : this.bmi,
-        bsa       : this.bsa,
-        dbp       : this.visitToAdd.dsp,
-        sbp       : this.visitToAdd.sbp,
-        dm        : this.visitToAdd.dm,
-        ht        : this.visitToAdd.ht,
-        dl        : this.visitToAdd.dl,
-        ef        : this.visitToAdd.ef,
-      }
-
-      console.log(visit)
+        remarks: this.visitToAdd.remarks,
+        height: this.visitToAdd.height,
+        weight: this.visitToAdd.weight,
+        bmi: this.bmi,
+        bsa: this.bsa,
+        dbp: this.visitToAdd.dsp,
+        sbp: this.visitToAdd.sbp,
+        dm: this.visitToAdd.dm,
+        ht: this.visitToAdd.ht,
+        dl: this.visitToAdd.dl,
+        ef: this.visitToAdd.ef,
+      };
 
 
-      this.$store.dispatch('addVisit', visit)
-          .then(() => {
+      this.$store.dispatch( 'addVisit', visit )
+          .then( () => {
 
             // hide modal
             this.modalAddVisit.visible = false;
@@ -260,21 +280,13 @@ export default {
             this.visitToAdd.dl = false
             this.visitToAdd.ef = 0
 
-          })
-          .catch(() => {
-            alert('Failed to add a visit');
-          });
+          } )
+          .catch( () => {
+            alert( 'Failed to add a visit' );
+          } );
 
     },
 
-    onClickShowAddVisitModal: function () {
-      this.visitToAdd.patient_id = this.patient.id;
-      this.modalAddVisit.visible = true;
-    },
-
-    onHidingAddVisitModal: function () {
-      this.modalAddVisit.visible = false;
-    },
 
   },
   /* *** METHODS *** */

@@ -39,21 +39,28 @@
         <table class="table table-bordered table-sm">
           <thead>
           <tr>
-            <th>Drug</th>
-            <th>Dose</th>
-            <th>Frequency</th>
-            <th>Duration</th>
-            <th>Remarks</th>
+            <th class="" style="width: 20%">Drug</th>
+            <th class="text-right" style="width: 100px">Dose</th>
+            <th class="text-right" style="width: 130px">Frequency</th>
+            <th class="text-right" style="width: 100px">Duration</th>
+            <th class="text-right">Remarks</th>
           </tr>
           </thead>
 
           <tbody>
           <tr v-for="item in selectedPrescription.prescription_items" :key="item.id">
-            <td><a href="#" @click="onOpenEditPrescriptionItem(item)">{{ item.drug.drug_name }}</a></td>
-            <td>{{ item.dose }}</td>
-            <td>{{ item.frequency }}</td>
-            <td>{{ item.duration }}</td>
-            <td>{{ item.remarks }}</td>
+
+            <td class="align-middle" @mouseover="showDeleteItemById = item.id" @mouseout="showDeleteItemById = null">
+              <button class="btn btn-sm btn-outline-danger" @click="onDeletePrescriptionItem(item)" v-show="showDeleteItemById === item.id">
+                <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+              </button>
+              {{ item.drug.drug_name }}
+            </td>
+
+            <td class="text-right"><input type="text" class="form-control form-control-sm text-right" v-model.trim="item.dose"></td>
+            <td class="text-right"><input type="text" class="form-control form-control-sm text-right" v-model.trim="item.frequency"></td>
+            <td class="text-right"><input type="text" class="form-control form-control-sm text-right" v-model.trim="item.duration"></td>
+            <td class="text-right"><input type="text" class="form-control form-control-sm" v-model.trim="item.remarks"></td>
           </tr>
           </tbody>
 
@@ -66,6 +73,10 @@
       </div><!-- card-body -->
 
     </div><!-- card -->
+
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- delete selected prescription -->
 
     <div class="row mt-3">
       <div class="col">
@@ -110,7 +121,7 @@
         <table class="table table-bordered table-sm" v-if="drugsSearchResult.length > 0">
           <thead>
           <tr>
-            <th style="width: 30px"></th>
+            <th style="width: 65px"></th>
             <th>Drug</th>
             <th>Remarks</th>
           </tr>
@@ -118,8 +129,11 @@
 
           <tbody>
           <tr v-for="item in drugsSearchResult" :key="item.id">
-            <td class="clickable-td">
-              <button class="btn btn-tiny btn-primary" @click="onAddToPrescription(item)">Add</button>
+            <td>
+              <button class="btn btn-tiny btn-outline-primary" @click="onAddToPrescription(item)">
+                <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
+                Add
+              </button>
             </td>
             <td>{{ item.drug_name }}</td>
             <td>{{ item.remarks }}</td>
@@ -139,77 +153,6 @@
     <!-- emd: modal: prescription drug -->
 
 
-    <!-- modal: edit drug -->
-    <ModalWindow :visible="isEditPrescriptionItemModalVisible" @close="isEditPrescriptionItemModalVisible = false">
-      <template v-slot:title>Editing {{ selectedPrescriptionItem.drug_name }}</template>
-      <slot>
-
-        <div class="form-row">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Drug</label>
-              <input type="text" class="form-control" :value="selectedPrescriptionItem.drug_name" readonly>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Dose</label>
-              <input type="text" class="form-control" v-model="selectedPrescriptionItem.dose">
-            </div>
-
-
-          </div>
-          <div class="col">
-
-            <div class="form-group">
-              <label>Frequency</label>
-              <input type="text" class="form-control" v-model="selectedPrescriptionItem.frequency">
-            </div>
-
-          </div>
-          <div class="col">
-
-            <div class="form-group">
-              <label>Duration</label>
-              <input type="text" class="form-control" v-model="selectedPrescriptionItem.duration">
-            </div>
-
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Remarks</label>
-              <textarea rows="3" class="form-control" v-model="selectedPrescriptionItem.remarks"></textarea>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-between">
-          <div></div>
-          <div>
-            <button class="btn btn-sm btn-success" @click="onUpdatePrescriptionItem()">Update</button>
-          </div>
-          <div>
-            <button class="btn btn-sm btn-danger" @click="onDeletePrescriptionItem()">Delete</button>
-          </div>
-        </div>
-
-
-      </slot>
-    </ModalWindow>
-    <!-- end: modal: edit drug -->
-
-
   </div>
 
 </template>
@@ -223,7 +166,7 @@ import {TYPE_SUCCESS} from "../../../../_common/message_types";
 
 export default {
   name: "EditPrescription",
-  components: {AlertArea, DateField, ModalWindow},
+  components: { AlertArea, DateField, ModalWindow },
 
   data() {
     return {
@@ -240,7 +183,7 @@ export default {
         id: undefined,
         visit_id: undefined,
         remarks: "",
-        date: moment().format("YYYY-MM-DD"),
+        date: moment().format( "YYYY-MM-DD" ),
         prescription_items: [],
       },
 
@@ -248,20 +191,6 @@ export default {
       drugSearchQuery: "",
       drugsSearchResult: [],
 
-
-      /* -- edit selected prescription item -- */
-      isEditPrescriptionItemModalVisible: false,
-
-      selectedPrescriptionItem: {
-        id: undefined,
-        prescription_id: undefined,
-        drug_id: undefined,
-        drug_name: undefined,
-        dose: undefined,
-        frequency: undefined,
-        duration: undefined,
-        remarks: undefined,
-      },
 
       /* delete prescription */
       chkConfirmDeletePrescription: false,
@@ -271,6 +200,10 @@ export default {
         message: "",
         type: TYPE_SUCCESS
       },
+
+
+      showDeleteItemById: null
+
     };
 
   },
@@ -287,18 +220,18 @@ export default {
 
       this.prescriptionId = this.$route.params.id;
 
-      await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
+      await this.$store.dispatch( "prescriptions_fetch", this.prescriptionId );
       this.selectedPrescription = this.$store.getters.getSelectedPrescription;
 
       this.isLoading = false;
 
-    } catch (e) {
-      await this.$router.push("/prescriptions");
+    } catch ( e ) {
+      await this.$router.push( "/prescriptions" );
     }
 
   },
 
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate( to, from, next ) {
 
     try {
 
@@ -306,14 +239,14 @@ export default {
 
       this.prescriptionId = to.params.id;
 
-      await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
+      await this.$store.dispatch( "prescriptions_fetch", this.prescriptionId );
       this.selectedPrescription = this.$store.getters.getSelectedPrescription;
 
       this.isLoading = false;
       next();
 
-    } catch (e) {
-      await this.$router.push("/prescriptions");
+    } catch ( e ) {
+      await this.$router.push( "/prescriptions" );
     }
 
   },
@@ -327,11 +260,11 @@ export default {
 
       try {
 
-        await this.$store.dispatch("prescriptions_searchDrugs", this.drugSearchQuery);
+        await this.$store.dispatch( "prescriptions_searchDrugs", this.drugSearchQuery );
         this.drugsSearchResult = this.$store.getters.getDrugsSearchResult;
 
-      } catch (e) {
-        console.log(e);
+      } catch ( e ) {
+        console.log( e );
       }
     },
 
@@ -339,7 +272,7 @@ export default {
     /*
     * On selecting a drug to add to prescription
     * */
-    async onAddToPrescription(drug) {
+    async onAddToPrescription( drug ) {
 
       try {
 
@@ -352,68 +285,18 @@ export default {
           remarks: ""
         };
 
-        await this.$store.dispatch("prescriptions_addPrescriptionItem", params);
+        await this.$store.dispatch( "prescriptions_addPrescriptionItem", params );
 
         /* fetch updated prescription details */
-        await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
+        await this.$store.dispatch( "prescriptions_fetch", this.prescriptionId );
         this.selectedPrescription = this.$store.getters.getSelectedPrescription;
 
 
-      } catch (e) {
-        alert("Failed to insert selected drug");
+      } catch ( e ) {
+        alert( "Failed to insert selected drug" );
       }
 
     },
-
-
-    /*
-    * On open modal for editing selected drug
-    * */
-    onOpenEditPrescriptionItem(item) {
-
-      this.selectedPrescriptionItem = {
-        id: item.id,
-        drug_id: item.drug_id,
-        drug_name: item.drug.drug_name,
-        dose: item.dose,
-        frequency: item.frequency,
-        duration: item.duration,
-        remarks: item.remarks,
-      }
-
-      this.isEditPrescriptionItemModalVisible = true;
-
-    },
-
-    /*
-    * On update prescription item
-    * */
-    async onUpdatePrescriptionItem() {
-
-      try {
-
-        const params = {
-          id: this.selectedPrescriptionItem.id,
-          dose: this.selectedPrescriptionItem.dose,
-          frequency: this.selectedPrescriptionItem.frequency,
-          duration: this.selectedPrescriptionItem.duration,
-          remarks: this.selectedPrescriptionItem.remarks,
-        }
-
-        await this.$store.dispatch("prescriptions_updatePrescriptionItem", params);
-
-        /* fetch updated prescription details */
-        await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
-        this.selectedPrescription = this.$store.getters.getSelectedPrescription;
-
-        this.isEditPrescriptionItemModalVisible = false;
-
-      } catch (e) {
-        alert("Failed to update");
-      }
-
-    },
-
 
     /*
     * On update prescription details
@@ -425,15 +308,18 @@ export default {
         const params = {
           id: this.selectedPrescription.id,
           date: this.selectedPrescription.date,
-          remarks: this.selectedPrescription.remarks
+          remarks: this.selectedPrescription.remarks,
+          prescription_items: this.selectedPrescription.prescription_items
         };
 
-        await this.$store.dispatch("prescriptions_update", params);
+        // console.log(params);
 
-        this.feedback.message = "Details updated successfully";
+        await this.$store.dispatch( "prescriptions_update", params );
 
-      } catch (e) {
-        alert("Failed to update prescription details");
+        successMessageBox( "Prescription details updated" );
+
+      } catch ( e ) {
+        alert( "Failed to update prescription details" );
       }
 
     },
@@ -449,12 +335,12 @@ export default {
           id: this.selectedPrescription.id,
         };
 
-        await this.$store.dispatch("prescriptions_delete", params);
+        await this.$store.dispatch( "prescriptions_delete", params );
 
-        await this.$router.push("/prescriptions");
+        await this.$router.push( "/prescriptions" );
 
-      } catch (e) {
-        errorMessageBox("Failed to delete the prescription");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete the prescription" );
       }
 
     },
@@ -462,24 +348,24 @@ export default {
     /*
     * On delete prescription item
     * */
-    async onDeletePrescriptionItem() {
+    async onDeletePrescriptionItem( prescription ) {
 
       try {
 
         const params = {
-          id: this.selectedPrescriptionItem.id,
+          id: prescription.id,
         };
 
-        await this.$store.dispatch("prescriptions_deletePrescriptionItem", params);
+        await this.$store.dispatch( "prescriptions_deletePrescriptionItem", params );
 
         /* fetch updated prescription details */
-        await this.$store.dispatch("prescriptions_fetch", this.prescriptionId);
+        await this.$store.dispatch( "prescriptions_fetch", this.prescriptionId );
         this.selectedPrescription = this.$store.getters.getSelectedPrescription;
 
         this.isEditPrescriptionItemModalVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to delete prescription item");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete prescription item" );
       }
 
     }

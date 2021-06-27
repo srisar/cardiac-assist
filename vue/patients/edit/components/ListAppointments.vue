@@ -7,13 +7,16 @@
 
         <div class="d-flex align-items-center justify-content-between">
           <div>Appointments</div>
-          <button class="btn btn-tiny btn-primary" @click="onClickShowAddModal">Add an appointment</button>
+          <button class="btn btn-tiny btn-outline-dark" @click="modalAddAppointment.visible = true">
+            <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
+            Add an appointment
+          </button>
         </div>
 
       </div>
       <div class="card-body">
 
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered" v-if="appointmentsList.length > 0">
           <thead>
           <tr>
             <th style="width: 100px">Date</th>
@@ -30,10 +33,12 @@
           </tbody>
         </table>
 
+        <p v-else>There is no appointments set for the patient. Add one using the button above.</p>
+
       </div><!-- card-body -->
     </div><!-- card -->
 
-    <ModalWindow id="modal-add-appointment" :visible="modalAddAppointment.visible" @modal-hiding="onClickHideModal(modalAddAppointment)">
+    <ModalWindow id="modal-add-appointment" :visible="modalAddAppointment.visible" @modal-hiding="modalAddAppointment.visible = false">
       <template v-slot:title>Add an appointment for {{ fullName }}</template>
       <slot>
 
@@ -65,7 +70,7 @@
     </ModalWindow>
     <!-- add appointment -->
 
-    <ModalWindow id="modal-edit-appointment" :visible="modalEditAppointment.visible" @modal-hiding="onClickHideModal(modalEditAppointment)">
+    <ModalWindow id="modal-edit-appointment" :visible="modalEditAppointment.visible" @close="modalEditAppointment.visible = false">
       <template v-slot:title>Edit appointment</template>
       <slot>
 
@@ -124,7 +129,7 @@
 import ModalWindow from "../../../_common/components/ModalWindow";
 import DateField from "../../../_common/components/DateField";
 
-const _ = require('lodash');
+const _ = require( 'lodash' );
 
 export default {
   name: "ListAppointments",
@@ -134,7 +139,7 @@ export default {
   data() {
     return {
 
-      modalAddAppointment : {
+      modalAddAppointment: {
         visible: false,
       },
       modalEditAppointment: {
@@ -143,23 +148,23 @@ export default {
 
       appointmentToAdd: {
         patient_id: undefined,
-        date      : moment().format('YYYY-MM-DD'),
-        remarks   : "",
+        date: moment().format( 'YYYY-MM-DD' ),
+        remarks: "",
       },
 
       appointmentToEdit: {
-        id        : undefined,
+        id: undefined,
         patient_id: undefined,
-        date      : undefined,
-        remarks   : undefined,
-        status    : undefined,
+        date: undefined,
+        remarks: undefined,
+        status: undefined,
       },
 
       statusList: {
-        PENDING  : 'Pending',
+        PENDING: 'Pending',
         COMPLETED: 'Completed',
         CANCELLED: 'Cancelled',
-        MISSED   : 'Missed',
+        MISSED: 'Missed',
       }
 
     }
@@ -199,43 +204,43 @@ export default {
 
       const appointment = {
         patient_id: this.patient.id,
-        date      : this.appointmentToAdd.date,
-        remarks   : this.appointmentToAdd.remarks,
+        date: this.appointmentToAdd.date,
+        remarks: this.appointmentToAdd.remarks,
       }
 
-      this.$store.dispatch('addAppointment', appointment)
-          .then(() => {
+      this.$store.dispatch( 'addAppointment', appointment )
+          .then( () => {
 
             // hide modal
             this.modalAddAppointment.visible = false
 
             // clear fields
             this.appointmentToAdd.remarks = ""
-          })
-          .catch(e => {
-            console.log(e)
-            alert('Failed to add an appointment')
-          })
+          } )
+          .catch( e => {
+            console.log( e )
+            alert( 'Failed to add an appointment' )
+          } )
 
     }, /* on click save */
 
     onClickUpdate: function () {
 
       const appointment = {
-        id     : this.appointmentToEdit.id,
-        date   : this.appointmentToEdit.date,
+        id: this.appointmentToEdit.id,
+        date: this.appointmentToEdit.date,
         remarks: this.appointmentToEdit.remarks,
-        status : this.appointmentToEdit.status,
+        status: this.appointmentToEdit.status,
       }
 
-      this.$store.dispatch('editAppointment', appointment)
-          .then(() => {
+      this.$store.dispatch( 'editAppointment', appointment )
+          .then( () => {
             this.modalEditAppointment.visible = false
-          })
-          .catch(e => {
-            alert('Failed to update the appointment')
-            console.log(e)
-          })
+          } )
+          .catch( e => {
+            alert( 'Failed to update the appointment' )
+            console.log( e )
+          } )
 
     }, /* on click update */
 
@@ -243,16 +248,16 @@ export default {
 
       const id = this.appointmentToEdit.id
 
-      if ( confirm('Are you sure to delete?') ) {
+      if ( confirm( 'Are you sure to delete?' ) ) {
 
-        this.$store.dispatch('deleteAppointment', id)
-            .then(() => {
+        this.$store.dispatch( 'deleteAppointment', id )
+            .then( () => {
               this.modalEditAppointment.visible = false
-            })
-            .catch(e => {
-              alert('Failed to delete the appointment')
-              console.log(e)
-            })
+            } )
+            .catch( e => {
+              alert( 'Failed to delete the appointment' )
+              console.log( e )
+            } )
       }
 
     }, /* on click delete */
@@ -262,11 +267,7 @@ export default {
       this.modalAddAppointment.visible = true
     },
 
-    onClickHideModal: function (modal) {
-      modal.visible = false
-    },
-
-    onClickSelectAppointment: function (appointment) {
+    onClickSelectAppointment: function ( appointment ) {
       this.appointmentToEdit = appointment
       this.modalEditAppointment.visible = true
     }

@@ -331,8 +331,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -434,6 +432,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
 /* harmony import */ var _common_components_DateField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/DateField */ "./vue/_common/components/DateField.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -674,9 +677,6 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
       this.appointmentToAdd.patient_id = this.patient.id;
       this.modalAddAppointment.visible = true;
     },
-    onClickHideModal: function onClickHideModal(modal) {
-      modal.visible = false;
-    },
     onClickSelectAppointment: function onClickSelectAppointment(appointment) {
       this.appointmentToEdit = appointment;
       this.modalEditAppointment.visible = true;
@@ -853,6 +853,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -870,6 +875,7 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
         visible: false
       },
       visitToAdd: {
+        patient_id: null,
         visit_date: moment().format('YYYY-MM-DD'),
         remarks: "",
         height: 1,
@@ -884,7 +890,7 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
     };
   },
 
-  /* *** DATA *** */
+  /* -- data -- */
   computed: {
     visitsList: function visitsList() {
       return this.$store.getters.getVisitsList;
@@ -906,10 +912,19 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
     }
   },
 
-  /* *** COMPUTED *** */
-  mounted: function mounted() {},
+  /* -- computed -- */
+  watch: {
+    patient: function patient(value) {
+      this.visitToAdd.patient_id = value.id;
+    }
+  },
 
-  /* *** MOUNTED *** */
+  /* -- watch -- */
+  mounted: function mounted() {
+    /**/
+  },
+
+  /* -- mounted -- */
   methods: {
     createVisitLink: function createVisitLink(visit) {
       return "".concat(getSiteURL(), "/app/visits/manage.php?id=").concat(visit.id);
@@ -936,7 +951,6 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
         dl: this.visitToAdd.dl,
         ef: this.visitToAdd.ef
       };
-      console.log(visit);
       this.$store.dispatch('addVisit', visit).then(function () {
         // hide modal
         _this.modalAddVisit.visible = false; // clear fields
@@ -953,13 +967,6 @@ var _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
       })["catch"](function () {
         alert('Failed to add a visit');
       });
-    },
-    onClickShowAddVisitModal: function onClickShowAddVisitModal() {
-      this.visitToAdd.patient_id = this.patient.id;
-      this.modalAddVisit.visible = true;
-    },
-    onHidingAddVisitModal: function onHidingAddVisitModal() {
-      this.modalAddVisit.visible = false;
     }
   }
   /* *** METHODS *** */
@@ -19676,46 +19683,62 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-tiny btn-primary",
-                  on: { click: _vm.onClickShowAddModal }
+                  staticClass: "btn btn-tiny btn-outline-dark",
+                  on: {
+                    click: function($event) {
+                      _vm.modalAddAppointment.visible = true
+                    }
+                  }
                 },
-                [_vm._v("Add an appointment")]
+                [
+                  _c("img", {
+                    staticClass: "icon-16",
+                    attrs: { src: "/assets/images/actions/add.svg", alt: "" }
+                  }),
+                  _vm._v("\n          Add an appointment\n        ")
+                ]
               )
             ]
           )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-sm table-bordered" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.appointmentsList, function(item) {
-                return _c("tr", [
-                  _c("td", [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.onClickSelectAppointment(item)
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(item.date))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.remarks))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.status))])
-                ])
-              }),
-              0
-            )
-          ])
+          _vm.appointmentsList.length > 0
+            ? _c("table", { staticClass: "table table-sm table-bordered" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.appointmentsList, function(item) {
+                    return _c("tr", [
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.onClickSelectAppointment(item)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(item.date))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.remarks))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(item.status))])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            : _c("p", [
+                _vm._v(
+                  "There is no appointments set for the patient. Add one using the button above."
+                )
+              ])
         ])
       ]),
       _vm._v(" "),
@@ -19728,7 +19751,7 @@ var render = function() {
           },
           on: {
             "modal-hiding": function($event) {
-              return _vm.onClickHideModal(_vm.modalAddAppointment)
+              _vm.modalAddAppointment.visible = false
             }
           },
           scopedSlots: _vm._u([
@@ -19828,8 +19851,8 @@ var render = function() {
             visible: _vm.modalEditAppointment.visible
           },
           on: {
-            "modal-hiding": function($event) {
-              return _vm.onClickHideModal(_vm.modalEditAppointment)
+            close: function($event) {
+              _vm.modalEditAppointment.visible = false
             }
           },
           scopedSlots: _vm._u([
@@ -20035,39 +20058,59 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-tiny btn-primary",
-                  on: { click: _vm.onClickShowAddVisitModal }
+                  staticClass: "btn btn-tiny btn-outline-dark",
+                  on: {
+                    click: function($event) {
+                      _vm.modalAddVisit.visible = true
+                    }
+                  }
                 },
-                [_vm._v("Add a visit")]
+                [
+                  _c("img", {
+                    staticClass: "icon-16",
+                    attrs: { src: "/assets/images/actions/add.svg", alt: "" }
+                  }),
+                  _vm._v("\n          Add a visit\n        ")
+                ]
               )
             ]
           )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-sm table-bordered" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.visitsList, function(item) {
-                return _c("tr", [
-                  _c("td", [
-                    _c("a", { attrs: { href: _vm.createVisitLink(item) } }, [
-                      _vm._v(_vm._s(item.visit_date))
+          _vm.visitsList.length > 0
+            ? _c("table", { staticClass: "table table-sm table-bordered" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.visitsList, function(item) {
+                    return _c("tr", [
+                      _c("td", [
+                        _c(
+                          "a",
+                          { attrs: { href: _vm.createVisitLink(item) } },
+                          [_vm._v(_vm._s(item.visit_date))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticStyle: { "white-space": "pre-line" } }, [
+                        _vm._v(_vm._s(item.remarks))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [
+                        _vm._v(_vm._s(item.status))
+                      ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.remarks))]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(item.status))
-                  ])
-                ])
-              }),
-              0
-            )
-          ])
+                  }),
+                  0
+                )
+              ])
+            : _c("p", [
+                _vm._v(
+                  "There is no visit details. You can add one using the button above."
+                )
+              ])
         ])
       ]),
       _vm._v(" "),
@@ -20075,7 +20118,11 @@ var render = function() {
         "ModalWindow",
         {
           attrs: { id: "modal-add-visit", visible: _vm.modalAddVisit.visible },
-          on: { "modal-hiding": _vm.onHidingAddVisitModal },
+          on: {
+            close: function($event) {
+              _vm.modalAddVisit.visible = false
+            }
+          },
           scopedSlots: _vm._u([
             {
               key: "title",
