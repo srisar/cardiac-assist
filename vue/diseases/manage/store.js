@@ -1,169 +1,75 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-Vue.use(Vuex);
-
-const PANEL_EDIT = "EDIT"
-const PANEL_ADD = "ADD"
+Vue.use( Vuex );
 
 
-export default new Vuex.Store({
+export default new Vuex.Store( {
 
     state: {
         diseasesList: [],
         selectedDisease: null,
-
-        panelMode: PANEL_ADD,
-        editButtonText: "Edit"
     },
 
-    mutations: {
-
-        updateDiseasesList(state, payload) {
-            state.diseasesList = payload;
-        },
-
-        updateSelectedDisease(state, payload) {
-            state.selectedDisease = payload;
-        },
-
-        setPanelModeEdit(state) {
-            state.panelMode = PANEL_EDIT;
-        },
-
-        setPanelModeAdd(state) {
-            state.panelMode = PANEL_ADD;
-        },
-
-        setEditButtonText(state, textValue) {
-            state.editButtonText = textValue;
-        }
-
-    },
+    mutations: {},
 
     getters: {
-        getDiseasesList: state => {
+        getDiseasesList( state ) {
             return state.diseasesList;
         },
 
-        getSelectedDisease: state => {
+        getSelectedDisease( state ) {
             return state.selectedDisease;
         },
 
-        getPanelMode: state => {
-            return state.panelMode;
-        },
-        getEditButtonText: state => {
-            return state.editButtonText;
-        },
     },
 
     actions: {
 
-        /*
-        * Fetch all available diseases
-        * */
-        fetchDiseases({commit}, payload) {
 
-            $.get(`${getSiteURL()}/api/get/diseases.php`)
-                .done(r => {
-                    commit('updateDiseasesList', r.data);
-                })
-                .fail(e => {
-                    console.log(e.responseJSON.message);
-                });
+        async diseases_fetchAll( context ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/diseases.php` );
+                context.state.diseasesList = response.data;
+            } catch ( e ) {
+                throw e;
+            }
+        },/* fetch all */
 
-        },
+        async diseases_fetch( context, id ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/diseases.php`, { id: id } );
+                context.state.selectedDisease = response.data;
+            } catch ( e ) {
+                throw e;
+            }
+        },/* fetch */
 
-        /*
-        * Save a new disease
-        * */
-        saveDisease({commit, dispatch}, disease) {
+        async diseases_add( context, params ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/save/disease.php`, params );
+            } catch ( e ) {
+                throw e;
+            }
+        },/* add */
 
-            return new Promise((resolve, reject) => {
+        async diseases_update( context, params ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/update/disease.php`, params );
+            } catch ( e ) {
+                throw e;
+            }
+        },/* update */
 
-                const params = {
-                    disease: disease.disease,
-                    disease_code: disease.disease_code,
-                    description: disease.description,
-                };
-
-                $.post(`${getSiteURL()}/api/save/disease.php`, params)
-                    .done(r => {
-                        dispatch('fetchDiseases');
-                        resolve(r);
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
-
-        },
-
-        /*
-        * Update disease
-        * */
-        updateDisease({commit, dispatch}, disease) {
-
-            return new Promise((resolve, reject) => {
-
-                const params = {
-                    id: disease.id,
-                    disease: disease.disease,
-                    disease_code: disease.disease_code,
-                    description: disease.description,
-                };
-
-                $.post(`${getSiteURL()}/api/update/disease.php`, params)
-                    .done(r => {
-
-                        dispatch('fetchDiseases');
-                        resolve(r);
-
-                    })
-                    .fail(e => {
-                        reject(e);
-                    });
-
-            });
-
-        },
+        async diseases_delete( context, id ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/delete/disease.php`, { id: id } );
+            } catch ( e ) {
+                throw e;
+            }
+        },/* delete */
 
 
-        /*
-        * Delete existing disease
-        * */
-        deleteDisease({commit, dispatch}, disease) {
-
-            return new Promise((resolve, reject) => {
-
-                const params = {
-                    id: disease.id,
-                }
-
-                $.post(`${getSiteURL()}/api/delete/disease.php`, params)
-                    .done(r => {
-
-                        dispatch('fetchDiseases');
-                        resolve();
-
-                    }).fail(e => {
-                    reject(e);
-                });
-
-
-            });
-
-        },
-
-
-        setSelectedDisease({commit, dispatch}, disease) {
-            commit('updateSelectedDisease', disease);
-            commit('setPanelModeEdit');
-            commit('setEditButtonText', 'Edit');
-
-        }
     }
 
-});
+} );

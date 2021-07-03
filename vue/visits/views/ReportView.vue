@@ -6,8 +6,31 @@
       <div class="card-header">Report generation</div>
       <div class="card-body">
 
-        <div class="text-center">
-          <router-link class="btn btn-primary" to="/reports/basic">Generate basic report</router-link>
+        <div class="mb-3">
+          <h4>Visit report</h4>
+          <p>
+            Visit report includes basic patient details, diagnoses, investigations, problems
+            and prescription. It is generated for A5 paper.
+          </p>
+          <router-link to="/reports/basic" class="btn btn-sm btn-primary">Generate visit report</router-link>
+          <hr>
+        </div>
+
+        <div class="mb-3">
+          <h4>Special investigations reports</h4>
+          <p>
+            This includes individual special investigation reports.
+          </p>
+
+          <router-link to="/reports/ecg" class="btn btn-sm btn-primary mb-2">Generate ECG report</router-link>
+          <br>
+          <router-link to="/reports/cct" class="btn btn-sm btn-primary mb-2">Generate Coronary CT report</router-link>
+          <br>
+          <router-link to="/reports/echo" class="btn btn-sm btn-primary mb-2">Generate Echocardiography report</router-link>
+          <br>
+          <router-link to="/reports/angio" class="btn btn-sm btn-primary mb-2">Generate Angiography report</router-link>
+
+          <hr>
         </div>
 
       </div>

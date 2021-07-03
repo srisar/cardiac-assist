@@ -1,7 +1,7 @@
 $font-family-custom: 'Sen', sans-serif;
 
 * {
-  transition: 0.25s;
+  transition: 0.1s;
 }
 
 
@@ -138,4 +138,9 @@ select {
   top: 0;
   right: 5px;
   background-color: #FFFFFF;
+}
+
+
+.login-logo {
+  width: 100px;
 }

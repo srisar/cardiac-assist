@@ -16,7 +16,7 @@
 
 
               <div class="row">
-                <div class="col">
+                <div class="col-4">
 
                   <div class="form-group">
                     <label>Performed on <span v-if="performedOnOutput" class="badge badge-danger">{{ performedOnOutput }}</span></label>

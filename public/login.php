@@ -4,8 +4,8 @@ use App\Core\App;
 use App\Core\Authentication;
 
 require_once "../_bootstrap.inc.php";
-if ( Authentication::isAuthenticated() ) App::redirect('/');
-App::setTitle("Login");
+if ( Authentication::isAuthenticated() ) App::redirect( '/' );
+App::setTitle( "Login" );
 
 $errors = $_GET['error'] ?? null;
 
@@ -19,17 +19,21 @@ $errors = $_GET['error'] ?? null;
 
     <div class="row justify-content-center">
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
 
             <div class="alert alert-success">
 
-                <h4><?= APP_NAME ?> : Login</h4>
+                <div class="text-center img-fluid">
+                    <img src="/assets/images/app-icon.svg" alt="" class="login-logo">
+                </div>
+
+                <h4 class="text-center my-2">Login to Cardiac Assist</h4>
                 <hr>
 
-                <?php if(!empty($errors)): ?>
-                <div class="alert alert-danger">
-                    Username or password incorrect!
-                </div>
+                <?php if ( !empty( $errors ) ): ?>
+                    <div class="alert alert-danger">
+                        Username or password incorrect!
+                    </div>
                 <?php endif; ?>
 
                 <form action="_process_login.php" method="post">

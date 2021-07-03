@@ -7,7 +7,9 @@
 
         <!-- left -->
         <div>
-          <button class="btn btn-tiny" :class="{'btn-secondary': editable, 'btn-primary': !editable}" @click="editable=!editable">{{ editButtonText }}</button>
+          <button class="btn btn-tiny btn-outline-dark" @click="editable=!editable">
+            <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> {{ editButtonText }}
+          </button>
           {{ selectedSymptom.symptom_name }}
         </div>
 
@@ -19,7 +21,9 @@
           </div>
 
           <div v-else>
-            <button class="btn btn-tiny btn-danger" @click="confirmDelete=true">Delete</button>
+            <button class="btn btn-tiny btn-outline-danger" @click="confirmDelete=true">
+              <img src="/assets/images/actions/remove.svg" class="icon-16" alt=""> Delete
+            </button>
           </div>
         </div>
 
@@ -45,7 +49,9 @@
 
           <div class="form-row my-2">
             <div class="col text-center">
-              <button class="btn btn-success" @click="onUpdate()">Update</button>
+              <button class="btn btn-success" @click="onUpdate()">
+                <img src="/assets/images/actions/up.svg" class="icon-24" alt=""> Update
+              </button>
             </div>
           </div>
         </div><!-- edit-form -->
@@ -70,7 +76,7 @@ import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialo
 export default {
 
   name: "EditSymptom",
-  components: {RichEditorV2},
+  components: { RichEditorV2 },
   props: [],
 
 
@@ -104,14 +110,14 @@ export default {
   async mounted() {
 
     const id = this.$route.params.id;
-    await this.fetchSelected(id);
+    await this.fetchSelected( id );
 
   },
 
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate( to, from, next ) {
 
     const id = to.params.id;
-    await this.fetchSelected(id);
+    await this.fetchSelected( id );
     await next();
 
   },
@@ -119,15 +125,15 @@ export default {
 
   methods: {
 
-    async fetchSelected(id) {
+    async fetchSelected( id ) {
       try {
 
-        await this.$store.dispatch("symptoms_fetch", id);
+        await this.$store.dispatch( "symptoms_fetch", id );
         this.selectedSymptom = this.$store.getters.getSelectedSymptom;
 
-      } catch (e) {
-        errorMessageBox("Failed to load selected investigation data");
-        await this.$router.push("/");
+      } catch ( e ) {
+        errorMessageBox( "Failed to load selected investigation data" );
+        await this.$router.push( "/" );
       }
     },
 
@@ -144,21 +150,21 @@ export default {
           description: this.selectedSymptom.description
         }
 
-        await this.$store.dispatch("symptoms_update", params);
+        await this.$store.dispatch( "symptoms_update", params );
 
 
         this.editable = false;
 
-        successMessageBox("Symptom details updated");
+        successMessageBox( "Symptom details updated" );
 
-      } catch (e) {
-        errorMessageBox("Failed to update the symptom");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update the symptom" );
       }
 
       try {
-        await this.$store.dispatch("symptoms_fetchAll");
-      } catch (e) {
-        errorMessageBox("Failed to load symptoms data");
+        await this.$store.dispatch( "symptoms_fetchAll" );
+      } catch ( e ) {
+        errorMessageBox( "Failed to load symptoms data" );
       }
 
     },
@@ -170,18 +176,18 @@ export default {
 
       try {
 
-        await this.$store.dispatch("symptoms_delete", this.selectedSymptom.id);
+        await this.$store.dispatch( "symptoms_delete", this.selectedSymptom.id );
 
-        await this.$store.dispatch("symptoms_fetchAll");
+        await this.$store.dispatch( "symptoms_fetchAll" );
 
         this.editable = false;
 
-        successMessageBox("Symptom deleted");
+        successMessageBox( "Symptom deleted" );
 
-        await this.$router.push("/");
+        await this.$router.push( "/" );
 
-      } catch (e) {
-        errorMessageBox("Failed to delete the symptom");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete the symptom" );
       }
 
 

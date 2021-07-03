@@ -34,7 +34,7 @@
 
         <div class="form-row my-2">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onClickSave" :disabled="!isValidForm">Save</button>
+            <button class="btn btn-success" @click="onSave()" :disabled="!isValidForm">Save</button>
           </div>
         </div>
       </div>
@@ -48,10 +48,11 @@
 <script>
 
 import RichEditorV2 from "../../../_common/components/RichEditorV2";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 export default {
   name: "SaveDisease",
-  components: {RichEditorV2,},
+  components: { RichEditorV2, },
 
   props: [],
 
@@ -83,16 +84,23 @@ export default {
     /*
     * On save disease
     * */
-    onClickSave: function () {
+    async onSave() {
 
-      this.$store.dispatch('saveDisease', this.disease)
-          .then(r => {
-            alert('Disease saved');
-          })
-          .catch(e => {
-            alert(e.responseJSON.message);
-            console.log(e);
-          });
+      try {
+
+        const params = {
+          disease: this.disease.disease,
+          disease_code: this.disease.disease_code,
+          description: this.disease.description,
+        };
+
+        await this.$store.dispatch( "diseases_add", params );
+        await this.$store.dispatch( "diseases_fetchAll" );
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to save new disease" );
+      }
+
 
     },
 

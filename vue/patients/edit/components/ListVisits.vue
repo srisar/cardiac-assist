@@ -21,14 +21,16 @@
           <tr>
             <th style="width: 100px">Date</th>
             <th>Remarks</th>
-            <th style="width: 150px" class="text-center">Status</th>
+            <th style="width: 10px" class="text-center">Status</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="(item) in visitsList">
             <td><a :href="createVisitLink(item)">{{ item.visit_date }}</a></td>
             <td style="white-space: pre-line">{{ item.remarks }}</td>
-            <td class="text-center">{{ item.status }}</td>
+            <td class="align-middle text-center">
+              <img :src="getStatusIcon(item.status)" alt="" class="icon-24">
+            </td>
           </tr>
           </tbody>
         </table>
@@ -236,14 +238,11 @@ export default {
 
   methods: {
 
-    createVisitLink: function ( visit ) {
+    createVisitLink( visit ) {
       return `${ getSiteURL() }/app/visits/manage.php?id=${ visit.id }`;
     },
 
 
-    /*
-    * Save a new visit
-    * */
     onClickSave() {
 
       const visit = {
@@ -285,7 +284,16 @@ export default {
             alert( 'Failed to add a visit' );
           } );
 
-    },
+    }, /* on save */
+
+
+    getStatusIcon( status ) {
+      if ( status === "COMPLETE" ) {
+        return "/assets/images/actions/done.svg";
+      } else {
+        return "/assets/images/actions/in-progress.svg"
+      }
+    }
 
 
   },

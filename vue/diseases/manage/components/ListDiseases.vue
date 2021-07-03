@@ -5,20 +5,16 @@
     <div class="card shadow shadow-sm">
 
       <div class="card-header d-flex justify-content-between">
-        <!-- left -->
+        <div>Diseases</div>
         <div>
-          Diseases
+          <router-link class="btn btn-tiny btn-outline-success" to="/add">
+            <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+          </router-link>
         </div>
-
-        <!-- right -->
-        <div>
-          <button class="btn btn-success btn-tiny" @click="onClickAdd">Add a new disease</button>
-        </div>
-
       </div>
       <div class="card-body p-2">
 
-        <table class="table table-sm table-bordered table-striped">
+        <table class="table table-sm table-bordered">
           <thead>
           <tr>
             <th>Disease Code</th>
@@ -28,7 +24,9 @@
           <tbody>
           <tr v-for="(item, index) in diseasesList">
             <td>{{ item.disease_code }}</td>
-            <td><a href="#" @click="setSelected(item)">{{ item.disease }}</a></td>
+            <td>
+              <router-link :to="'/edit/' + item.id">{{ item.disease }}</router-link>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -44,8 +42,10 @@
 <script>
 
 
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+
 export default {
-  name      : "ListDiseases",
+  name: "ListDiseases",
   components: {},
 
   props: [],
@@ -56,37 +56,23 @@ export default {
 
   computed: {
 
-    diseasesList: function () {
+    diseasesList() {
       return this.$store.getters.getDiseasesList;
     }
 
   },
 
-  mounted() {
-    //
-    this.fetchAll();
+  async mounted() {
 
-  },
-
-  methods: {
-    //
-
-    /*
-    * Fetch existing symptoms
-    * */
-    fetchAll: function () {
-      this.$store.dispatch('fetchDiseases');
-    },
-
-    setSelected: function (disease) {
-      this.$store.dispatch('setSelectedDisease', disease);
-    },
-
-    onClickAdd: function () {
-      this.$store.commit('setPanelModeAdd');
+    try {
+      await this.$store.dispatch( "diseases_fetchAll" );
+    } catch ( e ) {
+      errorMessageBox( "Failed to get disease details" );
     }
 
   },
+
+  methods: {},
 
 }
 </script>

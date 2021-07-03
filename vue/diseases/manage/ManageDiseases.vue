@@ -1,19 +1,17 @@
 <template>
   <div>
 
-    <div class="container-fluid">
+    <div class="container">
 
-      <div class="row">
+      <div class="form-row">
 
         <div class="col-12 col-md-4">
-          <ListDiseases/>
+          <ListDiseases class="sticky-top" style="top: 20px"/>
         </div>
 
         <div class="col-12 col-md-8 mb-2">
-          <SaveDisease v-if="panelMode === 'ADD'"/>
-          <EditDisease v-if="panelMode === 'EDIT'"/>
+          <router-view></router-view>
         </div><!-- col -->
-
 
       </div><!-- row -->
 
@@ -24,38 +22,11 @@
 
 <script>
 
-import Vue from "vue";
-import store from "./store";
-import SaveDisease from "./components/SaveDisease";
-import EditDisease from "./components/EditDisease";
 import ListDiseases from "./components/ListDiseases";
 
 export default {
   name: "ManageDiseases",
-  components: {SaveDisease, ListDiseases, EditDisease,},
-  store: store,
-  props: [],
-
-  data() {
-    return {
-      //
-    }
-  },
-
-  computed: {
-    panelMode: function () {
-      return this.$store.getters.getPanelMode;
-    }
-  },
-
-  mounted() {
-    //
-  },
-
-  methods: {
-    //
-  },
-
+  components: { ListDiseases },
 }
 </script>
 

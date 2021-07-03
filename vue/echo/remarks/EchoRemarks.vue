@@ -6,17 +6,31 @@
       <div class="row">
         <div class="col">
 
+          <div class="mb-2 text-center">
+            <h4>Echocardiography remark values</h4>
+            <p>These values can be added to patient's visit echocardiography report.</p>
+            <div class="alert alert-warning">
+              <i class="bi bi-info-circle"></i>
+              Updating or deleting any of the remark value here will be reflected on all visit reports. Deleting will remove that remark
+              from all the patients' report.
+            </div>
+          </div>
 
           <div class="card shadow-sm shadow mb-3" v-for="(items, key) in allValues">
 
             <div class="card-header d-flex justify-content-between">
-              <div>{{ echoValueTypes[key] }}</div>
-              <div>
-                <button class="btn btn-success btn-tiny" @click="onOpenAddModal(key)">Add</button>
-              </div>
+              <div>{{ echoValueTypes[ key ] }}</div>
+
             </div>
 
             <div class="card-body">
+
+              <div class="mb-2">
+                <button class="btn btn-sm btn-outline-dark" @click="onOpenAddModal(key)">
+                  <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
+                  Add
+                </button>
+              </div>
 
               <table class="table table-sm table-bordered table-hover">
 
@@ -24,11 +38,13 @@
                 <tr v-for="item in items">
                   <td style="white-space: pre-line">{{ item.value }}</td>
 
-                  <td class="text-center" style="width: 110px">
-                    <button type="button" class="btn btn-warning btn-tiny" @click="onOpenEditModal(item)">
-                      edit
+                  <td class="text-center" style="width: 150px">
+                    <button type="button" class="btn btn-outline-dark btn-tiny" @click="onOpenEditModal(item)">
+                      <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
+                      Edit
                     </button>
-                    <button type="button" class="btn btn-danger btn-tiny" @click="onDelete(item)">
+                    <button type="button" class="btn btn-outline-danger btn-tiny" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
                       Delete
                     </button>
                   </td>
@@ -99,7 +115,7 @@ import ModalWindow from "../../_common/components/ModalWindow";
 export default {
   name: "EchoRemarks",
 
-  components: {ModalWindow},
+  components: { ModalWindow },
 
   data() {
     return {
@@ -134,14 +150,14 @@ export default {
 
   mounted() {
 
-    this.$store.dispatch('FETCH_ALL');
+    this.$store.dispatch( 'FETCH_ALL' );
 
   },
 
 
   methods: {
 
-    onOpenEditModal: function (item) {
+    onOpenEditModal: function ( item ) {
 
       this.valueToEdit.id = item.id;
       this.valueToEdit.value = item.value;
@@ -157,10 +173,10 @@ export default {
         id: this.valueToEdit.id
       };
 
-      this.$store.dispatch('UPDATE', item)
-          .then(() => {
+      this.$store.dispatch( 'UPDATE', item )
+          .then( () => {
             this.modalEditVisible = false;
-          });
+          } );
 
     },
 
@@ -171,21 +187,21 @@ export default {
         type: this.echoRemarkToAdd.type
       }
 
-      this.$store.dispatch('SAVE', params).then()
+      this.$store.dispatch( 'SAVE', params ).then()
 
     },
 
-    onDelete: function (item) {
+    onDelete: function ( item ) {
 
-      this.$store.dispatch('DELETE', item.id)
+      this.$store.dispatch( 'DELETE', item.id )
           .then()
 
     },
 
-    onOpenAddModal(type) {
+    onOpenAddModal( type ) {
 
       this.echoRemarkToAdd.type = type;
-      this.echoRemarkToAdd.typeLabel = this.echoValueTypes[type];
+      this.echoRemarkToAdd.typeLabel = this.echoValueTypes[ type ];
 
       this.modalAddVisible = true;
 

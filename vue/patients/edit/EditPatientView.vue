@@ -2,10 +2,10 @@
 
   <div>
 
-    <div class="container-fluid">
+    <div class="container">
       <div class="row justify-content-center">
 
-        <div class="col-12 col-lg-7 mb-3">
+        <div class="col-12 col-lg-6 mb-3">
 
           <div class="card mb-4 shadow shadow-sm">
 
@@ -14,21 +14,27 @@
             <div class="card-body">
 
               <div class="form-row">
-                <div class="col-md-5">
+                <div class="col">
                   <div class="form-group">
                     <label class="required">First name</label>
                     <input class="form-control" type="text" v-model.trim="patient.first_name">
                   </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col">
                   <div class="form-group">
                     <label class="required">Last name</label>
                     <input class="form-control" type="text" v-model.trim="patient.last_name">
                   </div>
                 </div>
 
-                <div class="col-md-2">
+
+              </div><!--.row-->
+
+
+              <div class="form-row">
+
+                <div class="col">
                   <div class="form-group">
                     <label for="field_sex" class="required">Gender</label>
                     <select name="" id="field_sex" class="form-control" v-model="patient.gender">
@@ -38,61 +44,45 @@
                   </div>
                 </div>
 
-              </div><!--.row-->
 
-              <div class="form-row">
-                <div class="col-sm-4 col-md-3">
-
-                  <div class="form-group">
-                    <label>NIC</label>
-                    <input class="form-control" type="text" v-model.trim="patient.nic">
-
-                  </div>
-
-
-                </div>
-
-                <div class="col-md-3">
+                <div class="col">
                   <div class="form-group">
                     <label>Date of birth</label>
                     <DateField v-model="patient.dob"></DateField>
                   </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col">
                   <div class="form-group">
                     <label for="field_age">Age (calculated)</label>
                     <input class="form-control" type="number" id="field_age" v-model="calculatedAge" readonly>
-
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="field_phone">Phone number</label>
-                    <input class="form-control" type="text" id="field_phone" v-model.trim="patient.phone">
-
-                  </div>
-                </div>
-
-              </div><!--.row-->
-
-              <div class="row">
-
-
-              </div><!--.row-->
+              </div><!-- row -->
 
               <div class="form-row">
 
-                <div class="col-md-6">
+                <div class="col">
                   <div class="form-group">
-                    <label>Address</label>
-                    <textarea class="form-control" rows="4" v-model="patient.address"></textarea>
-
+                    <label>NIC</label>
+                    <input class="form-control" type="text" v-model.trim="patient.nic">
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="field_phone">Phone number</label>
+                    <input class="form-control" type="text" id="field_phone" v-model.trim="patient.phone">
+                  </div>
+                </div>
+
+              </div><!--.row-->
+
+
+              <div class="form-row">
+
+                <div class="col">
                   <div class="form-group">
                     <label for="field_ds_division">DS division</label>
                     <select name="" id="field_ds_division" class="form-control" v-model="patient.ds_division">
@@ -102,12 +92,24 @@
 
                   </div>
                 </div>
-              </div><!--.row-->
+
+              </div><!-- row -->
 
               <div class="form-row">
 
+                <div class="col">
+                  <div class="form-group">
+                    <label>Address</label>
+                    <textarea class="form-control" rows="4" v-model="patient.address"></textarea>
+                  </div>
+                </div>
 
-                <div class="col-md-4">
+              </div><!--.row-->
+
+
+              <div class="form-row">
+
+                <div class="col">
                   <div class="form-group">
                     <label for="field_job">Job</label>
                     <select name="" id="field_job" class="form-control" v-model="patient.job">
@@ -118,7 +120,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col">
                   <div class="form-group">
                     <label for="field_job_type">Job type</label>
                     <select name="" id="field_job_type" class="form-control" v-model="patient.job_type">
@@ -128,7 +130,7 @@
 
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col">
                   <div class="form-group">
                     <label for="field_income">Monthly income</label>
                     <input class="form-control" type="number" id="field_income" v-model.trim="patient.income">
@@ -139,7 +141,9 @@
 
 
               <div class="text-center">
-                <button type="button" class="btn btn-success" :disabled="!formValidated" @click="onClickUpdatePatient">Update</button>
+                <button type="button" class="btn btn-success" :disabled="!formValidated" @click="onClickUpdatePatient">
+                  <img src="/assets/images/actions/up.svg" class="icon-24" alt=""> Update
+                </button>
               </div>
 
             </div> <!--.card-body-->
@@ -147,10 +151,15 @@
 
         </div><!-- col-->
 
-        <div class="col-12 col-lg-5 mb-3">
+
+        <!-- start: sidebar column -->
+
+        <div class="col-12 col-lg-6 mb-3">
           <ListVisits class="mb-3"/>
           <ListAppointments class="mb-3"/>
         </div>
+
+        <!-- end: sidebar column -->
 
       </div><!-- row -->
     </div><!-- container -->
@@ -166,6 +175,7 @@ import DateField from "../../_common/components/DateField";
 import * as values from '../values';
 import ListVisits from "./components/ListVisits";
 import ListAppointments from "./components/ListAppointments";
+import {errorMessageBox, successMessageBox} from "../../_common/bootbox_dialogs";
 
 const _ = require( 'lodash' );
 
@@ -181,46 +191,47 @@ export default {
       genders: values.GENDERS,
       jobs: values.JOBS,
       jobTypes: values.JOB_TYPES,
-      dsDivisions: values.DS_DIVISIONS
+      dsDivisions: values.DS_DIVISIONS,
     }
   },
-  /* *** DATA *** */
+  /* -- data -- */
 
 
   computed: {
 
-    patient: function () {
+    patient() {
       return this.$store.getters.getPatient;
     },
 
-    formValidated: function () {
+    formValidated() {
       if ( _.isEmpty( this.patient.first_name ) ) return false;
       if ( _.isEmpty( this.patient.last_name ) ) return false;
       return !_.isEmpty( this.patient.gender );
     },
 
-    calculatedAge: function () {
-      return this._calculateAge()
+    calculatedAge() {
+      return this._calculateAge();
     },
 
-    fullName: function () {
+    fullName() {
       return this.patient.first_name + " " + this.patient.last_name;
     },
 
   },
-  /* *** COMPUTED *** */
+  /* -- computed -- */
+
 
   mounted() {
 
     this.fetchPatient();
 
   },
-  /* *** MOUNTED *** */
+  /* -- mounted -- */
 
 
   methods: {
 
-    fetchPatient: function () {
+    fetchPatient() {
 
       this.$store.dispatch( 'fetchPatient', this.patientId )
           .then( r => {
@@ -246,29 +257,29 @@ export default {
     },
 
 
-    onClickUpdatePatient: function () {
+    onClickUpdatePatient() {
 
       this.patient.age = this.calculatedAge;
 
       this.$store.dispatch( 'updatePatient', this.patient )
           .then( r => {
-            alert( r.message )
+            successMessageBox( "Patient details updated" );
           } )
           .catch( e => {
-            alert( 'Failed to update patient details' )
+            errorMessageBox( 'Failed to update patient details' );
             console.log( e )
           } )
 
     },
 
 
-    _calculateAge: function () {
+    _calculateAge() {
       const today = moment()
       const diff = moment.duration( today.diff( moment( this.patient.dob ) ) )
       return Math.round( diff.asYears() )
     }
   },
-  /* *** METHODS *** */
+  /* -- methods -- */
 
 }
 </script>

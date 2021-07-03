@@ -173,16 +173,16 @@ export default {
 
   computed: {
 
-    appointmentsList: function () {
-      return this.$store.getters.getAppointmentsList
+    appointmentsList() {
+      return this.$store.getters.getAppointmentsList;
     },
 
-    patient: function () {
-      return this.$store.getters.getPatient
+    patient() {
+      return this.$store.getters.getPatient;
     },
 
-    fullName: function () {
-      return this.patient.first_name + " " + this.patient.last_name
+    fullName() {
+      return this.patient.first_name + " " + this.patient.last_name;
     },
 
   },
@@ -200,7 +200,7 @@ export default {
     /*
     * Save a new appointment
     * */
-    onClickSave: function () {
+    onClickSave() {
 
       const appointment = {
         patient_id: this.patient.id,
@@ -224,7 +224,7 @@ export default {
 
     }, /* on click save */
 
-    onClickUpdate: function () {
+    onClickUpdate() {
 
       const appointment = {
         id: this.appointmentToEdit.id,
@@ -244,7 +244,7 @@ export default {
 
     }, /* on click update */
 
-    onClickDelete: function () {
+    onClickDelete() {
 
       const id = this.appointmentToEdit.id
 
@@ -262,12 +262,12 @@ export default {
 
     }, /* on click delete */
 
-    onClickShowAddModal: function () {
+    onClickShowAddModal() {
       this.appointmentToAdd.patient_id = this.patient.id;
       this.modalAddAppointment.visible = true
     },
 
-    onClickSelectAppointment: function ( appointment ) {
+    onClickSelectAppointment( appointment ) {
       this.appointmentToEdit = appointment
       this.modalEditAppointment.visible = true
     }
