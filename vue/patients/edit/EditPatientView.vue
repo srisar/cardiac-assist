@@ -3,7 +3,7 @@
   <div>
 
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="form-row justify-content-center">
 
         <div class="col-12 col-lg-6 mb-3">
 
@@ -142,7 +142,7 @@
 
               <div class="text-center">
                 <button type="button" class="btn btn-success" :disabled="!formValidated" @click="onClickUpdatePatient">
-                  <img src="/assets/images/actions/up.svg" class="icon-24" alt=""> Update
+                  <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
                 </button>
               </div>
 

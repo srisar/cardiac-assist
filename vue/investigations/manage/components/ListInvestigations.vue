@@ -7,7 +7,9 @@
       <div class="card-header d-flex justify-content-between">
         <div>Investigations</div>
         <div>
-          <router-link class="btn btn-tiny btn-success" to="/add">Add</router-link>
+          <router-link class="btn btn-tiny btn-outline-success" to="/add">
+            <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+          </router-link>
         </div>
       </div>
 

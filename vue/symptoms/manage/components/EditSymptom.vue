@@ -7,7 +7,7 @@
 
         <!-- left -->
         <div>
-          <button class="btn btn-tiny btn-outline-dark" @click="editable=!editable">
+          <button class="btn btn-tiny btn-outline-secondary" @click="editable=!editable">
             <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> {{ editButtonText }}
           </button>
           {{ selectedSymptom.symptom_name }}
@@ -50,7 +50,7 @@
           <div class="form-row my-2">
             <div class="col text-center">
               <button class="btn btn-success" @click="onUpdate()">
-                <img src="/assets/images/actions/up.svg" class="icon-24" alt=""> Update
+                <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
               </button>
             </div>
           </div>

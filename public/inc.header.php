@@ -47,7 +47,7 @@ use App\Models\User;
 <body>
 
 
-<?php if (Authentication::isAuthenticated() || Authentication::isAuthenticated(User::ROLE_ADMIN) || Authentication::isAuthenticated(User::ROLE_MANAGER)): ?>
+<?php if ( Authentication::isAuthenticated() || Authentication::isAuthenticated( User::ROLE_ADMIN ) || Authentication::isAuthenticated( User::ROLE_MANAGER ) ): ?>
     <!-- TOP NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
 
@@ -103,8 +103,12 @@ use App\Models\User;
             </ul>
 
             <div>
-                <a href="<?= App::url('/app/users/manage.php') ?>" class="btn btn-sm btn-success"><i class="bi bi-people-fill"></i> Manage Users</a>
-                <a href="<?= App::url('/logout.php') ?>" class="btn btn-sm btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                <a href="<?= App::url( '/app/users/manage.php' ) ?>" class="btn btn-sm btn-success">
+                    <img src="/assets/images/actions/users.svg" class="icon-16" alt=""> Manage Users
+                </a>
+                <a href="<?= App::url( '/logout.php' ) ?>" class="btn btn-sm btn-danger">
+                    <img src="/assets/images/actions/logout.svg" class="icon-16" alt=""> Logout
+                </a>
             </div>
 
         </div>

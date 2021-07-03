@@ -25,7 +25,9 @@
 
         <div class="form-row my-2">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onSave()" :disabled="!isValidForm">Save</button>
+            <button class="btn btn-success" @click="onSave()" :disabled="!isValidForm">
+              <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Save
+            </button>
           </div>
         </div>
       </div>

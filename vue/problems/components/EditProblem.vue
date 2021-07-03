@@ -13,7 +13,9 @@
         </div>
 
         <div class="text-center mt-3">
-          <button class="btn btn-success" @click="onUpdate()" :disabled="!isFormValid">Update</button>
+          <button class="btn btn-success" @click="onUpdate()" :disabled="!isFormValid">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+          </button>
         </div>
 
       </div>

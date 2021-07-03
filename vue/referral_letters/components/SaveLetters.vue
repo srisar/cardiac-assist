@@ -16,7 +16,9 @@
         </div>
 
         <div class="text-center mt-3">
-          <button class="btn btn-success" :disabled="!isFormValid" @click="onSave()">Save</button>
+          <button class="btn btn-success" :disabled="!isFormValid" @click="onSave()">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Save
+          </button>
         </div>
 
       </div>

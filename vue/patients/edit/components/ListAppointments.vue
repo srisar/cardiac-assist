@@ -7,7 +7,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
           <div>Appointments</div>
-          <button class="btn btn-tiny btn-outline-dark" @click="modalAddAppointment.visible = true">
+          <button class="btn btn-tiny btn-outline-success" @click="modalAddAppointment.visible = true">
             <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
             Add an appointment
           </button>
@@ -62,7 +62,9 @@
 
         <div class="form-row">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onClickSave">Save</button>
+            <button class="btn btn-success" @click="onClickSave">
+              <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Save
+            </button>
           </div>
         </div>
 

@@ -7,7 +7,7 @@
 
         <!-- left side -->
         <div>
-          <button class="btn btn-tiny btn-outline-dark" @click="editable=!editable">
+          <button class="btn btn-tiny btn-outline-secondary" @click="editable=!editable">
             <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> {{ editButtonText }}
           </button>
           {{ selectedDisease.disease }}
@@ -21,7 +21,9 @@
           </div>
 
           <div v-else>
-            <button class="btn btn-tiny btn-danger" @click="confirmDelete = true">Delete</button>
+            <button class="btn btn-tiny btn-outline-danger" @click="confirmDelete=true">
+              <img src="/assets/images/actions/remove.svg" class="icon-16" alt=""> Delete
+            </button>
           </div>
         </div>
 
@@ -57,7 +59,9 @@
 
           <div class="form-row my-2">
             <div class="col text-center">
-              <button class="btn btn-success" @click="onUpdate()">Update</button>
+              <button class="btn btn-success" @click="onUpdate()">
+                <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+              </button>
             </div>
           </div>
         </div><!-- edit-form -->

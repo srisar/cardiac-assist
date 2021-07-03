@@ -6,7 +6,9 @@
       <div class="card-header d-flex justify-content-between">
         <!-- left -->
         <div>
-          <button class="btn btn-tiny" :class="{'btn-secondary': editable, 'btn-primary': !editable}" @click="editable=!editable">{{ editButtonText }}</button>
+          <button class="btn btn-tiny btn-outline-secondary" @click="editable=!editable">
+            <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> {{ editButtonText }}
+          </button>
           {{ selectedInvestigation.investigation_name }}
         </div>
 
@@ -18,7 +20,9 @@
           </div>
 
           <div v-else>
-            <button class="btn btn-tiny btn-danger" @click="confirmDelete=true">Delete</button>
+            <button class="btn btn-tiny btn-outline-danger" @click="confirmDelete=true">
+              <img src="/assets/images/actions/remove.svg" class="icon-16" alt=""> Delete
+            </button>
           </div>
         </div>
 
@@ -46,7 +50,9 @@
 
           <div class="form-row my-2">
             <div class="col text-center">
-              <button class="btn btn-success" @click="onUpdate()">Update</button>
+              <button class="btn btn-success" @click="onUpdate()">
+                <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+              </button>
             </div>
           </div>
         </div><!-- edit-form -->
@@ -71,7 +77,7 @@ import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialo
 
 export default {
   name: "EditInvestigation",
-  components: {RichEditorV2},
+  components: { RichEditorV2 },
 
 
   data() {
@@ -104,7 +110,7 @@ export default {
   async mounted() {
 
     const id = this.$route.params.id;
-    await this.fetchSelected(id);
+    await this.fetchSelected( id );
 
   },
 
@@ -112,27 +118,27 @@ export default {
   * this is needed to catch the id params from the route
   * and fetch the investigation for that id
   * */
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate( to, from, next ) {
 
     this.editable = false;
 
     const id = to.params.id;
-    await this.fetchSelected(id);
+    await this.fetchSelected( id );
 
     await next();
   },
 
   methods: {
 
-    async fetchSelected(id) {
+    async fetchSelected( id ) {
       try {
 
-        await this.$store.dispatch("investigations_fetch", id);
+        await this.$store.dispatch( "investigations_fetch", id );
         this.selectedInvestigation = this.$store.getters.getSelectedInvestigation;
 
-      } catch (e) {
-        errorMessageBox("Failed to load selected investigation data");
-        await this.$router.push("/");
+      } catch ( e ) {
+        errorMessageBox( "Failed to load selected investigation data" );
+        await this.$router.push( "/" );
       }
     },
 
@@ -149,16 +155,16 @@ export default {
           description: this.selectedInvestigation.description
         }
 
-        await this.$store.dispatch("investigations_update", params);
+        await this.$store.dispatch( "investigations_update", params );
 
-        await this.$store.dispatch("investigations_fetchAll");
+        await this.$store.dispatch( "investigations_fetchAll" );
 
         this.editable = false;
 
-        successMessageBox("Investigation details updated");
+        successMessageBox( "Investigation details updated" );
 
-      } catch (e) {
-        errorMessageBox("Failed to update the investigation");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update the investigation" );
       }
 
     },
@@ -171,18 +177,18 @@ export default {
 
       try {
 
-        await this.$store.dispatch("investigations_delete", this.selectedInvestigation.id);
+        await this.$store.dispatch( "investigations_delete", this.selectedInvestigation.id );
 
-        await this.$store.dispatch("investigations_fetchAll");
+        await this.$store.dispatch( "investigations_fetchAll" );
 
         this.editable = false;
 
-        successMessageBox("Investigation deleted");
+        successMessageBox( "Investigation deleted" );
 
-        await this.$router.push("/");
+        await this.$router.push( "/" );
 
-      } catch (e) {
-        errorMessageBox("Failed to delete the investigation");
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete the investigation" );
       }
 
     },

@@ -10,7 +10,7 @@
             <h4>Echocardiography remark values</h4>
             <p>These values can be added to patient's visit echocardiography report.</p>
             <div class="alert alert-warning">
-              <i class="bi bi-info-circle"></i>
+              <img src="/assets/images/actions/warning.svg" class="icon-24" alt="">
               Updating or deleting any of the remark value here will be reflected on all visit reports. Deleting will remove that remark
               from all the patients' report.
             </div>
@@ -26,7 +26,7 @@
             <div class="card-body">
 
               <div class="mb-2">
-                <button class="btn btn-sm btn-outline-dark" @click="onOpenAddModal(key)">
+                <button class="btn btn-sm btn-outline-success" @click="onOpenAddModal(key)">
                   <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
                   Add
                 </button>
@@ -38,14 +38,14 @@
                 <tr v-for="item in items">
                   <td style="white-space: pre-line">{{ item.value }}</td>
 
-                  <td class="text-center" style="width: 150px">
-                    <button type="button" class="btn btn-outline-dark btn-tiny" @click="onOpenEditModal(item)">
+                  <td class="text-center" style="width: 80px">
+                    <button type="button" class="btn btn-outline-secondary btn-tiny" @click="onOpenEditModal(item)">
                       <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
-                      Edit
+
                     </button>
                     <button type="button" class="btn btn-outline-danger btn-tiny" @click="onDelete(item)">
                       <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
-                      Delete
+
                     </button>
                   </td>
                 </tr>
@@ -73,7 +73,9 @@
       </div>
 
       <div class="text-center">
-        <button class="btn btn-success" @click="onUpdate()">Update</button>
+        <button class="btn btn-success" @click="onUpdate()">
+          <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+        </button>
       </div>
 
     </ModalWindow>
@@ -96,7 +98,9 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-success" @click="onAdd()" :disabled="echoRemarkToAdd.value === ''">Add</button>
+          <button class="btn btn-success" @click="onAdd()" :disabled="echoRemarkToAdd.value === ''">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Save
+          </button>
         </div>
 
       </slot>

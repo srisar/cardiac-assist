@@ -7,7 +7,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
           <div>Visits</div>
-          <button class="btn btn-tiny btn-outline-dark" @click="modalAddVisit.visible = true">
+          <button class="btn btn-tiny btn-outline-success" @click="modalAddVisit.visible = true">
             <img src="/assets/images/actions/add.svg" alt="" class="icon-16">
             Add a visit
           </button>
