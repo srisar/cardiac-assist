@@ -4294,10 +4294,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -4316,6 +4312,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       prescriptionId: undefined,
       isLoading: true,
       isAddDrugModalVisible: false,
+      modalDeleteVisible: false,
       selectedPrescription: {
         id: undefined,
         visit_id: undefined,
@@ -4337,7 +4334,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       showDeleteItemById: null
     };
   },
-  computed: {},
+  computed: {
+    visitId: function visitId() {
+      return this.$store.getters.getVisitId;
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
@@ -4552,23 +4553,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 _context6.next = 6;
-                return _this6.$router.push("/prescriptions");
+                return _this6.$store.dispatch("prescriptions_fetchAll", _this6.visitId);
 
               case 6:
-                _context6.next = 11;
-                break;
+                _context6.next = 8;
+                return _this6.$router.push("/prescriptions");
 
               case 8:
-                _context6.prev = 8;
+                _context6.next = 13;
+                break;
+
+              case 10:
+                _context6.prev = 10;
                 _context6.t0 = _context6["catch"](0);
                 (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)("Failed to delete the prescription");
 
-              case 11:
+              case 13:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 8]]);
+        }, _callee6, null, [[0, 10]]);
       }))();
     },
 
@@ -41151,20 +41156,29 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-sm btn-primary",
+                      staticClass: "btn btn-outline-success",
                       on: {
                         click: function($event) {
                           _vm.isAddDrugModalVisible = true
                         }
                       }
                     },
-                    [_vm._v("Add drugs...")]
+                    [
+                      _c("img", {
+                        staticClass: "icon-16",
+                        attrs: {
+                          src: "/assets/images/actions/add.svg",
+                          alt: ""
+                        }
+                      }),
+                      _vm._v(" Add drugs...\n        ")
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-sm btn-success",
+                      staticClass: "btn btn-success",
                       on: {
                         click: function($event) {
                           return _vm.onUpdatePrescription()
@@ -41394,88 +41408,87 @@ var render = function() {
                   })
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function($event) {
+                        _vm.modalDeleteVisible = true
+                      }
+                    }
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "icon-16",
+                      attrs: {
+                        src: "/assets/images/actions/remove.svg",
+                        alt: ""
+                      }
+                    }),
+                    _vm._v(" Delete\n        ")
+                  ]
+                )
+              ])
             ])
           ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row mt-3" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("div", { staticClass: "form-group form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.chkConfirmDeletePrescription,
-                  expression: "chkConfirmDeletePrescription"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "checkbox", id: "chk-confirm-delete" },
-              domProps: {
-                checked: Array.isArray(_vm.chkConfirmDeletePrescription)
-                  ? _vm._i(_vm.chkConfirmDeletePrescription, null) > -1
-                  : _vm.chkConfirmDeletePrescription
+      _c(
+        "ModalWindow",
+        {
+          attrs: { visible: _vm.modalDeleteVisible },
+          on: {
+            close: function($event) {
+              _vm.modalDeleteVisible = false
+            }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "title",
+              fn: function() {
+                return [_vm._v("Delete prescription")]
               },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.chkConfirmDeletePrescription,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = null,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 &&
-                        (_vm.chkConfirmDeletePrescription = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.chkConfirmDeletePrescription = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.chkConfirmDeletePrescription = $$c
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c("h5", { staticClass: "text-center" }, [
+            _vm._v("Confirm deleting the prescription")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-center" }, [
+            _vm._v(
+              "All associated items such as drug details associated with this prescription will be lost."
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: {
+                  click: function($event) {
+                    return _vm.onDeletePrescription()
                   }
                 }
-              }
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "chk-confirm-delete" } }, [
-              _vm._v("Delete this prescription")
-            ])
+              },
+              [
+                _c("img", {
+                  staticClass: "icon-24",
+                  attrs: { src: "/assets/images/actions/remove.svg", alt: "" }
+                }),
+                _vm._v(" Delete\n      ")
+              ]
+            )
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.chkConfirmDeletePrescription
-        ? _c("div", { staticClass: "alert alert-danger text-center" }, [
-            _c("h5", { staticClass: "text-center" }, [
-              _vm._v("Confirm deleting the prescription")
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "All associated items such as drug details associated with this prescription will be lost."
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-center" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  on: {
-                    click: function($event) {
-                      return _vm.onDeletePrescription()
-                    }
-                  }
-                },
-                [_vm._v("Delete")]
-              )
-            ])
-          ])
-        : _vm._e(),
+        ]
+      ),
       _vm._v(" "),
       _c(
         "ModalWindow",

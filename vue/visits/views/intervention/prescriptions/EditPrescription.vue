@@ -33,13 +33,15 @@
 
 
         <div class="d-flex justify-content-between mb-3">
-          <button class="btn btn-sm btn-primary" @click="isAddDrugModalVisible = true">Add drugs...</button>
-          <button class="btn btn-sm btn-success" @click="onUpdatePrescription()">
+          <button class="btn btn-outline-success" @click="isAddDrugModalVisible = true">
+            <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add drugs...
+          </button>
+          <button class="btn btn-success" @click="onUpdatePrescription()">
             <img src="/assets/images/actions/save.svg" class="icon-16" alt=""> Update
           </button>
         </div>
 
-
+        <!-- drugs details -->
         <table class="table table-bordered table-sm">
           <thead>
           <tr>
@@ -78,9 +80,16 @@
           </tbody>
 
         </table>
+        <!-- drugs details -->
 
         <div class="my-3">
           <AlertArea :feedback="feedback" @clear="feedback.message=''"/>
+        </div>
+
+        <div>
+          <button class="btn btn-danger" @click="modalDeleteVisible = true">
+            <img src="/assets/images/actions/remove.svg" class="icon-16" alt=""> Delete
+          </button>
         </div>
 
       </div><!-- card-body -->
@@ -88,29 +97,20 @@
     </div><!-- card -->
 
 
-    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-    <!-- delete selected prescription -->
+    <!-- modal: delete prescription  -->
+    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
+      <template v-slot:title>Delete prescription</template>
 
-    <div class="row mt-3">
-      <div class="col">
-
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="chk-confirm-delete" v-model="chkConfirmDeletePrescription">
-          <label for="chk-confirm-delete">Delete this prescription</label>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="alert alert-danger text-center" v-if="chkConfirmDeletePrescription">
       <h5 class="text-center">Confirm deleting the prescription</h5>
-      <p>All associated items such as drug details associated with this prescription will be lost.</p>
+      <p class="text-center">All associated items such as drug details associated with this prescription will be lost.</p>
 
       <div class="text-center">
-        <button class="btn btn-danger" @click="onDeletePrescription()">Delete</button>
+        <button class="btn btn-danger" @click="onDeletePrescription()">
+          <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Delete
+        </button>
       </div>
-
-    </div>
+    </ModalWindow>
+    <!-- end:modal: delete prescription -->
 
     <!-- end: edit prescription -->
 
@@ -121,16 +121,13 @@
 
       <slot>
 
-
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="search for drugs..." v-model="drugSearchQuery" @keyup.enter="onSearchDrugs()">
           <div class="input-group-append">
             <button class="btn btn-success" @click="onSearchDrugs()">Search</button>
           </div>
         </div>
-
         <hr>
-
         <table class="table table-bordered table-sm" v-if="drugsSearchResult.length > 0">
           <thead>
           <tr>
@@ -139,7 +136,6 @@
             <th>Remarks</th>
           </tr>
           </thead>
-
           <tbody>
           <tr v-for="item in drugsSearchResult" :key="item.id">
             <td>
@@ -190,6 +186,7 @@ export default {
 
 
       isAddDrugModalVisible: false,
+      modalDeleteVisible: false,
 
 
       selectedPrescription: {
@@ -222,7 +219,11 @@ export default {
   },
 
 
-  computed: {},
+  computed: {
+    visitId() {
+      return this.$store.getters.getVisitId;
+    },
+  },
 
 
   async mounted() {
@@ -349,6 +350,7 @@ export default {
         };
 
         await this.$store.dispatch( "prescriptions_delete", params );
+        await this.$store.dispatch( "prescriptions_fetchAll", this.visitId );
 
         await this.$router.push( "/prescriptions" );
 
