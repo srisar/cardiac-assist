@@ -10,9 +10,11 @@
             <input type="text" class="form-control"
                    v-model.trim="query"
                    @keyup.enter="onSearch()"
-                   placeholder="Search for names, addresses and phones">
+                   placeholder="Use id:xx for search patient by id. Eg. id:12">
             <div class="input-group-append">
-              <button class="btn btn-primary" @click="onSearch()">Search</button>
+              <button class="btn btn-outline-primary" @click="onSearch()">
+                <img src="/assets/images/actions/search.svg" class="icon-16" alt="">
+              </button>
             </div>
           </div>
         </div>
@@ -51,8 +53,8 @@ export default {
 
     onSearch() {
 
-      if (!_.isEmpty(this.query) && this.$route.params.keyword !== this.query) {
-        this.$router.push("/search/" + this.query);
+      if ( !_.isEmpty( this.query ) && this.$route.params.keyword !== this.query ) {
+        this.$router.push( "/search/" + this.query );
       }
 
     }

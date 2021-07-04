@@ -286,7 +286,9 @@
                 <!-- details -->
 
                 <div class="text-center">
-                  <button class="btn btn-success" @click="onUpdate()" :disabled="!loaded">Update</button>
+                  <button class="btn btn-success" @click="onUpdate()" :disabled="!loaded">
+                    <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+                  </button>
                   <AlertArea :feedback="feedback"/>
                 </div>
 

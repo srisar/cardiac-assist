@@ -42,10 +42,6 @@
                 LVID Systole (mmHg)
                 <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_lvid_systole">
               </div>
-              <div class="col-3 mb-2">
-                LVEF (%)
-                <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_lvef">
-              </div>
             </div>
 
             <hr>
@@ -118,7 +114,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -130,8 +126,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('LEFT_VENTRICLE')" :disabled="hasRemarks('LEFT_VENTRICLE')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('LEFT_VENTRICLE')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('LEFT_VENTRICLE')" :disabled="hasRemarks('LEFT_VENTRICLE')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('LEFT_VENTRICLE')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -142,7 +142,9 @@
                 <tr v-for="item in visitEchoRemarks.LEFT_VENTRICLE">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -197,7 +199,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -209,8 +211,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('LEFT_ATRIUM')" :disabled="hasRemarks('LEFT_ATRIUM')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('LEFT_ATRIUM')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('LEFT_ATRIUM')" :disabled="hasRemarks('LEFT_ATRIUM')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('LEFT_ATRIUM')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -221,7 +227,9 @@
                 <tr v-for="item in visitEchoRemarks.LEFT_ATRIUM">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -271,7 +279,7 @@
             </div>
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -283,8 +291,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('MITRAL_VALVE')" :disabled="hasRemarks('MITRAL_VALVE')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('MITRAL_VALVE')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('MITRAL_VALVE')" :disabled="hasRemarks('MITRAL_VALVE')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('MITRAL_VALVE')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -295,7 +307,9 @@
                 <tr v-for="item in visitEchoRemarks.MITRAL_VALVE">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -365,7 +379,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -377,8 +391,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('AORTIC_VALVE')" :disabled="hasRemarks('AORTIC_VALVE')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('AORTIC_VALVE')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('AORTIC_VALVE')" :disabled="hasRemarks('AORTIC_VALVE')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('AORTIC_VALVE')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -389,7 +407,9 @@
                 <tr v-for="item in visitEchoRemarks.AORTIC_VALVE">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -451,7 +471,7 @@
             </div>
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -463,8 +483,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('AORTA')" :disabled="hasRemarks('AORTA')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('AORTA')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('AORTA')" :disabled="hasRemarks('AORTA')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('AORTA')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -475,7 +499,9 @@
                 <tr v-for="item in visitEchoRemarks.AORTA">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -575,7 +601,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -587,8 +613,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('RIGHT_VENTRICLE')" :disabled="hasRemarks('RIGHT_VENTRICLE')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('RIGHT_VENTRICLE')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('RIGHT_VENTRICLE')" :disabled="hasRemarks('RIGHT_VENTRICLE')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('RIGHT_VENTRICLE')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -599,7 +629,9 @@
                 <tr v-for="item in visitEchoRemarks.RIGHT_VENTRICLE">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -618,7 +650,7 @@
           <div class="card-body">
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -630,8 +662,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('RIGHT_ATRIUM')" :disabled="hasRemarks('RIGHT_ATRIUM')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('RIGHT_ATRIUM')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('RIGHT_ATRIUM')" :disabled="hasRemarks('RIGHT_ATRIUM')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('RIGHT_ATRIUM')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -642,7 +678,9 @@
                 <tr v-for="item in visitEchoRemarks.RIGHT_ATRIUM">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -681,7 +719,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -693,8 +731,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('PULMONIC_VALVE')" :disabled="hasRemarks('PULMONIC_VALVE')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('PULMONIC_VALVE')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('PULMONIC_VALVE')" :disabled="hasRemarks('PULMONIC_VALVE')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('PULMONIC_VALVE')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -705,7 +747,9 @@
                 <tr v-for="item in visitEchoRemarks.PULMONIC_VALVE">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -726,7 +770,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -738,8 +782,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('TRICUSPID')" :disabled="hasRemarks('TRICUSPID')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('TRICUSPID')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('TRICUSPID')" :disabled="hasRemarks('TRICUSPID')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('TRICUSPID')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -750,7 +798,9 @@
                 <tr v-for="item in visitEchoRemarks.TRICUSPID">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -769,7 +819,7 @@
           <div class="card-body">
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -781,8 +831,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('PERICARDIUM')" :disabled="hasRemarks('PERICARDIUM')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('PERICARDIUM')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('PERICARDIUM')" :disabled="hasRemarks('PERICARDIUM')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('PERICARDIUM')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -793,7 +847,9 @@
                 <tr v-for="item in visitEchoRemarks.PERICARDIUM">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>
@@ -814,7 +870,7 @@
 
 
             <!-- add remarks -->
-            <div class="alert alert-secondary p-1 m-0">
+            <div class="alert alert-warning p-1 m-0">
 
               <div class="font-weight-bold mb-2">Remarks</div>
 
@@ -826,8 +882,12 @@
                   </select>
 
                   <div class="input-group-append">
-                    <button class="btn btn-primary" @click="onInsert('CONCLUSION')" :disabled="hasRemarks('CONCLUSION')">Insert</button>
-                    <button class="btn btn-success" @click="onOpenAddModal('CONCLUSION')">Add</button>
+                    <button class="btn btn-outline-primary" @click="onInsert('CONCLUSION')" :disabled="hasRemarks('CONCLUSION')">
+                      <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
+                    </button>
+                    <button class="btn btn-outline-success" @click="onOpenAddModal('CONCLUSION')">
+                      <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
+                    </button>
                   </div>
                 </div>
               </div>
@@ -838,7 +898,9 @@
                 <tr v-for="item in visitEchoRemarks.CONCLUSION">
                   <td style="white-space: pre-line">{{ item.value }}</td>
                   <td style="width: 30px">
-                    <button class="btn btn-tiny btn-danger" @click="onDelete(item)">Remove</button>
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
+                      <img src="/assets/images/actions/remove.svg" class="icon-16" alt="">
+                    </button>
                   </td>
                 </tr>
                 </tbody>

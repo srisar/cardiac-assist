@@ -8,14 +8,18 @@
         <div class="d-flex justify-content-between align-items-center">
           <div>
 
-            <a :href="createPatientPageLink()" class="btn btn-tiny btn-secondary">Back to patient</a>
-            <button class="btn btn-tiny btn-primary" @click="modalEditVisitVisible = true">Edit</button>
+            <a :href="createPatientPageLink()" class="btn btn-tiny btn-outline-primary">
+              <img src="/assets/images/actions/back.svg" class="icon-16" alt=""> Back to patient
+            </a>
+
           </div><!-- left -->
 
           <div></div><!-- center -->
 
           <div>
-
+            <button class="btn btn-tiny btn-outline-secondary" @click="modalEditVisitVisible = true">
+              <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> Edit
+            </button>
           </div><!-- right -->
 
         </div><!-- d-flex -->
@@ -413,7 +417,7 @@ import {errorMessageBox} from "../../_common/bootbox_dialogs";
 
 export default {
   name: "BasicView",
-  components: {DateField, ModalWindow,},
+  components: { DateField, ModalWindow, },
 
   data() {
     return {
@@ -454,13 +458,13 @@ export default {
 
     /* status switch label */
     statusSwitchLabel() {
-      if (this.completed) return "Completed";
+      if ( this.completed ) return "Completed";
       else return "Incomplete";
     },
 
     /* status switch background color */
     statusAlertBgColorClass() {
-      if (this.completed) return "alert-success";
+      if ( this.completed ) return "alert-success";
       else return "alert-warning";
     },
 
@@ -472,12 +476,12 @@ export default {
 
     /* BMI calculation */
     bmi() {
-      return _.round(this.visit.weight / (this.visit.height * this.visit.height), 2);
+      return _.round( this.visit.weight / ( this.visit.height * this.visit.height ), 2 );
     },
 
     bsa() {
       // https://www.nursingcenter.com/ncblog/august-2017/body-mass-index-and-body-surface-area-what-s-the-d
-      return _.round(Math.sqrt(((this.visit.height / 100.0) * this.visit.weight) / 3600.0), 2);
+      return _.round( Math.sqrt( ( ( this.visit.height / 100.0 ) * this.visit.weight ) / 3600.0 ), 2 );
     },
 
 
@@ -500,23 +504,23 @@ export default {
     /*
     * Watch for the toggle, and send request accordingly
     * */
-    completed: function (value) {
+    completed: function ( value ) {
 
-      if (value) {
-        this.$store.dispatch("visit_setStatus", {visit_id: this.visit.id, status: "COMPLETE"})
-            .catch(() => {
+      if ( value ) {
+        this.$store.dispatch( "visit_setStatus", { visit_id: this.visit.id, status: "COMPLETE" } )
+            .catch( () => {
               this.completed = false;
-            });
+            } );
       } else {
-        this.$store.dispatch("visit_setStatus", {visit_id: this.visit.id, status: "INCOMPLETE"})
-            .catch(() => {
+        this.$store.dispatch( "visit_setStatus", { visit_id: this.visit.id, status: "INCOMPLETE" } )
+            .catch( () => {
               this.completed = true;
-            });
+            } );
       }
 
     },
 
-    status: function (value) {
+    status: function ( value ) {
       this.completed = value === "COMPLETE";
     }
 
@@ -526,8 +530,8 @@ export default {
 
   filters: {
 
-    filterSmoking(value) {
-      switch (value) {
+    filterSmoking( value ) {
+      switch ( value ) {
         case "NO":
           return "No";
         case "SMOKING":
@@ -539,8 +543,8 @@ export default {
       }
     },
 
-    filterFamilyHistory(value) {
-      switch (value) {
+    filterFamilyHistory( value ) {
+      switch ( value ) {
         case "Y":
           return "Yes";
         case "N" :
@@ -577,17 +581,17 @@ export default {
           smoking: this.visit.smoking,
         };
 
-        await this.$store.dispatch("visit_update", params);
+        await this.$store.dispatch( "visit_update", params );
         this.modalEditVisitVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to update visit details");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update visit details" );
       }
 
     },
 
     createPatientPageLink: function () {
-      return `${getSiteURL()}/app/patients/edit.php?id=${this.patient.id}`;
+      return `${ getSiteURL() }/app/patients/edit.php?id=${ this.patient.id }`;
     },
 
   },

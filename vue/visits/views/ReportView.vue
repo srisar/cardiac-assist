@@ -12,7 +12,9 @@
             Visit report includes basic patient details, diagnoses, investigations, problems
             and prescription. It is generated for A5 paper.
           </p>
-          <router-link to="/reports/basic" class="btn btn-sm btn-primary">Generate visit report</router-link>
+          <router-link to="/reports/basic" class="btn btn-sm btn-outline-primary">
+            <img src="/assets/images/actions/reports-basic.svg" class="icon-16" alt=""> Generate visit report
+          </router-link>
           <hr>
         </div>
 
@@ -22,12 +24,19 @@
             This includes individual special investigation reports.
           </p>
 
+          <router-link to="/reports/echo" class="btn btn-sm btn-link mb-2">
+            <img src="/assets/images/actions/reports.svg" class="icon-16" alt=""> Generate Echocardiography report
+          </router-link>
           <br>
-          <router-link to="/reports/cct" class="btn btn-sm btn-primary mb-2">Generate Coronary CT report</router-link>
+
+          <router-link to="/reports/angio" class="btn btn-sm btn-link mb-2">
+            <img src="/assets/images/actions/reports.svg" class="icon-16" alt=""> Generate Angiography report
+          </router-link>
           <br>
-          <router-link to="/reports/echo" class="btn btn-sm btn-primary mb-2">Generate Echocardiography report</router-link>
-          <br>
-          <router-link to="/reports/angio" class="btn btn-sm btn-primary mb-2">Generate Angiography report</router-link>
+
+          <router-link to="/reports/cct" class="btn btn-sm btn-link mb-2">
+            <img src="/assets/images/actions/reports.svg" class="icon-16" alt=""> Generate Coronary CT report
+          </router-link>
 
           <hr>
         </div>
