@@ -10,7 +10,12 @@
 
 
     <div class="d-print-none text-center">
-      <button class="btn btn-primary" @click="openPrintDialog()">Print</button>
+      <button class="btn btn-success" @click="openPrintDialog()">
+        <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print
+      </button>
+      <router-link class="btn btn-secondary" to="/reports">
+        <img src="/assets/images/actions/back.svg" class="icon-24" alt=""> Back
+      </router-link>
     </div>
 
 
@@ -63,7 +68,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 
 .paper {
@@ -76,7 +81,6 @@ export default {
 .lead, .report-heading {
   margin-left: 10mm;
 }
-
 
 @media print {
 
@@ -112,5 +116,41 @@ export default {
 
 }
 
+
+</style>
+
+
+<style lang="scss">
+
+/* This styles are universal for printing */
+
+.paper {
+
+  .border, table, tr, td, th {
+    border: solid 1px black !important;
+  }
+
+  hr {
+    border-top: solid 1px black !important;
+  }
+
+}
+
+.prescription-details {
+
+  figure {
+    //margin: 0;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  figure img {
+    width: 100% !important;
+    display: inline-block;
+  }
+
+}
 
 </style>

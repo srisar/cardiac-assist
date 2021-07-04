@@ -13,7 +13,7 @@ export default {
 <style scoped>
 
 .loading-spinner {
-  width: 64px;
+  width: 48px;
 }
 
 </style>

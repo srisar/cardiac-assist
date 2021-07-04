@@ -4,97 +4,26 @@
 
     <div v-if="loaded">
       <!-- section: basic -->
-      <div id="section-basic">
-        <table class="table table-sm table-bordered">
-          <!-- basic patient details -->
-          <tr>
-            <td colspan="4">
-              <div contenteditable="true" class="font-weight-bold">#{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }} ({{
-                  patient.gender
-                }})
-              </div>
-            </td>
-
-            <td>
-              <div contenteditable="true">{{ patient.dob }} ({{ patientAge }})</div>
-            </td>
-          </tr>
-
-          <!-- basic visit details -->
-          <tr>
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">H:</span> {{ visit.height }} m</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">W:</span> {{ visit.weight }} kg</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">BMI</span> {{ visit.bmi }} kg/m²</div>
-            </td>
-
-            <td style="width: 20%">
-              <div>{{ visit.dbp }} / {{ visit.sbp }} mmHg</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
-            </td>
-
-          </tr>
-
-          <tr>
-
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">SMO:</span> {{ visit.smoking | filterSmoking }}</div>
-            </td>
-
-            <td style="width: 20%">
-              <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
-            </td>
-
-          </tr>
-
-          <tr>
-
-
-          </tr>
-
-        </table>
-      </div>
+      <PatientBasicDetails/>
 
       <!-- section: lipids details -->
       <div id="section-lipids" v-if="! isLipidsEmpty">
         <table class="table table-bordered table-sm">
           <tbody>
           <tr>
-            <td>
+            <td style="width: 20%">
               <div><span class="font-weight-bold">TC:</span> {{ lipids.tc }}</div>
             </td>
-            <td>
+            <td style="width: 20%">
               <div><span class="font-weight-bold">LDL:</span> {{ lipids.ldl }}</div>
             </td>
-            <td>
+            <td style="width: 20%">
               <div><span class="font-weight-bold">HDL:</span> {{ lipids.hdl }}</div>
             </td>
-            <td>
+            <td style="width: 20%">
               <div><span class="font-weight-bold">TG:</span> {{ lipids.tg }}</div>
             </td>
-            <td>
+            <td style="width: 20%">
               <div><span class="font-weight-bold">NHC:</span> {{ lipids.nhc }}</div>
             </td>
           </tr>
@@ -189,10 +118,11 @@
 <script>
 import {errorMessageBox} from "../../../../_common/bootbox_dialogs";
 import TheLoading from "../../../../_common/components/TheLoading";
+import PatientBasicDetails from "./PatientBasicDetails";
 
 export default {
   name: "PatientDetailsDiagnoses",
-  components: { TheLoading },
+  components: { PatientBasicDetails, TheLoading },
   data() {
     return {
       loaded: false,
@@ -327,6 +257,7 @@ export default {
 .prescription-details >>> p {
   margin-bottom: 0 !important;
 }
+
 
 @media print {
 

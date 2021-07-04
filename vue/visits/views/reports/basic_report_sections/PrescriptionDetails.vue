@@ -9,7 +9,11 @@
 
       <table class="table table-sm table-bordered">
         <tr>
-          <td class="font-weight-bold">{{ prescription.date }} | {{ prescription.remarks }}</td>
+          <td class="font-weight-bold">
+            {{ prescription.date }}
+            <div class="" v-if="prescription.remarks">{{ prescription.remarks }}</div>
+          </td>
+
         </tr>
       </table>
 
@@ -94,7 +98,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 @media print {
 

@@ -16,8 +16,12 @@
     </div>
 
     <div class="d-print-none text-center">
-      <button class="btn btn-success" @click="openPrintDialog()">Print</button>
-      <router-link class="btn btn-secondary" to="/reports">Back</router-link>
+      <button class="btn btn-success" @click="openPrintDialog()">
+        <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print
+      </button>
+      <router-link class="btn btn-secondary" to="/reports">
+        <img src="/assets/images/actions/back.svg" class="icon-24" alt=""> Back
+      </router-link>
     </div>
 
   </div><!-- template -->
@@ -85,27 +89,6 @@ export default {
     font-size: 14pt !important;
     border: none;
     /*width: 200mm !important;*/
-  }
-
-}
-
-</style>
-
-<style lang="scss">
-
-.ck_text {
-
-  figure {
-    //margin: 0;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  figure img {
-    width: 100% !important;
-    display: inline-block;
   }
 
 }

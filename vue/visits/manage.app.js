@@ -23,7 +23,8 @@ import BasicReportView from "./views/reports/BasicReportView";
 import VisitEchoViewV2 from "./views/special-investigations/VisitEchoViewV2";
 import PrintReferralLetter from "./views/intervention/referral-letters/PrintReferralLetter";
 import ECGReportView from "./views/reports/ECGReportView";
-import CoronaryCTReport from "./views/reports/CoronaryCTReport";
+import CoronaryCTReportView from "./views/reports/CoronaryCTReportView";
+import EchoReportView from "./views/reports/EchoReportView";
 
 
 Vue.use( Vuex )
@@ -59,7 +60,8 @@ const routes = [
     { path: "/reports", component: ReportView },
     { path: "/reports/basic", component: BasicReportView },
     { path: "/reports/ecg", component: ECGReportView },
-    { path: "/reports/cct", component: CoronaryCTReport },
+    { path: "/reports/cct", component: CoronaryCTReportView },
+    { path: "/reports/echo", component: EchoReportView },
 ]
 
 const router = new VueRouter( {
