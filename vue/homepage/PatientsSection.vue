@@ -70,7 +70,7 @@
                     </div>
                   </div>
 
-                  <div class="text-center mt-2">You can search for patient by id by using id:xx. Eg:- id:12</div>
+                  <div class="text-center mt-2">Tip: Search for patient by id by using id:xx. Eg:- id:12</div>
                 </div>
 
               </div><!-- row -->
