@@ -38,7 +38,9 @@
             </div>
 
             <div class="text-center">
-              <button class="btn btn-success" :disabled="selectedModelId === '-1'" @click="onChooseAndUpdate()">Choose</button>
+              <button class="btn btn-success" :disabled="selectedModelId === '-1'" @click="onChooseAndUpdate()">
+                <img src="/assets/images/actions/forward.svg" class="icon-24" alt=""> Choose
+              </button>
             </div>
 
           </div>
@@ -85,7 +87,8 @@
                   </div>
 
                   <div class="d-flex justify-content-between">
-                    <button class="btn btn-secondary" :disabled="selectedModelId === '-1'" @click="onChooseAndUpdate()">Preview</button>
+                    <button class="btn btn-secondary" :disabled="selectedModelId === '-1'" @click="onChooseAndUpdate()">
+                      <img src="/assets/images/actions/image.svg" class="icon-24" alt=""> Preview</button>
 
                   </div>
 
@@ -102,7 +105,8 @@
               </div>
 
               <div class="text-center">
-                <button class="btn btn-success" :disabled="title.length === 0" @click="onSave()">Save</button>
+                <button class="btn btn-success" :disabled="title.length === 0" @click="onSave()">
+                  <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Save</button>
               </div>
 
             </div>

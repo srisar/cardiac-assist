@@ -25,7 +25,9 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-success" @click="onAddNewPrescription()">Add</button>
+          <button class="btn btn-success" @click="onAddNewPrescription()">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Add
+          </button>
         </div>
 
       </div>

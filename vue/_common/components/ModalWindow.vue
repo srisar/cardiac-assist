@@ -18,10 +18,10 @@
 
           <div>
             <button class="btn btn-tiny btn-secondary" type="button" @click="_resize">
-              {{ resizeButtonIcon }}
+              <img :src="resizeButtonIcon" class="icon-16" alt="">
             </button>
             <button type="button" class="btn btn-tiny btn-danger" @click="hide">
-              Close
+              <img src="/assets/images/actions/close.svg" class="icon-16" alt="">
             </button>
           </div>
 
@@ -44,7 +44,7 @@
 export default {
   name: "ModalWindow",
 
-  props: ['id', 'expanded', 'visible'],
+  props: ["id", "expanded", "visible"],
 
   data: function () {
     return {
@@ -52,12 +52,12 @@ export default {
       isExpanded: this.expanded,
 
       icons: {
-        expandIcon: 'Expand',
-        contractIcon: 'Contract',
-        closeIcon: 'bi-x',
+        expandIcon: "Expand",
+        contractIcon: "Contract",
+        closeIcon: "bi-x",
       },
 
-      resizeButtonIcon: 'Expand',
+      resizeButtonIcon: "/assets/images/actions/maximize.svg",
 
     };
   },
@@ -66,13 +66,13 @@ export default {
 
   mounted() {
     //
-    if (this.expanded) {
-      this.resizeButtonIcon = 'bi-arrows-angle-contract';
+    if ( this.expanded ) {
+      this.resizeButtonIcon = "bi-arrows-angle-contract";
     }
   },
 
   watch: {
-    visible(value) {
+    visible( value ) {
       this.isVisible = value;
     }
   },
@@ -82,22 +82,22 @@ export default {
 
     hide: function () {
       this.isVisible = false;
-      this.$emit('modal-hiding');
-      this.$emit('close');
+      this.$emit( "modal-hiding" );
+      this.$emit( "close" );
     },
 
     show: function () {
       this.isVisible = true;
-      this.$emit('modal-showing');
-      this.$emit('open');
+      this.$emit( "modal-showing" );
+      this.$emit( "open" );
     },
 
 
     _resize: function () {
       this.isExpanded = !this.isExpanded;
 
-      if (this.isExpanded) this.resizeButtonIcon = this.icons.contractIcon;
-      else this.resizeButtonIcon = this.icons.expandIcon
+      if ( this.isExpanded ) this.resizeButtonIcon = "/assets/images/actions/minimize.svg";
+      else this.resizeButtonIcon = "/assets/images/actions/maximize.svg";
 
     },
 

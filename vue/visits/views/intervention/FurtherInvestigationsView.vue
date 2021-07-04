@@ -25,7 +25,9 @@
             </div>
 
             <div class="text-center">
-              <button class="btn btn-success" :disabled="isAddFormInvalid" @click="onAdd()">Add</button>
+              <button class="btn btn-success" :disabled="isAddFormInvalid" @click="onAdd()">
+                <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Add
+              </button>
             </div>
 
           </div>
@@ -40,22 +42,23 @@
 
             <table class="table table-sm table-bordered table-hover">
               <tbody>
-              <tr v-for="item in furtherInvestigationsList" :key="item.id">
-                <td>
+              <tr v-for="item in furtherInvestigationsList" :key="item.id"
+                  @mouseover="showHoverItemsById = item.id" @mouseout="showHoverItemsById = null">
+                <td class="position-relative">
                   <p class="font-weight-bold">
                     <a :href="'/app/investigations/manage.php#/edit/' + item.investigation.id" target="_blank">{{ item.investigation.investigation_name }}</a>
                   </p>
                   <div style="white-space: pre-line">{{ item.remarks }}</div>
 
-                  <div class="my-2 d-flex justify-content-between">
-                    <div>
-                      <button class="btn btn-tiny btn-primary" @click="onOpenEditModal(item)">Edit</button>
-                    </div>
 
-                    <div>
-                      <button class="btn btn-tiny btn-danger" @click="showDeleteConfirmModal(item)">Remove</button>
-                    </div>
+                  <div class="mt-2 position-absolute hover-group rounded p-1" v-show="showHoverItemsById === item.id">
+                    <button class="btn btn-tiny btn-outline-dark" @click="onOpenEditModal(item)">
+                      <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
+                    </button>
 
+                    <button class="btn btn-tiny btn-outline-danger" @click="showDeleteConfirmModal(item)">
+                      <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
+                    </button>
                   </div>
 
                 </td>
@@ -89,7 +92,9 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-success" @click="onUpdate()">Edit</button>
+          <button class="btn btn-success" @click="onUpdate()">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+          </button>
         </div>
 
 
@@ -103,11 +108,12 @@
       <template v-slot:title>Confirm Removal</template>
       <slot>
 
-        <p class="lead text-center">Confirm removing the following added investigation</p>
-        <p class="text-center">{{ investigationToEdit.investigation.investigation_name }}</p>
+        <p class="lead text-center">Removing {{ investigationToEdit.investigation.investigation_name }}</p>
 
         <div class="text-center">
-          <button class="btn btn-danger" @click="onDelete()">Remove</button>
+          <button class="btn btn-danger" @click="onDelete()">
+            <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Remove
+          </button>
         </div>
 
       </slot>
@@ -125,7 +131,7 @@ import ModalWindow from "../../../_common/components/ModalWindow";
 
 export default {
   name: "FurtherInvestigationsView",
-  components: {ModalWindow},
+  components: { ModalWindow },
   data() {
     return {
 
@@ -147,7 +153,9 @@ export default {
         investigation: {},
         investigation_id: -1,
         remarks: "",
-      }
+      },
+
+      showHoverItemsById: null,
 
     }
   },
@@ -177,17 +185,17 @@ export default {
     try {
 
       /* 1.fetch all investigations */
-      this.$store.dispatch("investigations_fetchAllAvailableInvestigation").then(() => {
+      this.$store.dispatch( "investigations_fetchAllAvailableInvestigation" ).then( () => {
         this.investigationsList = this.$store.getters.getInvestigationsList;
-      });
+      } );
 
 
       /* 2. fetch all further investigations */
-      await this.$store.dispatch("furtherInvestigations_fetchAll", this.visitId);
+      await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
 
 
-    } catch (e) {
-      errorMessageBox("Failed to load data");
+    } catch ( e ) {
+      errorMessageBox( "Failed to load data" );
     }
 
   },
@@ -204,20 +212,20 @@ export default {
           remarks: this.investigationToAdd.remarks
         };
 
-        await this.$store.dispatch("furtherInvestigations_add", params);
+        await this.$store.dispatch( "furtherInvestigations_add", params );
 
         /* fetch added  further investigations */
-        await this.$store.dispatch("furtherInvestigations_fetchAll", this.visitId);
+        await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
 
-      } catch (e) {
-        errorMessageBox("Failed to add the investigation");
+      } catch ( e ) {
+        errorMessageBox( "Failed to add the investigation" );
       }
 
     },
 
-    onOpenEditModal(item) {
+    onOpenEditModal( item ) {
 
-      this.investigationToEdit = _.cloneDeep(item);
+      this.investigationToEdit = _.cloneDeep( item );
       this.isEditModalVisible = true;
     },
 
@@ -234,15 +242,15 @@ export default {
           remarks: this.investigationToEdit.remarks
         };
 
-        await this.$store.dispatch("furtherInvestigations_update", params);
+        await this.$store.dispatch( "furtherInvestigations_update", params );
 
         this.isEditModalVisible = false;
-        successMessageBox("Further investigation details updated");
+        successMessageBox( "Further investigation details updated" );
 
-        await this.$store.dispatch("furtherInvestigations_fetchAll", this.visitId);
+        await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
 
-      } catch (e) {
-        errorMessageBox("Failed to update investigation details");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update investigation details" );
       }
 
     },
@@ -250,7 +258,7 @@ export default {
     /*
     * On show delete confirm modal
     * */
-    showDeleteConfirmModal(item) {
+    showDeleteConfirmModal( item ) {
 
       this.investigationToEdit = item;
       this.isDeleteConfirmModalVisible = true;
@@ -264,13 +272,13 @@ export default {
 
       try {
 
-        await this.$store.dispatch("furtherInvestigations_delete", this.investigationToEdit.id);
-        await this.$store.dispatch("furtherInvestigations_fetchAll", this.visitId);
+        await this.$store.dispatch( "furtherInvestigations_delete", this.investigationToEdit.id );
+        await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
 
         this.isDeleteConfirmModalVisible = false;
 
-      } catch (e) {
-        errorMessageBox("Failed to remove selected investigation");
+      } catch ( e ) {
+        errorMessageBox( "Failed to remove selected investigation" );
       }
 
     }

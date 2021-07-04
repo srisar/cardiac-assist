@@ -55,7 +55,9 @@
               <div class="col">
 
                 <div class="text-center">
-                  <button class="btn btn-success" @click="onUpdate()">Update</button>
+                  <button class="btn btn-success" @click="onUpdate()">
+                    <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+                  </button>
                 </div>
 
               </div>
@@ -78,7 +80,7 @@ import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialo
 
 export default {
   name: "VisitReviewInView",
-  components: {DateField},
+  components: { DateField },
 
 
   data() {
@@ -86,7 +88,7 @@ export default {
 
       reviewPeriod: "0",
 
-      reviewInDate: moment().format("YYYY-MM-DD"),
+      reviewInDate: moment().format( "YYYY-MM-DD" ),
 
     };
   },
@@ -102,7 +104,7 @@ export default {
     },
 
     hasReviewInDate() {
-      return !_.isNull(this.visit.review_in) || _.isUndefined(this.visit.review_in);
+      return !_.isNull( this.visit.review_in ) || _.isUndefined( this.visit.review_in );
     },
 
     showReviewDateField() {
@@ -114,7 +116,7 @@ export default {
 
   watch: {
     visit() {
-      if (!_.isUndefined(this.visit.review_in)) {
+      if ( !_.isUndefined( this.visit.review_in ) ) {
         this.reviewInDate = this.visit.review_in;
       }
     }
@@ -124,7 +126,7 @@ export default {
   mounted() {
 
 
-    if (!_.isUndefined(this.visit.review_in)) {
+    if ( !_.isUndefined( this.visit.review_in ) ) {
       this.reviewInDate = this.visit.review_in;
     }
 
@@ -141,13 +143,13 @@ export default {
           review_in: this.reviewInDate,
         };
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-review-date.php`, params);
-        await this.$store.dispatch("visit_fetch", this.visitId);
+        await $.post( `${ getSiteURL() }/api/update/visit/visit-review-date.php`, params );
+        await this.$store.dispatch( "visit_fetch", this.visitId );
 
-        successMessageBox("Review date updated");
+        successMessageBox( "Review date updated" );
 
-      } catch (e) {
-        errorMessageBox("Failed to update");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update" );
       }
 
     },
@@ -157,27 +159,27 @@ export default {
       let today = moment();
       let newReviewDate = moment();
 
-      if (this.reviewPeriod === "1w") {
-        newReviewDate = today.add(1, "week");
-      } else if (this.reviewPeriod === "2w") {
-        newReviewDate = today.add(2, "week");
-      } else if (this.reviewPeriod === "1m") {
-        newReviewDate = today.add(1, "month");
-      } else if (this.reviewPeriod === "2m") {
-        newReviewDate = today.add(2, "month");
-      } else if (this.reviewPeriod === "4m") {
-        newReviewDate = today.add(4, "month");
-      } else if (this.reviewPeriod === "6m") {
-        newReviewDate = today.add(6, "month");
-      } else if (this.reviewPeriod === "1y") {
-        newReviewDate = today.add(1, "year");
-      } else if (this.reviewPeriod === "2y") {
-        newReviewDate = today.add(2, "year");
-      } else if (this.reviewPeriod === "5y") {
-        newReviewDate = today.add(5, "year");
+      if ( this.reviewPeriod === "1w" ) {
+        newReviewDate = today.add( 1, "week" );
+      } else if ( this.reviewPeriod === "2w" ) {
+        newReviewDate = today.add( 2, "week" );
+      } else if ( this.reviewPeriod === "1m" ) {
+        newReviewDate = today.add( 1, "month" );
+      } else if ( this.reviewPeriod === "2m" ) {
+        newReviewDate = today.add( 2, "month" );
+      } else if ( this.reviewPeriod === "4m" ) {
+        newReviewDate = today.add( 4, "month" );
+      } else if ( this.reviewPeriod === "6m" ) {
+        newReviewDate = today.add( 6, "month" );
+      } else if ( this.reviewPeriod === "1y" ) {
+        newReviewDate = today.add( 1, "year" );
+      } else if ( this.reviewPeriod === "2y" ) {
+        newReviewDate = today.add( 2, "year" );
+      } else if ( this.reviewPeriod === "5y" ) {
+        newReviewDate = today.add( 5, "year" );
       }
 
-      this.reviewInDate = newReviewDate.format("YYYY-MM-DD");
+      this.reviewInDate = newReviewDate.format( "YYYY-MM-DD" );
 
     }
 

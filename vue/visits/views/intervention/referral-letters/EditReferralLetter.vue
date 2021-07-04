@@ -20,12 +20,20 @@
 
         <div class="d-flex justify-content-between">
           <div>
-            <button class="btn btn-success" @click="onUpdate()">Update</button>
-            <router-link class="btn btn-secondary" :to="'/referral-letters/print/' + selectedLetter.id">Print Preview</router-link>
-            <router-link class="btn btn-secondary" to="/referral-letters/">Back</router-link>
+            <button class="btn btn-success" @click="onUpdate()">
+              <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+            </button>
+            <router-link class="btn btn-secondary" :to="'/referral-letters/print/' + selectedLetter.id">
+              <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print Preview
+            </router-link>
+            <router-link class="btn btn-secondary" to="/referral-letters/">
+              <img src="/assets/images/actions/back.svg" class="icon-24" alt=""> Back
+            </router-link>
           </div>
           <div>
-            <button class="btn btn-danger" @click="modalDeleteConfirmVisible = true">Delete</button>
+            <button class="btn btn-danger" @click="modalDeleteConfirmVisible = true">
+              <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Delete
+            </button>
           </div>
         </div>
 

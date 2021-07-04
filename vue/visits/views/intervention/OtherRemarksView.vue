@@ -26,7 +26,9 @@
               <div class="col">
 
                 <div class="text-center">
-                  <button class="btn btn-success" @click="onUpdate()">Update</button>
+                  <button class="btn btn-success" @click="onUpdate()">
+                    <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+                  </button>
                 </div>
 
               </div>
@@ -50,7 +52,7 @@ import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialo
 
 export default {
   name: "OtherRemarksView",
-  components: {RichEditorV2},
+  components: { RichEditorV2 },
 
   data() {
     return {
@@ -93,14 +95,14 @@ export default {
           other_remarks: this.otherRemarks,
         };
 
-        await $.post(`${getSiteURL()}/api/update/visit/visit-other-remarks.php`, params);
+        await $.post( `${ getSiteURL() }/api/update/visit/visit-other-remarks.php`, params );
 
-        await this.$store.dispatch("fetchVisit", this.visitId);
+        await this.$store.dispatch( "fetchVisit", this.visitId );
 
-        successMessageBox("Review date updated");
+        successMessageBox( "Review date updated" );
 
-      } catch (e) {
-        errorMessageBox("Failed to update");
+      } catch ( e ) {
+        errorMessageBox( "Failed to update" );
       }
 
     }

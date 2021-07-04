@@ -853,7 +853,9 @@
 
 
         <div class="text-center">
-          <button class="btn btn-success" @click="onUpdate()">Update</button>
+          <button class="btn btn-success" @click="onUpdate()">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+          </button>
         </div>
 
 
@@ -877,7 +879,9 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-success" @click="onAddRemark()" :disabled="echoRemarkToAdd.value === ''">Add</button>
+          <button class="btn btn-success" @click="onAddRemark()" :disabled="echoRemarkToAdd.value === ''">
+            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Add
+          </button>
         </div>
 
       </slot>

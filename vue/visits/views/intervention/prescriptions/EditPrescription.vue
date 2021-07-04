@@ -10,7 +10,9 @@
       <div class="card-header d-flex justify-content-between">
         <div>Prescription details</div>
         <div>
-          <router-link to="/prescriptions" class="btn btn-tiny btn-secondary">Close</router-link>
+          <router-link to="/prescriptions" class="btn btn-tiny btn-outline-secondary">
+            <img src="/assets/images/actions/close.svg" class="icon-16" alt=""> Close
+          </router-link>
         </div>
       </div>
 
@@ -32,7 +34,9 @@
 
         <div class="d-flex justify-content-between mb-3">
           <button class="btn btn-sm btn-primary" @click="isAddDrugModalVisible = true">Add drugs...</button>
-          <button class="btn btn-sm btn-success" @click="onUpdatePrescription()">Save</button>
+          <button class="btn btn-sm btn-success" @click="onUpdatePrescription()">
+            <img src="/assets/images/actions/save.svg" class="icon-16" alt=""> Update
+          </button>
         </div>
 
 

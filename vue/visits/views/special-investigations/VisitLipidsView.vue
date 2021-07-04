@@ -33,7 +33,9 @@
 
         <div class="form-row">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onUpdate()">Update</button>
+            <button class="btn btn-success" @click="onUpdate()">
+              <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
+            </button>
           </div>
         </div>
 

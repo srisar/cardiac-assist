@@ -7,8 +7,12 @@
     </div>
 
     <div class="d-print-none text-right">
-      <button class="btn btn-success" @click="openPrintDialog()">Print</button>
-      <router-link :to="'/referral-letters/edit/' + selectedLetter.id" class="btn btn-secondary">Back</router-link>
+      <button class="btn btn-success" @click="openPrintDialog()">
+        <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print
+      </button>
+      <router-link :to="'/referral-letters/edit/' + selectedLetter.id" class="btn btn-secondary">
+        <img src="/assets/images/actions/back.svg" class="icon-24" alt="">  Back
+      </router-link>
     </div>
 
   </div><!-- template -->

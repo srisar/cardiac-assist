@@ -10,7 +10,7 @@
       <div class="card-body" v-if="loaded">
 
         <div class="mb-3">
-          <button class="btn btn-sm btn-outline-dark" @click="modalAddVisible = true">
+          <button class="btn btn-sm btn-outline-success" @click="modalAddVisible = true">
             <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
           </button>
         </div>
@@ -27,11 +27,11 @@
 
               <div class="mt-2 position-absolute hover-group rounded" v-show="showHoverItemsById === item.id">
                 <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
-                  <img src="/assets/images/actions/edit.svg" class="icon-16" alt=""> Edit
+                  <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
                 </button>
 
                 <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteConfirmModal(item)">
-                  <img src="/assets/images/actions/remove.svg" alt="" class="icon-16"> Delete
+                  <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
                 </button>
               </div>
 
