@@ -25,6 +25,7 @@ import PrintReferralLetter from "./views/intervention/referral-letters/PrintRefe
 import ECGReportView from "./views/reports/ECGReportView";
 import CoronaryCTReportView from "./views/reports/CoronaryCTReportView";
 import EchoReportView from "./views/reports/EchoReportView";
+import AngioReportView from "./views/reports/AngioReportView";
 
 
 Vue.use( Vuex )
@@ -62,6 +63,7 @@ const routes = [
     { path: "/reports/ecg", component: ECGReportView },
     { path: "/reports/cct", component: CoronaryCTReportView },
     { path: "/reports/echo", component: EchoReportView },
+    { path: "/reports/angio", component: AngioReportView },
 ]
 
 const router = new VueRouter( {

@@ -286,7 +286,7 @@
                 <!-- details -->
 
                 <div class="text-center">
-                  <button class="btn btn-success" @click="onClickUpdate()" :disabled="!loaded">Update</button>
+                  <button class="btn btn-success" @click="onUpdate()" :disabled="!loaded">Update</button>
                   <AlertArea :feedback="feedback"/>
                 </div>
 
@@ -306,12 +306,14 @@
 
 <script>
 
-import {TYPE_ERROR, TYPE_SUCCESS} from "../../../_common/message_types";
+import {TYPE_SUCCESS} from "../../../_common/message_types";
 import AlertArea from "../../../_common/components/AlertArea";
+import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
 
 export default {
   name: "VisitAngiographyView",
   components: { AlertArea },
+
   data() {
     return {
       visitAngio: {
@@ -370,7 +372,6 @@ export default {
 
       },
 
-
       loaded: false,
 
       feedback: {
@@ -387,51 +388,37 @@ export default {
     }
   },
 
-  mounted() {
-    this.fetch();
+  async mounted() {
+
+    try {
+
+      await this.$store.dispatch( "visitAngio_fetch", this.visitId );
+      this.visitAngio = this.$store.getters.getVisitAngio;
+
+      /* set boolean value for dominance based on whats stored */
+      this.visitAngio.dominance_right = this.visitAngio.dominance_right === '1';
+      this.visitAngio.dominance_left = this.visitAngio.dominance_left === '1';
+
+      this.loaded = true;
+
+    } catch ( e ) {
+      errorMessageBox( "Failed to fetch angiography details" );
+    }
+
   },
 
   methods: {
 
-    async fetch() {
-
-      const params = {
-        visit_id: this.visitId
-      };
-
-      try {
-        const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-angio.php`, params );
-        this.visitAngio = response.data;
-        this.visitAngio.dominance_right = this.visitAngio.dominance_right === '1';
-        this.visitAngio.dominance_left = this.visitAngio.dominance_left === '1';
-
-        this.loaded = true;
-
-      } catch ( error ) {
-        console.log( error );
-      }
-
-    },
-
-    async onClickUpdate() {
-
-      this.feedback.message = "";
-      this.feedback.type = TYPE_SUCCESS;
+    async onUpdate() {
 
       try {
 
-        await $.post( `${ getSiteURL() }/api/update/visit/visit-angio.php`, this.visitAngio );
+        await this.$store.dispatch( "visitAngio_update", this.visitAngio );
 
-        this.feedback.message = "Updated successfully";
-        this.feedback.type = TYPE_SUCCESS;
-
-
+        successMessageBox( "Angiography details updated" );
       } catch ( e ) {
-        console.log( e );
-        this.feedback.message = "Failed to update";
-        this.feedback.type = TYPE_ERROR;
+        errorMessageBox( "Failed to update angiography details" );
       }
-
 
     },
 

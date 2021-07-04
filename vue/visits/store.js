@@ -12,6 +12,7 @@ import {visitProblems} from "./store_modules/visit_problems";
 import {visitLipids} from "./store_modules/visit_lipids";
 import {visitSpecialEcg} from "./store_modules/special_ecg";
 import {visitSpecialEcho} from "./store_modules/special_echo";
+import {visitAngio} from "./store_modules/visit_angio";
 
 Vue.use(Vuex);
 
@@ -31,6 +32,7 @@ export default new Vuex.Store({
         visitLipids: visitLipids,
         visitECG: visitSpecialEcg,
         visitEcho: visitSpecialEcho,
+        visitAngio: visitAngio
 
     },
 

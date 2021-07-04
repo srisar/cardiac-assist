@@ -22,7 +22,6 @@
             This includes individual special investigation reports.
           </p>
 
-          <router-link to="/reports/ecg" class="btn btn-sm btn-primary mb-2">Generate ECG report</router-link>
           <br>
           <router-link to="/reports/cct" class="btn btn-sm btn-primary mb-2">Generate Coronary CT report</router-link>
           <br>

@@ -3,18 +3,19 @@
   <div>
 
     <div class="paper">
+
+      <h3 class="text-center">Echocardiogram Report</h3>
+
       <PatientBasicDetails/>
 
       <div class="section-echo-report" v-if="loaded">
-
-        <h3 class="text-center">Echocardiogram Report</h3>
 
         <!-- section:Left Ventricle -->
 
         <div class="border p-2 mb-3 section">
 
           <div class="">
-            <h5 class="font-weight-bold">Left Ventricle</h5>
+            <h5 class="font-weight-bold text-uppercase">Left Ventricle</h5>
           </div>
 
           <div class="form-row">
@@ -83,7 +84,7 @@
           <div class="" v-if="visitEcho.show_advanced">
             <div class="">
               <hr>
-              <div class="font-weight-bold">Advanced</div>
+              <div class="font-weight-bold text-uppercase">Advanced</div>
             </div>
 
             <div class="form-row">
@@ -127,7 +128,7 @@
         <div class="border p-2 mb-3 section">
 
           <div class="">
-            <h5 class="font-weight-bold">Left Atrium</h5>
+            <h5 class="font-weight-bold text-uppercase">Left Atrium</h5>
           </div>
 
           <div v-if="visitEcho.is_left_atrium_dilated">
@@ -182,7 +183,7 @@
         <div class="border p-2 mb-3 section">
 
           <div class="">
-            <h5 class="font-weight-bold">Mitral Valve</h5>
+            <h5 class="font-weight-bold text-uppercase">Mitral Valve</h5>
           </div>
 
           <div class="" v-if="visitEcho.has_mitral_stenosis">
@@ -230,7 +231,7 @@
         <div class="section border p-2 mb-3">
 
           <div class="">
-            <h5 class="font-weight-bold">Aortic Valve</h5>
+            <h5 class="font-weight-bold text-uppercase">Aortic Valve</h5>
           </div>
 
 
@@ -300,7 +301,7 @@
         <div class="section border p-2 mb-3">
 
           <div class="">
-            <h5 class="font-weight-bold">Aorta</h5>
+            <h5 class="font-weight-bold text-uppercase">Aorta</h5>
           </div>
 
           <div class="form-row">
@@ -357,7 +358,7 @@
         <div class="section border p-2 mb-3">
 
           <div class="">
-            <h5 class="font-weight-bold">Right Ventricle / Pulmonary Artery</h5>
+            <h5 class="font-weight-bold text-uppercase">Right Ventricle / Pulmonary Artery</h5>
           </div>
 
           <div class="form-row">
@@ -452,7 +453,7 @@
         <div class="section border p-2 mb-3">
 
           <div class="">
-            <h5 class="font-weight-bold">Right Atrium</h5>
+            <h5 class="font-weight-bold text-uppercase">Right Atrium</h5>
           </div>
 
           <div class="" v-if="visitEchoRemarks.RIGHT_ATRIUM.length > 0">
@@ -504,7 +505,7 @@
         <div class="section border p-2 mb-3">
 
           <div class="">
-            <h5 class="font-weight-bold">Tricuspid</h5>
+            <h5 class="font-weight-bold text-uppercase">Tricuspid</h5>
           </div>
 
           <div class="" v-if="visitEchoRemarks.TRICUSPID.length > 0">
@@ -538,7 +539,7 @@
         <div class="section border p-2 mb-3">
 
           <div class="">
-            <h5 class="font-weight-bold">Conclusions</h5>
+            <h5 class="font-weight-bold text-uppercase">Conclusions</h5>
           </div>
 
           <div class="" v-if="visitEchoRemarks.CONCLUSION.length > 0">

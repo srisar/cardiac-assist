@@ -3,69 +3,70 @@
   <div>
 
     <div class="paper">
+
+      <h3 class="text-center">Coronary CT Report</h3>
+
       <PatientBasicDetails/>
 
       <div class="section-coronary-ct">
-
-        <h3 class="text-center">Coronary CT Report</h3>
 
         <table class="table table-bordered">
           <tbody>
 
           <tr>
             <td colspan="2">
-              <div class="font-weight-bold">Total calcium score</div>
+              <div class="font-weight-bold text-uppercase">Total calcium score</div>
               <div>{{ visitCoronaryCT.total_calcium_score }}</div>
             </td>
           </tr>
 
           <tr>
             <td style="width: 50%">
-              <div class="font-weight-bold">Origin</div>
+              <div class="font-weight-bold text-uppercase">Origin</div>
               <div>{{ visitCoronaryCT.origin }}</div>
             </td>
             <td>
-              <div class="font-weight-bold">Dominance</div>
+              <div class="font-weight-bold text-uppercase">Dominance</div>
               <div>{{ visitCoronaryCT.dominance }}</div>
             </td>
           </tr>
 
           <tr>
             <td>
-              <div class="font-weight-bold">Left Main</div>
+              <div class="font-weight-bold text-uppercase">Left Main</div>
               <div>{{ visitCoronaryCT.left_main }}</div>
             </td>
             <td>
-              <div class="font-weight-bold">LAD</div>
+              <div class="font-weight-bold text-uppercase">LAD</div>
               <div>{{ visitCoronaryCT.lad }}</div>
             </td>
           </tr>
 
           <tr>
             <td>
-              <div class="font-weight-bold">LCX</div>
+              <div class="font-weight-bold text-uppercase">LCX</div>
               <div>{{ visitCoronaryCT.lcx }}</div>
             </td>
             <td>
-              <div class="font-weight-bold">Cardiac Valves</div>
+              <div class="font-weight-bold text-uppercase">Cardiac Valves</div>
               <div>{{ visitCoronaryCT.cardiac_valves }}</div>
             </td>
           </tr>
 
           <tr>
             <td>
-              <div class="font-weight-bold">Pericardium</div>
+              <div class="font-weight-bold text-uppercase">Pericardium</div>
               <div>{{ visitCoronaryCT.pericardium }}</div>
             </td>
             <td>
-              <div class="font-weight-bold">Extra Cardiac Findings</div>
+              <div class="font-weight-bold text-uppercase">Extra Cardiac Findings</div>
               <div>{{ visitCoronaryCT.extra_cardiac_findings }}</div>
             </td>
           </tr>
 
           <tr>
             <td colspan="2">
-              <div class="font-weight-bold">Impression</div>
+              <div class="font-weight-bold text-uppercase">Impression</div>
               <div>{{ visitCoronaryCT.impression }}</div>
             </td>
           </tr>
