@@ -10,7 +10,7 @@
             <input type="text" class="form-control"
                    v-model.trim="query"
                    @keyup.enter="onSearch()"
-                   placeholder="Use id:xx for search patient by id. Eg. id:12">
+                   placeholder="Use id:xx to search patient by id. Eg:- id:12">
             <div class="input-group-append">
               <button class="btn btn-outline-primary" @click="onSearch()">
                 <img src="/assets/images/actions/search.svg" class="icon-16" alt="">

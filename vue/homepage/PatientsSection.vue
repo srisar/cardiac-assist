@@ -46,8 +46,12 @@
 
               <div class="row my-3">
                 <div class="col text-center">
-                  <a href="app/patients/add.php" class="btn btn-success btn-sm">Add new patient</a>
-                  <a href="app/patients/list.php" class="btn btn-primary btn-sm">View all patients</a>
+                  <a href="app/patients/add.php" class="btn btn-outline-success btn-sm">
+                    <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add new patient
+                  </a>
+                  <a href="app/patients/list.php" class="btn btn-outline-primary btn-sm">
+                    <img src="/assets/images/actions/forward.svg" class="icon-16" alt=""> View all patients
+                  </a>
                 </div>
               </div>
 
@@ -60,9 +64,13 @@
                            @keyup.enter="onSearch()"
                            placeholder="Search for names, addresses and phones">
                     <div class="input-group-append">
-                      <button class="btn btn-primary" @click="onSearch()">Search</button>
+                      <button class="btn btn-outline-primary" @click="onSearch()">
+                        <img src="/assets/images/actions/search.svg" class="icon-16" alt="">
+                      </button>
                     </div>
                   </div>
+
+                  <div class="text-center mt-2">You can search for patient by id by using id:xx. Eg:- id:12</div>
                 </div>
 
               </div><!-- row -->
@@ -82,7 +90,7 @@
 
 <script>
 
-let _ = require("lodash");
+let _ = require( "lodash" );
 
 export default {
   name: "PatientsSection",
@@ -108,8 +116,8 @@ export default {
   async mounted() {
 
     try {
-      await this.$store.dispatch("patients_getStats");
-    } catch (e) {
+      await this.$store.dispatch( "patients_getStats" );
+    } catch ( e ) {
 
     }
 
@@ -119,8 +127,8 @@ export default {
 
     onSearch() {
 
-      if (!_.isEmpty(this.patients.search.query)) {
-        window.location.href = `${getSiteURL()}/app/patients/list.php#search/${this.patients.search.query}`;
+      if ( !_.isEmpty( this.patients.search.query ) ) {
+        window.location.href = `${ getSiteURL() }/app/patients/list.php#search/${ this.patients.search.query }`;
       }
 
     },
