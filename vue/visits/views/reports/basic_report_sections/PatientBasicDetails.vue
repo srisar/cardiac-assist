@@ -33,7 +33,7 @@
           </td>
 
           <td style="width: 20%">
-            <div>{{ visit.dbp }} / {{ visit.sbp }} mmHg</div>
+            <div>{{ visit.dbp }}/{{ visit.sbp }} mmHg</div>
           </td>
 
           <td style="width: 20%">
@@ -58,7 +58,7 @@
           </td>
 
           <td style="width: 20%">
-            <div><span class="font-weight-bold">SMO:</span> {{ visit.smoking | filterSmoking }}</div>
+            <div><span class="font-weight-bold"></span> {{ visit.smoking | filterSmoking }}</div>
           </td>
 
           <td style="width: 20%">
