@@ -111,14 +111,19 @@ export default {
 .modal {
   background-color: rgba(108, 117, 125, 0.5);
   overflow-y: auto;
+  display: block;
+  visibility: hidden;
+  transition: opacity 0.33s ease-in-out, visibility 0.33s ease-in-out;
 }
 
 .show {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 .hide {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 

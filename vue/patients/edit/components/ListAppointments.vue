@@ -62,7 +62,7 @@
 
         <div class="form-row">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onClickSave">
+            <button class="btn btn-success" @click="onSave()">
               <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Save
             </button>
           </div>
@@ -112,8 +112,8 @@
           <div class="col">
 
             <div class="d-flex justify-content-center">
-              <button class="btn btn-success mx-1" @click="onClickUpdate">Update</button>
-              <button class="btn btn-danger mx-1" @click="onClickDelete">Delete</button>
+              <button class="btn btn-success mx-1" @click="onUpdate()">Update</button>
+              <button class="btn btn-danger mx-1" @click="onDelete()">Delete</button>
             </div>
 
           </div>
@@ -130,6 +130,7 @@
 
 import ModalWindow from "../../../_common/components/ModalWindow";
 import DateField from "../../../_common/components/DateField";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 const _ = require( 'lodash' );
 
@@ -150,7 +151,7 @@ export default {
 
       appointmentToAdd: {
         patient_id: undefined,
-        date: moment().format( 'YYYY-MM-DD' ),
+        date: moment().format( "YYYY-MM-DD" ),
         remarks: "",
       },
 
@@ -163,10 +164,10 @@ export default {
       },
 
       statusList: {
-        PENDING: 'Pending',
-        COMPLETED: 'Completed',
-        CANCELLED: 'Cancelled',
-        MISSED: 'Missed',
+        PENDING: "Pending",
+        COMPLETED: "Completed",
+        CANCELLED: "Cancelled",
+        MISSED: "Missed",
       }
 
     }
@@ -188,79 +189,80 @@ export default {
     },
 
   },
-  /* *** COMPUTED *** */
+  /* -- computed -- */
 
 
-  mounted() {
+  async mounted() {
 
   },
-  /* *** MOUNTED *** */
+  /* -- mounted -- */
 
 
   methods: {
 
-    /*
-    * Save a new appointment
-    * */
-    onClickSave() {
 
-      const appointment = {
-        patient_id: this.patient.id,
-        date: this.appointmentToAdd.date,
-        remarks: this.appointmentToAdd.remarks,
+    async onSave() {
+
+      try {
+
+        const appointment = {
+          patient_id: this.patient.id,
+          date: this.appointmentToAdd.date,
+          remarks: this.appointmentToAdd.remarks,
+        }
+
+        await this.$store.dispatch( "appointments_add", appointment );
+
+        await this.$store.dispatch( "appointments_fetchAll", this.patient.id );
+
+        // hide modal
+        this.modalAddAppointment.visible = false;
+
+        // clear fields
+        this.appointmentToAdd.remarks = "";
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to add an appointment" );
       }
-
-      this.$store.dispatch( 'addAppointment', appointment )
-          .then( () => {
-
-            // hide modal
-            this.modalAddAppointment.visible = false
-
-            // clear fields
-            this.appointmentToAdd.remarks = ""
-          } )
-          .catch( e => {
-            console.log( e )
-            alert( 'Failed to add an appointment' )
-          } )
 
     }, /* on click save */
 
-    onClickUpdate() {
+    async onUpdate() {
 
-      const appointment = {
-        id: this.appointmentToEdit.id,
-        date: this.appointmentToEdit.date,
-        remarks: this.appointmentToEdit.remarks,
-        status: this.appointmentToEdit.status,
+      try {
+
+        const appointment = {
+          id: this.appointmentToEdit.id,
+          date: this.appointmentToEdit.date,
+          remarks: this.appointmentToEdit.remarks,
+          status: this.appointmentToEdit.status,
+        };
+
+        await this.$store.dispatch( "appointments_update", appointment );
+        await this.$store.dispatch( "appointments_fetchAll", this.patient.id );
+        this.modalEditAppointment.visible = false;
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to update the appointment" );
       }
 
-      this.$store.dispatch( 'editAppointment', appointment )
-          .then( () => {
-            this.modalEditAppointment.visible = false
-          } )
-          .catch( e => {
-            alert( 'Failed to update the appointment' )
-            console.log( e )
-          } )
 
     }, /* on click update */
 
-    onClickDelete() {
+    async onDelete() {
 
-      const id = this.appointmentToEdit.id
+      try {
 
-      if ( confirm( 'Are you sure to delete?' ) ) {
+        const id = this.appointmentToEdit.id;
+        await this.$store.dispatch( "appointments_delete", id );
+        await this.$store.dispatch( "appointments_fetchAll", this.patient.id );
 
-        this.$store.dispatch( 'deleteAppointment', id )
-            .then( () => {
-              this.modalEditAppointment.visible = false
-            } )
-            .catch( e => {
-              alert( 'Failed to delete the appointment' )
-              console.log( e )
-            } )
+        this.modalEditAppointment.visible = false;
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to delete the appointment" );
       }
+
 
     }, /* on click delete */
 
@@ -275,7 +277,7 @@ export default {
     }
 
   },
-  /* *** METHODS *** */
+  /* -- methods -- */
 
 }
 </script>

@@ -146,7 +146,7 @@
 
         <div class="form-row">
           <div class="col text-center">
-            <button class="btn btn-success" @click="onClickSave">Save</button>
+            <button class="btn btn-success" @click="onSave()">Save</button>
           </div>
         </div>
 
@@ -161,13 +161,12 @@
 
 import ModalWindow from "../../../_common/components/ModalWindow";
 import DateField from "../../../_common/components/DateField";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 
 const _ = require( 'lodash' );
 
 export default {
-
   name: "ListVisits",
-
   components: { ModalWindow, DateField },
 
   data() {
@@ -191,8 +190,7 @@ export default {
         ef: 0,
       },
 
-
-    }
+    };
   },
   /* -- data -- */
 
@@ -224,6 +222,7 @@ export default {
   },
   /* -- computed -- */
 
+
   watch: {
     patient( value ) {
       this.visitToAdd.patient_id = value.id;
@@ -231,10 +230,6 @@ export default {
   },
   /* -- watch -- */
 
-  mounted() {
-    /**/
-  },
-  /* -- mounted -- */
 
   methods: {
 
@@ -243,49 +238,48 @@ export default {
     },
 
 
-    onClickSave() {
+    async onSave() {
 
-      const visit = {
-        patient_id: this.patient.id,
-        visit_date: this.visitToAdd.visit_date,
-        remarks: this.visitToAdd.remarks,
-        height: this.visitToAdd.height,
-        weight: this.visitToAdd.weight,
-        bmi: this.bmi,
-        bsa: this.bsa,
-        dbp: this.visitToAdd.dsp,
-        sbp: this.visitToAdd.sbp,
-        dm: this.visitToAdd.dm,
-        ht: this.visitToAdd.ht,
-        dl: this.visitToAdd.dl,
-        ef: this.visitToAdd.ef,
-      };
+      try {
 
+        const visit = {
+          patient_id: this.patient.id,
+          visit_date: this.visitToAdd.visit_date,
+          remarks: this.visitToAdd.remarks,
+          height: this.visitToAdd.height,
+          weight: this.visitToAdd.weight,
+          bmi: this.bmi,
+          bsa: this.bsa,
+          dbp: this.visitToAdd.dsp,
+          sbp: this.visitToAdd.sbp,
+          dm: this.visitToAdd.dm,
+          ht: this.visitToAdd.ht,
+          dl: this.visitToAdd.dl,
+          ef: this.visitToAdd.ef,
+        };
 
-      this.$store.dispatch( 'addVisit', visit )
-          .then( () => {
+        await this.$store.dispatch( 'visits_add', visit );
+        await this.$store.dispatch( "visits_fetchAll", this.patient.id );
 
-            // hide modal
-            this.modalAddVisit.visible = false;
+        // hide modal
+        this.modalAddVisit.visible = false;
 
-            // clear fields
-            this.visitToAdd.remarks = ''
-            this.visitToAdd.height = 1
-            this.visitToAdd.weight = 1
-            this.visitToAdd.dsp = 0
-            this.visitToAdd.sbp = 0
-            this.visitToAdd.dm = false
-            this.visitToAdd.ht = false
-            this.visitToAdd.dl = false
-            this.visitToAdd.ef = 0
+        // clear fields
+        this.visitToAdd.remarks = ''
+        this.visitToAdd.height = 1
+        this.visitToAdd.weight = 1
+        this.visitToAdd.dsp = 0
+        this.visitToAdd.sbp = 0
+        this.visitToAdd.dm = false
+        this.visitToAdd.ht = false
+        this.visitToAdd.dl = false
+        this.visitToAdd.ef = 0
 
-          } )
-          .catch( () => {
-            alert( 'Failed to add a visit' );
-          } );
+      } catch ( e ) {
+        errorMessageBox( "Failed to add new visit" );
+      }
 
     }, /* on save */
-
 
     getStatusIcon( status ) {
       if ( status === "COMPLETE" ) {
@@ -293,11 +287,10 @@ export default {
       } else {
         return "/assets/images/actions/in-progress.svg"
       }
-    }
-
+    },
 
   },
-  /* *** METHODS *** */
+  /* -- methods -- */
 
 }
 </script>

@@ -1,7 +1,7 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
+import Vuex from "vuex";
+import Vue from "vue";
 
-Vue.use(Vuex);
+Vue.use( Vuex );
 
 
 /*
@@ -13,73 +13,44 @@ const moduleVisits = {
         visitsList: [],
     },
 
-    /*
-    * === MUTATIONS ===
-    * */
     mutations: {
-
-        setVisitsList(state, list) {
+        setVisitsList( state, list ) {
             state.visitsList = list
         },
-
     },
 
-    /*
-    * === GETTERS ===
-    * */
     getters: {
-
-        getVisitsList(state) {
+        getVisitsList( state ) {
             return state.visitsList
         },
-
     },
 
-    /*
-    * === ACTIONS ===
-    * */
     actions: {
 
-        /*
-        * Fetch visits
-        * */
-        fetchVisits({ commit, rootGetters }) {
+        async visits_fetchAll( context, patientId ) {
 
-            return new Promise((resolve, reject) => {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/patient-visits.php`, { id: patientId } );
+                context.state.visitsList = response.data;
+            } catch ( e ) {
+                throw e;
+            }
 
-                $.get(`${getSiteURL()}/api/get/patient-visits.php`, {
-                    id: rootGetters.getPatient.id
-                }).done(r => {
-
-                    commit('setVisitsList', r.data)
-                    resolve()
-
-                }).fail(e => {
-                    reject(e)
-                })
-            })
 
         }, /* fetch visits */
 
-        addVisit({ commit, dispatch }, visit) {
+        async visits_add( context, params ) {
 
-            return new Promise((resolve, reject) => {
-
-                $.get(`${getSiteURL()}/api/save/visit/visit.php`, visit)
-                    .done(r => {
-
-                        dispatch('fetchVisits')
-                        resolve()
-                    })
-                    .fail(e => {
-                        reject(e)
-                    });
-            });
+            try {
+                await $.get( `${ getSiteURL() }/api/save/visit/visit.php`, params );
+            } catch ( e ) {
+                throw e;
+            }
 
         }, /* add visit*/
 
-
     }
+    /* -- actions -- */
 
 };
 
@@ -90,188 +61,156 @@ const moduleAppointments = {
     },
 
     getters: {
-        getAppointmentsList(state) {
+        getAppointmentsList( state ) {
             return state.appointmentsList
-        }
+        },
     },
 
     mutations: {
-        setAppointmentsList(state, list) {
+        setAppointmentsList( state, list ) {
             state.appointmentsList = list
-        }
+        },
     },
 
     actions: {
-        fetchAppointments({ rootGetters, commit }) {
 
-            return new Promise((resolve, reject) => {
+        async appointments_fetchAll( context, patientId ) {
 
-                $.get(`${getSiteURL()}/api/get/patient-appointments.php`, {
-                    id: rootGetters.getPatient.id
-                }).done(r => {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/patient-appointments.php`, { id: patientId } );
+                context.state.appointmentsList = response.data;
+            } catch ( e ) {
+                throw e;
+            }
 
-                    commit('setAppointmentsList', r.data)
-                    resolve()
-
-                }).fail(e => {
-                    reject(e)
-                });
-
-            })
         }, /* fetch appointments */
 
-        addAppointment({ dispatch }, appointment) {
-            return new Promise((resolve, reject) => {
-                $.post(`${getSiteURL()}/api/save/appointment.php`, appointment)
-                    .done(r => {
-                        dispatch('fetchAppointments')
-                        resolve()
-                    })
-                    .fail(e => {
-                        reject(e)
-                    })
-            })
+        async appointments_add( context, params ) {
+
+            try {
+                await $.post( `${ getSiteURL() }/api/save/appointment.php`, params );
+            } catch ( e ) {
+                throw e;
+            }
 
         }, /* add appointment */
 
-        editAppointment({ dispatch }, appointment) {
-            return new Promise((resolve, reject) => {
-                $.post(`${getSiteURL()}/api/update/appointment.php`, appointment)
-                    .done(r => {
-                        dispatch('fetchAppointments')
-                        resolve()
-                    })
-                    .fail(e => {
-                        reject(e)
-                    })
-            })
+        async appointments_update( context, params ) {
+
+            try {
+                $.post( `${ getSiteURL() }/api/update/appointment.php`, params )
+            } catch ( e ) {
+                throw e;
+            }
         }, /* update appointment */
 
-        deleteAppointment: function ({ dispatch }, id) {
-            return new Promise((resolve, reject) => {
+        async appointments_delete( context, id ) {
 
-                const params = {
-                    id: id
-                }
-
-                $.post(`${getSiteURL()}/api/delete/appointment.php`, params)
-                    .done(r => {
-
-                        dispatch('fetchAppointments')
-                            .then(() => {
-                                resolve()
-                            })
-                    })
-                    .fail(e => {
-                        reject(e)
-                    })
-            })
-
+            try {
+                $.post( `${ getSiteURL() }/api/delete/appointment.php`, { id: id } );
+            } catch ( e ) {
+                throw e;
+            }
         }, /* delete appointment */
 
     },
 }
 
 
-/*
-* ====== MAIN STORE ======
-* */
-export default new Vuex.Store({
+export default new Vuex.Store( {
 
     modules: {
-        visits      : moduleVisits,
+        visits: moduleVisits,
         appointments: moduleAppointments
     },
 
     state: {
 
         patient: {
-            id         : "",
-            first_name : "",
-            last_name  : "",
-            dob        : moment().format('YYYY-MM-DD'),
-            age        : 0,
-            address    : "",
+            id: "",
+            first_name: "",
+            last_name: "",
+            dob: moment().format( "YYYY-MM-DD" ),
+            age: 0,
+            address: "",
             ds_division: "",
-            nic        : "",
-            phone      : "",
-            gender     : "",
-            job        : "",
-            job_type   : "",
-            income     : 0,
-            status     : "",
+            nic: "",
+            phone: "",
+            gender: "",
+            job: "",
+            job_type: "",
+            income: 0,
+            status: "",
         },
 
     },
 
     mutations: {
-        setPatient(state, payload) {
+        setPatient( state, payload ) {
             state.patient = payload;
         }
     },
 
     getters: {
-        getPatient: (state) => {
+        getPatient( state ) {
             return state.patient;
-        }
+        },
     },
 
     actions: {
 
-        /*
-        * Fetch patient
-        * */
-        fetchPatient({ commit, dispatch }, id) {
+        async patient_fetch( context, id ) {
 
-            return new Promise((resolve, reject) => {
-                $.get(`${getSiteURL()}/api/get/patients.php`, {
-                    id: id
-                }).done(r => {
-                    commit('setPatient', r.data);
-                    resolve();
-                }).fail(e => {
-                    reject(e);
-                });
-            });
-        },
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/patients.php`, { id: id } );
+                context.state.patient = response.data;
+            } catch ( e ) {
+                throw e;
+            }
 
-        /*
-        * Update patient
-        * */
-        updatePatient({ commit, dispatch }, patient) {
+        }, /* fetch */
 
-            return new Promise((resolve, reject) => {
-                $.post(`${getSiteURL()}/api/update/patient.php`, {
-                    id         : patient.id,
-                    first_name : patient.first_name,
-                    last_name  : patient.last_name,
-                    dob        : patient.dob,
-                    age        : patient.age,
-                    address    : patient.address,
-                    ds_division: patient.ds_division,
-                    nic        : patient.nic,
-                    phone      : patient.phone,
-                    gender     : patient.gender,
-                    job        : patient.job,
-                    job_type   : patient.job_type,
-                    income     : patient.income,
-                    status     : patient.status,
-                }).done(r => {
 
-                    dispatch('fetchPatient', patient.id);
-                    resolve(r);
+        async patient_update( context, params ) {
 
-                }).fail(e => {
-                    reject(e);
-                });
+            try {
+                await $.post( `${ getSiteURL() }/api/update/patient.php`, params );
+            } catch ( e ) {
+                throw e;
+            }
 
-            });
+            // return new Promise( ( resolve, reject ) => {
+            //     $.post( `${ getSiteURL() }/api/update/patient.php`, {
+            //         id: patient.id,
+            //         first_name: patient.first_name,
+            //         last_name: patient.last_name,
+            //         dob: patient.dob,
+            //         age: patient.age,
+            //         address: patient.address,
+            //         ds_division: patient.ds_division,
+            //         nic: patient.nic,
+            //         phone: patient.phone,
+            //         gender: patient.gender,
+            //         job: patient.job,
+            //         job_type: patient.job_type,
+            //         income: patient.income,
+            //         status: patient.status,
+            //     } ).done( r => {
+            //
+            //         dispatch( "fetchPatient", patient.id );
+            //         resolve( r );
+            //
+            //     } ).fail( e => {
+            //         reject( e );
+            //     } );
+            //
+            // } );
 
         },
 
     }
 
-});
+} );
 
 
 

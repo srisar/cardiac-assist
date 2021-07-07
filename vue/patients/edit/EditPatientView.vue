@@ -141,7 +141,7 @@
 
 
               <div class="text-center">
-                <button type="button" class="btn btn-success" :disabled="!formValidated" @click="onClickUpdatePatient">
+                <button type="button" class="btn btn-success" :disabled="!formValidated" @click="onUpdatePatient()">
                   <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
                 </button>
               </div>
@@ -231,47 +231,30 @@ export default {
 
   methods: {
 
-    fetchPatient() {
+    async fetchPatient() {
 
-      this.$store.dispatch( 'fetchPatient', this.patientId )
-          .then( r => {
-
-            /*
-            * after fetching patient data, fetch visits data
-            * */
-            this.$store.dispatch( 'fetchVisits' )
-                .catch( e => {
-                  alert( 'Failed to get visits' )
-                  console.log( e )
-                } );
-
-
-            this.$store.dispatch( 'fetchAppointments' )
-                .catch( e => {
-                  alert( 'failed to get appointments' )
-                  console.log( e )
-                } )
-
-          } )
-
+      try {
+        await this.$store.dispatch( "patient_fetch", this.patientId );
+        await this.$store.dispatch( "visits_fetchAll", this.patientId );
+        await this.$store.dispatch( "appointments_fetchAll", this.patient.id );
+      } catch ( e ) {
+        errorMessageBox( "Failed to fetch patient details" );
+      }
     },
 
 
-    onClickUpdatePatient() {
+    async onUpdatePatient() {
 
-      this.patient.age = this.calculatedAge;
+      try {
+        this.patient.age = this.calculatedAge;
+        await this.$store.dispatch( 'patient_update', this.patient );
 
-      this.$store.dispatch( 'updatePatient', this.patient )
-          .then( r => {
-            successMessageBox( "Patient details updated" );
-          } )
-          .catch( e => {
-            errorMessageBox( 'Failed to update patient details' );
-            console.log( e )
-          } )
+        successMessageBox( "Patient details updated" );
 
+      } catch ( e ) {
+        errorMessageBox( 'Failed to update patient details' );
+      }
     },
-
 
     _calculateAge() {
       const today = moment()
