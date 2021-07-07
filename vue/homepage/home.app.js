@@ -3,13 +3,26 @@ import VueRouter from "vue-router";
 import HomepageView from "./HomepageView";
 
 import store from "./vuex.store";
+import AppView from "./AppView";
+import AppointmentsView from "./AppointmentsView";
 
-const routes = [];
+Vue.use(VueRouter);
 
-const router = new VueRouter({routes});
+const routes = [
+    {
+        path: "/",
+        component: HomepageView
+    },
+    {
+        path: "/appointments",
+        component: AppointmentsView,
+    }
+];
 
-new Vue({
-    render: h => h(HomepageView),
+const router = new VueRouter( { routes } );
+
+new Vue( {
+    render: h => h( AppView ),
     store: store,
     router: router,
-}).$mount("#app");
+} ).$mount( "#app" );

@@ -1,44 +1,85 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use( Vuex );
 
-export default new Vuex.Store({
+export default new Vuex.Store( {
 
-    /* *** STATE *** */
     state: {
+        patientsStats: {},
 
-        patientsStats: {}
-
-    },
-    /* *** STATE *** */
-
-    getters: {
-        getPatientsStats(state) {
-            return state.patientsStats;
+        statuses: {
+            pending: "PENDING",
+            completed: "COMPLETED",
+            missed: "MISSED",
+            cancelled: "CANCELLED",
         },
     },
 
-    /* *** MUTATIONS *** */
-    mutations: {},
-    /* *** MUTATIONS *** */
+    getters: {
+        getPatientsStats( state ) {
+            return state.patientsStats;
+        },
 
-    /* *** ACTIONS *** */
+        getAppointmentStatuses( state ) {
+            return state.statuses;
+        }
+    },
+
     actions: {
 
-        async patients_getStats(context) {
+        async patients_getStats( context ) {
             try {
+                context.state.patientsStats = await $.get( `${ getSiteURL() }/api/stats/patients.php` );
+            } catch ( e ) {
+                throw e;
+            }
+        }, /* get patients stats */
 
-                const response = await $.get(`${getSiteURL()}/api/stats/patients.php`);
-                console.log(response);
-                context.state.patientsStats = response;
 
-            } catch (e) {
+        async appointments_fetchByDate( context, params = { date: "", status: "" } ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/appointments/by-date.php`, params );
+                return response.data;
+            } catch ( e ) {
+                throw e;
+            }
+        },
+
+        async appointments_fetchBetweenDates( context, params ) {
+
+            /*
+            * params: start_date, end_date
+            * */
+
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/appointments/between-dates.php`, params );
+                return response.data;
+            } catch ( e ) {
+                throw e;
+            }
+        },
+
+        async appointments_fetchByDateExceptPending( context, params = { date: "", status: "" } ) {
+            try {
+                const response = await $.get( `${ getSiteURL() }/api/get/appointments/by-date.php`, params );
+                return response.data;
+            } catch ( e ) {
+                throw e;
+            }
+        },
+
+        async appointments_setStatus( context, params ) {
+            /*
+            * params: id, status
+            * */
+            try {
+                await $.get( `${ getSiteURL() }/api/update/appointment-status.php`, params );
+            } catch ( e ) {
                 throw e;
             }
         }
 
     },
-    /* *** ACTIONS *** */
 
-})
+} )

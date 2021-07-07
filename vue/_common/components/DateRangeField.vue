@@ -5,13 +5,13 @@
 <script>
 export default {
   name: "DateRangeField",
-  props: ['value', 'min-date', 'id'],
+  props: ['value', 'minDate', 'maxDate', 'id'],
   data: function () {
     return {};
   },
   mounted: function () {
     //
-    $(this.$refs.field_date_range).daterangepicker({
+    $( this.$refs.field_date_range ).daterangepicker( {
       "singleDatePicker": false,
       "showDropdowns": true,
       "locale": {
@@ -20,15 +20,16 @@ export default {
       "startDate": this.value.startDate,
       "endDate": this.value.endDate,
       "minDate": this.minDate,
-    });
+      "maxDate": this.maxDate,
+    } );
 
 
-    $(this.$refs.field_date_range).on("apply.daterangepicker", (event, picker) => {
-      let sDate = picker.startDate.format("YYYY-MM-DD");
-      let eDate = picker.endDate.format("YYYY-MM-DD");
-      this.$emit('input', {startDate: sDate, endDate: eDate});
-      this.$emit('changed:date-range');
-    });
+    $( this.$refs.field_date_range ).on( "apply.daterangepicker", ( event, picker ) => {
+      let sDate = picker.startDate.format( "YYYY-MM-DD" );
+      let eDate = picker.endDate.format( "YYYY-MM-DD" );
+      this.$emit( 'input', { startDate: sDate, endDate: eDate } );
+      this.$emit( 'changed:date-range' );
+    } );
 
   },
   methods: {

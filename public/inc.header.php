@@ -66,7 +66,7 @@ use App\Models\User;
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::siteURL() ?>">Home</a>
+                    <a class="nav-link" href="<?= App::siteURL() ?>/#/">Home</a>
                 </li>
 
 
@@ -78,6 +78,8 @@ use App\Models\User;
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/patients/add.php">Add a patient</a>
                         <a class="dropdown-item" href="<?= App::siteURL() ?>/app/patients/list.php">View all patients</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?= App::siteURL() ?>/#/appointments">Appointments</a>
                     </div>
                 </li><!-- end nav-item -->
 

@@ -113,7 +113,7 @@ export default {
   overflow-y: auto;
   display: block;
   visibility: hidden;
-  transition: opacity 0.33s ease-in-out, visibility 0.33s ease-in-out;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 
 .show {

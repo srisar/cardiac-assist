@@ -45,7 +45,7 @@
               </div><!-- row -->
 
               <div class="row my-3">
-                <div class="col text-center">
+                <div class="col-12 text-center mb-2">
                   <a href="app/patients/add.php" class="btn btn-outline-success btn-sm">
                     <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add new patient
                   </a>
@@ -53,6 +53,13 @@
                     <img src="/assets/images/actions/forward.svg" class="icon-16" alt=""> View all patients
                   </a>
                 </div>
+
+                <div class="col-12 text-center">
+                  <router-link class="btn btn-sm btn-outline-primary" to="/appointments">
+                    <img src="/assets/images/actions/appointments.svg" class="icon-16" alt=""> Appointments
+                  </router-link>
+                </div>
+
               </div>
 
               <div class="row my-3">
