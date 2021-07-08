@@ -75,11 +75,18 @@ class Request
     {
         $data = self::getParam( $key );
 
+        error_log( sprintf( "%s => %s", $key, $data ) );
+
+
         if ( !is_null( $data ) ) {
 
-            if ( $data == '0' ) return 0;
+            if ( $data === '0' ) return 0;
 
-            return filter_var( $data, FILTER_VALIDATE_FLOAT );
+            if ( filter_var( $data, FILTER_VALIDATE_FLOAT ) ) {
+                return (float)$data;
+            }
+
+            return null;
         }
         return null;
     }
