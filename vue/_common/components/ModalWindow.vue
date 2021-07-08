@@ -7,7 +7,8 @@
        :aria-labelledby="id"
        aria-hidden="true">
 
-    <div class="modal-dialog modal-lg" :class="{'expanded': isExpanded}">
+    <div class="modal-dialog"
+         :class="{'expanded': isExpanded, 'modal-lg': size===undefined, 'modal-sm': size==='small'} ">
       <div class="modal-content">
 
         <div class="modal-header p-1">
@@ -44,7 +45,7 @@
 export default {
   name: "ModalWindow",
 
-  props: ["id", "expanded", "visible"],
+  props: ["id", "expanded", "visible", "size"],
 
   data: function () {
     return {
@@ -101,6 +102,14 @@ export default {
 
     },
 
+    sizeClass() {
+      if ( this.size !== undefined ) {
+        if ( this.size === "small" ) return "modal-sm";
+        if ( this.size === "lx" ) return "modal-xl";
+      }
+      return "modal-lg";
+    },
+
   },
 
 }
@@ -126,6 +135,10 @@ export default {
   opacity: 0;
 }
 
+/* sizes */
+.size-small {
+
+}
 
 .expanded {
   max-width: 90%;

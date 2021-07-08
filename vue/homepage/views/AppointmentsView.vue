@@ -5,33 +5,7 @@
       <div class="row">
         <div class="col">
 
-          <div class="card shadow shadow-sm mb-3">
-            <div class="card-header">Today's appointments ({{ today }})</div>
-            <div class="card-body">
-
-
-              <div v-if="todayPendingAppointments.length > 0">
-                <h5 class="text-center text-uppercase">Pending</h5>
-                <AppointmentsTable @status-updated="onStatusUpdated()" :appointments="todayPendingAppointments" table-class="table-warning"/>
-              </div><!-- section -->
-
-              <div v-if="todayCompletedAppointments.length > 0">
-                <h5 class="text-center text-uppercase">Completed</h5>
-                <AppointmentsTable @status-updated="onStatusUpdated()" :appointments="todayCompletedAppointments" table-class="table-success"/>
-              </div><!-- section -->
-
-              <div v-if="todayMissedAppointments.length > 0">
-                <h5 class="text-center text-uppercase">Missed</h5>
-                <AppointmentsTable @status-updated="onStatusUpdated()" :appointments="todayMissedAppointments" table-class="table-danger"/>
-              </div><!-- section -->
-
-              <div v-if="todayCancelledAppointments.length > 0">
-                <h5 class="text-center text-uppercase">Cancelled</h5>
-                <AppointmentsTable @status-updated="onStatusUpdated()" :appointments="todayCancelledAppointments" table-class="table-info"/>
-              </div><!-- section -->
-
-            </div>
-          </div><!-- card -->
+          <SingleDayAppointments/>
 
           <div class="card shadow shadow-sm mb-3">
             <div class="card-header">{{ customDateRangeLabel }}</div>
@@ -43,7 +17,7 @@
 
               <div v-if="appointmentsBetweenDates.length > 0">
 
-                <div class="mb-3">
+                <div class="mb-3 alert alert-dark text-center">
 
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="chk_all" name="chk_status" value="ALL" v-model="checkStatus">
@@ -81,7 +55,10 @@
                   </div>
                 </div><!-- filter radio buttons -->
 
-                <AppointmentsTable @status-updated="onBetweenDatesStatusUpdated()" :appointments="filteredAppointmentsBetweenDates"/>
+                <AppointmentsTable
+                    @status-updated="onBetweenDatesStatusUpdated()"
+                    :appointments="filteredAppointmentsBetweenDates"
+                    :colored="true"/>
               </div><!-- section -->
 
               <div v-else class="text-center">
@@ -98,13 +75,12 @@
     </div><!-- container -->
 
 
-    <ModalWindow :visible="modalCustomDateRange.visible" @close="modalCustomDateRange.visible = false">
-
+    <ModalWindow :visible="modalCustomDateRange.visible" @close="modalCustomDateRange.visible = false" size="small">
+      <template v-slot:title>Choose date range</template>
       <div class="form-row justify-content-center">
-        <div class="col-4">
-          <div class="form-group">
-            <label>Date range</label>
-            <DateRangeField v-model="dateRange" :max-date="modalCustomDateRange.maxDate"/>
+        <div class="col">
+          <div class="form-group text-center">
+            <DateRangeField v-model="dateRange" class="text-center"/>
           </div>
         </div>
       </div>
@@ -122,36 +98,31 @@
 </template>
 
 <script>
-import AppointmentsTable from "./components/AppointmentsTable";
-import DateRangeField from "../_common/components/DateRangeField";
-import ModalWindow from "../_common/components/ModalWindow";
+import AppointmentsTable from "../components/AppointmentsTable";
+import DateRangeField from "../../_common/components/DateRangeField";
+import ModalWindow from "../../_common/components/ModalWindow";
+import {DateTime} from "luxon";
+import SingleDayAppointments from "./appointments/SingleDayAppointments";
 
 export default {
   name: "AppointmentsView",
-  components: { ModalWindow, DateRangeField, AppointmentsTable },
+  components: { SingleDayAppointments, ModalWindow, DateRangeField, AppointmentsTable },
   data() {
     return {
+
+      today: DateTime.now().toFormat( "yyyy-MM-dd" ),
 
       /* custom date range appointments */
       modalCustomDateRange: {
         visible: false,
-        maxDate: moment().format( "YYYY-MM-DD" ),
       },
       dateRange: {
-        startDate: moment().format( "YYYY-MM-DD" ),
-        endDate: moment().format( "YYYY-MM-DD" )
+        startDate: DateTime.now().minus( { days: 7 } ).toFormat( "yyyy-MM-dd" ),
+        endDate: DateTime.now().toFormat( "yyyy-MM-dd" )
       },
       checkStatus: "ALL",
       appointmentsBetweenDates: [],
       customDateRangeLabel: "Appointments between dates",
-
-      /* today's appointments */
-      today: moment().format( "YYYY-MM-DD" ),
-
-      todayPendingAppointments: [],
-      todayCompletedAppointments: [],
-      todayMissedAppointments: [],
-      todayCancelledAppointments: [],
 
 
     }
@@ -179,6 +150,11 @@ export default {
 
   async mounted() {
 
+    /* luxon test */
+    // console.log( DateTime.now().toFormat( "yyyy-MM-dd" ) );
+    // console.log( DateTime.now().plus( { days: 7 } ).toFormat( "yyyy-MM-dd" ) );
+    // console.log( DateTime.now().toISO() );
+
     try {
       await this.__fetchAppointments();
     } catch ( e ) {
@@ -188,33 +164,19 @@ export default {
 
   methods: {
 
-    calculateAge( dob ) {
-      const today = moment();
-      const diff = moment.duration( today.diff( moment( dob ) ) );
-      return Math.round( diff.asYears() );
-    },
 
-    renderPatientUrl( id ) {
-      return `${ getSiteURL() }/app/patients/edit.php?id=${ id }`;
-    },
-
-    async onStatusUpdated() {
-      await this.__fetchAppointments();
-    },
-
-    async onBetweenDatesStatusUpdated(){
-      try{
+    async onBetweenDatesStatusUpdated() {
+      try {
         const params = {
           start_date: this.dateRange.startDate,
           end_date: this.dateRange.endDate,
         }
 
         this.appointmentsBetweenDates = await this.$store.dispatch( "appointments_fetchBetweenDates", params );
-      }catch ( e ) {
+      } catch ( e ) {
 
       }
     },
-
 
     async onCustomDateRangeChoice() {
 
@@ -236,33 +198,6 @@ export default {
 
     },
 
-    async __fetchAppointments() {
-      const today = moment().format( "YYYY-MM-DD" );
-      const paramsPending = {
-        date: today,
-        status: this.statuses.pending
-      };
-
-      const paramsCompleted = {
-        date: today,
-        status: this.statuses.completed
-      };
-
-      const paramsCancelled = {
-        date: today,
-        status: this.statuses.cancelled
-      };
-
-      const paramsMissed = {
-        date: today,
-        status: this.statuses.missed
-      };
-
-      this.todayPendingAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsPending );
-      this.todayCompletedAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsCompleted );
-      this.todayCancelledAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsCancelled );
-      this.todayMissedAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsMissed );
-    }
 
   },
 

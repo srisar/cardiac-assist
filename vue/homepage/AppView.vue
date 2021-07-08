@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: "AppView"
+  name: "AppView",
+
+  mounted() {
+
+
+  }
 }
 </script>
 

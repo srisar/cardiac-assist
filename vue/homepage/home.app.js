@@ -1,12 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomepageView from "./HomepageView";
+import HomepageView from "./views/HomepageView";
 
 import store from "./vuex.store";
 import AppView from "./AppView";
-import AppointmentsView from "./AppointmentsView";
+import AppointmentsView from "./views/AppointmentsView";
 
-Vue.use(VueRouter);
+Vue.use( VueRouter );
 
 const routes = [
     {

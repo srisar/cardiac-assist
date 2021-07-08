@@ -25,11 +25,11 @@
         <td class="text-center">{{ item.patient.dob }} ({{ calculateAge( item.patient.dob ) }})</td>
         <td>{{ item.remarks }}</td>
         <td class="text-center">{{ item.date }}</td>
-        <td class="text-center">
+        <td class="text-center" :class="renderStatusColor(item.status)" data-toggle="tooltip" data-placement="left" :title="item.status">
           <img :src="getStatusIcon(item.status)" class="icon-16" alt="">
         </td>
         <td>
-          <button class="btn btn-tiny btn-outline-dark" @click="onShowSelectedAppointment(item)">
+          <button class="btn btn-tiny btn-outline-secondary" @click="onShowSelectedAppointment(item)">
             <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
           </button>
         </td>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-success">
+          <button class="btn btn-success" @click="onUpdate()">
             <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
           </button>
           <hr>
@@ -96,11 +96,12 @@
 <script>
 import ModalWindow from "../../_common/components/ModalWindow";
 import DateField from "../../_common/components/DateField";
+import {errorMessageBox} from "../../_common/bootbox_dialogs";
 
 export default {
   name: "AppointmentsTable",
   components: { DateField, ModalWindow },
-  props: ["appointments", "tableClass"],
+  props: ["appointments", "tableClass", "colored"],
 
   data() {
     return {
@@ -134,6 +135,13 @@ export default {
     }
   },
 
+  mounted() {
+    $( function () {
+      $( '[data-toggle="tooltip"]' ).tooltip();
+    } );
+
+  },
+
   methods: {
 
     calculateAge( dob ) {
@@ -145,6 +153,17 @@ export default {
     renderPatientUrl( id ) {
       return `${ getSiteURL() }/app/patients/edit.php?id=${ id }`;
     },
+
+    renderStatusColor( status ) {
+      if ( this.colored ) {
+        if ( status === this.statuses.completed ) return "table-success";
+        if ( status === this.statuses.pending ) return "table-warning";
+        if ( status === this.statuses.cancelled ) return "table-danger";
+        if ( status === this.statuses.missed ) return "table-info";
+      }
+    },
+
+    /* ------------------------------------------- */
 
     onShowSelectedAppointment( appointment ) {
       this.selectedAppointment = appointment;
@@ -181,6 +200,26 @@ export default {
       }
     },
 
+
+    async onUpdate() {
+      try {
+
+        const params = {
+          id: this.selectedAppointment.id,
+          date: this.selectedAppointment.date,
+          remarks: this.selectedAppointment.remarks,
+          status: this.selectedAppointment.status,
+        };
+
+        await this.$store.dispatch( "appointments_update", params );
+        this.modalAppointment.visible = false;
+
+        this.$emit( "status-updated" );
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to update appointment details" );
+      }
+    },
 
   },
 

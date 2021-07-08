@@ -98,7 +98,7 @@ const moduleAppointments = {
         async appointments_update( context, params ) {
 
             try {
-                $.post( `${ getSiteURL() }/api/update/appointment.php`, params )
+                $.post( `${ getSiteURL() }/api/update/appointment.php`, params );
             } catch ( e ) {
                 throw e;
             }

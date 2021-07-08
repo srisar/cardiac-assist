@@ -78,7 +78,15 @@ export default new Vuex.Store( {
             } catch ( e ) {
                 throw e;
             }
-        }
+        },
+
+        async appointments_update( context, params ) {
+            try {
+                $.post( `${ getSiteURL() }/api/update/appointment.php`, params );
+            } catch ( e ) {
+                throw e;
+            }
+        },
 
     },
 
