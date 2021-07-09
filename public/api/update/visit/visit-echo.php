@@ -84,6 +84,8 @@ try {
         "is_diseased_aorta" => Request::getAsBoolean( "is_diseased_aorta" ),
         "has_vsd" => Request::getAsBoolean( "has_vsd" ),
         "has_ps" => Request::getAsBoolean( "has_ps" ),
+        "has_aorta" => Request::getAsBoolean( "has_aorta" ),
+        "has_right_ventricle" => Request::getAsBoolean( "has_right_ventricle" ),
 
 
     ];

@@ -76,6 +76,8 @@ export const visitSpecialEcho = {
             has_asd: false,
             has_vsd: false,
             has_ps: false,
+            has_aorta: false,
+            has_right_ventricle: false,
             has_mitral_stenosis: false,
             is_diseased_aortic_valve: false,
             is_diseased_aorta: false,

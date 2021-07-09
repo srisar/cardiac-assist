@@ -9145,6 +9145,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AortaSection",
@@ -10221,6 +10228,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "RightVentricleSection",
@@ -10982,6 +10996,8 @@ var visitSpecialEcho = {
       has_asd: false,
       has_vsd: false,
       has_ps: false,
+      has_aorta: false,
+      has_right_ventricle: false,
       has_mitral_stenosis: false,
       is_diseased_aortic_valve: false,
       is_diseased_aorta: false
@@ -51897,172 +51913,233 @@ var render = function() {
     _vm._v(" "),
     _vm.visible
       ? _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Root (mm)\n        "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("div", { staticClass: "form-group form-check" }, [
               _c("input", {
                 directives: [
                   {
                     name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_aorta_root,
-                    expression: "visitEcho.param_aorta_root",
-                    modifiers: { number: true }
+                    rawName: "v-model",
+                    value: _vm.visitEcho.has_aorta,
+                    expression: "visitEcho.has_aorta"
                   }
                 ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_aorta_root },
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "chk_has_aorta" },
+                domProps: {
+                  checked: Array.isArray(_vm.visitEcho.has_aorta)
+                    ? _vm._i(_vm.visitEcho.has_aorta, null) > -1
+                    : _vm.visitEcho.has_aorta
+                },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  change: function($event) {
+                    var $$a = _vm.visitEcho.has_aorta,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.visitEcho,
+                            "has_aorta",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.visitEcho,
+                            "has_aorta",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.visitEcho, "has_aorta", $$c)
                     }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_aorta_root",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
                   }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Annulus (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_aorta_annulus,
-                    expression: "visitEcho.param_aorta_annulus",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_aorta_annulus },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_aorta_annulus",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        ST Junction (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_aorta_st_junction,
-                    expression: "visitEcho.param_aorta_st_junction",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_aorta_st_junction },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_aorta_st_junction",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Proximal Aorta (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_aorta_proximal,
-                    expression: "visitEcho.param_aorta_proximal",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_aorta_proximal },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_aorta_proximal",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Aortic Arch (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_aorta_aortic_arch,
-                    expression: "visitEcho.param_aorta_aortic_arch",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_aorta_aortic_arch },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_aorta_aortic_arch",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "chk_has_aorta" }
+                },
+                [_vm._v("Has values")]
+              )
             ])
           ]),
+          _vm._v(" "),
+          _vm.visitEcho.has_aorta
+            ? _c("div", { staticClass: "form-row" }, [
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Root (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aorta_root,
+                        expression: "visitEcho.param_aorta_root",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_aorta_root },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aorta_root",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Annulus (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aorta_annulus,
+                        expression: "visitEcho.param_aorta_annulus",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_aorta_annulus },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aorta_annulus",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        ST Junction (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aorta_st_junction,
+                        expression: "visitEcho.param_aorta_st_junction",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_aorta_st_junction },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aorta_st_junction",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Proximal Aorta (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aorta_proximal,
+                        expression: "visitEcho.param_aorta_proximal",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_aorta_proximal },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aorta_proximal",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Aortic Arch (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_aorta_aortic_arch,
+                        expression: "visitEcho.param_aorta_aortic_arch",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_aorta_aortic_arch },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_aorta_aortic_arch",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
@@ -55500,378 +55577,439 @@ var render = function() {
     _vm._v(" "),
     _vm.visible
       ? _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        TAPSE "),
-              _c("br"),
-              _vm._v(" (mm)\n        "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c("div", { staticClass: "form-group form-check" }, [
               _c("input", {
                 directives: [
                   {
                     name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_tapse,
-                    expression: "visitEcho.param_tapse",
-                    modifiers: { number: true }
+                    rawName: "v-model",
+                    value: _vm.visitEcho.has_right_ventricle,
+                    expression: "visitEcho.has_right_ventricle"
                   }
                 ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_tapse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_tapse",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Peak Tricuspid Velocity (cm/s)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_peak_tricuspid_velocity,
-                    expression: "visitEcho.param_peak_tricuspid_velocity",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "chk_has_right_ventricle" },
                 domProps: {
-                  value: _vm.visitEcho.param_peak_tricuspid_velocity
+                  checked: Array.isArray(_vm.visitEcho.has_right_ventricle)
+                    ? _vm._i(_vm.visitEcho.has_right_ventricle, null) > -1
+                    : _vm.visitEcho.has_right_ventricle
                 },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  change: function($event) {
+                    var $$a = _vm.visitEcho.has_right_ventricle,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(
+                            _vm.visitEcho,
+                            "has_right_ventricle",
+                            $$a.concat([$$v])
+                          )
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.visitEcho,
+                            "has_right_ventricle",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.visitEcho, "has_right_ventricle", $$c)
                     }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_peak_tricuspid_velocity",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
                   }
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Est. RVSP "),
-              _c("br"),
-              _vm._v(" (mmHg)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_est_rvsp,
-                    expression: "visitEcho.param_est_rvsp",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_est_rvsp },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_est_rvsp",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Est. CVP "),
-              _c("br"),
-              _vm._v(" (mmHg)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_est_cvp,
-                    expression: "visitEcho.param_est_cvp",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_est_cvp },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_est_cvp",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Est. PASP (mmHg)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_est_pasp,
-                    expression: "visitEcho.param_est_pasp",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_est_pasp },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_est_pasp",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        Est. CVP (mmHg)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_est_cvp,
-                    expression: "visitEcho.param_est_cvp",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_est_cvp },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_est_cvp",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        MPA (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_mpa,
-                    expression: "visitEcho.param_mpa",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_mpa },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_mpa",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        RVOT1 (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_rvot1,
-                    expression: "visitEcho.param_rvot1",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_rvot1 },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_rvot1",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        RVOT2 (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_rvot2,
-                    expression: "visitEcho.param_rvot2",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_rvot2 },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_rvot2",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        RVOTAT (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_rvotat,
-                    expression: "visitEcho.param_rvotat",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_rvotat },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_rvotat",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-3 mb-2" }, [
-              _vm._v("\n        RVID (mm)\n        "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.visitEcho.param_rvid,
-                    expression: "visitEcho.param_rvid",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control form-control-sm",
-                attrs: { type: "number" },
-                domProps: { value: _vm.visitEcho.param_rvid },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.visitEcho,
-                      "param_rvid",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "chk_has_right_ventricle" }
+                },
+                [_vm._v("Has values")]
+              )
             ])
           ]),
+          _vm._v(" "),
+          _vm.visitEcho.has_right_ventricle
+            ? _c("div", { staticClass: "form-row" }, [
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        TAPSE "),
+                  _c("br"),
+                  _vm._v(" (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_tapse,
+                        expression: "visitEcho.param_tapse",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_tapse },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_tapse",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Peak Tricuspid Velocity (cm/s)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_peak_tricuspid_velocity,
+                        expression: "visitEcho.param_peak_tricuspid_velocity",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: {
+                      value: _vm.visitEcho.param_peak_tricuspid_velocity
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_peak_tricuspid_velocity",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Est. RVSP "),
+                  _c("br"),
+                  _vm._v(" (mmHg)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_rvsp,
+                        expression: "visitEcho.param_est_rvsp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_rvsp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_rvsp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Est. CVP "),
+                  _c("br"),
+                  _vm._v(" (mmHg)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_cvp,
+                        expression: "visitEcho.param_est_cvp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_cvp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_cvp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Est. PASP (mmHg)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_pasp,
+                        expression: "visitEcho.param_est_pasp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_pasp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_pasp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        Est. CVP (mmHg)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_est_cvp,
+                        expression: "visitEcho.param_est_cvp",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_est_cvp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_est_cvp",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        MPA (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_mpa,
+                        expression: "visitEcho.param_mpa",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_mpa },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_mpa",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        RVOT1 (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_rvot1,
+                        expression: "visitEcho.param_rvot1",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_rvot1 },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_rvot1",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        RVOT2 (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_rvot2,
+                        expression: "visitEcho.param_rvot2",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_rvot2 },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_rvot2",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        RVOTAT (ms)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_rvotat,
+                        expression: "visitEcho.param_rvotat",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_rvotat },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_rvotat",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3 mb-2" }, [
+                  _vm._v("\n        RVID (mm)\n        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.visitEcho.param_rvid,
+                        expression: "visitEcho.param_rvid",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.visitEcho.param_rvid },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.visitEcho,
+                          "param_rvid",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),

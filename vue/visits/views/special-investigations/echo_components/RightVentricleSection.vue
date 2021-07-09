@@ -12,7 +12,14 @@
     </div>
     <div class="card-body" v-if="visible">
 
-      <div class="form-row">
+      <div class="mb-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="chk_has_right_ventricle" v-model="visitEcho.has_right_ventricle">
+          <label class="form-check-label" for="chk_has_right_ventricle">Has values</label>
+        </div>
+      </div>
+
+      <div class="form-row" v-if="visitEcho.has_right_ventricle">
 
         <div class="col-3 mb-2">
           TAPSE <br> (mm)
@@ -60,7 +67,7 @@
         </div>
 
         <div class="col-3 mb-2">
-          RVOTAT (mm)
+          RVOTAT (ms)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_rvotat">
         </div>
 

@@ -12,7 +12,14 @@
     </div>
     <div class="card-body" v-if="visible">
 
-      <div class="form-row">
+      <div class="mb-3">
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="chk_has_aorta" v-model="visitEcho.has_aorta">
+          <label class="form-check-label" for="chk_has_aorta">Has values</label>
+        </div>
+      </div>
+
+      <div class="form-row" v-if="visitEcho.has_aorta">
         <div class="col-3 mb-2">
           Root (mm)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_aorta_root">

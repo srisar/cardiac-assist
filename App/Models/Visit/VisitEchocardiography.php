@@ -27,7 +27,7 @@ class VisitEchocardiography implements IModel
 
 
     public $has_diastolic_dysfunction, $is_left_atrium_dilated, $has_asd, $has_mitral_stenosis, $is_diseased_aortic_valve,
-        $is_diseased_aorta, $has_vsd, $has_ps, $show_advanced;
+        $is_diseased_aorta, $has_vsd, $has_ps, $show_advanced, $has_aorta, $has_right_ventricle;
 
     public ?Visit $visit;
 
@@ -143,6 +143,8 @@ class VisitEchocardiography implements IModel
             "is_diseased_aorta" => $this->is_diseased_aorta ? "Y" : "N",
             "has_vsd" => $this->has_vsd ? "Y" : "N",
             "has_ps" => $this->has_ps ? "Y" : "N",
+            "has_aorta" => $this->has_aorta ? "Y" : "N",
+            "has_right_ventricle" => $this->has_right_ventricle ? "Y" : "N",
         ];
 
         return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
@@ -190,6 +192,8 @@ class VisitEchocardiography implements IModel
             $data->has_vsd = $data->has_vsd == "Y";
             $data->has_ps = $data->has_ps == "Y";
             $data->show_advanced = $data->show_advanced == "Y";
+            $data->has_aorta = $data->has_aorta == "Y";
+            $data->has_right_ventricle = $data->has_right_ventricle == "Y";
 
             return $data;
         }
