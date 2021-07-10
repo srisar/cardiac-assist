@@ -8,13 +8,14 @@
 
 <script>
 
-import {TYPE_ERROR, TYPE_INFO, TYPE_WARNING, TYPE_SUCCESS} from "../message_types";
+import {TYPE_ERROR, TYPE_INFO, TYPE_SUCCESS, TYPE_WARNING} from "../message_types";
 
 
 export default {
   name: "AlertArea",
   props: {
     feedback: Object,
+    trigger: Boolean,
   },
 
   data() {
@@ -27,10 +28,10 @@ export default {
   computed: {
     className() {
 
-      if (this.type === TYPE_ERROR) return 'alert-danger';
-      if (this.type === TYPE_INFO) return 'alert-info';
-      if (this.type === TYPE_WARNING) return 'alert-warning';
-      if (this.type === TYPE_SUCCESS) return 'alert-success';
+      if ( this.type === TYPE_ERROR ) return 'alert-danger';
+      if ( this.type === TYPE_INFO ) return 'alert-info';
+      if ( this.type === TYPE_WARNING ) return 'alert-warning';
+      if ( this.type === TYPE_SUCCESS ) return 'alert-success';
 
       return 'alert-primary';
     },
@@ -42,15 +43,15 @@ export default {
     // deep change watcher
     // https://vuejs.org/v2/api/#watch
     feedback: {
-      handler: function (newFeedback) {
+      handler: function ( newFeedback ) {
 
         this.message = newFeedback.message;
         this.type = newFeedback.type;
 
-        setTimeout(() => {
+        setTimeout( () => {
           this.message = "";
-          this.$emit("clear");
-        }, 3000);
+          this.$emit( "clear" );
+        }, 3000 );
 
       },
       deep: true

@@ -143,6 +143,8 @@
           <button class="btn btn-success" @click="onUpdate()">
             <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
           </button>
+
+          <AlertArea :feedback="feedback"/>
         </div>
 
 
@@ -154,6 +156,7 @@
     </div><!-- card -->
 
 
+    <!-- Modal: add remarks -->
     <ModalWindow :visible="modalAddVisible" @close="modalAddVisible = false">
       <template v-slot:title>Add new remark for {{ echoRemarkToAdd.typeLabel }}</template>
       <slot>
@@ -183,7 +186,7 @@
 </template>
 
 <script>
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
 import ModalWindow from "../../../_common/components/ModalWindow";
 import LeftVentricleSection from "./echo_components/LeftVentricleSection";
 import TheLoading from "../../../_common/components/TheLoading";
@@ -197,10 +200,13 @@ import PulmonicValveSection from "./echo_components/PulmonicValveSection";
 import TricuspidSection from "./echo_components/TricuspidSection";
 import PericardiumSection from "./echo_components/PericardiumSection";
 import ConclusionsSection from "./echo_components/ConclusionsSection";
+import AlertArea from "../../../_common/components/AlertArea";
+import {TYPE_SUCCESS} from "../../../_common/message_types";
 
 export default {
   name: "VisitEchoViewV2",
   components: {
+    AlertArea,
     ConclusionsSection,
     PericardiumSection,
     TricuspidSection,
@@ -255,6 +261,13 @@ export default {
         'CONCLUSION': 'Conclusion',
       },
 
+      /* messages */
+      feedback: {
+        message: "",
+        type: TYPE_SUCCESS
+      },
+
+      feedbackTrigger: false,
 
     };
   },
@@ -314,7 +327,7 @@ export default {
       try {
 
         await this.$store.dispatch( "visitEcho_update", this.visitEcho );
-        successMessageBox( "Echocardiogram details updated" );
+        this.feedback.message = "Echocardiogram details updated";
       } catch ( e ) {
         errorMessageBox( "Failed to update echocardiogram details" );
       }

@@ -21,33 +21,33 @@
 
       <div class="form-row" v-if="visitEcho.is_diseased_aortic_valve">
         <div class="col-3 mb-2">
-          Peak Aortic Gradient (mmHg)
+          Peak Aortic Gradient <br> (mmHg)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_peak_aortic_gradient">
         </div>
         <div class="col-3 mb-2">
-          Mean Aortic Gradient (mmHg)
+          Mean Aortic Gradient <br> (mmHg)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_mean_aortic_gradient">
         </div>
         <div class="col-3 mb-2">
-          Aortic Valve Area (mm²)
+          Aortic Valve Area <br> (mm²)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_aortic_valve_area">
         </div>
         <div class="col-3 mb-2">
-          Peak Aortic Velocity (cm/s)
+          Peak Aortic Velocity <br> (cm/s)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_peak_aortic_velocity">
         </div>
 
         <div class="col-3 mb-2">
-          Peak Aortic Velocity (cm/s)
+          Peak Aortic Velocity <br> (cm/s)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_peak_aortic_velocity">
         </div>
 
         <div class="col-3 mb-2">
-          Peak LVOT Velocity (cm/s)
+          Peak LVOT Velocity <br> (cm/s)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_peak_lvot_velocity">
         </div>
         <div class="col-3 mb-2">
-          Aortic/LVOT Velocity (cm/s)
+          Aortic/LVOT Velocity <br> (cm/s)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_aortic_lvot_velocity">
         </div>
         <div class="col-3 mb-2">
@@ -56,7 +56,7 @@
         </div>
 
         <div class="col-3 mb-2">
-          LVOT Diameter (mm)
+          LVOT Diameter <br> (mm)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_lvot_diameter">
         </div>
 

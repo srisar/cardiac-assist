@@ -4,14 +4,31 @@
 
     <div class="paper">
 
+      <div class="ems-header mb-3" v-if="isEmsHeaderVisible">
+        <div class="d-flex align-items-center">
+          <div class="mr-3">
+            <img src="/assets/images/ems-logo.png" style="width: 100px" alt="">
+          </div>
+
+          <div>
+            <div class="font-weight-bold">No.121, New Kalmunai Road</div>
+            <div class="font-weight-bold">Kallady, Batticaloa</div>
+            <div class="">Phone: 065 222 8812, 065 222 8800</div>
+            <div>Email: ems.hospital.batticaloa@gmail.com</div>
+          </div>
+
+        </div>
+      </div>
+
+
       <h3 class="text-center">Echocardiogram Report</h3>
 
       <PatientBasicDetails/>
 
       <div class="section-echo-report" v-if="loaded">
 
-        <!-- section:Left Ventricle -->
 
+        <!-- section:Left Ventricle -->
         <div class="border p-2 mb-3 section">
 
           <div class="">
@@ -22,27 +39,37 @@
           <table class="table table-sm table-bordered">
             <tbody>
             <tr>
-              <td class="text-center">IVS (mm)</td>
-              <td class="text-center">LVID D (mm)</td>
-              <td class="text-center">PW (mm)</td>
-              <td class="text-center">LVEF (%)</td>
-              <td class="text-center">FS</td>
-              <td class="text-center">LVID S (mmHg)</td>
-            </tr>
-            <tr>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_ivs_diastolic_thickness }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_lvid_diastole }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_pw_diastolic_thickness }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_lvef }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_fractional_shortening }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_lvid_systole }}</td>
+              <td class="" v-if="visitEcho.param_ivs_diastolic_thickness">
+                IVS:
+                <span class="font-weight-bold">{{ visitEcho.param_ivs_diastolic_thickness }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_lvid_diastole">
+                LVID D:
+                <span class="font-weight-bold">{{ visitEcho.param_lvid_diastole }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_pw_diastolic_thickness">
+                PW:
+                <span class="font-weight-bold">{{ visitEcho.param_pw_diastolic_thickness }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_lvef">
+                LVEF:
+                <span class="font-weight-bold">{{ visitEcho.param_lvef }} %</span>
+              </td>
+              <td class="" v-if="visitEcho.param_fractional_shortening">
+                FS:
+                <span class="font-weight-bold">{{ visitEcho.param_fractional_shortening }}</span>
+              </td>
+              <td class="" v-if="visitEcho.param_lvid_systole">
+                LVID S:
+                <span class="font-weight-bold">{{ visitEcho.param_lvid_systole }} mmHg</span>
+              </td>
             </tr>
             </tbody>
           </table>
 
           <div class="" v-if="visitEcho.has_diastolic_dysfunction">
             <div class="">
-              <div class="font-weight-bold text-uppercase">Has diastolic dysfunction</div>
+              <div class="font-weight-bold text-uppercase sub-title">Has diastolic dysfunction</div>
             </div>
 
             <table class="table table-sm table-bordered">
@@ -65,19 +92,28 @@
 
             <table class="table table-sm table-bordered">
               <tr>
-                <td class="text-center">Stroke Volume (ml)</td>
-                <td class="text-center">Cardiac Output (l/min)</td>
-                <td class="text-center">HR (beat/min)</td>
-                <td class="text-center">BP (mmHg)</td>
-                <td class="text-center">Cardiac Index (l/min/m²)</td>
+                <td class="text-center" v-if="visitEcho.param_stroke_volume">
+                  Stroke Vol.:
+                  <span class="font-weight-bold">{{ visitEcho.param_stroke_volume }} ml</span>
+                </td>
+                <td class="text-center" v-if="visitEcho.param_cardiac_output">
+                  Car. Output:
+                  <span class="font-weight-bold">{{ visitEcho.param_cardiac_output }} l/min</span>
+                </td>
+                <td class="text-center" v-if="visitEcho.param_hr">
+                  HR:
+                  <span class="font-weight-bold">{{ visitEcho.param_hr }} beat/min</span>
+                </td>
+                <td class="text-center" v-if="visitEcho.param_bp">
+                  BP:
+                  <span class="font-weight-bold">{{ visitEcho.param_bp }} mmHg</span>
+                </td>
+                <td class="text-center" v-if="cardiacIndex">
+                  Car. Index:
+                  <span class="font-weight-bold">{{ cardiacIndex }} l/min/m²</span>
+                </td>
               </tr>
-              <tr>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_stroke_volume }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_cardiac_output }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_hr }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_bp }}</td>
-                <td class="text-center font-weight-bold">{{ cardiacIndex }}</td>
-              </tr>
+
             </table>
 
           </div>
@@ -108,15 +144,21 @@
 
             <table class="table table-sm table-bordered">
               <tr>
-                <td class="w-50">LA Systolic Diameter (mm): <span class="font-weight-bold">{{ visitEcho.param_la_systolic_diameter }}</span></td>
-                <td class="w-50">LA Area(mm²): <span class="font-weight-bold">{{ visitEcho.param_la_area }}</span></td>
+                <td class="w-50" v-if="visitEcho.param_la_systolic_diameter">
+                  LA Systolic Diameter:
+                  <span class="font-weight-bold">{{ visitEcho.param_la_systolic_diameter }} mm</span>
+                </td>
+                <td class="w-50" v-if="visitEcho.param_la_area">
+                  LA Area:
+                  <span class="font-weight-bold">{{ visitEcho.param_la_area }} mm²</span>
+                </td>
               </tr>
             </table>
 
           </div>
 
 
-          <div class="" v-if="visitEcho.has_asd">
+          <div class="" v-if="visitEcho.has_asd && visitEcho.param_asd_size">
 
             <div class="">
               <div class="font-weight-bold text-uppercase">Has ASD</div>
@@ -124,7 +166,10 @@
 
             <table class="table table-sm table-bordered">
               <tr>
-                <td class="w-50">ASD Size (mm): <span class="font-weight-bold">{{ visitEcho.param_asd_size }}</span></td>
+                <td class="w-50">
+                  ASD Size:
+                  <span class="font-weight-bold">{{ visitEcho.param_asd_size }} mm</span>
+                </td>
               </tr>
             </table>
 
@@ -158,19 +203,28 @@
 
             <table class="table table-sm table-bordered">
               <tr>
-                <td class="text-center">Mitral Pressure 1/2 T (mmHg)</td>
-                <td class="text-center"> Mean Mitral Gradient (mmHg)</td>
-                <td class="text-center">Doppler Mitral VA (mm²)</td>
-                <td class="text-center">Trace Mitral VA (mm²)</td>
-                <td class="text-center">MV Score</td>
+                <td class="" v-if="visitEcho.param_mitral_pressure">
+                  Mitral Pressure 1/2 T:
+                  <span class=" font-weight-bold">{{ visitEcho.param_mitral_pressure }} mmHg</span>
+                </td>
+                <td class="" v-if="visitEcho.param_mean_mitral_gradient">
+                  Mean Mitral Gradient:
+                  <span class=" font-weight-bold">{{ visitEcho.param_mean_mitral_gradient }} mmHg</span>
+                </td>
+                <td class="" v-if="visitEcho.param_doppler_mitral_valve_area">
+                  Doppler Mitral VA:
+                  <span class=" font-weight-bold">{{ visitEcho.param_doppler_mitral_valve_area }} mm²</span>
+                </td>
+                <td class="" v-if="visitEcho.param_trace_mitral_valve_area">
+                  Trace Mitral VA:
+                  <span class="font-weight-bold">{{ visitEcho.param_trace_mitral_valve_area }} mm²</span>
+                </td>
+                <td class="" v-if="visitEcho.param_mv_score">
+                  MV Score:
+                  <span class="font-weight-bold">{{ visitEcho.param_mv_score }}</span>
+                </td>
               </tr>
-              <tr>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_mitral_pressure }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_mean_mitral_gradient }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_doppler_mitral_valve_area }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_trace_mitral_valve_area }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_mv_score }}</td>
-              </tr>
+
             </table>
 
           </div>
@@ -203,33 +257,44 @@
             <div>VA = Valve Area, AV = Aortic Velocity, AG = Aortic Gradient, V = velocity</div>
             <table class="table table-sm table-bordered">
               <tr>
-                <td class="text-center w-25">Peak AG (mmHg)</td>
-                <td class="text-center w-25">Mean AG (mmHg)</td>
-                <td class="text-center w-25">Aortic VA (mm²)</td>
-                <td class="text-center w-25">Peak AV (cm/s)</td>
+                <td class="5" v-if="visitEcho.param_peak_aortic_gradient">
+                  Peak AG
+                  <span class="font-weight-bold">{{ visitEcho.param_peak_aortic_gradient }} mmHg</span>
+                </td>
+                <td class="" v-if="visitEcho.param_mean_aortic_gradient">
+                  Mean AG:
+                  <span class="font-weight-bold">{{ visitEcho.param_mean_aortic_gradient }} mmHg</span>
+                </td>
+                <td class="" v-if="visitEcho.param_aortic_valve_area">
+                  Aortic VA:
+                  <span class="font-weight-bold">{{ visitEcho.param_aortic_valve_area }} mm²</span>
+                </td>
+                <td class="" v-if="visitEcho.param_peak_aortic_velocity">
+                  Peak AV:
+                  <span class="font-weight-bold">{{ visitEcho.param_peak_aortic_velocity }} cm/s</span>
+                </td>
               </tr>
               <tr>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_peak_aortic_gradient }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_mean_aortic_gradient }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_aortic_valve_area }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_peak_aortic_velocity }}</td>
-              </tr>
-              <tr>
-                <td class="text-center">Peak LVOT V (cm/s)</td>
-                <td class="text-center">Aortic/LVOT V (cm/s)</td>
-                <td class="text-center">ARPHT (mm)</td>
-                <td class="text-center">LVOT Diameter (mm)</td>
-              </tr>
-              <tr>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_peak_lvot_velocity }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_aortic_lvot_velocity }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_arpht }}</td>
-                <td class="text-center font-weight-bold">{{ visitEcho.param_lvot_diameter }}</td>
+                <td v-if="visitEcho.param_peak_lvot_velocity">
+                  Peak LVOT V:
+                  <span class="font-weight-bold">{{ visitEcho.param_peak_lvot_velocity }} cm/s</span>
+                </td>
+                <td class="" v-if="visitEcho.param_aortic_lvot_velocity">
+                  Aortic/LVOT V:
+                  <span class="font-weight-bold">{{ visitEcho.param_aortic_lvot_velocity }} cm/s</span>
+                </td>
+                <td class="" v-if="visitEcho.param_arpht">
+                  ARPHT:
+                  <span class="font-weight-bold">{{ visitEcho.param_arpht }} mm</span>
+                </td>
+                <td class="" v-if="visitEcho.param_lvot_diameter">
+                  LVOT Diameter:
+                  <span class="font-weight-bold">{{ visitEcho.param_lvot_diameter }} mm</span>
+                </td>
               </tr>
             </table>
 
           </div>
-
 
           <div class="" v-if="visitEchoRemarks.AORTIC_VALVE.length > 0">
 
@@ -243,26 +308,34 @@
         <!-- section: aortic valve -->
 
         <!-- section: aorta -->
-        <div class="section border p-2 mb-3">
+        <div class="section border p-2 mb-3" v-if="showAortaSection">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Aorta</h5>
           </div>
 
-          <table class="table table-sm table-bordered">
+          <table class="table table-sm table-bordered" v-if="visitEcho.has_aorta">
             <tr>
-              <td class="text-center">Root (mm)</td>
-              <td class="text-center">Annulus (mm)</td>
-              <td class="text-center">ST Junction (mm)</td>
-              <td class="text-center">Proximal Aorta (mm)</td>
-              <td class="text-center">Aortic Arch (mm)</td>
-            </tr>
-            <tr>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_aorta_root }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_aorta_annulus }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_aorta_st_junction }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_aorta_proximal }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_aorta_aortic_arch }}</td>
+              <td class="" v-if="visitEcho.param_aorta_root">
+                Root:
+                <span class="font-weight-bold">{{ visitEcho.param_aorta_root }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_aorta_annulus">
+                Annulus:
+                <span class="font-weight-bold">{{ visitEcho.param_aorta_annulus }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_aorta_st_junction">
+                ST Junction:
+                <span class="font-weight-bold">{{ visitEcho.param_aorta_st_junction }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_aorta_proximal">
+                Proximal Aorta:
+                <span class="font-weight-bold">{{ visitEcho.param_aorta_proximal }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_aorta_aortic_arch">
+                Aortic Arch:
+                <span class="font-weight-bold">{{ visitEcho.param_aorta_aortic_arch }} mm</span>
+              </td>
             </tr>
           </table>
 
@@ -273,7 +346,9 @@
 
             <table class="table table-bordered table-sm">
               <tr>
-                <td>Aortic Root Diameter (mm): <span class="font-weight-bold">{{ visitEcho.param_aortic_root_diameter }}</span></td>
+                <td>Aortic Root Diameter:
+                  <span class="font-weight-bold">{{ visitEcho.param_aortic_root_diameter }} mm</span>
+                </td>
               </tr>
             </table>
 
@@ -299,57 +374,74 @@
           <div>TV = Tricuspid Velocity</div>
           <table class="table table-bordered table-sm">
             <tr>
-              <td class="text-center w-25">TAPSE (mm)</td>
-              <td class="text-center w-25">Peak TV (cm/s)</td>
-              <td class="text-center w-25">Est. RVSP (mmHg)</td>
-              <td class="text-center w-25">Est. CVP (mmHg)</td>
+              <td class="" v-if="visitEcho.param_tapse">
+                TAPSE:
+                <span class=" font-weight-bold">{{ visitEcho.param_tapse }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_peak_tricuspid_velocity">
+                Peak TV:
+                <span class="text-center font-weight-bold">{{ visitEcho.param_peak_tricuspid_velocity }} cm/s</span>
+              </td>
+              <td class="" v-if="visitEcho.param_est_rvsp">
+                Est. RVSP:
+                <span class=" font-weight-bold">{{ visitEcho.param_est_rvsp }} mmHg</span>
+              </td>
+              <td class="" v-if="visitEcho.param_est_cvp">
+                Est. CVP:
+                <span class="text-center font-weight-bold">{{ visitEcho.param_est_cvp }} mmHg</span>
+              </td>
 
             </tr>
-            <tr>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_tapse }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_peak_tricuspid_velocity }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_est_rvsp }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_est_cvp }}</td>
 
-            </tr>
             <tr>
-              <td class="text-center">Est. PASP (mmHg)</td>
-              <td class="text-center"> Est. CVP (mmHg)</td>
-              <td class="text-center">MPA (mm)</td>
-              <td class="text-center">RVOT1 (mm)</td>
+              <td class="text-center" v-if="visitEcho.param_est_pasp">
+                Est. PASP:
+                <span class="font-weight-bold">{{ visitEcho.param_est_pasp }} mmHg</span>
+              </td>
+              <td class="" v-if="visitEcho.param_est_cvp">
+                Est. CVP:
+                <span class="font-weight-bold">{{ visitEcho.param_est_cvp }} mmHg</span>
+              </td>
+              <td class="" v-if="visitEcho.param_mpa">
+                MPA:
+                <span class="font-weight-bold">{{ visitEcho.param_mpa }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_rvot1">
+                RVOT1:
+                <span class="font-weight-bold">{{ visitEcho.param_rvot1 }} mm</span>
+              </td>
+            </tr>
 
-            </tr>
             <tr>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_est_pasp }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_est_cvp }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_mpa }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_rvot1 }}</td>
-
-            </tr>
-            <tr>
-              <td class="text-center">RVOT2 (mm)</td>
-              <td class="text-center">RVOTAT (mm)</td>
-              <td class="text-center">RVID (mm)</td>
+              <td class="" v-if="visitEcho.param_rvot2">
+                RVOT2:
+                <span class="font-weight-bold">{{ visitEcho.param_rvot2 }} mm</span>
+              </td>
+              <td class="" v-if="visitEcho.param_rvotat">
+                RVOTAT:
+                <span class="font-weight-bold">{{ visitEcho.param_rvotat }} ms</span>
+              </td>
+              <td class="" v-if="visitEcho.param_rvid">
+                RVID:
+                <span class="font-weight-bold">{{ visitEcho.param_rvid }} mm</span>
+              </td>
               <td></td>
             </tr>
-            <tr>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_rvot2 }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_rvotat }}</td>
-              <td class="text-center font-weight-bold">{{ visitEcho.param_rvid }}</td>
-              <td></td>
-            </tr>
+
           </table>
 
 
-          <div class="" v-if="visitEcho.has_vsd">
+          <div class="" v-if="visitEcho.has_vsd && (visitEcho.param_rv_size || visitEcho.param_rv_ivg)">
             <div class="">
               <div class="font-weight-bold text-uppercase">VSD</div>
             </div>
 
             <table class="table table-sm table-bordered">
               <tr>
-                <td class="w-50">Size (mm): <span class="font-weight-bold">{{ visitEcho.param_rv_size }}</span></td>
-                <td class="w-50">IVG (mm): <span class="font-weight-bold">{{ visitEcho.param_rv_ivg }}</span></td>
+                <td class="w-50" v-if="visitEcho.param_rv_size">
+                  Size: <span class="font-weight-bold">{{ visitEcho.param_rv_size }} mm</span></td>
+                <td class="w-50" v-if="visitEcho.param_rv_ivg">
+                  IVG: <span class="font-weight-bold">{{ visitEcho.param_rv_ivg }} mm</span></td>
               </tr>
             </table>
 
@@ -384,22 +476,26 @@
         <!-- section: right-atrium -->
 
         <!-- section: pulmonic valve -->
-        <div class="section border p-2 mb-3">
+        <div class="section border p-2 mb-3" v-if="showPulmonicValveSection">
 
           <div class="">
             <h5 class="font-weight-bold">Pulmonic Valve</h5>
           </div>
 
 
-          <div class="" v-if="visitEcho.has_ps">
+          <div class="" v-if="visitEcho.has_ps && (visitEcho.param_pv_pg || visitEcho.param_pv_annulus)">
             <div class="">
               <div class="font-weight-bold text-uppercase">Has PS</div>
             </div>
 
             <table class="table table-bordered table-sm">
               <tr>
-                <td class="w-50">PS (mmHg): <span class="font-weight-bold">{{ visitEcho.param_pv_pg }}</span></td>
-                <td class="w-50">PV Annulus (mm): <span class="font-weight-bold">{{ visitEcho.param_pv_annulus }}</span></td>
+                <td class="w-50" v-if="visitEcho.param_pv_pg">
+                  PS: <span class="font-weight-bold">{{ visitEcho.param_pv_pg }} mmHg</span>
+                </td>
+                <td class="w-50" v-if="visitEcho.param_pv_annulus">
+                  PV Annulus: <span class="font-weight-bold">{{ visitEcho.param_pv_annulus }} mm</span>
+                </td>
               </tr>
             </table>
 
@@ -437,7 +533,7 @@
         <div class="section border p-2 mb-3" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
 
           <div class="">
-            <h5 class="font-weight-bold">Pericardium</h5>
+            <h5 class="font-weight-bold text-uppercase">Pericardium</h5>
           </div>
 
           <div class="" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
@@ -478,6 +574,16 @@
 
 
     <div class="d-print-none text-center">
+
+      <div class="mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="chk_ems_header" v-model="isEmsHeaderVisible">
+          <label class="form-check-label" for="chk_ems_header">
+            Show EMS Hospital Header
+          </label>
+        </div>
+      </div>
+
       <button class="btn btn-success" @click="openPrintDialog()">
         <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print
       </button>
@@ -502,6 +608,7 @@ export default {
   data() {
     return {
       loaded: false,
+      isEmsHeaderVisible: false,
     }
   },
 
@@ -535,11 +642,21 @@ export default {
 
     cardiacIndex() {
       if ( this.visitEcho.param_cardiac_output === 0 ) return 0;
-      return this.visitEcho.param_cardiac_output / this.visitEcho.visit.bsa;
-    }
+      return ( this.visitEcho.param_cardiac_output / this.visitEcho.visit.bsa ).toFixed( 2 );
+    },
 
+    /* section display logic */
+    showAortaSection() {
+      return this.visitEcho.has_aorta || this.visitEcho.is_diseased_aorta || this.visitEchoRemarks.AORTA.length > 0;
+    },
+
+    showPulmonicValveSection() {
+      return this.visitEcho.has_ps || this.visitEchoRemarks.PULMONIC_VALVE.length > 0;
+    },
 
   },
+  /* -- computed -- */
+
 
   async mounted() {
     try {
@@ -573,33 +690,20 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-
-.paper {
-  border: solid 1px #cccccc;
-  box-shadow: 0 0 10px #cccccc;
-  padding: 5mm;
-  margin-bottom: 5mm;
-}
-
+<style lang="scss">
 
 @media print {
 
-
   @page {
-    size: A4;
-    margin: 20mm 10mm;
+    size: A4 !important;
+    margin: 10mm !important;
   }
+
 
   .paper {
-    font-size: 14pt !important;
-    border: none;
-    /*width: 200mm !important;*/
+    width: 260mm !important;
   }
 
-  .section {
-    break-inside: avoid;
-  }
 }
 
 </style>

@@ -4,6 +4,22 @@
 
     <div class="paper">
 
+      <div class="ems-header mb-3" v-if="isEmsHeaderVisible">
+        <div class="d-flex align-items-center">
+          <div class="mr-3">
+            <img src="/assets/images/ems-logo.png" style="width: 100px" alt="">
+          </div>
+
+          <div>
+            <div class="font-weight-bold">No.121, New Kalmunai Road</div>
+            <div class="font-weight-bold">Kallady, Batticaloa</div>
+            <div class="">Phone: 065 222 8812, 065 222 8800</div>
+            <div>Email: ems.hospital.batticaloa@gmail.com</div>
+          </div>
+
+        </div>
+      </div>
+
       <h3 class="text-center">Angiography Report</h3>
 
       <PatientBasicDetails/>
@@ -207,6 +223,16 @@
     </div>
 
     <div class="d-print-none text-center">
+
+      <div class="mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="chk_ems_header" v-model="isEmsHeaderVisible">
+          <label class="form-check-label" for="chk_ems_header">
+            Show EMS Hospital Header
+          </label>
+        </div>
+      </div>
+
       <button class="btn btn-success" @click="openPrintDialog()">
         <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print
       </button>
@@ -230,6 +256,7 @@ export default {
   data() {
     return {
       loaded: false,
+      isEmsHeaderVisible: false,
     }
   },
 

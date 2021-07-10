@@ -18,8 +18,11 @@
         </div>
 
       </div>
-      <div class="card-body">
+      <div class="card-body" v-if="loaded">
 
+        <div class="alert alert-dark text-center font-weight-bold" v-if="allEmpty">
+          <img src="/assets/images/actions/warning.svg" class="icon-24" alt=""> There are no appointments on {{ dateString }}
+        </div>
 
         <div v-if="pendingAppointments.length > 0">
           <h5 class="text-center text-uppercase">Pending</h5>
@@ -41,7 +44,12 @@
           <AppointmentsTable @status-updated="onStatusUpdated()" :appointments="cancelledAppointments" table-class="table-info"/>
         </div><!-- section -->
 
+      </div><!-- card-body -->
+
+      <div class="card-body" v-else>
+        <TheLoading/>
       </div>
+
     </div><!-- card -->
 
   </div><!-- template -->
@@ -52,13 +60,18 @@
 
 import AppointmentsTable from "../../components/AppointmentsTable";
 import {DateTime} from "luxon";
+import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import TheLoading from "../../../_common/components/TheLoading";
 
 export default {
   name: "SingleDayAppointments",
-  components: { AppointmentsTable },
+  components: { TheLoading, AppointmentsTable },
 
   data() {
     return {
+
+      loaded: false,
+
       /* today's appointments */
       date: DateTime.now(),
 
@@ -76,6 +89,14 @@ export default {
 
     dateString() {
       return this.date.toFormat( "yyyy-MM-dd" );
+    },
+
+    allEmpty() {
+      return _.isEmpty( this.pendingAppointments )
+          && _.isEmpty( this.completedAppointments )
+          && _.isEmpty( this.missedAppointments )
+          && _.isEmpty( this.cancelledAppointments );
+
     }
 
   },
@@ -122,30 +143,40 @@ export default {
     * */
 
     async __fetchAppointments() {
-      const paramsPending = {
-        date: this.dateString,
-        status: this.statuses.pending
-      };
+      try {
 
-      const paramsCompleted = {
-        date: this.dateString,
-        status: this.statuses.completed
-      };
+        this.loaded = false;
 
-      const paramsCancelled = {
-        date: this.dateString,
-        status: this.statuses.cancelled
-      };
+        const paramsPending = {
+          date: this.dateString,
+          status: this.statuses.pending
+        };
 
-      const paramsMissed = {
-        date: this.dateString,
-        status: this.statuses.missed
-      };
+        const paramsCompleted = {
+          date: this.dateString,
+          status: this.statuses.completed
+        };
 
-      this.pendingAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsPending );
-      this.completedAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsCompleted );
-      this.cancelledAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsCancelled );
-      this.missedAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsMissed );
+        const paramsCancelled = {
+          date: this.dateString,
+          status: this.statuses.cancelled
+        };
+
+        const paramsMissed = {
+          date: this.dateString,
+          status: this.statuses.missed
+        };
+
+        this.pendingAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsPending );
+        this.completedAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsCompleted );
+        this.cancelledAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsCancelled );
+        this.missedAppointments = await this.$store.dispatch( "appointments_fetchByDate", paramsMissed );
+
+        this.loaded = true;
+
+      } catch ( e ) {
+        errorMessageBox( "Failed to load appointments" );
+      }
     }
 
   },

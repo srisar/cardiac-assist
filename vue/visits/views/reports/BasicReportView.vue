@@ -3,13 +3,39 @@
   <div v-if="loaded">
 
     <div class="paper">
-      <PatientDetailsDiagnoses class="section"/>
 
+      <div class="ems-header mb-3" v-if="isEmsHeaderVisible">
+        <div class="d-flex align-items-center">
+          <div class="mr-3">
+            <img src="/assets/images/ems-logo.png" style="width: 100px" alt="">
+          </div>
+
+          <div>
+            <div class="font-weight-bold">No.121, New Kalmunai Road</div>
+            <div class="font-weight-bold">Kallady, Batticaloa</div>
+            <div class="">Phone: 065 222 8812, 065 222 8800</div>
+            <div>Email: ems.hospital.batticaloa@gmail.com</div>
+          </div>
+
+        </div>
+      </div>
+
+      <PatientDetailsDiagnoses class="section"/>
       <PrescriptionDetails class="section"/>
     </div><!-- paper -->
 
 
     <div class="d-print-none text-center">
+
+      <div class="mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="chk_ems_header" v-model="isEmsHeaderVisible">
+          <label class="form-check-label" for="chk_ems_header">
+            Show EMS Hospital Header
+          </label>
+        </div>
+      </div>
+
       <button class="btn btn-success" @click="openPrintDialog()">
         <img src="/assets/images/actions/print.svg" class="icon-24" alt=""> Print
       </button>
@@ -32,7 +58,7 @@ export default {
   components: { PrescriptionDetails, PatientDetailsDiagnoses },
   data() {
     return {
-      //
+      isEmsHeaderVisible: false,
     }
   },
 
@@ -68,87 +94,18 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-
-
-.paper {
-  border: solid 1px #cccccc;
-  box-shadow: 0 0 10px #cccccc;
-  padding: 5mm;
-  margin-bottom: 5mm;
-}
-
-.lead, .report-heading {
-  margin-left: 10mm;
-}
+<style lang="scss">
 
 @media print {
 
-
   @page {
-    size: A5;
-    margin: 10mm 5mm;
-  }
-
-  @page :first {
-    margin: 25mm 5mm;
+    size: A5 !important;
+    margin: 5mm !important;
   }
 
 
   .paper {
-    font-size: 14pt !important;
-    border: none;
-    /*width: 200mm !important;*/
-  }
-
-  .lead {
-    font-size: 16pt;
-  }
-
-  .page-break {
-    clear: both;
-    break-after: page;
-  }
-
-  .section {
-    break-inside: avoid;
-  }
-
-}
-
-
-</style>
-
-
-<style lang="scss">
-
-/* This styles are universal for printing */
-
-.paper {
-
-  .border, table, tr, td, th {
-    border: solid 1px black !important;
-  }
-
-  hr {
-    border-top: solid 1px black !important;
-  }
-
-}
-
-.prescription-details {
-
-  figure {
-    //margin: 0;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  figure img {
-    width: 100% !important;
-    display: inline-block;
+    width: 200mm !important;
   }
 
 }

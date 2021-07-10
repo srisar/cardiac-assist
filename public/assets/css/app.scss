@@ -144,3 +144,84 @@ select {
 .login-logo {
   width: 100px;
 }
+
+
+/* print styles */
+
+
+.paper {
+
+  border: solid 1px #cccccc;
+  box-shadow: 0 0 10px #cccccc;
+  padding: 5mm;
+  margin-bottom: 5mm;
+  font-size: 11pt !important;
+
+
+  .border, table, tr, td, th {
+    border: solid 1px black !important;
+  }
+
+  hr {
+    border-top: solid 1px black !important;
+  }
+
+}
+
+.prescription-details {
+
+  figure {
+    //margin: 0;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  figure img {
+    width: 100% !important;
+    display: inline-block;
+  }
+
+}
+
+.sub-title {
+  font-size: 11pt;
+}
+
+h5 {
+  font-size: 14pt;
+}
+
+/* end: font settings*/
+
+@media print {
+
+  @page {
+    size: A4; /* DIN A4 standard, Europe */
+    margin: 0;
+  }
+  html, body {
+    //width: 210mm;
+    /* height: 297mm; */
+    //height: 282mm;
+    //font-size: 11px;
+    background: #0a90eb;
+    overflow: visible;
+  }
+
+
+  .paper {
+    border: none;
+    padding: 0;
+  }
+
+  .page-break {
+    clear: both;
+    break-after: page;
+  }
+
+  .section {
+    break-inside: avoid;
+  }
+}
