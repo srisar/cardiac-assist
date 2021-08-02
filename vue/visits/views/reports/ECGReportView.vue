@@ -99,19 +99,6 @@ export default {
 
 <style scoped lang="scss">
 
-@media print {
-
-  @page {
-    size: A4 !important;
-    margin: 10mm !important;
-  }
-
-
-  .paper {
-    width: 260mm !important;
-  }
-
-}
 
 
 </style>

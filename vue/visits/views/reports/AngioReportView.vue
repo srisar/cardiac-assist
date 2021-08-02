@@ -246,18 +246,18 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
-import PatientBasicDetails from "./basic_report_sections/PatientBasicDetails";
-import TheLoading from "../../../_common/components/TheLoading";
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
+import PatientBasicDetails from './basic_report_sections/PatientBasicDetails';
+import TheLoading from '../../../_common/components/TheLoading';
 
 export default {
-  name: "AngioReportView",
+  name: 'AngioReportView',
   components: { TheLoading, PatientBasicDetails },
   data() {
     return {
       loaded: false,
       isEmsHeaderVisible: false,
-    }
+    };
   },
 
 
@@ -272,27 +272,27 @@ export default {
     },
 
     hasDominanceSection() {
-      return this.visitAngio.dominance_left === "1" || this.visitAngio.dominance_right === "1";
+      return this.visitAngio.dominance_left === '1' || this.visitAngio.dominance_right === '1';
     },
 
     hasNotes() {
-      return this.visitAngio.notes !== "";
+      return this.visitAngio.notes !== '';
     },
 
     hasInstruments() {
-      return this.visitAngio.instruments !== "";
-    }
+      return this.visitAngio.instruments !== '';
+    },
 
   },
 
   async mounted() {
     try {
 
-      await this.$store.dispatch( "visitAngio_fetch", this.visitId );
-      this.loaded = true
+      await this.$store.dispatch( 'visitAngio_fetch', this.visitId );
+      this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch angiography details" );
+      errorMessageBox( 'Failed to fetch angiography details' );
     }
 
 
@@ -300,32 +300,16 @@ export default {
 
   methods: {
     openPrintDialog() {
+
+
       window.print();
-    }
+
+    },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
-.paper {
-  border: solid 1px #cccccc;
-  box-shadow: 0 0 10px #cccccc;
-  padding: 5mm;
-  margin-bottom: 5mm;
-}
-
-@media print {
 
 
-  @page {
-    size: A4;
-    margin: 20mm 10mm;
-  }
-
-  .paper {
-    font-size: 14pt !important;
-    border: none;
-    /*width: 200mm !important;*/
-  }
-}
 </style>

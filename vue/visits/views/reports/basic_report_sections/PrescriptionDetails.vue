@@ -7,7 +7,7 @@
       <!-- prescriptions -->
       <div class="lead text-uppercase font-weight-bold">Prescriptions</div>
 
-      <table class="table table-sm table-bordered">
+      <table class="table table-sm table-borderless">
         <tr>
           <td class="font-weight-bold">
             {{ prescription.date }}
@@ -18,7 +18,7 @@
       </table>
 
       <!-- prescription items -->
-      <table class="table table-bordered table-sm">
+      <table class="table table-sm">
         <thead>
         <tr>
           <th>Drug</th>
@@ -99,25 +99,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-@media print {
-
-  .paper {
-    font-size: 14pt !important;
-    border: none;
-    /*width: 200mm !important;*/
-  }
-
-
-  .page-break {
-    clear: both;
-    break-after: page;
-  }
-
-  .section, table {
-    break-inside: avoid;
-  }
-
-}
-
 </style>

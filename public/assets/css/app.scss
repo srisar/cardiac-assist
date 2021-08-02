@@ -1,22 +1,22 @@
-$font-family-custom: 'Sen', sans-serif;
+$font-family-custom : "Sen", sans-serif;
 
 * {
-  transition: 0.1s;
+  transition : 0.1s;
 }
 
 
 footer {
   a:hover {
-    text-decoration: underline;
+    text-decoration : underline;
   }
-
+  
 }
 
 pre {
-  font-family: $font-family-custom;
-  margin-bottom: 0;
-  font-size: inherit;
-  white-space: pre-line;
+  font-family   : $font-family-custom;
+  margin-bottom : 0;
+  font-size     : inherit;
+  white-space   : pre-line;
 }
 
 .card {
@@ -24,83 +24,83 @@ pre {
 }
 
 .card-header {
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-size      : 0.9rem;
+  font-weight    : bold;
   //text-align: center;
-  padding: .5rem !important;
-  text-transform: uppercase;
+  padding        : .5rem !important;
+  text-transform : uppercase;
 }
 
 .card-body {
-  padding: .5rem !important;
+  padding : .5rem !important;
 }
 
 .modal-title {
-  font-size: 16px;
-  font-weight: bold;
+  font-size   : 16px;
+  font-weight : bold;
 }
 
 .btn {
-  text-transform: uppercase;
+  text-transform : uppercase;
 }
 
 .btn-tiny {
-  padding: .05rem .25rem;
-  font-size: .675rem;
-  line-height: 1rem;
-  border-radius: .2rem;
-
+  padding       : .05rem .25rem;
+  font-size     : .675rem;
+  line-height   : 1rem;
+  border-radius : .2rem;
+  
 }
 
 table {
-  background-color: white;
+  background-color : white;
 }
 
 
 .table thead tr {
-  background-color: #ddd;
+  background-color : #ddd;
 }
 
 .table-row-options {
-  width: 80px;
-  text-align: center;
+  width      : 80px;
+  text-align : center;
 }
 
 
 .field-age {
-  width: 80px !important;
+  width : 80px !important;
 }
 
 
 .dropdown-item {
-  font-size: 1em !important;
+  font-size : 1em !important;
 }
 
 
 .section {
   .section__title {
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 1.4em;
-    line-height: 1.6em;
-    margin-bottom: 2px;
-    padding-bottom: 2px;
+    text-transform : uppercase;
+    text-align     : center;
+    font-size      : 1.4em;
+    line-height    : 1.6em;
+    margin-bottom  : 2px;
+    padding-bottom : 2px;
     //color: #FFFFFF;
     //border-bottom: solid 1px #FFFFFF;
   }
-
+  
 }
 
 .gray-bg {
-  background-color: #e7e7e7;
+  background-color : #e7e7e7;
 }
 
 .daterangepicker {
-  font-family: $font-family-custom;
+  font-family : $font-family-custom;
 }
 
 .btn-link {
-  cursor: pointer;
+  cursor : pointer;
 }
 
 /*
@@ -109,40 +109,40 @@ BOOTSTRAP MODAL FULLSCREEN OPTION
 
 .content-description {
   .image img {
-    max-width: 100%;
+    max-width : 100%;
   }
-
+  
 }
 
 
 select {
-  font-family: $font-family-custom;
+  font-family : $font-family-custom;
 }
 
 
 .dropdown-menu {
-  z-index: 2000;
+  z-index : 2000;
 }
 
 
 .icon-24 {
-  height: 24px;
+  height : 24px;
 }
 
 
 .icon-16 {
-  height: 16px;
+  height : 16px;
 }
 
 .hover-group {
-  top: 0;
-  right: 5px;
-  background-color: #FFFFFF;
+  top              : 0;
+  right            : 5px;
+  background-color : #FFFFFF;
 }
 
 
 .login-logo {
-  width: 100px;
+  width : 100px;
 }
 
 
@@ -150,78 +150,105 @@ select {
 
 
 .paper {
-
-  border: solid 1px #cccccc;
-  box-shadow: 0 0 10px #cccccc;
-  padding: 5mm;
-  margin-bottom: 5mm;
-  font-size: 11pt !important;
-
-
+  
+  border        : solid 1px #cccccc;
+  box-shadow    : 0 0 10px #cccccc;
+  padding       : 5mm;
+  margin-bottom : 5mm;
+  font-size     : 11pt !important;
+  
+  
   .border, table, tr, td, th {
-    border: solid 1px black !important;
+    //border: solid 1px black !important;
   }
-
+  
   hr {
-    border-top: solid 1px black !important;
+    border-top : solid 1px #dee2e6 !important;
+    margin     : 1mm 0;
   }
-
+  
 }
 
 .prescription-details {
-
+  
   figure {
     //margin: 0;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    text-align   : center;
+    display      : block;
+    margin-left  : auto;
+    margin-right : auto;
   }
-
+  
   figure img {
-    width: 100% !important;
-    display: inline-block;
+    width   : 100% !important;
+    display : inline-block;
   }
-
+  
 }
 
 .sub-title {
-  font-size: 11pt;
+  font-size : 11pt;
 }
 
 h5 {
-  font-size: 14pt;
+  font-size : 14pt;
 }
 
 /* end: font settings*/
 
+
+.section {
+  margin-bottom : 5mm;
+}
+
+
+/*
+  ---------------------------------------------------------------------------
+  Styles for default printing
+*/
+
+
+@page {
+  size   : 148mm 210mm;
+  margin : 0.25in !important;
+}
+
 @media print {
-
-  @page {
-    size: A4; /* DIN A4 standard, Europe */
-    margin: 0;
+  
+  body {
+    width  : 100% !important;
+    height : 100% !important;
   }
-  html, body {
-    //width: 210mm;
-    /* height: 297mm; */
-    //height: 282mm;
-    //font-size: 11px;
-    background: #0a90eb;
-    overflow: visible;
-  }
-
-
+  
+  
   .paper {
-    border: none;
-    padding: 0;
+    font-size : 14pt !important;
+    margin    : 0;
+    border    : none;
   }
-
+  
+  
+  .lead {
+    font-size   : 15pt !important;
+    font-weight : bold;
+  }
+  
   .page-break {
-    clear: both;
-    break-after: page;
+    clear       : both;
+    break-after : page;
   }
-
+  
   .section {
-    break-inside: avoid;
+    break-inside  : avoid;
+    margin-bottom : 5mm;
+  }
+  
+  .page-break {
+    clear       : both;
+    break-after : page;
+  }
+  
+  .section, table {
+    break-inside : avoid;
   }
 }

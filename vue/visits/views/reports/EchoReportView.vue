@@ -25,14 +25,14 @@
 
       <PatientBasicDetails/>
 
-      <div class="section-echo-report" v-if="loaded">
+      <div class="section-echo-report mt-3" v-if="loaded">
 
 
         <!-- section:Left Ventricle -->
-        <div class="border p-2 mb-3 section">
+        <div class="mb-3 section">
 
           <div class="">
-            <h5 class="font-weight-bold text-uppercase">Left Ventricle</h5>
+            <h5 class="font-weight-bold text-uppercase lead">Left Ventricle</h5>
           </div>
 
 
@@ -130,7 +130,7 @@
         <!-- section:Left Ventricle -->
 
         <!-- section: Left Atrium -->
-        <div class="border p-2 mb-3 section">
+        <div class="mb-3 section">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Left Atrium</h5>
@@ -189,7 +189,7 @@
         <!-- section: Left Atrium -->
 
         <!-- section: mitral valve -->
-        <div class="border p-2 mb-3 section" v-if="visitEcho.has_mitral_stenosis || visitEchoRemarks.MITRAL_VALVE.length > 0">
+        <div class="mb-3 section" v-if="visitEcho.has_mitral_stenosis || visitEchoRemarks.MITRAL_VALVE.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Mitral Valve</h5>
@@ -241,7 +241,7 @@
         <!-- section: mitral valve -->
 
         <!-- section: aortic valve -->
-        <div class="section border p-2 mb-3">
+        <div class="section mb-3">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Aortic Valve</h5>
@@ -308,7 +308,7 @@
         <!-- section: aortic valve -->
 
         <!-- section: aorta -->
-        <div class="section border p-2 mb-3" v-if="showAortaSection">
+        <div class="section mb-3" v-if="showAortaSection">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Aorta</h5>
@@ -365,7 +365,7 @@
         <!-- section: aorta -->
 
         <!-- section: right-ventricle -->
-        <div class="section border p-2 mb-3">
+        <div class="section mb-3">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Right Ventricle / Pulmonary Artery</h5>
@@ -394,7 +394,7 @@
             </tr>
 
             <tr>
-              <td class="text-center" v-if="visitEcho.param_est_pasp">
+              <td class="" v-if="visitEcho.param_est_pasp">
                 Est. PASP:
                 <span class="font-weight-bold">{{ visitEcho.param_est_pasp }} mmHg</span>
               </td>
@@ -459,7 +459,7 @@
         <!-- section: right-ventricle -->
 
         <!-- section: right-atrium -->
-        <div class="section border p-2 mb-3" v-if="visitEchoRemarks.RIGHT_ATRIUM.length > 0">
+        <div class="section mb-3" v-if="visitEchoRemarks.RIGHT_ATRIUM.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Right Atrium</h5>
@@ -476,7 +476,7 @@
         <!-- section: right-atrium -->
 
         <!-- section: pulmonic valve -->
-        <div class="section border p-2 mb-3" v-if="showPulmonicValveSection">
+        <div class="section mb-3" v-if="showPulmonicValveSection">
 
           <div class="">
             <h5 class="font-weight-bold">Pulmonic Valve</h5>
@@ -513,7 +513,7 @@
         <!-- section: pulmonic valve -->
 
         <!-- section: tricuspid -->
-        <div class="section border p-2 mb-3" v-if="visitEchoRemarks.TRICUSPID.length > 0">
+        <div class="section mb-3" v-if="visitEchoRemarks.TRICUSPID.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Tricuspid</h5>
@@ -530,7 +530,7 @@
         <!-- section: tricuspid -->
 
         <!-- section: pericardium -->
-        <div class="section border p-2 mb-3" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
+        <div class="section mb-3" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Pericardium</h5>
@@ -547,7 +547,7 @@
         <!-- section: pericardium -->
 
         <!-- section: conclusions -->
-        <div class="section border p-2 mb-3" v-if="visitEchoRemarks.CONCLUSION.length > 0">
+        <div class="section mb-3" v-if="visitEchoRemarks.CONCLUSION.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Conclusions</h5>
@@ -598,18 +598,18 @@
 </template>
 
 <script>
-import PatientBasicDetails from "./basic_report_sections/PatientBasicDetails";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
-import TheLoading from "../../../_common/components/TheLoading";
+import PatientBasicDetails from './basic_report_sections/PatientBasicDetails';
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
+import TheLoading from '../../../_common/components/TheLoading';
 
 export default {
-  name: "EchoReportView",
+  name: 'EchoReportView',
   components: { TheLoading, PatientBasicDetails },
   data() {
     return {
       loaded: false,
       isEmsHeaderVisible: false,
-    }
+    };
   },
 
   computed: {
@@ -623,11 +623,11 @@ export default {
     },
 
     allEchoRemarks: function () {
-      return this.$store.getters.getEchoRemarks
+      return this.$store.getters.getEchoRemarks;
     },
 
     visitEchoRemarks: function () {
-      return this.$store.getters.getVisitEchoRemarks
+      return this.$store.getters.getVisitEchoRemarks;
     },
 
     eOverA() {
@@ -661,49 +661,36 @@ export default {
   async mounted() {
     try {
 
-      await this.$store.dispatch( "visitEcho_fetch", this.visitId );
+      await this.$store.dispatch( 'visitEcho_fetch', this.visitId );
 
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch echo details" );
+      errorMessageBox( 'Failed to fetch echo details' );
     }
 
     /* fetch all echo remarks */
     try {
 
-      await this.$store.dispatch( "echo_fetchAllRemarks" );
-      await this.$store.dispatch( "echo_fetchAllVisitRemarks", this.visitId );
+      await this.$store.dispatch( 'echo_fetchAllRemarks' );
+      await this.$store.dispatch( 'echo_fetchAllVisitRemarks', this.visitId );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch remarks" );
+      errorMessageBox( 'Failed to fetch remarks' );
     }
   },
 
   methods: {
     openPrintDialog() {
       window.print();
-    }
+    },
   },
 
-}
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
-@media print {
-
-  @page {
-    size: A4 !important;
-    margin: 10mm !important;
-  }
-
-
-  .paper {
-    width: 260mm !important;
-  }
-
-}
 
 </style>

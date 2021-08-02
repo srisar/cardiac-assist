@@ -50,16 +50,16 @@
 </template>
 
 <script>
-import PatientDetailsDiagnoses from "./basic_report_sections/PatientDetailsDiagnoses";
-import PrescriptionDetails from "./basic_report_sections/PrescriptionDetails";
+import PatientDetailsDiagnoses from './basic_report_sections/PatientDetailsDiagnoses';
+import PrescriptionDetails from './basic_report_sections/PrescriptionDetails';
 
 export default {
-  name: "BasicReportView",
+  name: 'BasicReportView',
   components: { PrescriptionDetails, PatientDetailsDiagnoses },
   data() {
     return {
       isEmsHeaderVisible: false,
-    }
+    };
   },
 
   computed: {
@@ -87,27 +87,15 @@ export default {
 
   methods: {
     openPrintDialog() {
+
       window.print();
-    }
+    },
   },
 
-}
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
-@media print {
-
-  @page {
-    size: A5 !important;
-    margin: 5mm !important;
-  }
-
-
-  .paper {
-    width: 200mm !important;
-  }
-
-}
 
 </style>

@@ -8,7 +8,7 @@
 
       <!-- section: lipids details -->
       <div id="section-lipids" v-if="! isLipidsEmpty">
-        <table class="table table-bordered table-sm">
+        <table class="table table-sm table-bordered">
           <tbody>
           <tr>
             <td style="width: 20%">
@@ -35,7 +35,7 @@
       <!-- section: ecg -->
       <div id="section-ecg" v-if="! isVisitECGEmpty">
         <div class="lead text-uppercase font-weight-bold">ECG Details</div>
-        <table class="table table-bordered table-sm">
+        <table class="table table-sm table-borderless mb-1">
           <tbody>
           <tr>
             <td>
@@ -44,13 +44,14 @@
           </tr>
           </tbody>
         </table>
+        <hr>
       </div>
 
 
       <!-- section: clinical details -->
       <div id="section-clinical-details" class="section">
         <div class="lead font-weight-bold text-uppercase">Clinical details</div>
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-borderless mb-1">
           <tbody>
           <tr v-for="item in visitSymptoms">
             <td contenteditable="true">{{ item.symptom.symptom_name }}</td>
@@ -58,10 +59,11 @@
           </tr>
           </tbody>
         </table>
+        <hr>
       </div>
 
       <div class="lead font-weight-bold text-uppercase">Differential diagnoses</div>
-      <table class="table table-sm table-bordered">
+      <table class="table table-sm table-borderless mb-1">
         <tbody>
         <tr>
           <td contenteditable="true">
@@ -69,12 +71,13 @@
           </td>
         </tr>
         </tbody>
+        <hr>
       </table>
 
       <!-- section: investigations -->
       <div id="section-investigations" class="section">
         <div class="lead font-weight-bold text-uppercase">Investigations</div>
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm table-borderless mb-1">
           <tbody>
           <tr v-for="item in investigations">
             <td contenteditable="true">
@@ -83,12 +86,13 @@
           </tr>
           </tbody>
         </table>
+        <hr>
       </div>
 
       <!-- section: visit problems -->
       <div id="section-problems" class="section">
-        <div class="lead font-weight-bold text-uppercase">Problems + Diagnoses</div>
-        <table class="table table-sm table-bordered">
+        <div class="lead font-weight-bold text-uppercase">Problems & Diagnoses</div>
+        <table class="table table-sm table-borderless mb-1">
           <tbody>
           <tr v-for="item in diagnoses">
             <td>
@@ -102,6 +106,7 @@
           </tr>
           </tbody>
         </table>
+        <hr>
       </div>
     </div>
 
@@ -116,17 +121,17 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../../../../_common/bootbox_dialogs";
-import TheLoading from "../../../../_common/components/TheLoading";
-import PatientBasicDetails from "./PatientBasicDetails";
+import {errorMessageBox} from '../../../../_common/bootbox_dialogs';
+import TheLoading from '../../../../_common/components/TheLoading';
+import PatientBasicDetails from './PatientBasicDetails';
 
 export default {
-  name: "PatientDetailsDiagnoses",
+  name: 'PatientDetailsDiagnoses',
   components: { PatientBasicDetails, TheLoading },
   data() {
     return {
       loaded: false,
-    }
+    };
   },
 
   computed: {
@@ -146,7 +151,7 @@ export default {
         const diff = moment.duration( today.diff( moment( this.patient.dob ) ) );
         return Math.round( diff.asYears() );
       }
-      return "";
+      return '';
     },
 
     /* loaded modules */
@@ -187,8 +192,8 @@ export default {
     },
 
     isVisitECGEmpty() {
-      return this.visitECG.description === "";
-    }
+      return this.visitECG.description === '';
+    },
 
   },
   /* -- computed -- */
@@ -196,31 +201,31 @@ export default {
   filters: {
 
     boolean( value ) {
-      if ( value ) return "Yes";
-      return "No";
+      if ( value ) return 'Yes';
+      return 'No';
     },
 
     filterSmoking( value ) {
       switch ( value ) {
-        case "NO":
-          return "No";
-        case "SMOKING":
-          return "Smoking";
-        case "JUST_QUIT":
-          return "Just quit";
-        case "EX_SMOKER":
-          return "Ex smoker";
+        case 'NO':
+          return 'No';
+        case 'SMOKING':
+          return 'Smoking';
+        case 'JUST_QUIT':
+          return 'Just quit';
+        case 'EX_SMOKER':
+          return 'Ex smoker';
       }
     },
 
     filterFamilyHistory( value ) {
       switch ( value ) {
-        case "Y":
-          return "Yes";
-        case "N" :
-          return "No";
+        case 'Y':
+          return 'Yes';
+        case 'N' :
+          return 'No';
       }
-    }
+    },
 
   },
   /* -- filters -- */
@@ -231,55 +236,33 @@ export default {
 
       const visitId = this.$store.getters.getVisitId;
 
-      await this.$store.dispatch( "visitSymptoms_fetchAll", visitId );
-      await this.$store.dispatch( "diffDiagnoses_fetchAll", visitId );
-      await this.$store.dispatch( "visitInvestigations_fetchAll", visitId );
-      await this.$store.dispatch( "diagnoses_fetchAll", visitId );
-      await this.$store.dispatch( "visitProblems_fetchAll", visitId );
-      await this.$store.dispatch( "visitLipids_fetchAll", visitId );
-      await this.$store.dispatch( "visitECG_fetch", visitId );
+      await this.$store.dispatch( 'visitSymptoms_fetchAll', visitId );
+      await this.$store.dispatch( 'diffDiagnoses_fetchAll', visitId );
+      await this.$store.dispatch( 'visitInvestigations_fetchAll', visitId );
+      await this.$store.dispatch( 'diagnoses_fetchAll', visitId );
+      await this.$store.dispatch( 'visitProblems_fetchAll', visitId );
+      await this.$store.dispatch( 'visitLipids_fetchAll', visitId );
+      await this.$store.dispatch( 'visitECG_fetch', visitId );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to load required data" );
+      errorMessageBox( 'Failed to load required data' );
     }
 
-  }
+  },
   /* -- mounted -- */
 
 
-}
+};
 </script>
 
-<style scoped>
+<style>
 
-.prescription-details >>> p {
+.prescription-details > > > p {
   margin-bottom: 0 !important;
 }
 
 
-@media print {
-
-  .paper {
-    font-size: 12pt !important;
-    border: none;
-    /*width: 200mm !important;*/
-  }
-
-  .lead {
-    font-size: 14pt;
-  }
-
-  .page-break {
-    clear: both;
-    break-after: page;
-  }
-
-  .section {
-    break-inside: avoid;
-  }
-
-}
 
 </style>
