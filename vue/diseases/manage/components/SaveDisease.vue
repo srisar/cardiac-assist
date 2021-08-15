@@ -49,12 +49,12 @@
 
 <script>
 
-import RichEditorV2 from "../../../_common/components/RichEditorV2";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
+import RichEditorV2 from '../../../_common/components/RichEditorV2';
 
 export default {
-  name: "SaveDisease",
-  components: { RichEditorV2, },
+  name: 'SaveDisease',
+  components: { RichEditorV2 },
 
   props: [],
 
@@ -62,18 +62,18 @@ export default {
     return {
 
       disease: {
-        disease: "",
-        disease_code: "",
-        description: "",
+        disease: '',
+        disease_code: '',
+        description: '',
       },
-    }
+    };
   },
 
   computed: {
     isValidForm: function () {
-      return this.disease.disease !== "";
+      return this.disease.disease !== '';
 
-    }
+    },
   },
 
   mounted() {
@@ -96,11 +96,17 @@ export default {
           description: this.disease.description,
         };
 
-        await this.$store.dispatch( "diseases_add", params );
-        await this.$store.dispatch( "diseases_fetchAll" );
+        await this.$store.dispatch( 'diseases_add', params );
+
+        this.disease.disease = '';
+        this.disease.description = '';
+        this.disease.disease_code = '';
+
+        await this.$store.dispatch( 'diseases_fetchAll' );
+
 
       } catch ( e ) {
-        errorMessageBox( "Failed to save new disease" );
+        errorMessageBox( 'Failed to save new disease' );
       }
 
 
@@ -108,7 +114,7 @@ export default {
 
   },
 
-}
+};
 </script>
 
 <style scoped>
