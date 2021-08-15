@@ -77,7 +77,7 @@ class EchoRemark implements IModel
     {
 
         $db = Database::instance();
-        $statement = $db->prepare( "select * from echo_remarks where type=?" );
+        $statement = $db->prepare( "select * from echo_remarks where type=? order by value" );
         $statement->execute( [ $type ] );
 
         /** @var EchoRemark[] $result */
