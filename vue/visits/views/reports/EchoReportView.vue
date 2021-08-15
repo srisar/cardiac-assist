@@ -119,11 +119,11 @@
           </div>
 
           <div class="" v-if="visitEchoRemarks.LEFT_VENTRICLE.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.LEFT_VENTRICLE">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
 
         </div>
@@ -178,11 +178,11 @@
 
           <div class="" v-if="visitEchoRemarks.LEFT_ATRIUM.length > 0">
 
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.LEFT_ATRIUM">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
 
         </div>
@@ -231,11 +231,11 @@
 
           <div class="" v-if="visitEchoRemarks.MITRAL_VALVE.length > 0">
 
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.MITRAL_VALVE">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: mitral valve -->
@@ -298,11 +298,11 @@
 
           <div class="" v-if="visitEchoRemarks.AORTIC_VALVE.length > 0">
 
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.AORTIC_VALVE">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: aortic valve -->
@@ -355,11 +355,11 @@
           </div>
 
           <div class="" v-if="visitEchoRemarks.AORTA.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.AORTA">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: aorta -->
@@ -449,11 +449,11 @@
 
 
           <div class="" v-if="visitEchoRemarks.RIGHT_VENTRICLE.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.RIGHT_VENTRICLE">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: right-ventricle -->
@@ -466,11 +466,11 @@
           </div>
 
           <div class="" v-if="visitEchoRemarks.RIGHT_ATRIUM.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.RIGHT_ATRIUM">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: right-atrium -->
@@ -503,11 +503,11 @@
 
 
           <div class="" v-if="visitEchoRemarks.PULMONIC_VALVE.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.PULMONIC_VALVE">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: pulmonic valve -->
@@ -520,11 +520,11 @@
           </div>
 
           <div class="" v-if="visitEchoRemarks.TRICUSPID.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.TRICUSPID">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: tricuspid -->
@@ -537,11 +537,11 @@
           </div>
 
           <div class="" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.PERICARDIUM">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: pericardium -->
@@ -554,11 +554,11 @@
           </div>
 
           <div class="" v-if="visitEchoRemarks.CONCLUSION.length > 0">
-            <ol>
+            <ul class="list-unstyled">
               <li v-for="item in visitEchoRemarks.CONCLUSION">
                 {{ item.value }}
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
         <!-- section: conclusions -->
