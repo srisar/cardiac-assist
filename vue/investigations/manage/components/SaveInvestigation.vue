@@ -40,30 +40,30 @@
 
 <script>
 
-import RichEditorV2 from "../../../_common/components/RichEditorV2";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
+import RichEditorV2 from '../../../_common/components/RichEditorV2';
 
 
 export default {
-  name: "SaveInvestigation",
-  components: {RichEditorV2,},
+  name: 'SaveInvestigation',
+  components: { RichEditorV2 },
 
 
   data() {
     return {
 
       investigation: {
-        investigation_name: "",
-        description: "",
+        investigation_name: '',
+        description: '',
       },
-    }
+    };
   },
 
   computed: {
     isValidForm: function () {
-      return this.investigation.investigation_name !== "";
+      return this.investigation.investigation_name !== '';
 
-    }
+    },
   },
 
   mounted() {
@@ -83,19 +83,23 @@ export default {
         };
 
 
-        await this.$store.dispatch("investigations_add", params);
-        await this.$store.dispatch("investigations_fetchAll");
+        await this.$store.dispatch( 'investigations_add', params );
+
+        this.investigation.investigation_name = '';
+        this.investigation.description = '';
+
+        await this.$store.dispatch( 'investigations_fetchAll' );
 
 
-      } catch (e) {
-        errorMessageBox("Failed to add the investigation");
+      } catch ( e ) {
+        errorMessageBox( 'Failed to add the investigation' );
       }
 
     },
 
   },
 
-}
+};
 </script>
 
 <style scoped>
