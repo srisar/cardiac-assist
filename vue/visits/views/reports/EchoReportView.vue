@@ -130,7 +130,7 @@
         <!-- section:Left Ventricle -->
 
         <!-- section: Left Atrium -->
-        <div class="mb-3 section">
+        <div class="mb-3 section" v-if="isLeftAtriumSectionVisible">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Left Atrium</h5>
@@ -241,7 +241,7 @@
         <!-- section: mitral valve -->
 
         <!-- section: aortic valve -->
-        <div class="section mb-3">
+        <div class="section mb-3" v-if="isAorticValveVisible">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Aortic Valve</h5>
@@ -365,7 +365,7 @@
         <!-- section: aorta -->
 
         <!-- section: right-ventricle -->
-        <div class="section mb-3">
+        <div class="section mb-3" v-if="isRightVentricleVisible">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Right Ventricle / Pulmonary Artery</h5>
@@ -598,9 +598,9 @@
 </template>
 
 <script>
-import PatientBasicDetails from './basic_report_sections/PatientBasicDetails';
 import {errorMessageBox} from '../../../_common/bootbox_dialogs';
 import TheLoading from '../../../_common/components/TheLoading';
+import PatientBasicDetails from './basic_report_sections/PatientBasicDetails';
 
 export default {
   name: 'EchoReportView',
@@ -653,6 +653,31 @@ export default {
     showPulmonicValveSection() {
       return this.visitEcho.has_ps || this.visitEchoRemarks.PULMONIC_VALVE.length > 0;
     },
+
+
+    isLeftAtriumSectionVisible() {
+      return this.visitEcho.is_left_atrium_dilated || this.visitEcho.has_asd || this.visitEchoRemarks.LEFT_ATRIUM.length > 0;
+    },
+
+    isAorticValveVisible() {
+      return this.visitEcho.is_diseased_aortic_valve || this.visitEchoRemarks.AORTIC_VALVE.length > 0;
+    },
+
+    isRightVentricleVisible() {
+      return this.visitEcho.param_tapse ||
+          this.visitEcho.param_peak_tricuspid_velocity ||
+          this.visitEcho.param_est_rvsp ||
+          this.visitEcho.param_est_cvp ||
+          this.visitEcho.param_est_rvsp ||
+          this.visitEcho.param_mpa ||
+          this.visitEcho.param_rvot1 ||
+          this.visitEcho.param_rvot2 ||
+          this.visitEcho.param_rvotat ||
+          this.visitEcho.param_rvid ||
+          this.visitEcho.has_vsd ||
+          this.visitEchoRemarks.RIGHT_VENTRICLE.length > 0;
+    },
+
 
   },
   /* -- computed -- */

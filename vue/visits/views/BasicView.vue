@@ -134,9 +134,9 @@
             <div class="col-4">
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">DBP/SBP (mmHg)</div>
+                  <div class="input-group-text">SBP/DBP (mmHg)</div>
                 </div>
-                <input type="text" class="form-control bg-white" :value="visit.dbp + '/' + visit.sbp" readonly>
+                <input type="text" class="form-control bg-white" :value="visit.sbp + '/' + visit.dbp" readonly>
               </div>
             </div><!-- col -->
 

@@ -39,7 +39,7 @@
           </td>
 
           <td style="width: 25%">
-            <div><span class="font-weight-bold">DP/SP:</span> {{ visit.dbp }}/{{ visit.sbp }} mmHg</div>
+            <div><span class="font-weight-bold">SBP/DBP:</span> {{ visit.sbp }}/{{ visit.dbp }} mmHg</div>
           </td>
 
         </tr>

@@ -60,8 +60,8 @@
 
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label for="field_age">Age (calculated)</label>
-                    <input class="form-control" type="number" id="field_age" v-model="calculatedAge" readonly>
+                    <label for="field_age">Age</label>
+                    <input class="form-control" type="number" id="field_age" v-model="patient.age">
 
                   </div>
                 </div>
@@ -148,6 +148,11 @@
 
       </div><!-- row -->
     </div><!-- container -->
+
+    <div class="d-none">
+      {{ calculatedAge }} {{ calculatedDob }}
+    </div>
+
   </div><!-- template -->
 
 </template>
@@ -202,14 +207,22 @@ export default {
       return !_.isEmpty(this.patient.gender);
     },
 
-    calculatedAge: function () {
-      const today = moment();
-      const diff = moment.duration(today.diff(moment(this.patient.dob)));
-      return Math.round(diff.asYears());
+    fullName: function () {
+      return this.patient.first_name + ' ' + this.patient.last_name;
     },
 
-    fullName: function () {
-      return this.patient.first_name + " " + this.patient.last_name;
+    calculatedAge: function () {
+      const today = moment();
+      const diff = moment.duration( today.diff( moment( this.patient.dob ) ) );
+      let years = Math.round( diff.asYears() );
+      this.patient.age = years;
+      return years;
+    },
+
+    calculatedDob() {
+      let date = moment().subtract( this.patient.age, 'years' ).format( 'YYYY-MM-DD' );
+      this.patient.dob = date;
+      return date;
     },
 
   },
