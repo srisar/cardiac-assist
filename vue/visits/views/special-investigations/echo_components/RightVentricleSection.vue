@@ -37,12 +37,7 @@
         </div>
 
         <div class="col-3 mb-2">
-          Est. CVP <br> (mmHg)
-          <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_est_cvp">
-        </div>
-
-        <div class="col-3 mb-2">
-          Est. PASP (mmHg)
+          Est. PASP <br> (mmHg)
           <input type="number" class="form-control form-control-sm" v-model.number="visitEcho.param_est_pasp">
         </div>
 

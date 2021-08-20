@@ -29,10 +29,10 @@
 
 
         <!-- section:Left Ventricle -->
-        <div class="mb-3 section">
+        <div class="mb-4 section">
 
           <div class="">
-            <h5 class="font-weight-bold text-uppercase lead">Left Ventricle</h5>
+            <h5 class="font-weight-bold text-uppercase">Left Ventricle</h5>
           </div>
 
 
@@ -61,7 +61,7 @@
               </td>
               <td class="" v-if="visitEcho.param_lvid_systole">
                 LVID S:
-                <span class="font-weight-bold">{{ visitEcho.param_lvid_systole }} mmHg</span>
+                <span class="font-weight-bold">{{ visitEcho.param_lvid_systole }} mm</span>
               </td>
             </tr>
             </tbody>
@@ -130,7 +130,7 @@
         <!-- section:Left Ventricle -->
 
         <!-- section: Left Atrium -->
-        <div class="mb-3 section" v-if="isLeftAtriumSectionVisible">
+        <div class="mb-4 section" v-if="isLeftAtriumSectionVisible">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Left Atrium</h5>
@@ -189,7 +189,7 @@
         <!-- section: Left Atrium -->
 
         <!-- section: mitral valve -->
-        <div class="mb-3 section" v-if="visitEcho.has_mitral_stenosis || visitEchoRemarks.MITRAL_VALVE.length > 0">
+        <div class="mb-4 section" v-if="visitEcho.has_mitral_stenosis || visitEchoRemarks.MITRAL_VALVE.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Mitral Valve</h5>
@@ -241,7 +241,7 @@
         <!-- section: mitral valve -->
 
         <!-- section: aortic valve -->
-        <div class="section mb-3" v-if="isAorticValveVisible">
+        <div class="section mb-4" v-if="isAorticValveVisible">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Aortic Valve</h5>
@@ -308,7 +308,7 @@
         <!-- section: aortic valve -->
 
         <!-- section: aorta -->
-        <div class="section mb-3" v-if="showAortaSection">
+        <div class="section mb-4" v-if="showAortaSection">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Aorta</h5>
@@ -365,7 +365,7 @@
         <!-- section: aorta -->
 
         <!-- section: right-ventricle -->
-        <div class="section mb-3" v-if="isRightVentricleVisible">
+        <div class="section mb-4" v-if="isRightVentricleVisible">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Right Ventricle / Pulmonary Artery</h5>
@@ -398,10 +398,7 @@
                 Est. PASP:
                 <span class="font-weight-bold">{{ visitEcho.param_est_pasp }} mmHg</span>
               </td>
-              <td class="" v-if="visitEcho.param_est_cvp">
-                Est. CVP:
-                <span class="font-weight-bold">{{ visitEcho.param_est_cvp }} mmHg</span>
-              </td>
+
               <td class="" v-if="visitEcho.param_mpa">
                 MPA:
                 <span class="font-weight-bold">{{ visitEcho.param_mpa }} mm</span>
@@ -410,13 +407,14 @@
                 RVOT1:
                 <span class="font-weight-bold">{{ visitEcho.param_rvot1 }} mm</span>
               </td>
-            </tr>
-
-            <tr>
               <td class="" v-if="visitEcho.param_rvot2">
                 RVOT2:
                 <span class="font-weight-bold">{{ visitEcho.param_rvot2 }} mm</span>
               </td>
+            </tr>
+
+            <tr>
+
               <td class="" v-if="visitEcho.param_rvotat">
                 RVOTAT:
                 <span class="font-weight-bold">{{ visitEcho.param_rvotat }} ms</span>
@@ -425,6 +423,7 @@
                 RVID:
                 <span class="font-weight-bold">{{ visitEcho.param_rvid }} mm</span>
               </td>
+              <td></td>
               <td></td>
             </tr>
 
@@ -459,7 +458,7 @@
         <!-- section: right-ventricle -->
 
         <!-- section: right-atrium -->
-        <div class="section mb-3" v-if="visitEchoRemarks.RIGHT_ATRIUM.length > 0">
+        <div class="section mb-4" v-if="visitEchoRemarks.RIGHT_ATRIUM.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Right Atrium</h5>
@@ -476,7 +475,7 @@
         <!-- section: right-atrium -->
 
         <!-- section: pulmonic valve -->
-        <div class="section mb-3" v-if="showPulmonicValveSection">
+        <div class="section mb-4" v-if="showPulmonicValveSection">
 
           <div class="">
             <h5 class="font-weight-bold">Pulmonic Valve</h5>
@@ -513,7 +512,7 @@
         <!-- section: pulmonic valve -->
 
         <!-- section: tricuspid -->
-        <div class="section mb-3" v-if="visitEchoRemarks.TRICUSPID.length > 0">
+        <div class="section mb-4" v-if="visitEchoRemarks.TRICUSPID.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Tricuspid</h5>
@@ -530,7 +529,7 @@
         <!-- section: tricuspid -->
 
         <!-- section: pericardium -->
-        <div class="section mb-3" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
+        <div class="section mb-4" v-if="visitEchoRemarks.PERICARDIUM.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Pericardium</h5>
@@ -547,7 +546,7 @@
         <!-- section: pericardium -->
 
         <!-- section: conclusions -->
-        <div class="section mb-3" v-if="visitEchoRemarks.CONCLUSION.length > 0">
+        <div class="section mb-4" v-if="visitEchoRemarks.CONCLUSION.length > 0">
 
           <div class="">
             <h5 class="font-weight-bold text-uppercase">Conclusions</h5>
