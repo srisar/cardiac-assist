@@ -140,6 +140,15 @@
               </div>
             </div><!-- col -->
 
+            <div class="col-4">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Heart beat</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.heart_beat" readonly>
+              </div>
+            </div>
+
           </div>
 
           <div class="form-row justify-content-center mb-2">
@@ -254,8 +263,9 @@
 
     </div>
 
-
-    <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!--
+     # Modals --------------------------------------------------------------------------------------
+     -->
 
     <!-- EDIT Modal: Visit Details -->
     <ModalWindow :visible="modalEditVisitVisible" @close="modalEditVisitVisible = false">
@@ -303,21 +313,31 @@
             </div>
           </div><!-- col -->
 
-          <div class="col">
+
+        </div><!-- row -->
+
+        <div class="form-row justify-content-center">
+          <div class="col-3">
             <div class="form-group">
               <label>Systolic BP</label>
               <input type="number" class="form-control" v-model="visit.sbp">
             </div>
           </div><!-- col -->
 
-          <div class="col">
+          <div class="col-3">
             <div class="form-group">
               <label>Diastolic BP</label>
               <input type="number" class="form-control" v-model="visit.dbp">
             </div>
           </div><!-- col -->
 
-        </div><!-- row -->
+          <div class="col-3">
+            <div class="form-group">
+              <label>Heart beat</label>
+              <input type="number" class="form-control" v-model="visit.heart_beat">
+            </div>
+          </div><!-- col -->
+        </div>
 
         <div class="form-row justify-content-center">
 
@@ -389,7 +409,9 @@
 
             <div class="form-group">
               <label>Remarks</label>
-              <textarea rows="5" class="form-control" v-model="visit.remarks"></textarea>
+              <textarea rows="5" class="form-control"
+                        v-model="visit.remarks"
+                        placeholder="Provide meaningful remark about this visit."></textarea>
             </div>
 
           </div>
@@ -411,13 +433,13 @@
 
 <script>
 
-import ModalWindow from "../../_common/components/ModalWindow";
-import DateField from "../../_common/components/DateField";
-import {errorMessageBox} from "../../_common/bootbox_dialogs";
+import {errorMessageBox} from '../../_common/bootbox_dialogs';
+import DateField from '../../_common/components/DateField';
+import ModalWindow from '../../_common/components/ModalWindow';
 
 export default {
-  name: "BasicView",
-  components: { DateField, ModalWindow, },
+  name: 'BasicView',
+  components: { DateField, ModalWindow },
 
   data() {
     return {
@@ -426,18 +448,18 @@ export default {
 
       /* dropdown values */
       familyHistoryOptions: {
-        "Y": "Yes",
-        "N": "No"
+        'Y': 'Yes',
+        'N': 'No',
       },
 
       smokingOptions: {
-        "NO": "No",
-        "SMOKING": "Smoking",
-        "EX_SMOKER": "Ex smoker",
-        "JUST_QUIT": "Just quit",
-      }
+        'NO': 'No',
+        'SMOKING': 'Smoking',
+        'EX_SMOKER': 'Ex smoker',
+        'JUST_QUIT': 'Just quit',
+      },
 
-    }
+    };
   },
   /* -- data -- */
 
@@ -458,19 +480,19 @@ export default {
 
     /* status switch label */
     statusSwitchLabel() {
-      if ( this.completed ) return "Completed";
-      else return "Incomplete";
+      if ( this.completed ) return 'Completed';
+      else return 'Incomplete';
     },
 
     /* status switch background color */
     statusAlertBgColorClass() {
-      if ( this.completed ) return "alert-success";
-      else return "alert-warning";
+      if ( this.completed ) return 'alert-success';
+      else return 'alert-warning';
     },
 
 
     patientFullName() {
-      return this.patient.first_name + " " + this.patient.last_name;
+      return this.patient.first_name + ' ' + this.patient.last_name;
     },
 
 
@@ -486,13 +508,13 @@ export default {
 
 
     visitDl() {
-      return this.visit.dl ? "YES" : "NO"
+      return this.visit.dl ? 'YES' : 'NO';
     },
     visitDm() {
-      return this.visit.dm ? "YES" : "NO"
+      return this.visit.dm ? 'YES' : 'NO';
     },
     visitHt() {
-      return this.visit.ht ? "YES" : "NO"
+      return this.visit.ht ? 'YES' : 'NO';
     },
 
   },
@@ -507,12 +529,12 @@ export default {
     completed: function ( value ) {
 
       if ( value ) {
-        this.$store.dispatch( "visit_setStatus", { visit_id: this.visit.id, status: "COMPLETE" } )
+        this.$store.dispatch( 'visit_setStatus', { visit_id: this.visit.id, status: 'COMPLETE' } )
             .catch( () => {
               this.completed = false;
             } );
       } else {
-        this.$store.dispatch( "visit_setStatus", { visit_id: this.visit.id, status: "INCOMPLETE" } )
+        this.$store.dispatch( 'visit_setStatus', { visit_id: this.visit.id, status: 'INCOMPLETE' } )
             .catch( () => {
               this.completed = true;
             } );
@@ -521,8 +543,8 @@ export default {
     },
 
     status: function ( value ) {
-      this.completed = value === "COMPLETE";
-    }
+      this.completed = value === 'COMPLETE';
+    },
 
 
   },
@@ -532,25 +554,25 @@ export default {
 
     filterSmoking( value ) {
       switch ( value ) {
-        case "NO":
-          return "No";
-        case "SMOKING":
-          return "Smoking";
-        case "JUST_QUIT":
-          return "Just quit";
-        case "EX_SMOKER":
-          return "Ex smoker";
+        case 'NO':
+          return 'No';
+        case 'SMOKING':
+          return 'Smoking';
+        case 'JUST_QUIT':
+          return 'Just quit';
+        case 'EX_SMOKER':
+          return 'Ex smoker';
       }
     },
 
     filterFamilyHistory( value ) {
       switch ( value ) {
-        case "Y":
-          return "Yes";
-        case "N" :
-          return "No";
+        case 'Y':
+          return 'Yes';
+        case 'N' :
+          return 'No';
       }
-    }
+    },
 
   },
   /* -- filters -- */
@@ -579,13 +601,14 @@ export default {
           ef: this.visit.ef,
           family_history: this.visit.family_history,
           smoking: this.visit.smoking,
+          heart_beat: this.visit.heart_beat,
         };
 
-        await this.$store.dispatch( "visit_update", params );
+        await this.$store.dispatch( 'visit_update', params );
         this.modalEditVisitVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to update visit details" );
+        errorMessageBox( 'Failed to update visit details' );
       }
 
     },
@@ -597,7 +620,7 @@ export default {
   },
   /* -- methods -- */
 
-}
+};
 </script>
 
 <style scoped>

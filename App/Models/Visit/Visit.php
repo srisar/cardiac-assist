@@ -15,7 +15,7 @@ class Visit implements IModel
 
     private const TABLE = "visits";
 
-    public ?int $id, $patient_id;
+    public ?int $id, $patient_id, $heart_beat;
 
     public ?string $visit_date, $remarks, $review_in, $other_remarks;
 
@@ -31,10 +31,10 @@ class Visit implements IModel
     private const STATUS_COMPLETE = "COMPLETE";
     private const STATUS_INCOMPLETE = "INCOMPLETE";
 
-    public static function build($array): Visit
+    public static function build( $array ): Visit
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -45,13 +45,13 @@ class Visit implements IModel
      * @param int $id
      * @return Visit|null
      */
-    public static function find(int $id): ?Visit
+    public static function find( int $id ): ?Visit
     {
         /** @var Visit $visit */
-        $visit = Database::find(self::TABLE, $id, self::class);
+        $visit = Database::find( self::TABLE, $id, self::class );
 
-        if (!empty($visit)) {
-            $visit->patient = Patient::find($visit->patient_id);
+        if ( !empty( $visit ) ) {
+            $visit->patient = Patient::find( $visit->patient_id );
         }
 
         return $visit;
@@ -63,9 +63,9 @@ class Visit implements IModel
      * @param int $offset
      * @return array
      */
-    public static function findAll($limit = 1000, $offset = 0): array
+    public static function findAll( $limit = 1000, $offset = 0 ): array
     {
-        return Database::findAll(self::TABLE, $limit, $offset, self::class, "patient_id");
+        return Database::findAll( self::TABLE, $limit, $offset, self::class, "patient_id" );
     }
 
 
@@ -89,13 +89,14 @@ class Visit implements IModel
                 "ht" => $this->ht ? 1 : 0,
                 "dl" => $this->dl ? 1 : 0,
                 "ef" => $this->ef,
+                "heart_beat" => $this->heart_beat,
             ];
 
             $db->beginTransaction();
 
-            $visitId = Database::insert(self::TABLE, $data);
+            $visitId = Database::insert( self::TABLE, $data );
 
-            if ($visitId != -1) {
+            if ( $visitId != -1 ) {
                 $visitECG = new VisitECG();
                 $visitECG->visit_id = $visitId;
                 $visitECG->insert();
@@ -121,8 +122,8 @@ class Visit implements IModel
 
             return true;
 
-        } catch (PDOException $exception) {
-            error_log($exception->getMessage());
+        } catch ( PDOException $exception ) {
+            error_log( $exception->getMessage() );
             $db->rollBack();
             return false;
         }
@@ -148,9 +149,10 @@ class Visit implements IModel
             "ef" => $this->ef,
             "smoking" => $this->smoking,
             "family_history" => $this->family_history,
+            "heart_beat" => $this->heart_beat,
         ];
 
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
     }
 
     /**
@@ -162,7 +164,7 @@ class Visit implements IModel
         $data = [
             "status" => self::STATUS_COMPLETE,
         ];
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
     }
 
     /**
@@ -173,7 +175,7 @@ class Visit implements IModel
         $data = [
             "status" => self::STATUS_INCOMPLETE,
         ];
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
     }
 
     /**
@@ -183,7 +185,7 @@ class Visit implements IModel
      */
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, "id", $this->id);
+        return Database::delete( self::TABLE, "id", $this->id );
     }
 
 
@@ -191,15 +193,15 @@ class Visit implements IModel
      * @param Patient $patient
      * @return Visit[]
      */
-    public static function findByPatient(Patient $patient): array
+    public static function findByPatient( Patient $patient ): array
     {
         $db = Database::instance();
-        $statement = $db->prepare("select * from visits where patient_id=?");
-        $statement->execute([$patient->id]);
+        $statement = $db->prepare( "select * from visits where patient_id=?" );
+        $statement->execute( [ $patient->id ] );
 
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($results)) return $results;
+        if ( !empty( $results ) ) return $results;
         return [];
 
     }
@@ -211,9 +213,9 @@ class Visit implements IModel
     public function updateReviewIn(): bool
     {
         $data = [
-            "review_in" => $this->review_in
+            "review_in" => $this->review_in,
         ];
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
 
     }
 
@@ -223,7 +225,7 @@ class Visit implements IModel
             "other_remarks" => $this->other_remarks,
         ];
 
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
     }
 
 

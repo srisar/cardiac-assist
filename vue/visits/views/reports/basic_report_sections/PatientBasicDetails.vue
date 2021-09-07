@@ -16,7 +16,7 @@
           </th>
 
           <th class="text-right">
-            <div contenteditable="true">{{ patient.dob }} ({{ patientAge }})</div>
+            <div contenteditable="true">Age: {{ patientAge }}</div>
           </th>
         </tr>
         </thead>
@@ -26,22 +26,29 @@
       <table class="table table-bordered table-sm mb-1">
         <tbody>
         <tr>
-          <td style="width: 25%">
-            <div><span class="font-weight-bold">H:</span> {{ visit.height }} m</div>
-          </td>
+          <td>
 
-          <td style="width: 25%">
-            <div><span class="font-weight-bold">W:</span> {{ visit.weight }} kg</div>
-          </td>
+            <div class="d-flex justify-content-between">
 
-          <td style="width: 25%">
-            <div><span class="font-weight-bold">BMI:</span> {{ visit.bmi }} kg/m²</div>
-          </td>
+              <div>
+                <span class="font-weight-bold">H:</span> {{ visit.height }} m
+              </div>
 
-          <td style="width: 25%">
-            <div><span class="font-weight-bold">SBP/DBP:</span> {{ visit.sbp }}/{{ visit.dbp }} mmHg</div>
-          </td>
+              <div>
+                <span class="font-weight-bold">W:</span> {{ visit.weight }} kg
+              </div>
 
+              <div>
+                <span class="font-weight-bold">BMI:</span> {{ visit.bmi }} kg/m²
+              </div>
+
+              <div>
+                <span class="font-weight-bold">SBP/DBP:</span> {{ visit.sbp }}/{{ visit.dbp }} mmHg
+              </div>
+
+            </div>
+
+          </td>
         </tr>
         </tbody>
       </table>
@@ -51,28 +58,16 @@
         <tbody>
         <tr>
 
-          <td style="width: 16.66%">
-            <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
-          </td>
+          <td>
+            <div class="d-flex justify-content-between">
 
-          <td style="width: 16.66%">
-            <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
-          </td>
-
-          <td style="width: 16.66%">
-            <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
-          </td>
-
-          <td style="width: 16.66%">
-            <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
-          </td>
-
-          <td style="width: 16.66%">
-            <div><span class="font-weight-bold">SMOK:</span> {{ visit.smoking | filterSmoking }}</div>
-          </td>
-
-          <td style="width: 16.66%">
-            <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
+              <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
+              <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
+              <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
+              <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
+              <div><span class="font-weight-bold">SMOKING:</span> {{ visit.smoking | filterSmoking }}</div>
+              <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
+            </div>
           </td>
 
         </tr>
@@ -91,7 +86,10 @@
 </template>
 
 <script>
-import TheLoading from '../../../../_common/components/TheLoading';
+
+import TheLoading from '@/_common/components/TheLoading';
+
+const _ = require( 'lodash' );
 
 export default {
   name: 'PatientBasicDetails',

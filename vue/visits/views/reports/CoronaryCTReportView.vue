@@ -118,12 +118,12 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
-import PatientDetailsDiagnoses from "./basic_report_sections/PatientDetailsDiagnoses";
-import PatientBasicDetails from "./basic_report_sections/PatientBasicDetails";
+import {errorMessageBox} from '@/_common/bootbox_dialogs';
+import PatientBasicDetails from './basic_report_sections/PatientBasicDetails';
+import PatientDetailsDiagnoses from './basic_report_sections/PatientDetailsDiagnoses';
 
 export default {
-  name: "CoronaryCTReportView",
+  name: 'CoronaryCTReportView',
   components: { PatientBasicDetails, PatientDetailsDiagnoses },
   data() {
     return {
@@ -164,22 +164,20 @@ export default {
       this.visitCoronaryCT = response.data;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch coronary ct details" );
+      errorMessageBox( 'Failed to fetch coronary ct details' );
     }
   },
 
   methods: {
     openPrintDialog() {
       window.print();
-    }
+    },
   },
 
-}
+};
 </script>
 
 <style scoped lang="scss">
-
-
 
 
 </style>

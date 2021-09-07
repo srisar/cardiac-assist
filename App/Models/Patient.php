@@ -24,10 +24,10 @@ class Patient implements IModel
      * @param $array
      * @return Patient
      */
-    public static function build($array): Patient
+    public static function build( $array ): Patient
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -37,9 +37,9 @@ class Patient implements IModel
      * @param int $id
      * @return Patient|null
      */
-    public static function find(int $id): ?Patient
+    public static function find( int $id ): ?Patient
     {
-        return Database::find(self::TABLE, $id, self::class);
+        return Database::find( self::TABLE, $id, self::class );
     }
 
     /**
@@ -47,9 +47,9 @@ class Patient implements IModel
      * @param int $offset
      * @return Patient[]
      */
-    public static function findAll($limit = 1000, $offset = 0): array
+    public static function findAll( $limit = 1000, $offset = 0 ): array
     {
-        return Database::findAll(self::TABLE, $limit, $offset, self::class, 'id', 'DESC');
+        return Database::findAll( self::TABLE, $limit, $offset, self::class, 'id', 'DESC' );
     }
 
 
@@ -71,7 +71,7 @@ class Patient implements IModel
             'status' => self::STATUS_ACTIVE,
         ];
 
-        return Database::insert(self::TABLE, $data);
+        return Database::insert( self::TABLE, $data );
 
     }
 
@@ -97,13 +97,17 @@ class Patient implements IModel
             'status' => $this->status,
         ];
 
-        return Database::update(self::TABLE, $data, ['id' => $this->id]);
+        return Database::update( self::TABLE, $data, [ 'id' => $this->id ] );
 
     }
 
-    public function delete()
+    /**
+     *
+     * @return bool
+     */
+    public function delete(): bool
     {
-        // TODO: Implement delete() method.
+        return Database::delete( self::TABLE, 'id', $this->id );
     }
 
 
@@ -112,54 +116,54 @@ class Patient implements IModel
      * @param array $age
      * @return Patient[]
      */
-    public static function filter(string $gender = "ALL", array $age = [0, 100]): array
+    public static function filter( string $gender = "ALL", array $age = [ 0, 100 ] ): array
     {
 
         $db = Database::instance();
 
-        if (strtoupper($gender) == 'ALL') {
-            $statement = $db->prepare('select * from ' . self::TABLE .
+        if ( strtoupper( $gender ) == 'ALL' ) {
+            $statement = $db->prepare( 'select * from ' . self::TABLE .
                 ' where age between :age_start and :age_end 
-                order by first_name');
+                order by first_name' );
 
-            $statement->execute([
-                ':age_start' => $age[0],
-                ':age_end' => $age[1],
-            ]);
+            $statement->execute( [
+                ':age_start' => $age[ 0 ],
+                ':age_end' => $age[ 1 ],
+            ] );
 
 
         } else {
 
-            $statement = $db->prepare('select * from ' . self::TABLE .
+            $statement = $db->prepare( 'select * from ' . self::TABLE .
                 ' where gender = :gender and age between :age_start and :age_end 
-                order by first_name');
+                order by first_name' );
 
-            $statement->execute([
+            $statement->execute( [
                 ':gender' => $gender,
-                ':age_start' => $age[0],
-                ':age_end' => $age[1],
-            ]);
+                ':age_start' => $age[ 0 ],
+                ':age_end' => $age[ 1 ],
+            ] );
         }
 
-        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($result)) return $result;
+        if ( !empty( $result ) ) return $result;
         return [];
 
     }
 
 
-    public static function search(string $keyword): array
+    public static function search( string $keyword ): array
     {
         $db = Database::instance();
-        $statement = $db->prepare("select * from patients 
-                                            where first_name like :q or last_name like :q or phone like :q or address like :q");
+        $statement = $db->prepare( "select * from patients 
+                                            where first_name like :q or last_name like :q or phone like :q or address like :q" );
 
-        $statement->execute([":q" => "%" . $keyword . "%"]);
+        $statement->execute( [ ":q" => "%" . $keyword . "%" ] );
 
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($results)) return $results;
+        if ( !empty( $results ) ) return $results;
         return [];
 
     }
@@ -170,7 +174,7 @@ class Patient implements IModel
      */
     public function getVisits(): array
     {
-        return Visit::findByPatient($this);
+        return Visit::findByPatient( $this );
     }
 
     /**
@@ -178,7 +182,7 @@ class Patient implements IModel
      */
     public function getAppointments(): array
     {
-        return Appointment::findByPatient($this);
+        return Appointment::findByPatient( $this );
     }
 
     /**
@@ -191,23 +195,23 @@ class Patient implements IModel
         $output = [
             "total" => 0,
             "male" => 0,
-            "female" => 0
+            "female" => 0,
         ];
 
-        $statement = $db->prepare("select count(*) as total from patients");
+        $statement = $db->prepare( "select count(*) as total from patients" );
         $statement->execute();
-        $result = $statement->fetchObject(stdClass::class);
-        $output["total"] = (int)$result->total;
+        $result = $statement->fetchObject( stdClass::class );
+        $output[ "total" ] = (int)$result->total;
 
-        $statement = $db->prepare("select count(*) as total from patients where gender='MALE'");
+        $statement = $db->prepare( "select count(*) as total from patients where gender='MALE'" );
         $statement->execute();
-        $result = $statement->fetchObject(stdClass::class);
-        $output["male"] = (int)$result->total;
+        $result = $statement->fetchObject( stdClass::class );
+        $output[ "male" ] = (int)$result->total;
 
-        $statement = $db->prepare("select count(*) as total from patients where gender='FEMALE'");
+        $statement = $db->prepare( "select count(*) as total from patients where gender='FEMALE'" );
         $statement->execute();
-        $result = $statement->fetchObject(stdClass::class);
-        $output["female"] = (int)$result->total;
+        $result = $statement->fetchObject( stdClass::class );
+        $output[ "female" ] = (int)$result->total;
 
         return $output;
     }

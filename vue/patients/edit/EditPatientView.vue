@@ -36,8 +36,8 @@
 
                 <div class="col">
                   <div class="form-group">
-                    <label for="field_sex" class="required">Gender</label>
-                    <select name="" id="field_sex" class="form-control" v-model="patient.gender">
+                    <label class="required">Gender</label>
+                    <select class="form-control" v-model="patient.gender">
                       <option value="" disabled>SELECT</option>
                       <option v-for="(item, key) in genders" :value="key">{{ item }}</option>
                     </select>
@@ -84,8 +84,8 @@
 
                 <div class="col">
                   <div class="form-group">
-                    <label for="field_ds_division">DS division</label>
-                    <select name="" id="field_ds_division" class="form-control" v-model="patient.ds_division">
+                    <label>DS division</label>
+                    <select class="form-control" v-model="patient.ds_division">
                       <option value="" disabled>SELECT</option>
                       <option v-for="(item, key) in dsDivisions" :value="key">{{ item }}</option>
                     </select>
@@ -111,8 +111,8 @@
 
                 <div class="col">
                   <div class="form-group">
-                    <label for="field_job">Job</label>
-                    <select name="" id="field_job" class="form-control" v-model="patient.job">
+                    <label>Job</label>
+                    <select id="field_job" class="form-control" v-model="patient.job">
                       <option value="" disabled>SELECT</option>
                       <option v-for="(item, key) in jobs" :value="key">{{ item }}</option>
                     </select>
@@ -122,8 +122,8 @@
 
                 <div class="col">
                   <div class="form-group">
-                    <label for="field_job_type">Job type</label>
-                    <select name="" id="field_job_type" class="form-control" v-model="patient.job_type">
+                    <label>Job type</label>
+                    <select id="field_job_type" class="form-control" v-model="patient.job_type">
                       <option value="" disabled>SELECT</option>
                       <option v-for="(item, key) in jobTypes" :value="key">{{ item }}</option>
                     </select>
@@ -148,6 +148,10 @@
 
             </div> <!--.card-body-->
           </div><!--.card-->
+
+          <div class="mt-3">
+            Click here to delete this patient.
+          </div>
 
         </div><!-- col-->
 
@@ -176,28 +180,28 @@
 
 <script>
 
-import DateField from "../../_common/components/DateField";
+import {errorMessageBox, successMessageBox} from '@/_common/bootbox_dialogs';
+import DateField from '@/_common/components/DateField';
 import * as values from '../values';
-import ListVisits from "./components/ListVisits";
-import ListAppointments from "./components/ListAppointments";
-import {errorMessageBox, successMessageBox} from "../../_common/bootbox_dialogs";
+import ListAppointments from './components/ListAppointments';
+import ListVisits from './components/ListVisits';
 
 const _ = require( 'lodash' );
 
 export default {
-  name: "EditPatientView",
+  name: 'EditPatientView',
   components: { ListAppointments, DateField, ListVisits },
 
   data() {
     return {
 
-      patientId: document.getElementById( "php_patient_id" ).value,
+      patientId: document.getElementById( 'php_patient_id' ).value,
 
       genders: values.GENDERS,
       jobs: values.JOBS,
       jobTypes: values.JOB_TYPES,
       dsDivisions: values.DS_DIVISIONS,
-    }
+    };
   },
   /* -- data -- */
 
@@ -229,7 +233,7 @@ export default {
     },
 
     fullName() {
-      return this.patient.first_name + " " + this.patient.last_name;
+      return this.patient.first_name + ' ' + this.patient.last_name;
     },
 
   },
@@ -249,11 +253,11 @@ export default {
     async fetchPatient() {
 
       try {
-        await this.$store.dispatch( "patient_fetch", this.patientId );
-        await this.$store.dispatch( "visits_fetchAll", this.patientId );
-        await this.$store.dispatch( "appointments_fetchAll", this.patient.id );
+        await this.$store.dispatch( 'patient_fetch', this.patientId );
+        await this.$store.dispatch( 'visits_fetchAll', this.patientId );
+        await this.$store.dispatch( 'appointments_fetchAll', this.patient.id );
       } catch ( e ) {
-        errorMessageBox( "Failed to fetch patient details" );
+        errorMessageBox( 'Failed to fetch patient details' );
       }
     },
 
@@ -264,7 +268,7 @@ export default {
         this.patient.age = this.calculatedAge;
         await this.$store.dispatch( 'patient_update', this.patient );
 
-        successMessageBox( "Patient details updated" );
+        successMessageBox( 'Patient details updated' );
 
       } catch ( e ) {
         errorMessageBox( 'Failed to update patient details' );
@@ -272,14 +276,14 @@ export default {
     },
 
     _calculateAge() {
-      const today = moment()
-      const diff = moment.duration( today.diff( moment( this.patient.dob ) ) )
-      return Math.round( diff.asYears() )
-    }
+      const today = moment();
+      const diff = moment.duration( today.diff( moment( this.patient.dob ) ) );
+      return Math.round( diff.asYears() );
+    },
   },
   /* -- methods -- */
 
-}
+};
 </script>
 
 <style scoped>
