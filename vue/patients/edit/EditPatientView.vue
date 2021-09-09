@@ -149,8 +149,14 @@
             </div> <!--.card-body-->
           </div><!--.card-->
 
+
+          <!--
+           # Delete patient area
+           -->
           <div class="mt-3">
-            Click here to delete this patient.
+            <button class="btn btn-sm btn-danger" @click="deletePatient.isModalVisible = true">
+              <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Delete patient
+            </button>
           </div>
 
         </div><!-- col-->
@@ -168,6 +174,45 @@
       </div><!-- row -->
     </div><!-- container -->
 
+
+    <!--
+     #
+     # MODAL WINDOWS
+     #
+     -->
+
+    <!-- MODAL: Delete patient  -->
+    <ModalWindow :visible="deletePatient.isModalVisible" @close="deletePatient.isModalVisible = false">
+      <template v-slot:title>Delete patient</template>
+
+      <h5 class="text-center">Confirm deleting the patient</h5>
+      <p class="text-center text-danger">All associated items such as visits and appointment details will be permanently lost.</p>
+
+      <div class="row justify-content-center mb-3">
+        <div class="col-8 text-center">
+          <p>Please type 'DELETE' in the text box to confirm deletion.</p>
+          <div class="text-center">
+            <input type="text" class="form-control" v-model.trim="deletePatient.textConfirmDelete">
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="text-center">
+        <button class="btn btn-danger" @click="onDeletePatient()" :disabled="deletePatient.textConfirmDelete !== 'DELETE'">
+          <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Delete
+        </button>
+      </div>
+
+    </ModalWindow>
+
+
+    <!--
+     #
+     # Hacks
+     #
+     -->
     <div class="d-none">
       {{ calculatedAge }} {{ calculatedDob }}
     </div>
@@ -182,6 +227,7 @@
 
 import {errorMessageBox, successMessageBox} from '@/_common/bootbox_dialogs';
 import DateField from '@/_common/components/DateField';
+import ModalWindow from '@/_common/components/ModalWindow';
 import * as values from '../values';
 import ListAppointments from './components/ListAppointments';
 import ListVisits from './components/ListVisits';
@@ -190,7 +236,7 @@ const _ = require( 'lodash' );
 
 export default {
   name: 'EditPatientView',
-  components: { ListAppointments, DateField, ListVisits },
+  components: { ModalWindow, ListAppointments, DateField, ListVisits },
 
   data() {
     return {
@@ -201,6 +247,13 @@ export default {
       jobs: values.JOBS,
       jobTypes: values.JOB_TYPES,
       dsDivisions: values.DS_DIVISIONS,
+
+
+      deletePatient: {
+        isModalVisible: false,
+        textConfirmDelete: '',
+      },
+
     };
   },
   /* -- data -- */
@@ -274,6 +327,26 @@ export default {
         errorMessageBox( 'Failed to update patient details' );
       }
     },
+
+
+    async onDeletePatient() {
+      try {
+
+        await this.$store.dispatch( 'patient_delete', this.patientId );
+
+        redirect( '/app/patients/list.php' );
+
+      } catch ( e ) {
+        errorMessageBox( 'Failed to delete the patient' );
+      }
+    },
+
+
+    /*
+     * ------------------
+     * Private Functions
+     * ------------------
+     */
 
     _calculateAge() {
       const today = moment();

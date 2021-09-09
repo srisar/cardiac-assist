@@ -116,6 +116,7 @@ export default {
       this.dataTable = $(".data-table-full").DataTable({
         responsive: true,
         autoWidth: false,
+        pageLength: 50,
         columns: [
           {
             "data": "first_name",
