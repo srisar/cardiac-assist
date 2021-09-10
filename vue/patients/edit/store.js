@@ -28,26 +28,15 @@ const moduleVisits = {
     actions: {
 
         async visits_fetchAll( context, patientId ) {
-
-            try {
-                const response = await $.get( `${ getSiteURL() }/api/get/patient-visits.php`, { id: patientId } );
-                context.state.visitsList = response.data;
-            } catch ( e ) {
-                throw e;
-            }
-
-
+            const response = await $.get( `${ getSiteURL() }/api/get/patient-visits.php`, { id: patientId } );
+            context.state.visitsList = response.data;
         }, /* fetch visits */
 
         async visits_add( context, params ) {
-
-            try {
-                await $.get( `${ getSiteURL() }/api/save/visit/visit.php`, params );
-            } catch ( e ) {
-                throw e;
-            }
-
+            await $.get( `${ getSiteURL() }/api/save/visit/visit.php`, params );
         }, /* add visit*/
+
+
 
     },
     /* -- actions -- */

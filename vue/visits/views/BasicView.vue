@@ -33,7 +33,7 @@
 
 
           <div class="form-row justify-content-center mb-2">
-            <div class="col-4">
+            <div class="col-3">
 
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
@@ -43,6 +43,18 @@
               </div>
 
             </div>
+
+            <div class="col-6">
+
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Performed by</div>
+                </div>
+                <input type="text" class="form-control bg-white" :value="visit.performed_by" readonly>
+              </div>
+
+            </div>
+
           </div>
 
           <div class="form-row mb-2">
@@ -260,20 +272,26 @@
         </section>
 
       </div><!-- card-body -->
+    </div> <!-- card -->
 
+    <div class="text-right mt-5">
+      <button class="btn btn-sm btn-outline-danger" @click="deleteVisit.isModalVisible = true">Delete visit</button>
     </div>
 
+
     <!--
-     # Modals --------------------------------------------------------------------------------------
+     # ---------------------
+     # MODALS
+     # ---------------------
      -->
 
-    <!-- EDIT Modal: Visit Details -->
+    <!-- MODAL: EDIT VISIT DETAILS -->
     <ModalWindow :visible="modalEditVisitVisible" @close="modalEditVisitVisible = false">
       <template v-slot:title>Edit visit details</template>
       <slot>
 
         <div class="form-row justify-content-center">
-          <div class="col-auto">
+          <div class="col-4">
 
             <div class="form-group text-center">
               <label class="text-center">Date</label>
@@ -281,6 +299,15 @@
             </div>
 
           </div>
+
+          <div class="col-6">
+            <div class="form-group text-center">
+              <label class="text-center">Performed by</label>
+              <input type="text" class="form-control" placeholder="Who is performing the tests..." v-model="visit.performed_by">
+            </div>
+
+          </div>
+
         </div>
 
         <div class="form-row justify-content-center">
@@ -423,9 +450,36 @@
           </div>
         </div>
 
-
       </slot>
     </ModalWindow><!-- EDIT Modal: Visit Details-->
+
+
+    <!-- MODAL: DELETE VISIT -->
+    <ModalWindow :visible="deleteVisit.isModalVisible" @close="deleteVisit.isModalVisible = false">
+      <template v-slot:title>Delete visit</template>
+
+      <h5 class="text-center">Confirm deleting the visit</h5>
+      <p class="text-center text-danger">All associated items such as diagnoses, investigations and reports will be permanently lost.</p>
+
+      <div class="row justify-content-center mb-3">
+        <div class="col-8 text-center">
+          <p>Please type 'DELETE' in the text box to confirm deletion.</p>
+          <div class="text-center">
+            <input type="text" class="form-control" v-model.trim="deleteVisit.textConfirmDelete">
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="text-center">
+        <button class="btn btn-danger" @click="onDeleteVisit()" :disabled="deleteVisit.textConfirmDelete !== 'DELETE'">
+          <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Delete
+        </button>
+
+      </div>
+
+    </ModalWindow>
 
   </div><!-- template -->
 
@@ -433,9 +487,12 @@
 
 <script>
 
-import {errorMessageBox} from '../../_common/bootbox_dialogs';
-import DateField from '../../_common/components/DateField';
-import ModalWindow from '../../_common/components/ModalWindow';
+
+import {errorMessageBox} from '@/_common/bootbox_dialogs';
+import DateField from '@/_common/components/DateField';
+import ModalWindow from '@/_common/components/ModalWindow';
+
+const _ = require( 'lodash' );
 
 export default {
   name: 'BasicView',
@@ -458,6 +515,17 @@ export default {
         'EX_SMOKER': 'Ex smoker',
         'JUST_QUIT': 'Just quit',
       },
+
+
+      /*
+      * DELETE VISIT OPTIONS
+      * */
+
+      deleteVisit: {
+        isModalVisible: false,
+        textConfirm: '',
+      },
+
 
     };
   },
@@ -602,6 +670,7 @@ export default {
           family_history: this.visit.family_history,
           smoking: this.visit.smoking,
           heart_beat: this.visit.heart_beat,
+          performed_by: this.visit.performed_by,
         };
 
         await this.$store.dispatch( 'visit_update', params );
@@ -616,6 +685,21 @@ export default {
     createPatientPageLink: function () {
       return `${ getSiteURL() }/app/patients/edit.php?id=${ this.patient.id }`;
     },
+
+
+    async onDeleteVisit() {
+      try {
+
+        await this.$store.dispatch( 'visit_delete', this.visit.id );
+
+        /* redirect back to the patient page */
+        redirect( this.createPatientPageLink() );
+
+      } catch ( e ) {
+        errorMessageBox( 'Failed to delete visit' );
+      }
+    },
+
 
   },
   /* -- methods -- */

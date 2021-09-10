@@ -30,6 +30,10 @@ try {
         "dl" => Request::getAsBoolean( "dl" ),
 
         "heart_beat" => Request::getAsInteger( "heart_beat" ),
+        "smoking" => Request::getAsString( "smoking" ),
+        "family_history" => Request::getAsString( "family_history" ),
+        "performed_by" => Request::getAsString( "performed_by" ),
+
     ];
 
 

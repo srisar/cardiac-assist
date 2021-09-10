@@ -23,7 +23,7 @@ class Visit implements IModel
 
     public ?bool $dm, $ht, $dl;
 
-    public ?string $smoking, $family_history, $status;
+    public ?string $smoking, $family_history, $status, $performed_by;
 
     public ?Patient $patient;
 
@@ -90,6 +90,9 @@ class Visit implements IModel
                 "dl" => $this->dl ? 1 : 0,
                 "ef" => $this->ef,
                 "heart_beat" => $this->heart_beat,
+                "smoking" => $this->smoking,
+                "family_history" => $this->family_history,
+                "performed_by" => $this->performed_by,
             ];
 
             $db->beginTransaction();
@@ -150,6 +153,7 @@ class Visit implements IModel
             "smoking" => $this->smoking,
             "family_history" => $this->family_history,
             "heart_beat" => $this->heart_beat,
+            "performed_by" => $this->performed_by,
         ];
 
         return Database::update( self::TABLE, $data, [ "id" => $this->id ] );

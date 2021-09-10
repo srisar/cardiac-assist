@@ -32,6 +32,7 @@ try {
         "family_history" => Request::getAsString( "family_history" ),
 
         "heart_beat" => Request::getAsInteger( "heart_beat" ),
+        "performed_by" => Request::getAsString( "performed_by" ),
     ];
 
 

@@ -154,8 +154,8 @@
            # Delete patient area
            -->
           <div class="mt-3">
-            <button class="btn btn-sm btn-danger" @click="deletePatient.isModalVisible = true">
-              <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Delete patient
+            <button class="btn btn-sm btn-outline-danger" @click="deletePatient.isModalVisible = true">
+              Delete patient
             </button>
           </div>
 

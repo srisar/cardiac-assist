@@ -7,26 +7,26 @@ use App\Models\Visit\Visit;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect(DEBUG);
+Authentication::isAdminOrRedirect( DEBUG );
 
 try {
 
     $fields = [
-        "id" => Request::getAsInteger("id"),
+        "id" => Request::getAsInteger( "id" ),
     ];
 
-    $object = Visit::build($fields);
+    $object = Visit::build( $fields );
 
 
     $result = $object->delete();
 
     if ( $result ) {
-        JSONResponse::validResponse("Deleted");
+        JSONResponse::validResponse( "Deleted" );
         return;
     } else {
-        throw new Exception("Failed");
+        throw new Exception( "Failed" );
     }
 
 } catch ( Exception $exception ) {
-    JSONResponse::exceptionResponse($exception);
+    JSONResponse::exceptionResponse( $exception );
 }

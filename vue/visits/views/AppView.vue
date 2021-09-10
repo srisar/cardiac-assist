@@ -2,7 +2,7 @@
 
   <div>
 
-    <div class="container container-sm">
+    <div class="container container-sm" v-if="visit">
 
       <div class="form-row">
         <!-- start: sidebar -->
@@ -18,23 +18,27 @@
 
       </div><!-- row -->
 
-    </div><!-- container -->
+    </div><!-- container, v:if=visit -->
+
+    <div class="text-center" v-else>
+      <h1>This visit doesnt exist.</h1>
+    </div>
 
   </div>
 
 </template>
 
 <script>
-import SidebarGroup from "./components/SidebarGroup";
+import SidebarGroup from './components/SidebarGroup';
 
 export default {
-  name: "AppView",
-  components: {SidebarGroup},
+  name: 'AppView',
+  components: { SidebarGroup },
 
   data() {
     return {
       hasSidebar: true,
-    }
+    };
   },
   /* -- data -- */
 
@@ -42,16 +46,23 @@ export default {
 
     this.hasSidebar = this.$store.state.view.hasSidebar;
 
-    const visitId = document.getElementById('php_visit_id').value;
+    const visitId = document.getElementById( 'php_visit_id' ).value;
 
     /* 1. fetch visit details */
-    this.$store.commit('updateVisitId', parseInt(visitId));
-    this.$store.dispatch('visit_fetch', parseInt(visitId));
+    this.$store.commit( 'updateVisitId', parseInt( visitId ) );
+    this.$store.dispatch( 'visit_fetch', parseInt( visitId ) );
   },
   /* -- beforeCreate -- */
 
 
-}
+  computed: {
+    visit() {
+      return this.$store.getters.getVisit;
+    },
+  },
+
+
+};
 </script>
 
 <style>
