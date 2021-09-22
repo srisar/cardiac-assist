@@ -121,7 +121,7 @@
 </template>
 
 <script>
-import {errorMessageBox} from '../../../../_common/bootbox_dialogs';
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 import TheLoading from '../../../../_common/components/TheLoading';
 import PatientBasicDetails from './PatientBasicDetails';
 

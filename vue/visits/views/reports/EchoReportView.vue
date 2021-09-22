@@ -23,7 +23,7 @@
 
       <h3 class="text-center">Echocardiogram Report</h3>
 
-      <PatientBasicDetails/>
+      <PatientBasicDetails :show-e-f="false"/>
 
       <div class="section-echo-report mt-3" v-if="loaded">
 

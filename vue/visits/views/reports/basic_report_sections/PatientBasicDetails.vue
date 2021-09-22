@@ -64,7 +64,7 @@
               <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
               <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
               <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
-              <div><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
+              <div v-if="showEF"><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
               <div><span class="font-weight-bold">SMOKING:</span> {{ visit.smoking | filterSmoking }}</div>
               <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
             </div>
@@ -94,6 +94,14 @@ const _ = require( 'lodash' );
 export default {
   name: 'PatientBasicDetails',
   components: { TheLoading },
+
+  props: {
+    showEF: {
+      type: Boolean,
+      default: true,
+    },
+  },
+
   data() {
     return {
       loaded: false,
