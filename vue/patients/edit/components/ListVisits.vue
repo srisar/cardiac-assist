@@ -255,7 +255,7 @@ export default {
         family_history: 'N',
         smoking: 'NO',
         heart_beat: 0,
-        performed_by: '',
+        performed_by: 'Dr. Arulnithy',
       },
 
       /* dropdown values */

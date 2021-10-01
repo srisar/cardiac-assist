@@ -4,26 +4,21 @@
 
     <div id="section-basic" class="mb-1" v-if="loaded">
 
-      <table class="table table-sm table-bordered mb-1">
 
-        <thead>
-        <tr>
-          <th>
-            <div contenteditable="true" class="font-weight-bold">#{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }} ({{
-                patient.gender
-              }})
-            </div>
-          </th>
-
-          <th class="text-right">
-            <div contenteditable="true">Age: {{ patientAge }}</div>
-          </th>
-        </tr>
-        </thead>
-      </table>
+      <div class="d-flex justify-content-between border p-1">
+        <div class="left">
+          <div contenteditable="true" class="">
+            #{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }}
+            ({{ patient.gender }})
+          </div>
+        </div>
+        <div class="right">
+          <div contenteditable="true">Age: {{ patientAge }}</div>
+        </div>
+      </div>
 
 
-      <table class="table table-bordered table-sm mb-1">
+      <table class="table table-bordered table-sm mb-1" v-if="showExtra">
         <tbody>
         <tr>
           <td>
@@ -54,7 +49,7 @@
       </table>
 
 
-      <table class="table table-bordered table-sm mb-1">
+      <table class="table table-bordered table-sm mb-1" v-if="showExtra">
         <tbody>
         <tr>
 
@@ -97,6 +92,11 @@ export default {
 
   props: {
     showEF: {
+      type: Boolean,
+      default: true,
+    },
+
+    showExtra: {
       type: Boolean,
       default: true,
     },

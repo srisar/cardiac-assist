@@ -20,140 +20,28 @@
         </div>
       </div>
 
-
       <h3 class="text-center">Echocardiogram Report</h3>
 
-      <PatientBasicDetails :show-e-f="false"/>
+      <!-- Patient basic details: Name and age -->
+      <PatientBasicDetails :show-e-f="false" :show-extra="false"/>
 
+      <div class="d-flex justify-content-end font-weight-bold" style="gap: 10px">
+        <span>Performed by:</span>
+        <span>{{ visit.performed_by }}</span>
+      </div>
+
+      <!--
+       /
+       /
+       /
+       -->
+
+      <!-- SECTION: Echo Report -->
       <div class="section-echo-report mt-3" v-if="loaded">
 
 
-        <!-- section:Left Ventricle -->
-        <div class="mb-1 section">
+        <LeftVentricle :visit-echo="visitEcho" :visit-echo-remarks="visitEchoRemarks"/>
 
-          <div class="">
-            <h5 class="font-weight-bold text-uppercase">Left Ventricle</h5>
-          </div>
-
-
-          <table class="table table-sm table-bordered">
-            <tbody>
-            <tr>
-
-              <td>
-                <div class="d-flex justify-content-between">
-
-                  <div class="" v-if="visitEcho.param_ivs_diastolic_thickness">
-                    IVS:
-                    <span class="font-weight-bold">{{ visitEcho.param_ivs_diastolic_thickness }}mm</span>
-                  </div>
-                  <div class="" v-if="visitEcho.param_lvid_diastole">
-                    LVID D:
-                    <span class="font-weight-bold">{{ visitEcho.param_lvid_diastole }}mm</span>
-                  </div>
-                  <div class="" v-if="visitEcho.param_pw_diastolic_thickness">
-                    PW:
-                    <span class="font-weight-bold">{{ visitEcho.param_pw_diastolic_thickness }}mm</span>
-                  </div>
-                  <div class="" v-if="visitEcho.param_lvef">
-                    LVEF:
-                    <span class="font-weight-bold">{{ visitEcho.param_lvef }}%</span>
-                  </div>
-                  <div class="" v-if="visitEcho.param_fractional_shortening">
-                    FS:
-                    <span class="font-weight-bold">{{ visitEcho.param_fractional_shortening }}</span>
-                  </div>
-                  <div class="" v-if="visitEcho.param_lvid_systole">
-                    LVID S:
-                    <span class="font-weight-bold">{{ visitEcho.param_lvid_systole }}mm</span>
-                  </div>
-
-                </div>
-              </td>
-
-
-            </tr>
-            </tbody>
-          </table>
-
-          <div class="" v-if="visitEcho.has_diastolic_dysfunction">
-            <div class="">
-              <div class="font-weight-bold text-uppercase sub-title">Has diastolic dysfunction</div>
-            </div>
-
-            <table class="table table-sm table-bordered">
-              <tr>
-
-                <td>
-                  <div class="d-flex justify-content-between">
-
-                    <div class="">A: <span class="font-weight-bold">{{ visitEcho.param_dd_a }}</span></div>
-                    <div class="">E: <span class="font-weight-bold">{{ visitEcho.param_dd_e }}</span></div>
-                    <div class="">E': <span class="font-weight-bold">{{ visitEcho.param_dd_e_bar }}</span></div>
-                    <div class="">E/A: <span class="font-weight-bold">{{ eOverA }}</span></div>
-                    <div class="">E/E': <span class="font-weight-bold">{{ eOverEBar }}</span></div>
-
-                  </div>
-                </td>
-
-
-              </tr>
-            </table>
-
-          </div>
-
-
-          <div class="" v-if="visitEcho.show_advanced">
-            <div class="">
-              <div class="font-weight-bold text-uppercase sub-title">Advanced</div>
-            </div>
-
-            <table class="table table-sm table-bordered">
-              <tr>
-                <td>
-                  <div class="d-flex justify-content-between">
-
-                    <div class="text-center" v-if="visitEcho.param_stroke_volume">
-                      <div>Stroke Vol.:</div>
-                      <span class="font-weight-bold">{{ visitEcho.param_stroke_volume }}ml</span>
-                    </div>
-                    <div class="text-center" v-if="visitEcho.param_cardiac_output">
-                      <div>Car. Output:</div>
-                      <span class="font-weight-bold">{{ visitEcho.param_cardiac_output }}l/min</span>
-                    </div>
-                    <div class="text-center" v-if="visitEcho.param_hr">
-                      <div>HR:</div>
-                      <span class="font-weight-bold">{{ visitEcho.param_hr }}beats/min</span>
-                    </div>
-                    <div class="text-center" v-if="visitEcho.param_bp">
-                      <div>BP:</div>
-                      <span class="font-weight-bold">{{ visitEcho.param_bp }}mmHg</span>
-                    </div>
-                    <div class="text-center" v-if="cardiacIndex">
-                      <div>Car. Index:</div>
-                      <span class="font-weight-bold">{{ cardiacIndex }}l/min/m²</span>
-                    </div>
-
-                  </div>
-                </td>
-
-
-              </tr>
-
-            </table>
-
-          </div>
-
-          <div class="" v-if="visitEchoRemarks.LEFT_VENTRICLE.length > 0">
-            <ul class="list-unstyled">
-              <li v-for="item in visitEchoRemarks.LEFT_VENTRICLE">
-                {{ item.value }}
-              </li>
-            </ul>
-          </div>
-
-        </div>
-        <!-- section:Left Ventricle -->
 
         <!-- section: Left Atrium -->
         <div class="mb-1 section" v-if="isLeftAtriumSectionVisible">
@@ -668,10 +556,11 @@
 import {errorMessageBox} from '@/_common/bootbox_dialogs';
 import TheLoading from '@/_common/components/TheLoading';
 import PatientBasicDetails from '@/visits/views/reports/basic_report_sections/PatientBasicDetails';
+import LeftVentricle from '@/visits/views/reports/echo_report_sections/LeftVentricle.vue';
 
 export default {
   name: 'EchoReportView',
-  components: { TheLoading, PatientBasicDetails },
+  components: { LeftVentricle, TheLoading, PatientBasicDetails },
   data() {
     return {
       loaded: false,
@@ -689,6 +578,10 @@ export default {
       return this.$store.getters.getVisitId;
     },
 
+    visit() {
+      return this.$store.getters.getVisit;
+    },
+
     allEchoRemarks: function () {
       return this.$store.getters.getEchoRemarks;
     },
@@ -697,20 +590,6 @@ export default {
       return this.$store.getters.getVisitEchoRemarks;
     },
 
-    eOverA() {
-      if ( this.visitEcho.param_dd_a === 0 ) return 0;
-      return ( this.visitEcho.param_dd_e / this.visitEcho.param_dd_a ).toFixed( 2 );
-    },
-
-    eOverEBar() {
-      if ( this.visitEcho.param_dd_e_bar === 0 ) return 0;
-      return ( this.visitEcho.param_dd_e / this.visitEcho.param_dd_e_bar ).toFixed( 2 );
-    },
-
-    cardiacIndex() {
-      if ( this.visitEcho.param_cardiac_output === 0 ) return 0;
-      return ( this.visitEcho.param_cardiac_output / this.visitEcho.visit.bsa ).toFixed( 2 );
-    },
 
     /* section display logic */
     showAortaSection() {
@@ -744,6 +623,31 @@ export default {
           this.visitEcho.has_vsd ||
           this.visitEchoRemarks.RIGHT_VENTRICLE.length > 0;
     },
+
+
+    /*
+    * ------------------------------------------------
+    *
+    * Used in left ventricle section
+    *
+    * -----------------------------------------------
+    * */
+
+    eOverA() {
+      if ( this.visitEcho.param_dd_a === 0 ) return 0;
+      return ( this.visitEcho.param_dd_e / this.visitEcho.param_dd_a ).toFixed( 2 );
+    },
+
+    eOverEBar() {
+      if ( this.visitEcho.param_dd_e_bar === 0 ) return 0;
+      return ( this.visitEcho.param_dd_e / this.visitEcho.param_dd_e_bar ).toFixed( 2 );
+    },
+
+    cardiacIndex() {
+      if ( this.visitEcho.param_cardiac_output === 0 ) return 0;
+      return ( this.visitEcho.param_cardiac_output / this.visitEcho.visit.bsa ).toFixed( 2 );
+    },
+
 
   },
   /* -- computed -- */
