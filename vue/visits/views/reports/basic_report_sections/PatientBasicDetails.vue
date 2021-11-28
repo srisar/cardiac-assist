@@ -12,8 +12,9 @@
             ({{ patient.gender }})
           </div>
         </div>
-        <div class="right">
-          <div contenteditable="true">Age: {{ patientAge }}</div>
+        <div class="right d-flex">
+          <div contenteditable="true" class="mr-3">Age: {{ patientAge }}</div>
+          <div class="">Date: {{ visit.visit_date }}</div>
         </div>
       </div>
 

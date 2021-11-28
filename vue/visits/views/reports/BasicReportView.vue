@@ -58,7 +58,7 @@ export default {
   components: { PrescriptionDetails, PatientDetailsDiagnoses },
   data() {
     return {
-      isEmsHeaderVisible: false,
+      isEmsHeaderVisible: true,
     };
   },
 

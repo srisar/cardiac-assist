@@ -49,7 +49,7 @@
 
 
       <!-- section: clinical details -->
-      <div id="section-clinical-details" class="section">
+      <div id="section-clinical-details" class="section" v-if="visitSymptoms.length > 0">
         <div class="lead font-weight-bold text-uppercase">Clinical details</div>
         <table class="table table-sm table-borderless mb-1">
           <tbody>
@@ -62,20 +62,26 @@
         <hr>
       </div>
 
-      <div class="lead font-weight-bold text-uppercase">Differential diagnoses</div>
-      <table class="table table-sm table-borderless mb-1">
-        <tbody>
-        <tr>
-          <td contenteditable="true">
-            <span class="mr-2" v-for="item in diffDiagnoses">{{ item.disease.disease }} / </span>
-          </td>
-        </tr>
-        </tbody>
-        <hr>
-      </table>
+      <!-- section: differential diagnoses -->
+      <div class="section-differential-diagnoses section" v-if="diffDiagnoses.length > 0">
+        <div class="lead font-weight-bold text-uppercase">Differential diagnoses</div>
+        <table class="table table-sm table-borderless mb-1">
+          <tbody>
+          <tr>
+            <td contenteditable="true">
+              <span class="mr-2" v-for="item in diffDiagnoses">{{ item.disease.disease }} / </span>
+            </td>
+          </tr>
+          </tbody>
+          <hr>
+        </table>
+      </div>
+      <!-- section: differential diagnoses -->
+
+
 
       <!-- section: investigations -->
-      <div id="section-investigations" class="section">
+      <div id="section-investigations" class="section" v-if="investigations.length > 0">
         <div class="lead font-weight-bold text-uppercase">Investigations</div>
         <table class="table table-sm table-borderless mb-1">
           <tbody>
@@ -90,7 +96,7 @@
       </div>
 
       <!-- section: visit problems -->
-      <div id="section-problems" class="section">
+      <div id="section-problems" class="section" v-if="diagnoses.length > 0 || problems.length > 0">
         <div class="lead font-weight-bold text-uppercase">Problems & Diagnoses</div>
         <table class="table table-sm table-borderless mb-1">
           <tbody>
@@ -108,6 +114,23 @@
         </table>
         <hr>
       </div>
+      <!-- section: visit problems -->
+
+      <div class="section" id="section-further-investigations" v-if="furtherInvestigationsList.length > 0">
+        <div class="lead font-weight-bold text-uppercase">Investigations</div>
+        <table class="table table-sm table-borderless mb-1">
+          <tbody>
+          <tr v-for="item in furtherInvestigationsList">
+            <td contenteditable="true">
+              <div><span class="font-weight-bold">{{ item.investigation.investigation_name }}</span> - {{ item.remarks }}</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
     </div>
 
     <div v-else>
@@ -183,6 +206,10 @@ export default {
       return this.$store.getters.getVisitECG;
     },
 
+    furtherInvestigationsList() {
+      return this.$store.getters.getFurtherInvestigationsList;
+    },
+
     /* -------------------------------------------------------------------------------- */
     /* validators */
     /* -------------------------------------------------------------------------------- */
@@ -243,6 +270,8 @@ export default {
       await this.$store.dispatch( 'visitProblems_fetchAll', visitId );
       await this.$store.dispatch( 'visitLipids_fetchAll', visitId );
       await this.$store.dispatch( 'visitECG_fetch', visitId );
+
+      await this.$store.dispatch( "furtherInvestigations_fetchAll", visitId );
 
       this.loaded = true;
 
