@@ -3,6 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
+use App\Models\Disease;
 use App\Models\Symptom;
 
 require_once "../../../_bootstrap.inc.php";
@@ -19,7 +20,7 @@ try {
         return;
     }
 
-    $data = Symptom::search( $query );
+    $data = Disease::search( $query );
     JSONResponse::validResponse( [ "data" => $data ] );
 
 

@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class Disease implements IModel
 {
@@ -98,6 +99,22 @@ class Disease implements IModel
 
         if (!empty($result)) return $result;
         return null;
+    }
+
+    public static function search( string $keyword ): array
+    {
+
+        $db = Database::instance();
+        $statement = $db->prepare( "select * from diseases where disease like :q" );
+        $statement->execute( [
+            ":q" => $keyword . "%",
+        ] );
+
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
+
+        if ( !empty( $result ) ) return $result;
+        return [];
+
     }
 
 }

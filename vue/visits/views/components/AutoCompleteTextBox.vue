@@ -2,7 +2,7 @@
 
   <div class="form-group">
     <input type="text" class="form-control"
-           placeholder="Type to get auto-complete..."
+           placeholder="Type to search..."
            v-model.trim="searchQuery"
            @keydown.down="onDown($event)"
            @keydown.up="onUp($event)"
@@ -23,7 +23,7 @@
 
       <!-- no results found -->
       <div class="p-2 text-white" v-if="validQuery && searchResults.length === 0">
-        no results... Press enter to save current value.
+        Searching...
       </div>
 
     </div>
@@ -95,6 +95,13 @@ export default {
       try {
         this.searchResults = await this.$store.dispatch( this.searchDispatchName, this.searchQuery );
 
+
+        if ( this.searchQuery.length > 0 ) {
+          const lastItem = {};
+          lastItem[ this.fieldName ] = this.searchQuery + ' - save this item';
+          this.searchResults.push( lastItem );
+        }
+
       } catch ( e ) {
 
       }
@@ -134,11 +141,12 @@ export default {
       return false;
     },
 
+
     async onSelect() {
 
 
       /* adding a new one */
-      if ( this.validQuery && this.searchResults.length === 0 ) {
+      if ( this.validQuery && this.searchSelectedResult === this.searchResults.length - 1 ) {
         try {
 
           const param = {};

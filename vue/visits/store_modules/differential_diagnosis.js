@@ -14,11 +14,11 @@ export default {
 
     mutations: {
 
-        setDifferentialDiagnosisList(state, payload) {
+        setDifferentialDiagnosisList( state, payload ) {
             state.differentialDiagnosisList = payload;
         },
 
-        setDiseasesList(state, payload) {
+        setDiseasesList( state, payload ) {
             state.diseasesList = payload;
         },
 
@@ -26,11 +26,11 @@ export default {
 
     getters: {
 
-        getDiseasesList(state) {
+        getDiseasesList( state ) {
             return state.diseasesList;
         },
 
-        getDifferentialDiagnosisList(state) {
+        getDifferentialDiagnosisList( state ) {
             return state.differentialDiagnosisList;
         },
 
@@ -42,15 +42,15 @@ export default {
         /*
         * Fetch all differential diagnoses
         * */
-        async diffDiagnoses_fetchAll(context, visitId) {
+        async diffDiagnoses_fetchAll( context, visitId ) {
 
 
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/diff-diagnosis.php`, {visit_id: visitId});
-                context.commit("setDifferentialDiagnosisList", response.data);
+                const response = await $.get( `${ getSiteURL() }/api/get/diff-diagnosis.php`, { visit_id: visitId } );
+                context.commit( 'setDifferentialDiagnosisList', response.data );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
@@ -59,14 +59,14 @@ export default {
         /*
         * Fetch all diseases
         * */
-        async diffDiagnoses_fetchAllDiseases(context) {
+        async diffDiagnoses_fetchAllDiseases( context ) {
 
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/diseases.php`);
-                context.commit("setDiseasesList", response.data);
+                const response = await $.get( `${ getSiteURL() }/api/get/diseases.php` );
+                context.commit( 'setDiseasesList', response.data );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
@@ -75,43 +75,34 @@ export default {
         /*
         * Add diff. diagnosis
         * */
-        async diffDiagnoses_add(context, params) {
-            try {
-
-                await $.get(`${getSiteURL()}/api/save/diff-diagnosis.php`, params);
-
-            } catch (e) {
-                throw e;
-            }
+        async diffDiagnoses_add( context, params ) {
+            return $.get( `${ getSiteURL() }/api/save/diff-diagnosis.php`, params );
 
         },
 
         /*
         * Delete diff. diagnosis
         * */
-        async diffDiagnoses_delete(context, id) {
+        async diffDiagnoses_delete( context, id ) {
 
-
-            try {
-
-                await $.get(`${getSiteURL()}/api/delete/diff-diagnosis.php`, {id: id,});
-
-            } catch (e) {
-                throw e;
-            }
+            return $.get( `${ getSiteURL() }/api/delete/diff-diagnosis.php`, { id: id } );
 
         },
 
         /* update */
-        async diffDiagnoses_update(context, params) {
+        async diffDiagnoses_update( context, params ) {
 
-            try {
-                await $.get(`${getSiteURL()}/api/update/diff-diagnosis.php`, params);
-            } catch (e) {
-                throw e;
-            }
-
+            return $.get( `${ getSiteURL() }/api/update/diff-diagnosis.php`, params );
         },
 
-    }
+        async diffDiagnoses_searchDiseases(context, query){
+            const response = await $.get( `${ getSiteURL() }/api/search/diseases.php`, { query: query } );
+            return response.data;
+        },
+
+        async diffDiagnoses_addDisease( context, params ) {
+            return $.post( `${ getSiteURL() }/api/save/disease.php`, params );
+        },
+
+    },
 };
