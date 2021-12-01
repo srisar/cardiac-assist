@@ -43,7 +43,7 @@
         </table>
 
         <div v-else>
-          <p>No items. Start adding some symptoms.</p>
+          <p>No items. Start adding something.</p>
         </div>
 
       </div><!-- card-body -->
@@ -55,20 +55,37 @@
     </div><!-- card -->
 
 
+    <!-- MODAL: Add -->
     <ModalWindow id="modal-add-visit-symptom" :visible="modalAddVisible" @close="modalAddVisible = false">
       <template v-slot:title>Add a symptom to clinical details</template>
       <slot>
+
+        <!-- autofill test area -->
+        <div>
+          <div class="row no-gutters">
+            <div class="col">
+
+              <AutoCompleteTextBox
+                  search-dispatch-name="visitSymptoms_search"
+                  add-dispatch-name="visitSymptoms_addSymptom"
+                  field-name="symptom_name"
+                  v-model="symptomToAdd.selectedSymptom"/>
+
+            </div><!-- col -->
+          </div><!-- row -->
+
+
+        </div>
+        <!-- end: autofill test area -->
+
 
         <!-- section : add symptom -->
         <div class="row text-center justify-content-center">
           <div class="col">
 
-            <div class="form-group">
-              <label>Symptom</label>
-              <select class="custom-select" v-model="symptomToAdd.selectedSymptom">
-                <option value="-1" disabled>CHOOSE ONE</option>
-                <option v-for="item in symptomsList" :value="item">{{ item.symptom_name }}</option>
-              </select>
+            <div class="form-group" v-if="symptomToAdd.selectedSymptom">
+              <label>Selected Symptom</label>
+              <input type="text" class="form-control bg-white" :value="symptomToAdd.selectedSymptom.symptom_name" readonly>
             </div>
 
           </div><!-- col -->
@@ -130,16 +147,17 @@
 
 <script>
 
-import ModalWindow from "../../../_common/components/ModalWindow";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
-import TheLoading from "../../../_common/components/TheLoading";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import TheLoading from '../../../_common/components/TheLoading';
 
 
 const _ = require( 'lodash' );
 
 export default {
-  name: "VisitSymptoms",
-  components: { TheLoading, ModalWindow },
+  name: 'VisitSymptoms',
+  components: { AutoCompleteTextBox, TheLoading, ModalWindow },
 
   /*
   *
@@ -154,22 +172,24 @@ export default {
       modalDeleteVisible: false,
 
       /* symptom duration*/
-      symptomDuration: "1/",
+      symptomDuration: '1/',
 
       symptomToAdd: {
-        selectedSymptom: "-1",
-        duration: "1 days"
+        selectedSymptom: null,
+        duration: '1 days',
       },
 
       symptomToDelete: {
         id: undefined,
-        duration: "",
-        symptom: {}
+        duration: '',
+        symptom: {},
       },
 
       hoverItemId: null,
 
-    }
+      /* -------------------------------------- */
+
+    };
   },
 
 
@@ -188,7 +208,7 @@ export default {
 
     visitId() {
       return this.$store.getters.getVisitId;
-    }
+    },
 
   },
 
@@ -197,13 +217,13 @@ export default {
 
     try {
 
-      await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
-      await this.$store.dispatch( "visitSymptoms_fetchAllSymptoms" );
+      await this.$store.dispatch( 'visitSymptoms_fetchAll', this.visitId );
+      await this.$store.dispatch( 'visitSymptoms_fetchAllSymptoms' );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch clinical details" );
+      errorMessageBox( 'Failed to fetch clinical details' );
     }
 
   },
@@ -219,17 +239,15 @@ export default {
         const params = {
           visit_id: this.visitId,
           symptom_id: this.symptomToAdd.selectedSymptom.id,
-          duration: this.symptomToAdd.duration
+          duration: this.symptomToAdd.duration,
         };
 
-        await this.$store.dispatch( "visitSymptoms_add", params );
-        this.modalAddVisible = false;
+        await this.$store.dispatch( 'visitSymptoms_add', params );
 
-        await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
-
+        await this.$store.dispatch( 'visitSymptoms_fetchAll', this.visitId );
 
       } catch ( e ) {
-        errorMessageBox( "Failed to add clinical detail" );
+        errorMessageBox( 'Failed to add clinical detail' );
       }
 
     },
@@ -239,13 +257,13 @@ export default {
 
       try {
 
-        await this.$store.dispatch( "visitSymptoms_delete", this.symptomToDelete.id );
+        await this.$store.dispatch( 'visitSymptoms_delete', this.symptomToDelete.id );
         this.modalDeleteVisible = false;
 
-        await this.$store.dispatch( "visitSymptoms_fetchAll", this.visitId );
+        await this.$store.dispatch( 'visitSymptoms_fetchAll', this.visitId );
 
       } catch ( e ) {
-        errorMessageBox( "Failed to delete clinical detail" );
+        errorMessageBox( 'Failed to delete clinical detail' );
       }
 
     },
@@ -254,11 +272,15 @@ export default {
       this.symptomToDelete = item;
       this.modalDeleteVisible = true;
 
-    }
+    }, /* onShowDeleteModal */
+
+    /* - -------------------------------------------------------------------------------------------------- */
+    /* SEARCH AND SELECT FEATURE */
+    /* - -------------------------------------------------------------------------------------------------- */
 
   },
 
-}
+};
 </script>
 
 <style scoped>

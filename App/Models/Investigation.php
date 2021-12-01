@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class Investigation implements IModel
 {
@@ -86,6 +87,22 @@ class Investigation implements IModel
 
         if (!empty($result)) return $result;
         return null;
+    }
+
+    public static function search( string $keyword ): array
+    {
+
+        $db = Database::instance();
+        $statement = $db->prepare( "select * from investigations where investigations.investigation_name like :q" );
+        $statement->execute( [
+            ":q" => $keyword . "%",
+        ] );
+
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
+
+        if ( !empty( $result ) ) return $result;
+        return [];
+
     }
 
 

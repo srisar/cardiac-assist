@@ -12,83 +12,92 @@ export default {
 
     mutations: {
 
-        setInvestigationsList: function (state, data) {
+        setInvestigationsList: function ( state, data ) {
             state.investigationsList = data;
         },
 
-        setVisitInvestigationsList: function (state, data) {
+        setVisitInvestigationsList: function ( state, data ) {
             state.visitInvestigationsList = data;
         },
 
     },
 
     getters: {
-        getInvestigationsList: function (state) {
+        getInvestigationsList: function ( state ) {
             return state.investigationsList;
         },
 
-        getVisitInvestigationsList: function (state) {
+        getVisitInvestigationsList: function ( state ) {
             return state.visitInvestigationsList;
-        }
+        },
     },
 
     actions: {
 
         /* fetch all available investigations */
-        async investigations_fetchAllAvailableInvestigation(context) {
+        async investigations_fetchAllAvailableInvestigation( context ) {
 
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/investigations.php`);
-                context.commit("setInvestigationsList", response.data);
+                const response = await $.get( `${ getSiteURL() }/api/get/investigations.php` );
+                context.commit( 'setInvestigationsList', response.data );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
         },
 
         /* fetch all visit investigations */
-        async visitInvestigations_fetchAll(context, visitId) {
+        async visitInvestigations_fetchAll( context, visitId ) {
 
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-investigations.php`, {visit_id: visitId});
-                context.commit("setVisitInvestigationsList", response.data);
-            } catch (e) {
+                const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-investigations.php`, { visit_id: visitId } );
+                context.commit( 'setVisitInvestigationsList', response.data );
+            } catch ( e ) {
                 throw e;
             }
 
         },
 
         /* add */
-        async visitInvestigations_add(context, params) {
+        async visitInvestigations_add( context, params ) {
 
             try {
-                await $.post(`${getSiteURL()}/api/save/visit/visit-investigation.php`, params);
-            } catch (e) {
+                await $.post( `${ getSiteURL() }/api/save/visit/visit-investigation.php`, params );
+            } catch ( e ) {
                 throw e;
             }
 
         },
 
         /* delete */
-        async visitInvestigations_delete(context, id) {
+        async visitInvestigations_delete( context, id ) {
             try {
-                await $.post(`${getSiteURL()}/api/delete/visit/visit-investigation.php`, {id: id});
-            } catch (e) {
+                await $.post( `${ getSiteURL() }/api/delete/visit/visit-investigation.php`, { id: id } );
+            } catch ( e ) {
                 throw e;
             }
         },
 
         /* update */
-        async visitInvestigations_update(context, params) {
+        async visitInvestigations_update( context, params ) {
             try {
-                await $.post(`${getSiteURL()}/api/update/visit/visit-investigation.php`, params)
-            } catch (e) {
+                await $.post( `${ getSiteURL() }/api/update/visit/visit-investigation.php`, params );
+            } catch ( e ) {
                 throw e;
             }
         },
 
-    }
+        async visitInvestigations_search( context, query ) {
+            const response = await $.get( `${ getSiteURL() }/api/search/investigations.php`, { query: query } );
+            return response.data;
+        },
+
+        async visitInvestigations_addInvestigation( context, params ) {
+            return $.post( `${ getSiteURL() }/api/save/investigation.php`, params );
+        },
+
+    },
 };

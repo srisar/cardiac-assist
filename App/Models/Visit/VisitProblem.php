@@ -15,25 +15,26 @@ class VisitProblem implements IModel
     private const TABLE = "visit_problems";
 
     public ?int $id, $visit_id, $problem_id;
+    public ?string $remarks;
 
     public ?Visit $visit;
     public ?Problem $problem;
 
-    public static function build($array): self
+    public static function build( $array ): self
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
     }
 
-    public static function find(int $id)
+    public static function find( int $id )
     {
-        return Database::find(self::TABLE, $id, self::class);
+        return Database::find( self::TABLE, $id, self::class );
     }
 
-    public static function findAll($limit = 1000, $offset = 0)
+    public static function findAll( $limit = 1000, $offset = 0 )
     {
         // TODO: Implement findAll() method.
     }
@@ -42,41 +43,46 @@ class VisitProblem implements IModel
     {
         $data = [
             "visit_id" => $this->visit_id,
-            "problem_id" => $this->problem_id
+            "problem_id" => $this->problem_id,
+            "remarks" => $this->remarks,
         ];
 
-        return Database::insert(self::TABLE, $data);
+        return Database::insert( self::TABLE, $data );
     }
 
-    public function update()
+    public function update(): bool
     {
-        // TODO: Implement update() method.
+        $data = [
+            "remarks" => $this->remarks,
+        ];
+
+        return Database::update( self::TABLE, $data, [ 'id' => $this->id ] );
     }
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, "id", $this->id);
+        return Database::delete( self::TABLE, "id", $this->id );
     }
 
     /**
      * @param Visit $visit
      * @return self[]
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit( Visit $visit ): array
     {
         $db = Database::instance();
-        $statement = $db->prepare("select * from visit_problems where visit_id=?");
-        $statement->execute([$visit->id]);
+        $statement = $db->prepare( "select * from visit_problems where visit_id=?" );
+        $statement->execute( [ $visit->id ] );
 
         /** @var self[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($results)) {
+        if ( !empty( $results ) ) {
 
             $output = [];
 
-            foreach ($results as $result) {
-                $result->problem = Problem::find($result->problem_id);
+            foreach ( $results as $result ) {
+                $result->problem = Problem::find( $result->problem_id );
                 $output[] = $result;
             }
             return $output;

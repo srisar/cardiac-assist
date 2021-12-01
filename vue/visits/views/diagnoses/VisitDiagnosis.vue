@@ -42,7 +42,7 @@
         </table>
 
         <div v-else>
-          <p>No items. Start adding some differential diagnoses</p>
+          <p>No items. Start adding something.</p>
         </div>
 
       </div><!-- card-body -->

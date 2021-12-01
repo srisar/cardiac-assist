@@ -22,7 +22,8 @@
           <tr v-for="item in visitProblemsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
             <td class="position-relative">
               <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
-
+              <span> - </span>
+              <span>{{ item.remarks }}</span>
               <div class="position-absolute rounded hover-group">
                 <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
                   <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
@@ -35,7 +36,7 @@
         </table>
 
         <div v-else>
-          <p>No items. Start adding some symptoms.</p>
+          <p>No items. Start adding something.</p>
         </div>
 
       </div><!-- card-body -->
@@ -58,15 +59,23 @@
 
             <div class="form-group">
               <label>Choose a problem from the list</label>
-              <select class="custom-select" v-model="problemToAdd">
-                <option value="-1" disabled>CHOOSE ONE</option>
+              <select class="custom-select" v-model="problemToAdd.problem">
+                <option :value="null" disabled>CHOOSE ONE</option>
                 <option v-for="item in problems" :value="item">{{ item.problem }}</option>
               </select>
             </div>
 
           </div><!-- col -->
-
         </div><!-- row -->
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Remarks</label>
+              <input type="text" class="form-control" v-model.trim="problemToAdd.remarks">
+            </div>
+          </div>
+        </div>
 
         <div class="form-row text-center">
           <div class="col">
@@ -105,12 +114,13 @@
 </template>
 
 <script>
-import ModalWindow from "../../../_common/components/ModalWindow";
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
-import TheLoading from "../../../_common/components/TheLoading";
+import voca from 'voca';
+import {errorMessageBox, successMessageBox} from '../../../_common/bootbox_dialogs';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import TheLoading from '../../../_common/components/TheLoading';
 
 export default {
-  name: "VisitProblems",
+  name: 'VisitProblems',
   components: { TheLoading, ModalWindow },
 
   data() {
@@ -123,14 +133,17 @@ export default {
 
       showSaveNewProblemSection: false,
 
-      problemToAdd: "-1",
+      problemToAdd: {
+        problem: null,
+        remarks: '',
+      },
 
       problemToDelete: {
         id: undefined,
-        problem: ""
+        problem: '',
       },
 
-      newProblemToSave: "",
+      newProblemToSave: '',
 
       hoverItemId: null,
 
@@ -152,7 +165,7 @@ export default {
 
     visitId() {
       return this.$store.getters.getVisitId;
-    }
+    },
 
   },
 
@@ -161,13 +174,13 @@ export default {
 
     try {
 
-      await this.$store.dispatch( "visitProblems_fetchAll", this.visitId );
-      await this.$store.dispatch( "visitProblems_fetchAllProblems" );
+      await this.$store.dispatch( 'visitProblems_fetchAll', this.visitId );
+      await this.$store.dispatch( 'visitProblems_fetchAllProblems' );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch visit problems" );
+      errorMessageBox( 'Failed to fetch visit problems' );
     }
 
   },
@@ -182,20 +195,21 @@ export default {
 
         const params = {
           visit_id: this.visitId,
-          problem_id: this.problemToAdd.id,
+          problem_id: this.problemToAdd.problem.id,
+          remarks: voca.capitalize( this.problemToAdd.remarks ),
         };
 
-        await this.$store.dispatch( "visitProblems_add", params );
+        await this.$store.dispatch( 'visitProblems_add', params );
         this.modalAddVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to add clinical detail" );
+        errorMessageBox( 'Failed to add clinical detail' );
       }
 
       try {
-        await this.$store.dispatch( "visitProblems_fetchAll", this.visitId );
+        await this.$store.dispatch( 'visitProblems_fetchAll', this.visitId );
       } catch ( e ) {
-        errorMessageBox( "Failed to fetch visit problems" );
+        errorMessageBox( 'Failed to fetch visit problems' );
       }
 
     }, /* on add */
@@ -205,13 +219,13 @@ export default {
 
       try {
 
-        await this.$store.dispatch( "visitProblems_delete", item.id );
+        await this.$store.dispatch( 'visitProblems_delete', item.id );
         this.modalDeleteVisible = false;
 
-        await this.$store.dispatch( "visitProblems_fetchAll", this.visitId );
+        await this.$store.dispatch( 'visitProblems_fetchAll', this.visitId );
 
       } catch ( e ) {
-        errorMessageBox( "Failed to delete visit problem" );
+        errorMessageBox( 'Failed to delete visit problem' );
       }
     }, /* on delete */
 
@@ -227,23 +241,23 @@ export default {
       try {
 
         const params = {
-          problem: this.newProblemToSave
+          problem: this.newProblemToSave,
         };
 
-        await this.$store.dispatch( "visitProblems_saveProblem", params );
+        await this.$store.dispatch( 'visitProblems_saveProblem', params );
 
-        successMessageBox( "New problem saved, please choose it from the list now." );
+        successMessageBox( 'New problem saved, please choose it from the list now.' );
 
-        this.newProblemToSave = "";
+        this.newProblemToSave = '';
 
       } catch ( e ) {
-        errorMessageBox( "Failed to save new problem" );
+        errorMessageBox( 'Failed to save new problem' );
       }
 
       try {
-        await this.$store.dispatch( "visitProblems_fetchAllProblems" );
+        await this.$store.dispatch( 'visitProblems_fetchAllProblems' );
       } catch ( e ) {
-        errorMessageBox( "Failed to fetch problems list" );
+        errorMessageBox( 'Failed to fetch problems list' );
       }
 
     }, /* on save new problem */
@@ -252,7 +266,7 @@ export default {
   },
 
 
-}
+};
 </script>
 
 <style scoped>

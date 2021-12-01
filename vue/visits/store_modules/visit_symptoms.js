@@ -13,11 +13,11 @@ export default {
 
     mutations: {
 
-        setSymptomsList(state, payload) {
+        setSymptomsList( state, payload ) {
             state.symptomsList = payload;
         },
 
-        setVisitSymptomsList(state, payload) {
+        setVisitSymptomsList( state, payload ) {
             state.visitSymptomsList = payload;
         },
 
@@ -25,11 +25,11 @@ export default {
 
     getters: {
 
-        getVisitSymptomsList(state) {
+        getVisitSymptomsList( state ) {
             return state.visitSymptomsList;
         },
 
-        getSymptomsList(state) {
+        getSymptomsList( state ) {
             return state.symptomsList;
         },
 
@@ -38,57 +38,56 @@ export default {
     actions: {
 
         /* fetch all visit symptoms */
-        async visitSymptoms_fetchAll(context, visitId) {
+        async visitSymptoms_fetchAll( context, visitId ) {
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-symptoms.php`, {visit_id: visitId});
-                context.commit("setVisitSymptomsList", response.data);
+                const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-symptoms.php`, { visit_id: visitId } );
+                context.commit( 'setVisitSymptomsList', response.data );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
 
         },
 
         /* fetch all available symptoms */
-        async visitSymptoms_fetchAllSymptoms(context) {
+        async visitSymptoms_fetchAllSymptoms( context ) {
 
             try {
 
-                const response = await $.get(`${getSiteURL()}/api/get/symptoms.php`);
-                context.commit("setSymptomsList", response.data);
+                const response = await $.get( `${ getSiteURL() }/api/get/symptoms.php` );
+                context.commit( 'setSymptomsList', response.data );
 
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
         },
 
         /* add */
-        async visitSymptoms_add(context, params) {
-
-            try {
-
-                await $.get(`${getSiteURL()}/api/save/visit/visit-symptom.php`, params);
-
-            } catch (e) {
-                throw e;
-            }
-
+        async visitSymptoms_add( context, params ) {
+            return $.get( `${ getSiteURL() }/api/save/visit/visit-symptom.php`, params );
         },
 
         /* delete */
-        async visitSymptoms_delete(context, id) {
+        async visitSymptoms_delete( context, id ) {
+            return $.get( `${ getSiteURL() }/api/delete/visit/visit-symptom.php`, { id: id } );
+        },
 
-            try {
+        /* search all symptoms */
+        async visitSymptoms_search( context, query ) {
+            const response = await $.get( `${ getSiteURL() }/api/search/symptoms.php`, { query: query } );
+            return response.data;
+        },
 
-                await $.get(`${getSiteURL()}/api/delete/visit/visit-symptom.php`, {id: id});
-
-            } catch (e) {
-                throw e;
-            }
-
+        /**
+         *
+         * @param context
+         * @param params [symptom_name, description(optional)]
+         */
+        async visitSymptoms_addSymptom( context, params ) {
+            return $.post( `${ getSiteURL() }/api/save/symptom.php`, params );
         },
 
 
-    }
+    },
 };

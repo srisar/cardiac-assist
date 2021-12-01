@@ -48,7 +48,7 @@
           </table>
 
           <div v-else>
-            <p>No items. Start adding investigations.</p>
+            <p>No items. Start adding something.</p>
           </div>
 
         </div><!-- investigations list -->
@@ -71,16 +71,19 @@
       <slot>
 
         <!-- section : add symptom -->
-        <div class="row">
+        <div class="row no-gutters">
           <div class="col">
 
-            <div class="form-group">
-              <select class="form-control" v-model="investigationToAdd.investigation_id">
-                <option value="-1" disabled>SELECT ONE</option>
-                <option v-for="item in investigationsList" :value="item.id">
-                  {{ item.investigation_name }}
-                </option>
-              </select>
+            <AutoCompleteTextBox
+                search-dispatch-name="visitInvestigations_search"
+                add-dispatch-name="visitInvestigations_addInvestigation"
+                field-name="investigation_name"
+                v-model="investigationToAdd.selectedInvestigation"/>
+
+
+            <div class="form-group" v-if="investigationToAdd.selectedInvestigation">
+              <label>Selected Investigation</label>
+              <input type="text" class="form-control" readonly :value="investigationToAdd.selectedInvestigation.investigation_name">
             </div>
 
             <div class="form-group">
@@ -176,16 +179,17 @@
 
 <script>
 
-import ModalWindow from "../../../_common/components/ModalWindow";
-import RichEditorV2 from "../../../_common/components/RichEditorV2";
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
-import TheLoading from "../../../_common/components/TheLoading";
+import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
+import {errorMessageBox, successMessageBox} from '../../../_common/bootbox_dialogs';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import RichEditorV2 from '../../../_common/components/RichEditorV2';
+import TheLoading from '../../../_common/components/TheLoading';
 
-const _ = require( "lodash" );
+const _ = require( 'lodash' );
 
 export default {
-  name: "VisitInvestigations",
-  components: { TheLoading, ModalWindow, RichEditorV2 },
+  name: 'VisitInvestigations',
+  components: { AutoCompleteTextBox, TheLoading, ModalWindow, RichEditorV2 },
 
   /*
   * DATA
@@ -202,20 +206,20 @@ export default {
 
 
       investigationToAdd: {
-        investigation_id: -1,
-        remarks: ""
+        selectedInvestigation: null,
+        remarks: '',
       },
 
       investigationToEdit: {
         id: undefined,
         investigation: {},
         investigation_id: -1,
-        remarks: "",
+        remarks: '',
       },
 
       showHoverItemsById: null,
 
-    }
+    };
   },
 
   /*
@@ -252,19 +256,19 @@ export default {
       /*
        * Fetch investigations for the dropdown
        * */
-      await this.$store.dispatch( "investigations_fetchAllAvailableInvestigation" );
+      await this.$store.dispatch( 'investigations_fetchAllAvailableInvestigation' );
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch visit investigations" );
+      errorMessageBox( 'Failed to fetch visit investigations' );
     }
 
     try {
-      await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
+      await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch visit investigation details" );
+      errorMessageBox( 'Failed to fetch visit investigation details' );
     }
 
   },
@@ -283,19 +287,17 @@ export default {
 
         const params = {
           visit_id: this.visitId,
-          investigation_id: this.investigationToAdd.investigation_id,
-          remarks: this.investigationToAdd.remarks
-        }
+          investigation_id: this.investigationToAdd.selectedInvestigation.id,
+          remarks: this.investigationToAdd.remarks,
+        };
 
-        await this.$store.dispatch( "visitInvestigations_add", params );
+        await this.$store.dispatch( 'visitInvestigations_add', params );
 
-        await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
-
-        this.modalAddVisible = false;
+        await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
 
 
       } catch ( e ) {
-        errorMessageBox( "Failed to add investigation" );
+        errorMessageBox( 'Failed to add investigation' );
       }
 
     },
@@ -329,17 +331,17 @@ export default {
         const params = {
           id: this.investigationToEdit.id,
           investigation_id: this.investigationToEdit.investigation_id,
-          remarks: this.investigationToEdit.remarks
+          remarks: this.investigationToEdit.remarks,
         };
 
-        await this.$store.dispatch( "visitInvestigations_update", params );
+        await this.$store.dispatch( 'visitInvestigations_update', params );
         this.modalEditVisible = false;
-        successMessageBox( "Investigation details updated" );
+        successMessageBox( 'Investigation details updated' );
 
-        await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
+        await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
 
       } catch ( e ) {
-        errorMessageBox( "Failed to update investigation details" );
+        errorMessageBox( 'Failed to update investigation details' );
       }
 
     },
@@ -351,20 +353,20 @@ export default {
 
       try {
 
-        await this.$store.dispatch( "visitInvestigations_delete", this.investigationToEdit.id );
-        await this.$store.dispatch( "visitInvestigations_fetchAll", this.visitId );
+        await this.$store.dispatch( 'visitInvestigations_delete', this.investigationToEdit.id );
+        await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
 
         this.modalDeleteVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to remove selected investigation" );
+        errorMessageBox( 'Failed to remove selected investigation' );
       }
 
-    }
+    },
 
   },
 
-}
+};
 </script>
 
 <style scoped>

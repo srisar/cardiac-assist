@@ -7,25 +7,25 @@ use App\Models\Problem;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect(DEBUG);
+Authentication::isAdminOrRedirect( DEBUG );
 
 try {
 
     $fields = [
-        "id" => Request::getAsInteger("id"),
-        "problem" => Request::getAsString("problem"),
+        "id" => Request::getAsInteger( "id" ),
+        "problem" => Request::getAsString( "problem" ),
     ];
 
-    $object = Problem::build($fields);
+    $object = Problem::build( $fields );
 
     $result = $object->update();
 
-    if (empty($result)) throw new Exception("Update failed");
+    if ( empty( $result ) ) throw new Exception( "Update failed" );
 
     JSONResponse::validResponse();
     return;
 
-} catch (Exception $exception) {
-    JSONResponse::exceptionResponse($exception);
+} catch ( Exception $exception ) {
+    JSONResponse::exceptionResponse( $exception );
 }
 

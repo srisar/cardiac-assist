@@ -1,9 +1,9 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex);
+Vue.use( Vuex );
 
-export const store = new Vuex.Store({
+export const store = new Vuex.Store( {
 
     state: {
 
@@ -12,11 +12,11 @@ export const store = new Vuex.Store({
 
     },
     getters: {
-        getProblems(state) {
+        getProblems( state ) {
             return state.problems;
         },
 
-        getSelectedProblem(state) {
+        getSelectedProblem( state ) {
             return state.selectedProblem;
         },
 
@@ -27,42 +27,38 @@ export const store = new Vuex.Store({
     actions: {
 
 
-        async problems_fetch(context, id) {
+        async problems_fetch( context, id ) {
             try {
-                const response = await $.get(`${getSiteURL()}/api/get/problems.php`, {id: id});
+                const response = await $.get( `${ getSiteURL() }/api/get/problems.php`, { id: id } );
                 context.state.selectedProblem = response.data;
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
         }, /* fetch all */
 
-        async problems_fetchAll(context) {
+        async problems_fetchAll( context ) {
             try {
-                const response = await $.get(`${getSiteURL()}/api/get/problems.php`);
+                const response = await $.get( `${ getSiteURL() }/api/get/problems.php` );
                 context.state.problems = response.data;
-            } catch (e) {
+            } catch ( e ) {
                 throw e;
             }
         }, /* fetch all */
 
 
-        async problem_save(context, params) {
+        async problem_save( context, params ) {
             try {
-                await $.post(`${getSiteURL()}/api/save/problem.php`, params);
-            } catch (e) {
+                await $.post( `${ getSiteURL() }/api/save/problem.php`, params );
+            } catch ( e ) {
                 throw e;
             }
         }, /* save */
 
-        async problem_update(context, params) {
-            try {
-                await $.post(`${getSiteURL()}/api/update/problem.php`, params);
-            } catch (e) {
-                throw e;
-            }
+        async problem_update( context, params ) {
+            return $.post( `${ getSiteURL() }/api/update/problem.php`, params );
         }, /* update */
 
 
     },
 
-});
+} );

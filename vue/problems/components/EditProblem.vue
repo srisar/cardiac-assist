@@ -26,49 +26,49 @@
 </template>
 
 <script>
-import {errorMessageBox, successMessageBox} from "../../_common/bootbox_dialogs";
+import {errorMessageBox} from '../../_common/bootbox_dialogs';
 
-const _ = require("lodash");
+const _ = require( 'lodash' );
 
 export default {
-  name: "EditProblem",
+  name: 'EditProblem',
 
   computed: {
     selectedProblem() {
-      return _.cloneDeep(this.$store.getters.getSelectedProblem);
+      return _.cloneDeep( this.$store.getters.getSelectedProblem );
     },
 
     isFormValid() {
-      return this.selectedProblem.problem !== "";
-    }
+      return this.selectedProblem.problem !== '';
+    },
 
   },
 
   async mounted() {
 
     const id = this.$route.params.id;
-    await this.fetchSelected(id);
+    await this.fetchSelected( id );
 
   },
 
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate( to, from, next ) {
 
     const id = to.params.id;
-    await this.fetchSelected(id);
+    await this.fetchSelected( id );
     await next();
 
   },
 
   methods: {
 
-    async fetchSelected(id) {
+    async fetchSelected( id ) {
       try {
 
-        await this.$store.dispatch("problems_fetch", id);
+        await this.$store.dispatch( 'problems_fetch', id );
 
-      } catch (e) {
-        errorMessageBox("Failed to load selected problem");
-        await this.$router.push("/");
+      } catch ( e ) {
+        errorMessageBox( 'Failed to load selected problem' );
+        await this.$router.push( '/' );
       }
     },
 
@@ -81,27 +81,26 @@ export default {
 
         const params = {
           id: this.selectedProblem.id,
-          problem: this.selectedProblem.problem
+          problem: this.selectedProblem.problem,
         };
 
-        await this.$store.dispatch("problem_update", params);
-        successMessageBox("Problem updated");
+        await this.$store.dispatch( 'problem_update', params );
 
-      } catch (e) {
-        errorMessageBox("Failed to update problem");
+      } catch ( e ) {
+        errorMessageBox( 'Failed to update problem' );
       }
 
       try {
-        await this.$store.dispatch("problems_fetchAll");
-      } catch (e) {
-        errorMessageBox("Failed to fetch problems");
+        await this.$store.dispatch( 'problems_fetchAll' );
+      } catch ( e ) {
+        errorMessageBox( 'Failed to fetch problems' );
       }
 
-    }
+    },
 
   },
 
-}
+};
 </script>
 
 <style scoped>

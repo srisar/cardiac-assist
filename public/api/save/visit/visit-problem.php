@@ -7,27 +7,28 @@ use App\Models\Visit\VisitProblem;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect(DEBUG);
+Authentication::isAdminOrRedirect( DEBUG );
 
 try {
 
     $fields = [
-        "visit_id" => Request::getAsInteger("visit_id"),
-        "problem_id" => Request::getAsInteger("problem_id"),
+        "visit_id" => Request::getAsInteger( "visit_id" ),
+        "problem_id" => Request::getAsInteger( "problem_id" ),
+        "remarks" => Request::getAsString( "remarks" ),
     ];
 
-    $object = VisitProblem::build($fields);
+    $object = VisitProblem::build( $fields );
 
 
     $result = $object->insert();
 
-    if (empty($result)) throw new Exception("Failed");
+    if ( empty( $result ) ) throw new Exception( "Failed" );
 
-    $object = VisitProblem::find($result);
+    $object = VisitProblem::find( $result );
 
-    JSONResponse::validResponse(["data" => $object]);
+    JSONResponse::validResponse( [ "data" => $object ] );
     return;
 
-} catch (Exception $exception) {
-    JSONResponse::exceptionResponse($exception);
+} catch ( Exception $exception ) {
+    JSONResponse::exceptionResponse( $exception );
 }
