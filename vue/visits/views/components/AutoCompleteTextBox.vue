@@ -1,6 +1,6 @@
 <template>
 
-  <div class="form-group">
+  <div class="form-group" @blur.capture="searchQuery=''">
     <input type="text" class="form-control autofill-control shadow-sm"
            placeholder="Type to search and add..."
            v-model.trim="searchQuery"
