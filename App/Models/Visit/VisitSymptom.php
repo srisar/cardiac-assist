@@ -24,10 +24,10 @@ class VisitSymptom implements IModel
      * @param $array
      * @return VisitSymptom
      */
-    public static function build($array): VisitSymptom
+    public static function build( $array ): VisitSymptom
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -38,12 +38,12 @@ class VisitSymptom implements IModel
      * @param int $id
      * @return VisitSymptom|null
      */
-    public static function find(int $id): ?VisitSymptom
+    public static function find( int $id ): ?VisitSymptom
     {
-        $result = Database::find(self::TABLE, $id, self::class);
-        if (!empty($result)) {
-            $result->visit = Visit::find($result->visit_id);
-            $result->symptom = Symptom::find($result->symptom_id);
+        $result = Database::find( self::TABLE, $id, self::class );
+        if ( !empty( $result ) ) {
+            $result->visit = Visit::find( $result->visit_id );
+            $result->symptom = Symptom::find( $result->symptom_id );
 
             return $result;
         }
@@ -56,32 +56,32 @@ class VisitSymptom implements IModel
      * @param int $offset
      * @return VisitSymptom[]
      */
-    public static function findAll($limit = 1000, $offset = 0): array
+    public static function findAll( $limit = 1000, $offset = 0 ): array
     {
-        return Database::findAll(self::TABLE, $limit, $offset, self::class, 'visit_id');
+        return Database::findAll( self::TABLE, $limit, $offset, self::class, 'visit_id' );
     }
 
     /**
      * @param Visit $visit
      * @return VisitSymptom[]
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit( Visit $visit ): array
     {
         $db = Database::instance();
-        $statement = $db->prepare('select * from visit_symptoms where visit_id=?');
-        $statement->execute([$visit->id]);
+        $statement = $db->prepare( 'select * from visit_symptoms where visit_id=?' );
+        $statement->execute( [ $visit->id ] );
 
 
         /** @var VisitSymptom[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
         $output = [];
 
-        if (!empty($results)) {
+        if ( !empty( $results ) ) {
 
-            foreach ($results as $result) {
-                $result->visit = Visit::find($result->visit_id);
-                $result->symptom = Symptom::find($result->symptom_id);
+            foreach ( $results as $result ) {
+                $result->visit = Visit::find( $result->visit_id );
+                $result->symptom = Symptom::find( $result->symptom_id );
                 $output[] = $result;
             }
 
@@ -98,12 +98,15 @@ class VisitSymptom implements IModel
             'duration' => $this->duration,
         ];
 
-        return Database::insert(self::TABLE, $data);
+        return Database::insert( self::TABLE, $data );
     }
 
-    public function update()
+    public function update(): bool
     {
-
+        $data = [
+            'duration' => $this->duration,
+        ];
+        return Database::update( self::TABLE, $data, [ 'id' => $this->id ] );
     }
 
     /**
@@ -111,7 +114,7 @@ class VisitSymptom implements IModel
      */
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, 'id', $this->id);
+        return Database::delete( self::TABLE, 'id', $this->id );
     }
 
 }

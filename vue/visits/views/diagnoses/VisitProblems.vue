@@ -27,16 +27,16 @@
           <tr v-for="item in visitProblemsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
             <td class="position-relative">
 
-              <p class="font-weight-bold">
+              <p class="font-weight-bold mb-1">
                 <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
               </p>
 
               <!-- remarks show and edit -->
-              <div class="" v-if="showEditRemarks && selectedProblemId === item.id">
+              <div class="" v-if="showEditRemarks && selectedItemId === item.id">
                 <input type="text"
                        class="form-control"
                        :id="'txt_remarks'+item.id"
-                       v-model="selectedProblem.remarks"
+                       v-model="selectedItem.remarks"
                        @blur="onUpdateRemarks"
                        @keyup.enter="onUpdateRemarks">
               </div>
@@ -106,9 +106,9 @@ export default {
 
       /* edit remarks */
       showEditRemarks: false,
-      selectedProblemId: null,
-      selectedProblem: {
-        problem: null,
+      selectedItemId: null,
+      selectedItem: {
+        item: null,
         remarks: '',
       },
 
@@ -195,10 +195,17 @@ export default {
     }, /* on delete */
 
 
-    onSelectRemarkToEdit( problem ) {
-      this.selectedProblem = _.cloneDeep( problem );
 
-      this.selectedProblemId = problem.id;
+    /*
+    * ------------------------------------------------------------
+    * Selected item's edit remarks logic
+    * ------------------------------------------------------------
+    * */
+
+    onSelectRemarkToEdit( problem ) {
+      this.selectedItem = _.cloneDeep( problem );
+
+      this.selectedItemId = problem.id;
       this.showEditRemarks = true;
 
       this.$nextTick( () => {
@@ -217,13 +224,13 @@ export default {
        * and then set selectedProblem = null, this will cause an issue
        * when blur is trying to run.
        * */
-      if ( _.isNull( this.selectedProblem ) ) return false;
+      if ( _.isNull( this.selectedItem ) ) return false;
 
       try {
 
         const params = {
-          id: this.selectedProblemId,
-          remarks: voca.capitalize( this.selectedProblem.remarks ),
+          id: this.selectedItemId,
+          remarks: voca.capitalize( this.selectedItem.remarks ),
         };
 
         await this.$store.dispatch( 'visitProblems_update', params );
@@ -244,8 +251,8 @@ export default {
 
 
     _resetSelectedProblem() {
-      this.selectedProblem = null;
-      this.selectedProblemId = null;
+      this.selectedItem = null;
+      this.selectedItemId = null;
       this.showEditRemarks = false;
     },
 

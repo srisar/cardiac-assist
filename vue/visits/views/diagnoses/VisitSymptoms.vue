@@ -25,27 +25,46 @@
         </div>
 
 
-
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
           <thead>
           <tr>
             <th>Symptom</th>
-            <th style="width: 50px" class="text-center">Duration</th>
+            <th style="width: 100px" class="text-center">Duration</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="item in visitSymptomsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
+
             <td class="position-relative align-middle">
               <a :href="'/app/symptoms/manage.php#/edit/' + item.symptom.id" target="_blank">{{ item.symptom.symptom_name }}</a>
 
               <div class="position-absolute hover-group rounded">
-                <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onShowDeleteModal(item)">
+                <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
                   <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
                 </button>
               </div>
 
             </td>
-            <td class="text-center">{{ item.duration }}</td>
+            <td class="text-center">
+              <!-- remarks show and edit -->
+              <div class="" v-if="showEditDuration && selectedItemId === item.id">
+                <input type="text"
+                       class="form-control"
+                       :id="'txt_duration'+item.id"
+                       v-model="selectedItem.duration"
+                       @blur="onUpdateDuration"
+                       @keyup.enter="onUpdateDuration">
+              </div>
+              <div class="" v-else>
+
+                <div class="pointer" v-if="item.duration" @click="onSelectDurationToEdit(item)">{{ item.duration }}</div>
+                <div class="text-secondary pointer" v-else @click="onSelectDurationToEdit(item)">
+                  -
+                </div>
+              </div>
+              <!-- remarks show and edit -->
+
+            </td>
 
           </tr>
           </tbody>
@@ -63,93 +82,6 @@
 
     </div><!-- card -->
 
-
-    <!-- MODAL: Add -->
-    <ModalWindow id="modal-add-visit-symptom" :visible="modalAddVisible" @close="modalAddVisible = false">
-      <template v-slot:title>Add a symptom to clinical details</template>
-      <slot>
-
-        <!-- autofill test area -->
-        <div>
-          <div class="row no-gutters">
-            <div class="col">
-
-              <AutoCompleteTextBox
-                  search-dispatch-name="visitSymptoms_search"
-                  add-dispatch-name="visitSymptoms_addSymptom"
-                  field-name="symptom_name"
-                  v-model="symptomToAdd.selectedSymptom"/>
-
-            </div><!-- col -->
-          </div><!-- row -->
-
-
-        </div>
-        <!-- end: autofill test area -->
-
-
-        <!-- section : add symptom -->
-        <div class="row text-center justify-content-center">
-          <div class="col">
-
-            <div class="form-group" v-if="symptomToAdd.selectedSymptom">
-              <label>Selected Symptom</label>
-              <input type="text" class="form-control bg-white" :value="symptomToAdd.selectedSymptom.symptom_name" readonly>
-            </div>
-
-          </div><!-- col -->
-
-          <div class="w-100"></div>
-
-          <div class="col-2">
-            <div class="form-group">
-              <label>Duration</label>
-              <input type="text" class="form-control" v-model="symptomToAdd.duration">
-            </div>
-          </div>
-
-        </div><!-- row -->
-
-        <div class="form-row text-center">
-          <div class="col">
-            <button class="btn btn-success" @click="onAdd()">Add</button>
-          </div>
-        </div>
-
-
-        <div class="row">
-
-        </div><!-- row -->
-
-        <!-- section: add symptom -->
-
-      </slot>
-    </ModalWindow>
-
-
-    <!-- ----------------------------------------------------------------------------------------------------------- -->
-
-    <!--
-    modal: delete confirm
-    -->
-    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
-      <template v-slot:title>Confirm Removal</template>
-      <slot>
-
-        <p class="lead text-center">Confirm removing the following clinical detail</p>
-        <p class="text-center">{{ symptomToDelete.symptom.symptom_name }} for {{ symptomToDelete.duration }}</p>
-
-        <div class="text-center">
-          <button class="btn btn-danger" @click="onDelete()">Remove</button>
-        </div>
-
-      </slot>
-    </ModalWindow>
-    <!--
-    end: modal: delete confirm
-    -->
-
-
   </div><!-- Template -->
 
 </template>
@@ -158,6 +90,7 @@
 
 import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
+import voca from 'voca';
 import ModalWindow from '../../../_common/components/ModalWindow';
 import TheLoading from '../../../_common/components/TheLoading';
 
@@ -196,7 +129,13 @@ export default {
 
       hoverItemId: null,
 
-      /* -------------------------------------- */
+      /* edit duration */
+      showEditDuration: false,
+      selectedItemId: null,
+      selectedItem: {
+        item: null,
+        duration: '',
+      },
 
     };
   },
@@ -262,13 +201,11 @@ export default {
     },
 
 
-    async onDelete() {
+    async onDelete( item ) {
 
       try {
 
-        await this.$store.dispatch( 'visitSymptoms_delete', this.symptomToDelete.id );
-        this.modalDeleteVisible = false;
-
+        await this.$store.dispatch( 'visitSymptoms_delete', item.id );
         await this.$store.dispatch( 'visitSymptoms_fetchAll', this.visitId );
 
       } catch ( e ) {
@@ -277,15 +214,67 @@ export default {
 
     },
 
-    onShowDeleteModal( item ) {
-      this.symptomToDelete = item;
-      this.modalDeleteVisible = true;
 
-    }, /* onShowDeleteModal */
+    /*
+     * ------------------------------------------------------------
+     * Selected item's edit remarks logic
+     * ------------------------------------------------------------
+     * */
 
-    /* - -------------------------------------------------------------------------------------------------- */
-    /* SEARCH AND SELECT FEATURE */
-    /* - -------------------------------------------------------------------------------------------------- */
+    onSelectDurationToEdit( item ) {
+      this.selectedItem = _.cloneDeep( item );
+
+      this.selectedItemId = item.id;
+      this.showEditDuration = true;
+
+      this.$nextTick( () => {
+        /* set focus on the selected text box */
+        document.getElementById( 'txt_duration' + item.id ).focus();
+      } );
+
+    }, /* --------------------------------------------------------- */
+
+    async onUpdateDuration() {
+
+      /*
+       * if selectedProblem is null, then dont do anything
+       * this is needed because we are hooking both blur and enter events
+       * to the same function. once enter is pressed, this code will run
+       * and then set selectedProblem = null, this will cause an issue
+       * when blur is trying to run.
+       * */
+      if ( _.isNull( this.selectedItem ) ) return false;
+
+      try {
+
+        const params = {
+          id: this.selectedItemId,
+          duration: voca.capitalize( this.selectedItem.duration ),
+        };
+
+        await this.$store.dispatch( 'visitSymptoms_update', params );
+
+        await this.$store.dispatch( 'visitSymptoms_fetchAll', this.visitId );
+
+      } catch ( e ) {
+        console.log( e );
+        errorMessageBox( 'Failed to update' );
+      }
+
+
+      this.$nextTick( () => {
+        this._resetSelectedItem();
+      } );
+
+    }, /* --------------------------------------------------------- */
+
+
+    _resetSelectedItem() {
+      this.selectedItem = null;
+      this.selectedItemId = null;
+      this.showEditRemarks = false;
+
+    }, /* --------------------------------------------------------- */
 
   },
 

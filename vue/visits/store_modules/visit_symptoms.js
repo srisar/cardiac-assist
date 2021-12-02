@@ -39,33 +39,24 @@ export default {
 
         /* fetch all visit symptoms */
         async visitSymptoms_fetchAll( context, visitId ) {
-            try {
-
-                const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-symptoms.php`, { visit_id: visitId } );
-                context.commit( 'setVisitSymptomsList', response.data );
-
-            } catch ( e ) {
-                throw e;
-            }
-
+            const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-symptoms.php`, { visit_id: visitId } );
+            context.commit( 'setVisitSymptomsList', response.data );
         },
 
         /* fetch all available symptoms */
         async visitSymptoms_fetchAllSymptoms( context ) {
-
-            try {
-
-                const response = await $.get( `${ getSiteURL() }/api/get/symptoms.php` );
-                context.commit( 'setSymptomsList', response.data );
-
-            } catch ( e ) {
-                throw e;
-            }
+            const response = await $.get( `${ getSiteURL() }/api/get/symptoms.php` );
+            context.commit( 'setSymptomsList', response.data );
         },
 
         /* add */
         async visitSymptoms_add( context, params ) {
             return $.get( `${ getSiteURL() }/api/save/visit/visit-symptom.php`, params );
+        },
+
+        /* update */
+        async visitSymptoms_update( context, params ) {
+            return $.get( `${ getSiteURL() }/api/update/visit/visit-symptom.php`, params );
         },
 
         /* delete */

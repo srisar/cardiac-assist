@@ -29,25 +29,36 @@
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
 
           <tbody>
-          <tr v-for="item in diffDiagnosisList" :key="item.id"
-              @mouseover="showHoverItemsById = item.id" @mouseout="showHoverItemsById = null">
-
+          <tr v-for="item in diffDiagnosisList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
 
             <td class="position-relative">
 
-              <p class="font-weight-bold"><a href="#">{{ item.disease.disease }}</a> ({{ item.disease.disease_code }})</p>
-              <div style="white-space: pre-line">{{ item.remarks }}</div>
+              <p class="font-weight-bold mb-1">
+                <a href="#">{{ item.disease.disease }}</a> ({{ item.disease.disease_code }})
+              </p>
 
+              <!-- remarks show and edit -->
+              <div class="" v-if="showEditRemarks && selectedItemId === item.id">
+                <input type="text"
+                       class="form-control"
+                       :id="'txt_remarks'+item.id"
+                       v-model="selectedItem.remarks"
+                       @blur="onUpdateRemarks"
+                       @keyup.enter="onUpdateRemarks">
+              </div>
+              <div class="" v-else>
 
-              <div class="mt-2 position-absolute hover-group p-1 rounded" v-show="showHoverItemsById === item.id">
-                <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
-                  <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
-                </button>
+                <div class="pointer" style="white-space: pre-line" v-if="item.remarks" @click="onSelectRemarkToEdit(item)">{{ item.remarks }}</div>
+                <div class="text-secondary pointer" v-else @click="onSelectRemarkToEdit(item)">
+                  Click here to add remarks (Enter to save)
+                </div>
+              </div>
+              <!-- remarks show and edit -->
 
-                <button class="btn btn-tiny btn-outline-danger" @click="onShowDeleteConfirmModal(item)">
+              <div class="position-absolute rounded hover-group">
+                <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
                   <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
                 </button>
-
               </div>
 
             </td>
@@ -68,109 +79,6 @@
 
     </div><!-- card -->
 
-
-    <!-- Modal Add Diff Diagnosis -->
-    <ModalWindow id="modal-add-diff-diagnosis" :visible="modalAddVisible" @close="modalAddVisible = false">
-      <template v-slot:title>Add a differential diagnosis</template>
-      <slot>
-
-        <div class="form-row">
-
-          <div class="col">
-
-            <div class="form-group">
-              <label>Disease</label>
-              <select class="form-control" v-model="diffDiagnosisToAdd.disease">
-                <option value="-1" disabled>SELECT</option>
-                <option v-for="item in diseasesList" :value="item">{{ item.disease }}</option>
-              </select>
-            </div>
-
-          </div><!-- col -->
-
-        </div><!-- row -->
-
-
-        <div class="form-row">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Remarks</label>
-              <textarea rows="5" class="form-control" v-model="diffDiagnosisToAdd.remarks"></textarea>
-            </div>
-
-          </div><!-- col -->
-        </div><!-- row -->
-
-        <div class="form-row">
-          <div class="col text-center">
-
-            <button class="btn btn-success" @click="onAdd()">Add</button>
-
-          </div>
-        </div>
-
-      </slot>
-    </ModalWindow><!-- Modal Add Diff Diagnosis -->
-
-    <!-- ------------------------------------------------------------------------------------------------------------ -->
-
-    <!-- Modal Edit Diff Diagnosis -->
-    <ModalWindow id="modal-edit-diff-diagnosis" :visible="modalEditVisible" @close="modalEditVisible = false">
-      <template v-slot:title v-if="diffDiagnosisToEdit">Edit {{ diffDiagnosisToEdit.disease.disease }}</template>
-      <slot v-if="diffDiagnosisToEdit">
-
-        <div class="form-row">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Disease</label>
-              <input class="form-control" type="text" readonly :value="diffDiagnosisToEdit.disease.disease">
-            </div>
-
-            <div class="w-100"></div>
-
-            <div class="form-group">
-              <label>Remarks</label>
-              <textarea class="form-control" rows="5" v-model="diffDiagnosisToEdit.remarks"></textarea>
-            </div>
-
-          </div><!-- col -->
-        </div><!-- row -->
-
-        <div class="row">
-          <div class="col text-center">
-            <button class="btn btn-success" @click="onUpdate()">Update</button>
-          </div>
-        </div>
-
-      </slot>
-    </ModalWindow><!-- Modal Edit Diff Diagnosis -->
-
-
-    <!-- ----------------------------------------------------------------------------------------------------------- -->
-
-    <!--
-    modal: delete confirm
-    -->
-    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
-      <template v-slot:title>Confirm Removal</template>
-      <slot>
-
-        <p class="lead text-center">Confirm removing the following added diagnosis</p>
-        <p class="text-center">{{ diffDiagnosisToEdit.disease.disease }}</p>
-
-        <div class="text-center">
-          <button class="btn btn-danger" @click="onDelete()">Remove</button>
-        </div>
-
-      </slot>
-    </ModalWindow>
-    <!--
-    end: modal: delete confirm
-    -->
-
-
   </div><!-- Template -->
 
 </template>
@@ -179,6 +87,7 @@
 
 import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
+import voca from 'voca';
 import ModalWindow from '../../../_common/components/ModalWindow';
 import TheLoading from '../../../_common/components/TheLoading';
 
@@ -210,7 +119,15 @@ export default {
         remarks: '',
       },
 
-      showHoverItemsById: null,
+      hoverItemId: null,
+
+      /* edit remarks */
+      showEditRemarks: false,
+      selectedItemId: null,
+      selectedItem: {
+        item: null,
+        remarks: '',
+      },
 
     };
   },
@@ -267,7 +184,6 @@ export default {
     /* On add */
     async onAdd() {
 
-
       try {
 
         const params = {
@@ -289,34 +205,12 @@ export default {
     },
 
 
-    /* On update */
-    async onUpdate() {
-      try {
-
-        const params = {
-          id: this.diffDiagnosisToEdit.id,
-          remarks: this.diffDiagnosisToEdit.remarks,
-        };
-
-        await this.$store.dispatch( 'diffDiagnoses_update', params );
-        this.modalEditVisible = false;
-
-      } catch ( e ) {
-        errorMessageBox( 'Failed to update differential diagnosis' );
-      }
-
-      await this.fetchAllDiffDiagnoses();
-
-    },
-
-
     /* On delete */
-    async onDelete() {
+    async onDelete( item ) {
 
       try {
 
-        await this.$store.dispatch( 'diffDiagnoses_delete', this.diffDiagnosisToEdit.id );
-        this.modalDeleteVisible = false;
+        await this.$store.dispatch( 'diffDiagnoses_delete', item.id );
 
       } catch ( e ) {
         errorMessageBox( 'Failed to delete differential diagnosis' );
@@ -326,17 +220,66 @@ export default {
 
     },
 
+    /*
+    * ------------------------------------------------------------
+    * Selected item's edit remarks logic
+    * ------------------------------------------------------------
+    * */
 
-    onShowEditModal( item ) {
-      this.diffDiagnosisToEdit = _.cloneDeep( item );
-      this.modalEditVisible = true;
+    onSelectRemarkToEdit( problem ) {
+      this.selectedItem = _.cloneDeep( problem );
+
+      this.selectedItemId = problem.id;
+      this.showEditRemarks = true;
+
+      this.$nextTick( () => {
+        /* set focus on the selected text box */
+        document.getElementById( 'txt_remarks' + problem.id ).focus();
+      } );
+
+    }, /* onSelectRemarkToEdit */
+
+    async onUpdateRemarks() {
+
+      /*
+       * if selectedProblem is null, then dont do anything
+       * this is needed because we are hooking both blur and enter events
+       * to the same function. once enter is pressed, this code will run
+       * and then set selectedProblem = null, this will cause an issue
+       * when blur is trying to run.
+       * */
+      if ( _.isNull( this.selectedItem ) ) return false;
+
+      try {
+
+        const params = {
+          id: this.selectedItemId,
+          remarks: voca.capitalize( this.selectedItem.remarks ),
+        };
+
+        await this.$store.dispatch( 'diffDiagnoses_update', params );
+
+        await this.$store.dispatch( 'diffDiagnoses_fetchAll', this.visitId );
+
+      } catch ( e ) {
+        console.log( e );
+        errorMessageBox( 'Failed to update' );
+      }
+
+
+      this.$nextTick( () => {
+        this._resetSelectedProblem();
+      } );
+
     },
 
-    onShowDeleteConfirmModal( item ) {
 
-      this.diffDiagnosisToEdit = item;
-      this.modalDeleteVisible = true;
+    _resetSelectedProblem() {
+      this.selectedItem = null;
+      this.selectedItemId = null;
+      this.showEditRemarks = false;
     },
+
 
   },
 
