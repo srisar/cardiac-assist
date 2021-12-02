@@ -11,11 +11,20 @@
 
       <div class="card-body" v-if="loaded">
 
-        <div class="mb-3">
-          <button class="btn btn-sm btn-outline-success" @click="modalAddVisible = true">
-            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
-          </button>
+
+        <div class="row no-gutters">
+          <div class="col">
+            <AutoCompleteTextBox
+                search-dispatch-name="visitSymptoms_search"
+                add-dispatch-name="visitSymptoms_addSymptom"
+                field-name="symptom_name"
+                v-model="symptomToAdd.selectedSymptom"
+                @input="onAdd"
+            />
+          </div>
         </div>
+
+
 
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
           <thead>
@@ -103,7 +112,7 @@
 
         <div class="form-row text-center">
           <div class="col">
-            <button class="btn btn-success" @click="onSave()">Add</button>
+            <button class="btn btn-success" @click="onAdd()">Add</button>
           </div>
         </div>
 
@@ -232,7 +241,7 @@ export default {
   methods: {
 
     /* On save */
-    async onSave() {
+    async onAdd() {
 
       try {
 

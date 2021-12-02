@@ -159,35 +159,35 @@
 
 <script>
 
-import DateField from "../../_common/components/DateField";
-import store from "./store";
-import * as values from "../values";
+import DateField from '../../_common/components/DateField';
+import * as values from '../values';
+import store from './store';
 
-const _ = require('lodash');
+const _ = require( 'lodash' );
 
 export default {
-  name: "AddPatientView",
-  components: {DateField,},
+  name: 'AddPatientView',
+  components: { DateField },
   store: store,
 
   data() {
     return {
 
       patient: {
-        id: "",
-        first_name: "",
-        last_name: "",
-        dob: moment().format('YYYY-MM-DD'),
+        id: '',
+        first_name: '',
+        last_name: '',
+        dob: moment().format( 'YYYY-MM-DD' ),
         age: 0,
-        address: "",
-        ds_division: "",
-        nic: "",
-        phone: "",
-        gender: "",
-        job: "",
-        job_type: "",
+        address: '',
+        ds_division: '',
+        nic: '',
+        phone: '',
+        gender: '',
+        job: '',
+        job_type: '',
         income: 0,
-        status: "",
+        status: '',
       },
 
       genders: values.GENDERS,
@@ -195,16 +195,16 @@ export default {
       jobTypes: values.JOB_TYPES,
       dsDivisions: values.DS_DIVISIONS,
 
-    }
+    };
   },
 
   computed: {
 
 
     formValidated: function () {
-      if (_.isEmpty(this.patient.first_name)) return false;
-      if (_.isEmpty(this.patient.last_name)) return false;
-      return !_.isEmpty(this.patient.gender);
+      if ( _.isEmpty( this.patient.first_name ) ) return false;
+      if ( _.isEmpty( this.patient.last_name ) ) return false;
+      return !_.isEmpty( this.patient.gender );
     },
 
     fullName: function () {
@@ -235,19 +235,19 @@ export default {
 
     onClickSave: function () {
 
-      this.$store.dispatch('savePatient', this.patient)
-          .then(r => {
+      this.$store.dispatch( 'savePatient', this.patient )
+          .then( r => {
             const patientId = r.data.id;
-            redirect(`${getSiteURL()}/app/patients/edit.php?id=${patientId}`);
-          })
-          .catch(e => {
-            alert('Failed to save patient');
-          });
+            redirect( `${ getSiteURL() }/app/patients/edit.php?id=${ patientId }` );
+          } )
+          .catch( e => {
+            alert( 'Failed to save patient' );
+          } );
 
     },
 
   },
-}
+};
 </script>
 
 <style scoped>

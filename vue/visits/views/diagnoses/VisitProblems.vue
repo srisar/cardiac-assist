@@ -9,21 +9,46 @@
 
       <div class="card-body" v-if="loaded">
 
-        <div class="mb-3">
-          <button class="btn btn-sm btn-outline-success" @click="modalAddVisible = true">
-            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
-          </button>
+        <div class="row no-gutters">
+          <div class="col">
+            <AutoCompleteTextBox
+                search-dispatch-name="visitProblems_search"
+                add-dispatch-name="visitProblems_addProblem"
+                field-name="problem"
+                v-model="problemToAdd.problem"
+                @input="onAdd"
+            />
+          </div>
         </div>
-
 
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
 
           <tbody>
           <tr v-for="item in visitProblemsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
             <td class="position-relative">
-              <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
-              <span> - </span>
-              <span>{{ item.remarks }}</span>
+
+              <p class="font-weight-bold">
+                <a :href="'/app/problems/manage.php#/edit/' + item.problem.id" target="_blank">{{ item.problem.problem }}</a>
+              </p>
+
+              <!-- remarks show and edit -->
+              <div class="" v-if="showEditRemarks && selectedProblemId === item.id">
+                <input type="text"
+                       class="form-control"
+                       :id="'txt_remarks'+item.id"
+                       v-model="selectedProblem.remarks"
+                       @blur="onUpdateRemarks"
+                       @keyup.enter="onUpdateRemarks">
+              </div>
+              <div class="" v-else>
+
+                <div class="pointer" style="white-space: pre-line" v-if="item.remarks" @click="onSelectRemarkToEdit(item)">{{ item.remarks }}</div>
+                <div class="text-secondary pointer" v-else @click="onSelectRemarkToEdit(item)">
+                  Click here to add remarks (Enter to save)
+                </div>
+              </div>
+              <!-- remarks show and edit -->
+
               <div class="position-absolute rounded hover-group">
                 <button class="btn btn-tiny btn-outline-danger" v-show="hoverItemId === item.id" @click="onDelete(item)">
                   <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
@@ -49,103 +74,43 @@
 
     <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
 
-    <ModalWindow id="modal-add-visit-symptom" :visible="modalAddVisible" @close="modalAddVisible = false; showSaveNewProblemSection = false">
-      <template v-slot:title>Add a problem</template>
-      <slot>
-
-        <!-- section : add symptom -->
-        <div class="row text-center justify-content-center">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Choose a problem from the list</label>
-              <select class="custom-select" v-model="problemToAdd.problem">
-                <option :value="null" disabled>CHOOSE ONE</option>
-                <option v-for="item in problems" :value="item">{{ item.problem }}</option>
-              </select>
-            </div>
-
-          </div><!-- col -->
-        </div><!-- row -->
-
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label>Remarks</label>
-              <input type="text" class="form-control" v-model.trim="problemToAdd.remarks">
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row text-center">
-          <div class="col">
-            <button class="btn btn-success" @click="onAdd()">Add</button>
-          </div>
-        </div>
-
-        <button class="btn btn-link" @click="showSaveNewProblemSection = !showSaveNewProblemSection">Create a new problem</button>
-
-        <div class="row mt-3" v-if="showSaveNewProblemSection">
-
-          <div class="col">
-
-            <hr>
-
-            <div class="mb-3">
-              <label>Problem</label>
-              <textarea class="form-control" v-model.trim="newProblemToSave"></textarea>
-            </div>
-
-            <div class="text-center">
-              <button class="btn btn-primary btn-sm" @click="onSaveNewProblem()">Save a new problem</button>
-            </div>
-
-          </div>
-
-        </div><!-- row -->
-
-        <!-- section: add symptom -->
-
-      </slot>
-    </ModalWindow>
 
   </div><!-- Template -->
 
 </template>
 
 <script>
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
+
+import _ from 'lodash';
 import voca from 'voca';
-import {errorMessageBox, successMessageBox} from '../../../_common/bootbox_dialogs';
 import ModalWindow from '../../../_common/components/ModalWindow';
 import TheLoading from '../../../_common/components/TheLoading';
 
 export default {
   name: 'VisitProblems',
-  components: { TheLoading, ModalWindow },
+  components: { AutoCompleteTextBox, TheLoading, ModalWindow },
 
   data() {
     return {
 
       loaded: false,
 
-      modalAddVisible: false,
-      modalDeleteVisible: false,
-
-      showSaveNewProblemSection: false,
-
       problemToAdd: {
         problem: null,
         remarks: '',
       },
 
-      problemToDelete: {
-        id: undefined,
-        problem: '',
-      },
-
-      newProblemToSave: '',
-
       hoverItemId: null,
+
+      /* edit remarks */
+      showEditRemarks: false,
+      selectedProblemId: null,
+      selectedProblem: {
+        problem: null,
+        remarks: '',
+      },
 
     };
   },
@@ -230,38 +195,59 @@ export default {
     }, /* on delete */
 
 
-    onShowDeleteModal( item ) {
-      this.symptomToDelete = item;
-      this.modalDeleteVisible = true;
+    onSelectRemarkToEdit( problem ) {
+      this.selectedProblem = _.cloneDeep( problem );
 
-    }, /* show delete modal */
+      this.selectedProblemId = problem.id;
+      this.showEditRemarks = true;
 
-    async onSaveNewProblem() {
+      this.$nextTick( () => {
+        /* set focus on the selected text box */
+        document.getElementById( 'txt_remarks' + problem.id ).focus();
+      } );
+
+    }, /* onSelectRemarkToEdit */
+
+    async onUpdateRemarks() {
+
+      /*
+       * if selectedProblem is null, then dont do anything
+       * this is needed because we are hooking both blur and enter events
+       * to the same function. once enter is pressed, this code will run
+       * and then set selectedProblem = null, this will cause an issue
+       * when blur is trying to run.
+       * */
+      if ( _.isNull( this.selectedProblem ) ) return false;
 
       try {
 
         const params = {
-          problem: this.newProblemToSave,
+          id: this.selectedProblemId,
+          remarks: voca.capitalize( this.selectedProblem.remarks ),
         };
 
-        await this.$store.dispatch( 'visitProblems_saveProblem', params );
+        await this.$store.dispatch( 'visitProblems_update', params );
 
-        successMessageBox( 'New problem saved, please choose it from the list now.' );
-
-        this.newProblemToSave = '';
+        await this.$store.dispatch( 'visitProblems_fetchAll', this.visitId );
 
       } catch ( e ) {
-        errorMessageBox( 'Failed to save new problem' );
+        console.log( e );
+        errorMessageBox( 'Failed to update' );
       }
 
-      try {
-        await this.$store.dispatch( 'visitProblems_fetchAllProblems' );
-      } catch ( e ) {
-        errorMessageBox( 'Failed to fetch problems list' );
-      }
 
-    }, /* on save new problem */
+      this.$nextTick( () => {
+        this._resetSelectedProblem();
+      } );
 
+    },
+
+
+    _resetSelectedProblem() {
+      this.selectedProblem = null;
+      this.selectedProblemId = null;
+      this.showEditRemarks = false;
+    },
 
   },
 
@@ -274,5 +260,6 @@ export default {
 .hover-group {
   top: 5px;
 }
+
 
 </style>

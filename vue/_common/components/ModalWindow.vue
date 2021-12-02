@@ -43,9 +43,9 @@
 <script>
 
 export default {
-  name: "ModalWindow",
+  name: 'ModalWindow',
 
-  props: ["id", "expanded", "visible", "size"],
+  props: ['id', 'expanded', 'visible', 'size'],
 
   data: function () {
     return {
@@ -53,12 +53,12 @@ export default {
       isExpanded: this.expanded,
 
       icons: {
-        expandIcon: "Expand",
-        contractIcon: "Contract",
-        closeIcon: "bi-x",
+        expandIcon: 'Expand',
+        contractIcon: 'Contract',
+        closeIcon: 'bi-x',
       },
 
-      resizeButtonIcon: "/assets/images/actions/maximize.svg",
+      resizeButtonIcon: '/assets/images/actions/maximize.svg',
 
     };
   },
@@ -68,14 +68,14 @@ export default {
   mounted() {
     //
     if ( this.expanded ) {
-      this.resizeButtonIcon = "bi-arrows-angle-contract";
+      this.resizeButtonIcon = 'bi-arrows-angle-contract';
     }
   },
 
   watch: {
     visible( value ) {
       this.isVisible = value;
-    }
+    },
   },
 
   methods: {
@@ -83,56 +83,57 @@ export default {
 
     hide: function () {
       this.isVisible = false;
-      this.$emit( "modal-hiding" );
-      this.$emit( "close" );
+      this.$emit( 'modal-hiding' );
+      this.$emit( 'close' );
     },
 
     show: function () {
       this.isVisible = true;
-      this.$emit( "modal-showing" );
-      this.$emit( "open" );
+      this.$emit( 'modal-showing' );
+      this.$emit( 'open' );
     },
 
 
     _resize: function () {
       this.isExpanded = !this.isExpanded;
 
-      if ( this.isExpanded ) this.resizeButtonIcon = "/assets/images/actions/minimize.svg";
-      else this.resizeButtonIcon = "/assets/images/actions/maximize.svg";
+      if ( this.isExpanded ) this.resizeButtonIcon = '/assets/images/actions/minimize.svg';
+      else this.resizeButtonIcon = '/assets/images/actions/maximize.svg';
 
     },
 
     sizeClass() {
       if ( this.size !== undefined ) {
-        if ( this.size === "small" ) return "modal-sm";
-        if ( this.size === "lx" ) return "modal-xl";
+        if ( this.size === 'small' ) return 'modal-sm';
+        if ( this.size === 'lx' ) return 'modal-xl';
       }
-      return "modal-lg";
+      return 'modal-lg';
     },
 
   },
 
-}
+};
 </script>
 
 <style scoped lang="scss">
 
 .modal {
-  background-color: rgba(108, 117, 125, 0.5);
-  overflow-y: auto;
-  display: block;
-  visibility: hidden;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  background-color : rgba(108, 117, 125, 0.5);
+  color            : #0c0c0c;
+  overflow-y       : auto;
+  display          : block;
+  visibility       : hidden;
+  transition       : opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 
 .show {
-  visibility: visible;
-  opacity: 1;
+  visibility : visible;
+  opacity    : 1;
 }
 
 .hide {
-  visibility: hidden;
-  opacity: 0;
+  visibility : hidden;
+  opacity    : 0;
 }
 
 /* sizes */
@@ -141,28 +142,28 @@ export default {
 }
 
 .expanded {
-  max-width: 90%;
+  max-width : 90%;
 }
 
 .header-button {
-  border: solid 1px #d0d0d0;
-  background-color: #f8fafc;
-  padding: 2px;
-  margin: 0;
-  border-radius: 5px;
-  width: 28px;
-  height: 28px;
+  border           : solid 1px #d0d0d0;
+  background-color : #f8fafc;
+  padding          : 2px;
+  margin           : 0;
+  border-radius    : 5px;
+  width            : 28px;
+  height           : 28px;
 }
 
 .modal-header {
-  background-color: #212529;
-  color: whitesmoke;
-  line-height: 2em;
+  background-color : #212529;
+  color            : whitesmoke;
+  line-height      : 2em;
 
   h3 {
-    font-size: 1em;
-    line-height: 2em;
-    font-weight: bold;
+    font-size   : 1em;
+    line-height : 2em;
+    font-weight : bold;
 
   }
 
@@ -170,7 +171,7 @@ export default {
 
 .modal-footer {
   /* modal footer display option */
-  justify-content: center;
+  justify-content : center;
 }
 
 </style>

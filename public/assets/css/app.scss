@@ -4,6 +4,11 @@ $font-family-custom : "Sen", sans-serif;
   transition : 0.1s;
 }
 
+body {
+  background-color : #0c0c0c;
+  color            : #F8F8F8;
+}
+
 
 footer {
   a:hover {
@@ -24,6 +29,7 @@ pre {
 }
 
 .card-header {
+  color          : #0c0c0c;
   font-size      : 0.9rem;
   font-weight    : bold;
   //text-align: center;
@@ -33,6 +39,7 @@ pre {
 
 .card-body {
   padding : .5rem !important;
+  color   : #0c0c0c;
 }
 
 .modal-title {
@@ -145,17 +152,26 @@ select {
   width : 100px;
 }
 
+.daterangepicker {
+  color : #0c0c0c;
+}
+
+.pointer {
+  cursor : pointer;
+}
 
 /* print styles */
 
 
 .paper {
   
-  border        : solid 1px #cccccc;
-  box-shadow    : 0 0 10px #cccccc;
-  padding       : 5mm;
-  margin-bottom : 5mm;
-  font-size     : 11pt !important;
+  border           : solid 1px #cccccc;
+  border-radius    : 0.25rem;
+  padding          : 5mm;
+  margin-bottom    : 5mm;
+  font-size        : 11pt !important;
+  background-color : white;
+  color            : #0c0c0c;
   
   
   .border, table, tr, td, th {
@@ -219,7 +235,7 @@ select {
   
   
   .paper {
-    font-size : 15pt !important;
+    font-size : 16pt !important;
     margin    : 0;
     border    : none;
   }

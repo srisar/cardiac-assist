@@ -107,7 +107,7 @@ class Disease implements IModel
         $db = Database::instance();
         $statement = $db->prepare( "select * from diseases where disease like :q" );
         $statement->execute( [
-            ":q" => $keyword . "%",
+            ":q" => "%" . $keyword . "%",
         ] );
 
         $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );

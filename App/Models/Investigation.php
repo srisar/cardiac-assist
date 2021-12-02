@@ -93,9 +93,9 @@ class Investigation implements IModel
     {
 
         $db = Database::instance();
-        $statement = $db->prepare( "select * from investigations where investigations.investigation_name like :q" );
+        $statement = $db->prepare( "select * from investigations where investigation_name like :q" );
         $statement->execute( [
-            ":q" => $keyword . "%",
+            ":q" => "%" . $keyword . "%",
         ] );
 
         $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );

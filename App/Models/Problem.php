@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database\Database;
+use PDO;
 
 class Problem implements IModel
 {
@@ -61,4 +62,21 @@ class Problem implements IModel
     {
         return Database::delete(self::TABLE, "id", $this->id);
     }
+
+    public static function search( string $keyword ): array
+    {
+
+        $db = Database::instance();
+        $statement = $db->prepare( "select * from problems where problem like :q" );
+        $statement->execute( [
+            ":q" => "%". $keyword . "%",
+        ] );
+
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
+
+        if ( !empty( $result ) ) return $result;
+        return [];
+
+    }
+
 }

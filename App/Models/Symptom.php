@@ -103,7 +103,7 @@ class Symptom implements IModel
         $db = Database::instance();
         $statement = $db->prepare( "select * from symptoms where symptom_name like :q" );
         $statement->execute( [
-            ":q" => $keyword . "%",
+            ":q" => "%" . $keyword . "%",
         ] );
 
         $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );

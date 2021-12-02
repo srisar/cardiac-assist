@@ -9,11 +9,18 @@
 
       <div class="card-body" v-if="loaded">
 
-        <div class="mb-3">
-          <button class="btn btn-sm btn-outline-success" @click="modalAddVisible = true">
-            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
-          </button>
+        <div class="row no-gutters">
+          <div class="col">
+            <AutoCompleteTextBox
+                search-dispatch-name="diffDiagnoses_searchDiseases"
+                add-dispatch-name="diffDiagnoses_addDisease"
+                field-name="disease"
+                v-model="visitDiagnosisToAdd.disease"
+                @input="onAdd"
+            />
+          </div>
         </div>
+
 
         <table class="table table-sm table-hover table-bordered" v-if="!isEmpty">
 
@@ -161,15 +168,16 @@
 
 <script>
 
-import ModalWindow from "../../../_common/components/ModalWindow";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
-import TheLoading from "../../../_common/components/TheLoading";
+import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import TheLoading from '../../../_common/components/TheLoading';
 
 const _ = require( 'lodash' );
 
 export default {
-  name: "VisitDiagnosis",
-  components: { TheLoading, ModalWindow },
+  name: 'VisitDiagnosis',
+  components: { AutoCompleteTextBox, TheLoading, ModalWindow },
 
   data() {
     return {
@@ -183,18 +191,18 @@ export default {
 
 
       visitDiagnosisToAdd: {
-        disease: "-1",
-        remarks: "",
+        disease: null,
+        remarks: '',
       },
 
       visitDiagnosisToEdit: {
         disease: {},
-        remarks: ""
+        remarks: '',
       },
 
       showHoverItemsById: null,
 
-    }
+    };
   },
   /* *** DATA *** */
 
@@ -214,7 +222,7 @@ export default {
 
     visitId() {
       return this.$store.getters.getVisitId;
-    }
+    },
 
 
   },
@@ -225,13 +233,13 @@ export default {
 
     try {
 
-      await this.$store.dispatch( "diffDiagnoses_fetchAllDiseases" );
-      await this.$store.dispatch( "diagnoses_fetchAll", this.visitId );
+      await this.$store.dispatch( 'diffDiagnoses_fetchAllDiseases' );
+      await this.$store.dispatch( 'diagnoses_fetchAll', this.visitId );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to load diagnoses" );
+      errorMessageBox( 'Failed to load diagnoses' );
     }
 
   },
@@ -242,9 +250,9 @@ export default {
 
     async fetchAllVisitDiagnoses() {
       try {
-        await this.$store.dispatch( "diagnoses_fetchAll", this.visitId );
+        await this.$store.dispatch( 'diagnoses_fetchAll', this.visitId );
       } catch ( e ) {
-        errorMessageBox( "Failed to fetch diagnoses" );
+        errorMessageBox( 'Failed to fetch diagnoses' );
       }
 
     },
@@ -259,14 +267,14 @@ export default {
         const params = {
           visit_id: this.visitId,
           disease_id: this.visitDiagnosisToAdd.disease.id,
-          remarks: this.visitDiagnosisToAdd.remarks
+          remarks: this.visitDiagnosisToAdd.remarks,
         };
 
-        await this.$store.dispatch( "diagnoses_add", params );
+        await this.$store.dispatch( 'diagnoses_add', params );
         this.modalAddVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to add diagnosis details" );
+        errorMessageBox( 'Failed to add diagnosis details' );
       }
 
       await this.fetchAllVisitDiagnoses();
@@ -281,14 +289,14 @@ export default {
 
         const params = {
           id: this.visitDiagnosisToEdit.id,
-          remarks: this.visitDiagnosisToEdit.remarks
-        }
+          remarks: this.visitDiagnosisToEdit.remarks,
+        };
 
-        await this.$store.dispatch( "diagnoses_update", params );
+        await this.$store.dispatch( 'diagnoses_update', params );
         this.modalEditVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to update diagnosis" );
+        errorMessageBox( 'Failed to update diagnosis' );
       }
 
       await this.fetchAllVisitDiagnoses();
@@ -301,11 +309,11 @@ export default {
 
       try {
 
-        await this.$store.dispatch( "diagnoses_delete", this.visitDiagnosisToEdit.id );
+        await this.$store.dispatch( 'diagnoses_delete', this.visitDiagnosisToEdit.id );
         this.modalDeleteVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to delete diagnosis" );
+        errorMessageBox( 'Failed to delete diagnosis' );
       }
 
       await this.fetchAllVisitDiagnoses();
@@ -327,7 +335,7 @@ export default {
 
   },
 
-}
+};
 </script>
 
 <style scoped>

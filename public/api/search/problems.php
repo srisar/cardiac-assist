@@ -3,7 +3,7 @@
 use App\Core\Authentication;
 use App\Core\Requests\JSONResponse;
 use App\Core\Requests\Request;
-use App\Models\Investigation;
+use App\Models\Problem;
 
 require_once "../../../_bootstrap.inc.php";
 
@@ -19,7 +19,7 @@ try {
         return;
     }
 
-    $data = Investigation::search( $query );
+    $data = Problem::search( $query );
     JSONResponse::validResponse( [ "data" => $data ] );
 
 

@@ -9,10 +9,16 @@
 
       <div class="card-body" v-if="loaded">
 
-        <div class="mb-3">
-          <button class="btn btn-sm btn-outline-success" @click="modalAddVisible = true">
-            <img src="/assets/images/actions/add.svg" alt="" class="icon-16"> Add
-          </button>
+        <div class="row no-gutters">
+          <div class="col">
+            <AutoCompleteTextBox
+                search-dispatch-name="visitInvestigations_search"
+                add-dispatch-name="visitInvestigations_addInvestigation"
+                field-name="investigation_name"
+                v-model="investigationToAdd.selectedInvestigation"
+                @input="onAdd"
+            />
+          </div>
         </div>
 
 
@@ -64,57 +70,10 @@
     <!-- ----------------------------------------------------------------------------------------------------------- -->
 
     <!--
-    modal: add visit investigations
-    -->
-    <ModalWindow id="modal-add-visit-investigation" :visible="modalAddVisible" @close="modalAddVisible = false">
-      <template v-slot:title>Add common investigations</template>
-      <slot>
-
-        <!-- section : add symptom -->
-        <div class="row no-gutters">
-          <div class="col">
-
-            <AutoCompleteTextBox
-                search-dispatch-name="visitInvestigations_search"
-                add-dispatch-name="visitInvestigations_addInvestigation"
-                field-name="investigation_name"
-                v-model="investigationToAdd.selectedInvestigation"/>
-
-
-            <div class="form-group" v-if="investigationToAdd.selectedInvestigation">
-              <label>Selected Investigation</label>
-              <input type="text" class="form-control" readonly :value="investigationToAdd.selectedInvestigation.investigation_name">
-            </div>
-
-            <div class="form-group">
-              <label>Remarks</label>
-              <textarea rows="5" class="form-control" v-model="investigationToAdd.remarks"></textarea>
-            </div>
-
-
-          </div><!-- col -->
-        </div><!-- row -->
-        <!-- section: add symptom -->
-
-        <div class="row">
-          <div class="col text-center">
-            <button class="btn btn-success" @click="onAdd()">Add</button>
-          </div>
-        </div>
-
-      </slot>
-    </ModalWindow>
-    <!--
-     end: modal: add visit investigation
-     -->
-
-    <!-- ----------------------------------------------------------------------------------------------------------- -->
-
-    <!--
      modal: edit visit investigation
      -->
     <ModalWindow id="modal-edit-investigation" :visible="modalEditVisible" @close="modalEditVisible = false">
-      <template v-slot:title>Add common investigations</template>
+      <template v-slot:title>Edit investigations</template>
       <slot>
 
         <!-- section : add symptom -->
@@ -123,9 +82,7 @@
 
             <div class="form-group">
               <label>Investigation</label>
-              <select class="custom-select" v-model.number="investigationToEdit.investigation_id">
-                <option v-for="item in investigationsList" :value="item.id">{{ item.investigation_name }}</option>
-              </select>
+              <input type="text" class="form-control" readonly :value="investigationToEdit.investigation.investigation_name">
             </div>
 
             <div class="form-group">

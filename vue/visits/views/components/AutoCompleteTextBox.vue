@@ -1,8 +1,8 @@
 <template>
 
   <div class="form-group">
-    <input type="text" class="form-control"
-           placeholder="Type to search..."
+    <input type="text" class="form-control autofill-control shadow-sm"
+           placeholder="Type to search and add..."
            v-model.trim="searchQuery"
            @keydown.down="onDown($event)"
            @keydown.up="onUp($event)"
@@ -36,6 +36,7 @@
 
 <script>
 import _ from 'lodash';
+import voca from 'voca';
 
 export default {
   name: 'AutoCompleteTextBox',
@@ -98,7 +99,7 @@ export default {
 
         if ( this.searchQuery.length > 0 ) {
           const lastItem = {};
-          lastItem[ this.fieldName ] = this.searchQuery + ' - save this item';
+          lastItem[ this.fieldName ] = voca.capitalize( this.searchQuery ) + ' - SAVE & ADD';
           this.searchResults.push( lastItem );
         }
 
@@ -115,7 +116,7 @@ export default {
         try {
 
           const param = {};
-          param[ this.fieldName ] = this.searchQuery;
+          param[ this.fieldName ] = voca.capitalize( this.searchQuery );
 
           await this.$store.dispatch( this.addDispatchName, param );
         } catch ( e ) {
@@ -150,7 +151,7 @@ export default {
         try {
 
           const param = {};
-          param[ this.fieldName ] = this.searchQuery;
+          param[ this.fieldName ] = voca.capitalize( this.searchQuery );
 
           await this.$store.dispatch( this.addDispatchName, param );
 
@@ -186,6 +187,11 @@ $color-selected : #1e2024;
 
 .selected {
   background-color : $color-selected;
+}
+
+.autofill-control{
+  background-color: #e4f8ed;
+  border-color: #3ed086;
 }
 
 .autofill-dropdown {
