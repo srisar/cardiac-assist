@@ -15,6 +15,7 @@
         <div class="cursor-pointer" v-for="(item, index) in searchResults">
           <div class="p-2 rounded text-white form-control-dropdown cursor-pointer"
                :class="{'selected' : searchSelectedResult === index}"
+               @mouseover="searchSelectedResult = index"
                @click="onSelect">
             {{ item[ fieldName ] }}
           </div>
@@ -189,9 +190,9 @@ $color-selected : #1e2024;
   background-color : $color-selected;
 }
 
-.autofill-control{
-  background-color: #e4f8ed;
-  border-color: #3ed086;
+.autofill-control {
+  background-color : #e4f8ed;
+  border-color     : #3ed086;
 }
 
 .autofill-dropdown {
