@@ -14,6 +14,20 @@
     </div><!-- card -->
 
     <div class="card mb-3 shadow shadow-sm">
+      <div class="card-header"><img src="/assets/images/icon-reports.svg" class="icon-24" alt="icon"> Reports</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <router-link to="/reports/basic" class="btn btn-sm btn-outline-primary">
+            <img src="/assets/images/actions/reports-basic.svg" class="icon-16" alt=""> Generate visit report
+          </router-link>
+        </li>
+        <li class="list-group-item">
+          <router-link to="/reports" class="">All reports</router-link>
+        </li>
+      </ul>
+    </div><!-- card -->
+
+    <div class="card mb-3 shadow shadow-sm">
       <div class="card-header"><img src="/assets/images/icon-diagnoses.svg" class="icon-24" alt="icon"> Diagnoses</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
@@ -79,14 +93,7 @@
       </ul>
     </div><!-- card -->
 
-    <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header"><img src="/assets/images/icon-reports.svg" class="icon-24" alt="icon"> Reports</div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <router-link to="/reports" class="">Generate reports</router-link>
-        </li>
-      </ul>
-    </div><!-- card -->
+
 
 
   </div>
