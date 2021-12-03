@@ -28,21 +28,33 @@
           <table class="table table-bordered table-hover table-sm" v-if="!isEmptyInvestigationsList">
 
             <tbody>
-            <tr v-for="item in visitInvestigationsList"
-                @mouseover="showHoverItemsById = item.id" @mouseout="showHoverItemsById = null">
+            <tr v-for="item in visitInvestigationsList" @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
 
               <td class="position-relative">
                 <p class="font-weight-bold">
                   <a :href="'/app/investigations/manage.php#/edit/' + item.investigation.id" target="_blank">{{ item.investigation.investigation_name }}</a>
                 </p>
-                <div style="white-space: pre-line">{{ item.remarks }}</div>
 
-                <div class="mt-2 position-absolute hover-group rounded p-1" v-show="showHoverItemsById === item.id">
-                  <button class="btn btn-tiny btn-outline-dark" @click="onShowEditModal(item)">
-                    <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
-                  </button>
+                <!-- remarks show and edit -->
+                <div class="" v-if="showEditRemarks && selectedItemId === item.id">
+                  <input type="text"
+                         class="form-control"
+                         :id="'txt_remarks'+item.id"
+                         v-model="selectedItem.remarks"
+                         @blur="onUpdateRemarks"
+                         @keyup.enter="onUpdateRemarks">
+                </div>
+                <div class="" v-else>
 
-                  <button class="btn btn-tiny btn-outline-danger" @click="showDeleteConfirmModal(item)">
+                  <div class="pointer" style="white-space: pre-line" v-if="item.remarks" @click="onSelectRemarkToEdit(item)">{{ item.remarks }}</div>
+                  <div class="text-secondary pointer" v-else @click="onSelectRemarkToEdit(item)">
+                    Click here to add remarks (Enter to save)
+                  </div>
+                </div>
+                <!-- remarks show and edit -->
+
+                <div class="mt-2 position-absolute hover-group rounded p-1" v-show="hoverItemId === item.id">
+                  <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
                     <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
                   </button>
                 </div>
@@ -66,78 +78,15 @@
 
     </div><!-- card -->
 
-
-    <!-- ----------------------------------------------------------------------------------------------------------- -->
-
-    <!--
-     modal: edit visit investigation
-     -->
-    <ModalWindow id="modal-edit-investigation" :visible="modalEditVisible" @close="modalEditVisible = false">
-      <template v-slot:title>Edit investigations</template>
-      <slot>
-
-        <!-- section : add symptom -->
-        <div class="row">
-          <div class="col">
-
-            <div class="form-group">
-              <label>Investigation</label>
-              <input type="text" class="form-control" readonly :value="investigationToEdit.investigation.investigation_name">
-            </div>
-
-            <div class="form-group">
-              <label>Remarks</label>
-              <textarea rows="5" class="form-control" v-model="investigationToEdit.remarks"></textarea>
-            </div>
-
-
-          </div><!-- col -->
-        </div><!-- row -->
-        <!-- section: add symptom -->
-
-
-        <div class="text-center">
-          <button class="btn btn-success" @click="onUpdate()">Update</button>
-        </div>
-
-      </slot>
-    </ModalWindow>
-    <!--
-     end: modal: visit investigation
-     -->
-
-
-    <!-- ----------------------------------------------------------------------------------------------------------- -->
-
-    <!--
-    modal: delete confirm
-    -->
-    <ModalWindow :visible="modalDeleteVisible" @close="modalDeleteVisible = false">
-      <template v-slot:title>Confirm Removal</template>
-      <slot>
-
-        <p class="lead text-center">Confirm removing the following added investigation</p>
-        <p class="text-center">{{ investigationToEdit.investigation.investigation_name }}</p>
-
-        <div class="text-center">
-          <button class="btn btn-danger" @click="onDelete()">Remove</button>
-        </div>
-
-      </slot>
-    </ModalWindow>
-    <!--
-    end: modal: delete confirm
-    -->
-
-
   </div><!-- template -->
 
 </template>
 
 <script>
 
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
-import {errorMessageBox, successMessageBox} from '../../../_common/bootbox_dialogs';
+import voca from 'voca';
 import ModalWindow from '../../../_common/components/ModalWindow';
 import RichEditorV2 from '../../../_common/components/RichEditorV2';
 import TheLoading from '../../../_common/components/TheLoading';
@@ -174,7 +123,15 @@ export default {
         remarks: '',
       },
 
-      showHoverItemsById: null,
+      hoverItemId: null,
+
+      /* edit remarks */
+      showEditRemarks: false,
+      selectedItemId: null,
+      selectedItem: {
+        item: null,
+        remarks: '',
+      },
 
     };
   },
@@ -259,67 +216,82 @@ export default {
 
     },
 
-
-    /*
-    * On show edit modal
-    * */
-    onShowEditModal( item ) {
-
-      this.investigationToEdit = _.cloneDeep( item );
-      this.modalEditVisible = true;
-
-    },
-
-    /*
-    * On show delete confirm modal
-    * */
-    showDeleteConfirmModal( item ) {
-
-      this.investigationToEdit = item;
-      this.modalDeleteVisible = true;
-
-    },
-
-
-    async onUpdate() {
-
-      try {
-
-        const params = {
-          id: this.investigationToEdit.id,
-          investigation_id: this.investigationToEdit.investigation_id,
-          remarks: this.investigationToEdit.remarks,
-        };
-
-        await this.$store.dispatch( 'visitInvestigations_update', params );
-        this.modalEditVisible = false;
-        successMessageBox( 'Investigation details updated' );
-
-        await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
-
-      } catch ( e ) {
-        errorMessageBox( 'Failed to update investigation details' );
-      }
-
-    },
-
     /*
     * On delete
     * */
-    async onDelete() {
+    async onDelete( item ) {
 
       try {
 
-        await this.$store.dispatch( 'visitInvestigations_delete', this.investigationToEdit.id );
+        await this.$store.dispatch( 'visitInvestigations_delete', item.id );
         await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
-
-        this.modalDeleteVisible = false;
 
       } catch ( e ) {
         errorMessageBox( 'Failed to remove selected investigation' );
       }
 
     },
+
+    /*
+   * ------------------------------------------------------------
+   * Selected item's edit remarks logic
+   * ------------------------------------------------------------
+   * */
+
+    onSelectRemarkToEdit( problem ) {
+      this.selectedItem = _.cloneDeep( problem );
+
+      this.selectedItemId = problem.id;
+      this.showEditRemarks = true;
+
+      this.$nextTick( () => {
+        /* set focus on the selected text box */
+        document.getElementById( 'txt_remarks' + problem.id ).focus();
+      } );
+
+    }, /* onSelectRemarkToEdit */
+
+    async onUpdateRemarks() {
+
+      /*
+       * if selectedProblem is null, then dont do anything
+       * this is needed because we are hooking both blur and enter events
+       * to the same function. once enter is pressed, this code will run
+       * and then set selectedProblem = null, this will cause an issue
+       * when blur is trying to run.
+       * */
+      if ( _.isNull( this.selectedItem ) ) return false;
+
+      try {
+
+        const params = {
+          id: this.selectedItemId,
+          remarks: voca.capitalize( this.selectedItem.remarks ),
+        };
+
+        await this.$store.dispatch( 'visitInvestigations_update', params );
+
+        await this.$store.dispatch( 'visitInvestigations_fetchAll', this.visitId );
+
+      } catch ( e ) {
+        console.log( e );
+        errorMessageBox( 'Failed to update' );
+      }
+
+
+      this.$nextTick( () => {
+        this._resetSelectedProblem();
+      } );
+
+    },
+
+
+    _resetSelectedProblem() {
+      this.selectedItem = null;
+      this.selectedItemId = null;
+      this.showEditRemarks = false;
+    },
+
 
   },
 

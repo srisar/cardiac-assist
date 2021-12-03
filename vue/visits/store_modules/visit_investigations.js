@@ -37,57 +37,33 @@ export default {
         /* fetch all available investigations */
         async investigations_fetchAllAvailableInvestigation( context ) {
 
-            try {
-
-                const response = await $.get( `${ getSiteURL() }/api/get/investigations.php` );
-                context.commit( 'setInvestigationsList', response.data );
-
-            } catch ( e ) {
-                throw e;
-            }
+            const response = await $.get( `${ getSiteURL() }/api/get/investigations.php` );
+            context.commit( 'setInvestigationsList', response.data );
 
         },
 
         /* fetch all visit investigations */
         async visitInvestigations_fetchAll( context, visitId ) {
-
-            try {
-
-                const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-investigations.php`, { visit_id: visitId } );
-                context.commit( 'setVisitInvestigationsList', response.data );
-            } catch ( e ) {
-                throw e;
-            }
+            const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-investigations.php`, { visit_id: visitId } );
+            context.commit( 'setVisitInvestigationsList', response.data );
 
         },
 
         /* add */
         async visitInvestigations_add( context, params ) {
 
-            try {
-                await $.post( `${ getSiteURL() }/api/save/visit/visit-investigation.php`, params );
-            } catch ( e ) {
-                throw e;
-            }
+            await $.post( `${ getSiteURL() }/api/save/visit/visit-investigation.php`, params );
 
         },
 
         /* delete */
         async visitInvestigations_delete( context, id ) {
-            try {
-                await $.post( `${ getSiteURL() }/api/delete/visit/visit-investigation.php`, { id: id } );
-            } catch ( e ) {
-                throw e;
-            }
+            await $.post( `${ getSiteURL() }/api/delete/visit/visit-investigation.php`, { id: id } );
         },
 
         /* update */
         async visitInvestigations_update( context, params ) {
-            try {
-                await $.post( `${ getSiteURL() }/api/update/visit/visit-investigation.php`, params );
-            } catch ( e ) {
-                throw e;
-            }
+            await $.post( `${ getSiteURL() }/api/update/visit/visit-investigation.php`, params );
         },
 
         async visitInvestigations_search( context, query ) {

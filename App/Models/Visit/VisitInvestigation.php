@@ -24,10 +24,10 @@ class VisitInvestigation implements IModel
      * @param $array
      * @return self
      */
-    public static function build($array): self
+    public static function build( $array ): self
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -38,14 +38,14 @@ class VisitInvestigation implements IModel
      * @param int $id
      * @return VisitInvestigation|null
      */
-    public static function find(int $id): ?VisitInvestigation
+    public static function find( int $id ): ?VisitInvestigation
     {
         /** @var VisitInvestigation $result */
-        $result = Database::find(self::TABLE, $id, self::class);
+        $result = Database::find( self::TABLE, $id, self::class );
 
-        if (!empty($result)) {
-            $result->visit = Visit::find($result->visit_id);
-            $result->investigation = Investigation::find($result->investigation_id);
+        if ( !empty( $result ) ) {
+            $result->visit = Visit::find( $result->visit_id );
+            $result->investigation = Investigation::find( $result->investigation_id );
 
             return $result;
         }
@@ -53,7 +53,7 @@ class VisitInvestigation implements IModel
         return null;
     }
 
-    public static function findAll($limit = 1000, $offset = 0)
+    public static function findAll( $limit = 1000, $offset = 0 )
     {
 
     }
@@ -66,45 +66,44 @@ class VisitInvestigation implements IModel
             "remarks" => $this->remarks,
         ];
 
-        return Database::insert(self::TABLE, $data);
+        return Database::insert( self::TABLE, $data );
     }
 
     public function update(): bool
     {
         $data = [
             "remarks" => $this->remarks,
-            "investigation_id" => $this->investigation_id
         ];
 
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
     }
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, "id", $this->id);
+        return Database::delete( self::TABLE, "id", $this->id );
     }
 
     /**
      * @param Visit $visit
      * @return self[]
      */
-    public static function findByVisit(Visit $visit): array
+    public static function findByVisit( Visit $visit ): array
     {
         $db = Database::instance();
-        $statement = $db->prepare("select * from visit_investigations where visit_id=?");
-        $statement->execute([$visit->id]);
+        $statement = $db->prepare( "select * from visit_investigations where visit_id=?" );
+        $statement->execute( [ $visit->id ] );
 
 
         /** @var self[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
         $output = [];
 
-        if (!empty($results)) {
+        if ( !empty( $results ) ) {
 
-            foreach ($results as $result) {
-                $result->visit = Visit::find($result->visit_id);
-                $result->investigation = Investigation::find($result->investigation_id);
+            foreach ( $results as $result ) {
+                $result->visit = $visit;
+                $result->investigation = Investigation::find( $result->investigation_id );
                 $output[] = $result;
             }
 
