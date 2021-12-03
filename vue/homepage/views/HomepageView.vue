@@ -17,6 +17,9 @@
 
     <hr>
 
+    <CommonStatsSection/>
+
+
     <!-- Management -->
     <div class="container my-3">
 
@@ -128,12 +131,13 @@
 </template>
 
 <script>
-import PatientsSection from "./PatientsSection";
+import CommonStatsSection from '@/homepage/views/stats/CommonStatsSection.vue';
+import PatientsSection from './PatientsSection';
 
 export default {
-  name: "HomepageView",
-  components: {PatientsSection}
-}
+  name: 'HomepageView',
+  components: { CommonStatsSection, PatientsSection },
+};
 </script>
 
 <style scoped>

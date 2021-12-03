@@ -11,7 +11,7 @@ use App\Core\App;
             <footer>
                 <hr>
                 <div class="text-center">
-                    &copy; <?= date('Y') ?> Cardiac Clinic System. All rights reserved. Developed by <a href="https://srisar.dev">srisar.dev</a>.
+                    &copy; <?= date( 'Y' ) ?> Cardiac Clinic System. All rights reserved. Developed by <a href="https://srisar.dev">srisar.dev</a>.
                     <span class="badge badge-warning"><?= APP_VERSION ?></span>
                 </div>
             </footer>
@@ -30,6 +30,7 @@ use App\Core\App;
 <script src="<?= App::siteURL() ?>/assets/ckeditor5/ckeditor.js"></script>
 <script src="<?= App::siteURL() ?>/ckfinder/ckfinder.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="<?= App::siteURL() ?>/assets/js/app.js"></script>
 </body>
 </html>

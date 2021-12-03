@@ -8,6 +8,7 @@ use App\Core\Database\Database;
 use App\Models\IModel;
 use App\Models\Investigation;
 use PDO;
+use stdClass;
 
 class VisitInvestigation implements IModel
 {
@@ -111,4 +112,25 @@ class VisitInvestigation implements IModel
 
         return $output;
     }
+
+    public static function getCommonStats(): array
+    {
+        $db = Database::instance();
+        $statement = $db->prepare( 'SELECT investigation_id, COUNT(investigation_id) AS total FROM visit_investigations GROUP BY investigation_id ORDER BY total DESC LIMIT 10' );
+
+        $statement->execute();
+
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, stdClass::class );
+
+        if ( !empty( $results ) ) {
+            foreach ( $results as $result ) {
+                $result->investigation = Investigation::find( $result->investigation_id );
+            }
+
+            return $results;
+        }
+
+        return [];
+    }
+
 }
