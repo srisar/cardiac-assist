@@ -21,6 +21,7 @@
       </div>
 
       <PatientDetailsDiagnoses class="section"/>
+
       <PrescriptionDetails class="section"/>
     </div><!-- paper -->
 

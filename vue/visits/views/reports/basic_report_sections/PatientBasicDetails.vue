@@ -4,46 +4,40 @@
 
     <div id="section-basic" class="mb-1" v-if="loaded">
 
-
-      <div class="d-flex justify-content-between border p-1">
-        <div class="left">
-          <div contenteditable="true" class="">
-            #{{ patient.id }} - {{ patient.first_name }} {{ patient.last_name }}
-            ({{ patient.gender }})
-          </div>
-        </div>
-        <div class="right d-flex">
-          <div contenteditable="true" class="mr-3">Age: {{ patientAge }}</div>
-          <div class="">Date: {{ visit.visit_date }}</div>
-        </div>
+      <!-- patient details -->
+      <div class="">
+        <table class="table table-bordered table-sm mb-1">
+          <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-middle" style="gap: .25rem">
+                <div><span class="font-weight-bold">ID</span> {{ patient.id }}</div>
+                <div>&mdash; {{ visit.visit_date }}</div>
+              </div>
+            </td>
+            <td class="w-75 font-weight-bold">
+              {{ patient.first_name }} {{ patient.last_name }} &mdash; {{ patient.gender }} &mdash; {{ patientAge }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
-
+      <!-- visit details -->
       <table class="table table-bordered table-sm mb-1" v-if="showExtra">
         <tbody>
         <tr>
           <td>
-
-            <div class="d-flex justify-content-between">
-
-              <div>
-                <span class="font-weight-bold">H:</span> {{ visit.height }} m
-              </div>
-
-              <div>
-                <span class="font-weight-bold">W:</span> {{ visit.weight }} kg
-              </div>
-
-              <div>
-                <span class="font-weight-bold">BMI:</span> {{ visit.bmi }} kg/m²
-              </div>
-
-              <div>
-                <span class="font-weight-bold">SBP/DBP:</span> {{ visit.sbp }}/{{ visit.dbp }} mmHg
-              </div>
-
-            </div>
-
+            <span class="font-weight-bold">H:</span> {{ visit.height }} m
+          </td>
+          <td>
+            <span class="font-weight-bold">W:</span> {{ visit.weight }} kg
+          </td>
+          <td>
+            <span class="font-weight-bold">BMI:</span> {{ visit.bmi }} kg/m²
+          </td>
+          <td>
+            <span class="font-weight-bold">SBP/DBP:</span> {{ visit.sbp }}/{{ visit.dbp }} mmHg
           </td>
         </tr>
         </tbody>
@@ -53,20 +47,29 @@
       <table class="table table-bordered table-sm mb-1" v-if="showExtra">
         <tbody>
         <tr>
-
           <td>
-            <div class="d-flex justify-content-between">
-
-              <div><span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}</div>
-              <div><span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}</div>
-              <div><span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}</div>
-              <div v-if="showEF"><span class="font-weight-bold">EF:</span> {{ visit.ef }} %</div>
-              <div><span class="font-weight-bold">SMOKING:</span> {{ visit.smoking | filterSmoking }}</div>
-              <div><span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}</div>
-            </div>
+            <span class="font-weight-bold">DM:</span> {{ visit.dm | boolean }}
           </td>
-
+          <td>
+            <span class="font-weight-bold">HT:</span> {{ visit.ht | boolean }}
+          </td>
+          <td>
+            <span class="font-weight-bold">DL:</span> {{ visit.dl | boolean }}
+          </td>
+          <td v-if="showEF">
+            <span class="font-weight-bold">EF:</span> {{ visit.ef }} %
+          </td>
+          <td>
+            <span class="font-weight-bold">SMOKING:</span> {{ visit.smoking | filterSmoking }}
+          </td>
+          <td>
+            <span class="font-weight-bold">FH:</span> {{ visit.family_history | filterFamilyHistory }}
+          </td>
+          <td>
+            <span class="font-weight-bold">HB:</span> {{ visit.heart_beat }}
+          </td>
         </tr>
+
         </tbody>
       </table>
 
