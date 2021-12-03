@@ -21,6 +21,7 @@
           <table class="table table-bordered data-table-full text-right">
             <thead>
             <tr>
+              <th>ID</th>
               <th>Full name</th>
               <th>Gender</th>
               <th>DoB</th>
@@ -47,31 +48,31 @@
 
 <script>
 
-import DateRangeField from "../../_common/components/DateRangeField";
-import DateField from "../../_common/components/DateField";
-import ModalWindow from "../../_common/components/ModalWindow";
-import PatientsFilter from "./PatientsFilter";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import DateField from '../../_common/components/DateField';
+import DateRangeField from '../../_common/components/DateRangeField';
+import ModalWindow from '../../_common/components/ModalWindow';
 
-import * as values from "../values";
-import {errorMessageBox} from "../../_common/bootbox_dialogs";
+import * as values from '../values';
+import PatientsFilter from './PatientsFilter';
 
-const _ = require("lodash");
+const _ = require( 'lodash' );
 
 export default {
-  name: "ListAllPatients",
-  components: {DateRangeField, DateField, ModalWindow, PatientsFilter,},
+  name: 'ListAllPatients',
+  components: { DateRangeField, DateField, ModalWindow, PatientsFilter },
 
   data() {
     return {
       dataTable: null,
 
       filters: {
-        gender: "SELECT"
+        gender: 'SELECT',
       },
 
       GENDERS: values.GENDERS,
 
-    }
+    };
   },
 
   computed: {
@@ -88,18 +89,18 @@ export default {
 
     try {
 
-      await this.$store.dispatch("patients_fetchAll");
+      await this.$store.dispatch( 'patients_fetchAll' );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch patients data");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to fetch patients data' );
     }
 
 
     try {
-      this.dataTable.rows.add(this.patientsList);
+      this.dataTable.rows.add( this.patientsList );
       this.dataTable.draw();
-    } catch (e) {
-      alert("Failed to populate data table");
+    } catch ( e ) {
+      alert( 'Failed to populate data table' );
     }
 
 
@@ -113,56 +114,63 @@ export default {
      */
     generateDataTable: function () {
 
-      this.dataTable = $(".data-table-full").DataTable({
+      this.dataTable = $( '.data-table-full' ).DataTable( {
         responsive: true,
         autoWidth: false,
         pageLength: 50,
+        language: {
+          search: '',
+          searchPlaceholder: 'Filter patient results...',
+        },
         columns: [
           {
-            "data": "first_name",
-            render(data, type, row) {
-              return `<a href="${getSiteURL()}/app/patients/edit.php?id=${row.id}">${data} ${row.last_name}</a>`;
-            }
+            data: 'id',
           },
           {
-            "data": "gender",
-            render(data, type, row) {
-              return values.GENDERS[data];
-            }
+            'data': 'first_name',
+            render( data, type, row ) {
+              return `<a href="${ getSiteURL() }/app/patients/edit.php?id=${ row.id }">${ data } ${ row.last_name }</a>`;
+            },
           },
-          {"data": "dob"},
           {
-            "data": "age",
-            render(data, type, row) {
+            'data': 'gender',
+            render( data, type, row ) {
+              return values.GENDERS[ data ];
+            },
+          },
+          { 'data': 'dob' },
+          {
+            'data': 'age',
+            render( data, type, row ) {
 
 
-              if (!_.isEmpty(row.dob)) {
+              if ( !_.isEmpty( row.dob ) ) {
 
                 const today = moment();
-                const diff = moment.duration(today.diff(moment(row.dob)));
-                return Math.round(diff.asYears());
+                const diff = moment.duration( today.diff( moment( row.dob ) ) );
+                return Math.round( diff.asYears() );
               }
 
               return data;
-            }
+            },
           },
           {
-            "data": "address",
-            render(data, type, row) {
-              return toBrString(data);
-            }
+            'data': 'address',
+            render( data, type, row ) {
+              return toBrString( data );
+            },
           },
-          {"data": "phone"},
-          {"data": "job"},
-          {"data": "job_type"},
+          { 'data': 'phone' },
+          { 'data': 'job' },
+          { 'data': 'job_type' },
           {
-            "data": "income",
-            render(data, type, row) {
-              return toCurrency(data);
-            }
+            'data': 'income',
+            render( data, type, row ) {
+              return toCurrency( data );
+            },
           },
         ],
-      });
+      } );
 
     },
 
@@ -170,7 +178,7 @@ export default {
   },
 
 
-}
+};
 </script>
 
 <style scoped>

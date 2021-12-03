@@ -23,6 +23,7 @@
           <table class="table table-bordered data-table-full text-right">
             <thead>
             <tr>
+              <th>ID</th>
               <th>Full name</th>
               <th>Gender</th>
               <th>DoB</th>
@@ -53,20 +54,20 @@
 </template>
 
 <script>
-import PatientsFilter from "./PatientsFilter";
-import * as values from "../values";
-import {errorMessageBox} from "../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import * as values from '../values';
+import PatientsFilter from './PatientsFilter';
 
 export default {
-  name: "SearchResults",
-  components: {PatientsFilter},
+  name: 'SearchResults',
+  components: { PatientsFilter },
 
   data() {
     return {
 
       dataTable: null,
 
-    }
+    };
   },
 
   computed: {
@@ -85,23 +86,23 @@ export default {
 
       const keyword = this.$route.params.keyword;
 
-      await this.$store.dispatch("patients_search", keyword);
+      await this.$store.dispatch( 'patients_search', keyword );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch patients data");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to fetch patients data' );
     }
 
 
     try {
-      this.dataTable.rows.add(this.patientsList);
+      this.dataTable.rows.add( this.patientsList );
       this.dataTable.draw();
-    } catch (e) {
-      alert("Failed to populate data table");
+    } catch ( e ) {
+      alert( 'Failed to populate data table' );
     }
 
   },
 
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate( to, from, next ) {
 
     // this.generateDataTable();
 
@@ -109,20 +110,20 @@ export default {
 
       const keyword = to.params.keyword;
 
-      await this.$store.dispatch("patients_search", keyword);
+      await this.$store.dispatch( 'patients_search', keyword );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch patients data");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to fetch patients data' );
     }
 
     try {
 
       this.dataTable.clear();
-      this.dataTable.rows.add(this.patientsList);
+      this.dataTable.rows.add( this.patientsList );
       this.dataTable.draw();
 
-    } catch (e) {
-      alert("Failed to populate data table");
+    } catch ( e ) {
+      alert( 'Failed to populate data table' );
     }
 
     next();
@@ -136,61 +137,62 @@ export default {
      */
     generateDataTable: function () {
 
-      this.dataTable = $(".data-table-full").DataTable({
+      this.dataTable = $( '.data-table-full' ).DataTable( {
         responsive: true,
         autoWidth: false,
         columns: [
+          { data: 'id' },
           {
-            "data": "first_name",
-            render(data, type, row) {
-              return `<a href="${getSiteURL()}/app/patients/edit.php?id=${row.id}">${data} ${row.last_name}</a>`;
-            }
+            'data': 'first_name',
+            render( data, type, row ) {
+              return `<a href="${ getSiteURL() }/app/patients/edit.php?id=${ row.id }">${ data } ${ row.last_name }</a>`;
+            },
           },
           {
-            "data": "gender",
-            render(data, type, row) {
-              return values.GENDERS[data];
-            }
+            'data': 'gender',
+            render( data, type, row ) {
+              return values.GENDERS[ data ];
+            },
           },
-          {"data": "dob"},
+          { 'data': 'dob' },
           {
-            "data": "age",
-            render(data, type, row) {
+            'data': 'age',
+            render( data, type, row ) {
 
 
-              if (!_.isEmpty(row.dob)) {
+              if ( !_.isEmpty( row.dob ) ) {
 
                 const today = moment();
-                const diff = moment.duration(today.diff(moment(row.dob)));
-                return Math.round(diff.asYears());
+                const diff = moment.duration( today.diff( moment( row.dob ) ) );
+                return Math.round( diff.asYears() );
               }
 
               return data;
-            }
+            },
           },
           {
-            "data": "address",
-            render(data, type, row) {
-              return toBrString(data);
-            }
+            'data': 'address',
+            render( data, type, row ) {
+              return toBrString( data );
+            },
           },
-          {"data": "phone"},
-          {"data": "job"},
-          {"data": "job_type"},
+          { 'data': 'phone' },
+          { 'data': 'job' },
+          { 'data': 'job_type' },
           {
-            "data": "income",
-            render(data, type, row) {
-              return toCurrency(data);
-            }
+            'data': 'income',
+            render( data, type, row ) {
+              return toCurrency( data );
+            },
           },
         ],
-      });
+      } );
 
     }, /* generate data table */
 
   }, /* methods */
 
-}
+};
 </script>
 
 <style scoped>
