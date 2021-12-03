@@ -1601,7 +1601,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         chart: {
           type: 'pie',
           fontFamily: 'Sen',
-          height: '250px'
+          height: '100%'
         },
         series: this.investigationsChartData.seriesData,
         labels: this.investigationsChartData.labelsData,
@@ -1617,7 +1617,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         chart: {
           type: 'pie',
           fontFamily: 'Sen',
-          height: '250px'
+          height: '100%'
         },
         series: this.problemsChartData.seriesData,
         labels: this.problemsChartData.labelsData,
@@ -31377,7 +31377,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "form-row justify-content-center" }, [
         _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card", staticStyle: { height: "250px" } }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Most used investigations")
             ]),
@@ -31387,7 +31387,7 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card", staticStyle: { height: "250px" } }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Most common problems")
             ]),

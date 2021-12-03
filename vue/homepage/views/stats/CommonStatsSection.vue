@@ -11,7 +11,7 @@
 
       <div class="col-4">
 
-        <div class="card">
+        <div class="card" style="height: 250px">
           <div class="card-header">Most used investigations</div>
           <div id="chart_investigations"></div>
         </div>
@@ -20,7 +20,7 @@
 
       <div class="col-4">
 
-        <div class="card">
+        <div class="card" style="height: 250px">
           <div class="card-header">Most common problems</div>
           <div id="chart_problems"></div>
         </div>
@@ -116,7 +116,7 @@ export default {
         chart: {
           type: 'pie',
           fontFamily: 'Sen',
-          height: '250px',
+          height: '100%',
         },
         series: this.investigationsChartData.seriesData,
         labels: this.investigationsChartData.labelsData,
@@ -132,7 +132,7 @@ export default {
         chart: {
           type: 'pie',
           fontFamily: 'Sen',
-          height: '250px',
+          height: '100%',
         },
         series: this.problemsChartData.seriesData,
         labels: this.problemsChartData.labelsData,
