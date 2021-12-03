@@ -8,6 +8,7 @@ use App\Core\Database\Database;
 use App\Models\IModel;
 use App\Models\Problem;
 use PDO;
+use stdClass;
 
 class VisitProblem implements IModel
 {
@@ -89,6 +90,26 @@ class VisitProblem implements IModel
         }
         return [];
 
+    }
+
+    public static function getCommonStats(): array
+    {
+        $db = Database::instance();
+        $statement = $db->prepare( 'SELECT problem_id, COUNT(problem_id) AS total FROM visit_problems GROUP BY problem_id ORDER BY total DESC LIMIT 10' );
+
+        $statement->execute();
+
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, stdClass::class );
+
+        if ( !empty( $results ) ) {
+            foreach ( $results as $result ) {
+                $result->problem = Problem::find( $result->problem_id );
+            }
+
+            return $results;
+        }
+
+        return [];
     }
 
 }

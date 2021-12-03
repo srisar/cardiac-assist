@@ -8,14 +8,26 @@
     </div>
 
     <div class="form-row justify-content-center">
+
       <div class="col-4">
 
         <div class="card">
-          <div class="card-header">Most used Investigations</div>
+          <div class="card-header">Most used investigations</div>
           <div id="chart_investigations"></div>
         </div>
 
-      </div>
+      </div><!-- col -->
+
+      <div class="col-4">
+
+        <div class="card">
+          <div class="card-header">Most common problems</div>
+          <div id="chart_problems"></div>
+        </div>
+
+      </div><!-- col -->
+
+
     </div>
 
   </div><!-- container -->
@@ -40,7 +52,6 @@ export default {
       return this.allStats[ 'investigations' ];
     },
 
-
     investigationsChartData() {
 
       const data = {
@@ -58,8 +69,28 @@ export default {
       }
 
       return data;
-    },
+    }, /* investigationsChartData */
 
+    problemsStats() {
+      return this.allStats[ 'problems' ];
+    },
+    problemsChartData() {
+      const data = {
+        seriesData: [],
+        labelsData: [],
+      };
+
+      if ( this.problemsStats !== undefined ) {
+        this.problemsStats.forEach( item => {
+
+          data.seriesData.push( parseInt( item[ 'total' ] ) );
+          data.labelsData.push( item[ 'problem' ][ 'problem' ] );
+
+        } );
+      }
+      return data;
+
+    }, /* problemsChartData */
 
   },
 
@@ -73,6 +104,7 @@ export default {
     }
 
     this.generateInvestigationsCountChart();
+    this.generateProblemsCountChart();
 
   },
 
@@ -92,8 +124,22 @@ export default {
 
       const chart = new ApexCharts( document.querySelector( '#chart_investigations' ), options );
       chart.render();
-    },
+    }, /* generateInvestigationsCountChart */
 
+    generateProblemsCountChart() {
+      const options = {
+        chart: {
+          type: 'pie',
+          fontFamily: 'Sen',
+        },
+        series: this.problemsChartData.seriesData,
+        labels: this.problemsChartData.labelsData,
+        chartOptions: {},
+      };
+
+      const chart = new ApexCharts( document.querySelector( '#chart_problems' ), options );
+      chart.render();
+    }, /* generateInvestigationsCountChart */
 
   },
 

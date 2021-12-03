@@ -11,9 +11,11 @@ Authentication::isAdminOrRedirect( DEBUG );
 try {
 
     $allInvestigations = VisitInvestigation::getCommonStats();
+    $allProblems = \App\Models\Visit\VisitProblem::getCommonStats();
 
     $output = [
         'investigations' => $allInvestigations,
+        'problems' => $allProblems,
     ];
 
     JSONResponse::validResponse( $output );
