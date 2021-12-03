@@ -116,6 +116,7 @@ export default {
         chart: {
           type: 'pie',
           fontFamily: 'Sen',
+          height: '250px',
         },
         series: this.investigationsChartData.seriesData,
         labels: this.investigationsChartData.labelsData,
@@ -131,6 +132,7 @@ export default {
         chart: {
           type: 'pie',
           fontFamily: 'Sen',
+          height: '250px',
         },
         series: this.problemsChartData.seriesData,
         labels: this.problemsChartData.labelsData,

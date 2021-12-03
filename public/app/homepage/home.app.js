@@ -1600,7 +1600,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var options = {
         chart: {
           type: 'pie',
-          fontFamily: 'Sen'
+          fontFamily: 'Sen',
+          height: '250px'
         },
         series: this.investigationsChartData.seriesData,
         labels: this.investigationsChartData.labelsData,
@@ -1615,7 +1616,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var options = {
         chart: {
           type: 'pie',
-          fontFamily: 'Sen'
+          fontFamily: 'Sen',
+          height: '250px'
         },
         series: this.problemsChartData.seriesData,
         labels: this.problemsChartData.labelsData,
