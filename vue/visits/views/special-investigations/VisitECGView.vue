@@ -43,6 +43,9 @@
                 </button>
               </div>
 
+              <div class="my-2 d-flex justify-content-center" v-if="updated">
+                <span class="alert alert-success m-0">✅ Successfully updated.</span>
+              </div>
 
             </div>
           </div><!-- card -->
@@ -56,28 +59,24 @@
 </template>
 
 <script>
-import DateField from "../../../_common/components/DateField";
-import RichEditorV2 from "../../../_common/components/RichEditorV2";
-import ModalWindow from "../../../_common/components/ModalWindow";
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import DateField from '../../../_common/components/DateField';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import RichEditorV2 from '../../../_common/components/RichEditorV2';
 
 export default {
-  name: "VisitECGView",
+  name: 'VisitECGView',
   components: { DateField, RichEditorV2, ModalWindow },
 
   data() {
     return {
 
-      // visitECG: {
-      //   visit_id: undefined,
-      //   description: '',
-      //   performed_on: moment().format('YYYY-MM-DD'),
-      //   indication: '',
-      // },
-
       exist: false,
-      performedOnOutput: "",
-    }
+      performedOnOutput: '',
+
+      updated: false,
+
+    };
   },
 
   computed: {
@@ -87,7 +86,7 @@ export default {
 
     visitECG() {
       return this.$store.getters.getVisitECG;
-    }
+    },
 
   },
 
@@ -95,16 +94,16 @@ export default {
 
     try {
 
-      await this.$store.dispatch( "visitECG_fetch", this.visitId );
+      await this.$store.dispatch( 'visitECG_fetch', this.visitId );
 
       if ( this.visitECG.performed_on === null ) {
         this.visitECG.performed_on = moment().format( 'YYYY-MM-DD' );
-        this.performedOnOutput = "No performed on date. Displaying today's date";
+        this.performedOnOutput = 'No performed on date. Displaying today\'s date';
       }
 
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch ECG details" );
+      errorMessageBox( 'Failed to fetch ECG details' );
     }
 
   },
@@ -125,21 +124,28 @@ export default {
           performed_on: this.visitECG.performed_on,
         };
 
-        await this.$store.dispatch( "visitECG_update", params );
+        await this.$store.dispatch( 'visitECG_update', params );
 
-        await this.$store.dispatch( "visitECG_fetch", this.visitId )
+        this.setAsUpdated();
 
-        successMessageBox( 'ECG details updated' );
+        await this.$store.dispatch( 'visitECG_fetch', this.visitId );
 
       } catch ( e ) {
         errorMessageBox( 'Failed to update ECG details' );
       }
     },
 
+    setAsUpdated() {
+      this.updated = true;
+
+      setTimeout( () => {
+        this.updated = false;
+      }, 3500 );
+    },
 
   }, /* methods */
 
-}
+};
 </script>
 
 <style scoped>

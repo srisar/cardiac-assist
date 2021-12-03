@@ -5,7 +5,7 @@ export const visitSpecialEcg = {
 
     getters: {
 
-        getVisitECG(state) {
+        getVisitECG( state ) {
             return state.visitECG;
         },
 
@@ -14,25 +14,15 @@ export const visitSpecialEcg = {
     actions: {
 
         /* fetch */
-        async visitECG_fetch(context, visitId) {
-
-            try {
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-ecg.php`, {visit_id: visitId});
-                context.state.visitECG = response.data;
-
-            } catch (e) {
-                throw e;
-            }
+        async visitECG_fetch( context, visitId ) {
+            const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-ecg.php`, { visit_id: visitId } );
+            context.state.visitECG = response.data;
         },
 
 
         /* update */
-        async visitECG_update(context, params) {
-            try {
-                await $.post(`${getSiteURL()}/api/update/visit/visit-ecg.php`, params);
-            } catch (e) {
-                throw e;
-            }
+        async visitECG_update( context, params ) {
+            await $.post( `${ getSiteURL() }/api/update/visit/visit-ecg.php`, params );
         },
 
     },

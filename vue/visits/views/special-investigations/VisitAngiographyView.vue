@@ -289,9 +289,11 @@
                   <button class="btn btn-success" @click="onUpdate()" :disabled="!loaded">
                     <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
                   </button>
-                  <AlertArea :feedback="feedback"/>
                 </div>
 
+                <div class="my-2 d-flex justify-content-center" v-if="updated">
+                  <span class="alert alert-success m-0">✅ Successfully updated.</span>
+                </div>
 
               </div>
             </div>
@@ -308,78 +310,80 @@
 
 <script>
 
-import {TYPE_SUCCESS} from "../../../_common/message_types";
-import AlertArea from "../../../_common/components/AlertArea";
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
+import AlertArea from '../../../_common/components/AlertArea';
+import {TYPE_SUCCESS} from '../../../_common/message_types';
 
 export default {
-  name: "VisitAngiographyView",
+  name: 'VisitAngiographyView',
   components: { AlertArea },
 
   data() {
     return {
       visitAngio: {
-        instruments: "",
+        instruments: '',
         dominance_right: false,
         dominance_left: false,
-        notes: "",
+        notes: '',
 
         prox_rca_stenosis: 0,
-        prox_rca_lesion_type: "",
-        prox_rca_timi_flow: "",
+        prox_rca_lesion_type: '',
+        prox_rca_timi_flow: '',
 
         prox_lad_stenosis: 0,
-        prox_lad_lesion_type: "",
-        prox_lad_timi_flow: "",
+        prox_lad_lesion_type: '',
+        prox_lad_timi_flow: '',
 
         mid_rca_stenosis: 0,
-        mid_rca_lesion_type: "",
-        mid_rca_timi_flow: "",
+        mid_rca_lesion_type: '',
+        mid_rca_timi_flow: '',
 
         rpl1_stenosis: 0,
-        rpl1_lesion_type: "",
-        rpl1_timi_flow: "",
+        rpl1_lesion_type: '',
+        rpl1_timi_flow: '',
 
         rpl2_stenosis: 0,
-        rpl2_lesion_type: "",
-        rpl2_timi_flow: "",
+        rpl2_lesion_type: '',
+        rpl2_timi_flow: '',
 
         mid_lad_stenosis: 0,
-        mid_lad_lesion_type: "",
-        mid_lad_timi_flow: "",
+        mid_lad_lesion_type: '',
+        mid_lad_timi_flow: '',
 
         dist_lad_stenosis: 0,
-        dist_lad_lesion_type: "",
-        dist_lad_timi_flow: "",
+        dist_lad_lesion_type: '',
+        dist_lad_timi_flow: '',
 
         left_main_stenosis: 0,
-        left_main_lesion_type: "",
-        left_main_timi_flow: "",
+        left_main_lesion_type: '',
+        left_main_timi_flow: '',
 
         left_circumflex_stenosis: 0,
-        left_circumflex_lesion_type: "",
-        left_circumflex_timi_flow: "",
+        left_circumflex_lesion_type: '',
+        left_circumflex_timi_flow: '',
 
         om1_stenosis: 0,
-        om1_lesion_type: "",
-        om1_timi_flow: "",
+        om1_lesion_type: '',
+        om1_timi_flow: '',
 
         om2_stenosis: 0,
-        om2_lesion_type: "",
-        om2_timi_flow: "",
+        om2_lesion_type: '',
+        om2_timi_flow: '',
 
         pda_stenosis: 0,
-        pda_lesion_type: "",
-        pda_timi_flow: "",
+        pda_lesion_type: '',
+        pda_timi_flow: '',
 
       },
 
       loaded: false,
 
       feedback: {
-        message: "",
-        type: TYPE_SUCCESS
-      }
+        message: '',
+        type: TYPE_SUCCESS,
+      },
+
+      updated: false,
 
     };
   },
@@ -387,14 +391,14 @@ export default {
   computed: {
     visitId() {
       return this.$store.getters.getVisitId;
-    }
+    },
   },
 
   async mounted() {
 
     try {
 
-      await this.$store.dispatch( "visitAngio_fetch", this.visitId );
+      await this.$store.dispatch( 'visitAngio_fetch', this.visitId );
       this.visitAngio = this.$store.getters.getVisitAngio;
 
       /* set boolean value for dominance based on whats stored */
@@ -404,7 +408,7 @@ export default {
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch angiography details" );
+      errorMessageBox( 'Failed to fetch angiography details' );
     }
 
   },
@@ -415,18 +419,28 @@ export default {
 
       try {
 
-        await this.$store.dispatch( "visitAngio_update", this.visitAngio );
+        await this.$store.dispatch( 'visitAngio_update', this.visitAngio );
 
-        successMessageBox( "Angiography details updated" );
+        this.setAsUpdated();
+
       } catch ( e ) {
-        errorMessageBox( "Failed to update angiography details" );
+        errorMessageBox( 'Failed to update angiography details' );
       }
 
     },
 
+
+    setAsUpdated() {
+      this.updated = true;
+
+      setTimeout( () => {
+        this.updated = false;
+      }, 3500 );
+    },
+
   },
 
-}
+};
 </script>
 
 <style scoped>

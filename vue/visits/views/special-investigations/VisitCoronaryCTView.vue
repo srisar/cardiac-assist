@@ -82,6 +82,11 @@
           </div>
         </div><!-- form-row -->
 
+        <div class="my-2 d-flex justify-content-center" v-if="updated">
+          <span class="alert alert-success mb-0">✅ Successfully updated.</span>
+        </div>
+
+
       </div>
     </div><!-- card -->
 
@@ -91,10 +96,10 @@
 
 <script>
 
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '../../../_common/bootbox_dialogs';
 
 export default {
-  name: "VisitCoronaryCTView",
+  name: 'VisitCoronaryCTView',
 
   data() {
     return {
@@ -112,12 +117,15 @@ export default {
         extra_cardiac_findings: null,
         impression: null,
       },
-    }
+
+      updated: false,
+
+    };
   },
 
   computed: {
     visitId: function () {
-      return this.$store.getters.getVisitId
+      return this.$store.getters.getVisitId;
     },
   },
 
@@ -132,7 +140,7 @@ export default {
       this.visitCoronaryCT = response.data;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch coronary ct details" );
+      errorMessageBox( 'Failed to fetch coronary ct details' );
     }
   },
 
@@ -154,20 +162,29 @@ export default {
           pericardium: this.visitCoronaryCT.pericardium,
           extra_cardiac_findings: this.visitCoronaryCT.extra_cardiac_findings,
           impression: this.visitCoronaryCT.impression,
-        }
+        };
 
         await $.post( `${ getSiteURL() }/api/update/visit/visit-coronary-ct.php`, params );
-        successMessageBox( "Coronary CT details updated" );
+
+        this.setAsUpdated();
 
       } catch ( e ) {
-        errorMessageBox( "Failed to update coronary CT details" );
+        errorMessageBox( 'Failed to update coronary CT details' );
       }
 
     },
 
+    setAsUpdated() {
+      this.updated = true;
+
+      setTimeout( () => {
+        this.updated = false;
+      }, 3500 );
+    },
+
   },
 
-}
+};
 </script>
 
 <style scoped>

@@ -39,6 +39,10 @@
           </div>
         </div>
 
+        <div class="my-2 d-flex justify-content-center" v-if="updated">
+          <span class="alert alert-success m-0">✅ Successfully updated.</span>
+        </div>
+
 
       </div>
     </div><!-- card -->
@@ -48,10 +52,10 @@
 </template>
 
 <script>
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 
 export default {
-  name: "VisitLipidsView",
+  name: 'VisitLipidsView',
 
   data() {
     return {
@@ -64,10 +68,12 @@ export default {
         ldl: 0,
         hdl: 0,
         tg: 0,
-        nhc: 0
+        nhc: 0,
       },
 
-    }
+      updated: false,
+
+    };
   },
 
   computed: {
@@ -90,11 +96,11 @@ export default {
 
     try {
 
-      await this.$store.dispatch("visitLipids_fetchAll", this.visitId);
+      await this.$store.dispatch( 'visitLipids_fetchAll', this.visitId );
       this.visitLipids = this.$store.getters.getVisitLipids;
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch lipids details");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to fetch lipids details' );
     }
 
   },
@@ -114,19 +120,27 @@ export default {
           nhc: this.visitLipids.nhc,
         };
 
-        await this.$store.dispatch("visitLipids_update", params);
+        await this.$store.dispatch( 'visitLipids_update', params );
 
-        successMessageBox("Lipid details updated");
+        this.setAsUpdated();
 
-      } catch (e) {
-        errorMessageBox("Failed to update lipids details");
+      } catch ( e ) {
+        errorMessageBox( 'Failed to update lipids details' );
       }
     }, /* update */
+
+    setAsUpdated() {
+      this.updated = true;
+
+      setTimeout( () => {
+        this.updated = false;
+      }, 3500 );
+    },
 
 
   },
 
-}
+};
 </script>
 
 <style scoped>

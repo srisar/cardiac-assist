@@ -143,8 +143,11 @@
           <button class="btn btn-success" @click="onUpdate()">
             <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
           </button>
+        </div>
 
-          <AlertArea :feedback="feedback"/>
+
+        <div class="my-2 d-flex justify-content-center" v-if="updated">
+          <span class="alert alert-success m-0">✅ Successfully updated.</span>
         </div>
 
 
@@ -186,25 +189,24 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
-import ModalWindow from "../../../_common/components/ModalWindow";
-import LeftVentricleSection from "./echo_components/LeftVentricleSection";
-import TheLoading from "../../../_common/components/TheLoading";
-import LeftAtriumSection from "./echo_components/LeftAtriumSection";
-import MitralValveSection from "./echo_components/MitralValveSection";
-import AorticValveSection from "./echo_components/AorticValveSection";
-import AortaSection from "./echo_components/AortaSection";
-import RightVentricleSection from "./echo_components/RightVentricleSection";
-import RightAtriumSection from "./echo_components/RightAtriumSection";
-import PulmonicValveSection from "./echo_components/PulmonicValveSection";
-import TricuspidSection from "./echo_components/TricuspidSection";
-import PericardiumSection from "./echo_components/PericardiumSection";
-import ConclusionsSection from "./echo_components/ConclusionsSection";
-import AlertArea from "../../../_common/components/AlertArea";
-import {TYPE_SUCCESS} from "../../../_common/message_types";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import AlertArea from '../../../_common/components/AlertArea';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import TheLoading from '../../../_common/components/TheLoading';
+import AortaSection from './echo_components/AortaSection';
+import AorticValveSection from './echo_components/AorticValveSection';
+import ConclusionsSection from './echo_components/ConclusionsSection';
+import LeftAtriumSection from './echo_components/LeftAtriumSection';
+import LeftVentricleSection from './echo_components/LeftVentricleSection';
+import MitralValveSection from './echo_components/MitralValveSection';
+import PericardiumSection from './echo_components/PericardiumSection';
+import PulmonicValveSection from './echo_components/PulmonicValveSection';
+import RightAtriumSection from './echo_components/RightAtriumSection';
+import RightVentricleSection from './echo_components/RightVentricleSection';
+import TricuspidSection from './echo_components/TricuspidSection';
 
 export default {
-  name: "VisitEchoViewV2",
+  name: 'VisitEchoViewV2',
   components: {
     AlertArea,
     ConclusionsSection,
@@ -219,7 +221,7 @@ export default {
     LeftAtriumSection,
     TheLoading,
     LeftVentricleSection,
-    ModalWindow
+    ModalWindow,
   },
   data() {
     return {
@@ -228,9 +230,9 @@ export default {
       modalAddVisible: false,
 
       echoRemarkToAdd: {
-        value: "",
-        type: "",
-        typeLabel: "",
+        value: '',
+        type: '',
+        typeLabel: '',
       },
 
       selectedRemarks: {
@@ -261,13 +263,7 @@ export default {
         'CONCLUSION': 'Conclusion',
       },
 
-      /* messages */
-      feedback: {
-        message: "",
-        type: TYPE_SUCCESS
-      },
-
-      feedbackTrigger: false,
+      updated: false,
 
     };
   },
@@ -297,23 +293,23 @@ export default {
   async mounted() {
     try {
 
-      await this.$store.dispatch( "visitEcho_fetch", this.visitId );
+      await this.$store.dispatch( 'visitEcho_fetch', this.visitId );
 
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch echo details" );
+      errorMessageBox( 'Failed to fetch echo details' );
     }
 
     /* fetch all echo remarks */
     try {
 
-      await this.$store.dispatch( "echo_fetchAllRemarks" );
-      await this.$store.dispatch( "echo_fetchAllVisitRemarks", this.visitId );
+      await this.$store.dispatch( 'echo_fetchAllRemarks' );
+      await this.$store.dispatch( 'echo_fetchAllVisitRemarks', this.visitId );
 
       this.loaded = true;
 
     } catch ( e ) {
-      errorMessageBox( "Failed to fetch remarks" );
+      errorMessageBox( 'Failed to fetch remarks' );
     }
 
 
@@ -326,10 +322,10 @@ export default {
 
       try {
 
-        await this.$store.dispatch( "visitEcho_update", this.visitEcho );
-        this.feedback.message = "Echocardiogram details updated";
+        await this.$store.dispatch( 'visitEcho_update', this.visitEcho );
+        this.setAsUpdated();
       } catch ( e ) {
-        errorMessageBox( "Failed to update echocardiogram details" );
+        errorMessageBox( 'Failed to update echocardiogram details' );
       }
 
     }, /* update */
@@ -343,13 +339,13 @@ export default {
           value: this.echoRemarkToAdd.value,
         };
 
-        await this.$store.dispatch( "echo_addEchoRemark", params );
-        await this.$store.dispatch( "echo_fetchAllRemarks" );
+        await this.$store.dispatch( 'echo_addEchoRemark', params );
+        await this.$store.dispatch( 'echo_fetchAllRemarks' );
 
         this.modalAddVisible = false;
 
       } catch ( e ) {
-        errorMessageBox( "Failed to add new echo remark item" );
+        errorMessageBox( 'Failed to add new echo remark item' );
       }
     },
 
@@ -362,20 +358,20 @@ export default {
 
         const params = {
           visit_id: this.visitId,
-          echo_value_id: item.id
+          echo_value_id: item.id,
         };
 
-        await this.$store.dispatch( "echo_addVisitRemark", params );
+        await this.$store.dispatch( 'echo_addVisitRemark', params );
 
       } catch ( e ) {
-        errorMessageBox( "Failed to insert the remark" );
+        errorMessageBox( 'Failed to insert the remark' );
       }
 
       /* fetch all visit echo remarks again */
       try {
-        await this.$store.dispatch( "echo_fetchAllVisitRemarks", this.visitId );
+        await this.$store.dispatch( 'echo_fetchAllVisitRemarks', this.visitId );
       } catch ( e ) {
-        errorMessageBox( "Failed to fetch remarks" );
+        errorMessageBox( 'Failed to fetch remarks' );
       }
 
     },
@@ -383,16 +379,16 @@ export default {
     async onDelete( item ) {
 
       try {
-        await this.$store.dispatch( "echo_deleteVisitRemark", item.id );
+        await this.$store.dispatch( 'echo_deleteVisitRemark', item.id );
 
       } catch ( e ) {
-        errorMessageBox( "Failed to delete selected remark item" );
+        errorMessageBox( 'Failed to delete selected remark item' );
       }
 
       try {
-        await this.$store.dispatch( "echo_fetchAllVisitRemarks", this.visitId );
+        await this.$store.dispatch( 'echo_fetchAllVisitRemarks', this.visitId );
       } catch ( e ) {
-        errorMessageBox( "Failed to fetch remarks" );
+        errorMessageBox( 'Failed to fetch remarks' );
       }
 
     },
@@ -411,11 +407,19 @@ export default {
      * */
     hasRemarks( group ) {
       return !!_.isEmpty( this.allEchoRemarks[ group ] );
-    }
+    },
+
+    setAsUpdated() {
+      this.updated = true;
+
+      setTimeout( () => {
+        this.updated = false;
+      }, 3500 );
+    },
 
   },
 
-}
+};
 </script>
 
 <style scoped>

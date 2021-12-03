@@ -8205,9 +8205,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_message_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/message_types */ "./vue/_common/message_types.js");
+/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
 /* harmony import */ var _common_components_AlertArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/AlertArea */ "./vue/_common/components/AlertArea.vue");
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _common_message_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_common/message_types */ "./vue/_common/message_types.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8522,63 +8522,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitAngiographyView",
+  name: 'VisitAngiographyView',
   components: {
     AlertArea: _common_components_AlertArea__WEBPACK_IMPORTED_MODULE_2__.default
   },
   data: function data() {
     return {
       visitAngio: {
-        instruments: "",
+        instruments: '',
         dominance_right: false,
         dominance_left: false,
-        notes: "",
+        notes: '',
         prox_rca_stenosis: 0,
-        prox_rca_lesion_type: "",
-        prox_rca_timi_flow: "",
+        prox_rca_lesion_type: '',
+        prox_rca_timi_flow: '',
         prox_lad_stenosis: 0,
-        prox_lad_lesion_type: "",
-        prox_lad_timi_flow: "",
+        prox_lad_lesion_type: '',
+        prox_lad_timi_flow: '',
         mid_rca_stenosis: 0,
-        mid_rca_lesion_type: "",
-        mid_rca_timi_flow: "",
+        mid_rca_lesion_type: '',
+        mid_rca_timi_flow: '',
         rpl1_stenosis: 0,
-        rpl1_lesion_type: "",
-        rpl1_timi_flow: "",
+        rpl1_lesion_type: '',
+        rpl1_timi_flow: '',
         rpl2_stenosis: 0,
-        rpl2_lesion_type: "",
-        rpl2_timi_flow: "",
+        rpl2_lesion_type: '',
+        rpl2_timi_flow: '',
         mid_lad_stenosis: 0,
-        mid_lad_lesion_type: "",
-        mid_lad_timi_flow: "",
+        mid_lad_lesion_type: '',
+        mid_lad_timi_flow: '',
         dist_lad_stenosis: 0,
-        dist_lad_lesion_type: "",
-        dist_lad_timi_flow: "",
+        dist_lad_lesion_type: '',
+        dist_lad_timi_flow: '',
         left_main_stenosis: 0,
-        left_main_lesion_type: "",
-        left_main_timi_flow: "",
+        left_main_lesion_type: '',
+        left_main_timi_flow: '',
         left_circumflex_stenosis: 0,
-        left_circumflex_lesion_type: "",
-        left_circumflex_timi_flow: "",
+        left_circumflex_lesion_type: '',
+        left_circumflex_timi_flow: '',
         om1_stenosis: 0,
-        om1_lesion_type: "",
-        om1_timi_flow: "",
+        om1_lesion_type: '',
+        om1_timi_flow: '',
         om2_stenosis: 0,
-        om2_lesion_type: "",
-        om2_timi_flow: "",
+        om2_lesion_type: '',
+        om2_timi_flow: '',
         pda_stenosis: 0,
-        pda_lesion_type: "",
-        pda_timi_flow: ""
+        pda_lesion_type: '',
+        pda_timi_flow: ''
       },
       loaded: false,
       feedback: {
-        message: "",
-        type: _common_message_types__WEBPACK_IMPORTED_MODULE_1__.TYPE_SUCCESS
-      }
+        message: '',
+        type: _common_message_types__WEBPACK_IMPORTED_MODULE_3__.TYPE_SUCCESS
+      },
+      updated: false
     };
   },
   computed: {
@@ -8596,7 +8599,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _this.$store.dispatch("visitAngio_fetch", _this.visitId);
+              return _this.$store.dispatch('visitAngio_fetch', _this.visitId);
 
             case 3:
               _this.visitAngio = _this.$store.getters.getVisitAngio;
@@ -8611,7 +8614,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 9:
               _context.prev = 9;
               _context.t0 = _context["catch"](0);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)("Failed to fetch angiography details");
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch angiography details');
 
             case 12:
             case "end":
@@ -8632,17 +8635,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this2.$store.dispatch("visitAngio_update", _this2.visitAngio);
+                return _this2.$store.dispatch('visitAngio_update', _this2.visitAngio);
 
               case 3:
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.successMessageBox)("Angiography details updated");
+                _this2.setAsUpdated();
+
                 _context2.next = 9;
                 break;
 
               case 6:
                 _context2.prev = 6;
                 _context2.t0 = _context2["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_3__.errorMessageBox)("Failed to update angiography details");
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to update angiography details');
 
               case 9:
               case "end":
@@ -8651,6 +8655,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2, null, [[0, 6]]);
       }))();
+    },
+    setAsUpdated: function setAsUpdated() {
+      var _this3 = this;
+
+      this.updated = true;
+      setTimeout(function () {
+        _this3.updated = false;
+      }, 3500);
     }
   }
 });
@@ -8768,9 +8780,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitCoronaryCTView",
+  name: 'VisitCoronaryCTView',
   data: function data() {
     return {
       visitCoronaryCT: {
@@ -8786,7 +8803,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         pericardium: null,
         extra_cardiac_findings: null,
         impression: null
-      }
+      },
+      updated: false
     };
   },
   computed: {
@@ -8819,7 +8837,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 8:
               _context.prev = 8;
               _context.t0 = _context["catch"](0);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch coronary ct details");
+              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch coronary ct details');
 
             case 11:
             case "end":
@@ -8857,14 +8875,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return $.post("".concat(getSiteURL(), "/api/update/visit/visit-coronary-ct.php"), params);
 
               case 4:
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)("Coronary CT details updated");
+                _this2.setAsUpdated();
+
                 _context2.next = 10;
                 break;
 
               case 7:
                 _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update coronary CT details");
+                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to update coronary CT details');
 
               case 10:
               case "end":
@@ -8873,6 +8892,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2, null, [[0, 7]]);
       }))();
+    },
+    setAsUpdated: function setAsUpdated() {
+      var _this3 = this;
+
+      this.updated = true;
+      setTimeout(function () {
+        _this3.updated = false;
+      }, 3500);
     }
   }
 });
@@ -8892,10 +8919,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_components_DateField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/components/DateField */ "./vue/_common/components/DateField.vue");
-/* harmony import */ var _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/RichEditorV2 */ "./vue/_common/components/RichEditorV2.vue");
+/* harmony import */ var _common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/_common/bootbox_dialogs.js */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _common_components_DateField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/DateField */ "./vue/_common/components/DateField.vue");
 /* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../_common/components/RichEditorV2 */ "./vue/_common/components/RichEditorV2.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8959,27 +8986,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitECGView",
+  name: 'VisitECGView',
   components: {
-    DateField: _common_components_DateField__WEBPACK_IMPORTED_MODULE_1__.default,
-    RichEditorV2: _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_2__.default,
+    DateField: _common_components_DateField__WEBPACK_IMPORTED_MODULE_2__.default,
+    RichEditorV2: _common_components_RichEditorV2__WEBPACK_IMPORTED_MODULE_4__.default,
     ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
-      // visitECG: {
-      //   visit_id: undefined,
-      //   description: '',
-      //   performed_on: moment().format('YYYY-MM-DD'),
-      //   indication: '',
-      // },
       exist: false,
-      performedOnOutput: ""
+      performedOnOutput: '',
+      updated: false
     };
   },
   computed: {
@@ -9000,12 +9025,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _this.$store.dispatch("visitECG_fetch", _this.visitId);
+              return _this.$store.dispatch('visitECG_fetch', _this.visitId);
 
             case 3:
               if (_this.visitECG.performed_on === null) {
                 _this.visitECG.performed_on = moment().format('YYYY-MM-DD');
-                _this.performedOnOutput = "No performed on date. Displaying today's date";
+                _this.performedOnOutput = 'No performed on date. Displaying today\'s date';
               }
 
               _context.next = 9;
@@ -9014,7 +9039,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 6:
               _context.prev = 6;
               _context.t0 = _context["catch"](0);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__.errorMessageBox)("Failed to fetch ECG details");
+              (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch ECG details');
 
             case 9:
             case "end":
@@ -9045,21 +9070,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   performed_on: _this2.visitECG.performed_on
                 };
                 _context2.next = 4;
-                return _this2.$store.dispatch("visitECG_update", params);
+                return _this2.$store.dispatch('visitECG_update', params);
 
               case 4:
-                _context2.next = 6;
-                return _this2.$store.dispatch("visitECG_fetch", _this2.visitId);
+                _this2.setAsUpdated();
 
-              case 6:
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__.successMessageBox)('ECG details updated');
+                _context2.next = 7;
+                return _this2.$store.dispatch('visitECG_fetch', _this2.visitId);
+
+              case 7:
                 _context2.next = 12;
                 break;
 
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_4__.errorMessageBox)('Failed to update ECG details');
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to update ECG details');
 
               case 12:
               case "end":
@@ -9068,6 +9094,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2, null, [[0, 9]]);
       }))();
+    },
+    setAsUpdated: function setAsUpdated() {
+      var _this3 = this;
+
+      this.updated = true;
+      setTimeout(function () {
+        _this3.updated = false;
+      }, 3500);
     }
   }
   /* methods */
@@ -9089,22 +9123,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
-/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
-/* harmony import */ var _echo_components_LeftVentricleSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./echo_components/LeftVentricleSection */ "./vue/visits/views/special-investigations/echo_components/LeftVentricleSection.vue");
+/* harmony import */ var _common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/_common/bootbox_dialogs.js */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _common_components_AlertArea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_common/components/AlertArea */ "./vue/_common/components/AlertArea.vue");
+/* harmony import */ var _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_common/components/ModalWindow */ "./vue/_common/components/ModalWindow.vue");
 /* harmony import */ var _common_components_TheLoading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../_common/components/TheLoading */ "./vue/_common/components/TheLoading.vue");
-/* harmony import */ var _echo_components_LeftAtriumSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./echo_components/LeftAtriumSection */ "./vue/visits/views/special-investigations/echo_components/LeftAtriumSection.vue");
-/* harmony import */ var _echo_components_MitralValveSection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./echo_components/MitralValveSection */ "./vue/visits/views/special-investigations/echo_components/MitralValveSection.vue");
-/* harmony import */ var _echo_components_AorticValveSection__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./echo_components/AorticValveSection */ "./vue/visits/views/special-investigations/echo_components/AorticValveSection.vue");
-/* harmony import */ var _echo_components_AortaSection__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./echo_components/AortaSection */ "./vue/visits/views/special-investigations/echo_components/AortaSection.vue");
-/* harmony import */ var _echo_components_RightVentricleSection__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./echo_components/RightVentricleSection */ "./vue/visits/views/special-investigations/echo_components/RightVentricleSection.vue");
-/* harmony import */ var _echo_components_RightAtriumSection__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./echo_components/RightAtriumSection */ "./vue/visits/views/special-investigations/echo_components/RightAtriumSection.vue");
-/* harmony import */ var _echo_components_PulmonicValveSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./echo_components/PulmonicValveSection */ "./vue/visits/views/special-investigations/echo_components/PulmonicValveSection.vue");
-/* harmony import */ var _echo_components_TricuspidSection__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./echo_components/TricuspidSection */ "./vue/visits/views/special-investigations/echo_components/TricuspidSection.vue");
-/* harmony import */ var _echo_components_PericardiumSection__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./echo_components/PericardiumSection */ "./vue/visits/views/special-investigations/echo_components/PericardiumSection.vue");
-/* harmony import */ var _echo_components_ConclusionsSection__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./echo_components/ConclusionsSection */ "./vue/visits/views/special-investigations/echo_components/ConclusionsSection.vue");
-/* harmony import */ var _common_components_AlertArea__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../_common/components/AlertArea */ "./vue/_common/components/AlertArea.vue");
-/* harmony import */ var _common_message_types__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../_common/message_types */ "./vue/_common/message_types.js");
+/* harmony import */ var _echo_components_AortaSection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./echo_components/AortaSection */ "./vue/visits/views/special-investigations/echo_components/AortaSection.vue");
+/* harmony import */ var _echo_components_AorticValveSection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./echo_components/AorticValveSection */ "./vue/visits/views/special-investigations/echo_components/AorticValveSection.vue");
+/* harmony import */ var _echo_components_ConclusionsSection__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./echo_components/ConclusionsSection */ "./vue/visits/views/special-investigations/echo_components/ConclusionsSection.vue");
+/* harmony import */ var _echo_components_LeftAtriumSection__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./echo_components/LeftAtriumSection */ "./vue/visits/views/special-investigations/echo_components/LeftAtriumSection.vue");
+/* harmony import */ var _echo_components_LeftVentricleSection__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./echo_components/LeftVentricleSection */ "./vue/visits/views/special-investigations/echo_components/LeftVentricleSection.vue");
+/* harmony import */ var _echo_components_MitralValveSection__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./echo_components/MitralValveSection */ "./vue/visits/views/special-investigations/echo_components/MitralValveSection.vue");
+/* harmony import */ var _echo_components_PericardiumSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./echo_components/PericardiumSection */ "./vue/visits/views/special-investigations/echo_components/PericardiumSection.vue");
+/* harmony import */ var _echo_components_PulmonicValveSection__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./echo_components/PulmonicValveSection */ "./vue/visits/views/special-investigations/echo_components/PulmonicValveSection.vue");
+/* harmony import */ var _echo_components_RightAtriumSection__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./echo_components/RightAtriumSection */ "./vue/visits/views/special-investigations/echo_components/RightAtriumSection.vue");
+/* harmony import */ var _echo_components_RightVentricleSection__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./echo_components/RightVentricleSection */ "./vue/visits/views/special-investigations/echo_components/RightVentricleSection.vue");
+/* harmony import */ var _echo_components_TricuspidSection__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./echo_components/TricuspidSection */ "./vue/visits/views/special-investigations/echo_components/TricuspidSection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -9298,7 +9331,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
+//
+//
+//
 
 
 
@@ -9315,31 +9350,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitEchoViewV2",
+  name: 'VisitEchoViewV2',
   components: {
-    AlertArea: _common_components_AlertArea__WEBPACK_IMPORTED_MODULE_15__.default,
-    ConclusionsSection: _echo_components_ConclusionsSection__WEBPACK_IMPORTED_MODULE_14__.default,
-    PericardiumSection: _echo_components_PericardiumSection__WEBPACK_IMPORTED_MODULE_13__.default,
-    TricuspidSection: _echo_components_TricuspidSection__WEBPACK_IMPORTED_MODULE_12__.default,
-    PulmonicValveSection: _echo_components_PulmonicValveSection__WEBPACK_IMPORTED_MODULE_11__.default,
-    RightAtriumSection: _echo_components_RightAtriumSection__WEBPACK_IMPORTED_MODULE_10__.default,
-    RightVentricleSection: _echo_components_RightVentricleSection__WEBPACK_IMPORTED_MODULE_9__.default,
-    AortaSection: _echo_components_AortaSection__WEBPACK_IMPORTED_MODULE_8__.default,
-    AorticValveSection: _echo_components_AorticValveSection__WEBPACK_IMPORTED_MODULE_7__.default,
-    MitralValveSection: _echo_components_MitralValveSection__WEBPACK_IMPORTED_MODULE_6__.default,
-    LeftAtriumSection: _echo_components_LeftAtriumSection__WEBPACK_IMPORTED_MODULE_5__.default,
+    AlertArea: _common_components_AlertArea__WEBPACK_IMPORTED_MODULE_2__.default,
+    ConclusionsSection: _echo_components_ConclusionsSection__WEBPACK_IMPORTED_MODULE_7__.default,
+    PericardiumSection: _echo_components_PericardiumSection__WEBPACK_IMPORTED_MODULE_11__.default,
+    TricuspidSection: _echo_components_TricuspidSection__WEBPACK_IMPORTED_MODULE_15__.default,
+    PulmonicValveSection: _echo_components_PulmonicValveSection__WEBPACK_IMPORTED_MODULE_12__.default,
+    RightAtriumSection: _echo_components_RightAtriumSection__WEBPACK_IMPORTED_MODULE_13__.default,
+    RightVentricleSection: _echo_components_RightVentricleSection__WEBPACK_IMPORTED_MODULE_14__.default,
+    AortaSection: _echo_components_AortaSection__WEBPACK_IMPORTED_MODULE_5__.default,
+    AorticValveSection: _echo_components_AorticValveSection__WEBPACK_IMPORTED_MODULE_6__.default,
+    MitralValveSection: _echo_components_MitralValveSection__WEBPACK_IMPORTED_MODULE_10__.default,
+    LeftAtriumSection: _echo_components_LeftAtriumSection__WEBPACK_IMPORTED_MODULE_8__.default,
     TheLoading: _common_components_TheLoading__WEBPACK_IMPORTED_MODULE_4__.default,
-    LeftVentricleSection: _echo_components_LeftVentricleSection__WEBPACK_IMPORTED_MODULE_3__.default,
-    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_2__.default
+    LeftVentricleSection: _echo_components_LeftVentricleSection__WEBPACK_IMPORTED_MODULE_9__.default,
+    ModalWindow: _common_components_ModalWindow__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
       loaded: false,
       modalAddVisible: false,
       echoRemarkToAdd: {
-        value: "",
-        type: "",
-        typeLabel: ""
+        value: '',
+        type: '',
+        typeLabel: ''
       },
       selectedRemarks: {
         'LEFT_VENTRICLE': 0,
@@ -9367,13 +9402,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'PERICARDIUM': 'Pericardium',
         'CONCLUSION': 'Conclusion'
       },
-
-      /* messages */
-      feedback: {
-        message: "",
-        type: _common_message_types__WEBPACK_IMPORTED_MODULE_16__.TYPE_SUCCESS
-      },
-      feedbackTrigger: false
+      updated: false
     };
   },
   computed: {
@@ -9400,7 +9429,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _this.$store.dispatch("visitEcho_fetch", _this.visitId);
+              return _this.$store.dispatch('visitEcho_fetch', _this.visitId);
 
             case 3:
               _context.next = 8;
@@ -9409,16 +9438,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 5:
               _context.prev = 5;
               _context.t0 = _context["catch"](0);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch echo details");
+              (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch echo details');
 
             case 8:
               _context.prev = 8;
               _context.next = 11;
-              return _this.$store.dispatch("echo_fetchAllRemarks");
+              return _this.$store.dispatch('echo_fetchAllRemarks');
 
             case 11:
               _context.next = 13;
-              return _this.$store.dispatch("echo_fetchAllVisitRemarks", _this.visitId);
+              return _this.$store.dispatch('echo_fetchAllVisitRemarks', _this.visitId);
 
             case 13:
               _this.loaded = true;
@@ -9428,7 +9457,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 16:
               _context.prev = 16;
               _context.t1 = _context["catch"](8);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch remarks");
+              (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch remarks');
 
             case 19:
             case "end":
@@ -9449,17 +9478,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this2.$store.dispatch("visitEcho_update", _this2.visitEcho);
+                return _this2.$store.dispatch('visitEcho_update', _this2.visitEcho);
 
               case 3:
-                _this2.feedback.message = "Echocardiogram details updated";
+                _this2.setAsUpdated();
+
                 _context2.next = 9;
                 break;
 
               case 6:
                 _context2.prev = 6;
                 _context2.t0 = _context2["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update echocardiogram details");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to update echocardiogram details');
 
               case 9:
               case "end":
@@ -9486,11 +9516,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   value: _this3.echoRemarkToAdd.value
                 };
                 _context3.next = 4;
-                return _this3.$store.dispatch("echo_addEchoRemark", params);
+                return _this3.$store.dispatch('echo_addEchoRemark', params);
 
               case 4:
                 _context3.next = 6;
-                return _this3.$store.dispatch("echo_fetchAllRemarks");
+                return _this3.$store.dispatch('echo_fetchAllRemarks');
 
               case 6:
                 _this3.modalAddVisible = false;
@@ -9500,7 +9530,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 _context3.prev = 9;
                 _context3.t0 = _context3["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to add new echo remark item");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to add new echo remark item');
 
               case 12:
               case "end":
@@ -9527,7 +9557,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   echo_value_id: item.id
                 };
                 _context4.next = 6;
-                return _this4.$store.dispatch("echo_addVisitRemark", params);
+                return _this4.$store.dispatch('echo_addVisitRemark', params);
 
               case 6:
                 _context4.next = 11;
@@ -9536,12 +9566,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 8:
                 _context4.prev = 8;
                 _context4.t0 = _context4["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to insert the remark");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to insert the remark');
 
               case 11:
                 _context4.prev = 11;
                 _context4.next = 14;
-                return _this4.$store.dispatch("echo_fetchAllVisitRemarks", _this4.visitId);
+                return _this4.$store.dispatch('echo_fetchAllVisitRemarks', _this4.visitId);
 
               case 14:
                 _context4.next = 19;
@@ -9550,7 +9580,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 16:
                 _context4.prev = 16;
                 _context4.t1 = _context4["catch"](11);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch remarks");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch remarks');
 
               case 19:
               case "end":
@@ -9570,7 +9600,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return _this5.$store.dispatch("echo_deleteVisitRemark", item.id);
+                return _this5.$store.dispatch('echo_deleteVisitRemark', item.id);
 
               case 3:
                 _context5.next = 8;
@@ -9579,12 +9609,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 5:
                 _context5.prev = 5;
                 _context5.t0 = _context5["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to delete selected remark item");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to delete selected remark item');
 
               case 8:
                 _context5.prev = 8;
                 _context5.next = 11;
-                return _this5.$store.dispatch("echo_fetchAllVisitRemarks", _this5.visitId);
+                return _this5.$store.dispatch('echo_fetchAllVisitRemarks', _this5.visitId);
 
               case 11:
                 _context5.next = 16;
@@ -9593,7 +9623,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 13:
                 _context5.prev = 13;
                 _context5.t1 = _context5["catch"](8);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch remarks");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch remarks');
 
               case 16:
               case "end":
@@ -9618,6 +9648,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * */
     hasRemarks: function hasRemarks(group) {
       return !!_.isEmpty(this.allEchoRemarks[group]);
+    },
+    setAsUpdated: function setAsUpdated() {
+      var _this6 = this;
+
+      this.updated = true;
+      setTimeout(function () {
+        _this6.updated = false;
+      }, 3500);
     }
   }
 });
@@ -9637,7 +9675,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../_common/bootbox_dialogs */ "./vue/_common/bootbox_dialogs.js");
+/* harmony import */ var _common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/_common/bootbox_dialogs.js */ "./vue/_common/bootbox_dialogs.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -9693,9 +9731,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "VisitLipidsView",
+  name: 'VisitLipidsView',
   data: function data() {
     return {
       exist: false,
@@ -9707,7 +9749,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         hdl: 0,
         tg: 0,
         nhc: 0
-      }
+      },
+      updated: false
     };
   },
   computed: {
@@ -9731,7 +9774,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _this.$store.dispatch("visitLipids_fetchAll", _this.visitId);
+              return _this.$store.dispatch('visitLipids_fetchAll', _this.visitId);
 
             case 3:
               _this.visitLipids = _this.$store.getters.getVisitLipids;
@@ -9741,7 +9784,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 6:
               _context.prev = 6;
               _context.t0 = _context["catch"](0);
-              (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to fetch lipids details");
+              (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to fetch lipids details');
 
             case 9:
             case "end":
@@ -9771,17 +9814,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   nhc: _this2.visitLipids.nhc
                 };
                 _context2.next = 4;
-                return _this2.$store.dispatch("visitLipids_update", params);
+                return _this2.$store.dispatch('visitLipids_update', params);
 
               case 4:
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.successMessageBox)("Lipid details updated");
+                _this2.setAsUpdated();
+
                 _context2.next = 10;
                 break;
 
               case 7:
                 _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
-                (0,_common_bootbox_dialogs__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)("Failed to update lipids details");
+                (0,_common_bootbox_dialogs_js__WEBPACK_IMPORTED_MODULE_1__.errorMessageBox)('Failed to update lipids details');
 
               case 10:
               case "end":
@@ -9790,9 +9834,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2, null, [[0, 7]]);
       }))();
-    }
-    /* update */
+    },
 
+    /* update */
+    setAsUpdated: function setAsUpdated() {
+      var _this3 = this;
+
+      this.updated = true;
+      setTimeout(function () {
+        _this3.updated = false;
+      }, 3500);
+    }
   }
 });
 
@@ -11607,29 +11659,21 @@ var visitSpecialEcg = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
+                _context.next = 2;
                 return $.get("".concat(getSiteURL(), "/api/get/visit/visit-ecg.php"), {
                   visit_id: visitId
                 });
 
-              case 3:
+              case 2:
                 response = _context.sent;
                 context.state.visitECG = response.data;
-                _context.next = 10;
-                break;
 
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-                throw _context.t0;
-
-              case 10:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee);
       }))();
     },
 
@@ -11640,25 +11684,15 @@ var visitSpecialEcg = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
+                _context2.next = 2;
                 return $.post("".concat(getSiteURL(), "/api/update/visit/visit-ecg.php"), params);
 
-              case 3:
-                _context2.next = 8;
-                break;
-
-              case 5:
-                _context2.prev = 5;
-                _context2.t0 = _context2["catch"](0);
-                throw _context2.t0;
-
-              case 8:
+              case 2:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 5]]);
+        }, _callee2);
       }))();
     }
   }
@@ -52021,37 +52055,42 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { disabled: !_vm.loaded },
-                        on: {
-                          click: function($event) {
-                            return _vm.onUpdate()
-                          }
+                _c("div", { staticClass: "text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { disabled: !_vm.loaded },
+                      on: {
+                        click: function($event) {
+                          return _vm.onUpdate()
                         }
-                      },
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "icon-24",
+                        attrs: {
+                          src: "/assets/images/actions/save.svg",
+                          alt: ""
+                        }
+                      }),
+                      _vm._v(" Update\n                ")
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.updated
+                  ? _c(
+                      "div",
+                      { staticClass: "my-2 d-flex justify-content-center" },
                       [
-                        _c("img", {
-                          staticClass: "icon-24",
-                          attrs: {
-                            src: "/assets/images/actions/save.svg",
-                            alt: ""
-                          }
-                        }),
-                        _vm._v(" Update\n                ")
+                        _c("span", { staticClass: "alert alert-success m-0" }, [
+                          _vm._v("✅ Successfully updated.")
+                        ])
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c("AlertArea", { attrs: { feedback: _vm.feedback } })
-                  ],
-                  1
-                )
+                    )
+                  : _vm._e()
               ])
             ])
           ])
@@ -52573,7 +52612,15 @@ var render = function() {
               )
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _vm.updated
+          ? _c("div", { staticClass: "my-2 d-flex justify-content-center" }, [
+              _c("span", { staticClass: "alert alert-success mb-0" }, [
+                _vm._v("✅ Successfully updated.")
+              ])
+            ])
+          : _vm._e()
       ])
     ])
   ])
@@ -52702,7 +52749,19 @@ var render = function() {
                     _vm._v(" Update\n              ")
                   ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.updated
+                ? _c(
+                    "div",
+                    { staticClass: "my-2 d-flex justify-content-center" },
+                    [
+                      _c("span", { staticClass: "alert alert-success m-0" }, [
+                        _vm._v("✅ Successfully updated.")
+                      ])
+                    ]
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -52956,36 +53015,41 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        on: {
-                          click: function($event) {
-                            return _vm.onUpdate()
-                          }
+                _c("div", { staticClass: "text-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.onUpdate()
                         }
-                      },
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "icon-24",
+                        attrs: {
+                          src: "/assets/images/actions/save.svg",
+                          alt: ""
+                        }
+                      }),
+                      _vm._v(" Update\n        ")
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.updated
+                  ? _c(
+                      "div",
+                      { staticClass: "my-2 d-flex justify-content-center" },
                       [
-                        _c("img", {
-                          staticClass: "icon-24",
-                          attrs: {
-                            src: "/assets/images/actions/save.svg",
-                            alt: ""
-                          }
-                        }),
-                        _vm._v(" Update\n        ")
+                        _c("span", { staticClass: "alert alert-success m-0" }, [
+                          _vm._v("✅ Successfully updated.")
+                        ])
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c("AlertArea", { attrs: { feedback: _vm.feedback } })
-                  ],
-                  1
-                )
+                    )
+                  : _vm._e()
               ],
               1
             )
@@ -53293,7 +53357,15 @@ var render = function() {
               ]
             )
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _vm.updated
+          ? _c("div", { staticClass: "my-2 d-flex justify-content-center" }, [
+              _c("span", { staticClass: "alert alert-success m-0" }, [
+                _vm._v("✅ Successfully updated.")
+              ])
+            ])
+          : _vm._e()
       ])
     ])
   ])
