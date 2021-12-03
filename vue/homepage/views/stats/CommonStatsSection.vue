@@ -11,18 +11,22 @@
 
       <div class="col-4">
 
-        <div class="card" style="height: 250px">
+        <div class="card">
           <div class="card-header">Most used investigations</div>
-          <div id="chart_investigations"></div>
+          <div class="card-body" style="height: 250px">
+            <div id="chart_investigations"></div>
+          </div>
         </div>
 
       </div><!-- col -->
 
       <div class="col-4">
 
-        <div class="card" style="height: 250px">
+        <div class="card">
           <div class="card-header">Most common problems</div>
-          <div id="chart_problems"></div>
+          <div class="card-body" style="height: 250px">
+            <div id="chart_problems"></div>
+          </div>
         </div>
 
       </div><!-- col -->

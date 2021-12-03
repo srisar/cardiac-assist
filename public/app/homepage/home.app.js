@@ -1510,6 +1510,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CommonStatsSection',
   data: function data() {
@@ -31377,22 +31381,30 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "form-row justify-content-center" }, [
         _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card", staticStyle: { height: "250px" } }, [
+          _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Most used investigations")
             ]),
             _vm._v(" "),
-            _c("div", { attrs: { id: "chart_investigations" } })
+            _c(
+              "div",
+              { staticClass: "card-body", staticStyle: { height: "250px" } },
+              [_c("div", { attrs: { id: "chart_investigations" } })]
+            )
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-4" }, [
-          _c("div", { staticClass: "card", staticStyle: { height: "250px" } }, [
+          _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Most common problems")
             ]),
             _vm._v(" "),
-            _c("div", { attrs: { id: "chart_problems" } })
+            _c(
+              "div",
+              { staticClass: "card-body", staticStyle: { height: "250px" } },
+              [_c("div", { attrs: { id: "chart_problems" } })]
+            )
           ])
         ])
       ])
