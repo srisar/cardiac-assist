@@ -21,20 +21,14 @@
 
             <div class="card-body">
 
-
-              <div class="mb-3">
-
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Filter drugs" v-model="filterText">
-                </div>
-
-              </div>
-
-
               <table class="table table-sm table-bordered table-hover">
-
+                <thead>
+                <tr>
+                  <th>All Drugs</th>
+                </tr>
+                </thead>
                 <tbody>
-                <tr v-for="drug in filteredDrugsList" :key="drug.id">
+                <tr v-for="drug in drugsList" :key="drug.id">
                   <td class="text-left">
                     <router-link :to="'/edit/' + drug.id">{{ drug.drug_name }}</router-link>
                   </td>
@@ -65,14 +59,14 @@
 <script>
 
 export default {
-  name: "ManageDrugs",
+  name: 'ManageDrugs',
   components: {},
   data() {
     return {
 
-      filterText: "",
+      filterText: '',
 
-    }
+    };
   },
 
   computed: {
@@ -81,17 +75,17 @@ export default {
       return this.$store.getters.getDrugs;
     },
 
-    filteredDrugsList() {
-
-      const filteredTextUpper = _.upperCase(this.filterText);
-
-      return _.filter(this.drugsList, (obj) => {
-        const drugName = _.upperCase(obj.drug_name);
-
-        if (drugName.includes(filteredTextUpper)) return obj;
-      });
-
-    },
+    // filteredDrugsList() {
+    //
+    //   const filteredTextUpper = _.upperCase( this.filterText );
+    //
+    //   return _.filter( this.drugsList, ( obj ) => {
+    //     const drugName = _.upperCase( obj.drug_name );
+    //
+    //     if ( drugName.includes( filteredTextUpper ) ) return obj;
+    //   } );
+    //
+    // },
 
   },
 
@@ -99,16 +93,34 @@ export default {
 
     try {
 
-      await this.$store.dispatch("drugs_fetchAll");
+      await this.$store.dispatch( 'drugs_fetchAll' );
 
-    } catch (e) {
-      console.log(e);
+    } catch ( e ) {
+      console.log( e );
     }
+
+    this.$nextTick( () => {
+
+      new DataTable( '.table', {
+        responsive: true,
+        info: true,
+        paging: false,
+        scrollY: 500,
+        language: {
+          search: '',
+          searchPlaceholder: 'Filter drugs...',
+        },
+        dom: '<\'row\'<\'col-sm-12\'f>>' +
+            '<\'row\'<\'col-sm-12\'tr>>' +
+            '<\'row\'<\'col-sm-12\'i>>',
+      } );
+
+    } );
 
   },
 
 
-}
+};
 </script>
 
 <style scoped>

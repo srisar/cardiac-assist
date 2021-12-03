@@ -1,26 +1,22 @@
 <template>
 
-  <div>
+  <div class="container-fluid">
 
-    <div class="container">
+    <div class="form-row">
 
-      <div class="form-row">
+      <div class="col-4">
+        <ListSymptoms/>
 
-        <div class="col-12 col-md-4">
-          <ListSymptoms/>
+      </div>
 
-        </div>
-
-        <div class="col-12 col-md-8 mb-2">
-          <router-view></router-view>
-        </div><!-- col -->
+      <div class="col-8">
+        <router-view></router-view>
+      </div><!-- col -->
 
 
-      </div><!-- row -->
+    </div><!-- row -->
 
-    </div><!-- container -->
-
-  </div><!-- template -->
+  </div><!-- container -->
 
 </template>
 

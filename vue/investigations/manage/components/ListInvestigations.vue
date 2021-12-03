@@ -16,6 +16,11 @@
       <div class="card-body p-2">
 
         <table class="table table-sm table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>All Investigations</th>
+          </tr>
+          </thead>
           <tbody>
           <tr v-for="item in investigationsList" :key="item.id">
             <td>
@@ -36,10 +41,10 @@
 <script>
 
 
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 
 export default {
-  name: "ListInvestigations",
+  name: 'ListInvestigations',
 
 
   data() {
@@ -50,7 +55,7 @@ export default {
 
     investigationsList() {
       return this.$store.getters.getInvestigationsList;
-    }
+    },
 
   },
 
@@ -58,16 +63,34 @@ export default {
 
     try {
 
-      await this.$store.dispatch("investigations_fetchAll");
+      await this.$store.dispatch( 'investigations_fetchAll' );
 
-    } catch (e) {
-      errorMessageBox("Failed to load investigations");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to load investigations' );
     }
+
+    this.$nextTick( () => {
+
+      new DataTable( '.table', {
+        responsive: true,
+        info: true,
+        paging: false,
+        scrollY: 500,
+        language: {
+          search: '',
+          searchPlaceholder: 'Filter investigations...',
+        },
+        dom: '<\'row\'<\'col-sm-12\'f>>' +
+            '<\'row\'<\'col-sm-12\'tr>>' +
+            '<\'row\'<\'col-sm-12\'i>>',
+      } );
+
+    } );
 
   },
 
 
-}
+};
 </script>
 
 <style scoped>

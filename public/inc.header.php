@@ -36,10 +36,12 @@ use App\Models\User;
     <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap" rel="stylesheet">
     <!-- google fonts -->
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/datatables.min.css"/>
+
+
+
+
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/fonts/clear-sans/stylesheet.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/DataTables/datatables.min.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/daterangepicker-3.1/daterangepicker.css">
     <link rel="stylesheet" href="<?= App::siteURL() ?>/assets/css/app.css">
 

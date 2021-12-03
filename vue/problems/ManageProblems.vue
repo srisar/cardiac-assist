@@ -22,7 +22,11 @@
             <div class="card-body">
 
               <table class="table table-sm table-bordered table-hover">
-
+                <thead>
+                <tr>
+                  <th>All Problems</th>
+                </tr>
+                </thead>
                 <tbody>
                 <tr v-for="item in problemsList" :key="item.id">
                   <td class="text-left">
@@ -53,17 +57,17 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../_common/bootbox_dialogs";
+import {errorMessageBox} from '../_common/bootbox_dialogs';
 
 export default {
-  name: "ManageProblems",
+  name: 'ManageProblems',
 
   data() {
     return {
 
-      filterText: "",
+      filterText: '',
 
-    }
+    };
   },
 
   computed: {
@@ -78,15 +82,33 @@ export default {
 
     try {
 
-      await this.$store.dispatch("problems_fetchAll");
+      await this.$store.dispatch( 'problems_fetchAll' );
 
-    } catch (e) {
-      errorMessageBox("Failed to fetch problems");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to fetch problems' );
     }
+
+    this.$nextTick( () => {
+
+      new DataTable( '.table', {
+        responsive: true,
+        info: true,
+        paging: false,
+        scrollY: 500,
+        language: {
+          search: '',
+          searchPlaceholder: 'Filter problems...',
+        },
+        dom: '<\'row\'<\'col-sm-12\'f>>' +
+            '<\'row\'<\'col-sm-12\'tr>>' +
+            '<\'row\'<\'col-sm-12\'i>>',
+      } );
+
+    } );
 
   },
 
-}
+};
 </script>
 
 <style scoped>

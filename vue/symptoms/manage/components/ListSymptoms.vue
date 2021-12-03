@@ -16,7 +16,11 @@
       <div class="card-body p-2">
 
         <table class="table table-sm table-bordered table-hover">
-
+          <thead>
+          <tr>
+            <th>All Symptoms</th>
+          </tr>
+          </thead>
           <tbody>
           <tr v-for="item in symptomsList">
             <td>
@@ -37,39 +41,67 @@
 <script>
 
 
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 
 export default {
-  name: "ListSymptoms",
+  name: 'ListSymptoms',
   components: {},
 
 
   data() {
-    return {}
+    return {
+
+      dataTable: null,
+
+    };
   },
 
   computed: {
 
     symptomsList() {
       return this.$store.getters.getSymptomsList;
-    }
+    },
+
+  },
+
+  beforeMount() {
+
 
   },
 
   async mounted() {
+
     try {
 
-      await this.$store.dispatch("symptoms_fetchAll");
+      await this.$store.dispatch( 'symptoms_fetchAll' );
 
-    } catch (e) {
-      errorMessageBox("Failed to load symptoms");
+    } catch ( e ) {
+      errorMessageBox( 'Failed to load symptoms' );
     }
+
+    this.$nextTick( () => {
+
+      new DataTable( '.table', {
+        responsive: true,
+        info: true,
+        paging: false,
+        scrollY: 500,
+        language: {
+          search: '',
+          searchPlaceholder: 'Filter symptoms...',
+        },
+        dom: '<\'row\'<\'col-sm-12\'f>>' +
+            '<\'row\'<\'col-sm-12\'tr>>' +
+            '<\'row\'<\'col-sm-12\'i>>',
+      } );
+
+    } );
 
   },
 
   methods: {},
 
-}
+};
 </script>
 
 <style scoped>

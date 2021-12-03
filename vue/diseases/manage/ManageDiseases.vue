@@ -1,15 +1,15 @@
 <template>
   <div>
 
-    <div class="container">
+    <div class="container-fluid">
 
       <div class="form-row">
 
-        <div class="col-12 col-md-4">
-          <ListDiseases class="sticky-top" style="top: 20px"/>
+        <div class="col-4">
+          <ListDiseases/>
         </div>
 
-        <div class="col-12 col-md-8 mb-2">
+        <div class="col-8">
           <router-view></router-view>
         </div><!-- col -->
 

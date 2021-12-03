@@ -17,7 +17,7 @@
         <table class="table table-sm table-bordered">
           <thead>
           <tr>
-            <th>Disease Code</th>
+            <th>Code</th>
             <th>Disease</th>
           </tr>
           </thead>
@@ -42,39 +42,56 @@
 <script>
 
 
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
 
 export default {
-  name: "ListDiseases",
+  name: 'ListDiseases',
   components: {},
 
   props: [],
 
   data() {
-    return {}
+    return {};
   },
 
   computed: {
 
     diseasesList() {
       return this.$store.getters.getDiseasesList;
-    }
+    },
 
   },
 
   async mounted() {
 
     try {
-      await this.$store.dispatch( "diseases_fetchAll" );
+      await this.$store.dispatch( 'diseases_fetchAll' );
     } catch ( e ) {
-      errorMessageBox( "Failed to get disease details" );
+      errorMessageBox( 'Failed to get disease details' );
     }
 
+    this.$nextTick( () => {
+
+      new DataTable( '.table', {
+        responsive: true,
+        info: true,
+        paging: false,
+        scrollY: 500,
+        language: {
+          search: '',
+          searchPlaceholder: 'Filter diseases...',
+        },
+        dom: '<\'row\'<\'col-sm-12\'f>>' +
+            '<\'row\'<\'col-sm-12\'tr>>' +
+            '<\'row\'<\'col-sm-12\'i>>',
+      } );
+
+    } );
   },
 
   methods: {},
 
-}
+};
 </script>
 
 <style scoped>
