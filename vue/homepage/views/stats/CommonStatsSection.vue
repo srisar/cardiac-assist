@@ -9,7 +9,7 @@
 
     <div class="form-row justify-content-center">
 
-      <div class="col-4">
+      <div class="col-6">
 
         <div class="card">
           <div class="card-header">Most used investigations</div>
@@ -20,7 +20,7 @@
 
       </div><!-- col -->
 
-      <div class="col-4">
+      <div class="col-6">
 
         <div class="card">
           <div class="card-header">Most common problems</div>

@@ -31380,7 +31380,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row justify-content-center" }, [
-        _c("div", { staticClass: "col-4" }, [
+        _c("div", { staticClass: "col-6" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Most used investigations")
@@ -31394,7 +31394,7 @@ var staticRenderFns = [
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [
+        _c("div", { staticClass: "col-6" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Most common problems")
