@@ -69,7 +69,10 @@
           <tbody>
           <tr>
             <td contenteditable="true">
-              <span class="mr-2" v-for="item in diffDiagnoses">{{ item.disease.disease }} / </span>
+              <span class="mr-2" v-for="(item, index) in diffDiagnoses">{{ item.disease.disease }}
+                <span v-if="item.remarks">&mdash; {{ item.remarks }}</span>
+                <span v-if="index !== diffDiagnoses.length - 1">&diams;</span>
+              </span>
             </td>
           </tr>
           </tbody>
@@ -77,7 +80,6 @@
         </table>
       </div>
       <!-- section: differential diagnoses -->
-
 
 
       <!-- section: investigations -->
@@ -102,12 +104,18 @@
           <tbody>
           <tr v-for="item in diagnoses">
             <td>
-              <div contenteditable="true">{{ item.disease.disease }}</div>
+              <div contenteditable="true">
+                {{ item.disease.disease }}
+                <span v-if="item.remarks">&mdash; {{ item.remarks }}</span>
+              </div>
             </td>
           </tr>
           <tr v-for="item in problems">
             <td>
-              <div contenteditable="true">{{ item.problem.problem }}</div>
+              <div contenteditable="true">
+                {{ item.problem.problem }}
+                <span v-if="item.remarks">&mdash; {{ item.remarks }}</span>
+              </div>
             </td>
           </tr>
           </tbody>
@@ -128,7 +136,6 @@
           </tbody>
         </table>
       </div>
-
 
 
     </div>
@@ -271,7 +278,7 @@ export default {
       await this.$store.dispatch( 'visitLipids_fetchAll', visitId );
       await this.$store.dispatch( 'visitECG_fetch', visitId );
 
-      await this.$store.dispatch( "furtherInvestigations_fetchAll", visitId );
+      await this.$store.dispatch( 'furtherInvestigations_fetchAll', visitId );
 
       this.loaded = true;
 
@@ -291,7 +298,6 @@ export default {
 .prescription-details > > > p {
   margin-bottom: 0 !important;
 }
-
 
 
 </style>
