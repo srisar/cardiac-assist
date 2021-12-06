@@ -36,8 +36,6 @@ const moduleVisits = {
             await $.get( `${ getSiteURL() }/api/save/visit/visit.php`, params );
         }, /* add visit*/
 
-
-
     },
     /* -- actions -- */
 

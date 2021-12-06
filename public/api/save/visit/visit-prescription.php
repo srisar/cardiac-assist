@@ -22,8 +22,6 @@ try {
 
     $object = VisitPrescription::build($fields);
 
-    // check if name already exist in the database
-//    if ( !empty(Symptom::findByName($object->symptom_name)) ) throw new Exception("Symptom already exist");
 
     $result = $object->insert();
 

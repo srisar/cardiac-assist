@@ -7,7 +7,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
           <div>Visits</div>
-          <button class="btn btn-tiny btn-outline-success" @click="modalAddVisit.visible = true">
+          <button class="btn btn-tiny btn-outline-success" @click="onOpenAddModal()">
             <img src="/assets/images/actions/add.svg" alt="" class="icon-16">
             Add a visit
           </button>
@@ -319,6 +319,31 @@ export default {
     },
 
 
+    onOpenAddModal() {
+
+      if ( !_.isEmpty( this.visitsList ) ) {
+        const lastVisit = _.last( this.visitsList );
+
+        console.log(lastVisit)
+
+        this.visitToAdd.height = lastVisit.height;
+        this.visitToAdd.weight = lastVisit.weight;
+        this.visitToAdd.dbp = lastVisit.dbp;
+        this.visitToAdd.sbp = lastVisit.sbp;
+        this.visitToAdd.dm = lastVisit.dm;
+        this.visitToAdd.ht = lastVisit.ht;
+        this.visitToAdd.dl = lastVisit.dl;
+        this.visitToAdd.ef = lastVisit.ef;
+        this.visitToAdd.family_history = lastVisit.family_history;
+        this.visitToAdd.smoking = lastVisit.smoking;
+        this.visitToAdd.heart_beat = lastVisit.heart_beat;
+
+      }
+
+      this.modalAddVisit.visible = true;
+
+    }, /* on open add modal */
+
     async onSave() {
 
       try {
@@ -341,7 +366,7 @@ export default {
           family_history: this.visitToAdd.family_history,
           smoking: this.visitToAdd.smoking,
           heart_beat: this.visitToAdd.heart_beat,
-          performed_by: this.visitToAdd.performed_by
+          performed_by: this.visitToAdd.performed_by,
         };
 
         await this.$store.dispatch( 'visits_add', visit );
@@ -373,7 +398,7 @@ export default {
       } else {
         return '/assets/images/actions/in-progress.svg';
       }
-    },
+    }, /* get status icon */
 
   },
   /* -- methods -- */

@@ -118,7 +118,7 @@ export default {
     generateInvestigationsCountChart() {
       const options = {
         chart: {
-          type: 'pie',
+          type: 'donut',
           fontFamily: 'Sen',
           height: '100%',
         },
@@ -134,7 +134,7 @@ export default {
     generateProblemsCountChart() {
       const options = {
         chart: {
-          type: 'pie',
+          type: 'donut',
           fontFamily: 'Sen',
           height: '100%',
         },

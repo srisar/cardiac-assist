@@ -125,7 +125,7 @@
       <!-- section: visit problems -->
 
       <div class="section" id="section-further-investigations" v-if="furtherInvestigationsList.length > 0">
-        <div class="lead font-weight-bold text-uppercase">Investigations</div>
+        <div class="lead font-weight-bold text-uppercase">Further Investigations</div>
         <table class="table table-sm table-borderless mb-1">
           <tbody>
           <tr v-for="item in furtherInvestigationsList">

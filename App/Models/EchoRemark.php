@@ -47,7 +47,7 @@ class EchoRemark implements IModel
     {
         $data = [
             "value" => $this->value,
-            "type" => $this->type
+            "type" => $this->type,
         ];
 
         return Database::insert( self::TABLE, $data );
@@ -81,6 +81,23 @@ class EchoRemark implements IModel
         $statement->execute( [ $type ] );
 
         /** @var EchoRemark[] $result */
+        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
+
+        if ( !empty( $result ) ) return $result;
+        return [];
+
+    }
+
+    public static function search( string $keyword, string $type ): array
+    {
+
+        $db = Database::instance();
+        $statement = $db->prepare( "select * from echo_remarks where echo_remarks.value like :q and type=:type" );
+        $statement->execute( [
+            ":q" => "%" . $keyword . "%",
+            ":type" => $type,
+        ] );
+
         $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
         if ( !empty( $result ) ) return $result;

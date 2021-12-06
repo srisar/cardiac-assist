@@ -27,12 +27,12 @@ try {
 
     $fields = [
         "value" => Request::getAsString( "value" ),
-        "type" => strtoupper( Request::getAsString( "type" ) )
+        "type" => strtoupper( Request::getAsString( "type" ) ),
     ];
 
-    if ( !is_null( $fields["type"] ) ) {
+    if ( !empty( $fields[ "type" ] ) ) {
 
-        if ( !in_array( strtoupper( $fields["type"] ), $types ) ) throw new Exception( "Invalid type" );
+        if ( !in_array( strtoupper( $fields[ "type" ] ), $types ) ) throw new Exception( "Invalid type" );
 
         $echoValue = EchoRemark::build( $fields );
 

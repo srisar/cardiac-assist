@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <PatientDetailsDiagnoses class="section"/>
+      <PatientDetailsDiagnoses/>
 
       <PrescriptionDetails class="section"/>
     </div><!-- paper -->

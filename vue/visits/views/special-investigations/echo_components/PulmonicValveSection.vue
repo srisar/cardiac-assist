@@ -35,25 +35,15 @@
       <div class="alert alert-warning p-1 m-0">
 
         <div class="font-weight-bold mb-2">Remarks</div>
-
-        <div class="mb-3">
-          <div class="input-group input-group-sm">
-
-            <select class="custom-select" v-model="selectedRemarks.PULMONIC_VALVE">
-              <option v-for="(item, key) in allEchoRemarks.PULMONIC_VALVE" :value="key">{{ item.value }}</option>
-            </select>
-
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary" @click="$emit('insert-remark')" :disabled="isDisableAddRemarks">
-                <img src="/assets/images/actions/done.svg" class="icon-16" alt=""> Insert
-              </button>
-              <button class="btn btn-outline-success" @click="$emit('open-modal')">
-                <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
-              </button>
-            </div>
-
-          </div>
-        </div>
+	
+				
+				<AutoCompleteTextBox
+						search-dispatch-name="echo_searchPulmonicValveRemarks"
+						add-dispatch-name="echo_addPulmonicValveRemark"
+						field-name="value"
+						v-model="remarkToAdd"
+						@input="onAdd"
+				/>
 
 
         <table class="table table-bordered table-sm table-hover m-0">
@@ -79,18 +69,58 @@
 </template>
 
 <script>
+import {errorMessageBox} from '@/_common/bootbox_dialogs.js';
+import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox.vue';
 import {sectionMixins} from "./sections_mixins";
 
 export default {
   name: "PulmonicValveSection",
-  mixins: [sectionMixins],
+	components: { AutoCompleteTextBox },
+	mixins: [sectionMixins],
   props: [
+		'visitId',
     "visitEcho",
     "visitEchoRemarks",
     "allEchoRemarks",
     "selectedRemarks",
     "isDisableAddRemarks",
   ],
+	
+	data() {
+		return {
+			remarkToAdd: null,
+		};
+	},
+	
+	methods: {
+		
+		async onAdd() {
+			try {
+				
+				const id = this.remarkToAdd[ 'id' ];
+				
+				const params = {
+					visit_id: this.visitId,
+					echo_value_id: id,
+				};
+				
+				await this.$store.dispatch( 'echo_addVisitRemark', params );
+				
+			} catch ( e ) {
+				errorMessageBox( 'Failed to insert the remark' );
+			}
+			
+			/* fetch all visit echo remarks again */
+			try {
+				await this.$store.dispatch( 'echo_fetchAllVisitRemarks', this.visitId );
+			} catch ( e ) {
+				errorMessageBox( 'Failed to fetch remarks' );
+			}
+		},
+		
+	},
+	
+	
 }
 </script>
 

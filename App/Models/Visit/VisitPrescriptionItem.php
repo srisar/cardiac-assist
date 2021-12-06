@@ -25,10 +25,10 @@ class VisitPrescriptionItem implements IModel
      * @param $array
      * @return static
      */
-    public static function build($array): self
+    public static function build( $array ): self
     {
         $object = new self();
-        foreach ($array as $key => $value) {
+        foreach ( $array as $key => $value ) {
             $object->$key = $value;
         }
         return $object;
@@ -38,15 +38,15 @@ class VisitPrescriptionItem implements IModel
      * @param int $id
      * @return static|null
      */
-    public static function find(int $id): ?self
+    public static function find( int $id ): ?self
     {
         /** @var self $result */
-        $result = Database::find(self::TABLE, $id, self::class);
+        $result = Database::find( self::TABLE, $id, self::class );
 
-        if (!empty($result)) {
+        if ( !empty( $result ) ) {
 
 //            $result->prescription = VisitPrescription::find($result->prescription_id);
-            $result->drug = Drug::find($result->drug_id);
+            $result->drug = Drug::find( $result->drug_id );
 
             return $result;
         }
@@ -56,9 +56,9 @@ class VisitPrescriptionItem implements IModel
     /**
      * @throws Exception
      */
-    public static function findAll($limit = 1000, $offset = 0)
+    public static function findAll( $limit = 1000, $offset = 0 )
     {
-        throw new Exception("Not implemented");
+        throw new Exception( "Not implemented" );
     }
 
 
@@ -73,8 +73,21 @@ class VisitPrescriptionItem implements IModel
             "remarks" => $this->remarks,
         ];
 
-        return Database::insert(self::TABLE, $data);
+        return Database::insert( self::TABLE, $data );
 
+    }
+
+    public function insertIntoPrescription( VisitPrescription $prescription ): int
+    {
+        $data = [
+            "prescription_id" => $prescription->id,
+            "drug_id" => $this->drug_id,
+            "dose" => $this->dose,
+            "frequency" => $this->frequency,
+            "duration" => $this->duration,
+            "remarks" => $this->remarks,
+        ];
+        return Database::insert( self::TABLE, $data );
     }
 
     public function update(): bool
@@ -86,12 +99,12 @@ class VisitPrescriptionItem implements IModel
             "remarks" => $this->remarks,
         ];
 
-        return Database::update(self::TABLE, $data, ["id" => $this->id]);
+        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
     }
 
     public function delete(): bool
     {
-        return Database::delete(self::TABLE, "id", $this->id);
+        return Database::delete( self::TABLE, "id", $this->id );
     }
 
 
@@ -99,22 +112,22 @@ class VisitPrescriptionItem implements IModel
      * @param VisitPrescription $prescription
      * @return self[]
      */
-    public static function findByPrescription(VisitPrescription $prescription): array
+    public static function findByPrescription( VisitPrescription $prescription ): array
     {
 
         $db = Database::instance();
-        $statement = $db->prepare("select * from visit_prescription_items where prescription_id=?");
-        $statement->execute([$prescription->id]);
+        $statement = $db->prepare( "select * from visit_prescription_items where prescription_id=?" );
+        $statement->execute( [ $prescription->id ] );
 
         /** @var self[] $results */
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
 
-        if (!empty($results)) {
+        if ( !empty( $results ) ) {
 
             $output = [];
 
-            foreach ($results as $result) {
-                $result->drug = Drug::find($result->drug_id);
+            foreach ( $results as $result ) {
+                $result->drug = Drug::find( $result->drug_id );
 
                 $output[] = $result;
             }

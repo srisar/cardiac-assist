@@ -14,6 +14,11 @@ try {
 
     $query = Request::getAsString("query");
 
+    if ( empty( $query ) ) {
+        JSONResponse::validResponse( [ "data" => [] ] );
+        return;
+    }
+
     $drugs = Drug::search($query);
     JSONResponse::validResponse(["drugs" => $drugs]);
 

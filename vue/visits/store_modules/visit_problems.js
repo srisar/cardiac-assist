@@ -54,7 +54,7 @@ export const visitProblems = {
         /* search all symptoms */
         async visitProblems_search( context, query ) {
             const response = await $.get( `${ getSiteURL() }/api/search/problems.php`, { query: query } );
-            return response.data;
+            return response['data'];
         },
 
         /**
