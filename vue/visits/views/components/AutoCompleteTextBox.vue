@@ -2,7 +2,7 @@
 	
 	<div class="form-group" @blur.capture="searchQuery=''">
 		<input type="text" class="form-control autofill-control shadow-sm"
-					 placeholder="Type to search and add..."
+					 :placeholder="placeHolderText"
 					 v-model.trim="searchQuery"
 					 @blur="searchQuery=''"
 					 @keydown.down="onDown($event)"
@@ -57,6 +57,10 @@ export default {
 			type: String,
 		},
 		
+		placeHolderText: {
+			type: String,
+			default: 'Type to search and add...',
+		},
 		
 		/* for v-model */
 		value: {
@@ -192,7 +196,7 @@ $color-selected : #1e2024;
 }
 
 .autofill-control {
-	background-color : #e4f8ed;
+	background-color : #effaf2;
 	border-color     : #3ed086;
 }
 

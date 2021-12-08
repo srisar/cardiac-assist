@@ -12,6 +12,7 @@
         <div class="row no-gutters">
           <div class="col">
             <AutoCompleteTextBox
+								place-holder-text="Search and add problems..."
                 search-dispatch-name="visitProblems_search"
                 add-dispatch-name="visitProblems_addProblem"
                 field-name="problem"

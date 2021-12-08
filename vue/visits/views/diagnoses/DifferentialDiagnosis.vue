@@ -14,6 +14,7 @@
           <div class="row no-gutters">
             <div class="col">
               <AutoCompleteTextBox
+									place-holder-text="Search and add differential diagnoses..."
                   search-dispatch-name="diffDiagnoses_searchDiseases"
                   add-dispatch-name="diffDiagnoses_addDisease"
                   field-name="disease"

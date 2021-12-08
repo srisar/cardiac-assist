@@ -7,22 +7,22 @@ use App\Models\Drug;
 
 require_once "../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect(DEBUG);
+Authentication::isAdminOrRedirect( DEBUG );
 
 
 try {
 
-    $query = Request::getAsString("query");
+    $query = Request::getAsString( "query" );
 
     if ( empty( $query ) ) {
         JSONResponse::validResponse( [ "data" => [] ] );
         return;
     }
 
-    $drugs = Drug::search($query);
-    JSONResponse::validResponse(["drugs" => $drugs]);
+    $drugs = Drug::search( $query );
+    JSONResponse::validResponse( [ "data" => $drugs ] );
 
 
-} catch (Exception $exception) {
-    JSONResponse::exceptionResponse($exception);
+} catch ( Exception $exception ) {
+    JSONResponse::exceptionResponse( $exception );
 }

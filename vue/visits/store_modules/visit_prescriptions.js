@@ -11,23 +11,23 @@ export const visitPrescriptions = {
 
     getters: {
 
-        getVisitPrescriptions(state) {
+        getVisitPrescriptions( state ) {
             return state.visitPrescriptions;
         },
 
-        getDrugsSearchResult(state) {
+        getDrugsSearchResult( state ) {
             return state.drugsSearchResult;
         },
 
-        getSelectedPrescription(state) {
+        getSelectedPrescription( state ) {
             return state.selectedPrescription;
-        }
+        },
 
     },
 
     mutations: {
 
-        setVisitPrescriptions(state, data) {
+        setVisitPrescriptions( state, data ) {
             state.visitPrescriptions = data;
         },
 
@@ -36,112 +36,61 @@ export const visitPrescriptions = {
     actions: {
 
         /* fetch all */
-        async prescriptions_fetchAll(context, visit_id) {
-
-            try {
-
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-prescriptions.php`, {visit_id: visit_id});
-                context.commit("setVisitPrescriptions", response.data);
-
-            } catch (e) {
-                throw e;
-            }
+        async prescriptions_fetchAll( context, visit_id ) {
+            const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-prescriptions.php`, { visit_id: visit_id } );
+            context.commit( 'setVisitPrescriptions', response[ 'data' ] );
 
         },
 
         /* fetch */
-        async prescriptions_fetch(context, id) {
-
-            try {
-                const response = await $.get(`${getSiteURL()}/api/get/visit/visit-prescriptions.php`, {id: id});
-                context.state.selectedPrescription = response.data;
-
-            } catch (e) {
-                throw e;
-            }
+        async prescriptions_fetch( context, id ) {
+            const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-prescriptions.php`, { id: id } );
+            context.state.selectedPrescription = response[ 'data' ];
         },
 
         /* add prescription */
-        async prescription_add(context, params) {
-            try {
-
-                await $.post(`${getSiteURL()}/api/save/visit/visit-prescription.php`, params);
-
-            } catch (e) {
-
-            }
+        async prescription_add( context, params ) {
+            await $.post( `${ getSiteURL() }/api/save/visit/visit-prescription.php`, params );
         },
 
         /* update prescription */
-        async prescriptions_update(context, params) {
-            try {
-
-                await $.post(`${getSiteURL()}/api/update/visit/visit-prescription.php`, params);
-
-            } catch (e) {
-
-            }
+        async prescriptions_update( context, params ) {
+            await $.post( `${ getSiteURL() }/api/update/visit/visit-prescription.php`, params );
         },
 
         /* delete prescription */
-        async prescriptions_delete(context, params) {
+        async prescriptions_delete( context, params ) {
 
-            /*
-            * params = {id}
-            * */
-
-            try {
-                await $.post(`${getSiteURL()}/api/delete/visit/visit-prescription.php`, params);
-            } catch (e) {
-                throw e;
-            }
+            await $.post( `${ getSiteURL() }/api/delete/visit/visit-prescription.php`, params );
 
         },
 
         /* search drugs */
-        async prescriptions_searchDrugs(context, query) {
+        async prescriptions_searchDrugs( context, query ) {
 
-            try {
+            const response = await $.get( `${ getSiteURL() }/api/search/drugs.php?query=${ query }` );
+            return response[ 'data' ];
+        },
 
-                const response = await $.get(`${getSiteURL()}/api/search/drugs.php?query=${query}`);
-                context.state.drugsSearchResult = response.drugs;
-
-            } catch (e) {
-                throw e;
-            }
+        async prescriptions_saveDrug( context, params ) {
+            await $.post( `${ getSiteURL() }/api/save/drug.php`, params );
         },
 
         /* update prescription item */
-        async prescriptions_updatePrescriptionItem(context, params) {
+        async prescriptions_updatePrescriptionItem( context, params ) {
 
-            try {
-
-                await $.post(`${getSiteURL()}/api/update/visit/visit-prescription-item.php`, params);
-
-            } catch (e) {
-                throw e;
-            }
+            await $.post( `${ getSiteURL() }/api/update/visit/visit-prescription-item.php`, params );
 
         },
 
         /* add prescription item */
-        async prescriptions_addPrescriptionItem(context, params) {
-            try {
-                await $.post(`${getSiteURL()}/api/save/visit/visit-prescription-item.php`, params);
-            } catch (e) {
-                throw e;
-            }
+        async prescriptions_addPrescriptionItem( context, params ) {
+            await $.post( `${ getSiteURL() }/api/save/visit/visit-prescription-item.php`, params );
         },
 
         /* delete prescription item */
-        async prescriptions_deletePrescriptionItem(context, params) {
-            try {
-
-                await $.post(`${getSiteURL()}/api/delete/visit/visit-prescription-item.php`, params);
-
-            } catch (e) {
-                throw e;
-            }
+        async prescriptions_deletePrescriptionItem( context, params ) {
+            await $.post( `${ getSiteURL() }/api/delete/visit/visit-prescription-item.php`, params );
         },
 
 
