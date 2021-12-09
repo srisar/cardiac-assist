@@ -45,7 +45,6 @@ class VisitPrescriptionItem implements IModel
 
         if ( !empty( $result ) ) {
 
-//            $result->prescription = VisitPrescription::find($result->prescription_id);
             $result->drug = Drug::find( $result->drug_id );
 
             return $result;

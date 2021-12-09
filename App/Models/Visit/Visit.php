@@ -5,6 +5,7 @@ namespace App\Models\Visit;
 
 
 use App\Core\Database\Database;
+use App\Models\Appointment;
 use App\Models\IModel;
 use App\Models\Patient;
 use PDO;
@@ -121,12 +122,20 @@ class Visit implements IModel
                 $visitAngio->insert();
             }
 
+            $appointment = Appointment::build( [
+                "patient_id" => $this->patient_id,
+                "date" => $this->visit_date,
+                "remarks" => "Appointment for " . $this->visit_date . " visit",
+            ] );
+
+            $appointment->insert();
+
             $db->commit();
 
             return true;
 
         } catch ( PDOException $exception ) {
-            error_log( $exception->getMessage() );
+//            error_log( $exception->getMessage() );
             $db->rollBack();
             return false;
         }

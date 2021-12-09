@@ -16,19 +16,19 @@ class Request
      * Returns the request method: GET, POST, PUT, DELETE and so on..
      * @return string
      */
-    public static function method()
+    public static function method(): string
     {
-        return $_SERVER['REQUEST_METHOD'];
+        return $_SERVER[ 'REQUEST_METHOD' ];
     }
 
     public static function scheme()
     {
-        return $_SERVER['REQUEST_SCHEME'];
+        return $_SERVER[ 'REQUEST_SCHEME' ];
     }
 
     public static function host()
     {
-        return $_SERVER['HTTP_HOST'];
+        return $_SERVER[ 'HTTP_HOST' ];
     }
 
     /*
@@ -57,8 +57,9 @@ class Request
     {
         $data = self::getParam( $key );
 
+        if ( $data == '0' ) return 0;
+
         if ( !is_null( $data ) ) {
-            if ( $data == '0' ) return 0;
             if ( filter_var( $data, FILTER_VALIDATE_INT ) ) {
                 return (int)$data;
             }
@@ -74,9 +75,6 @@ class Request
     public static function getAsFloat( string $key ): ?float
     {
         $data = self::getParam( $key );
-
-        error_log( sprintf( "%s => %s", $key, $data ) );
-
 
         if ( !is_null( $data ) ) {
 
@@ -140,7 +138,7 @@ class Request
     {
 
         // Allow from any origin
-        if ( isset( $_SERVER['HTTP_ORIGIN'] ) ) {
+        if ( isset( $_SERVER[ 'HTTP_ORIGIN' ] ) ) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
             // you want to allow, and if so:
             header( "Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}" );
@@ -149,13 +147,13 @@ class Request
         }
 
         // Access-Control headers are received during OPTIONS requests
-        if ( $_SERVER['REQUEST_METHOD'] == 'OPTIONS' ) {
+        if ( $_SERVER[ 'REQUEST_METHOD' ] == 'OPTIONS' ) {
 
-            if ( isset( $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] ) )
+            if ( isset( $_SERVER[ 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' ] ) )
                 // may also be using PUT, PATCH, HEAD etc
                 header( "Access-Control-Allow-Methods: GET, POST, OPTIONS" );
 
-            if ( isset( $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'] ) )
+            if ( isset( $_SERVER[ 'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' ] ) )
                 header( "Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}" );
 
             exit( 0 );

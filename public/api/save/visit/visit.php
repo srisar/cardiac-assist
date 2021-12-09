@@ -39,6 +39,8 @@ try {
 
     ];
 
+    error_log( print_r( $fields, true ) );
+
 
     $object = Visit::build( $fields );
 
@@ -53,36 +55,45 @@ try {
      */
     $existingVisits = Visit::findByPatient( Patient::find( $fields[ 'patient_id' ] ) );
 
+
+    /* try adding existing prescriptions from the previous visit */
     if ( !empty( $existingVisits ) ) {
-        $lastVisit = $existingVisits[ count( $existingVisits ) - 1 ];
-        $previousVisit = $existingVisits[ count( $existingVisits ) - 2 ];
 
-        /* previous visit prescriptions */
-        $prescriptions = VisitPrescription::findByVisit( $previousVisit );
+        if ( count( $existingVisits ) > 2 ) {
+            /* only check and add visit prescriptions if there's earlier visits */
 
-        if ( !empty( $prescriptions ) ) {
-            foreach ( $prescriptions as $prescription ) {
+            $lastVisit = $existingVisits[ count( $existingVisits ) - 1 ];
+            $previousVisit = $existingVisits[ count( $existingVisits ) - 2 ];
 
-                /* all current prescription items */
-                $items = $prescription->prescription_items;
+            /* previous visit prescriptions */
+            $prescriptions = VisitPrescription::findByVisit( $previousVisit );
 
-                /* creating new prescription into the latest visit */
-                $id = $prescription->insertIntoVisit( $lastVisit, $lastVisit->visit_date );
+            if ( !empty( $prescriptions ) ) {
+                foreach ( $prescriptions as $prescription ) {
 
-                if ( !empty( $id ) ) {
-                    $p = VisitPrescription::find( $id );
+                    /* all current prescription items */
+                    $items = $prescription->prescription_items;
 
-                    if ( !empty( $p ) ) {
-                        if ( !empty( $items ) ) {
-                            foreach ( $items as $item ) {
-                                $item->insertIntoPrescription( $p );
+                    /* creating new prescription into the latest visit */
+                    $id = $prescription->insertIntoVisit( $lastVisit, $lastVisit->visit_date );
+
+                    if ( !empty( $id ) ) {
+                        $p = VisitPrescription::find( $id );
+
+                        if ( !empty( $p ) ) {
+                            if ( !empty( $items ) ) {
+                                foreach ( $items as $item ) {
+                                    $item->insertIntoPrescription( $p );
+                                }
                             }
                         }
                     }
-                }
 
+                }
             }
         }
+
+        /* create new appointment for the same date */
 
     }
 
