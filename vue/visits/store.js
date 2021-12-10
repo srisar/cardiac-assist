@@ -92,7 +92,7 @@ export default new Vuex.Store( {
         /* fetch visit details */
         async visit_fetch( context, id ) {
             let response = await $.get( `${ getSiteURL() }/api/get/visit/visits.php`, { id: id } );
-            context.commit( 'updateVisit', response.data );
+            context.commit( 'updateVisit', response['data'] );
         },
 
         /* update visit details */
@@ -112,6 +112,7 @@ export default new Vuex.Store( {
         async visit_delete( context, id ) {
             await $.get( `${ getSiteURL() }/api/delete/visit/visit.php`, { id: id } );
         }, /* delete visit */
+
 
     },
     /* -- actions -- */

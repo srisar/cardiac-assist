@@ -63,42 +63,30 @@ const moduleAppointments = {
 
         async appointments_fetchAll( context, patientId ) {
 
-            try {
-                const response = await $.get( `${ getSiteURL() }/api/get/patient-appointments.php`, { id: patientId } );
-                context.state.appointmentsList = response.data;
-            } catch ( e ) {
-                throw e;
-            }
+            const response = await $.get( `${ getSiteURL() }/api/get/patient-appointments.php`, { id: patientId } );
+            context.state.appointmentsList = response['data'];
 
         }, /* fetch appointments */
 
         async appointments_add( context, params ) {
-
-            try {
-                await $.post( `${ getSiteURL() }/api/save/appointment.php`, params );
-            } catch ( e ) {
-                throw e;
-            }
+            await $.post( `${ getSiteURL() }/api/save/appointment.php`, params );
 
         }, /* add appointment */
 
         async appointments_update( context, params ) {
-
-            try {
-                $.post( `${ getSiteURL() }/api/update/appointment.php`, params );
-            } catch ( e ) {
-                throw e;
-            }
+            $.post( `${ getSiteURL() }/api/update/appointment.php`, params );
         }, /* update appointment */
 
         async appointments_delete( context, id ) {
-
-            try {
-                $.post( `${ getSiteURL() }/api/delete/appointment.php`, { id: id } );
-            } catch ( e ) {
-                throw e;
-            }
+            $.post( `${ getSiteURL() }/api/delete/appointment.php`, { id: id } );
         }, /* delete appointment */
+
+        async appointments_setStatus( context, params ) {
+            /*
+            * params: id, status
+            * */
+            await $.get( `${ getSiteURL() }/api/update/appointment-status.php`, params );
+        },
 
     },
 };

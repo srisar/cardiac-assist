@@ -119,7 +119,7 @@ export default {
 			
 			symptomToAdd: {
 				selectedSymptom: null,
-				duration: '1 days',
+				duration: '',
 			},
 			
 			symptomToDelete: {

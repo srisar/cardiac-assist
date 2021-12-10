@@ -137,7 +137,11 @@
 					</tbody>
 				</table>
 			</div>
-		
+			
+			<div class="section" v-if="otherRemarks">
+				<div class="lead font-weight-bold text-uppercase">Other Remarks</div>
+				<div class="" v-html="otherRemarks" contenteditable="true"></div>
+			</div>
 		
 		</div>
 		
@@ -217,6 +221,10 @@ export default {
 		
 		furtherInvestigationsList() {
 			return this.$store.getters.getFurtherInvestigationsList;
+		},
+		
+		otherRemarks() {
+			return this.visit.other_remarks;
 		},
 		
 		/* -------------------------------------------------------------------------------- */
