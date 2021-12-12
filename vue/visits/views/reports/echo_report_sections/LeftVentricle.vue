@@ -1,7 +1,7 @@
 <template>
 
   <!-- section:Left Ventricle -->
-  <div class="mb-1 section" v-if="!empty">
+  <div class="mb-1 pdf-item" v-if="!empty">
 
     <div class="">
       <h5 class="font-weight-bold text-uppercase">Left Ventricle</h5>

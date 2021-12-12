@@ -49,7 +49,7 @@
 			
 			
 			<!-- section: clinical details -->
-			<div id="section-clinical-details" class="section" v-if="visitSymptoms.length > 0">
+			<div id="section-clinical-details" class="pdf-item" v-if="visitSymptoms.length > 0">
 				<div class="lead font-weight-bold text-uppercase">Clinical details</div>
 				<table class="table table-sm table-borderless mb-1">
 					<tbody>
@@ -83,7 +83,7 @@
 			
 			
 			<!-- section: investigations -->
-			<div id="section-investigations" class="section" v-if="investigations.length > 0">
+			<div id="section-investigations" class="pdf-item" v-if="investigations.length > 0">
 				<div class="lead font-weight-bold text-uppercase">Investigations</div>
 				<table class="table table-sm table-borderless mb-1">
 					<tbody>
@@ -99,7 +99,7 @@
 			</div>
 			
 			<!-- section: visit problems -->
-			<div id="section-problems" class="section" v-if="diagnoses.length > 0 || problems.length > 0">
+			<div id="section-problems" class="pdf-item" v-if="diagnoses.length > 0 || problems.length > 0">
 				<div class="lead font-weight-bold text-uppercase">Problems & Diagnoses</div>
 				<table class="table table-sm table-borderless mb-1">
 					<tbody>
@@ -125,7 +125,7 @@
 			</div>
 			<!-- section: visit problems -->
 			
-			<div class="section" id="section-further-investigations" v-if="furtherInvestigationsList.length > 0">
+			<div class="pdf-item" id="section-further-investigations" v-if="furtherInvestigationsList.length > 0">
 				<div class="lead font-weight-bold text-uppercase">Further Investigations</div>
 				<table class="table table-sm table-borderless mb-1">
 					<tbody>
@@ -138,7 +138,7 @@
 				</table>
 			</div>
 			
-			<div class="section" v-if="otherRemarks">
+			<div class="pdf-item" v-if="otherRemarks">
 				<div class="lead font-weight-bold text-uppercase">Other Remarks</div>
 				<div class="" v-html="otherRemarks" contenteditable="true"></div>
 			</div>

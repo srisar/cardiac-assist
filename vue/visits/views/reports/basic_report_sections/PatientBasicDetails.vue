@@ -11,11 +11,11 @@
 					<tr>
 						<td>
 							<div class="d-flex align-middle" style="gap: .25rem">
-								<div><span class="font-weight-bold">ID</span> {{ patient.id }}</div>
+								<div><span class="font-weight-bold">ID #{{ patient.id }}</span></div>
 								<div>&mdash; {{ visit.visit_date }}</div>
 							</div>
 						</td>
-						<td class="w-75 font-weight-bold">
+						<td class="font-weight-bold">
 							{{ patient.first_name }} {{ patient.last_name }} &mdash; {{ patient.gender }} &mdash; {{ patientAge }}
 						</td>
 					</tr>

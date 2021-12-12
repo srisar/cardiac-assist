@@ -180,115 +180,22 @@ div.dataTables_wrapper div.dataTables_filter {
 }
 
 .apexcharts-canvas {
-  color       : #0c0c0c;
+  color : #0c0c0c;
   //font-family : "Sen", sans-serif !important;
 }
 
 
-/* ------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------ */
-/* print styles */
-
+/* ---------- PRINT --------------------------------------*/
 
 .paper {
-  
-  border           : solid 1px #cccccc;
-  border-radius    : 0.25rem;
-  padding          : 5mm;
-  margin-bottom    : 5mm;
-  font-size        : 11pt !important;
-  background-color : white;
+  background-color : #ffffff;
   color            : #0c0c0c;
-  
-  
-  .border, table, tr, td, th {
-    //border: solid 1px black !important;
-  }
-  
-  hr {
-    border-top : solid 1px #dee2e6 !important;
-    margin     : 1mm 0;
-  }
-  
+  padding          : .1in;
 }
 
-.prescription-details {
-  
-  figure {
-    //margin: 0;
-    text-align   : center;
-    display      : block;
-    margin-left  : auto;
-    margin-right : auto;
-  }
-  
-  figure img {
-    width   : 100% !important;
-    display : inline-block;
-  }
-  
+.pdf-content {
 }
 
-.sub-title {
-  font-size : 13pt;
-}
+.pdf-item {
 
-
-/* end: font settings*/
-
-
-.section {
-  margin-bottom : 5mm;
-}
-
-
-/*
-  ---------------------------------------------------------------------------
-  Styles for default printing
-*/
-
-
-@page {
-  size   : 148mm 210mm;
-  margin : 0.25in !important;
-}
-
-@media print {
-  
-  body {
-    width  : 100% !important;
-    height : 100% !important;
-  }
-  
-  
-  .paper {
-    font-size : 18pt !important;
-    margin    : 0;
-    border    : none;
-  }
-  
-  
-  .lead {
-    font-size   : 15pt !important;
-    font-weight : bold;
-  }
-  
-  .page-break {
-    clear       : both;
-    break-after : page;
-  }
-  
-  .section {
-    break-inside  : avoid;
-    margin-bottom : 5mm;
-  }
-  
-  .page-break {
-    clear       : both;
-    break-after : page;
-  }
-  
-  .section, table {
-    break-inside : avoid;
-  }
 }
