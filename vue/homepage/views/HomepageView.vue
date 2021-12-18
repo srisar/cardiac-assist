@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col text-right">
 
-          <h3>Dr Arulnithy's Cardiac Clinic System</h3>
+          <h3>Dr K.Arulnithy's Cardiac Clinic System</h3>
 
         </div>
       </div>

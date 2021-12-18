@@ -4,7 +4,7 @@
   <div class="mb-1 pdf-item" v-if="!empty">
 
     <div class="">
-      <h5 class="font-weight-bold text-uppercase">Left Ventricle</h5>
+      <h5 class="section-header">Left Ventricle</h5>
     </div>
 
 

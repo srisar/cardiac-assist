@@ -77,8 +77,10 @@
 
 <script>
 import ModalWindow from "../../../../_common/components/ModalWindow";
-import {errorMessageBox} from "../../../../_common/bootbox_dialogs";
+import {errorMessageBox} from "@/_common/bootbox_dialogs";
 import DateField from "../../../../_common/components/DateField";
+
+import voca from 'voca';
 
 export default {
   name: "PrescriptionView",
@@ -146,7 +148,7 @@ export default {
         const params = {
           visit_id: this.visitId,
           date: this.prescriptionToAdd.date,
-          remarks: this.prescriptionToAdd.remarks,
+          remarks: voca.capitalize(this.prescriptionToAdd.remarks),
         };
 
         await this.$store.dispatch("prescription_add", params);

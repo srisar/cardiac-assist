@@ -26,69 +26,70 @@ import ECGReportView from "./views/reports/ECGReportView";
 import CoronaryCTReportView from "./views/reports/CoronaryCTReportView";
 import EchoReportView from "./views/reports/EchoReportView";
 import AngioReportView from "./views/reports/AngioReportView";
+import PrintPrescription from "@/visits/views/intervention/prescriptions/PrintPrescription";
 
 
-Vue.use( Vuex )
-Vue.use( VueRouter )
+Vue.use(Vuex)
+Vue.use(VueRouter)
 
 
 const routes = [
-    { path: "", component: BasicView },
-    { path: "/diagnoses", component: DiagnosesView },
-    { path: "/edit/:id", component: EditVisitDetails },
+    {path: "", component: BasicView},
+    {path: "/diagnoses", component: DiagnosesView},
+    {path: "/edit/:id", component: EditVisitDetails},
 
-    { path: "/special/ecg", component: VisitECGView },
-    { path: "/special/lipids", component: VisitLipidsView },
-    { path: "/special/coronary-ct", component: VisitCoronaryCTView },
-    { path: "/special/echo", component: VisitEchoViewV2 },
-    { path: "/special/angio", component: VisitAngiographyView },
+    {path: "/special/ecg", component: VisitECGView},
+    {path: "/special/lipids", component: VisitLipidsView},
+    {path: "/special/coronary-ct", component: VisitCoronaryCTView},
+    {path: "/special/echo", component: VisitEchoViewV2},
+    {path: "/special/angio", component: VisitAngiographyView},
 
     {
         path: "/prescriptions",
         component: PrescriptionView,
         children: [
-            { path: "edit/:id", component: EditPrescription },
+            {path: "edit/:id", component: EditPrescription},
         ],
     },
 
-    { path: "/further-investigations", component: FurtherInvestigationsView },
-    { path: "/review-in", component: VisitReviewInView },
-    { path: "/other-remarks", component: OtherRemarksView },
-    { path: "/referral-letters", component: ReferralLettersView },
-    { path: "/referral-letters/edit/:id", component: EditReferralLetter },
-    { path: "/referral-letters/print/:id", component: PrintReferralLetter },
+    {path: "/further-investigations", component: FurtherInvestigationsView},
+    {path: "/review-in", component: VisitReviewInView},
+    {path: "/other-remarks", component: OtherRemarksView},
+    {path: "/referral-letters", component: ReferralLettersView},
+    {path: "/referral-letters/edit/:id", component: EditReferralLetter},
+    {path: "/referral-letters/print/:id", component: PrintReferralLetter},
 
-    { path: "/reports", component: ReportView },
-    { path: "/reports/basic", component: BasicReportView },
-    { path: "/reports/ecg", component: ECGReportView },
-    { path: "/reports/cct", component: CoronaryCTReportView },
-    { path: "/reports/echo", component: EchoReportView },
-    { path: "/reports/angio", component: AngioReportView },
+    {path: "/reports", component: ReportView},
+    {path: "/reports/basic", component: BasicReportView},
+    {path: "/reports/ecg", component: ECGReportView},
+    {path: "/reports/cct", component: CoronaryCTReportView},
+    {path: "/reports/echo", component: EchoReportView},
+    {path: "/reports/angio", component: AngioReportView},
 ]
 
-const router = new VueRouter( {
+const router = new VueRouter({
     routes,
-    scrollBehavior( to ) {
-        if ( to.hash ) {
+    scrollBehavior(to) {
+        if (to.hash) {
             return {
                 selector: to.hash,
                 behavior: "smooth"
             };
         } else {
-            return { x: 0, y: 0, behavior: "smooth" };
+            return {x: 0, y: 0, behavior: "smooth"};
         }
     }
-} );
+});
 
 
-router.beforeEach( ( to, from, next ) => {
-    store.commit( "hasSidebar", true );
+router.beforeEach((to, from, next) => {
+    store.commit("hasSidebar", true);
     next();
-} );
+});
 
 
-new Vue( {
-    render: h => h( AppView ),
+new Vue({
+    render: h => h(AppView),
     store: store,
     router
-} ).$mount( "#app" );
+}).$mount("#app");

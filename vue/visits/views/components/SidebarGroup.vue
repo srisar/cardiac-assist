@@ -17,9 +17,10 @@
       <div class="card-header"><img src="/assets/images/icon-reports.svg" class="icon-24" alt="icon"> Reports</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <router-link to="/reports/basic" class="btn btn-sm btn-outline-primary">
-            <img src="/assets/images/actions/reports-basic.svg" class="icon-16" alt=""> Generate visit report
-          </router-link>
+          <router-link to="/reports/basic">Visit report</router-link>
+        </li>
+        <li class="list-group-item">
+          <router-link to="/reports/echo">Echo report</router-link>
         </li>
         <li class="list-group-item">
           <router-link to="/reports" class="">All reports</router-link>
@@ -50,7 +51,9 @@
 
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header"><img src="/assets/images/icon-special-investigations.svg" class="icon-24" alt="icon"> Investigations</div>
+      <div class="card-header"><img src="/assets/images/icon-special-investigations.svg" class="icon-24" alt="icon">
+        Investigations
+      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <router-link to="/special/ecg" class="">Electrocardiogram</router-link>
@@ -71,7 +74,9 @@
     </div><!-- card -->
 
     <div class="card mb-3 shadow shadow-sm">
-      <div class="card-header"><img src="/assets/images/icon-interventions.svg" class="icon-24" alt="icon"> Interventions</div>
+      <div class="card-header"><img src="/assets/images/icon-interventions.svg" class="icon-24" alt="icon">
+        Interventions
+      </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <router-link to="/prescriptions" class="">Prescriptions</router-link>
@@ -92,8 +97,6 @@
         </li>
       </ul>
     </div><!-- card -->
-
-
 
 
   </div>

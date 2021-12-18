@@ -1,27 +1,27 @@
-$font-family-custom : "Sen", sans-serif;
+$font-family-custom: "Sen", sans-serif;
 
 * {
-  transition : 0.1s;
+  transition: 0.1s;
 }
 
 body {
-  background-color : #0c0c0c;
-  color            : #F8F8F8;
+  background-color: #0c0c0c;
+  color: #F8F8F8;
 }
 
 
 footer {
   a:hover {
-    text-decoration : underline;
+    text-decoration: underline;
   }
-  
+
 }
 
 pre {
-  font-family   : $font-family-custom;
-  margin-bottom : 0;
-  font-size     : inherit;
-  white-space   : pre-line;
+  font-family: $font-family-custom;
+  margin-bottom: 0;
+  font-size: inherit;
+  white-space: pre-line;
 }
 
 .card {
@@ -29,85 +29,85 @@ pre {
 }
 
 .card-header {
-  color          : #0c0c0c;
-  font-size      : 0.9rem;
-  font-weight    : bold;
+  color: #0c0c0c;
+  font-size: 0.9rem;
+  font-weight: bold;
   //text-align: center;
-  padding        : .5rem !important;
-  text-transform : uppercase;
+  padding: .5rem !important;
+  text-transform: uppercase;
 }
 
 .card-body {
-  padding : .5rem !important;
-  color   : #0c0c0c;
+  padding: .5rem !important;
+  color: #0c0c0c;
 }
 
 .modal-title {
-  font-size   : 16px;
-  font-weight : bold;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .btn {
-  text-transform : uppercase;
+  text-transform: uppercase;
 }
 
 .btn-tiny {
-  padding       : .05rem .25rem;
-  font-size     : .675rem;
-  line-height   : 1rem;
-  border-radius : .2rem;
-  
+  padding: .05rem .25rem;
+  font-size: .675rem;
+  line-height: 1rem;
+  border-radius: .2rem;
+
 }
 
 table {
-  background-color : white;
+  background-color: white;
 }
 
 
 .table thead tr {
-  background-color : #ddd;
+  background-color: #ddd;
 }
 
 .table-row-options {
-  width      : 80px;
-  text-align : center;
+  width: 80px;
+  text-align: center;
 }
 
 
 .field-age {
-  width : 80px !important;
+  width: 80px !important;
 }
 
 
 .dropdown-item {
-  font-size : 1em !important;
+  font-size: 1em !important;
 }
 
 
 .section {
   .section__title {
-    text-transform : uppercase;
-    text-align     : center;
-    font-size      : 1.4em;
-    line-height    : 1.6em;
-    margin-bottom  : 2px;
-    padding-bottom : 2px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
     //color: #FFFFFF;
     //border-bottom: solid 1px #FFFFFF;
   }
-  
+
 }
 
 .gray-bg {
-  background-color : #e7e7e7;
+  background-color: #e7e7e7;
 }
 
 .daterangepicker {
-  font-family : $font-family-custom;
+  font-family: $font-family-custom;
 }
 
 .btn-link {
-  cursor : pointer;
+  cursor: pointer;
 }
 
 /*
@@ -116,71 +116,72 @@ BOOTSTRAP MODAL FULLSCREEN OPTION
 
 .content-description {
   .image img {
-    max-width : 100%;
+    max-width: 100%;
   }
-  
+
 }
 
 
 select {
-  font-family : $font-family-custom;
+  font-family: $font-family-custom;
 }
 
 
 .dropdown-menu {
-  z-index : 2000;
+  z-index: 2000;
 }
 
 
 .icon-24 {
-  height : 24px;
+  height: 24px;
 }
 
 
 .icon-16 {
-  height : 16px;
+  height: 16px;
 }
 
 .hover-group {
-  top              : 0;
-  right            : 5px;
-  background-color : #FFFFFF;
+  top: 0;
+  right: 5px;
+  background-color: #FFFFFF;
 }
 
 
 .login-logo {
-  width : 100px;
+  width: 100px;
 }
 
 .daterangepicker {
-  color : #0c0c0c;
+  color: #0c0c0c;
 }
 
 .pointer {
-  cursor : pointer;
+  cursor: pointer;
 }
 
 .bootbox-body {
-  color : #0c0c0c;
+  color: #0c0c0c;
 }
 
 
 div.dataTables_wrapper div.dataTables_filter {
-  display : flex;
-  
+  display: flex;
+
   label {
-    display   : flex;
-    flex-grow : 1;
+    display: flex;
+    flex-grow: 1;
+
     input {
-      margin    : 0 !important;
-      flex-grow : 1;
+      margin: 0 !important;
+      flex-grow: 1;
     }
   }
-  
+
 }
 
 .apexcharts-canvas {
-  color : #0c0c0c;
+  color: #0c0c0c;
   //font-family : "Sen", sans-serif !important;
 }
 
@@ -188,9 +189,9 @@ div.dataTables_wrapper div.dataTables_filter {
 /* ---------- PRINT --------------------------------------*/
 
 .paper {
-  background-color : #ffffff;
-  color            : #0c0c0c;
-  padding          : .1in;
+  background-color: #ffffff;
+  color: #0c0c0c;
+  padding: .1in;
 }
 
 .pdf-content {
@@ -198,4 +199,18 @@ div.dataTables_wrapper div.dataTables_filter {
 
 .pdf-item {
 
+}
+
+.report.lead {
+  font-size: 1rem;
+}
+
+.section-header {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.report-a4 {
+  font-size: 0.95rem;
 }
