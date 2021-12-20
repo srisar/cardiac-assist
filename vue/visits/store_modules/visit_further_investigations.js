@@ -35,59 +35,44 @@ export const visitFurtherInvestigation = {
 
         /* fetch all */
         async furtherInvestigations_fetchAll(context, visitId) {
-            try {
-
-                let response = await $.get(`${getSiteURL()}/api/get/visit/visit-further-investigations.php`, {visit_id: visitId});
-                context.commit("setFurtherInvestigationsList", response.data);
-
-            } catch (e) {
-                throw e;
-            }
+            let response = await $.get(`${getSiteURL()}/api/get/visit/visit-further-investigations.php`, {visit_id: visitId});
+            context.commit('setFurtherInvestigationsList', response['data']);
         },
 
         /* fetch */
         async furtherInvestigations_fetch(context, id) {
-            try {
-
-                let response = await $.get(`${getSiteURL()}/api/get/visit/visit-further-investigations.php`, {id: id});
-                context.commit("setSelectedFurtherInvestigation", response.data);
-            } catch (e) {
-                throw e;
-
-            }
+            let response = await $.get(`${getSiteURL()}/api/get/visit/visit-further-investigations.php`, {id: id});
+            context.commit('setSelectedFurtherInvestigation', response['data']);
         },
 
         /* add */
         async furtherInvestigations_add(context, params) {
-            try {
-                await $.post(`${getSiteURL()}/api/save/visit/visit-further-investigation.php`, params);
-            } catch (e) {
-                throw e;
-            }
+            await $.post(`${getSiteURL()}/api/save/visit/visit-further-investigation.php`, params);
         },
 
         /* update */
         async furtherInvestigations_update(context, params) {
-            try {
-
-                let response = await $.post(`${getSiteURL()}/api/update/visit/visit-further-investigation.php`, params);
-
-            } catch (e) {
-                throw e;
-
-            }
+            await $.post(`${getSiteURL()}/api/update/visit/visit-further-investigation.php`, params);
         },
 
         /* delete */
         async furtherInvestigations_delete(context, id) {
-            try {
+            await $.post(`${getSiteURL()}/api/delete/visit/visit-further-investigation.php`, {id: id});
+        },
 
-                let response = await $.post(`${getSiteURL()}/api/delete/visit/visit-further-investigation.php`, {id: id});
+        /* search all symptoms */
+        async furtherInvestigations_search( context, query ) {
+            const response = await $.get( `${ getSiteURL() }/api/search/symptoms.php`, { query: query } );
+            return response.data;
+        },
 
-            } catch (e) {
-                throw e;
-
-            }
+        /**
+         *
+         * @param context
+         * @param params [symptom_name, description(optional)]
+         */
+        async furtherInvestigations_addInvestigation( context, params ) {
+            return $.post( `${ getSiteURL() }/api/save/investigation.php`, params );
         },
 
 

@@ -5,58 +5,56 @@
     <div class="row">
       <div class="col">
 
-        <div class="card shadow shadow-sm mb-3">
-          <div class="card-header">Add an investigation</div>
-          <div class="card-body">
-
-            <div class="form-group">
-              <label>Investigation</label>
-              <select class="custom-select" v-model.number="investigationToAdd.investigation_id" :class="{'is-invalid': isAddFormInvalid}">
-                <option value="-1" disabled selected>CHOOSE ONE</option>
-                <option v-for="item in investigationsList" :value="item.id">{{ item.investigation_name }}</option>
-              </select>
-            </div>
-
-            <p class="text-right">Add a new <a href="/app/investigations/manage.php#/add">investigation</a></p>
-
-            <div class="form-group">
-              <label>Remarks</label>
-              <textarea rows="3" class="form-control" v-model="investigationToAdd.remarks" placeholder="Add useful remarks for the investigation..."></textarea>
-            </div>
-
-            <div class="text-center">
-              <button class="btn btn-success" :disabled="isAddFormInvalid" @click="onAdd()">
-                <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Add
-              </button>
-            </div>
-
-          </div>
-        </div><!-- card -->
-
-
         <div class="card shadow shadow-sm">
 
           <div class="card-header">Further Investigations</div>
 
           <div class="card-body">
 
+            <AutoCompleteTextBox
+                place-holder-text="Search and add further investigations..."
+                search-dispatch-name="visitInvestigations_search"
+                add-dispatch-name="furtherInvestigations_addInvestigation"
+                field-name="investigation_name"
+                v-model="investigationToAdd.investigation"
+                @input="onAdd"
+            />
+
             <table class="table table-sm table-bordered table-hover">
               <tbody>
               <tr v-for="item in furtherInvestigationsList" :key="item.id"
-                  @mouseover="showHoverItemsById = item.id" @mouseout="showHoverItemsById = null">
+                  @mouseover="hoverItemId = item.id" @mouseout="hoverItemId = null">
+
                 <td class="position-relative">
                   <p class="font-weight-bold">
-                    <a :href="'/app/investigations/manage.php#/edit/' + item.investigation.id" target="_blank">{{ item.investigation.investigation_name }}</a>
+                    <a :href="'/app/investigations/manage.php#/edit/' + item.investigation.id"
+                       target="_blank">{{ item.investigation.investigation_name }}</a>
                   </p>
-                  <div style="white-space: pre-line">{{ item.remarks }}</div>
+
+                  <!-- remarks show and edit -->
+                  <div class="" v-if="showEditRemarks && selectedItemId === item.id">
+                    <input type="text"
+                           class="form-control"
+                           :id="'txt_remarks'+item.id"
+                           v-model="selectedItem.remarks"
+                           @blur="onUpdateRemarks"
+                           @keyup.enter="onUpdateRemarks">
+                  </div>
+                  <div class="" v-else>
+
+                    <div class="pointer" style="white-space: pre-line" v-if="item.remarks"
+                         @click="onSelectRemarkToEdit(item)">
+                      <span :class="abnormalRemarks(item.remarks)">{{ item.remarks }}</span>
+                    </div>
+                    <div class="text-secondary pointer" v-else @click="onSelectRemarkToEdit(item)">
+                      Click here to add remarks (Enter to save)
+                    </div>
+                  </div>
+                  <!-- remarks show and edit -->
 
 
-                  <div class="mt-2 position-absolute hover-group rounded p-1" v-show="showHoverItemsById === item.id">
-                    <button class="btn btn-tiny btn-outline-dark" @click="onOpenEditModal(item)">
-                      <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
-                    </button>
-
-                    <button class="btn btn-tiny btn-outline-danger" @click="showDeleteConfirmModal(item)">
+                  <div class="mt-2 position-absolute hover-group rounded p-1" v-show="hoverItemId === item.id">
+                    <button class="btn btn-tiny btn-outline-danger" @click="onDelete(item)">
                       <img src="/assets/images/actions/remove.svg" alt="" class="icon-16">
                     </button>
                   </div>
@@ -74,64 +72,20 @@
       </div><!-- col -->
     </div><!-- row -->
 
-    <!-- modal: edit -->
-    <ModalWindow :visible="isEditModalVisible" @close="isEditModalVisible = false">
-      <template v-slot:title>Edit {{ investigationToEdit.investigation.investigation_name }}</template>
-      <slot>
-
-        <div class="form-group">
-          <label>Investigation</label>
-          <select class="custom-select" v-model.number="investigationToEdit.investigation_id">
-            <option v-for="item in investigationsList" :value="item.id">{{ item.investigation_name }}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Remarks</label>
-          <textarea rows="3" class="form-control" v-model="investigationToEdit.remarks" placeholder="Add useful remarks for the investigation..."></textarea>
-        </div>
-
-        <div class="text-center">
-          <button class="btn btn-success" @click="onUpdate()">
-            <img src="/assets/images/actions/save.svg" class="icon-24" alt=""> Update
-          </button>
-        </div>
-
-
-      </slot>
-    </ModalWindow>
-    <!-- end: modal: edit further investigations -->
-
-
-    <!-- modal: delete confirm -->
-    <ModalWindow :visible="isDeleteConfirmModalVisible" @close="isDeleteConfirmModalVisible = false">
-      <template v-slot:title>Confirm Removal</template>
-      <slot>
-
-        <p class="lead text-center">Removing {{ investigationToEdit.investigation.investigation_name }}</p>
-
-        <div class="text-center">
-          <button class="btn btn-danger" @click="onDelete()">
-            <img src="/assets/images/actions/remove.svg" class="icon-24" alt=""> Remove
-          </button>
-        </div>
-
-      </slot>
-    </ModalWindow>
-    <!-- end: modal: delete confirm -->
-
-
   </div><!-- template -->
 
 </template>
 
 <script>
-import {errorMessageBox, successMessageBox} from "../../../_common/bootbox_dialogs";
-import ModalWindow from "../../../_common/components/ModalWindow";
+import {errorMessageBox, successMessageBox} from '../../../_common/bootbox_dialogs';
+import ModalWindow from '../../../_common/components/ModalWindow';
+import AutoCompleteTextBox from '@/visits/views/components/AutoCompleteTextBox';
+import _ from 'lodash';
+import voca from 'voca';
 
 export default {
-  name: "FurtherInvestigationsView",
-  components: { ModalWindow },
+  name: 'FurtherInvestigationsView',
+  components: {AutoCompleteTextBox, ModalWindow},
   data() {
     return {
 
@@ -144,20 +98,28 @@ export default {
       investigationsList: [],
 
       investigationToAdd: {
-        investigation_id: -1,
-        remarks: ""
+        investigation: null,
+        remarks: ''
       },
 
       investigationToEdit: {
         id: undefined,
         investigation: {},
         investigation_id: -1,
-        remarks: "",
+        remarks: '',
       },
 
-      showHoverItemsById: null,
+      hoverItemId: null,
 
-    }
+      /* edit remarks */
+      showEditRemarks: false,
+      selectedItemId: null,
+      selectedItem: {
+        item: null,
+        remarks: '',
+      },
+
+    };
   },
 
 
@@ -185,17 +147,17 @@ export default {
     try {
 
       /* 1.fetch all investigations */
-      this.$store.dispatch( "investigations_fetchAllAvailableInvestigation" ).then( () => {
+      this.$store.dispatch('investigations_fetchAllAvailableInvestigation').then(() => {
         this.investigationsList = this.$store.getters.getInvestigationsList;
-      } );
+      });
 
 
       /* 2. fetch all further investigations */
-      await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
+      await this.$store.dispatch('furtherInvestigations_fetchAll', this.visitId);
 
 
-    } catch ( e ) {
-      errorMessageBox( "Failed to load data" );
+    } catch (e) {
+      errorMessageBox('Failed to load data');
     }
 
   },
@@ -208,84 +170,136 @@ export default {
 
         const params = {
           visit_id: this.visitId,
-          investigation_id: this.investigationToAdd.investigation_id,
+          investigation_id: this.investigationToAdd.investigation.id,
           remarks: this.investigationToAdd.remarks
         };
 
-        await this.$store.dispatch( "furtherInvestigations_add", params );
+        await this.$store.dispatch('furtherInvestigations_add', params);
 
         /* fetch added  further investigations */
-        await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
+        await this.$store.dispatch('furtherInvestigations_fetchAll', this.visitId);
 
-      } catch ( e ) {
-        errorMessageBox( "Failed to add the investigation" );
+      } catch (e) {
+        errorMessageBox('Failed to add the investigation');
       }
 
-    },
-
-    onOpenEditModal( item ) {
-
-      this.investigationToEdit = _.cloneDeep( item );
-      this.isEditModalVisible = true;
     },
 
     /*
     * On update
     * */
-    async onUpdate() {
+    // async onUpdate() {
+    //
+    //   try {
+    //
+    //     const params = {
+    //       id: this.investigationToEdit.id,
+    //       investigation_id: this.investigationToEdit.investigation_id,
+    //       remarks: this.investigationToEdit.remarks
+    //     };
+    //
+    //     await this.$store.dispatch('furtherInvestigations_update', params);
+    //
+    //     this.isEditModalVisible = false;
+    //     successMessageBox('Further investigation details updated');
+    //
+    //     await this.$store.dispatch('furtherInvestigations_fetchAll', this.visitId);
+    //
+    //   } catch (e) {
+    //     errorMessageBox('Failed to update investigation details');
+    //   }
+    //
+    // },
 
-      try {
-
-        const params = {
-          id: this.investigationToEdit.id,
-          investigation_id: this.investigationToEdit.investigation_id,
-          remarks: this.investigationToEdit.remarks
-        };
-
-        await this.$store.dispatch( "furtherInvestigations_update", params );
-
-        this.isEditModalVisible = false;
-        successMessageBox( "Further investigation details updated" );
-
-        await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
-
-      } catch ( e ) {
-        errorMessageBox( "Failed to update investigation details" );
-      }
-
-    },
-
-    /*
-    * On show delete confirm modal
-    * */
-    showDeleteConfirmModal( item ) {
-
-      this.investigationToEdit = item;
-      this.isDeleteConfirmModalVisible = true;
-
-    },
 
     /*
     * On delete
     * */
-    async onDelete() {
+    async onDelete(item) {
 
       try {
 
-        await this.$store.dispatch( "furtherInvestigations_delete", this.investigationToEdit.id );
-        await this.$store.dispatch( "furtherInvestigations_fetchAll", this.visitId );
+        await this.$store.dispatch('furtherInvestigations_delete', item.id);
+        await this.$store.dispatch('furtherInvestigations_fetchAll', this.visitId);
 
-        this.isDeleteConfirmModalVisible = false;
+      } catch (e) {
+        errorMessageBox('Failed to remove selected investigation');
+      }
+    }, /* onDelete */
 
-      } catch ( e ) {
-        errorMessageBox( "Failed to remove selected investigation" );
+
+    abnormalRemarks(remarks) {
+      if (voca.first(remarks) === '*') {
+        return 'text-danger font-weight-bold';
+      }
+      return '';
+    },
+
+    /*
+	   * ------------------------------------------------------------
+	   * Selected item's edit remarks logic
+	   * ------------------------------------------------------------
+	   * */
+
+    onSelectRemarkToEdit(problem) {
+      this.selectedItem = _.cloneDeep(problem);
+
+      this.selectedItemId = problem.id;
+      this.showEditRemarks = true;
+
+      this.$nextTick(() => {
+        /* set focus on the selected text box */
+        document.getElementById('txt_remarks' + problem.id).focus();
+      });
+
+    }, /* onSelectRemarkToEdit */
+
+    async onUpdateRemarks() {
+
+      /*
+       * if selectedProblem is null, then don't do anything
+       * this is needed because we are hooking both blur and enter events
+       * to the same function. once enter is pressed, this code will run
+       * and then set selectedProblem = null, this will cause an issue
+       * when blur is trying to run.
+       * */
+      if (_.isNull(this.selectedItem)) return false;
+
+      try {
+
+        const params = {
+          id: this.selectedItemId,
+          remarks: voca.capitalize(this.selectedItem.remarks),
+        };
+
+        await this.$store.dispatch('furtherInvestigations_update', params);
+
+        await this.$store.dispatch('furtherInvestigations_fetchAll', this.visitId);
+
+      } catch (e) {
+        console.log(e);
+        errorMessageBox('Failed to update');
       }
 
-    }
+
+      this.$nextTick(() => {
+        this._resetSelectedProblem();
+      });
+
+    },
+
+
+    _resetSelectedProblem() {
+      this.selectedItem = null;
+      this.selectedItemId = null;
+      this.showEditRemarks = false;
+    },
+
 
   },
+  /* METHODS */
 
-}
+};
 </script>
 
 <style scoped>

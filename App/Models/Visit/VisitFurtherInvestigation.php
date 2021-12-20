@@ -77,7 +77,6 @@ class VisitFurtherInvestigation implements IModel
     {
         $data = [
             "remarks" => $this->remarks,
-            "investigation_id" => $this->investigation_id
         ];
 
         return Database::update(self::TABLE, $data, ["id" => $this->id]);

@@ -196,7 +196,6 @@ export default {
 	methods: {
 		
 		abnormalRemarks( remarks ) {
-			console.log( remarks );
 			if ( voca.first( remarks ) === '*' ) {
 				return 'text-danger font-weight-bold';
 			}
@@ -244,10 +243,10 @@ export default {
 		},
 		
 		/*
-	 * ------------------------------------------------------------
-	 * Selected item's edit remarks logic
-	 * ------------------------------------------------------------
-	 * */
+	   * ------------------------------------------------------------
+	   * Selected item's edit remarks logic
+	   * ------------------------------------------------------------
+	   * */
 		
 		onSelectRemarkToEdit( problem ) {
 			this.selectedItem = _.cloneDeep( problem );

@@ -79,7 +79,7 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <router-link to="/prescriptions" class="">Prescriptions</router-link>
+          <router-link to="/prescriptions" class="text-danger font-weight-bold">Prescriptions</router-link>
         </li>
 
         <li class="list-group-item">

@@ -13,7 +13,6 @@ try {
 
     $fields = [
         "id" => Request::getAsInteger("id"),
-        "investigation_id" => Request::getAsInteger("investigation_id"),
         "remarks" => Request::getAsRawString("remarks"),
     ];
 
