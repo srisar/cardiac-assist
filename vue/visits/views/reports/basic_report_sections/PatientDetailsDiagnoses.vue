@@ -49,7 +49,7 @@
 
 
       <!-- section: clinical details -->
-      <div id="section-clinical-details" class="pdf-item" v-if="visitSymptoms.length > 0">
+      <section id="section-clinical-details" class="pdf-item" v-if="visitSymptoms.length > 0">
         <div class="section-header">Clinical details</div>
         <table class="table table-sm table-borderless mb-1">
           <tbody>
@@ -60,7 +60,7 @@
           </tbody>
         </table>
         <hr>
-      </div>
+      </section>
 
       <!-- section: differential diagnoses -->
       <div class="section-differential-diagnoses section" v-if="diffDiagnoses.length > 0">

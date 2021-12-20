@@ -1,6 +1,6 @@
 <template>
 	
-	<div>
+	<section class="pdf-item">
 		
 		<div v-if="prescription">
 			
@@ -46,7 +46,7 @@
 		</div>
 	
 	
-	</div>
+	</section>
 
 </template>
 

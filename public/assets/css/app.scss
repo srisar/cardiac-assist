@@ -198,7 +198,7 @@ div.dataTables_wrapper div.dataTables_filter {
 }
 
 .pdf-item {
-
+  break-inside: avoid;
 }
 
 .report.lead {
@@ -213,4 +213,11 @@ div.dataTables_wrapper div.dataTables_filter {
 
 .report-a4 {
   font-size: 0.95rem;
+}
+
+
+@media print {
+  .pdf-item {
+    break-before: page;
+  }
 }
