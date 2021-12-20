@@ -17,7 +17,7 @@
 			<tbody>
 			<tr v-for="item in appointments">
 				<td>
-					<a :href="renderPatientUrl(item.patient.id)">
+					<a :href="renderPatientUrl(item.patient.id)" target="_blank">
 						{{ item.patient.first_name }} {{ item.patient.last_name }}
 					</a>
 				</td>

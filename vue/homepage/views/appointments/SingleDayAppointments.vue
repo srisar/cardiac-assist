@@ -60,7 +60,7 @@
 
 import AppointmentsTable from "../../components/AppointmentsTable";
 import {DateTime} from "luxon";
-import {errorMessageBox} from "../../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs';
 import TheLoading from "../../../_common/components/TheLoading";
 
 export default {
