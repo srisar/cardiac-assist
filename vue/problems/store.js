@@ -58,6 +58,10 @@ export const store = new Vuex.Store( {
             return $.post( `${ getSiteURL() }/api/update/problem.php`, params );
         }, /* update */
 
+        async problem_delete( context, id ) {
+            return $.post( `${ getSiteURL() }/api/delete/problem.php`, {id: id} );
+        }, /* update */
+
 
     },
 

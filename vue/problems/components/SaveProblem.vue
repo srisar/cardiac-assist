@@ -7,7 +7,7 @@
       <div class="">
 
         <div class="form-group">
-          <label for="text-remarks">Remarks</label>
+          <label for="text-remarks">Problem</label>
           <textarea rows="3" id="text-remarks" class="form-control" v-model.trim="problem.problem"></textarea>
         </div>
 
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {errorMessageBox} from "../../_common/bootbox_dialogs";
+import {errorMessageBox} from '@/_common/bootbox_dialogs';
 
 export default {
   name: "SaveProblem",

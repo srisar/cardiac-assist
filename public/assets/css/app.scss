@@ -201,6 +201,10 @@ div.dataTables_wrapper div.dataTables_filter {
   break-inside: avoid;
 }
 
+.pdf-item-table {
+  break-inside: avoid-column;
+}
+
 .report.lead {
   font-size: 1rem;
 }

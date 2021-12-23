@@ -25,7 +25,7 @@
         :paginate-elements-by-height="1400"
         filename="hee hee"
         :pdf-quality="2"
-        :manual-pagination="false"
+        :manual-pagination="true"
         pdf-format="a5"
         pdf-orientation="portrait"
         pdf-content-width="100%"
@@ -43,39 +43,42 @@
         <div class="section-header text-dark">Prescribed on {{ selectedPrescription.date }}</div>
         <div class="" v-if="selectedPrescription.remarks">{{ selectedPrescription.remarks }}</div>
 
-        <table class="table table-bordered table-sm">
-          <thead>
-          <tr>
-            <th class="">Drug</th>
-            <th class="text-right">Dose</th>
-            <th class="text-right">Frequency</th>
-            <th class="text-right">Duration</th>
-            <th class="text-right">Remarks</th>
-          </tr>
-          </thead>
+        <section class="pdf-item-table">
+          <table class="table table-bordered table-sm">
+            <thead>
+            <tr>
+              <th class="">Drug</th>
+              <th class="text-right">Dose</th>
+              <th class="text-right">Frequency</th>
+              <th class="text-right">Duration</th>
+              <th class="text-right">Remarks</th>
+            </tr>
+            </thead>
 
-          <tbody>
-          <tr v-for="item in selectedPrescription.prescription_items" :key="item.id">
+            <tbody>
+            <tr v-for="item in selectedPrescription.prescription_items" :key="item.id">
 
-            <td class="align-middle">
-              {{ item.drug.drug_name }}
-            </td>
+              <td class="align-middle">
+                {{ item.drug.drug_name }}
+              </td>
 
-            <td class="text-right">
-              {{ item.dose }}
-            </td>
-            <td class="text-right">
-              {{ item.frequency }}
-            </td>
-            <td class="text-right">
-              {{ item.duration }}
-            </td>
-            <td class="text-right align-middle">
-              {{ item.remarks }}
-            </td>
-          </tr>
-          </tbody>
-        </table>
+              <td class="text-right">
+                {{ item.dose }}
+              </td>
+              <td class="text-right">
+                {{ item.frequency }}
+              </td>
+              <td class="text-right">
+                {{ item.duration }}
+              </td>
+              <td class="text-right align-middle">
+                {{ item.remarks }}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </section>
+
 
       </section>
 
@@ -131,6 +134,7 @@ export default {
         html2canvas: {
           scale: 3,
           useCORS: true,
+          letterRendering: true
         },
 
         jsPDF: {
@@ -138,6 +142,7 @@ export default {
           format: 'a5',
           orientation: 'portrait',
         },
+        pagebreak: {mode: ['avoid-all', 'css', 'legacy']}
       },
 
 
