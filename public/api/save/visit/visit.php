@@ -40,8 +40,6 @@ try {
 
     ];
 
-//    error_log(print_r($fields, true));
-
 
     $object = Visit::build($fields);
 
@@ -95,8 +93,6 @@ try {
 
             /* add problems list to the current visit */
             $visitProblems = VisitProblem::findByVisit($previousVisit);
-
-            error_log(print_r($visitProblems, true));
 
             if (!empty($visitProblems)) {
                 foreach ($visitProblems as $visitProblem) {
