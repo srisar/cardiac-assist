@@ -155,7 +155,7 @@
             <div class="col-4">
               <div class="input-group input-group-sm">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">Heart beat</div>
+                  <div class="input-group-text">Heart rate</div>
                 </div>
                 <input type="text" class="form-control bg-white" :value="visit.heart_beat" readonly>
               </div>

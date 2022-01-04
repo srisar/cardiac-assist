@@ -76,7 +76,7 @@
               }}</span>
           </td>
           <td>
-            <span class="font-weight-bold">HB:</span> {{ visit.heart_beat }}
+            <span class="font-weight-bold">HR:</span> {{ visit.heart_beat }}
           </td>
         </tr>
 
