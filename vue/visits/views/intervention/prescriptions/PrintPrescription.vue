@@ -23,7 +23,7 @@
         :enable-download="false"
         :preview-modal="true"
         :paginate-elements-by-height="1400"
-        filename="hee hee"
+        filename="prescription-report"
         :pdf-quality="2"
         :manual-pagination="true"
         pdf-format="a5"
@@ -109,7 +109,7 @@ export default {
     return {
 
       isLoading: false,
-      addEmsHeader: true,
+      addEmsHeader: false,
 
       selectedPrescription: {
         id: undefined,
@@ -120,7 +120,7 @@ export default {
       },
 
       htmlToPdfOptions: {
-        margin: [0.2, 0.1, 0.2, 0.1],
+        margin: [5.5, 0.5, 0.5, 0.5],
 
         filename: `basic-report.pdf`,
 
@@ -138,7 +138,7 @@ export default {
         },
 
         jsPDF: {
-          unit: 'in',
+          unit: 'cm',
           format: 'a5',
           orientation: 'portrait',
         },

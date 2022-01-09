@@ -14,7 +14,7 @@
         :manual-pagination="true"
         pdf-format="a5"
         pdf-orientation="portrait"
-        pdf-content-width="545px"
+        pdf-content-width="100%"
         ref="html2Pdf"
         :html-to-pdf-options="htmlToPdfOptions"
     >
@@ -26,8 +26,6 @@
 
           <!-- patient details diagnoses -->
           <PatientDetailsDiagnoses/>
-
-          <PrescriptionDetails class="section"/>
 
         </div><!-- paper -->
 
@@ -63,17 +61,17 @@
 import VueHtml2pdf from 'vue-html2pdf';
 import PatientDetailsDiagnoses from './basic_report_sections/PatientDetailsDiagnoses';
 import PrescriptionDetails from './basic_report_sections/PrescriptionDetails';
-import SectionEMSHeader from "@/visits/views/reports/components/SectionEMSHeader";
+import SectionEMSHeader from '@/visits/views/reports/components/SectionEMSHeader';
 
 export default {
   name: 'BasicReportView',
   components: {SectionEMSHeader, PrescriptionDetails, PatientDetailsDiagnoses, VueHtml2pdf},
   data() {
     return {
-      isEmsHeaderVisible: true,
+      isEmsHeaderVisible: false,
 
       htmlToPdfOptions: {
-        margin: [0.2, 0.1, 0.2, 0.1],
+        margin: [5.5, 0.5, 0.5, 0.5],
 
         filename: `basic-report.pdf`,
 
@@ -87,10 +85,11 @@ export default {
         html2canvas: {
           scale: 3,
           useCORS: true,
+          letterRendering: true
         },
 
         jsPDF: {
-          unit: 'in',
+          unit: 'cm',
           format: 'a5',
           orientation: 'portrait',
         },
