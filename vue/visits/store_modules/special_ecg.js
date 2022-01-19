@@ -16,7 +16,7 @@ export const visitSpecialEcg = {
         /* fetch */
         async visitECG_fetch( context, visitId ) {
             const response = await $.get( `${ getSiteURL() }/api/get/visit/visit-ecg.php`, { visit_id: visitId } );
-            context.state.visitECG = response.data;
+            context.state.visitECG = response['data'];
         },
 
 

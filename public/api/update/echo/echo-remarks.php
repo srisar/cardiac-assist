@@ -7,26 +7,26 @@ use App\Models\EchoRemark;
 
 require_once "../../../../_bootstrap.inc.php";
 
-Authentication::isAdminOrRedirect( DEBUG );
+Authentication::isAdminOrRedirect(DEBUG);
 
 try {
 
     $fields = [
-        "id" => Request::getAsInteger( "id" ),
-        "value" => Request::getAsString( "value" ),
-
+        "id" => Request::getAsInteger("id"),
+        "value" => Request::getAsString("value"),
+        "fillable" => Request::getAsString("fillable")
     ];
 
-    $object = EchoRemark::build( $fields );
+    $object = EchoRemark::build($fields);
 
     $result = $object->update();
 
-    if ( empty( $result ) ) throw new Exception( "Update failed" );
+    if (empty($result)) throw new Exception("Update failed");
 
     JSONResponse::validResponse();
     return;
 
-} catch ( Exception $exception ) {
-    JSONResponse::exceptionResponse( $exception );
+} catch (Exception $exception) {
+    JSONResponse::exceptionResponse($exception);
 }
 

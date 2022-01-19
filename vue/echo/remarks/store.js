@@ -1,7 +1,7 @@
-import Vuex from 'vuex'
-import Vue from 'vue'
+import Vuex from 'vuex';
+import Vue from 'vue';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
 
@@ -28,11 +28,11 @@ export default new Vuex.Store({
     getters: {
 
         getEchoValues: function (state) {
-            return state.echoValues
+            return state.echoValues;
         },
 
         getEchoValueTypes: function (state) {
-            return state.echoValueTypes
+            return state.echoValueTypes;
         }
 
     },
@@ -40,99 +40,41 @@ export default new Vuex.Store({
     mutations: {
 
         setEchoValues: function (state, values) {
-            state.echoValues = values
+            state.echoValues = values;
         }
 
     },
 
     actions: {
 
-        FETCH_ALL: function ({commit}) {
+        FETCH_ALL: async function ({commit}) {
 
-            return new Promise((resolve, reject) => {
-
-                $.get(`${getSiteURL()}/api/get/echo/echo-remarks.php`)
-                    .done(response => {
-
-                        commit('setEchoValues', response)
-
-                        resolve()
-
-                    })
-                    .fail(error => {
-                        reject(error)
-                    })
-
-            })
+            const response = await $.get(`${getSiteURL()}/api/get/echo/echo-remarks.php`);
+            commit('setEchoValues', response);
 
         },/* fetch all */
 
-        UPDATE: function ({commit, dispatch}, item) {
+        UPDATE: async function ({commit, dispatch}, item) {
 
-            return new Promise((resolve, reject) => {
-
-                $.post(`${getSiteURL()}/api/update/echo/echo-remarks.php`, item)
-                    .done(response => {
-
-                        dispatch('FETCH_ALL')
-                            .catch(() => {
-                                reject()
-                            })
-
-                        resolve()
-                    })
-                    .fail(error => {
-                        reject(error)
-                    })
-
-            })
+            await $.post(`${getSiteURL()}/api/update/echo/echo-remarks.php`, item);
+            await dispatch('FETCH_ALL');
 
         },/* update */
 
 
-        SAVE: function ({commit, dispatch}, item) {
+        SAVE: async function ({commit, dispatch}, item) {
 
-            return new Promise((resolve, reject) => {
-
-                $.post(`${getSiteURL()}/api/save/echo/echo-remarks.php`, item)
-                    .done(response => {
-
-                        dispatch('FETCH_ALL')
-                            .catch(() => {
-                                reject()
-                            })
-
-                        resolve()
-                    })
-                    .fail(error => {
-                        reject(error)
-                    })
-
-            })
+            await $.post(`${getSiteURL()}/api/save/echo/echo-remarks.php`, item);
+            await dispatch('FETCH_ALL');
 
         },/* save */
 
-        DELETE: function ({commit, dispatch}, id) {
+        DELETE: async function ({commit, dispatch}, id) {
 
-            return new Promise((resolve, reject) => {
-
-                $.post(`${getSiteURL()}/api/delete/echo/echo-remarks.php`, {id: id})
-                    .done(response => {
-
-                        dispatch('FETCH_ALL')
-                            .catch(() => {
-                                reject()
-                            })
-
-                        resolve()
-                    })
-                    .fail(error => {
-                        reject(error)
-                    })
-
-            })
+            await $.post(`${getSiteURL()}/api/delete/echo/echo-remarks.php`, {id: id});
+            await dispatch('FETCH_ALL');
 
         },/* save */
 
     },
-})
+});

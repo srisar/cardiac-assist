@@ -43,7 +43,7 @@ Database::init( $db_config );
 const SITE_URL = 'http://localhost';
 const BASE_PATH = __DIR__ . '/public';
 define( 'APP_NAME', $_ENV['APP_NAME'] );
-const APP_VERSION = '2.9.8';
+const APP_VERSION = '3.0';
 
 
 App::setTitle( "" );

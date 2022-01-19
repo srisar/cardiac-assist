@@ -19,16 +19,14 @@
           <div class="card shadow-sm shadow mb-3" v-for="(items, key) in allValues">
 
             <div class="card-header d-flex justify-content-between">
-              <div>{{ echoValueTypes[ key ] }}</div>
-
+              <div>{{ echoValueTypes[key] }}</div>
             </div>
 
             <div class="card-body">
 
               <div class="mb-2">
                 <button class="btn btn-sm btn-outline-success" @click="onOpenAddModal(key)">
-                  <img src="/assets/images/actions/add.svg" class="icon-16" alt="">
-                  Add
+                  <img src="/assets/images/actions/add.svg" class="icon-16" alt=""> Add
                 </button>
               </div>
 
@@ -36,8 +34,12 @@
 
                 <tbody>
                 <tr v-for="item in items">
-                  <td style="white-space: pre-line">{{ item.value }}</td>
-
+                  <td style="white-space: pre-line">
+                    <span>{{ item.value }}</span>
+                  </td>
+                  <td style="width: 30px">
+                    <div v-if="item.fillable === 'Y'" class="text-center">✔</div>
+                  </td>
                   <td class="text-center" style="width: 80px">
                     <button type="button" class="btn btn-outline-secondary btn-tiny" @click="onOpenEditModal(item)">
                       <img src="/assets/images/actions/edit.svg" class="icon-16" alt="">
@@ -70,6 +72,22 @@
 
       <div class="form-group">
         <textarea class="form-control" rows="4" v-model="valueToEdit.value"></textarea>
+      </div>
+
+      <div>
+        <div>Add to default fillable button?</div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="edit_fillable" id="edit_fillable_no" value="N" checked v-model="valueToEdit.fillable">
+          <label class="form-check-label" for="edit_fillable_no">
+            No
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="edit_fillable" id="edit_fillable_yes" value="Y" v-model="valueToEdit.fillable">
+          <label class="form-check-label" for="edit_fillable_yes">
+            Yes
+          </label>
+        </div>
       </div>
 
       <div class="text-center">
@@ -114,12 +132,12 @@
 <script>
 
 
-import ModalWindow from "../../_common/components/ModalWindow";
+import ModalWindow from '../../_common/components/ModalWindow';
 
 export default {
-  name: "EchoRemarks",
+  name: 'EchoRemarks',
 
-  components: { ModalWindow },
+  components: {ModalWindow},
 
   data() {
     return {
@@ -128,40 +146,46 @@ export default {
       modalAddVisible: false,
 
       echoRemarkToAdd: {
-        value: "",
-        type: "AORTA",
-        typeLabel: "",
+        value: '',
+        type: 'AORTA',
+        typeLabel: '',
+        fillable: 'N'
       },
 
       valueToEdit: {
-        value: "",
+        value: '',
         id: undefined,
+        fillable: 'N'
       }
 
-    }
+    };
   },
 
   computed: {
     echoValueTypes: function () {
-      return this.$store.getters.getEchoValueTypes
+      return this.$store.getters.getEchoValueTypes;
     },
 
     allValues: function () {
-      return this.$store.getters.getEchoValues
+      return this.$store.getters.getEchoValues;
     }
 
   },
 
-  mounted() {
+  async mounted() {
 
-    this.$store.dispatch( 'FETCH_ALL' );
+    try {
+      await this.$store.dispatch('FETCH_ALL');
+    } catch (e) {
+      console.log(e);
+    }
 
   },
 
 
   methods: {
 
-    onOpenEditModal: function ( item ) {
+    onOpenEditModal: function (item) {
 
       this.valueToEdit.id = item.id;
       this.valueToEdit.value = item.value;
@@ -174,13 +198,14 @@ export default {
 
       let item = {
         value: this.valueToEdit.value,
-        id: this.valueToEdit.id
+        id: this.valueToEdit.id,
+        fillable: this.valueToEdit.fillable,
       };
 
-      this.$store.dispatch( 'UPDATE', item )
-          .then( () => {
+      this.$store.dispatch('UPDATE', item)
+          .then(() => {
             this.modalEditVisible = false;
-          } );
+          });
 
     },
 
@@ -189,23 +214,23 @@ export default {
       const params = {
         value: this.echoRemarkToAdd.value,
         type: this.echoRemarkToAdd.type
-      }
+      };
 
-      this.$store.dispatch( 'SAVE', params ).then()
-
-    },
-
-    onDelete: function ( item ) {
-
-      this.$store.dispatch( 'DELETE', item.id )
-          .then()
+      this.$store.dispatch('SAVE', params).then();
 
     },
 
-    onOpenAddModal( type ) {
+    onDelete: function (item) {
+
+      this.$store.dispatch('DELETE', item.id)
+          .then();
+
+    },
+
+    onOpenAddModal(type) {
 
       this.echoRemarkToAdd.type = type;
-      this.echoRemarkToAdd.typeLabel = this.echoValueTypes[ type ];
+      this.echoRemarkToAdd.typeLabel = this.echoValueTypes[type];
 
       this.modalAddVisible = true;
 
@@ -214,7 +239,7 @@ export default {
 
   },
 
-}
+};
 </script>
 
 <style scoped>

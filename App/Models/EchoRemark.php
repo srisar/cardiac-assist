@@ -14,20 +14,21 @@ class EchoRemark implements IModel
 
     public ?int $id;
     public ?string $value, $type;
+    public ?string $fillable; /* Y,N */
 
 
-    public static function build( $array ): self
+    public static function build($array): self
     {
         $object = new self();
-        foreach ( $array as $key => $value ) {
+        foreach ($array as $key => $value) {
             $object->$key = $value;
         }
         return $object;
     }
 
-    public static function find( int $id ): ?EchoRemark
+    public static function find(int $id): ?EchoRemark
     {
-        return Database::find( self::TABLE, $id, self::class );
+        return Database::find(self::TABLE, $id, self::class);
     }
 
     /**
@@ -35,9 +36,9 @@ class EchoRemark implements IModel
      * @param int $offset
      * @return EchoRemark[]
      */
-    public static function findAll( $limit = 1000, $offset = 0 ): array
+    public static function findAll($limit = 1000, $offset = 0): array
     {
-        return Database::findAll( self::TABLE, $limit, $offset, self::class, "type" );
+        return Database::findAll(self::TABLE, $limit, $offset, self::class, "type");
     }
 
     /**
@@ -50,7 +51,7 @@ class EchoRemark implements IModel
             "type" => $this->type,
         ];
 
-        return Database::insert( self::TABLE, $data );
+        return Database::insert(self::TABLE, $data);
 
     }
 
@@ -58,49 +59,50 @@ class EchoRemark implements IModel
     {
         $data = [
             "value" => $this->value,
+            "fillable" => $this->fillable
         ];
 
-        return Database::update( self::TABLE, $data, [ "id" => $this->id ] );
+        return Database::update(self::TABLE, $data, ["id" => $this->id]);
 
     }
 
     public function delete(): bool
     {
-        return Database::delete( self::TABLE, "id", $this->id );
+        return Database::delete(self::TABLE, "id", $this->id);
     }
 
     /**
      * @param $type
      * @return EchoRemark[]
      */
-    public static function findByType( $type ): array
+    public static function findByType($type): array
     {
 
         $db = Database::instance();
-        $statement = $db->prepare( "select * from echo_remarks where type=? order by value" );
-        $statement->execute( [ $type ] );
+        $statement = $db->prepare("select * from echo_remarks where type=? order by value");
+        $statement->execute([$type]);
 
         /** @var EchoRemark[] $result */
-        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
+        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        if ( !empty( $result ) ) return $result;
+        if (!empty($result)) return $result;
         return [];
 
     }
 
-    public static function search( string $keyword, string $type ): array
+    public static function search(string $keyword, string $type): array
     {
 
         $db = Database::instance();
-        $statement = $db->prepare( "select * from echo_remarks where echo_remarks.value like :q and type=:type" );
-        $statement->execute( [
+        $statement = $db->prepare("select * from echo_remarks where echo_remarks.value like :q and type=:type");
+        $statement->execute([
             ":q" => "%" . $keyword . "%",
             ":type" => $type,
-        ] );
+        ]);
 
-        $result = $statement->fetchAll( PDO::FETCH_CLASS, self::class );
+        $result = $statement->fetchAll(PDO::FETCH_CLASS, self::class);
 
-        if ( !empty( $result ) ) return $result;
+        if (!empty($result)) return $result;
         return [];
 
     }
