@@ -59,7 +59,7 @@
           </tr>
           </tbody>
         </table>
-        <hr>
+        <hr class="my-1">
       </section>
 
       <!-- section: differential diagnoses -->
@@ -76,8 +76,8 @@
             </td>
           </tr>
           </tbody>
-          <hr>
         </table>
+        <hr class="my-1">
       </div>
       <!-- section: differential diagnoses -->
 
@@ -95,7 +95,8 @@
           </tr>
           </tbody>
         </table>
-        <hr>
+        <hr class="my-1">
+
       </div>
 
       <!-- section: visit problems -->
@@ -121,7 +122,7 @@
           </tr>
           </tbody>
         </table>
-        <hr>
+        <hr class="my-1">
       </div>
       <!-- section: visit problems -->
 
@@ -324,5 +325,8 @@ export default {
   margin-bottom: 0 !important;
 }
 
+.table-sm td, .table-sm th {
+  padding: 0.1rem;
+}
 
 </style>

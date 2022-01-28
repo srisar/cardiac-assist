@@ -202,4 +202,8 @@ export default {
 </script>
 
 <style scoped>
+
+.table-sm td, .table-sm th {
+  padding: 0.1rem;
+}
 </style>
