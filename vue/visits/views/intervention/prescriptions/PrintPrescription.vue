@@ -150,6 +150,17 @@ export default {
   },
   /* DATA */
 
+  watch: {
+    addEmsHeader(value) {
+      if (value) {
+        this.htmlToPdfOptions.margin = [0.5, 0.5, 0.5, 0.5];
+      } else {
+        this.htmlToPdfOptions.margin = [5.5, 0.5, 0.5, 0.5];
+      }
+    },
+  },
+
+
   computed: {
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Print';

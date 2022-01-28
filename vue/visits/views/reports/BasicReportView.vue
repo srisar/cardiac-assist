@@ -115,6 +115,16 @@ export default {
 
   },
 
+  watch: {
+    isEmsHeaderVisible(value) {
+      if (this.isEmsHeaderVisible) {
+        this.htmlToPdfOptions.margin = [0.5, 0.5, 0.5, 0.5];
+      } else {
+        this.htmlToPdfOptions.margin = [5.5, 0.5, 0.5, 0.5];
+      }
+    },
+  },
+
 
   async mounted() {
 
