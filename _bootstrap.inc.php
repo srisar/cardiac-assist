@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types=1 );
+declare( strict_types = 1 );
 
 session_start();
 
@@ -18,9 +18,9 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable( __DIR__ );
 $dotenv->load();
 
-if ( isset( $_ENV["DEBUG"] ) ) {
+if( isset( $_ENV["DEBUG"] ) ) {
 
-    if ( $_ENV["DEBUG"] == "true" ) define( "DEBUG", true );
+    if( $_ENV["DEBUG"] == "true" ) define( "DEBUG", true );
     else define( "DEBUG", false );
 } else {
     define( "DEBUG", false );
@@ -43,7 +43,7 @@ Database::init( $db_config );
 const SITE_URL = 'http://localhost';
 const BASE_PATH = __DIR__ . '/public';
 define( 'APP_NAME', $_ENV['APP_NAME'] );
-const APP_VERSION = '3.2';
+const APP_VERSION = '3.3';
 
 
 App::setTitle( "" );

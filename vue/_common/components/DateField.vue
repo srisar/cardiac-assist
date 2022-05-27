@@ -4,42 +4,52 @@
 
 <script>
 export default {
-  name: "DateField",
+  name: 'DateField',
   props: ['value', 'min-date', 'id'],
 
-  data: function () {
+  data: function() {
     return {};
   },
 
   watch: {
-    value(newValue) {
-      $(this.$refs.field_date).data('daterangepicker').setStartDate(newValue);
-      $(this.$refs.field_date).data('daterangepicker').setEndDate(newValue);
-    }
+    // value( newValue ) {
+    //   console.log( 'new value received', newValue );
+    //
+    //   $( this.$refs.field_date ).data( 'daterangepicker' ).setStartDate( moment( newValue ) );
+    //   $( this.$refs.field_date ).data( 'daterangepicker' ).setEndDate( moment( newValue ) );
+    //
+    // }
   },
 
-  mounted: function () {
+  mounted: function() {
     //
-    $(this.$refs.field_date).daterangepicker({
+    $( this.$refs.field_date ).daterangepicker( {
       singleDatePicker: true,
       autoApply: true,
       showDropdowns: true,
       locale: {
-        format: "YYYY-MM-DD",
+        format: 'YYYY-MM-DD',
       },
       startDate: this.value,
-    });
+    } );
 
-    $(this.$refs.field_date).on("apply.daterangepicker", (event, picker) => {
-      let date = picker.startDate.format("YYYY-MM-DD");
-      this.$emit('input', date);
-      this.$emit('changed:date');
-    });
+    $( this.$refs.field_date ).on( 'apply.daterangepicker', ( event, picker ) => {
+
+      console.log( picker.startDate.format( 'YYYY-MM-DD' ) );
+      let date = picker.startDate.format( 'YYYY-MM-DD' );
+
+      this.$emit( 'input', date );
+      this.$emit( 'changed:date' );
+
+      $( this.$refs.field_date ).data( 'daterangepicker' ).setStartDate( date );
+      $( this.$refs.field_date ).data( 'daterangepicker' ).setEndDate( date );
+
+    } );
   },
   methods: {
     //
   }
-}
+};
 </script>
 
 <style scoped>

@@ -201,17 +201,17 @@ export default {
   computed: {
 
 
-    formValidated: function () {
-      if ( _.isEmpty( this.patient.first_name ) ) return false;
-      if ( _.isEmpty( this.patient.last_name ) ) return false;
+    formValidated: function() {
+      if( _.isEmpty( this.patient.first_name ) ) return false;
+      if( _.isEmpty( this.patient.last_name ) ) return false;
       return !_.isEmpty( this.patient.gender );
     },
 
-    fullName: function () {
+    fullName: function() {
       return this.patient.first_name + ' ' + this.patient.last_name;
     },
 
-    calculatedAge: function () {
+    calculatedAge: function() {
       const today = moment();
       const diff = moment.duration( today.diff( moment( this.patient.dob ) ) );
       let years = Math.round( diff.asYears() );
@@ -233,7 +233,7 @@ export default {
 
   methods: {
 
-    onClickSave: function () {
+    onClickSave: function() {
 
       this.$store.dispatch( 'savePatient', this.patient )
           .then( r => {
