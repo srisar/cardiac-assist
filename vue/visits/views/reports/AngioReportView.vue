@@ -23,6 +23,11 @@
       <h3 class="text-center">Angiography Report</h3>
 
       <PatientBasicDetails/>
+			
+			<div class="d-flex justify-content-end font-weight-bold" style="gap: 10px">
+				<span>Performed by:</span>
+				<span>{{ visit.performed_by }}</span>
+			</div>
 
       <div class="section" v-if="loaded">
 
@@ -266,6 +271,10 @@ export default {
     visitId() {
       return this.$store.getters.getVisitId;
     },
+		
+		visit() {
+			return this.$store.getters.getVisit;
+		},
 
     visitAngio() {
       return this.$store.getters.getVisitAngio;

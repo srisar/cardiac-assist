@@ -23,7 +23,12 @@
       <h3 class="text-center">Coronary CT Report</h3>
 
       <PatientBasicDetails/>
-
+			
+			<div class="d-flex justify-content-end font-weight-bold" style="gap: 10px">
+				<span>Performed by:</span>
+				<span>{{ visit.performed_by }}</span>
+			</div>
+			
       <div class="section-coronary-ct">
 
         <table class="table table-bordered">
@@ -149,7 +154,12 @@ export default {
 
 
   computed: {
-    //
+		
+		visit() {
+			return this.$store.getters.getVisit;
+		},
+		
+		
   },
 
   async mounted() {
